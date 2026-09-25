@@ -1,0 +1,1087 @@
+[
+ {
+  "case_id": "L045",
+  "repo": "sgl-project/sglang",
+  "number": 22320,
+  "url": "https://github.com/sgl-project/sglang/issues/22320",
+  "title": "[Bug] Fix memory buffer overflow in Mooncake transfer caused by incorrect SGLang metadata in heterogeneous setups",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "Ascend 910B(prefill)와 H20(decode)을 섞은 PD 분리 구성에서 스트레스 테스트 첫 회는 통과하지만 두 번째 회차에서 decode 쪽이 KVTransferError를 내며 요청의 KV 전송이 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문 decode 로그: \"Failed to get kvcache from prefill instance, it might be dead\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "보고자 설명: mooncake/conn.py의 _send_kvcache_generic(send_kvcache)이 decode 쪽 dst_kv_item_len을 받지 않고 prefill 쪽 item_len으로 decode 목적지 주소를 계산한다. 910B 이종 구성에서는 prefill이 메타데이터에 실제 KV 항목 길이가 아니라 CPU 스테이징 버퍼 크기(Mooncake heterogeneous_rdma_transport.h의 HUGE_HOST_SIZE)를 등록하므로 슬롯 오프셋이 어긋나 범위 밖 쓰기와 전송 실패가 난다. 협업자(ShangmingCai)는 generic 전송은 같은 TP 크기에서 양쪽 길이가 같다는 전제이므로, 근본 원인은 Ascend 메모리 풀 구현이 올바른 kv_item_lens를 돌려주지 않는 것(Ascend 쪽 버그)이라고 말했다.",
+  "components_involved": [
+   "python/sglang/srt/disaggregation/mooncake/conn.py (_send_kvcache_generic, send_kvcache, transfer_worker)",
+   "KVArgsRegisterInfo (dst_kv_item_len)",
+   "Ascend mem pool (kv_item_lens 등록)",
+   "Mooncake heterogeneous_rdma_transport.h (HUGE_HOST_SIZE)"
+  ],
+  "fix": null,
+  "trigger": "이종 PD 분리(prefill: Ascend 910B2 NPU, decode: H20 GPU), --disaggregation-transfer-backend mooncake, MiniMax-M2.5 bf16, 양쪽 TP8, 두 번째 스트레스 테스트 회차, sglang 0.5.6.post2",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/22320#issuecomment-4203828216",
+   "https://github.com/sgl-project/sglang/pull/22334",
+   "https://github.com/sgl-project/sglang/pull/22334#issuecomment-4215528292",
+   "https://github.com/sgl-project/sglang/pull/22334#pullrequestreview-4141771867",
+   "https://github.com/sgl-project/sglang/pull/22334#issuecomment-4289012120"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "출력 오류가 아니라 요청 단위 KV 전송 실패(오류 로그)라서 output_problem=no. 보고자 PR #22334(decode 쪽 item_len 사용)는 병합되지 않고 비활성으로 닫힘. 협업자는 generic 전송 로직을 바꾸는 데 반대하고 Ascend 쪽에서 고치라고 함. 보고자는 전송되는 KV 값 자체는 비트 복사라 정확하다고 주장. 원인 판정은 유지보수자의 리뷰 발언에 기댄 것으로, 검증이나 병합 수정은 없음. 이슈는 비활성 자동 종료."
+ },
+ {
+  "case_id": "L046",
+  "repo": "sgl-project/sglang",
+  "number": 17635,
+  "url": "https://github.com/sgl-project/sglang/issues/17635",
+  "title": "[Bug] feature --enable-double-sparsity causes a problem in inference accuracy",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "--enable-double-sparsity를 켜면 Llama-3.1-8B-Instruct의 GSM8K(5-shot, 50문항) 정확도가 0.7에서 0.06으로 떨어진다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문에 정확도 수치만 있고 오류·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "--enable-double-sparsity, --ds-channel-config-path (Llama-3.1-8B-Instruct용 설정), --ds-heavy-channel-num 32, --ds-heavy-channel-type k, --ds-heavy-token-num 256, --ds-sparse-decode-threshold 0, --disable-cuda-graph, --disable-radix-cache, TP1, H20, sglang main 3ed3b7ef(2026-01-10)",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/17635"
+  ],
+  "extractor_confidence": "high",
+  "notes": "출력 텍스트는 제시되지 않아 깨진 출력인지 멀쩡하지만 틀린 출력인지는 알 수 없음(정확도 하락이라 fluent_wrong으로 기록). 보고자가 기능 작성자(@andy-yang-1)를 호출했으나 답이 없었고 비활성으로 자동 종료."
+ },
+ {
+  "case_id": "L047",
+  "repo": "sgl-project/sglang",
+  "number": 28792,
+  "url": "https://github.com/sgl-project/sglang/issues/28792",
+  "title": "[Bug] Antropic endpoint have wrong checks for the format of prompts - Claude Code not works.",
+  "output_problem": "unclear",
+  "not_output_reason": null,
+  "symptom": "VS Code Claude Code 플러그인(2.1.165)을 SGLang의 Anthropic 호환 /v1/messages 엔드포인트와 Qwen 3.6 35A3B에 붙이면 에이전트가 모델로부터 잘못된 답만 받는다고 보고했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문에 오류·검증 메시지 없음; 기여자가 \"capture ... the validation error\"를 요청",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "python/sglang/srt/entrypoints/anthropic/protocol.py (AnthropicMessage.role)",
+   "python/sglang/srt/entrypoints/http_server.py (/v1/messages 핸들러)"
+  ],
+  "fix": null,
+  "trigger": "Claude Code VS Code 플러그인 2.1.165, Qwen 3.6 35A3B, sglang v0.5.11~v0.5.13, SGLANG_ENABLE_SPEC_V2=1 EAGLE, --reasoning-parser qwen3, --tool-call-parser qwen3_coder, --quantization moe_wna16, fp8_e4m3 KV 캐시, TP2",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/28792",
+   "https://github.com/sgl-project/sglang/issues/28792#issuecomment-4824630377"
+  ],
+  "extractor_confidence": "low",
+  "notes": "보고자는 \"only wrong answers\"라고만 적고 실제 출력이나 오류를 보이지 않음. 제시한 우회책(메시지 role에 \"system\" 허용, 요청 검증 방식 변경)은 요청 형식 검증에 관한 것이라 증상이 틀린 출력인지 요청 거부인지 불분명해 unclear로 둠. 기여자 ronhuafeng(CONTRIBUTOR)은 main에서 이미 \"system\" role을 허용한다고 확인하고 재시험과 실제 요청 JSON 캡처를 권함. 비활성 자동 종료."
+ },
+ {
+  "case_id": "L048",
+  "repo": "sgl-project/sglang",
+  "number": 25055,
+  "url": "https://github.com/sgl-project/sglang/issues/25055",
+  "title": "[Bug] OpenAI /v1/chat/completions: logprobs.content includes reasoning tokens, mismatches message.content",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "추론 모델에 /v1/chat/completions를 logprobs=true, separate_reasoning=true로 요청하면 logprobs.content에 <think> 추론 구간과 표지 토큰까지 원시 출력 전체의 로그확률이 담겨, 최종 답만 담은 message.content와 맞지 않는다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문의 관찰 응답 JSON은 정상 반환; 오류·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "python/sglang/srt/entrypoints/openai/serving_chat.py (비스트리밍 chat completions 응답 조립)",
+   "reasoning parser (separate_reasoning)",
+   "meta_info.output_token_logprobs"
+  ],
+  "fix": null,
+  "trigger": "추론 모델(DeepSeek-R1/V3, Qwen3, GLM-4.5/5, Kimi 등)과 --reasoning-parser, 요청의 logprobs=true와 separate_reasoning=true, 비스트리밍 응답",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/25055",
+   "https://github.com/sgl-project/sglang/pull/25056",
+   "https://github.com/sgl-project/sglang/pull/25815",
+   "https://github.com/sgl-project/sglang/issues/26778"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자 alphabetc1은 COLLABORATOR이며 기대 동작을 OpenAI 규격과 Aliyun Bailian 응답에 비추어 제시(logprobs 토큰을 이으면 message.content와 같아야 함). 수정 PR #25056(보고자)과 #25815(외부 기여자, AI 보조, 원인이 serving_chat.py 비스트리밍 분기라고 설명)은 모두 병합되지 않고 닫힘. 이슈는 비활성 자동 종료. 스트리밍 경로에서 추론 청크의 logprobs가 빠지는 문제는 별도 이슈 #26778."
+ },
+ {
+  "case_id": "L049",
+  "repo": "sgl-project/sglang",
+  "number": 18780,
+  "url": "https://github.com/sgl-project/sglang/issues/18780",
+  "title": "[Bug] Deepseek 3.2 NVFP4 SpecV2 crash page indices mismatch",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "DeepSeek V3.2 NVFP4에 SpecV2(EAGLE)를 켜고 운영 트래픽을 받으면 스케줄러가 nsa_backend의 page_table 복사에서 텐서 크기 불일치 RuntimeError로 죽는다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문 트레이스: \"size of tensor a (163840) must match the size of tensor b (163842)\"",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "python/sglang/srt/layers/attention/nsa_backend.py (init_forward_metadata_replay_cuda_graph, init_cuda_graph_state의 page_table)",
+   "python/sglang/srt/speculative/eagle_info_v2.py (prepare_for_v2_verify)",
+   "python/sglang/srt/model_executor/cuda_graph_runner.py (replay_prepare)"
+  ],
+  "fix": null,
+  "trigger": "DeepSeek V3.2 NVFP4(modelopt_fp4), SGLANG_ENABLE_SPEC_V2=1, EAGLE(steps 3, topk 1, draft 4), TP8, flashinfer_trtllm MoE/FP4 GEMM, v0.5.8 + flashinfer 0.5.3 + 외부 패치, 운영 트래픽(보고자는 동시성 10 이상에서 문제를 봤다고 함)",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/18780",
+   "https://github.com/sgl-project/sglang/issues/18780#issuecomment-3899763599",
+   "https://github.com/sgl-project/sglang/pull/19641"
+  ],
+  "extractor_confidence": "high",
+  "notes": "협업자 rainj-me는 main에서 재현하지 못함(동시성 200 이상도 정상). 외부 기여자 PR #19641은 target_verify에서 max_seqlen_k가 seq_len+draft 토큰 수로 max_context_len을 넘는다고 설명했으나 병합되지 않고 닫힘. 헬스체크 실패도 함께 보고됨. 비활성 자동 종료."
+ },
+ {
+  "case_id": "L050",
+  "repo": "sgl-project/sglang",
+  "number": 7143,
+  "url": "https://github.com/sgl-project/sglang/issues/7143",
+  "title": "[Bug] The accuracy of MTP inference is reduced under high concurrency",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "DeepSeek-R1 BF16을 PD 분리로 띄우고 decode에 MTP(EAGLE)를 켠 상태에서 동시성을 높이면(GSM8K 벤치 parallel 1000) 정확도가 떨어진다고 보고했다. 본문 설명은 첨부 이미지뿐이다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문은 이미지와 실행 명령뿐이고 오류·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "DeepSeek-R1-BF16, PD 분리(prefill TP80/DP80 10노드, decode TP64/DP64 8노드), decode에 --speculative-algorithm EAGLE(steps 3, topk 1, draft 4), --enable-dp-attention, DeepEP(prefill normal, decode low_latency), EPLB, --disable-cuda-graph-padding, flashinfer 어텐션, A800; GSM8K 8-shot 10000문항 --parallel 1000",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/7143",
+   "https://github.com/sgl-project/sglang/pull/6081#issuecomment-2969373045"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "정확도 수치는 첨부 이미지에만 있어 확인하지 못함. 보고자가 MTP+DP 어텐션 기능 PR #6081에 \"precision decrease a lot in high concurrency\"라고 댓글을 달았으나 답이 없었음. 유지보수자 응답 없이 비활성 자동 종료."
+ },
+ {
+  "case_id": "L051",
+  "repo": "sgl-project/sglang",
+  "number": 21235,
+  "url": "https://github.com/sgl-project/sglang/issues/21235",
+  "title": "[Bug] /pause_generation and /continue_generation wrong for --tokenizer-worker-num > 1",
+  "output_problem": "no",
+  "not_output_reason": "other(요청이 영원히 멈춤)",
+  "symptom": "--tokenizer-worker-num > 1일 때 /pause_generation과 /continue_generation이 서로 다른 한 워커에만 적용되어, 일부 워커가 멈춘 채로 남고 그 워커로 간 요청(또는 PD 분리에서 KV 전송을 기다리는 요청)이 영원히 멈춘다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "PR #24445: 요청이 is_pause_cond.wait_for에서 \"hang forever\"; 로그의 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "--tokenizer-worker-num=N이면 TokenizerWorker(TokenizerManager 하위 클래스) 프로세스 N개가 각자 is_pause 플래그를 가진다(tokenizer_manager.py). HTTP 부하 분산기가 요청을 한 워커에만 보내므로 /pause_generation은 한 워커만 멈추고 /continue_generation은 대개 다른 한 워커만 풀어, (N-1)/N 확률로 한 워커가 is_pause=True로 남는다. 그 워커로 간 이후 요청은 is_pause_cond.wait_for에서 계속 기다리고, PD 분리에서는 KV 전송을 기다리며 멈춘다. 스케줄러의 _engine_paused는 단일 프로세스라 제대로 바뀌었다.",
+  "components_involved": [
+   "python/sglang/srt/managers/tokenizer_manager.py (is_pause, is_pause_cond, pause/continue 처리)",
+   "python/sglang/srt/managers/multi_tokenizer_mixin.py (MultiTokenizerRouter)",
+   "python/sglang/srt/managers/io_struct.py (PauseGenerationReqInput, ContinueGenerationReqInput)"
+  ],
+  "fix": {
+   "url": "https://github.com/sgl-project/sglang/pull/24462",
+   "summary": "pause/continue 요청을 MultiTokenizerRouter가 등록된 모든 토크나이저 워커에 방송하게 바꿈(#24445가 병합 후 되돌려져 재제출된 PR)."
+  },
+  "trigger": "--tokenizer-worker-num > 1, /pause_generation 후 /continue_generation 호출; PD 분리와 워커 8개면 요청의 15/64가 멈춘다고 보고",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/21235",
+   "https://github.com/sgl-project/sglang/pull/24445",
+   "https://github.com/sgl-project/sglang/pull/24462"
+  ],
+  "extractor_confidence": "high",
+  "notes": "출력 오류가 아니라 요청 멈춤(hang)이라 output_problem=no. #24445는 2026-05-05 병합 후 import 시점 검사 실패로 #24461에서 되돌려졌고, 이름을 바꾼 #24462가 2026-05-08 병합됨. 그 밖의 외부 수정 PR(#21237, #21279)은 병합되지 않음."
+ },
+ {
+  "case_id": "L052",
+  "repo": "sgl-project/sglang",
+  "number": 12589,
+  "url": "https://github.com/sgl-project/sglang/issues/12589",
+  "title": "[Bug] max_tokens=0 is incorrectly treated as None in chat requests",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "chat completions 요청에 max_tokens=0을 주면 백엔드가 이를 None으로 취급해 매우 큰 기본값으로 바꾸므로, 사용자가 지정한 0이 무시된다.",
+  "visible_effect": "setting_no_effect",
+  "message_at_failure": "none",
+  "message_evidence": "PR #12556: \"causing the user-specified 0 to be ignored\" (값이 조용히 None으로 바뀜)",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "OpenAI 호환 요청을 샘플링 파라미터로 바꾸는 python/sglang/srt/entrypoints/openai/protocol.py가 \"max_new_tokens\": self.max_tokens or self.max_completion_tokens로 값을 정했다. max_tokens=0이고 max_completion_tokens=None이면 파이썬에서 0 or None은 None이 된다. 백엔드는 None을 매우 큰 기본값으로 바꾸므로 사용자가 준 0이 무시되고 생성이 진행된다.",
+  "components_involved": [
+   "python/sglang/srt/entrypoints/openai/protocol.py (ChatCompletionRequest.to_sampling_params의 max_new_tokens)"
+  ],
+  "fix": null,
+  "trigger": "/v1/chat/completions 요청에서 max_tokens=0이고 max_completion_tokens를 주지 않을 때",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/12589",
+   "https://github.com/sgl-project/sglang/pull/12556"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자는 PR #12556에서 고쳤다고 적었지만 이 PR은 병합되지 않았고 2026-07-28 작성자가 닫음(닫은 이유는 기록 없음). 원인은 재현 요청(curl)과 PR 차분(or를 is not None 검사로 바꿈)으로 판단. 유지보수자 응답 없이 이슈는 비활성 자동 종료."
+ },
+ {
+  "case_id": "L053",
+  "repo": "sgl-project/sglang",
+  "number": 8939,
+  "url": "https://github.com/sgl-project/sglang/issues/8939",
+  "title": "[Bug] get_hidden_dim default output dim is incorrect",
+  "output_problem": "no",
+  "not_output_reason": "other(코드 검토로 찾은 LoRA 차원 기본값 오류; 출력 증상 보고 없음)",
+  "symptom": "LoRA 유틸의 기본 get_hidden_dim이 kv_proj 출력 차원을 q_proj 출력 차원이 hidden_size와 같다는 가정으로 계산해 Llama 3.1 외 모델에서는 틀리며, 그래서 다른 모델은 LoRA가 동작하도록 이 함수를 재정의해야 했다고 보고했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "재현·실행 증상 없이 코드 설명만 있음 (\"Reproduction: N/A\")",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "python/sglang/srt/lora/utils.py의 기본 get_hidden_dim이 kv_proj 출력 차원을 config.hidden_size // (num_attention_heads // num_key_value_heads)로 계산했다. 이는 q_proj 출력 차원이 hidden_size와 같다는 가정에 기댄 것으로 Llama 3.1에서만 우연히 맞고, 올바른 값은 head_dim * num_key_value_heads다. 그래서 gemma2, qwen3 등 다른 모델은 LoRA를 쓰려면 get_hidden_dim을 따로 재정의해야 했다. 병합된 수정은 head_dim 기반으로 계산하고 모델별 재정의를 정리했다.",
+  "components_involved": [
+   "python/sglang/srt/lora/utils.py (get_hidden_dim)",
+   "python/sglang/srt/models/llama.py, gemma2.py, gemma3n_mm.py, granite.py, qwen3.py, torch_native_llama.py (모델별 get_hidden_dim 재정의)"
+  ],
+  "fix": {
+   "url": "https://github.com/sgl-project/sglang/pull/8987",
+   "summary": "기본 get_hidden_dim을 head_dim * num_heads/num_key_value_heads 기반으로 고치고 불필요한 모델별 재정의를 지움."
+  },
+  "trigger": "LoRA 사용 시, get_hidden_dim을 재정의하지 않았고 q_proj 출력 차원(head_dim*num_attention_heads)이 hidden_size와 다른 모델",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/8939",
+   "https://github.com/sgl-project/sglang/issues/8939#issuecomment-3172361708",
+   "https://github.com/sgl-project/sglang/pull/8987"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "협업자(lifuhuang)가 추적용으로 연 이슈이고 실제 틀린 출력이나 오류 관찰은 보고되지 않아 output_problem=no로 둠. 잘못된 차원이 어떤 증상(충돌 또는 틀린 출력)으로 이어지는지는 출처에 없음. 원인은 보고자(협업자) 설명과 병합된 PR #8987로 확인."
+ },
+ {
+  "case_id": "L054",
+  "repo": "sgl-project/sglang",
+  "number": 20420,
+  "url": "https://github.com/sgl-project/sglang/issues/20420",
+  "title": "[Bug] deploy glm-5-w4a8，there is a problem with the accuracy.",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Ascend 910B4에서 GLM-5-w4a8을 띄우고 \"who are you\"를 temperature 0으로 물으면 한자·기호가 뒤섞인 알아볼 수 없는 문장이 반복 출력된다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문에 응답 JSON만 있고 서버 로그·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "GLM-5-w4a8(Eco-Tech, modelslim 양자화), Ascend 910B4(Atlas 800I A2), --device npu, --attention-backend ascend, --quantization modelslim, TP8, --disable-cuda-graph, --disable-custom-all-reduce, sglang 0.5.9, CANN 8.5.0, quay.io/ascend/sglang:v0.5.9-cann8.5.0-910b 이미지",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/20420"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 다음 날 설명 없이 직접 닫음. 몇 달 뒤 다른 사용자가 해결됐느냐고 물었으나 답 없음. 원인이나 해결 방법 기록 없음."
+ },
+ {
+  "case_id": "L055",
+  "repo": "sgl-project/sglang",
+  "number": 21843,
+  "url": "https://github.com/sgl-project/sglang/issues/21843",
+  "title": "[Bug] Qwen3 GDN produces wrong results when num_v_heads == num_k_heads (ratio=1)",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Qwen3GatedDeltaNet을 num_v_heads == num_k_heads(비율 1)로 구성하면 틀린 결과가 나오고, 비율 2와 4인 모델은 정상이라고 보고했다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자는 커널이 a/b 값을 섞어 읽는다고만 설명; 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "python/sglang/srt/models/qwen3_next.py의 fix_query_key_value_ordering에서 mixed_ba를 torch.split과 reshape로 나눈 a, b 텐서가 비율 1일 때는 마지막 크기 1 차원만 없어져 비연속 stride (2*num_k_heads, 2)를 유지한다(비율 2 이상이면 reshape가 연속 복사본을 만든다). fused_gdn_gating Triton 커널은 a, b를 평평한 연속 배열로 보고 인덱싱하므로 a와 b 값이 섞인 채로 읽혀 게이팅 계산이 틀어진다. 보고자는 stride를 보여 주는 재현 코드와 .contiguous()를 붙이는 수정을 냈고, 같은 커널의 연속 배치 가정은 병합된 PR #22312(커널이 stride를 받도록 수정)에서도 다른 모델의 정확도 하락 원인으로 확인되었다.",
+  "components_involved": [
+   "python/sglang/srt/models/qwen3_next.py (fix_query_key_value_ordering)",
+   "python/sglang/srt/layers/attention/fla/fused_gdn_gating.py (fused_gdn_gating Triton 커널)",
+   "python/sglang/srt/layers/attention/fla/fused_sigmoid_gating_recurrent.py"
+  ],
+  "fix": {
+   "url": "https://github.com/sgl-project/sglang/pull/22312",
+   "summary": "GDN 커널(fused_gdn_gating 등)이 a/b의 stride를 명시적으로 받아 비연속 텐서도 올바로 읽게 함(Qwen3.5-27B 정확도 하락 수정; 이 이슈에 대한 효과는 기여자 제안이며 보고자 확인 없음)."
+  },
+  "trigger": "Qwen3 GDN(Qwen3GatedDeltaNet) 층을 num_v_heads == num_k_heads(비율 1)로 구성한 모델; 원래 Qwen3-Next는 비율 2라 해당 없음",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/21843",
+   "https://github.com/sgl-project/sglang/pull/21836",
+   "https://github.com/sgl-project/sglang/pull/21836#issuecomment-4251720145",
+   "https://github.com/sgl-project/sglang/pull/22312",
+   "https://github.com/sgl-project/sglang/issues/21744#issuecomment-4251789492"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자 PR #21836(.contiguous() 추가, 커널이 읽는 값과 기대값을 비교하는 테스트 포함)은 병합되지 않고 비활성으로 닫힘. 기여자 cs-cat이 병합된 PR #22312가 이 문제도 해결할 것이라고 안내했으나 보고자 확인은 없음. 틀린 결과의 구체적 형태(수치, 문장)는 제시되지 않음. 비율 1인 구체적 모델 이름은 없음. 이슈는 비활성 자동 종료."
+ },
+ {
+  "case_id": "L056",
+  "repo": "sgl-project/sglang",
+  "number": 22701,
+  "url": "https://github.com/sgl-project/sglang/issues/22701",
+  "title": "[Bug] RunAI streamer (#17948): corrupted weights, missing quant init, and broken object-storage URIs for multimodal models",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "RunAI 스트리머로 object storage(az://)에서 Kimi-K2.5를 TP8로 올리면 서버는 뜨지만 모든 채팅 응답이 \"!\"만 나온다. 같은 경로에서 DeepSeek-V3 FP8은 OOM, 멀티모달 모델은 시작 중 OSError가 난다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "none",
+  "message_evidence": "PR #22715: \"resulting in silently corrupted weights (model outputs all `!`)\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "RunAI 분산 스트리머(is_distributed=True)는 GPU 스테이징 버퍼를 배치마다 재사용한다. Kimi-K2.5의 load_weights()(kimi_k25.py)는 언어 모델 가중치 텐서를 리스트에 모았다가 한꺼번에 넘겼고, DeepSeek 가중치 로더(deepseek_weight_loader.py)의 cached_a_proj는 MLA 융합 짝을 기다리며 q_a_proj/kv_a_proj_with_mqa 텐서 뷰를 붙잡고 있었다. 처리 시점에는 뒤 배치가 이미 그 버퍼를 덮어써 가중치가 조용히 손상되었고, Kimi-K2.5는 로짓이 모두 0이 되어 토큰 0(\"!\")만 냈다. 별개로 RunaiModelStreamerLoader.load_model()(loader.py)이 _initialize_model()에 quant_config를 넘기지 않아 양자화 모델이 BF16 층으로 초기화되었고(DeepSeek-V3 FP8에서 OOM), get_processor()는 object storage URI를 로컬 경로로 바꾸지 않아 멀티모달 모델 시작이 실패했다.",
+  "components_involved": [
+   "RunAI model streamer (분산 모드 GPU 스테이징 버퍼 재사용)",
+   "python/sglang/srt/model_loader/loader.py (RunaiModelStreamerLoader.load_model)",
+   "python/sglang/srt/models/kimi_k25.py (load_weights)",
+   "python/sglang/srt/models/deepseek_common/deepseek_weight_loader.py (do_load_weights의 cached_a_proj)",
+   "python/sglang/srt/utils/hf_transformers_utils.py (get_processor, ObjectStorageModel.get_path)"
+  ],
+  "fix": {
+   "url": "https://github.com/sgl-project/sglang/pull/23850",
+   "summary": "RunAI 로더에 quant_config를 넘기고, Kimi 가중치를 모으지 않고 스트리밍 처리하며, DeepSeek cached_a_proj 텐서를 복제함(URI 정규화는 PR #22715로 병합)."
+  },
+  "trigger": "RunAI 스트리머(load_format=runai_streamer 또는 az://, s3://, gs:// 모델 경로)와 TP>1(분산 스트리머), Kimi-K2.5(WNA16 Marlin) TP8에서 \"!\" 출력; DeepSeek-V3-0324 FP8은 OOM; 멀티모달 모델은 OSError; 8×H200, sglang 0.5.10.post1",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/22701",
+   "https://github.com/sgl-project/sglang/pull/22715",
+   "https://github.com/sgl-project/sglang/pull/22715#issuecomment-4380489212",
+   "https://github.com/sgl-project/sglang/pull/23850"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 버그 세 개를 원인·위치·수정 커밋과 함께 보고하고 수정 전후 실측을 PR #22715에 적음. 가중치 관련 수정은 먼저 병합된 PR #23850(다른 기여자)에 포함되어, 최종 병합된 #22715에는 get_processor URI 처리만 남았다고 보고자가 설명. 뒤에 관련 이슈 #29998(GLM-5.2를 runai_streamer TP8로 올리면 토큰 0 쓰레기 출력, 열림)과 #31240(get_processor 수정 불완전)이 따로 있음."
+ },
+ {
+  "case_id": "L057",
+  "repo": "sgl-project/sglang",
+  "number": 18831,
+  "url": "https://github.com/sgl-project/sglang/issues/18831",
+  "title": "[Bug] Qwen3-next mtp topk>1 accuracy issue",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "GDN 모델(Qwen3-Next)의 투기적 디코딩 topk>1 경로가 쓰레기 출력을 낼 수 있으며, MTP 테스트의 KL 발산 기준을 비MTP와 같은 0.0025로 두면 실패한다고 보고했다(현재 MTP 기준은 0.008).",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문에 오류·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "GDN 모델의 투기적 디코딩 topk>1 경로(보고자가 지목, 파일 미특정)",
+   "test/registered/4-gpu-models/test_qwen3_next_models_mtp.py (KL 기준)"
+  ],
+  "fix": null,
+  "trigger": "Qwen3-Next(GDN) 모델, MTP 투기적 디코딩 topk>1; 재현은 test/registered/4-gpu-models/test_qwen3_next_models_mtp.py의 KL 기준을 0.0025로 바꿔 TestQwen3NextMTP 실행",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/18831"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자 hanming-lu는 COLLABORATOR지만 결함의 위치(topk>1 경로)만 말하고 원인은 설명하지 않음. 쓰레기 출력은 보고자의 서술이고, 제시된 측정 근거는 테스트의 KL 발산 기준 차이뿐. 응답 없이 비활성 자동 종료."
+ },
+ {
+  "case_id": "L058",
+  "repo": "sgl-project/sglang",
+  "number": 11574,
+  "url": "https://github.com/sgl-project/sglang/issues/11574",
+  "title": "[Bug] PR #11304 sets top_k = 50 by default which is wrong",
+  "output_problem": "unclear",
+  "not_output_reason": null,
+  "symptom": "--sampling-defaults model로 GLM-4.5-Air-FP8을 띄우면 모델 generation config에 top_k가 없는데도 기본 샘플링 파라미터에 top_k=50이 들어가고, EAGLE 투기적 디코딩을 켠 상태에서 토큰 속도가 30% 떨어진다고 보고했다.",
+  "visible_effect": "other",
+  "message_at_failure": "none",
+  "message_evidence": "INFO 로그 \"Using default chat sampling params from model generation config: {... 'top_k': 50 ...}\"만 있고 경고 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "협업자 adarshxs 설명: --sampling-defaults=model(PR #11304)은 HF GenerationConfig를 dict로 바꿔 샘플링 기본값을 가져오는데, 모델의 generation_config.json이 top_k를 정의하지 않아도 transformers GenerationConfig의 기본값(top_k=50)이 채워져 있어 모델이 지정한 값처럼 쓰였다. 그래서 GLM-4.5에 top_k=50이 적용되었다. 속도 하락은 top_k가 -1이 아니면 매 스텝 로짓에 torch.topk 필터링(부분 정렬)을 하기 때문이라고 설명했다.",
+  "components_involved": [
+   "python/sglang/srt/configs/model_config.py (get_default_sampling_params)",
+   "python/sglang/srt/utils/hf_transformers_utils.py (get_generation_config)",
+   "transformers GenerationConfig 기본값",
+   "--sampling-defaults model (PR #11304)"
+  ],
+  "fix": null,
+  "trigger": "--sampling-defaults model, generation_config.json에 top_k가 없는 모델(GLM-4.5-Air-FP8; PR 예시는 Llama-3.2-1B), PR #11304 이후 sglang; 속도 하락은 EAGLE 투기적 디코딩을 켰을 때",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/11574#issuecomment-3400318555",
+   "https://github.com/sgl-project/sglang/issues/11574#issuecomment-3401674489",
+   "https://github.com/sgl-project/sglang/pull/11610",
+   "https://github.com/sgl-project/sglang/pull/11610#issuecomment-3413536533"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "모델이 정하지 않은 top_k=50이 샘플링에 적용된 것은 출력 분포를 바꾸지만, 보고된 피해는 속도 하락뿐이고 출력 품질 저하는 보고되지 않아 unclear로 둠. 협업자는 top_k가 투기적 디코딩의 수락률을 낮추는 것 같다는 추측도 적음. 이슈 댓글에서는 MoE top_k 계산식을 언급해 설명이 섞여 있으나 PR #11610 본문이 원인을 분명히 적음. PR #11610(명시된 키만 쓰도록 수정)은 병합되지 않고 닫힘. 이슈는 비활성 자동 종료."
+ },
+ {
+  "case_id": "L059",
+  "repo": "sgl-project/sglang",
+  "number": 2277,
+  "url": "https://github.com/sgl-project/sglang/issues/2277",
+  "title": "[CI] Add accuracy test for multimodal models",
+  "output_problem": "no",
+  "not_output_reason": "feature",
+  "symptom": "멀티모달 모델(llama 3.2, llava onevision 등)에 대한 정확도 테스트를 CI에 추가하자는 작업 요청이다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "결함 보고가 아닌 작업 요청",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "해당 없음",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/2277"
+  ],
+  "extractor_confidence": "high",
+  "notes": "good first issue/help wanted 라벨의 CI 작업. 기여자 배정 논의만 있고 2026-03-21 유지보수자가 설명 없이 닫음."
+ },
+ {
+  "case_id": "L060",
+  "repo": "sgl-project/sglang",
+  "number": 21093,
+  "url": "https://github.com/sgl-project/sglang/issues/21093",
+  "title": "[Bug] [Qwen3.5 Dense] pp=2 Qwen3.4-4B result is incorrect",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "main 브랜치에서 Qwen3.5-4B를 --pp-size 2로 띄우면 temperature 0 채팅 응답이 \"!!!!...\"만 반복된다(PP 없이 쓰면 정상 문장).",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문과 PR에 출력 비교만 있고 로딩 경고·오류 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "python/sglang/srt/models/qwen3_5.py의 Qwen3_5ForConditionalGeneration(및 Qwen3_5MoeForConditionalGeneration)이 부모 Qwen3VLForConditionalGeneration의 load_weights를 재정의하면서 tie_word_embeddings 처리를 빠뜨렸다. PP>1이면 마지막 랭크의 lm_head가 별도 ParallelLMHead인데, 체크포인트에는 lm_head.weight가 따로 없고 embed_tokens.weight를 lm_head로 복사하지도 않아 lm_head가 초기화되지 않은 가중치로 남았다. 그래서 로짓이 무의미해져 \"!\"만 나왔다. make_layers의 PP 분할 누락은 별도 PR #21070에서 고쳤고(OOM 문제), 그것만으로는 이 출력이 고쳐지지 않았다.",
+  "components_involved": [
+   "python/sglang/srt/models/qwen3_5.py (Qwen3_5ForConditionalGeneration.load_weights, Qwen3_5MoeForConditionalGeneration.load_weights)",
+   "Qwen3VLForConditionalGeneration.load_weights (부모의 tie_word_embeddings 처리)",
+   "ParallelLMHead (lm_head), embed_tokens",
+   "make_layers (PR #21070)"
+  ],
+  "fix": {
+   "url": "https://github.com/sgl-project/sglang/pull/21347",
+   "summary": "tie_word_embeddings이고 PP 마지막 랭크일 때 embed_tokens 가중치를 lm_head에 불러오도록 load_weights에 추가함."
+  },
+  "trigger": "Qwen3.5-4B(dense, tie_word_embeddings=true), --pp-size 2, 2026-03 main, H200(수정 검증은 A100); Qwen3.5-35B-A3B pp2는 정상(tie_word_embeddings=false)",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/21093",
+   "https://github.com/sgl-project/sglang/issues/21093#issuecomment-4102850368",
+   "https://github.com/sgl-project/sglang/issues/21093#issuecomment-4108613169",
+   "https://github.com/sgl-project/sglang/pull/21347"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자 yuan-luo는 COLLABORATOR. 외부 사용자의 진단 댓글은 make_layers PP 분할 누락과 lm_head 미로딩 두 가지를 들었고, 병합된 PR #21347은 lm_head 쪽만 고침(분할은 #21070에서 이미 수정). PR에서 PP=1과 PP=2의 GSM8K 정확도가 일치함을 확인."
+ },
+ {
+  "case_id": "L061",
+  "repo": "sgl-project/sglang",
+  "number": 10344,
+  "url": "https://github.com/sgl-project/sglang/issues/10344",
+  "title": "[Bug] qwen 2 accuracy drop",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "CI 정확도 평가에서 Qwen2-57B-A14B-Instruct의 점수가 0.58로 떨어졌다(표의 다른 값 0.86; 수정 후 PR에서 0.869 측정).",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문은 CI 점수 표 한 줄뿐; 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "python/sglang/srt/models/qwen2_moe.py의 forward_normal_dual_stream은 공유 전문가 계산과 라우팅 전문가(FusedMoE) 계산을 두 CUDA 스트림에서 같은 hidden_states로 동시에 실행한다. FusedMoE가 hidden_states를 제자리에서 갱신하므로 공유 전문가 계산이 바뀐 입력을 읽게 되어 결과가 틀어졌고 정확도가 떨어졌다. 수정은 공유 전문가에 hidden_states 복제본을 넘기고 이중 스트림 경로를 CUDA 그래프 캡처 모드에서만 쓰게 했다.",
+  "components_involved": [
+   "python/sglang/srt/models/qwen2_moe.py (forward_normal_dual_stream, forward)",
+   "FusedMoE (hidden_states 제자리 갱신)",
+   "공유 전문가(_forward_shared_experts)"
+  ],
+  "fix": {
+   "url": "https://github.com/sgl-project/sglang/pull/10352",
+   "summary": "공유 전문가 계산에 hidden_states.clone()을 넘기고 이중 스트림을 캡처 모드에서만 쓰도록 함."
+  },
+  "trigger": "Qwen/Qwen2-57B-A14B-Instruct(공유 전문가가 있는 Qwen2 MoE), TP2, 이중 스트림 경로(alt_stream, 토큰 수 DUAL_STREAM_TOKEN_THRESHOLD 이하), 2025-09 CI 평가",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/10344",
+   "https://github.com/sgl-project/sglang/pull/10352"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자 zhyncs가 CI 결과로 연 이슈이고, 협업자 yizhang2077의 PR #10352가 원인을 설명하고 병합됨(같은 날 이슈 종료). 0.86이 기준값인지는 표 형식만으로는 분명하지 않음."
+ },
+ {
+  "case_id": "L062",
+  "repo": "sgl-project/sglang",
+  "number": 24322,
+  "url": "https://github.com/sgl-project/sglang/issues/24322",
+  "title": "[Bug]: EAGLE + MiMo-V2.5 NVFP4 — shape mismatch in mimo_v2_nextn.py:331 load_merged_column_weight",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "MiMo-V2.5-NVFP4를 EAGLE(multi-layer) 투기적 디코딩과 TP4로 띄우면 draft 워커 초기화 중 load_merged_column_weight의 shape 불일치 AssertionError로 스케줄러가 죽는다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"assert param_data.shape == loaded_weight.shape\" (parameter.py:218)",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "python/sglang/srt/models/mimo_v2_nextn.py (load_merged_column_weight, load_mimo_v2_qkv_proj_weight)",
+   "python/sglang/srt/layers/parameter.py"
+  ],
+  "fix": null,
+  "trigger": "shadowlilac/MiMo-V2.5-NVFP4(별도 model-mtp.safetensors), --speculative-algorithm EAGLE(steps 3, topk 1, draft 4), --enable-multi-layer-eagle, TP4, 4× RTX PRO 6000 Blackwell(SM 12.0a), lmsysorg/sglang:dev-cu13-mimo-v2.5 이미지",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/24322",
+   "https://github.com/sgl-project/sglang/issues/24322#issuecomment-4695979569",
+   "https://github.com/sgl-project/sglang/pull/28100"
+  ],
+  "extractor_confidence": "high",
+  "notes": "외부 사용자 댓글: #24321과 원인이 같고, load_mimo_v2_qkv_proj_weight가 qkv_proj를 행 단위로 그냥 나눠서 transformers+ModelOpt로 다시 내보낸 [Q;K;V] 순서 체크포인트를 잘못 샤딩한다고 설명하며 PR #28100을 제시. 그 PR은 병합되지 않고 닫힘. 유지보수자 응답 없이 비활성 자동 종료."
+ },
+ {
+  "case_id": "L063",
+  "repo": "sgl-project/sglang",
+  "number": 13227,
+  "url": "https://github.com/sgl-project/sglang/issues/13227",
+  "title": "[Bug] RuntimeError: Detected mismatch between collectives on ranks (Kimi K2 with TP=8, single node)",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "Kimi-K2-Thinking(및 Llama-3-70B)을 TP8로 띄우면 스케줄러 이벤트 루프 초기화 중 랭크 사이 collective 순번 불일치 RuntimeError로 서버 시작이 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"RuntimeError: Detected mismatch between collectives on ranks.\"",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "sglang v0.5.5 도커 이미지, --tp 8, --disable-cuda-graph, 8× H200 또는 B200, Slurm(pyxis/enroot) on Kubernetes 환경; 재현이 들쑥날쑥함",
+  "evidence_urls": [
+   "https://github.com/sgl-project/sglang/issues/13227",
+   "https://github.com/sgl-project/sglang/issues/13227#issuecomment-3530924149",
+   "https://github.com/sgl-project/sglang/issues/13227#issuecomment-3533919748"
+  ],
+  "extractor_confidence": "high",
+  "notes": "협업자 Fridge003은 같은 명령으로 B200, H200에서 재현하지 못했고 Slurm/enroot 환경 문제일 수 있다고 함. 협업자 ishandhanani는 다른 구성(PD 분리 WideEP)에서 재현된다고 했다가 보고자 명령으로는 재현하지 못함. 원인 규명 없이 비활성 자동 종료."
+ },
+ {
+  "case_id": "L064",
+  "repo": "vllm-project/vllm",
+  "number": 33091,
+  "url": "https://github.com/vllm-project/vllm/issues/33091",
+  "title": "[Bug]: Whisper accuracy issue with FA2+CG",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Whisper large-v3-turbo를 FlashAttention 2와 CUDA 그래프로 돌리면 \"Mary had a little lamb\" 오디오가 \"The end of the day, the end of the day...\"처럼 틀리게 전사된다(FA3나 eager 모드에서는 정상).",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "PR #33164: \"the issue is purely in accuracy and does not produce a crash\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "vLLM v1 FlashAttention 백엔드에서 인코더-디코더의 cross-attention 메타데이터를 만드는 CrossAttentionBuilder.build()가 max_seq_len을 encoder_seq_lens의 최댓값으로 덮어쓴다. CUDA 그래프 캡처 때는 gpu_model_runner의 _get_encoder_seq_lens가 패딩 요청의 encoder 길이를 0으로 채우므로 max_seq_len == 0인 잘못된 그래프가 캡처되었고, FA2 경로에서 이 그래프를 재생하면서 전사 결과가 틀렸다. 수정은 캡처 때 encoder 길이를 실제 최대값(max_source_positions)으로 채워 max_seqlen_k가 올바른 값으로 캡처되게 했다.",
+  "components_involved": [
+   "vllm/v1/attention/backends/flash_attn.py (CrossAttentionBuilder.build, get_cudagraph_support)",
+   "vllm/v1/worker/gpu_model_runner.py (_get_encoder_seq_lens, _build_attn_group_metadata)",
+   "FlashAttention 2",
+   "full CUDA graph (FULL_DECODE_ONLY)"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/33360",
+   "summary": "CUDA 그래프 캡처 시 encoder_seq_lens를 실제 최대 encoder 길이로 채우고, 임시로 넣었던 FA2+인코더-디코더 CUDA 그래프 비활성화를 걷어냄."
+  },
+  "trigger": "openai/whisper-large-v3-turbo(및 whisper-large-v3), FlashAttention 2(VLLM_FLASH_ATTN_VERSION=2 또는 A100/L4/L40S 등), CUDA 그래프 켬(enforce_eager=False, 인코더-디코더는 FULL_DECODE_ONLY로 강제), vLLM v0.14.0/0.14.1",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/33091#issuecomment-3814271243",
+   "https://github.com/vllm-project/vllm/issues/33091#issuecomment-3817103304",
+   "https://github.com/vllm-project/vllm/pull/33164",
+   "https://github.com/vllm-project/vllm/pull/33360",
+   "https://github.com/vllm-project/vllm/issues/33107"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자 NickLucche는 MEMBER. 기여자 표로 CUDA 그래프가 원인이고 torch.compile은 무관함을 좁힘. 임시 수정 PR #33164는 FA2+인코더-디코더에서 CUDA 그래프를 끄고 경고를 내게 했으며, 이후 PR #33360(LucasWilkinson)이 원인을 고치며 이를 걷어냄. 관련 이슈 #33107은 vLLM 0.14.1 L40S에서 Whisper large-v3 WER 134.56%를 보고."
+ },
+ {
+  "case_id": "L065",
+  "repo": "vllm-project/vllm",
+  "number": 11630,
+  "url": "https://github.com/vllm-project/vllm/issues/11630",
+  "title": "[Bug]:  Dimension mismatch error will occur during batch inference when processing image embeddings with minicpmv",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "MiniCPM-V에 서로 다른 개수의 이미지 임베딩(image_embeds)을 가진 요청 두 개를 묶어 추론하면 get_embedding에서 AttributeError로 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문 트레이스: \"AttributeError: 'list' object has no attribute 'type'\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "vllm/model_executor/models/minicpmv.py의 MiniCPMVBaseModel._parse_and_validate_inputs는 image_embeds를 텐서로만 가정했다. 크기가 다른 이미지 임베딩을 한 배치로 넣으면 image_embeds가 리스트로 들어오는데 그대로 넘겨져, get_embedding에서 리스트에 .type()을 호출하다 오류가 났다. 수정은 타입을 검증하고 리스트면 torch.concat으로 이어 붙인다.",
+  "components_involved": [
+   "vllm/model_executor/models/minicpmv.py (MiniCPMVBaseModel._parse_and_validate_inputs, get_embedding)"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/11631",
+   "summary": "image_embeds의 타입을 검증하고 리스트면 하나의 텐서로 이어 붙임."
+  },
+  "trigger": "MiniCPM-V(보고자 로컬 모델), 오프라인 LLM.generate 배치에 image_embeds 크기가 다른 요청(9×64×3584와 3×64×3584)을 함께 넣을 때, A100 40GB",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/11630",
+   "https://github.com/vllm-project/vllm/pull/11631"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 직접 수정 PR을 내 같은 날 병합되고 이슈가 닫힘."
+ },
+ {
+  "case_id": "L066",
+  "repo": "vllm-project/vllm",
+  "number": 14342,
+  "url": "https://github.com/vllm-project/vllm/issues/14342",
+  "title": "[Bug]: Phi-4-multimodal-instruct audio tag seems wrong",
+  "output_problem": "no",
+  "not_output_reason": "other(프롬프트의 오디오 자리표시자 토큰이 틀렸다는 의심; 보고자가 정상이라고 결론)",
+  "symptom": "Phi-4-multimodal-instruct에 오디오를 넣으면 서버 로그의 프롬프트에 오디오 자리표시자로 <|endoftext11|>가 들어가는데, 모델 예제는 <|audio_1|>을 쓰므로 태그가 틀린 것 같다고 보고했다.",
+  "visible_effect": "other",
+  "message_at_failure": "none",
+  "message_evidence": "INFO 로그의 프롬프트 출력만 있고 경고 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "microsoft/Phi-4-multimodal-instruct, OpenAI 호환 chat completions에 audio_url 또는 input_audio 입력, vLLM 0.7.4.dev, A40",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/14342#issuecomment-2703221710",
+   "https://github.com/vllm-project/vllm/issues/14342#issuecomment-2707986748",
+   "https://github.com/vllm-project/vllm/issues/14342#issuecomment-2710330209"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자는 곧 \"<|endoftext11|> is correct\"라고 적고, 모델이 프롬프트 형식(텍스트와 오디오 순서 등)에 민감해 형식이 다르면 답을 거부하거나 전사를 다듬는다며 요청 형식을 바꿔 해결했다고 함. 다른 사용자는 여전히 태그가 이상하다고 했다가 HF 코드상 두 형식 모두 맞는 것 같다고 적음. 유지보수자의 판단이나 코드 수정은 없음(보고자가 1시간여 만에 닫음)."
+ },
+ {
+  "case_id": "L067",
+  "repo": "vllm-project/vllm",
+  "number": 33598,
+  "url": "https://github.com/vllm-project/vllm/issues/33598",
+  "title": "[CI Failure]:  mi325_4: Qwen3-30B-A3B-FP8-block Accuracy (H100)",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "AMD MI325 CI의 Qwen3-30B-A3B-FP8-block 정확도 테스트가 float8_e4m3fnuz dtype을 지원하지 않는다는 ValueError로 실패한다(서버가 시작되지 않음).",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"ValueError: Unsupported dtype torch.float8_e4m3fnuz\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "PR #33030이 vllm/distributed/device_communicators/pynccl_wrapper.py의 dtype 변환(from_torch)을 고치면서 torch.float8_e4m3fn만 ncclFloat8e4m3로 매핑하고, MI300/325에서 쓰는 float8_e4m3fnuz를 빠뜨렸다. 그래서 ROCm에서 EP/EPLB 구성으로 FP8 텐서를 통신하려 할 때 ValueError가 나 워커가 죽었다. RCCL은 fn과 fnuz를 구분하지 않고 ncclFloat8e4m3 하나만 정의하므로, 수정은 current_platform.fp8_dtype()을 ncclFloat8e4m3로 매핑한다.",
+  "components_involved": [
+   "vllm/distributed/device_communicators/pynccl_wrapper.py (ncclDataTypeEnum.from_torch)",
+   "RCCL (ncclFloat8e4m3)",
+   "PR #33030"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/33713",
+   "summary": "NCCL dtype 변환에서 torch.float8_e4m3fn 대신 current_platform.fp8_dtype()을 ncclFloat8e4m3로 매핑함."
+  },
+  "trigger": "ROCm MI300X/MI325, Qwen3-30B-A3B-FP8, --enable-eplb, --all2all-backend allgather_reducescatter, TP2 DP2 expert parallel, PR #33030 이후 main",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/33598#issuecomment-3848746341",
+   "https://github.com/vllm-project/vllm/pull/33713"
+  ],
+  "extractor_confidence": "high",
+  "notes": "CI 실패 이슈이며 정확도 수치 문제가 아니라 시작 실패였음. 수정 후 MI300X에서 정확도 0.915로 테스트 통과(PR 본문)."
+ },
+ {
+  "case_id": "L068",
+  "repo": "vllm-project/vllm",
+  "number": 15959,
+  "url": "https://github.com/vllm-project/vllm/issues/15959",
+  "title": "[Bug]: Possible shape mismatch for weights of gemma3 27b bnb 4bit quant from Unsloth",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "Unsloth의 Gemma 3 27B bitsandbytes 4bit 양자화 모델을 vLLM 0.8.2로 띄우면 가중치 로딩 중 shape 불일치 AssertionError로 엔진 시작이 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문 트레이스: linear.py weight_loader의 \"assert param_data.shape == loaded_weight.shape\"",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "vllm/model_executor/models/gemma3.py (load_weights)",
+   "vllm/model_executor/layers/linear.py (weight_loader)"
+  ],
+  "fix": null,
+  "trigger": "unsloth/gemma-3-27b-it-unsloth-bnb-4bit(bitsandbytes 4bit), vLLM 0.8.2(V0로 되돌아감), TP4 또는 PP4, --limit-mm-per-prompt image=1",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/15959#issuecomment-2774991341",
+   "https://github.com/vllm-project/vllm/issues/15959#issuecomment-2775085898",
+   "https://github.com/vllm-project/vllm/issues/15959#issuecomment-2784205935"
+  ],
+  "extractor_confidence": "high",
+  "notes": "멤버 jeejeelee와 mgoin은 최신 main에서 재현하지 못하고 nightly로 올리라고 함. 다른 사용자들은 vLLM을 최신으로 올리거나 소스에서 빌드해 해결했다고 보고. 원인 설명이나 특정 수정 PR은 없음. 유지보수자가 닫음."
+ },
+ {
+  "case_id": "L069",
+  "repo": "vllm-project/vllm",
+  "number": 6760,
+  "url": "https://github.com/vllm-project/vllm/issues/6760",
+  "title": "[Bug]: Broken accuracy on LLaMa 3.1 70B -- worse than even 8B",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "vLLM(4×H100)에서 Llama 3.1 70B가 RAG 질문에 지나치게 짧게 답하고(\"$174,870\"만 반복, 단위 누락이나 billion 오답) 8B보다 정확도가 낮다고 보고했다. TGI에서도 같은 현상을 봤다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문·댓글에 출력 비교만 있고 오류·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "meta-llama Llama 3.1 70B Instruct, vllm/vllm-openai:latest(2024-07), 4×H100, 긴 RAG 프롬프트(표 형식 문서)",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/6760#issuecomment-2249723075",
+   "https://github.com/vllm-project/vllm/issues/6760#issuecomment-2496568871",
+   "https://github.com/vllm-project/vllm/pull/9549",
+   "https://github.com/huggingface/transformers/issues/32205#issuecomment-2260044385"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "품질이 떨어진 출력을 보고한 이슈라 yes로 두었으나, 보고자는 TGI도 같다며 모델(HF/Meta) 문제일 가능성이 크다고 보고 다음 날 직접 닫음(소프트웨어 결함인지 모델 성질인지 불분명). 4개월 뒤 협업자 robertgshaw2-redhat이 PR #9549로 해결됐다고 적었으나, 그 PR(2024-10 병합)은 #8645에서 생긴 디코더 그래프 캡처 패딩 버그를 고친 것이라 이 이슈(2024-07)와의 연결이 설명되지 않았고 보고자의 질문에도 답이 없어 원인 확인으로 보지 않음. transformers 이슈 #32205에서 유지보수자는 버전/RoPE scaling 가능성만 언급."
+ },
+ {
+  "case_id": "L070",
+  "repo": "vllm-project/vllm",
+  "number": 4421,
+  "url": "https://github.com/vllm-project/vllm/issues/4421",
+  "title": "[Bug]: Issue Running LLaVA with vLLM Due to Tensor Size Mismatch",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "vLLM 0.4.1에서 LLaVA-1.5-7B에 image_input_shape 1,3,224,224로 이미지를 넣으면 텐서 크기 불일치 RuntimeError가 난다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"The size of tensor a (257) must match the size of tensor b (577)\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "멤버 DarkLight1337 설명: 이 모델의 이미지 입력 크기는 1,3,336,336이어야 하고, 당시 vLLM은 이미지 전처리를 하지 않으므로 설정뿐 아니라 실제로 넣는 이미지 텐서도 그 크기여야 한다. 보고자는 224 크기로 설정하고 이미지를 크기 조정 없이 넣어 오류가 났으며, 이미지를 336×336 텐서로 변환해 넣자 동작했다. 소프트웨어 결함이 아니라 입력 설정 문제였다.",
+  "components_involved": [
+   "vLLM LLaVA pixel_values 입력 경로 (image_input_shape, image_feature_size 설정; 이미지 전처리 없음)"
+  ],
+  "fix": null,
+  "trigger": "llava-hf/llava-1.5-7b-hf, vLLM 0.4.1, image_input_type=pixel_values, image_input_shape=1,3,224,224, 크기 조정하지 않은 이미지 입력",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/4421#issuecomment-2081322186",
+   "https://github.com/vllm-project/vllm/issues/4421#issuecomment-2081426096",
+   "https://github.com/vllm-project/vllm/issues/4421#issuecomment-2081598653"
+  ],
+  "extractor_confidence": "high",
+  "notes": "사용 방법 문제로 해결됨(보고자가 336×336으로 크기 조정한 텐서를 넣어 동작 확인). 멤버는 앞으로 vLLM에 이미지 전처리를 넣겠다고 언급. 이후 LLaVA-1.6 지원 여부 질문 등 부수 질의."
+ },
+ {
+  "case_id": "L071",
+  "repo": "vllm-project/vllm",
+  "number": 28637,
+  "url": "https://github.com/vllm-project/vllm/issues/28637",
+  "title": "[Bug]: fp8 cutlass_gemm_caller has wrong shape",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "SM120용 FP8 blockwise CUTLASS GEMM 디스패치 코드가 n = b.size(1)로 b를 [k,n]으로 가정해 이 커널을 호출하면 NaN이 나온다고 보고했으나, 이후 보고자가 자기 입력 텐서의 메모리 배치 문제였다고 철회했다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문은 \"it generates nan\"뿐이고 오류·경고 언급 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "csrc/quantization/w8a8/cutlass/c3x/scaled_mm_blockwise_sm120_fp8_dispatch.cuh (m, n, k 계산)"
+  ],
+  "fix": null,
+  "trigger": "SM120 FP8 blockwise CUTLASS scaled_mm 커널을 직접 호출할 때 b 텐서의 모양·메모리 배치(보고자는 행 우선 [N,K] 텐서를 써서 해결)",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/28637",
+   "https://github.com/vllm-project/vllm/issues/28637#issuecomment-3536079323"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자 철회: \"related to the memory layout of my input tensors, not a code bug\". 기여자가 재현 코드를 요청했으나 제공되지 않았고 유지보수자 판단도 없음. 커널이 예상과 다른 배치의 입력을 받아도 NaN을 낼 뿐 막지 않았다는 점은 출처의 사실이나, 이것이 결함인지는 논의되지 않음. 보고자가 직접 닫음."
+ },
+ {
+  "case_id": "L072",
+  "repo": "vllm-project/vllm",
+  "number": 32866,
+  "url": "https://github.com/vllm-project/vllm/issues/32866",
+  "title": "wrong issue, need delete",
+  "output_problem": "no",
+  "not_output_reason": "other(보고자가 실수로 열었다며 7분 만에 닫은 이슈; 내용은 CPU Arm CI의 MoE 테스트 실패)",
+  "symptom": "CPU(Arm) CI 스크립트의 test_cpu_fused_moe_basic이 참조 구현을 만들 때 \"Current vLLM config is not set\" AssertionError로 실패했다는 내용이다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"AssertionError: Current vLLM config is not set.\"",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "bash .buildkite/scripts/hardware_ci/run-cpu-test-arm.sh, aarch64 Neoverse-V2, vLLM 0.14.0rc2.dev171",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/32866",
+   "https://github.com/vllm-project/vllm/issues/32866#issuecomment-3785316293"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 \"mistake\"라는 댓글과 함께 닫고 제목을 \"wrong issue, need delete\"로 바꿈. 오류 메시지 자체는 커스텀 op를 설정 문맥 밖에서 만든 테스트 쪽 문제를 가리킴(메시지 문구)."
+ },
+ {
+  "case_id": "L073",
+  "repo": "vllm-project/vllm",
+  "number": 20670,
+  "url": "https://github.com/vllm-project/vllm/issues/20670",
+  "title": "[Bug]: Tensor dimension mismatch when loading Qwen3-Reranker-4B with tensor parallel > 1",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "Qwen3-Reranker-4B를 tensor_parallel_size=2로 올리면 score 층 가중치를 복사하는 단계에서 텐서 크기 불일치 RuntimeError로 모델 로딩이 실패한다(TP1은 정상).",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"The size of tensor a (1280) must match the size of tensor b (2560)\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "vllm/model_executor/models/adapters.py의 시퀀스 분류용 가중치 로더(load_weights_using_from_2_way_softmax, load_weights_no_post_processing)가 텐서 병렬을 고려하지 않았다. lm_head에서 \"yes\"와 \"no\" 토큰 행의 차이로 만든 전체 hidden 크기(2560) 가중치를 TP로 나뉜 score 층(1280)에 copy_로 그대로 넣으려다 크기 불일치 오류가 났다. 수정은 score 파라미터의 weight_loader를 써서 TP 샤딩에 맞게 불러오게 했다.",
+  "components_involved": [
+   "vllm/model_executor/models/adapters.py (load_weights_using_from_2_way_softmax, load_weights_no_post_processing)",
+   "score 층 weight_loader"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/20682",
+   "summary": "score 가중치를 param.weight_loader로 불러와 TP 샤딩을 따르게 하고 TP>1 테스트를 추가함."
+  },
+  "trigger": "Qwen/Qwen3-Reranker-4B, --task score, hf_overrides로 Qwen3ForSequenceClassification과 classifier_from_token [no, yes] 지정, --tensor_parallel_size 2, vLLM 0.9.2",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/20670",
+   "https://github.com/vllm-project/vllm/pull/20682"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 직접 수정 PR을 내 병합됨. 협업자 noooop은 TP>1을 당장 시험할 수 없다고 답함."
+ },
+ {
+  "case_id": "L074",
+  "repo": "vllm-project/vllm",
+  "number": 31626,
+  "url": "https://github.com/vllm-project/vllm/issues/31626",
+  "title": "[Bug][CPU Backend]: Gibberish output on CPU backend when --enforce-eager is enabled (Qwen3-0.6B)",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "CPU 백엔드에서 Qwen3-0.6B를 --enforce-eager로 띄우면 \"ellaneous\", \"arry\" 같은 무의미한 토큰이 반복 출력된다(기본 컴파일 경로에서는 정상).",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문에 출력 비교만 있고 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "--enforce-eager는 custom_ops=\"all\"로 CustomOp 디스패치를 켜고, CPU에서는 forward_cpu()가 선택되는데 기본 구현(vllm/model_executor/custom_op.py)이 forward_cuda()로 넘겨 C++ CPU 커널을 호출했다. 멤버 bigPYJ1151에 따르면 PR #28103 이후 RMSNorm이 비연속 입력을 받게 되었는데 CPU 커널에는 이를 반영하지 않아 계산이 틀렸다. 그래서 eager 모드 CPU에서만 출력이 깨졌다. 수정은 CustomOp.forward_cpu 기본값을 forward_native(PyTorch 구현)로 바꾸고 RoPE만 CPU 커널을 쓰게 했다.",
+  "components_involved": [
+   "vllm/model_executor/custom_op.py (CustomOp.forward_cpu 기본 디스패치)",
+   "RMSNorm, GemmaRMSNorm, RMSNormGated의 CPU C++ 커널",
+   "vllm/model_executor/layers/rotary_embedding/base.py (RotaryEmbedding.forward_cpu)",
+   "PR #28103 (RMSNorm 비연속 입력 허용)"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/31643",
+   "summary": "CustomOp.forward_cpu의 기본을 forward_native로 바꾸고 RotaryEmbedding은 CPU 커스텀 커널을 쓰는 forward_cpu를 둠."
+  },
+  "trigger": "CPU 백엔드, --enforce-eager(custom_ops=\"all\"), Qwen/Qwen3-0.6B, PR #28103 이후 main(2026-01)",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/31626#issuecomment-3706961534",
+   "https://github.com/vllm-project/vllm/pull/31643",
+   "https://github.com/vllm-project/vllm/pull/31643#issuecomment-3709457026"
+  ],
+  "extractor_confidence": "high",
+  "notes": "기여자는 처음에 여러 CustomOp에 forward_cpu가 없어 C++ CPU 커널로 떨어지는 것이 원인이라 했고, 멤버가 근본 원인을 RMSNorm 비연속 입력 미지원으로 특정하며 수정 방향을 제시함."
+ },
+ {
+  "case_id": "L075",
+  "repo": "vllm-project/vllm",
+  "number": 40252,
+  "url": "https://github.com/vllm-project/vllm/issues/40252",
+  "title": "[Bug]: Qwen3-Next NVFP4 quants silently produce garbage when linear_attn weights are missing from quantization_config.ignore",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Qwen3-Next 계열(Qwen3.5/3.6) 커뮤니티 NVFP4 양자화 모델(RedHatAI/Qwen3.6-35B-A3B-NVFP4)을 띄우면 서버는 정상으로 돌지만 temperature 0에서 모든 프롬프트에 \"!!!!\"만 출력한다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "warning",
+  "message_evidence": "시작 로그(보고자 요약): \"not found in params_dict, skip loading\"; 보고자는 예외는 없었다고 함",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "커뮤니티 NVFP4(compressed-tensors) 체크포인트의 quantization_config.ignore 목록은 선형 어텐션 투영을 분리된 이름(in_proj_qkv, in_proj_z, in_proj_b, in_proj_a)으로 적는데, vLLM의 Qwen3.5/Qwen3-Next 모델은 이 투영을 결합된 층 in_proj_qkvz, in_proj_ba로 만든다. 두 이름을 잇는 packed_modules_mapping이 없어 결합 층이 ignore 대상으로 인식되지 않았고, 로더는 이를 NVFP4 양자화 층으로 불러오려다 파라미터를 찾지 못해 건너뛰었다(skip loading). 그 층들이 사실상 0인 채로 추론되어 모든 토큰이 같은 문자로 무너졌다(보고자 설명). 병합된 PR #34697이 qwen3_5.py의 packed_modules_mapping에 in_proj_qkvz→[in_proj_qkv, in_proj_z], in_proj_ba→[in_proj_b, in_proj_a]를 추가해 ignore 목록이 결합 층에 대응되게 했고(Qwen3-Next 쪽 대응은 PR #35413), 보고자가 이후 빌드에서 수정 없는 config로 재시험해 해결을 확인했다.",
+  "components_involved": [
+   "vllm/model_executor/models/qwen3_5.py (packed_modules_mapping, in_proj_qkvz/in_proj_ba 결합 층)",
+   "vllm/model_executor/models/qwen3_next.py (Qwen3NextForCausalLM.packed_modules_mapping)",
+   "compressed-tensors quantization_config.ignore (체크포인트 config.json)",
+   "가중치 로더의 skip loading 처리"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/34697",
+   "summary": "Qwen3.5/Qwen3-Next GDN 투영 융합을 다시 구현하면서 packed_modules_mapping에 결합 층과 분리 이름의 대응을 추가함."
+  },
+  "trigger": "RedHatAI/Qwen3.6-35B-A3B-NVFP4 등 Qwen3-Next 계열 커뮤니티 NVFP4 체크포인트(ignore 목록에 분리 이름만 있음), PR #34697(2026-02-18) 이전 vLLM 빌드, TP1",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/40252",
+   "https://github.com/vllm-project/vllm/issues/40252#issuecomment-4284849293",
+   "https://github.com/vllm-project/vllm/pull/34697",
+   "https://github.com/vllm-project/vllm/pull/35413",
+   "https://github.com/sgl-project/sglang/issues/20973"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자는 \"silent correctness failure\"(예외도 nvfp4 경로 경고도 없음)라고 했지만 층마다 skip loading 로그 한 줄은 있었다고 적음(WARNING으로 인용, 다른 곳에서는 INFO/WARNING이라고 표현). 원인과 수정 PR은 보고자가 스스로 찾았고 유지보수자 댓글은 없음. 같은 증상이 sglang #20973에도 보고됨. HF 저장소들은 여전히 옛 이름 ignore 목록을 배포한다고 보고자가 지적."
+ },
+ {
+  "case_id": "L076",
+  "repo": "vllm-project/vllm",
+  "number": 30830,
+  "url": "https://github.com/vllm-project/vllm/issues/30830",
+  "title": "[Bug]: accuracy issue on MoE online fp8 quantization",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Qwen3-30B-A3B를 온라인 FP8 양자화(--quantization fp8)와 TP2로 돌리면 \"the. The United States has. The United States...\"처럼 문장이 무너진 출력이 나온다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문에 생성 결과만 있고 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "PR #29196이 넣은 온라인 FP8 양자화의 스트리밍 가중치 후처리는 vllm/model_executor/layers/quantization/fp8.py의 patched_weight_loader에서 불러온 원소 수를 loaded_weight.numel()로 세고, 층의 원소가 다 채워지면 process_weights_after_loading을 부른다. 이는 weight_loader가 loaded_weight를 param에 그대로 복사한다고 가정한 것인데, 실제 weight_loader는 복사 전에 loaded_weight를 잘라내는 등 임의의 처리를 하므로(TP>1에서 샤드만 복사) 센 원소 수가 실제 복사량과 달랐다. 그래서 TP>1에서 적재 완료 판단과 그에 이은 양자화 처리가 올바로 되지 않아 출력이 무너졌다(PR 설명과 diff). 수정은 TorchDispatchMode로 copy_가 실제로 바꾼 원소 수를 센다.",
+  "components_involved": [
+   "vllm/model_executor/layers/quantization/fp8.py (Fp8LinearMethod·MoE 쪽 create_weights의 patched_weight_loader, process_weights_after_loading)",
+   "vllm/model_executor/parameter.py (weight_loader의 샤드 처리)",
+   "PR #29196 (스트리밍 온라인 FP8 양자화)"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/30900",
+   "summary": "copy_로 실제 갱신된 원소 수를 CopyNumelCounter(TorchDispatchMode)로 세어 적재 완료를 판단하게 함."
+  },
+  "trigger": "Qwen/Qwen3-30B-A3B(MoE) BF16 체크포인트, --quantization fp8(온라인 양자화, PR #29196 이후 스트리밍 후처리), TP2, --enforce-eager; CUDA와 XPU 모두",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/30830",
+   "https://github.com/vllm-project/vllm/issues/30830#issuecomment-3664903661",
+   "https://github.com/vllm-project/vllm/pull/30900",
+   "https://github.com/vllm-project/vllm/pull/30831"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 patched_weight_loader를 원인으로 짚고 해당 줄을 주석 처리하면 정상이라 했으며, XPU에서는 PR #30831로 스트리밍 양자화를 임시로 끔. 기능 작성자 vkuzo가 PR #30900으로 수정(TP1은 원래 정상, TP2가 고쳐짐), 보고자가 \"fixed by #30900\"이라며 닫음."
+ },
+ {
+  "case_id": "L077",
+  "repo": "vllm-project/vllm",
+  "number": 35504,
+  "url": "https://github.com/vllm-project/vllm/issues/35504",
+  "title": "[Bug]: qwen3-coder-next inference randomly hangs, accuracy degradation in 0.16.0+ with TP > 1 and  fuse_allreduce_rms=False (H100s on PCIe)",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "vLLM 0.16.0 이후 Qwen3-Coder-Next를 TP>1로 돌리면 반복에 빠지고 철자를 틀리며 경로·식별자를 제대로 못 불러와 도구 호출이 실패하는 등 품질이 떨어진다. 가끔 생성은 계속되는데 응답이 돌아오지 않는 멈춤도 보고됐다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자는 오류·경고 언급 없음; 다른 사용자가 FLA \"Input tensor shape suggests potential format mismatch\" 경고를 보고했으나 관련성 미확인",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "Qwen3-Next 체크포인트는 in_proj_ba를 key-head 그룹마다 b와 a가 번갈아 놓인(interleaved GQA) 하나의 융합 가중치로 저장한다. vllm/model_executor/models/qwen3_next.py는 in_proj_ba를 output_sizes=[num_v_heads]*2인 MergedColumnParallelLinear로 만들어, TP>1에서 이 가중치를 가운데 지점에서 두 샤드로 나눈 뒤 랭크별로 나누었다. 그 결과 b/a 게이팅 값이 TP 랭크 사이에서 뒤섞였고 출력 품질이 떨어졌다. 수정은 Qwen3-Next에서는 단일 출력 샤드([num_v_heads*2])로 두어 interleaved 배치를 유지하고, b와 a를 따로 저장하는 Qwen3.5만 두 샤드를 쓰게 했다.",
+  "components_involved": [
+   "vllm/model_executor/models/qwen3_next.py (in_proj_ba, create_ba_proj)",
+   "vllm/model_executor/models/qwen3_5.py (create_ba_proj)",
+   "MergedColumnParallelLinear (output_sizes 기반 TP 샤딩)"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/36242",
+   "summary": "Qwen3-Next의 in_proj_ba를 단일 출력 샤드로 만들어 TP 샤딩이 interleaved 배치를 보존하게 함."
+  },
+  "trigger": "Qwen/Qwen3-Coder-Next(FP8, BF16), TP 2/4, vLLM 0.16.0 이후(보고자는 #35085 이전 버전도 fuse_allreduce_rms=False면 같다고 함), H100 PCIe; 다른 사용자는 4×RTX 3090 TP4 nightly",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/35504",
+   "https://github.com/vllm-project/vllm/issues/35504#issuecomment-4033652139",
+   "https://github.com/vllm-project/vllm/pull/36242",
+   "https://github.com/vllm-project/vllm/pull/34697"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "#36242 병합 뒤 한 사용자는 도구 호출 실패와 반복이 크게 줄어 v0.16.0 수준이 되었다고 했으나 속도 저하(70→59 tps)와 가끔의 멈춤은 남았다고 보고. 멈춤은 별개 문제일 수 있다고 보고자도 언급(#35502). 수집자 관찰: 고친 코드(in_proj_ba를 [num_v_heads]*2로 나눈 MergedColumnParallelLinear)는 diff상 PR #34697(2026-02-18 병합, L075의 수정 PR)에서 들어왔으나 출처가 이를 명시적으로 연결하지는 않음."
+ },
+ {
+  "case_id": "L078",
+  "repo": "vllm-project/vllm",
+  "number": 22858,
+  "url": "https://github.com/vllm-project/vllm/issues/22858",
+  "title": "[Bug]: Batch inference uses wrong model (or just bad Docker build?)",
+  "output_problem": "no",
+  "not_output_reason": "other(사용자 실수: 배치 입력 파일이 다른 모델 이름을 지정)",
+  "symptom": "vllm.entrypoints.openai.run_batch로 Qwen/Qwen3-4B-Thinking-2507을 지정했는데 요청마다 meta-llama/Meta-Llama-3-8B-Instruct 모델이 없다는 404 오류가 났다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문: \"The model `meta-llama/Meta-Llama-3-8B-Instruct` does not exist.\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "run_batch 입력으로 쓴 예제 openai_example_batch.jsonl의 요청마다 model이 meta-llama/Meta-Llama-3-8B-Instruct로 적혀 있어, 띄운 모델과 이름이 달라 NotFoundError(404)가 났다. 보고자가 jsonl의 모델 이름을 고치자 정상 동작했다. vLLM 결함이 아니라 입력 파일 문제였다.",
+  "components_involved": [
+   "vllm/entrypoints/openai/run_batch.py",
+   "serving_chat.py (요청 모델 이름 확인)",
+   "예제 openai_example_batch.jsonl"
+  ],
+  "fix": null,
+  "trigger": "run_batch에 예제 jsonl을 그대로 쓰면서 --model을 다른 모델(Qwen3-4B-Thinking-2507)로 지정, vLLM 0.10.1.dev 및 0.9.2 도커 이미지(Singularity)",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/22858",
+   "https://github.com/vllm-project/vllm/issues/22858#issuecomment-3186072637"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 약 1시간 40분 만에 자기 실수를 찾아 닫음."
+ },
+ {
+  "case_id": "L079",
+  "repo": "vllm-project/vllm",
+  "number": 39265,
+  "url": "https://github.com/vllm-project/vllm/issues/39265",
+  "title": "[Bug]: Gemma 4 offline inference outputs gibberish",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Gemma 4 31B-it를 LLM 클래스로 오프라인 추론하면 알아볼 수 없는 출력이 나오고, OpenAI API 서버로 띄우면 정상이라고 보고했다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문은 출력 스크린샷과 스크립트뿐; 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "보고자 스크립트는 지시 조정(-it) 모델에 채팅 템플릿을 적용하지 않은 원문 프롬프트를 llm.generate()에 넘겼다. OpenAI 호환 서버는 채팅 템플릿을 자동으로 적용하지만 LLM.generate()는 그렇지 않아, 모델이 입력을 대화로 인식하지 못하고 깨진 출력을 냈다(외부 사용자 설명). 보고자는 tokenizer.apply_chat_template()로 프롬프트를 감싸라는 제안을 받아들이고 닫았다. vLLM 결함이 아니라 사용법 문제로 정리되었다.",
+  "components_involved": [
+   "LLM.generate (원문 프롬프트, 채팅 템플릿 미적용)",
+   "OpenAI 호환 서버의 채팅 템플릿 자동 적용",
+   "tokenizer.apply_chat_template"
+  ],
+  "fix": null,
+  "trigger": "google/gemma-4-31B-it, 오프라인 LLM.generate에 채팅 템플릿 없는 원문 프롬프트, TP4, Gemma 4 사용 안내서의 도커 이미지, temperature 0.7",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/39265",
+   "https://github.com/vllm-project/vllm/issues/39265#issuecomment-4204187348",
+   "https://github.com/vllm-project/vllm/issues/39265#issuecomment-4204375814"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "원인 설명은 외부 사용자(NONE)가 했고 보고자가 \"Missed that one out\"이라며 받아들이고 닫음. 템플릿 적용 뒤 출력이 정상이 됐다는 명시적 결과는 없음. 유지보수자 댓글 없음."
+ },
+ {
+  "case_id": "L080",
+  "repo": "vllm-project/vllm",
+  "number": 23056,
+  "url": "https://github.com/vllm-project/vllm/issues/23056",
+  "title": "[Bug]: Incorrect video rotary embedding calculation in Qwen2.5-Omni due to missing `second_per_grid_ts` mapping",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Qwen2.5-Omni에 기본값(2)이 아닌 fps(예: 1)로 비디오를 넣으면 vLLM이 계산한 비디오 토큰의 멀티모달 회전 위치가 HF 구현과 달라지고 출력이 흔들린다. 보통은 그럴듯한 출력이지만 시간 관련 과제로 SFT한 모델에서는 오류가 크다고 보고했다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자: 값이 설정되지 않아 \"always uses the default value\"; 오류·경고 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "Qwen2.5-Omni의 HF 프로세서(transformers processing_qwen2_5_omni.py)는 비디오 격자당 시간 간격을 video_second_per_grid라는 이름으로 돌려주는데, vLLM v1 모델 러너(vllm/v1/worker/gpu_model_runner.py)는 mrope 위치 계산에 second_per_grid_ts라는 이름을 찾는다. vllm/model_executor/models/qwen2_5_omni_thinker.py에 두 이름을 잇는 매핑이 없어 값을 늘 찾지 못하고 기본값을 썼다. 기본 fps=2에서는 기본값이 맞아 HF와 같지만, 다른 fps에서는 비디오 토큰의 회전 위치가 HF와 달라졌다. 수정은 _qwen2_5_omni_thinker_field_config에서 video_second_per_grid를 second_per_grid_ts로 옮겨 담는다.",
+  "components_involved": [
+   "vllm/model_executor/models/qwen2_5_omni_thinker.py (_qwen2_5_omni_thinker_field_config)",
+   "vllm/v1/worker/gpu_model_runner.py (mrope 위치 계산의 second_per_grid_ts)",
+   "transformers processing_qwen2_5_omni.py (video_second_per_grid)"
+  ],
+  "fix": {
+   "url": "https://github.com/vllm-project/vllm/pull/23058",
+   "summary": "Qwen2.5-Omni thinker의 프로세서 출력 video_second_per_grid를 second_per_grid_ts로 매핑함."
+  },
+  "trigger": "Qwen/Qwen2.5-Omni-7B(thinker), 비디오 입력에 mm_processor_kwargs의 videos_kwargs fps를 기본 2가 아닌 값(예: 1)으로 지정, vLLM 0.10.0 V1, A100",
+  "evidence_urls": [
+   "https://github.com/vllm-project/vllm/issues/23056",
+   "https://github.com/vllm-project/vllm/issues/23056#issuecomment-3194408185",
+   "https://github.com/vllm-project/vllm/pull/23058",
+   "https://github.com/vllm-project/vllm/issues/50142"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 위치 인코딩을 HF와 직접 비교해 fps=2에서는 일치, 다른 fps에서는 불일치를 확인하고 수정안을 제시했으며, 멤버 DarkLight1337이 동의해 PR이 다음 날 병합됨. Qwen-VL도 영향받을 수 있다는 것은 보고자의 추정. 후속으로 Qwen3-Omni가 실제 샘플링 fps를 오디오/비디오 끼워넣기에 전달하지 않는다는 이슈 #50142(열림)가 있음."
+ }
+]

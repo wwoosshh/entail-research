@@ -1,0 +1,237 @@
+{
+ "when": "2026-09-24 16:01:40",
+ "torch": "2.14.0+cu130",
+ "cases": {
+  "rb-01": {
+   "defect": [
+    "refused at trace",
+    "linear: weight reads w after reorder#0 wrote it; read the value that write returned"
+   ],
+   "fixed": [
+    "passes",
+    "2 operations"
+   ],
+   "what": "Layout: a backend reorders a q8_0 weight in place (interleaved -> split); a second path reads it as before."
+  },
+  "rb-02": {
+   "defect": [
+    "passes",
+    "2 operations"
+   ],
+   "fixed": [
+    "passes",
+    "2 operations"
+   ],
+   "what": "Layout (scale format): block scales rounded to powers of two, the fp8 data not requantized to match."
+  },
+  "rb-03": {
+   "defect": [
+    "cannot be written",
+    "AttributeError: 'Sym' object has no attribute 'view'"
+   ],
+   "fixed": [
+    "passes",
+    "11 operations"
+   ],
+   "what": "Layout (stride): Q sliced from a fused QKV projection is a strided view; a kernel assumed it packed."
+  },
+  "rb-04": {
+   "defect": [
+    "refused at trace",
+    "all_reduce: x is Reduction(state='R', dim=None, group=None): reducing it would count it again"
+   ],
+   "fixed": [
+    "passes",
+    "2 operations"
+   ],
+   "what": "Reduction: a value already all-reduced (replicated) is reduced again as if it were a partial sum."
+  },
+  "rb-05": {
+   "defect": [
+    "resolved at trace",
+    "rope: positions was chunk-relative (offset 3); converted to absolute positions; rope: positions was chunk-relative (offset 3); converted to absolute positions; write: at was chunk-relative (offset 3); converted to absolute positions; write: at was chunk-relative (offset 3); converted to absolute positions"
+   ],
+   "fixed": [
+    "passes",
+    "6 operations"
+   ],
+   "what": "Positions: chunk-relative query positions compared with absolute key positions."
+  },
+  "rb-06": {
+   "defect": [
+    "cannot be written",
+    "TypeError: attend() got an unexpected keyword argument 'mask'"
+   ],
+   "fixed": [
+    "resolved at trace",
+    "attend: triton does not honour sliding_window; routed to torch"
+   ],
+   "what": "ModelProps (window): a user mask switches the kernel's own window off, and the mask carries no window."
+  },
+  "rb-07": {
+   "defect": [
+    "passes",
+    "2 operations"
+   ],
+   "fixed": [
+    "passes",
+    "2 operations"
+   ],
+   "what": "ModelProps (tie): the config declares tied embeddings; the checkpoint holds a separate head."
+  },
+  "rb-08": {
+   "defect": [
+    "resolved at trace",
+    "attend: flex does not honour softcap; routed to torch"
+   ],
+   "fixed": [
+    "resolved at trace",
+    "attend: flex does not honour softcap; routed to torch"
+   ],
+   "what": "ModelProps (softcap): the default SDPA path drops the attention softcap the model declares."
+  },
+  "rb-09": {
+   "defect": [
+    "refused at bind",
+    "program input keys: dim slots is 16, the type declares 12"
+   ],
+   "fixed": [
+    "passes",
+    "6 operations"
+   ],
+   "what": "Epoch/Assumed: a CUDA graph captured for one length is replayed after the length changed."
+  },
+  "rb-10": {
+   "defect": [
+    "refused at trace",
+    "attend: until reads until after advance#4 wrote it; read the value that write returned"
+   ],
+   "fixed": [
+    "passes",
+    "8 operations"
+   ],
+   "what": "Epoch: a mask holds the position counter itself and reads it after the cache update moved it on."
+  },
+  "rb-11": {
+   "defect": [
+    "refused at bind",
+    "program input q: dim batch is 2, the type declares 1"
+   ],
+   "fixed": [
+    "passes",
+    "6 operations"
+   ],
+   "what": "Assumed: a program specialized on the warm-up's input (batch 1) is reused for batch 2."
+  },
+  "rb-16": {
+   "defect": [
+    "resolved at trace",
+    "linear: x was quantized (Quantized(dtype='float8_e4m3fn', scale=0.25)); dequantized with its scale first"
+   ],
+   "fixed": [
+    "resolved at trace",
+    "linear: x was quantized (Quantized(dtype='float8_e4m3fn', scale=0.25)); dequantized with its scale first"
+   ],
+   "what": "Quantized: FP8 activations with a per-tensor scale are used as if they were BF16 values."
+  },
+  "rb-17": {
+   "defect": [
+    "resolved at trace",
+    "attend: flex does not honour softcap; routed to torch"
+   ],
+   "fixed": [
+    "resolved at trace",
+    "attend: flex does not honour softcap; routed to torch"
+   ],
+   "what": "ModelProps (softcap): SGLang's torch_native backend does not apply the logit cap the model declares."
+  },
+  "rb-12": {
+   "defect": [
+    "passes",
+    "a restored session takes its next position from the token count, one more than the KV holds: both are lengths, and nothing in a type tells the two counts apart, so the program would trace; the library's container contract caught it at run time (M5.5)"
+   ],
+   "fixed": [
+    null,
+    "not written"
+   ],
+   "what": "a restored session takes its next position from the token count, one more than the KV holds: both are lengths, and nothing in a type tells the two counts apart, so the program would trace; the library's container contract caught it at run time (M5.5)"
+  },
+  "rb-14": {
+   "defect": [
+    "passes",
+    "beam search reorders the standard cache and leaves a recurrent state in the old order: no front-end operation carries a beam order, so the program would trace; the library's container contract caught it at run time (M5.5)"
+   ],
+   "fixed": [
+    null,
+    "not written"
+   ],
+   "what": "beam search reorders the standard cache and leaves a recurrent state in the old order: no front-end operation carries a beam order, so the program would trace; the library's container contract caught it at run time (M5.5)"
+  },
+  "rb-15": {
+   "defect": [
+    "outside",
+    "a config key under a name the loader does not know is a config file's defect, not a program's: the load contract (M3.5) refused it"
+   ],
+   "fixed": [
+    null,
+    "not written"
+   ],
+   "what": "a config key under a name the loader does not know is a config file's defect, not a program's: the load contract (M3.5) refused it"
+  }
+ },
+ "e5": {
+  "keys and values swapped": [
+   "refused at trace",
+   "attend: keys takes key, got value (values)"
+  ],
+  "heads repeated with repeat instead of repeat_interleave": [
+   "cannot be written",
+   "AttributeError: 'Sym' object has no attribute 'repeat'"
+  ],
+  "mask polarity reversed": [
+   "cannot be written",
+   "TypeError: attend() got an unexpected keyword argument 'mask'"
+  ],
+  "a boolean mask added as if additive": [
+   "cannot be written",
+   "TypeError: attend() got an unexpected keyword argument 'additive_mask'"
+  ],
+  "the valid range one short (exclusive for inclusive)": [
+   "refused at trace",
+   "attend: until takes last_key, got length (length)"
+  ],
+  "sdpa given a sliding window it ignores": [
+   "resolved at trace",
+   "attend: triton does not honour sliding_window; routed to torch"
+  ],
+  "[B, L, H, D] read as [B, H, L, D] where L == H": [
+   "cannot be written",
+   "AttributeError: 'Sym' object has no attribute 'transpose'"
+  ],
+  "causal alignment of fewer queries than keys (is_causal)": [
+   "refused at trace",
+   "attend: a query of several tokens (or an unknown number) needs at=, its absolute positions"
+  ]
+ },
+ "runs": {
+  "rb-03 fused QKV (torch lowering)": 2.1457672119140625e-06,
+  "rb-03 fused QKV (triton lowering, bfloat16)": 0.04251909255981445
+ },
+ "count": {
+  "cases": 16,
+  "cannot be written": 2,
+  "outside": 1,
+  "passes": 4,
+  "refused at bind": 2,
+  "refused at trace": 3,
+  "resolved at trace": 4,
+  "prevented before running (trace)": 9,
+  "prevented before running (trace or bind)": 11,
+  "false refusals of fixed versions": 0
+ },
+ "count_e5": {
+  "cannot be written": 4,
+  "refused at trace": 3,
+  "resolved at trace": 1
+ }
+}

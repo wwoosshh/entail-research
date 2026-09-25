@@ -1,0 +1,67 @@
+(APIServer pid=2162) WARNING 09-24 02:42:58 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=2162) WARNING 09-24 02:42:58 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=2257) WARNING 09-24 02:43:06 [buffer_utils.py:47] Pinned memory is not available on this platform; falling back to device memory for UVA buffers.
+(EngineCore pid=2257) 
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+(EngineCore pid=2257) 
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:00<00:00,  2.83it/s]
+(EngineCore pid=2257) 
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:00<00:00,  2.87it/s]
+(EngineCore pid=2257) 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:00<00:00,  4.23it/s]
+(EngineCore pid=2257) 
+(EngineCore pid=2257) WARNING 09-24 02:43:11 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=2257) WARNING 09-24 02:43:11 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=2162) [entail] refused at load:vllm.tool_parser: Template declared Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='hermes') (manifest: <workspace>/testbed/results/m53/manifests/tool/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a.json#Template, declared); vllm.tool_parser.pythonic uses Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='pythonic') (engine: vllm.tool_parser.pythonic [tool_call_format: reads pythonic (code)], inferred); rule: the consumer differs from the declaration and the policy repairs nothing; stops here
+(APIServer pid=2162) WARNING 09-24 02:43:11 [utils.py:652] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=2162) WARNING 09-24 02:43:11 [utils.py:657] [shutdown] Process manager: force killing remaining process EngineCore pid 2257
+(APIServer pid=2162) Traceback (most recent call last):
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/bin/vllm", line 6, in <module>
+(APIServer pid=2162)     sys.exit(main())
+(APIServer pid=2162)              ^^^^^^
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/cli/main.py", line 106, in main
+(APIServer pid=2162)     args.dispatch_function(args)
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/cli/serve.py", line 154, in cmd
+(APIServer pid=2162)     uvloop.run(run_server(args))
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/uvloop/__init__.py", line 96, in run
+(APIServer pid=2162)     return __asyncio.run(
+(APIServer pid=2162)            ^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+(APIServer pid=2162)     return runner.run(main)
+(APIServer pid=2162)            ^^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+(APIServer pid=2162)     return self._loop.run_until_complete(task)
+(APIServer pid=2162)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=2162)     return await main
+(APIServer pid=2162)            ^^^^^^^^^^
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 176, in run_server
+(APIServer pid=2162)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 194, in run_server_worker
+(APIServer pid=2162)     shutdown_task = await build_and_serve(
+(APIServer pid=2162)                     ^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 137, in build_and_serve
+(APIServer pid=2162)     await init_app_state(engine_client, app.state, args, supported_tasks)
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/launchers/api_server/app_state.py", line 88, in init_app_state
+(APIServer pid=2162)     state.online_renderer = OnlineRenderer(
+(APIServer pid=2162)                             ^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/renderers/online_renderer.py", line 140, in __init__
+(APIServer pid=2162)     self.parser: type[Parser] | None = ParserManager.get_parser(
+(APIServer pid=2162)                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "<workspace>/entail/entail/adapters/vllm_serve.py", line 199, in get_parser
+(APIServer pid=2162)     _PARSERS[key] = load.safely(TOOL_PARSER, f"vllm.tool_parser.{tool_parser_name}", "Template",
+(APIServer pid=2162)                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "<workspace>/entail/entail/load.py", line 652, in safely
+(APIServer pid=2162)     return work()
+(APIServer pid=2162)            ^^^^^^
+(APIServer pid=2162)   File "<workspace>/entail/entail/adapters/vllm_serve.py", line 200, in <lambda>
+(APIServer pid=2162)     lambda: _tool_parser(model_name, tool_parser_name), tool_parser_name)
+(APIServer pid=2162)             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2162)   File "<workspace>/entail/entail/adapters/vllm_serve.py", line 127, in _tool_parser
+(APIServer pid=2162)     load.enforce(decisions)
+(APIServer pid=2162)   File "<workspace>/entail/entail/load.py", line 709, in enforce
+(APIServer pid=2162)     raise RoleError("\n".join(_record.line(d) for d in stops))
+(APIServer pid=2162) entail.core.RoleError: [entail] refused at load:vllm.tool_parser: Template declared Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='hermes') (manifest: <workspace>/testbed/results/m53/manifests/tool/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a.json#Template, declared); vllm.tool_parser.pythonic uses Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='pythonic') (engine: vllm.tool_parser.pythonic [tool_call_format: reads pythonic (code)], inferred); rule: the consumer differs from the declaration and the policy repairs nothing; stops here
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

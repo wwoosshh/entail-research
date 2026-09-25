@@ -1,0 +1,2943 @@
+{
+ "when": "2026-09-23 21:21",
+ "transformers": "5.17.0",
+ "rows": [
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "seconds": 2.549,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct: 254 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings, verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Llama-3.2-3B-Instruct: 254 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: /home/<user>/models/Llama-3.2-3B-Instruct/config.json (every key it gives), declared); transformers.config uses Coverage(total=27, taken=27, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": [
+    "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#rope_theta,rope_scaling: RoPE keys ['high_freq_factor', 'low_freq_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "seconds": 0.003,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct: 254 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings, verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Llama-3.2-3B-Instruct: 254 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: /home/<user>/models/Llama-3.2-3B-Instruct/config.json (every key it gives), declared); sglang.config uses Coverage(total=27, taken=27, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": [
+    "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#rope_theta,rope_scaling: RoPE keys ['high_freq_factor', 'low_freq_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "seconds": 0.003,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct: 254 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings, verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Llama-3.2-3B-Instruct: 254 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: /home/<user>/models/Llama-3.2-3B-Instruct/config.json (every key it gives), declared); vllm.config uses Coverage(total=27, taken=27, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": [
+    "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#rope_theta,rope_scaling: RoPE keys ['high_freq_factor', 'low_freq_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ]
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "transformers",
+   "seconds": 0.006,
+   "backends": {
+    "transformers.attention.eager": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.attention.sdpa": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.attention.flex_attention": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.paged_attention.eager": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.paged_attention.sdpa": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct: 195 tensors, lm_head.weight row 0 holds other bytes than the embedding"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=29, taken=29, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=29, taken=29, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (config: /home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings, verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (data: /home/<user>/models/Phi-3.5-mini-instruct: 195 tensors, lm_head.weight row 0 holds other bytes than the embedding, verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=29, taken=29, left=()) (config: /home/<user>/models/Phi-3.5-mini-instruct/config.json (every key it gives), declared); transformers.config uses Coverage(total=29, taken=29, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+   ],
+   "notes": [
+    "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ]
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "sglang",
+   "seconds": 0.002,
+   "backends": {
+    "sglang.attention.triton": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "sglang.attention.flashinfer": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.torch_native": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "sglang.attention.flex_attention": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.trtllm_mha": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct: 195 tensors, lm_head.weight row 0 holds other bytes than the embedding"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=29, taken=29, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=29, taken=29, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (config: /home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings, verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (data: /home/<user>/models/Phi-3.5-mini-instruct: 195 tensors, lm_head.weight row 0 holds other bytes than the embedding, verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=29, taken=29, left=()) (config: /home/<user>/models/Phi-3.5-mini-instruct/config.json (every key it gives), declared); sglang.config uses Coverage(total=29, taken=29, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+   ],
+   "notes": [
+    "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ]
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "vllm",
+   "seconds": 0.002,
+   "backends": {
+    "vllm.attention.FLASH_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.TRITON_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLEX_ATTENTION": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLASHINFER": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.ROCM_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct: 195 tensors, lm_head.weight row 0 holds other bytes than the embedding"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=29, taken=29, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=29, taken=29, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (config: /home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings, verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (data: /home/<user>/models/Phi-3.5-mini-instruct: 195 tensors, lm_head.weight row 0 holds other bytes than the embedding, verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=29, taken=29, left=()) (config: /home/<user>/models/Phi-3.5-mini-instruct/config.json (every key it gives), declared); vllm.config uses Coverage(total=29, taken=29, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+   ],
+   "notes": [
+    "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ]
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "transformers",
+   "seconds": 0.007,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct: 434 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=23, taken=23, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=23, taken=23, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings, verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Qwen2.5-3B-Instruct: 434 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=23, taken=23, left=()) (config: /home/<user>/models/Qwen2.5-3B-Instruct/config.json (every key it gives), declared); transformers.config uses Coverage(total=23, taken=23, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "sglang",
+   "seconds": 0.002,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct: 434 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=23, taken=23, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=23, taken=23, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings, verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Qwen2.5-3B-Instruct: 434 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=23, taken=23, left=()) (config: /home/<user>/models/Qwen2.5-3B-Instruct/config.json (every key it gives), declared); sglang.config uses Coverage(total=23, taken=23, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "vllm",
+   "seconds": 0.002,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct: 434 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=23, taken=23, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=23, taken=23, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings, verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Qwen2.5-3B-Instruct: 434 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=23, taken=23, left=()) (config: /home/<user>/models/Qwen2.5-3B-Instruct/config.json (every key it gives), declared); vllm.config uses Coverage(total=23, taken=23, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "transformers",
+   "seconds": 0.011,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=24, taken=24, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=24, taken=24, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.linear",
+     "consumer": "transformers.linear.unknown",
+     "name": "Layout",
+     "verdict": "unknown",
+     "blocking": false,
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": null,
+      "source": {
+       "kind": "engine",
+       "where": "transformers.linear.unknown [not in the capability table]"
+      },
+      "certainty": "unknown"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings, declared); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=24, taken=24, left=()) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json (every key it gives), declared); transformers.config uses Coverage(total=24, taken=24, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+    "[entail] unknown at load:transformers.linear: Layout declared Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config, declared); transformers.linear.unknown uses unknown (engine: transformers.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "sglang",
+   "seconds": 0.003,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=24, taken=24, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=24, taken=24, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.linear",
+     "consumer": "sglang.linear.unknown",
+     "name": "Layout",
+     "verdict": "unknown",
+     "blocking": false,
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": null,
+      "source": {
+       "kind": "engine",
+       "where": "sglang.linear.unknown [not in the capability table]"
+      },
+      "certainty": "unknown"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings, declared); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=24, taken=24, left=()) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json (every key it gives), declared); sglang.config uses Coverage(total=24, taken=24, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+    "[entail] unknown at load:sglang.linear: Layout declared Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config, declared); sglang.linear.unknown uses unknown (engine: sglang.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "vllm",
+   "seconds": 0.003,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=24, taken=24, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=24, taken=24, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "consumer": "vllm.linear.unknown",
+     "name": "Layout",
+     "verdict": "unknown",
+     "blocking": false,
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": null,
+      "source": {
+       "kind": "engine",
+       "where": "vllm.linear.unknown [not in the capability table]"
+      },
+      "certainty": "unknown"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings, declared); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=24, taken=24, left=()) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json (every key it gives), declared); vllm.config uses Coverage(total=24, taken=24, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+    "[entail] unknown at load:vllm.linear: Layout declared Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None) (config: /home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config, declared); vllm.linear.unknown uses unknown (engine: vllm.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "seconds": 0.005,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen3-4B: 398 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=26, taken=26, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=26, taken=26, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings, verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Qwen3-4B: 398 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=26, taken=26, left=()) (config: /home/<user>/models/Qwen3-4B/config.json (every key it gives), declared); transformers.config uses Coverage(total=26, taken=26, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "seconds": 0.002,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen3-4B: 398 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=26, taken=26, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=26, taken=26, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings, verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Qwen3-4B: 398 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=26, taken=26, left=()) (config: /home/<user>/models/Qwen3-4B/config.json (every key it gives), declared); sglang.config uses Coverage(total=26, taken=26, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "seconds": 0.002,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen3-4B: 398 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=26, taken=26, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=26, taken=26, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings, verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/Qwen3-4B: 398 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=26, taken=26, left=()) (config: /home/<user>/models/Qwen3-4B/config.json (every key it gives), declared); vllm.config uses Coverage(total=26, taken=26, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "transformers",
+   "seconds": 0.011,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.linear",
+     "consumer": "transformers.linear.unknown",
+     "name": "Layout",
+     "verdict": "unknown",
+     "blocking": false,
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16')",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": null,
+      "source": {
+       "kind": "engine",
+       "where": "transformers.linear.unknown [not in the capability table]"
+      },
+      "certainty": "unknown"
+     },
+     "observed": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16')",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings, declared); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: /home/<user>/models/Qwen3-4B-FP8/config.json (every key it gives), declared); transformers.config uses Coverage(total=27, taken=27, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+    "[entail] unknown at load:transformers.linear: Layout declared Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16') (config: /home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config, verified); transformers.linear.unknown uses unknown (engine: transformers.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table); the data shows Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16') (data: /home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16, verified)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "sglang",
+   "seconds": 0.003,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.linear",
+     "consumer": "sglang.linear.unknown",
+     "name": "Layout",
+     "verdict": "unknown",
+     "blocking": false,
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16')",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": null,
+      "source": {
+       "kind": "engine",
+       "where": "sglang.linear.unknown [not in the capability table]"
+      },
+      "certainty": "unknown"
+     },
+     "observed": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16')",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings, declared); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: /home/<user>/models/Qwen3-4B-FP8/config.json (every key it gives), declared); sglang.config uses Coverage(total=27, taken=27, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+    "[entail] unknown at load:sglang.linear: Layout declared Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16') (config: /home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config, verified); sglang.linear.unknown uses unknown (engine: sglang.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table); the data shows Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16') (data: /home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16, verified)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "vllm",
+   "seconds": 0.003,
+   "backends": {},
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=27, taken=27, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "consumer": "vllm.linear.unknown",
+     "name": "Layout",
+     "verdict": "unknown",
+     "blocking": false,
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16')",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": null,
+      "source": {
+       "kind": "engine",
+       "where": "vllm.linear.unknown [not in the capability table]"
+      },
+      "certainty": "unknown"
+     },
+     "observed": {
+      "name": "Layout",
+      "kind": "LAYOUT",
+      "value": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16')",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings, declared); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: /home/<user>/models/Qwen3-4B-FP8/config.json (every key it gives), declared); vllm.config uses Coverage(total=27, taken=27, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: quantization_config (read by the quantizer (transformers' quantizers, vLLM's and SGLang's quantization configs), not by the model's config class; its facts are read as Layout (readers.py))",
+    "[entail] unknown at load:vllm.linear: Layout declared Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16') (config: /home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config, verified); vllm.linear.unknown uses unknown (engine: vllm.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table); the data shows Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16') (data: /home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16, verified)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "seconds": 0.005,
+   "backends": {
+    "transformers.attention.eager": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.attention.sdpa": {
+     "verdict": "resolved",
+     "target": "eager",
+     "blocking": false
+    },
+    "transformers.attention.flex_attention": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.paged_attention.eager": {
+     "verdict": "refused",
+     "target": null,
+     "blocking": true
+    },
+    "transformers.paged_attention.sdpa": {
+     "verdict": "refused",
+     "target": null,
+     "blocking": true
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=30, taken=30, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-2-2b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=30, taken=30, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding), verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=30, taken=30, left=()) (config: /home/<user>/models/gemma-2-2b-it/config.json (every key it gives), declared); transformers.config uses Coverage(total=30, taken=30, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "seconds": 0.002,
+   "backends": {
+    "sglang.attention.triton": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "sglang.attention.flashinfer": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.torch_native": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.flex_attention": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.trtllm_mha": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=30, taken=30, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-2-2b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=30, taken=30, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding), verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=30, taken=30, left=()) (config: /home/<user>/models/gemma-2-2b-it/config.json (every key it gives), declared); sglang.config uses Coverage(total=30, taken=30, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "seconds": 0.003,
+   "backends": {
+    "vllm.attention.FLASH_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.TRITON_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLEX_ATTENTION": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLASHINFER": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.ROCM_ATTN": {
+     "verdict": "resolved",
+     "target": "FLASH_ATTN",
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=30, taken=30, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-2-2b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=30, taken=30, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding), verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-2b-it: 288 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=30, taken=30, left=()) (config: /home/<user>/models/gemma-2-2b-it/config.json (every key it gives), declared); vllm.config uses Coverage(total=30, taken=30, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-2-9b-it",
+   "engine": "transformers",
+   "seconds": 0.004,
+   "backends": {
+    "transformers.attention.eager": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.attention.sdpa": {
+     "verdict": "resolved",
+     "target": "eager",
+     "blocking": false
+    },
+    "transformers.attention.flex_attention": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.paged_attention.eager": {
+     "verdict": "refused",
+     "target": null,
+     "blocking": true
+    },
+    "transformers.paged_attention.sdpa": {
+     "verdict": "refused",
+     "target": null,
+     "blocking": true
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-2-9b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding), verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: /home/<user>/models/gemma-2-9b-it/config.json (every key it gives), declared); transformers.config uses Coverage(total=31, taken=31, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-2-9b-it",
+   "engine": "sglang",
+   "seconds": 0.002,
+   "backends": {
+    "sglang.attention.triton": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "sglang.attention.flashinfer": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.torch_native": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.flex_attention": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.trtllm_mha": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-2-9b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding), verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: /home/<user>/models/gemma-2-9b-it/config.json (every key it gives), declared); sglang.config uses Coverage(total=31, taken=31, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-2-9b-it",
+   "engine": "vllm",
+   "seconds": 0.002,
+   "backends": {
+    "vllm.attention.FLASH_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.TRITON_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLEX_ATTENTION": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLASHINFER": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.ROCM_ATTN": {
+     "verdict": "resolved",
+     "target": "FLASH_ATTN",
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-2-9b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding), verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-2-9b-it: 464 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: /home/<user>/models/gemma-2-9b-it/config.json (every key it gives), declared); vllm.config uses Coverage(total=31, taken=31, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint)"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "transformers",
+   "seconds": 0.015,
+   "backends": {
+    "transformers.attention.eager": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.attention.sdpa": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.attention.flex_attention": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.paged_attention.eager": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "transformers.paged_attention.sdpa": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:transformers.loader",
+     "consumer": "transformers.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:transformers.config",
+     "consumer": "transformers.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-3-1b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding), verified); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:transformers.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: /home/<user>/models/gemma-3-1b-it/config.json (every key it gives), declared); transformers.config uses Coverage(total=31, taken=31, left=()) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint))"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "sglang",
+   "seconds": 0.005,
+   "backends": {
+    "sglang.attention.triton": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "sglang.attention.flashinfer": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.torch_native": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "sglang.attention.flex_attention": {
+     "verdict": "resolved",
+     "target": "triton",
+     "blocking": false
+    },
+    "sglang.attention.trtllm_mha": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:sglang.loader",
+     "consumer": "sglang.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:sglang.config",
+     "consumer": "sglang.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-3-1b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "sglang config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:sglang.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding), verified); sglang.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: sglang.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:sglang.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: /home/<user>/models/gemma-3-1b-it/config.json (every key it gives), declared); sglang.config uses Coverage(total=31, taken=31, left=()) (engine: sglang config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint))"
+   ],
+   "notes": []
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "vllm",
+   "seconds": 0.005,
+   "backends": {
+    "vllm.attention.FLASH_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.TRITON_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLEX_ATTENTION": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.FLASHINFER": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    },
+    "vllm.attention.ROCM_ATTN": {
+     "verdict": "pass",
+     "target": null,
+     "blocking": false
+    }
+   },
+   "model_decisions": [
+    {
+     "boundary": "load:vllm.loader",
+     "consumer": "vllm.loader",
+     "name": "ModelProps",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "",
+     "declared": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "chosen": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "engine",
+       "where": "vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings"
+      },
+      "certainty": "verified"
+     },
+     "observed": {
+      "name": "ModelProps",
+      "kind": "PROPERTY",
+      "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+      "source": {
+       "kind": "data",
+       "where": "/home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding)"
+      },
+      "certainty": "verified"
+     },
+     "conflict": []
+    },
+    {
+     "boundary": "load:vllm.config",
+     "consumer": "vllm.config",
+     "name": "Coverage",
+     "verdict": "pass",
+     "blocking": false,
+     "rule": "the consumer uses the declared value",
+     "resolution": null,
+     "handle": null,
+     "target": null,
+     "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint))",
+     "declared": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "config",
+       "where": "/home/<user>/models/gemma-3-1b-it/config.json (every key it gives)"
+      },
+      "certainty": "declared"
+     },
+     "chosen": {
+      "name": "Coverage",
+      "kind": "MAPPING",
+      "value": "Coverage(total=31, taken=31, left=())",
+      "source": {
+       "kind": "engine",
+       "where": "vllm config class: a key is taken if the class knows it or its value landed in a field it knows"
+      },
+      "certainty": "verified"
+     },
+     "observed": null,
+     "conflict": []
+    }
+   ],
+   "model_lines": [
+    "[entail] pass at load:vllm.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding), verified); vllm.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: vllm.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the consumer uses the declared value; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (data: /home/<user>/models/gemma-3-1b-it: 340 tensors, no lm_head.weight (the head can only be the embedding), verified)",
+    "[entail] pass at load:vllm.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: /home/<user>/models/gemma-3-1b-it/config.json (every key it gives), declared); vllm.config uses Coverage(total=31, taken=31, left=()) (engine: vllm config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer uses the declared value; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint))"
+   ],
+   "notes": []
+  }
+ ]
+}

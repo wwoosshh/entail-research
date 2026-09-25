@@ -1,0 +1,235 @@
+[32m[INFO][0m setup plugin alembic.autogenerate.schemas
+[32m[INFO][0m setup plugin alembic.autogenerate.tables
+[32m[INFO][0m setup plugin alembic.autogenerate.types
+[32m[INFO][0m setup plugin alembic.autogenerate.constraints
+[32m[INFO][0m setup plugin alembic.autogenerate.defaults
+[32m[INFO][0m setup plugin alembic.autogenerate.comments
+[32m[INFO][0m setup plugin alembic.autogenerate.checkconstraint_byname
+[32m[INFO][0m Adding extra search path loras C:\Users\<user>\AppData\Local\Temp\claude\C--Users-<user>-Desktop------ai-compiler\1ca95520-f800-4114-8750-ff4f872cd917\scratchpad\m63_loras
+[32m[INFO][0m Setting output directory to: <workspace>\testbed\results\m63\comfy_images
+[32m[INFO][0m Setting user directory to: <workspace>\testbed\results\m63\comfy_user
+[32m[INFO][0m 
+Prestartup times for custom nodes:
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\rgthree-comfy
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Easy-Use
+[32m[INFO][0m 
+[32m[INFO][0m Found comfy_kitchen backend triton: {'available': False, 'disabled': True, 'unavailable_reason': "ImportError: No module named 'triton'", 'capabilities': []}
+[32m[INFO][0m Found comfy_kitchen backend cuda: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['adaln', 'apply_rope', 'apply_rope1', 'apply_rope1_', 'apply_rope_', 'apply_rope_split_half', 'apply_rope_split_half1', 'apply_rope_split_half1_', 'apply_rope_split_half_', 'convrot_w4a4_linear', 'dequantize_convrot_w4a4_weight', 'dequantize_int8_convrot_weight', 'dequantize_int8_convrot_weight_dtype', 'dequantize_int8_simple', 'dequantize_int8_simple_dtype', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'dequantize_w4a8_int8_weight', 'gemv_awq_w4a16', 'int8_linear', 'na3d', 'prepare_int4_weight_for_int8_linear', 'quantize_and_rotate_rowwise', 'quantize_convrot_w4a4_weight', 'quantize_int8_convrot_weight', 'quantize_int8_rowwise', 'quantize_int8_tensorwise', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'quantize_svdquant_w4a4', 'quantize_w4a8_int8_weight', 'rms_adaln', 'rms_rope', 'rms_rope1', 'rms_rope1_', 'rms_rope_', 'rms_rope_split_half', 'rms_rope_split_half1', 'rms_rope_split_half1_', 'rms_rope_split_half_', 'rotate_int8_convrot_weight', 'scaled_mm_nvfp4', 'scaled_mm_svdquant_w4a4', 'stochastic_rounding_fp8', 'w4a8_int8_linear']}
+[32m[INFO][0m Found comfy_kitchen backend hip: {'available': False, 'disabled': False, 'unavailable_reason': 'PyTorch ROCm/HIP runtime not available', 'capabilities': []}
+[32m[INFO][0m Found comfy_kitchen backend eager: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['adaln', 'apply_rope', 'apply_rope1', 'apply_rope1_', 'apply_rope_', 'apply_rope_split_half', 'apply_rope_split_half1', 'apply_rope_split_half1_', 'apply_rope_split_half_', 'convrot_w4a4_linear', 'dequantize_convrot_w4a4_weight', 'dequantize_int8_convrot_weight', 'dequantize_int8_convrot_weight_dtype', 'dequantize_int8_embedding', 'dequantize_int8_simple', 'dequantize_int8_simple_dtype', 'dequantize_mxfp8', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'dequantize_w4a8_int8_weight', 'gemv_awq_w4a16', 'int8_linear', 'na3d', 'prepare_int4_weight_for_int8_linear', 'quantize_and_rotate_rowwise', 'quantize_convrot_w4a4_weight', 'quantize_int8_convrot_weight', 'quantize_int8_rowwise', 'quantize_int8_tensorwise', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'quantize_svdquant_w4a4', 'quantize_w4a8_int8_weight', 'rms_adaln', 'rms_rope', 'rms_rope1', 'rms_rope1_', 'rms_rope_', 'rms_rope_split_half', 'rms_rope_split_half1', 'rms_rope_split_half1_', 'rms_rope_split_half_', 'rotate_int8_convrot_weight', 'scaled_mm_mxfp8', 'scaled_mm_nvfp4', 'scaled_mm_svdquant_w4a4', 'stochastic_rounding_fp8', 'w4a8_int8_linear']}
+[32m[INFO][0m Checkpoint files will always be loaded safely.
+[32m[INFO][0m Total VRAM 12282 MB, total RAM 32532 MB
+[32m[INFO][0m pytorch version: 2.13.0+cu130
+[32m[INFO][0m Set vram state to: NORMAL_VRAM
+[32m[INFO][0m Device: cuda:0 NVIDIA GeForce RTX 4070 Ti : cudaMallocAsync
+[32m[INFO][0m Using async weight offloading with 2 streams
+[32m[INFO][0m Enabled pinned memory 13012.0
+[32m[INFO][0m Using pytorch attention
+[32m[INFO][0m aimdo: src-win/cuda-detour.c:38:INFO:aimdo_setup_hooks: installing 6 hooks
+[32m[INFO][0m aimdo: src/control.c:262:INFO:comfy-aimdo NVML pressure enabled
+[32m[INFO][0m aimdo: src-win/shmem-detect.c:80:INFO:comfy-aimdo WDDM adapter match: NVIDIA GeForce RTX 4070 Ti runtime_luid=00000000:000117a6 dxgi_luid=00000000:000117a6
+[32m[INFO][0m aimdo: src/control.c:277:INFO:comfy-aimdo inited for GPU: NVIDIA GeForce RTX 4070 Ti (VRAM: 12281 MB)
+[32m[INFO][0m DynamicVRAM support detected and enabled
+[32m[INFO][0m Python version: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+[32m[INFO][0m ComfyUI version: 0.34.1
+[32m[INFO][0m comfy-aimdo version: 0.4.15
+[32m[INFO][0m comfy-kitchen version: 0.2.31
+[32m[INFO][0m Setting temp directory to: <workspace>\testbed\results\m63\comfy_temp\temp
+[32m[INFO][0m comfyui-frontend-package version: 1.49.6
+[32m[INFO][0m comfyui-workflow-templates version: 0.11.48
+[32m[INFO][0m comfyui-embedded-docs version: 0.5.10
+[32m[INFO][0m comfy-kitchen version: 0.2.31
+[32m[INFO][0m comfy-aimdo version: 0.4.15
+[32m[INFO][0m [Prompt Server] web root: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\.venv\Lib\site-packages\comfyui_frontend_package\static
+[32m[INFO][0m Asset seeder disabled
+[32m[INFO][0m No OpenGL_accelerate module loaded: No module named 'OpenGL_accelerate'
+[32m[INFO][0m ComfyUI-GGUF: Allowing full torch compile
+[32m[INFO][0m ### Loading: ComfyUI-Impact-Pack (V8.28.3)
+[32m[INFO][0m [Impact Pack] Wildcard total size (0.03 MB) is within cache limit (50.00 MB). Using full cache mode.
+[32m[INFO][0m ### Loading: ComfyUI-Impact-Subpack (V1.3.5)
+[32m[INFO][0m [Impact Pack/Subpack] Using folder_paths to determine whitelist path: <workspace>\testbed\results\m63\comfy_user\default\ComfyUI-Impact-Subpack\model-whitelist.txt
+[32m[INFO][0m [Impact Pack/Subpack] Ensured whitelist directory exists: <workspace>\testbed\results\m63\comfy_user\default\ComfyUI-Impact-Subpack
+[32m[INFO][0m [Impact Pack/Subpack] Loaded 0 model(s) from whitelist: <workspace>\testbed\results\m63\comfy_user\default\ComfyUI-Impact-Subpack\model-whitelist.txt
+[32m[INFO][0m [Impact Pack] Wildcards loading done.
+[32m[INFO][0m [Impact Subpack] ultralytics_bbox: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\models\ultralytics\bbox
+[32m[INFO][0m [Impact Subpack] ultralytics_segm: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\models\ultralytics\segm
+[1m[33m[WARNING][0m KJNodes: PatchTritonVAE node could not be imported. PatchTritonVAE will be unavailable.
+Traceback (most recent call last):
+  File "C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-KJNodes\nodes\triton_vae.py", line 10, in <module>
+    import triton
+ModuleNotFoundError: No module named 'triton'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-KJNodes\__init__.py", line 386, in <module>
+    from .nodes.triton_vae import PatchTritonVAE
+  File "C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-KJNodes\nodes\triton_vae.py", line 13, in <module>
+    raise ImportError("PatchTritonVAE requires triton (pip install triton, or triton-windows)") from e
+ImportError: PatchTritonVAE requires triton (pip install triton, or triton-windows)
+[36;20m[C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfyui_controlnet_aux] | INFO -> Using ckpts path: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfyui_controlnet_aux\ckpts[0m
+[36;20m[C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfyui_controlnet_aux] | INFO -> Using symlinks: False[0m
+[36;20m[C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfyui_controlnet_aux] | INFO -> Using ort providers: ['CUDAExecutionProvider', 'DirectMLExecutionProvider', 'OpenVINOExecutionProvider', 'ROCMExecutionProvider', 'MIGraphXExecutionProvider', 'CPUExecutionProvider'][0m
+USDU batch patches applied successfully.
+[32m[INFO][0m USDU batch patches applied successfully.
+[34m[ComfyUI-Easy-Use] server: [0mv1.3.7 [92mLoaded[0m
+[34m[ComfyUI-Easy-Use] web root: [0mC:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Easy-Use\web_version/v2 [92mLoaded[0m
+DWPose: Onnxruntime with acceleration providers detected
+
+[92m[rgthree-comfy] Loaded 48 exciting nodes. 🎉[0m
+
+[33m[rgthree-comfy] ComfyUI's new Node 2.0 rendering may be incompatible with some rgthree-comfy nodes and features, breaking some rendering as well as losing the ability to access a node's properties (a vital part of many nodes). It also appears to run MUCH more slowly spiking CPU usage and causing jankiness and unresponsiveness, especially with large workflows. Personally I am not planning to use the new Nodes 2.0 and, unfortunately, am not able to invest the time to investigate and overhaul rgthree-comfy where needed. If you have issues when Nodes 2.0 is enabled, I'd urge you to switch it off as well and join me in hoping ComfyUI is not planning to deprecate the existing, stable canvas rendering all together.
+[0m
+[34mWAS Node Suite: [0mOpenCV Python FFMPEG support is enabled[0m
+[34mWAS Node Suite [93mWarning: [0m`ffmpeg_bin_path` is not set in `C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\was-node-suite-comfyui\was_suite_config.json` config file. Will attempt to use system ffmpeg binaries if available.[0m
+[34mWAS Node Suite: [0mFinished.[0m [32mLoaded[0m [0m220[0m [32mnodes successfully.[0m
+
+	[3m[93m"The purpose of art is washing the dust of daily life off our souls."[0m[3m - Pablo Picasso[0m
+
+[TIPO-installer]-|10:24:11|-[0;32mINFO[0m: Using model dir: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\models\kgen
+[32m[INFO][0m 
+Import times for custom nodes:
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\websocket_image_save.py
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI_PRNodes
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-GGUF
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI_JPS-Nodes
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Autocomplete-Plus
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfy-image-saver
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Custom-Scripts
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI_essentials
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI_UltimateSDUpscale
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\rgthree-comfy
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-ppm
+[32m[INFO][0m    0.0 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfyui_controlnet_aux
+[32m[INFO][0m    0.1 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Impact-Subpack
+[32m[INFO][0m    0.1 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Impact-Pack
+[32m[INFO][0m    0.2 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-KJNodes
+[32m[INFO][0m    0.2 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\z-tipo-extension
+[32m[INFO][0m    0.2 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\comfyui-propost
+[32m[INFO][0m    0.3 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Detail-Daemon
+[32m[INFO][0m    0.8 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\was-node-suite-comfyui
+[32m[INFO][0m    2.2 seconds: C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new\custom_nodes\ComfyUI-Easy-Use
+[32m[INFO][0m 
+[32m[INFO][0m Using RAM pressure cache.
+[32m[INFO][0m Starting server
+
+[32m[INFO][0m To see the GUI go to: http://127.0.0.1:8189
+[32m[INFO][0m got prompt
+[32m[INFO][0m model weight dtype torch.float16, manual cast: None
+[32m[INFO][0m model_type EPS
+[32m[INFO][0m Using pytorch attention in VAE
+[32m[INFO][0m Using pytorch attention in VAE
+[32m[INFO][0m VAE load device: cuda:0, offload device: cpu, dtype: torch.float16
+[32m[INFO][0m CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16
+[32m[INFO][0m Requested to load SDXLClipModel
+[32m[INFO][0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.
+[32m[INFO][0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.
+[32m[INFO][0m Requested to load SDXL
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 0 patches attached. Force pre-loaded 512 weights: 1197 KB.
+
+  0%|          | 0/25 [00:00<?, ?it/s]
+  0%|          | 0/25 [00:00<?, ?it/s,   Model Initializing ...  ]
+  0%|          | 0/25 [00:03<?, ?it/s,  Model Initialization complete!  ]
+  4%|▍         | 1/25 [00:03<01:14,  3.09s/it,  Model Initialization complete!  ]
+  4%|▍         | 1/25 [00:00<01:14,  3.09s/it]                                   
+  8%|▊         | 2/25 [00:00<00:04,  5.01it/s]
+ 12%|█▏        | 3/25 [00:00<00:04,  4.53it/s]
+ 16%|█▌        | 4/25 [00:00<00:04,  4.25it/s]
+ 20%|██        | 5/25 [00:01<00:04,  4.50it/s]
+ 24%|██▍       | 6/25 [00:01<00:04,  4.55it/s]
+ 28%|██▊       | 7/25 [00:01<00:04,  4.48it/s]
+ 32%|███▏      | 8/25 [00:01<00:03,  4.52it/s]
+ 36%|███▌      | 9/25 [00:01<00:03,  4.29it/s]
+ 40%|████      | 10/25 [00:02<00:03,  4.49it/s]
+ 44%|████▍     | 11/25 [00:02<00:03,  4.49it/s]
+ 48%|████▊     | 12/25 [00:02<00:02,  4.50it/s]
+ 52%|█████▏    | 13/25 [00:02<00:02,  4.28it/s]
+ 56%|█████▌    | 14/25 [00:03<00:02,  4.49it/s]
+ 60%|██████    | 15/25 [00:03<00:02,  4.48it/s]
+ 64%|██████▍   | 16/25 [00:03<00:01,  4.50it/s]
+ 68%|██████▊   | 17/25 [00:03<00:01,  4.29it/s]
+ 72%|███████▏  | 18/25 [00:04<00:01,  4.49it/s]
+ 76%|███████▌  | 19/25 [00:04<00:01,  4.54it/s]
+ 80%|████████  | 20/25 [00:04<00:01,  4.27it/s]
+ 84%|████████▍ | 21/25 [00:04<00:00,  4.50it/s]
+ 88%|████████▊ | 22/25 [00:04<00:00,  4.51it/s]
+ 92%|█████████▏| 23/25 [00:05<00:00,  4.53it/s]
+ 96%|█████████▌| 24/25 [00:05<00:00,  4.45it/s]
+100%|██████████| 25/25 [00:05<00:00,  4.25it/s]
+100%|██████████| 25/25 [00:05<00:00,  4.48it/s]
+[32m[INFO][0m Requested to load AutoencoderKL
+[32m[INFO][0m 0 models unloaded.
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 10.99 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 0 patches attached. Force pre-loaded 512 weights: 1197 KB.
+
+  0%|          | 0/25 [00:00<?, ?it/s]
+  0%|          | 0/25 [00:00<?, ?it/s,   Model Initializing ...  ]
+  0%|          | 0/25 [00:00<?, ?it/s,  Model Initialization complete!  ]
+  4%|▍         | 1/25 [00:00<00:02,  8.14it/s,  Model Initialization complete!  ]
+  4%|▍         | 1/25 [00:00<00:02,  8.14it/s]                                   
+  8%|▊         | 2/25 [00:00<00:05,  4.53it/s]
+ 12%|█▏        | 3/25 [00:00<00:04,  4.52it/s]
+ 16%|█▌        | 4/25 [00:00<00:04,  4.50it/s]
+ 20%|██        | 5/25 [00:01<00:04,  4.25it/s]
+ 24%|██▍       | 6/25 [00:01<00:04,  4.50it/s]
+ 28%|██▊       | 7/25 [00:01<00:03,  4.53it/s]
+ 32%|███▏      | 8/25 [00:01<00:03,  4.48it/s]
+ 36%|███▌      | 9/25 [00:02<00:03,  4.27it/s]
+ 40%|████      | 10/25 [00:02<00:03,  4.51it/s]
+ 44%|████▍     | 11/25 [00:02<00:03,  4.49it/s]
+ 48%|████▊     | 12/25 [00:02<00:02,  4.48it/s]
+ 52%|█████▏    | 13/25 [00:02<00:02,  4.49it/s]
+ 56%|█████▌    | 14/25 [00:03<00:02,  4.27it/s]
+ 60%|██████    | 15/25 [00:03<00:02,  4.49it/s]
+ 64%|██████▍   | 16/25 [00:03<00:01,  4.52it/s]
+ 68%|██████▊   | 17/25 [00:03<00:01,  4.32it/s]
+ 72%|███████▏  | 18/25 [00:04<00:01,  4.50it/s]
+ 76%|███████▌  | 19/25 [00:04<00:01,  4.48it/s]
+ 80%|████████  | 20/25 [00:04<00:01,  4.33it/s]
+ 84%|████████▍ | 21/25 [00:04<00:00,  4.51it/s]
+ 88%|████████▊ | 22/25 [00:04<00:00,  4.51it/s]
+ 92%|█████████▏| 23/25 [00:05<00:00,  4.47it/s]
+ 96%|█████████▌| 24/25 [00:05<00:00,  4.27it/s]
+100%|██████████| 25/25 [00:05<00:00,  4.50it/s]
+100%|██████████| 25/25 [00:05<00:00,  4.45it/s]
+[32m[INFO][0m 0 models unloaded.
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 6.25 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 0 patches attached. Force pre-loaded 512 weights: 1197 KB.
+
+  0%|          | 0/25 [00:00<?, ?it/s]
+  0%|          | 0/25 [00:00<?, ?it/s,   Model Initializing ...  ]
+  0%|          | 0/25 [00:00<?, ?it/s,  Model Initialization complete!  ]
+  4%|▍         | 1/25 [00:00<00:03,  7.84it/s,  Model Initialization complete!  ]
+  4%|▍         | 1/25 [00:00<00:03,  7.84it/s]                                   
+  8%|▊         | 2/25 [00:00<00:04,  4.83it/s]
+ 12%|█▏        | 3/25 [00:00<00:05,  4.30it/s]
+ 16%|█▌        | 4/25 [00:00<00:04,  4.50it/s]
+ 20%|██        | 5/25 [00:01<00:04,  4.52it/s]
+ 24%|██▍       | 6/25 [00:01<00:04,  4.27it/s]
+ 28%|██▊       | 7/25 [00:01<00:03,  4.50it/s]
+ 32%|███▏      | 8/25 [00:01<00:03,  4.51it/s]
+ 36%|███▌      | 9/25 [00:02<00:03,  4.25it/s]
+ 40%|████      | 10/25 [00:02<00:03,  4.47it/s]
+ 44%|████▍     | 11/25 [00:02<00:03,  4.45it/s]
+ 48%|████▊     | 12/25 [00:02<00:02,  4.50it/s]
+ 52%|█████▏    | 13/25 [00:02<00:02,  4.53it/s]
+ 56%|█████▌    | 14/25 [00:03<00:02,  4.22it/s]
+ 60%|██████    | 15/25 [00:03<00:02,  4.50it/s]
+ 64%|██████▍   | 16/25 [00:03<00:01,  4.52it/s]
+ 68%|██████▊   | 17/25 [00:03<00:01,  4.28it/s]
+ 72%|███████▏  | 18/25 [00:04<00:01,  4.50it/s]
+ 76%|███████▌  | 19/25 [00:04<00:01,  4.49it/s]
+ 80%|████████  | 20/25 [00:04<00:01,  4.53it/s]
+ 84%|████████▍ | 21/25 [00:04<00:00,  4.24it/s]
+ 88%|████████▊ | 22/25 [00:04<00:00,  4.49it/s]
+ 92%|█████████▏| 23/25 [00:05<00:00,  4.50it/s]
+ 96%|█████████▌| 24/25 [00:05<00:00,  4.29it/s]
+100%|██████████| 25/25 [00:05<00:00,  4.52it/s]
+100%|██████████| 25/25 [00:05<00:00,  4.46it/s]
+[32m[INFO][0m 0 models unloaded.
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 6.17 seconds[0m

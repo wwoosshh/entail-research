@@ -1,0 +1,2761 @@
+{
+ "summary": {
+  "models": 30,
+  "runs": 87,
+  "valid_runs": 81,
+  "excluded": 6,
+  "entail_broke_a_run": 0,
+  "runs_with_broken_or_refused": 14,
+  "broken_or_refused_decisions": 54,
+  "alarms_by_boundary_fact": {
+   "load:transformers.config Coverage broken": 45,
+   "load:vllm.loader ModelProps broken": 5,
+   "request:transformers.chat_template Template broken": 3,
+   "request:vllm.chat_template Template broken": 1
+  },
+  "resolved_decisions": 5,
+  "resolved_not_backed_by_a_measured_row (false alarms by protocol 2.3)": 3,
+  "false_alarm_runs (broken, refused or unbacked resolved)": 17,
+  "unknown_decisions": 45,
+  "same_output_without_resolution": "76/76",
+  "load_share_median": 0.008,
+  "load_share_max": 0.0347,
+  "by_group": {
+   "top 20": {
+    "models": 19,
+    "valid_runs": 54,
+    "runs_with_broken_or_refused": 9
+   },
+   "per architecture": {
+    "models": 4,
+    "valid_runs": 11,
+    "runs_with_broken_or_refused": 3
+   },
+   "local": {
+    "models": 6,
+    "valid_runs": 16,
+    "runs_with_broken_or_refused": 2
+   }
+  }
+ },
+ "runs": [
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "broken": 2,
+    "pass": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 20.2,
+   "load_s_on": 0.84,
+   "load_s_off": 0.998,
+   "share": 0.024,
+   "group": "top 20"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 5,
+    "pass": 4
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 148.1,
+   "load_s_on": 11.339,
+   "load_s_off": 9.431,
+   "share": 0.0131,
+   "group": "top 20"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 6,
+    "pass": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 65.1,
+   "load_s_on": 12.739,
+   "load_s_off": 10.972,
+   "share": 0.0051,
+   "group": "top 20"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 14.4,
+   "load_s_on": 3.471,
+   "load_s_off": 4.154,
+   "share": 0.0042,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 173.0,
+   "load_s_on": 15.294,
+   "load_s_off": 13.334,
+   "share": 0.0113,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 12
+   },
+   "not_pass": [],
+   "entail_ms": 47.3,
+   "load_s_on": 16.812,
+   "load_s_off": 16.68,
+   "share": 0.0028,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    }
+   ],
+   "entail_ms": 31.1,
+   "load_s_on": 4.248,
+   "load_s_off": 4.521,
+   "share": 0.0073,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 10,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    }
+   ],
+   "entail_ms": 135.3,
+   "load_s_on": 12.683,
+   "load_s_off": 11.481,
+   "share": 0.0107,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": false,
+   "verdicts": {
+    "pass": 12,
+    "unknown": 1,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    },
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "triton",
+     "note": "",
+     "backing": {
+      "consumer": "sglang.attention.flashinfer",
+      "dropped": {
+       "sliding_window": "code"
+      },
+      "backed_by_measured_row": false
+     }
+    }
+   ],
+   "entail_ms": 62.6,
+   "load_s_on": 13.423,
+   "load_s_off": 12.911,
+   "share": 0.0047,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 16.1,
+   "load_s_on": 1.994,
+   "load_s_off": 4.415,
+   "share": 0.0081,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 141.9,
+   "load_s_on": 14.036,
+   "load_s_off": 12.368,
+   "share": 0.0101,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 34.7,
+   "load_s_on": 13.822,
+   "load_s_off": 12.342,
+   "share": 0.0025,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: Loading an AWQ quantized model requires gptqmodel. Please install it with `pip install gptqmodel`",
+   "error_on": "ImportError: Loading an AWQ quantized model requires gptqmodel. Please install it with `pip install gptqmodel`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 2
+   },
+   "not_pass": [],
+   "entail_ms": 4.9,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "broken": 1,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.loader",
+     "fact": "ModelProps",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 44.2,
+   "load_s_on": 15.629,
+   "load_s_off": 15.295,
+   "share": 0.0028,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 44.4,
+   "load_s_on": 13.959,
+   "load_s_off": 16.617,
+   "share": 0.0032,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 13.7,
+   "load_s_on": 2.023,
+   "load_s_off": 5.22,
+   "share": 0.0068,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 153.6,
+   "load_s_on": 14.78,
+   "load_s_off": 15.146,
+   "share": 0.0104,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 98.5,
+   "load_s_on": 15.298,
+   "load_s_off": 13.054,
+   "share": 0.0064,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 29.2,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "broken": 1,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.loader",
+     "fact": "ModelProps",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    }
+   ],
+   "entail_ms": 73.5,
+   "load_s_on": 16.388,
+   "load_s_off": 15.022,
+   "share": 0.0045,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 39.4,
+   "load_s_on": 13.867,
+   "load_s_off": 13.035,
+   "share": 0.0028,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 15.7,
+   "load_s_on": 0.993,
+   "load_s_off": 1.337,
+   "share": 0.0158,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 119.0,
+   "load_s_on": 11.566,
+   "load_s_off": 10.932,
+   "share": 0.0103,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 34.2,
+   "load_s_on": 12.387,
+   "load_s_off": 10.86,
+   "share": 0.0028,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 14.3,
+   "load_s_on": 0.93,
+   "load_s_off": 1.367,
+   "share": 0.0154,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 139.5,
+   "load_s_on": 12.878,
+   "load_s_off": 11.659,
+   "share": 0.0108,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 31.9,
+   "load_s_on": 12.857,
+   "load_s_off": 12.092,
+   "share": 0.0025,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 14.4,
+   "load_s_on": 0.994,
+   "load_s_off": 1.419,
+   "share": 0.0145,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 144.8,
+   "load_s_on": 12.946,
+   "load_s_off": 13.376,
+   "share": 0.0112,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 41.1,
+   "load_s_on": 15.242,
+   "load_s_off": 11.833,
+   "share": 0.0027,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 15.8,
+   "load_s_on": 1.282,
+   "load_s_off": 2.322,
+   "share": 0.0123,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 113.8,
+   "load_s_on": 13.239,
+   "load_s_off": 11.415,
+   "share": 0.0086,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 31.8,
+   "load_s_on": 13.223,
+   "load_s_off": 11.5,
+   "share": 0.0024,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 16.7,
+   "load_s_on": 1.303,
+   "load_s_off": 2.489,
+   "share": 0.0128,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 120.5,
+   "load_s_on": 13.235,
+   "load_s_off": 12.425,
+   "share": 0.0091,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 28.3,
+   "load_s_on": 13.128,
+   "load_s_off": 13.568,
+   "share": 0.0022,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 21.1,
+   "load_s_on": 1.111,
+   "load_s_off": 1.583,
+   "share": 0.019,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "broken": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.loader",
+     "fact": "ModelProps",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 139.0,
+   "load_s_on": 13.744,
+   "load_s_off": 12.793,
+   "share": 0.0101,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 42.8,
+   "load_s_on": 13.899,
+   "load_s_off": 13.588,
+   "share": 0.0031,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 15.3,
+   "load_s_on": 1.051,
+   "load_s_off": 1.333,
+   "share": 0.0145,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 192.4,
+   "load_s_on": 12.942,
+   "load_s_off": 11.933,
+   "share": 0.0149,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 39.2,
+   "load_s_on": 12.717,
+   "load_s_off": 11.69,
+   "share": 0.0031,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 15.2,
+   "load_s_on": 1.503,
+   "load_s_off": 2.777,
+   "share": 0.0101,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "broken": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.loader",
+     "fact": "ModelProps",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 203.2,
+   "load_s_on": 13.693,
+   "load_s_off": 13.306,
+   "share": 0.0148,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 28.4,
+   "load_s_on": 14.483,
+   "load_s_off": 12.123,
+   "share": 0.002,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 14.0,
+   "load_s_on": 1.287,
+   "load_s_off": 2.733,
+   "share": 0.0109,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 121.6,
+   "load_s_on": 12.61,
+   "load_s_off": 11.852,
+   "share": 0.0096,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 36.4,
+   "load_s_on": 13.134,
+   "load_s_off": 11.453,
+   "share": 0.0028,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 15.7,
+   "load_s_on": 4.968,
+   "load_s_off": 4.61,
+   "share": 0.0032,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 114.4,
+   "load_s_on": 14.223,
+   "load_s_off": 14.639,
+   "share": 0.008,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 76.1,
+   "load_s_on": 14.248,
+   "load_s_off": 14.027,
+   "share": 0.0053,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 17.1,
+   "load_s_on": 6.805,
+   "load_s_off": 9.779,
+   "share": 0.0025,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 129.4,
+   "load_s_on": 14.23,
+   "load_s_off": 15.111,
+   "share": 0.0091,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 28.3,
+   "load_s_on": 16.456,
+   "load_s_off": 13.142,
+   "share": 0.0017,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 27.8,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "broken": 1,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.loader",
+     "fact": "ModelProps",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    }
+   ],
+   "entail_ms": 54.3,
+   "load_s_on": 15.472,
+   "load_s_off": 14.194,
+   "share": 0.0035,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 38.7,
+   "load_s_on": 15.016,
+   "load_s_off": 12.688,
+   "share": 0.0026,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-8B-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 20.9,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "top 20"
+  },
+  {
+   "model": "Qwen__Qwen3-8B-FP8",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    }
+   ],
+   "entail_ms": 32.7,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "top 20"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 13.1,
+   "load_s_on": 1.103,
+   "load_s_off": 1.949,
+   "share": 0.0119,
+   "group": "top 20"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 122.5,
+   "load_s_on": 11.49,
+   "load_s_off": 10.448,
+   "share": 0.0107,
+   "group": "top 20"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 32.0,
+   "load_s_on": 12.547,
+   "load_s_off": 11.288,
+   "share": 0.0026,
+   "group": "top 20"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "eager",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "eager",
+     "note": "",
+     "backing": {
+      "consumer": "transformers.attention.sdpa",
+      "dropped": {
+       "softcap": "measured"
+      },
+      "backed_by_measured_row": true
+     }
+    }
+   ],
+   "entail_ms": 38.8,
+   "load_s_on": 2.788,
+   "load_s_off": 3.2,
+   "share": 0.0139,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 10
+   },
+   "not_pass": [],
+   "entail_ms": 130.7,
+   "load_s_on": 18.301,
+   "load_s_off": 18.182,
+   "share": 0.0071,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": false,
+   "verdicts": {
+    "pass": 8,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "triton",
+     "note": "",
+     "backing": {
+      "consumer": "sglang.attention.flashinfer",
+      "dropped": {
+       "softcap": "measured",
+       "sliding_window": "code"
+      },
+      "backed_by_measured_row": true
+     }
+    }
+   ],
+   "entail_ms": 40.0,
+   "load_s_on": 15.589,
+   "load_s_off": 14.992,
+   "share": 0.0026,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "Gemma3TextConfig held by transformers#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4"
+    }
+   ],
+   "entail_ms": 27.2,
+   "load_s_on": 1.146,
+   "load_s_off": 1.856,
+   "share": 0.0237,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 7,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "Gemma3TextConfig held by vllm#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4"
+    }
+   ],
+   "entail_ms": 139.6,
+   "load_s_on": 17.895,
+   "load_s_off": 16.008,
+   "share": 0.0078,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9,
+    "unknown": 2,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "Gemma3TextConfig held by transformers#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4"
+    },
+    {
+     "boundary": "load:sglang.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "Gemma3TextConfig held by sglang#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4"
+    },
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "triton",
+     "note": "",
+     "backing": {
+      "consumer": "sglang.attention.flashinfer",
+      "dropped": {
+       "sliding_window": "code"
+      },
+      "backed_by_measured_row": false
+     }
+    }
+   ],
+   "entail_ms": 65.6,
+   "load_s_on": 17.087,
+   "load_s_off": 14.983,
+   "share": 0.0038,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 12.9,
+   "load_s_on": 3.043,
+   "load_s_off": 3.566,
+   "share": 0.0043,
+   "group": "per architecture"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 137.2,
+   "load_s_on": 12.632,
+   "load_s_off": 11.632,
+   "share": 0.0109,
+   "group": "per architecture"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 12
+   },
+   "not_pass": [],
+   "entail_ms": 42.9,
+   "load_s_on": 13.48,
+   "load_s_off": 12.696,
+   "share": 0.0032,
+   "group": "per architecture"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/m10/microsoft__Phi-4-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    }
+   ],
+   "entail_ms": 24.7,
+   "load_s_on": 3.297,
+   "load_s_off": 3.966,
+   "share": 0.0075,
+   "group": "per architecture"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 10,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/m10/microsoft__Phi-4-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    }
+   ],
+   "entail_ms": 129.5,
+   "load_s_on": 14.254,
+   "load_s_off": 13.909,
+   "share": 0.0091,
+   "group": "per architecture"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": false,
+   "verdicts": {
+    "pass": 12,
+    "unknown": 1,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/m10/microsoft__Phi-4-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    },
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "triton",
+     "note": "",
+     "backing": {
+      "consumer": "sglang.attention.flashinfer",
+      "dropped": {
+       "sliding_window": "code"
+      },
+      "backed_by_measured_row": false
+     }
+    }
+   ],
+   "entail_ms": 58.9,
+   "load_s_on": 16.752,
+   "load_s_off": 16.067,
+   "share": 0.0035,
+   "group": "per architecture"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "broken": 5,
+    "pass": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "request:transformers.chat_template",
+     "fact": "Template",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "request:transformers.chat_template",
+     "fact": "Template",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "request:transformers.chat_template",
+     "fact": "Template",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    }
+   ],
+   "entail_ms": 27.3,
+   "load_s_on": 4.004,
+   "load_s_off": 13.915,
+   "share": 0.0068,
+   "group": "top 20"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 6,
+    "pass": 3,
+    "unknown": 21
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.0.mixer.conv1d): model.layers.0.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.11.mixer.conv1d): model.layers.11.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.14.mixer.conv1d): model.layers.14.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.16.mixer.conv1d): model.layers.16.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.19.mixer.conv1d): model.layers.19.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.2.mixer.conv1d): model.layers.2.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.21.mixer.conv1d): model.layers.21.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.23.mixer.conv1d): model.layers.23.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.26.mixer.conv1d): model.layers.26.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.28.mixer.conv1d): model.layers.28.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.30.mixer.conv1d): model.layers.30.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.31.mixer.conv1d): model.layers.31.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.34.mixer.conv1d): model.layers.34.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.35.mixer.conv1d): model.layers.35.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.36.mixer.conv1d): model.layers.36.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.38.mixer.conv1d): model.layers.38.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.4.mixer.conv1d): model.layers.4.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.40.mixer.conv1d): model.layers.40.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.6.mixer.conv1d): model.layers.6.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.7.mixer.conv1d): model.layers.7.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.9.mixer.conv1d): model.layers.9.mixer.conv1d.weight: not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "request:vllm.chat_template",
+     "fact": "Template",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 367.6,
+   "load_s_on": 20.78,
+   "load_s_off": 62.701,
+   "share": 0.0177,
+   "group": "top 20"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 12,
+    "pass": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))"
+    }
+   ],
+   "entail_ms": 109.3,
+   "load_s_on": 21.488,
+   "load_s_off": 21.821,
+   "share": 0.0051,
+   "group": "top 20"
+  },
+  {
+   "model": "trl-internal-testing__tiny-GptOssForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "eager",
+   "backend_on": "eager",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/config.json#rope_theta,rope_scaling: RoPE keys ['beta_fast', 'beta_slow', 'truncate'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    }
+   ],
+   "entail_ms": 26.7,
+   "load_s_on": 0.769,
+   "load_s_off": 0.638,
+   "share": 0.0347,
+   "group": "per architecture"
+  },
+  {
+   "model": "trl-internal-testing__tiny-GptOssForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 10,
+    "unknown": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.config.rope_parameters",
+     "fact": "Rotary",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "/home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/config.json#rope_theta,rope_scaling: RoPE keys ['beta_fast', 'beta_slow', 'truncate'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.0.mlp.router): model.layers.0.mlp.router.weight: the layer gives no in and out features, so the orientation was not read"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.1.mlp.router): model.layers.1.mlp.router.weight: the layer gives no in and out features, so the orientation was not read"
+    }
+   ],
+   "entail_ms": 116.8,
+   "load_s_on": 14.872,
+   "load_s_off": 16.71,
+   "share": 0.0079,
+   "group": "per architecture"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen2ForCausalLM-2.5",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 13.5,
+   "load_s_on": 0.575,
+   "load_s_off": 0.511,
+   "share": 0.0235,
+   "group": "top 20"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen2ForCausalLM-2.5",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 6
+   },
+   "not_pass": [],
+   "entail_ms": 115.5,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "top 20"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 13.4,
+   "load_s_on": 0.616,
+   "load_s_off": 0.525,
+   "share": 0.0218,
+   "group": "top 20"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 110.7,
+   "load_s_on": 12.652,
+   "load_s_off": 11.361,
+   "share": 0.0088,
+   "group": "top 20"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 35.3,
+   "load_s_on": 12.929,
+   "load_s_off": 11.709,
+   "share": 0.0027,
+   "group": "top 20"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "broken": 2,
+    "pass": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 16.3,
+   "load_s_on": 0.53,
+   "load_s_off": 0.53,
+   "share": 0.0307,
+   "group": "per architecture"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 5,
+    "pass": 4,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.0.mlp.gate): model.layers.0.mlp.gate.weight: the layer gives no in and out features, so the orientation was not read"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "1 weight(s) (first: model.layers.1.mlp.gate): model.layers.1.mlp.gate.weight: the layer gives no in and out features, so the orientation was not read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 150.1,
+   "load_s_on": 11.65,
+   "load_s_off": 11.832,
+   "share": 0.0129,
+   "group": "per architecture"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 6,
+    "pass": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 116.5,
+   "load_s_on": 12.399,
+   "load_s_off": 10.779,
+   "share": 0.0094,
+   "group": "per architecture"
+  }
+ ]
+}

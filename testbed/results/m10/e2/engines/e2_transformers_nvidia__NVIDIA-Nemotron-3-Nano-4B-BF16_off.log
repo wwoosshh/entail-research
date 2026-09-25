@@ -1,0 +1,18 @@
+W0924 22:48:09.139000 28191 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 22:48:09.163000 28191 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/263 [00:00<?, ?it/s]
+Loading weights:   6%|▋         | 17/263 [00:00<00:01, 144.51it/s]
+Loading weights:  13%|█▎        | 35/263 [00:00<00:01, 153.42it/s]
+Loading weights:  20%|██        | 53/263 [00:00<00:01, 158.04it/s]
+Loading weights:  30%|███       | 80/263 [00:00<00:00, 192.81it/s]
+Loading weights:  38%|███▊      | 100/263 [00:00<00:01, 160.64it/s]
+Loading weights:  49%|████▉     | 129/263 [00:00<00:00, 190.99it/s]
+Loading weights:  57%|█████▋    | 150/263 [00:00<00:00, 191.06it/s]
+Loading weights: 100%|██████████| 263/263 [00:00<00:00, 300.65it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `mamba_chunk_scan_combined` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `selective_state_update` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+RESULT transformers nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16 entail=off ok=True load=13.915 used=sdpa 

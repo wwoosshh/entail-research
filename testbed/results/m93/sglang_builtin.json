@@ -1,0 +1,46 @@
+{
+ "condition": "builtin",
+ "when": "2026-09-24 19:43:29",
+ "args": [
+  "--chat-template",
+  "chatml"
+ ],
+ "started": true,
+ "requests": [
+  {
+   "status": 200,
+   "content": "<think>\nOkay, the user is asking for the capital of France in one word",
+   "prompt_tokens": 28
+  },
+  {
+   "status": 200,
+   "content": "<think>\nOkay, the user is asking for the capital of France in one word",
+   "prompt_tokens": 28
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "request:sglang.chat_template",
+   "verdict": "broken",
+   "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+   "chosen": "SGLang conversation template 'chatml', named by --chat-template"
+  },
+  {
+   "boundary": "request:sglang.chat_template",
+   "verdict": "broken",
+   "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+   "chosen": "SGLang conversation template 'chatml', named by --chat-template"
+  }
+ ],
+ "counted": {
+  "6299 request:sglang.chat_template": {
+   "checks": 2,
+   "broken": 2,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  }
+ }
+}

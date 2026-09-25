@@ -1,0 +1,33 @@
+{
+ "server": "tool",
+ "tag": "observe_strict",
+ "env": {
+  "ENTAIL_POLICY": "refuse",
+  "ENTAIL_ON_BROKEN": "stop"
+ },
+ "args": [
+  "--tool-call-parser",
+  "pythonic"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-24 02:42:51",
+ "started": false,
+ "start_seconds": 21.4,
+ "exit": 1,
+ "log_entail": [
+  "(APIServer pid=2162) [entail] refused at load:vllm.tool_parser: Template declared Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='hermes') (manifest: <workspace>/testbed/results/m53/manifests/tool/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a.json#Template, declared); vllm.tool_parser.pythonic uses Template(chat_templ",
+  "(APIServer pid=2162)     raise RoleError(\"\\n\".join(_record.line(d) for d in stops))",
+  "(APIServer pid=2162) entail.core.RoleError: [entail] refused at load:vllm.tool_parser: Template declared Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='hermes') (manifest: <workspace>/testbed/results/m53/manifests/tool/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a.json#Template, declared); vllm.tool_parser.pythonic u"
+ ],
+ "decisions": [
+  {
+   "boundary": "load:vllm.tool_parser",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and the policy repairs nothing",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {}
+}

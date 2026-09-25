@@ -1,0 +1,58 @@
+{
+ "tag": "i01_on",
+ "checkpoint": "waiIllustriousSDXL_v170.safetensors",
+ "node": null,
+ "lora": "nagito_illustrious_v3_peft_names.safetensors",
+ "entail": true,
+ "extra": {},
+ "runs": [
+  {
+   "seed": 11,
+   "status": "success",
+   "seconds": 8.71,
+   "image": "C:\\Users\\<user>\\Desktop\\프로젝트\\ai_compiler\\testbed\\results\\m63\\comfy_images\\m63_i01_on_11_00001_.png"
+  },
+  {
+   "seed": 22,
+   "status": "success",
+   "seconds": 6.17,
+   "image": "C:\\Users\\<user>\\Desktop\\프로젝트\\ai_compiler\\testbed\\results\\m63\\comfy_images\\m63_i01_on_22_00001_.png"
+  },
+  {
+   "seed": 33,
+   "status": "success",
+   "seconds": 6.18,
+   "image": "C:\\Users\\<user>\\Desktop\\프로젝트\\ai_compiler\\testbed\\results\\m63\\comfy_images\\m63_i01_on_33_00001_.png"
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:comfyui.lora",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "note": "",
+   "declared": "Coverage(total=1348, taken=1348, left=())",
+   "chosen": "Coverage(total=1348, taken=0, left=('base_model.model.down_blocks.1.0.conv1', 'base_model.model.down_blocks.1.0.conv2', 'base_model.model.down_blocks.1.0.time_emb_proj', 'base_model.model.down_blocks.2.0.conv1', 'base_model.model.down_blocks.2.0.conv2', '... and 1343 more'))"
+  },
+  {
+   "boundary": "load:comfyui.prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "note": "",
+   "declared": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:comfyui.latent_scale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "note": "",
+   "declared": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  }
+ ],
+ "when": "2026-09-24 10:28:27"
+}

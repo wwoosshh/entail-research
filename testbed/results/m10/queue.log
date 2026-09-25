@@ -1,0 +1,38 @@
+testbed/m10_e2_run.sh: line 15: 49903 Killed                  env -u ENTAIL -u PYTHONPATH timeout 1200 $py $ROOT/testbed/m3_run_engine.py $eng $model $E/$name.json > $E/$name.log 2>&1
+testbed/m10_e2_run.sh: line 15: 50138 Killed                  env PYTHONPATH=$SHIM ENTAIL=load ENTAIL_RECORD=$E/$name.record.jsonl ENTAIL_LOG_DIR=$R/entail_logs timeout 1200 $py $ROOT/testbed/m3_run_engine.py $eng $model $E/$name.json > $E/$name.log 2>&1
+testbed/m10_e2_run.sh: line 15: 54014 Killed                  env -u ENTAIL -u PYTHONPATH timeout 1200 $py $ROOT/testbed/m3_run_engine.py $eng $model $E/$name.json > $E/$name.log 2>&1
+testbed/m10_e2_run.sh: line 15: 54256 Killed                  env PYTHONPATH=$SHIM ENTAIL=load ENTAIL_RECORD=$E/$name.record.jsonl ENTAIL_LOG_DIR=$R/entail_logs timeout 1200 $py $ROOT/testbed/m3_run_engine.py $eng $model $E/$name.json > $E/$name.log 2>&1
+default 
+[23:14:42] e2_sglang_Qwen__Qwen2-0.5B_load: RESULT sglang Qwen__Qwen2-0.5B entail=load ok=True load=12.387 used=default 
+[23:14:52] e2_transformers_Qwen__Qwen3-8B-FP8_off: RESULT transformers Qwen__Qwen3-8B-FP8 entail=off ok=False load=None used=None ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Pleas
+[23:15:07] e2_transformers_Qwen__Qwen3-8B-FP8_load: RESULT transformers Qwen__Qwen3-8B-FP8 entail=load ok=False load=None used=None ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Plea
+[23:15:30] e2_vllm_Qwen__Qwen3-8B-FP8_off: RESULT vllm Qwen__Qwen3-8B-FP8 entail=off ok=False load=None used=None RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+[23:15:52] e2_vllm_Qwen__Qwen3-8B-FP8_load: RESULT vllm Qwen__Qwen3-8B-FP8 entail=load ok=False load=None used=None RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+[23:16:09] e2_sglang_Qwen__Qwen3-8B-FP8_off: 
+[23:16:26] e2_sglang_Qwen__Qwen3-8B-FP8_load: 
+[23:16:35] e2_transformers_ibm-granite__granite-4.1-3b_off: RESULT transformers ibm-granite__granite-4.1-3b entail=off ok=True load=3.566 used=sdpa 
+[23:16:45] e2_transformers_ibm-granite__granite-4.1-3b_load: RESULT transformers ibm-granite__granite-4.1-3b entail=load ok=True load=3.043 used=sdpa 
+[23:17:04] e2_vllm_ibm-granite__granite-4.1-3b_off: RESULT vllm ibm-granite__granite-4.1-3b entail=off ok=True load=11.632 used=default 
+[23:17:26] e2_vllm_ibm-granite__granite-4.1-3b_load: RESULT vllm ibm-granite__granite-4.1-3b entail=load ok=True load=12.632 used=default 
+[23:17:46] e2_sglang_ibm-granite__granite-4.1-3b_off: RESULT sglang ibm-granite__granite-4.1-3b entail=off ok=True load=12.696 used=default 
+[23:18:06] e2_sglang_ibm-granite__granite-4.1-3b_load: RESULT sglang ibm-granite__granite-4.1-3b entail=load ok=True load=13.48 used=default 
+[23:18:18] e2_transformers_microsoft__Phi-4-mini-instruct_off: RESULT transformers microsoft__Phi-4-mini-instruct entail=off ok=True load=3.966 used=sdpa 
+[23:18:29] e2_transformers_microsoft__Phi-4-mini-instruct_load: RESULT transformers microsoft__Phi-4-mini-instruct entail=load ok=True load=3.297 used=sdpa 
+[23:18:50] e2_vllm_microsoft__Phi-4-mini-instruct_off: RESULT vllm microsoft__Phi-4-mini-instruct entail=off ok=True load=13.909 used=default 
+[23:19:14] e2_vllm_microsoft__Phi-4-mini-instruct_load: RESULT vllm microsoft__Phi-4-mini-instruct entail=load ok=True load=14.254 used=default 
+[23:19:37] e2_sglang_microsoft__Phi-4-mini-instruct_off: RESULT sglang microsoft__Phi-4-mini-instruct entail=off ok=True load=16.067 used=default 
+[23:20:02] e2_sglang_microsoft__Phi-4-mini-instruct_load: RESULT sglang microsoft__Phi-4-mini-instruct entail=load ok=True load=16.752 used=default 
+[23:20:10] e2_transformers_trl-internal-testing__tiny-GptOssForCausalLM_off: RESULT transformers trl-internal-testing__tiny-GptOssForCausalLM entail=off ok=True load=0.638 used=eager 
+[23:20:17] e2_transformers_trl-internal-testing__tiny-GptOssForCausalLM_load: RESULT transformers trl-internal-testing__tiny-GptOssForCausalLM entail=load ok=True load=0.769 used=eager 
+[23:20:44] e2_vllm_trl-internal-testing__tiny-GptOssForCausalLM_off: RESULT vllm trl-internal-testing__tiny-GptOssForCausalLM entail=off ok=True load=16.71 used=default 
+[23:21:08] e2_vllm_trl-internal-testing__tiny-GptOssForCausalLM_load: RESULT vllm trl-internal-testing__tiny-GptOssForCausalLM entail=load ok=True load=14.872 used=default 
+[23:21:24] e2_sglang_trl-internal-testing__tiny-GptOssForCausalLM_off: 
+[23:21:42] e2_sglang_trl-internal-testing__tiny-GptOssForCausalLM_load: 
+[23:21:48] e2_transformers_trl-internal-testing__tiny-Qwen3MoeForCausalLM_off: RESULT transformers trl-internal-testing__tiny-Qwen3MoeForCausalLM entail=off ok=True load=0.53 used=sdpa 
+[23:21:54] e2_transformers_trl-internal-testing__tiny-Qwen3MoeForCausalLM_load: RESULT transformers trl-internal-testing__tiny-Qwen3MoeForCausalLM entail=load ok=True load=0.53 used=sdpa 
+[23:22:14] e2_vllm_trl-internal-testing__tiny-Qwen3MoeForCausalLM_off: RESULT vllm trl-internal-testing__tiny-Qwen3MoeForCausalLM entail=off ok=True load=11.832 used=default 
+[23:22:34] e2_vllm_trl-internal-testing__tiny-Qwen3MoeForCausalLM_load: RESULT vllm trl-internal-testing__tiny-Qwen3MoeForCausalLM entail=load ok=True load=11.65 used=default 
+[23:22:51] e2_sglang_trl-internal-testing__tiny-Qwen3MoeForCausalLM_off: RESULT sglang trl-internal-testing__tiny-Qwen3MoeForCausalLM entail=off ok=True load=10.779 used=default 
+[23:23:11] e2_sglang_trl-internal-testing__tiny-Qwen3MoeForCausalLM_load: RESULT sglang trl-internal-testing__tiny-Qwen3MoeForCausalLM entail=load ok=True load=12.399 used=default 
+[23:23:11] list sglang done
+[23:23:11] QUEUE DONE

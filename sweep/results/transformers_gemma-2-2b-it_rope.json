@@ -1,0 +1,67 @@
+{
+  "when": "2026-09-23 09:21:45",
+  "protocol": "sweep/PROTOCOL.md",
+  "model": "/home/<user>/models/gemma-2-2b-it",
+  "prompts": 6,
+  "new_tokens": 24,
+  "rows": [
+    {
+      "fact": "rope_theta",
+      "kind": "FRAME",
+      "model": "gemma-2-2b-it",
+      "engine": "transformers",
+      "engine_version": "5.17.0",
+      "backend": "eager",
+      "verdict": "honoured",
+      "differing_prompts": 4,
+      "seconds": 18.9
+    },
+    {
+      "fact": "rope_theta",
+      "kind": "FRAME",
+      "model": "gemma-2-2b-it",
+      "engine": "transformers",
+      "engine_version": "5.17.0",
+      "backend": "sdpa",
+      "verdict": "honoured",
+      "differing_prompts": 4,
+      "seconds": 11.9
+    },
+    {
+      "fact": "rope_theta",
+      "kind": "FRAME",
+      "model": "gemma-2-2b-it",
+      "engine": "transformers",
+      "engine_version": "5.17.0",
+      "backend": "flex_attention",
+      "verdict": "honoured",
+      "differing_prompts": 4,
+      "seconds": 42.1
+    },
+    {
+      "fact": "rope_theta",
+      "kind": "FRAME",
+      "model": "gemma-2-2b-it",
+      "engine": "transformers",
+      "engine_version": "5.17.0",
+      "backend": "paged|eager",
+      "verdict": "honoured",
+      "differing_prompts": 5,
+      "seconds": 6.6
+    },
+    {
+      "fact": "rope_theta",
+      "kind": "FRAME",
+      "model": "gemma-2-2b-it",
+      "engine": "transformers",
+      "engine_version": "5.17.0",
+      "backend": "paged|sdpa",
+      "verdict": "honoured",
+      "differing_prompts": 5,
+      "seconds": 6.2
+    }
+  ],
+  "dropped": 0,
+  "honoured": 5,
+  "void": 0
+}

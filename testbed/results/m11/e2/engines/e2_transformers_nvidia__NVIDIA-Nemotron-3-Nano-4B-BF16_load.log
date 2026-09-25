@@ -1,0 +1,19 @@
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=49, taken=49, left=()) (config: NemotronHConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=49, taken=47, left=('hybrid_override_pattern', 'num_hidden_layers')) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=50, taken=50, left=()) (config: NemotronHConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=50, taken=48, left=('hybrid_override_pattern', 'num_hidden_layers')) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5))
+W0925 08:01:07.835000 17827 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0925 08:01:07.867000 17827 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/263 [00:00<?, ?it/s]
+Loading weights:  11%|█         | 28/263 [00:00<00:00, 263.77it/s]
+Loading weights:  21%|██        | 55/263 [00:00<00:00, 241.56it/s]
+Loading weights:  32%|███▏      | 85/263 [00:00<00:00, 250.89it/s]
+Loading weights:  43%|████▎     | 113/263 [00:00<00:00, 261.24it/s]
+Loading weights:  57%|█████▋    | 149/263 [00:00<00:00, 288.88it/s]
+Loading weights:  68%|██████▊   | 179/263 [00:00<00:00, 284.71it/s]
+Loading weights: 100%|██████████| 263/263 [00:00<00:00, 383.53it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `mamba_chunk_scan_combined` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `selective_state_update` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+RESULT transformers nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16 entail=load ok=True load=3.799 used=sdpa 

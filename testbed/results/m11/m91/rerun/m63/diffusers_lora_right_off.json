@@ -1,0 +1,56 @@
+{
+ "tag": "lora_right_off",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "lora": "nagito/nagito_illustrious_v3.safetensors",
+ "condition": "off",
+ "entail": "not installed",
+ "on_broken": "report",
+ "outcome": "loaded",
+ "adapters": {
+  "unet": [
+   "t"
+  ]
+ },
+ "modules_with_the_adapter": 788,
+ "log": [
+  "WARNING diffusers.quantizers.torchao.torchao_quantizer: Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+  "WARNING diffusers.models.modeling_utils: There are modules in UNet2DConditionModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModel found with the prefix='text_encoder'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModel related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue if you think it's unexpected: h",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModelWithProjection found with the prefix='text_encoder_2'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModelWithProjection related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue i"
+ ],
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 13.84,
+   "image": "/home/<user>/m63_out_rerun/lora_right_off_seed11.png",
+   "stats": {
+    "mean": 167.7,
+    "std": 61.06,
+    "saturation": 38.21
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 11.55,
+   "image": "/home/<user>/m63_out_rerun/lora_right_off_seed22.png",
+   "stats": {
+    "mean": 173.33,
+    "std": 55.91,
+    "saturation": 39.72
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 11.56,
+   "image": "/home/<user>/m63_out_rerun/lora_right_off_seed33.png",
+   "stats": {
+    "mean": 162.15,
+    "std": 65.56,
+    "saturation": 49.7
+   }
+  }
+ ],
+ "decisions": [],
+ "when": "2026-09-25 07:11:55"
+}

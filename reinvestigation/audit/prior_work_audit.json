@@ -1,0 +1,894 @@
+{
+ "title": "prior_work 계열 문서의 외부 사실 주장 점검",
+ "checked_on": "2026-09-23",
+ "status": "intermediate",
+ "verdict_counts": {
+  "확인됨": 62,
+  "일부 다름": 25,
+  "틀림": 0,
+  "확인 못 함": 0,
+  "사실 주장 아님": 1
+ },
+ "rows": [
+  {
+   "no": 1,
+   "key": "M01",
+   "doc": "prior_work.md; PROBLEM_STATEMENT.md; RESEARCH_PLAN.md",
+   "loc": "prior_work L165-176; PROBLEM_STATEMENT L30; RESEARCH_PLAN L108",
+   "claim": "Ekka(Gu, Zhang, Zhu, Fu, Wu, Wang, Kasikci; arXiv 2606.04594, 2026-06-03): vLLM 48건·SGLang 42건, 모두 90건의 조용한 오류. 닫힌 70건으로 실증 연구. 원인 위치는 프레임워크 30.6%, 모델 25.5%, 커널 24.5%, 수치 정밀도 19.4%. 정확도 회귀 43.8%. 60% 넘는 이슈에서 설정 바꿔 보기. pass@1 80%, pass@5 88%. 새 조용한 오류 4건 확인",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2606.04594v1",
+   "memo": "모든 수치가 본문 2절·초록과 일치한다. 인용: \"This produced 90 silent errors in total: 48 from vLLM\". prior_work가 [not verified]로 둔 백분율의 분모: 본문은 \"of issues\"라고만 쓴다. 네 비율(30.6/25.5/24.5/19.4)은 98건 기준 30/25/24/19와 정확히 맞고 70건으로는 정수가 나오지 않는다[계산]. 한 이슈에 원인이 여럿일 수 있다는 뜻으로 보인다. arXiv 주석에 ICML 2026이 적혀 있다."
+  },
+  {
+   "no": 2,
+   "key": "M02",
+   "doc": "prior_work.md; RESEARCH_PLAN.md",
+   "loc": "prior_work L147-163, L244; RESEARCH_PLAN L108",
+   "claim": "Liu, Zhong, Bi 등 \"A First Look at Bugs in LLM Inference Engines\"(arXiv 2506.09713 v2 2026-01, TOSEM): 2024-12-01 기준 5개 엔진의 버그 929건. 표본 추출 전 후보 1,488건. 증상 932건(충돌 603 등), 원인 1,041건(28개 세부 범주)",
+   "verdict": "일부 다름",
+   "source_url": "https://arxiv.org/pdf/2506.09713v2",
+   "memo": "929건, 5개 엔진, 2024-12-01, 증상 수(603/122/107/53/35/12=932), 범주 수(설정 242, 기능 432, 환경 301, 자원 37, 입출력 41), 세부 수, 표 5의 오답 원인(기능 88, 설정 26, 환경 15)은 일치한다. 틀린 것 두 가지. (1) 후보 1,488건: 본문 3.2.1절의 엔진별 후보 184, 1200, 187, 551, 366의 합은 2,488건이다[계산]. 추출 뒤 958건, 제외 뒤 929건이다. (2) 원인 사례 1,041건: 그림 5의 합계는 v2에서 1,054건, v1에서 1,053건이다. 1,041은 어느 판에도 없다. 이 분모로 계산한 1.6%와 약 9%는 1,054로 다시 계산해도 1.6%와 8.9%다. DOI 10.1145/3788873은 Crossref에서 같은 제목의 ACM TOSEM 논문으로 확인된다(2026-08-21 게재)."
+  },
+  {
+   "no": 3,
+   "key": "M03",
+   "doc": "NOVELTY_CHECK.md; RESEARCH_PLAN.md; prior_work.md",
+   "loc": "NOVELTY_CHECK L43, L109; RESEARCH_PLAN L136; prior_work L13",
+   "claim": "transformers PR #48962(선택형 엄격 적재)가 2026-09-22에 닫혔다. 유지보수자는 2년 된 요청이라 원하는지 모르겠다는 취지로 답했다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/huggingface/transformers/pull/48962",
+   "memo": "병합되지 않고 2026-09-22 04:04 UTC에 닫혔다. Cyrilvallez의 댓글: \"This comes from a 2 years old feature request, so not sure we actually want it\". 맥락이 있다. 외부 기여자가 2026-09-20에 연 이틀짜리 PR이고, 기여자가 먼저 닫겠다고 했다. 원래 요청 #32067(2024-07)에는 ArthurZucker가 2024-08에 찬성했고, 그 이슈는 아직 열려 있다. prior_work의 'rejected'와 RESEARCH_PLAN의 '계약 제안이 닫혔다'는 사실이지만, 가벼운 종료를 논쟁의 결론처럼 쓰는 것은 과한 해석이다."
+  },
+  {
+   "no": 4,
+   "key": "M04",
+   "doc": "NOVELTY_CHECK.md; RESEARCH_PLAN.md",
+   "loc": "NOVELTY_CHECK L57, L90; RESEARCH_PLAN L112",
+   "claim": "Megatron-LM 이슈 #7452(2026-09-17, ezyang): 병렬화 조합의 조용한 수치 오류 13건을 spmd_types의 R/P/S 표기로 적었다. 보고자는 전부를 직접 검증하지 않았다고 밝혔다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/NVIDIA/Megatron-LM/issues/7452",
+   "memo": "요약표의 본 목록이 1~13번이다. 이미 고쳐진 부록 A, Bridge 쪽 부록 B, 세지 않은 부록 C는 따로 있다. 보고자의 말: \"I haven't personally verified every single one\". 문서에 없는 사실 두 가지: 결함은 Astra와 spmd_types로 찾았다. 보고서 대부분은 AI가 썼다고 밝혔다. 재현 스크립트는 CPU/Gloo에서 돌린다. 2026-09-21 유지보수자는 추적표에 '모두 검증된 것은 아니다'라고 적었다."
+  },
+  {
+   "no": 5,
+   "key": "M05",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L87-89",
+   "claim": "Meta spmd_types 저장소는 2026-03-30에 만들어졌다. JAX 방식을 PyTorch 학습 코드로 옮긴 타입 시스템이고, 표기는 R(복제), P(부분합), S(분할)이다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/meta-pytorch/spmd_types",
+   "memo": "GitHub API의 created_at은 2026-03-30T21:44:46Z다. 저장소 설명: \"based off of JAX's sharding in types, but adapted for the PyTorch ecosystem\". R/P/S 정의는 Megatron #7452 본문에 있다. '선택형이 설계 목표'라는 부분은 README에서 따로 확인한다(M23)."
+  },
+  {
+   "no": 6,
+   "key": "M06",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L110, L116",
+   "claim": "vLLM RFC #24384(설정 스키마, 쓰인 필드와 안 쓰인 필드 분리)는 비활성으로 자동 종료됐고(not_planned) 반대 논거는 없었다. 계약 제안을 엔진들이 받아들이지 않은 사례다",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/vllm-project/vllm/issues/24384 ; https://github.com/vllm-project/vllm/pull/28454",
+   "memo": "자동 종료는 맞다(github-actions, 2026-03-10, not_planned). 틀린 것 두 가지. (1) 반대 논거가 있었다. hmellor(2025-11-03): \"My only objection is that this isn't a problem that vLLM should have to solve\"(Transformers에서 고치자는 취지). (2) RFC의 핵심은 받아들여졌다. PR #28454가 2026-01-02에 병합됐다(PR 본문이 #24384를 인용). 지금 main에 vllm/config/model_arch.py의 ModelArchitectureConfig가 있고, 엔진이 쓰는 필드를 명시한다. 따라서 '받아들이지 않았다'의 근거로 쓸 수 없다."
+  },
+  {
+   "no": 7,
+   "key": "M07",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L111",
+   "claim": "vLLM RFC #32613(정확도 시험)은 자동 종료됐다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/vllm-project/vllm/issues/32613",
+   "memo": "제목은 \"More robust model accuracy testing with configurable and tiered coverage\"다. 2026-06-20에 stale 라벨로 not_planned 종료됐다."
+  },
+  {
+   "no": 8,
+   "key": "M08",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L112",
+   "claim": "vLLM RFC #48312(가중치 재적재 정확성, 2026-07-11)는 열려 있고 일부 수정만 병합됐다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/vllm-project/vllm/issues/48312",
+   "memo": "열려 있고 2026-07-11에 만들어졌다. 연결된 PR 가운데 #48438, #48025, #49505, #49857, #57421은 병합됐고, 다수는 열려 있거나 병합 없이 닫혔다."
+  },
+  {
+   "no": 9,
+   "key": "M09",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L113",
+   "claim": "PyTorch RFC #190792(분산 집합 연산의 의미 정체성, 2026-07-22)는 열려 있고 검토가 없다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/pytorch/pytorch/issues/190792",
+   "memo": "제목은 \"[RFC] Semantic Identity for Inductor Distributed Collectives\"다. 열려 있다. 댓글은 aditvenk가 cc로 사람을 부른 1개뿐이다(2026-07-24). triaged 라벨은 붙어 있다."
+  },
+  {
+   "no": 10,
+   "key": "M10",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L114",
+   "claim": "SGLang #32432(CUDA Graph 메타데이터 계약)는 열려 있고 댓글은 작성자 것뿐이다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/sgl-project/sglang/issues/32432",
+   "memo": "열려 있다. 댓글 9개가 모두 작성자 Phoenix3334의 것이다(2026-07-26~08-10). 마지막 댓글은 실행 추적을 #34297 로드맵으로 옮겼다고 적었다."
+  },
+  {
+   "no": 11,
+   "key": "M11",
+   "doc": "NOVELTY_CHECK.md; prior_work.md; RESEARCH_PLAN.md",
+   "loc": "NOVELTY_CHECK L122; prior_work L382; RESEARCH_PLAN L134",
+   "claim": "PyTorch named tensors: 2021년에 개발이 멈췄다(설계의 모호성, 인력 부족). 2.13.0에서 제거됐다(부담과 코드 크기)",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/pytorch/pytorch/issues/60832 ; https://github.com/pytorch/pytorch/releases/tag/v2.13.0",
+   "memo": "2021-06 zou3519: \"not actively developing the feature due to a lack of bandwidth\". 2.13.0 릴리스 노트(2026-07-08 공개): \"fully removed to reduce overhead and code bloat (#173895)\". prior_work가 확인하지 못한 릴리스 날짜는 2026-07-08이다. '연산 지원 부족, 섞어 쓰기 어려움'은 같은 이슈에 사용자들이 쓴 의견이고 PyTorch의 공식 설명은 아니다."
+  },
+  {
+   "no": 12,
+   "key": "M12",
+   "doc": "NOVELTY_CHECK.md; RESEARCH_PLAN.md",
+   "loc": "NOVELTY_CHECK L53; RESEARCH_PLAN L110, L146",
+   "claim": "M2K(arXiv 2603.24595, v1 2026-03-06, v2 2026-08-29): 모델과 CUDA 커널 사이 인터페이스가 암묵적이라고 진단한다. 실행을 추적해 인터페이스를 추론하고 커널을 기호 실행한다. 새 버그 181건, 오탐 9건. SOSP'26 채택은 초록 페이지에서 확인하지 못했다",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2603.24595v2",
+   "memo": "초록: \"M2K discovers 181 previously unknown bugs ... only nine false positives\". 구성은 HFProbe(추적, 기호 제약)와 cuKLEE(기호 실행)다. 대상은 커널 메모리 버그다. NOVELTY_CHECK가 확인하지 못했다고 한 SOSP'26은 v2 PDF 첫 쪽의 ACM 인용 양식에 있다: \"SOSP '26, September 29-October 02, 2026, Prague\"."
+  },
+  {
+   "no": 13,
+   "key": "M13",
+   "doc": "NOVELTY_CHECK.md; RESEARCH_PLAN.md",
+   "loc": "NOVELTY_CHECK L42, L54; RESEARCH_PLAN L111",
+   "claim": "Emerge(arXiv 2603.21851, 2026-03-23): HF Transformers와 vLLM 계산 그래프의 동등성을 검증한다. 관계를 추론하고 SMT와 무작위 시험으로 확인한다. 알려진 결함 13건 중 10건을 잡고, 새로 8건을 찾았다(개발자 확인). 사용자 선언이 필요 없다. 결함 예는 무시된 설정 필드, RoPE 방식과 우선순위, 슬라이딩 윈도, TP 가중치 분할",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2603.21851v1",
+   "memo": "논문 제목은 \"Verify Implementation Equivalence of Large Models\"(Zhan, Hu, Xia, Li)이고 도구 이름이 Emerge다. 초록: \"detects 10 of 13 known implementation bugs, uncovers 8 previously unknown\". 5.2.2절: 8건 중 2건은 패치됐고 나머지는 확인 뒤 수정이 검토 중이다. 표 1·2의 예: scale_attn_weights와 clip_qkv 무시, GPT-J RoPE, Command-R RoPE base 우선순위, Mistral 슬라이딩 윈도, InternLM2 split_qkv TP."
+  },
+  {
+   "no": 14,
+   "key": "M14",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L80-81",
+   "claim": "Emerge는 데이터에 따라 달라지는 경로(MoE 라우팅 등)와 일부 윈도 결함을 놓쳤다",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2603.21851v1",
+   "memo": "놓친 3건: 데이터 의존 분기 2건(Mistral 슬라이딩 윈도 #12, Phi-3.5 LongRoPE #13)과 가중치 적재 1건(GGUF TP). MoE 라우팅은 실제로 놓친 사례가 아니라 6.2절 한계로 적힌 것이다: \"especially pronounced for Mixture-of-Experts architectures\"."
+  },
+  {
+   "no": 15,
+   "key": "M15",
+   "doc": "RESEARCH_PLAN.md",
+   "loc": "L115",
+   "claim": "\"The Silent Hyperparameter\"(arXiv 2605.19537, 2026-05): 가중치·복호 설정·하드웨어를 고정한 채 추론 엔진 5종을 비교했더니 백엔드 선택만으로 점수가 최대 16.6%p 움직였다. 원인은 prefix caching, CUDA Graph, 손 커널, 엔진별 logit 처리 기본값이다. 처방은 추론 스택을 표준 양식으로 보고하자는 것이다",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2605.19537v2",
+   "memo": "저자는 Pape, Evertz, Schönherr(CISPA)다. 초록: \"shift benchmark scores by up to 16.6 percentage points\". 16.60은 DeepSeek R1 Distill Qwen 7B의 GSM8K에서 나왔다(본문 4절). 원인 목록과 표준 보고 권고도 초록과 같다. 엔진 5종은 vLLM, SGLang, llama.cpp, LMDeploy, Ollama이고 transformers는 기준으로 썼다."
+  },
+  {
+   "no": 16,
+   "key": "M16",
+   "doc": "RESEARCH_PLAN.md; prior_work.md",
+   "loc": "RESEARCH_PLAN L116; prior_work L195-197",
+   "claim": "GRIEF(Zhao 등, arXiv 2605.11202, 2026-05-11): 시간이 있는 다중 요청 추적을 입력으로 쓰는 서빙 엔진 퍼저. 로그확률 검사로 조용한 출력 손상을 확인한다. vLLM·SGLang에서 취약점 15건(개발자 확인 10건, CVE 2건)",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2605.11202v1",
+   "memo": "초록: \"GRIEF discovers 15 vulnerabilities, 10 confirmed by engine developers, including 2 CVEs\". 도구 이름(GReybox Inference Engine Fuzzer), 시간이 있는 요청 추적, 로그확률 재현 검사 모두 일치한다. 찾은 것은 주로 KV 캐시 격리, 요청 간 간섭, 충돌 같은 보안·동시성 결함이다."
+  },
+  {
+   "no": 17,
+   "key": "M17",
+   "doc": "prior_work.md",
+   "loc": "L360-361 (L291, L585도 같은 수치)",
+   "claim": "Masoudian 등(arXiv 2608.04714, 2026-08-05): 추론 프레임워크 5종에서 기본 설정 점수 변동의 약 39%가 백엔드에서 온다. 백엔드 몫에는 기본 생성 파라미터, 샘플링, 모델 의존 효과가 포함된다",
+   "verdict": "일부 다름",
+   "source_url": "https://arxiv.org/pdf/2608.04714v1",
+   "memo": "약 39%와 5종은 맞다. 하지만 prior_work L361의 콜론 뒤 목록이 논문과 반대다. 논문은 나머지가 샘플링 잡음과 각 프레임워크의 기본 생성 파라미터에서 온다고 한다. 초록: \"the remaining stems from sampling noise and each framework's default generation parameters\". 즉 이 둘은 39%의 구성 요소가 아니다. 저자 표기: PDF에는 Passant Elchafei, arXiv 메타데이터에는 Passant Shafaei로 적혀 있다."
+  },
+  {
+   "no": 18,
+   "key": "M18",
+   "doc": "prior_work.md",
+   "loc": "L83-94, L239",
+   "claim": "Tambon 등 \"Silent Bugs in Deep Learning Frameworks: An Empirical Study of Keras and TensorFlow\"(EMSE, DOI 10.1007/s10664-023-10389-6): 닫힌 이슈 1,168건 중 재현되는 조용한 버그 77건. 잘못된 계산 23(29.9%), 잘못된 파라미터 설정 16(20.8%), 잘못된 메시지 15(19.5%), 저장·재적재 10(13%), 잘못된 모양 6(7.8%), 성능 4, 구조 3. 학습률 0 예시, 재적재 뒤 정확도 100%에서 50%. 개발자 103명 설문에서 72.8%가 더 문제라고 답했다",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2112.13314v2 ; https://link.springer.com/article/10.1007/s10664-023-10389-6",
+   "memo": "모든 수치가 본문과 일치한다(4.1절 범주, 그림 1 예, 설문 72.8%). 성능 저하는 5.19%(4건)다. DOI는 EMSE 논문으로 연결되고, 권호 날짜는 2024/01이다. 표의 'Tambon 2023'은 arXiv v2(2023-09) 기준이라 틀렸다고 보지 않는다."
+  },
+  {
+   "no": 19,
+   "key": "M19",
+   "doc": "prior_work.md; PROBLEM_STATEMENT.md; RESEARCH_PLAN.md",
+   "loc": "prior_work L254-263, L565; PROBLEM_STATEMENT L7; RESEARCH_PLAN L107",
+   "claim": "Perry & Evangelist, \"An Empirical Study of Software Interface Faults -- An Update\", HICSS 20, 1987-01, vol. II pp.113-126. 약 35만 줄 C 실시간 시스템. 운영 정의 35.87%, 단일 파일의 51%, 전체의 32.73%, 합해서 68.6%. 16개 범주. 전체 대비 비중은 오류 처리 14.1, 인터페이스 오용 11.8, 기능 11.4, 데이터 10.1, 조정 7.0. Inscape가 인터페이스 결함의 73%를 막을 잠재력이 있다. Thayer 17%·22.5%, Bowen 4.5%, Basili 39%",
+   "verdict": "확인됨",
+   "source_url": "https://users.ece.utexas.edu/~perry/work/papers/ie-update.pdf",
+   "memo": "모든 수치가 본문과 일치한다. 인용: \"68.6% of the total error population\"(2절). 비중은 표 4a에 있다. Inscape 73%는 저자들이 [Perry 86b]를 인용해 적은 주장이다. 16개 범주는 원래 15개에 하드웨어·소프트웨어 인터페이스를 더한 것이다."
+  },
+  {
+   "no": 20,
+   "key": "M20",
+   "doc": "prior_work.md",
+   "loc": "L270-275, L566",
+   "claim": "Perry & Stieg, \"Software Faults in Evolving a Large, Real-Time System: a Case Study\", ESEC 1993. 100만 NCSL 이상 시스템에서 인터페이스 결함은 설계·코딩 결함의 약 49%(수정 가중 56%). 불완전·누락 요구사항의 79.6%가 인터페이스 결함. 형식적 인터페이스 명세는 73.6%. 언어 함정과 경쟁 상태는 8% 미만",
+   "verdict": "확인됨",
+   "source_url": "https://users.ece.utexas.edu/~perry/work/papers/esec93.pdf",
+   "memo": "표 7(49/50/56), 표 8(79.6), 표 9(73.6), 결론(8% 미만, 정보 부족이 근본 원인에서 우세)과 일치한다. 인용: \"Interface faults were roughly 49% of the entire set of design and coding faults\". PDF는 LLNCS 양식이다. ESEC 1993 학회명은 PDF 안에 적혀 있지 않다."
+  },
+  {
+   "no": 21,
+   "key": "M21",
+   "doc": "prior_work.md",
+   "loc": "L265-268",
+   "claim": "Basili & Perricone, CACM 27(1), 1984-01 [secondary]: 중간 규모 시스템에서 인터페이스 오류가 39%로 가장 큰 부류였다",
+   "verdict": "확인됨",
+   "source_url": "https://users.ece.utexas.edu/~perry/work/papers/esec93.pdf ; https://users.ece.utexas.edu/~perry/work/papers/ie-update.pdf",
+   "memo": "문서가 밝힌 대로 2차 확인이다. Perry & Stieg: \"Interface faults were the largest class of faults (39%)\". Perry & Evangelist 참고문헌의 서지는 CACM 27:1 (January 1984), 42-52다. 원문은 열지 않았다."
+  },
+  {
+   "no": 22,
+   "key": "M22",
+   "doc": "PROBLEM_STATEMENT.md; RESEARCH_PLAN.md; prior_work.md",
+   "loc": "PROBLEM_STATEMENT L7, L29; RESEARCH_PLAN L107, L144; prior_work L567",
+   "claim": "고전 연구에서 인터페이스 결함은 전체 결함의 39~69%이고, 이 연구의 59~71%는 그 범위 안이다",
+   "verdict": "일부 다름",
+   "source_url": "https://users.ece.utexas.edu/~perry/work/papers/ie-update.pdf",
+   "memo": "39%(Basili)와 68.6%(P&E)는 맞다. 그러나 같은 출처가 더 낮은 수치도 적었다. Thayer 17%·22.5%와 Bowen 4.5%는 정의가 좁은 연구다. Perry & Stieg의 49%는 전체가 아니라 설계·코딩 결함 기준이다. 따라서 '39~69%'는 정의가 넓은 연구만 고른 범위다. 또 71%는 68.6%보다 커서 엄밀히는 범위 밖이다."
+  },
+  {
+   "no": 23,
+   "key": "M23",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L88-89",
+   "claim": "spmd_types는 선택형으로 쓰는 것이 설계 목표다",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/meta-pytorch/spmd_types/blob/main/docs/design.md",
+   "memo": "설계 문서의 목표 목록: \"Be optional, so that code can run without any types at runtime\". Megatron #7452 댓글에서 ezyang도 지운 뒤 실행하는(erasable) 타입이라 단위 시험에서 돌린다고 설명했다."
+  },
+  {
+   "no": 24,
+   "key": "M24",
+   "doc": "prior_work.md; PUBLIC_SUMMARY.md",
+   "loc": "prior_work L299-307, L313-314, L287; PUBLIC_SUMMARY L48",
+   "claim": "Anthropic \"A postmortem of three recent issues\"(2025-09-17). (1) 문맥 창 라우팅 오류: 8/5 시작, 0.8%에서 8/31 최악 시간 16%, 끈끈한 라우팅, Claude Code 사용자의 약 30%, 9/4 수정, 9/16~18 배포 완료. (2) TPU 서버 설정 오류로 출력 손상: 8/25~9/2, 영어 답에 태국 문자와 코드의 문법 오류, Opus 4.1·4는 8/25~28. 탐지가 어려웠던 이유(평가가 못 잡음, 정상 변동처럼 보임, 개인정보 통제)와 재발 방지책",
+   "verdict": "확인됨",
+   "source_url": "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues",
+   "memo": "날짜, 비율, 모델, 재발 방지책이 모두 원문과 같다. 인용: \"At the worst impacted hour on August 31, 16% of Sonnet 4 requests\". 원문에는 태국 문자와 함께 중국 문자도 나온다. PUBLIC_SUMMARY L48의 '원인 부류를 판정할 수 없었다'는 해석이지만, 원문 설명이 짧은 것은 사실이다."
+  },
+  {
+   "no": 25,
+   "key": "M25",
+   "doc": "prior_work.md; PROBLEM_STATEMENT.md; RESEARCH_PLAN.md",
+   "loc": "prior_work L308-312, L315, L583; PROBLEM_STATEMENT L24; RESEARCH_PLAN L84",
+   "claim": "Anthropic 3번 사건(approximate top-k XLA:TPU 오컴파일): 8/25 변경이 2024-12 우회책을 없애 더 깊은 버그를 드러냈다. 기전은 샘플링 일부가 bf16과 fp32로 다른 정밀도에서 돌아 최상위 토큰이 서로 어긋난 것이다(xla_allow_excess_precision 기본 켜짐). 그래서 3번 사건은 '정밀도 불일치'이고, 2025년 사후 분석의 결함은 '라우팅 설정, 정밀도 불일치'다",
+   "verdict": "일부 다름",
+   "source_url": "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues",
+   "memo": "같은 출처 안의 두 사건이 섞였다. 원문에서 bf16/fp32 정밀도 불일치는 2024-12의 온도 0 최상위 토큰 누락 버그의 원인이다. 원문은 이것을 xla_allow_excess_precision의 \"expected behavior\"라고 부른다. 2025년 8~9월 사고(3번)의 원인은 우회책을 지운 뒤 드러난 approximate top-k 연산 버그다. 인용: \"sometimes returned completely wrong results, but only for certain batch sizes\". 우회책을 지운 샘플링 재작성은 원문 심층 절에서 8/26이다(요약 절은 8/25 배포라고 적어 원문 안에서도 날짜가 둘이다). 배치 크기, 모델 구성, 결과, 수정(exact top-k와 fp32 표준화)은 맞다. 따라서 3번 사건을 '정밀도 불일치(역할 계열)'로 분류한 prior_work L315와 PROBLEM_STATEMENT L24는 원문 설명과 다르다."
+  },
+  {
+   "no": 26,
+   "key": "M26",
+   "doc": "prior_work.md",
+   "loc": "L317-323",
+   "claim": "Anthropic \"An update on recent Claude Code quality reports\"(2026-04-23): 제품 계층 변경 세 개이고 API·추론 계층은 영향이 없었다. 기본 추론 노력을 3/4~4/7 낮췄다. 1시간 넘게 쉰 세션의 옛 생각을 한 번 지우려던 변경이 매 턴 지웠다(3/26~4/10). 장황함 제한(4/16~20)은 한 평가에서 3% 손해. 트래픽 조각이 달라 탐지가 어려웠고, 낡은 세션이 필요했으며, 내부 실험이 가렸다",
+   "verdict": "확인됨",
+   "source_url": "https://www.anthropic.com/engineering/april-23-postmortem",
+   "memo": "모든 날짜와 수치가 원문과 같다. 인용: \"we were able to immediately confirm that our API and inference layer were unaffected\". 3%는 Opus 4.6과 4.7 둘 다에서 나온 값이다."
+  },
+  {
+   "no": 27,
+   "key": "M27",
+   "doc": "prior_work.md; prior_work.md",
+   "loc": "L325-327, L584",
+   "claim": "OpenAI 상태 페이지 \"Unexpected responses from ChatGPT\"(2024-02-20~21, 2/22 해결): 최적화가 토큰 선택에 버그를 넣었고, 특정 GPU 설정에서 추론 커널이 틀린 결과를 내 뜻 없는 문장이 나왔다",
+   "verdict": "확인됨",
+   "source_url": "https://status.openai.com/incidents/ssg8fh7sfyz3",
+   "memo": "원문: \"inference kernels produced incorrect results when used in certain GPU configurations\". 날짜와 해결 표시가 일치한다. 원문에는 이 이상의 기전이 없다."
+  },
+  {
+   "no": 28,
+   "key": "M28",
+   "doc": "prior_work.md",
+   "loc": "L329-332, L585",
+   "claim": "[secondary] Simon Willison(2025-08-15, 8/20 갱신): Artificial Analysis가 gpt-oss-120b의 AIME25를 업체별로 쟀더니 처음에 36.7%~93.3%였다. Microsoft는 Azure의 낮은 점수를 reasoning_effort를 무시한 옛 vLLM 커밋 때문이라고 했고, 모든 요청이 medium으로 돌았다. 수정 뒤 Azure와 Groq는 93.3%",
+   "verdict": "확인됨",
+   "source_url": "https://simonwillison.net/2025/Aug/15/inconsistent-performance/ ; https://x.com/lupickup/status/1955620918086226223",
+   "memo": "Willison 글의 수치와 일치한다: 93.3%(여러 업체), Parasail 90.0, Groq 86.7, Amazon 83.3, Azure 80.0, CompactifAI 36.7. 원인 설명은 Microsoft의 공식 발표가 아니라 Azure AI 엔지니어 Lucas Pickup의 X 게시물이다(fxtwitter 공개 API로 원문 확인): \"Old vLLM commits that didn't respect reasoning_effort\". 최저 36.7%는 압축 모델을 파는 CompactifAI이고, Azure는 80.0%였다."
+  },
+  {
+   "no": 29,
+   "key": "M29",
+   "doc": "RESEARCH_PLAN.md",
+   "loc": "L84",
+   "claim": "gpt-oss-120b의 AIME 점수가 업체별로 36.7~93.3%로 벌어졌다. Azure의 낮은 점수는 reasoning_effort를 무시한 옛 vLLM 때문이었고, 수정 뒤 93.3%(실제 서비스 영향의 근거로 제시)",
+   "verdict": "일부 다름",
+   "source_url": "https://simonwillison.net/2025/Aug/15/inconsistent-performance/",
+   "memo": "문장마다 따로 보면 맞다. 하지만 폭 36.7~93.3%의 하한은 Azure가 아니라 CompactifAI다. Willison은 이 점수를 압축 모델로 설명했다(\"highly-compressed versions\"). Azure는 80.0%에서 93.3%로 올랐다. 범위 전체를 역할 계열 결함의 서비스 영향처럼 쓰면 과장이 된다. 역할 계열로 볼 수 있는 몫은 Azure의 약 13%p 차이다."
+  },
+  {
+   "no": 30,
+   "key": "M30",
+   "doc": "prior_work.md",
+   "loc": "L334-339",
+   "claim": "OpenAI \"Verifying gpt-oss implementations\"(쿡북, 날짜 없음): harmony 형식, 생각의 사슬을 다음 턴에 되돌려 주기, MXFP4 MoE 가중치를 공급자가 맞춰야 한다. 도구 호출 smoke test와 AIME·GPQA·HealthBench 평가를 참조 구현과 비교해 검증한다",
+   "verdict": "확인됨",
+   "source_url": "https://developers.openai.com/cookbook/articles/gpt-oss/verifying-implementations",
+   "memo": "내용은 일치한다. 날짜가 없는 것이 아니다. 페이지 머리에 \"Aug 11, 2025\"와 작성자 Dominik Kundel(OpenAI)이 적혀 있다. 평가 반복 수도 있다: AIME 16회, GPQA 8회, HealthBench 1회."
+  },
+  {
+   "no": 31,
+   "key": "M31",
+   "doc": "prior_work.md; PROBLEM_STATEMENT.md; RESEARCH_PLAN.md",
+   "loc": "prior_work L341-347; PROBLEM_STATEMENT L24; RESEARCH_PLAN L84",
+   "claim": "vLLM 블로그 \"Chasing 100% Accuracy ... Kimi K2's Tool-Calling on vLLM\"(2025-10-28): vLLM은 선언된 템플릿 인자만 넘겨 **kwargs로만 받는 add_generation_prompt를 조용히 버렸다. 빈 문자열을 리스트로 바꿔 템플릿이 글자 그대로 렌더링했다. 엄격한 ID 파서가 IndexError로 유효한 도구 호출을 버렸다. 파싱된 도구 호출이 218에서 971로(약 4.4배)",
+   "verdict": "확인됨",
+   "source_url": "https://vllm.ai/blog/2025-10-28-kimi-k2-accuracy",
+   "memo": "세 문제와 수치가 원문과 같다. 인용: \"Since add_generation_prompt was hidden in **kwargs, vLLM discarded it\". 작성자는 Linian Wang(Peking University)이다. 첫 문제는 vLLM이 보안 때문에 한 선택(PR #25794)이고, 수정은 Kimi 쪽 tokenizer_config.json에서 인자를 명시한 것이다."
+  },
+  {
+   "no": 32,
+   "key": "M32",
+   "doc": "prior_work.md; NOVELTY_CHECK.md",
+   "loc": "prior_work L349-351; NOVELTY_CHECK L70",
+   "claim": "Moonshot K2-Vendor-Verifier(결과 날짜 2025-11-15): 업체별 도구 호출 trigger F1과 스키마 정확도. 한 업체는 K2-0905에서 F1 50.60%. 밝힌 원인은 낡은 vLLM·SGLang 버전, 잘못된 도구 호출 ID, guided decoding 없음",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/MoonshotAI/K2-Vendor-Verifier",
+   "memo": "README: \"Test Time: 2025-11-15\". K2-0905 표에서 Nebius가 50.60%다. 원인 세 가지는 README의 'Suggestions to Vendors'(버전, 도구 호출 ID 이름 바꾸기, guided encoding)와 같다. 저장소는 2025-09-09에 만들어졌다."
+  },
+  {
+   "no": 33,
+   "key": "M33",
+   "doc": "prior_work.md; NOVELTY_CHECK.md",
+   "loc": "prior_work L353-355; NOVELTY_CHECK L70, L143",
+   "claim": "Moonshot Kimi Vendor Verifier 블로그(날짜 없음, K2.6과 함께 공개): 제3자 업체에서 복호 파라미터 오용, KV 캐시 버그, 양자화 열화, 비전 전처리 오류, 도구 호출 불일치를 보고한다. 사용자는 구현 실패와 모델 한계를 구분하지 못했다",
+   "verdict": "일부 다름",
+   "source_url": "https://www.kimi.ai/blog/kimi-vendor-verifier",
+   "memo": "K2.6과 함께 공개한 것은 맞다(HN 게시 2026-04-20). 블로그가 실제 발견으로 적은 원인은 복호 파라미터 오용뿐이다: \"a significant portion of these cases stemmed from the misuse of Decoding parameters\". KV 캐시 버그, 양자화 열화, 비전 전처리는 각 벤치마크가 잡도록 고른 실패 유형으로 적혀 있다. 예: \"Catches KV cache bugs and quantization degradation\". 업체에서 관측했다는 보고가 아니다. '사용자가 구분하지 못했다'도 원문은 구분하지 못하면 신뢰가 무너진다는 조건문이다."
+  },
+  {
+   "no": 34,
+   "key": "M34",
+   "doc": "prior_work.md",
+   "loc": "L357-358",
+   "claim": "[secondary] TechCrunch(2025-04-07): Meta의 생성 AI 부사장이 서비스별로 품질이 섞여 나오는 것을 공개 구현이 안정되는 데 며칠 걸리는 탓으로 돌렸다",
+   "verdict": "확인됨",
+   "source_url": "https://techcrunch.com/2025/04/07/meta-exec-denies-the-company-artificially-boosted-llama-4s-benchmark-scores/",
+   "memo": "Ahmad Al-Dahle(VP of generative AI)의 발언을 인용했다: \"it'll take several days for all the public implementations to get dialed in\". 원 발언은 X 게시물이다."
+  },
+  {
+   "no": 35,
+   "key": "M35",
+   "doc": "prior_work.md",
+   "loc": "L363-365",
+   "claim": "Thinking Machines \"Defeating Nondeterminism in LLM Inference\"(He 외, 2025-09-10): 비결정성의 주원인은 배치 불변이 아닌 커널이다. 배치 불변 커널로 Qwen3-235B가 1000개 중 1000개 같은 답을 냈고(전에는 80개가 서로 달랐다), 비용은 약 1.6~2배",
+   "verdict": "확인됨",
+   "source_url": "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+   "memo": "80 unique와 1000개 동일은 원문과 같다: \"all of our 1000 completions are identical\". 비용은 Qwen3-235B가 아니라 Qwen-3-8B 서버에서 쟀다. vLLM 기본 26초, 최적화 전 결정적 모드 55초, 개선 42초로 약 1.6~2.1배다."
+  },
+  {
+   "no": 36,
+   "key": "M36",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L60",
+   "claim": "vLLM PR #16801(2025-04-18 병합): Llama 4 INT4의 스케일을 안전하지 않게 형 변환했다. INT4 Scout의 MMLU-Pro가 0.0286이었고 수정 뒤 0.7168",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/vllm-project/vllm/pull/16801",
+   "memo": "제목: \"Accuracy fix for llama4 int4 - improperly casted scales\". 병합은 2025-04-18 05:13 UTC다. 수치는 PR 본문이 아니라 liuzijing2014의 댓글(lm_eval 표)에 있다. 변경 전 0.0286, 변경 후 TP=8 0.7168, TP=1 0.7186. PR은 MoE 수정 세 개를 묶었다(M37 참조)."
+  },
+  {
+   "no": 37,
+   "key": "M37",
+   "doc": "PUBLIC_SUMMARY.md; RESEARCH_PLAN.md",
+   "loc": "PUBLIC_SUMMARY L14-19; RESEARCH_PLAN L70",
+   "claim": "vLLM의 Llama 4 INT4는 스케일 형 변환 결함 하나 때문에 MMLU-Pro 2.9%였다. 모델 문제가 아니었고, 고치자 71.7%가 됐다. 그동안 오류 메시지는 하나도 없었다",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/vllm-project/vllm/pull/16801",
+   "memo": "2.9%에서 71.7%는 PR 댓글 수치와 맞다. 모델 문제가 아니라는 것도 맞다(BF16 Scout는 0.709). 다른 점 두 가지. (1) 결함 하나라고 할 수 없다. PR 본문은 세 수정을 묶었다: 스케일 형 변환, FusedMoE의 params_dtype AttributeError, 커널 호환을 위한 float 라우터 가중치. 댓글은 묶음 전체가 정확도를 되돌렸다고만 확인한다: \"Confirmed the fix recover llama4 int4 checkpoint accuracy\". (2) '오류 메시지가 하나도 없었다'는 PR에 적혀 있지 않다. 평가가 끝까지 돈 것만 보인다. 게다가 같은 묶음에 AttributeError 수정이 있다."
+  },
+  {
+   "no": 38,
+   "key": "M38",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L56",
+   "claim": "The Foundation Cracks(arXiv 2506.12320, 2025-06-14): Transformers·vLLM의 버그 수정 313건. 최다 원인은 API 오용(32.17~48.19%)이고, 테스트 부족으로 빠져나간다",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2506.12320v1",
+   "memo": "초록: \"API misuse has emerged as the predominant root cause (32.17%-48.19%)\". 빠져나가는 이유는 테스트 케이스 부족 41.73%, 테스트 드라이버 부족 32.37%, 약한 오라클 25.90%다."
+  },
+  {
+   "no": 39,
+   "key": "M39",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L75, L82",
+   "claim": "Scalify(arXiv 2509.10694): 분산 그래프 검증, Amazon 프레임워크에서 새 버그 5건. 그래프 밖의 결함(KV 캐시 자르기, 로짓 배치)은 보지 못한다",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2509.10694v1",
+   "memo": "논문 제목은 \"Verifying Computational Graphs in Production-Grade Distributed Machine Learning Frameworks\"이고 도구 이름이 Scalify다. 초록: \"exposed five unknown bugs in Amazon production machine learning frameworks\". 재현한 19건 중 Bug#18(KV 캐시 자르기)과 Bug#19(로짓 배치)는 그래프 밖에서 드러나 잡지 못했다고 적혀 있다."
+  },
+  {
+   "no": 40,
+   "key": "M40",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L75",
+   "claim": "GraphGuard(arXiv 2508.09505): 참조 구현이나 단일 장치 그래프와 비교하는 동등성 검증",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/pdf/2508.09505v1",
+   "memo": "논문 제목은 \"Verify Distributed Deep Learning Model Implementation Refinement with Iterative Relation Inference\"(ByteDance Seed·NYU)이고 도구 이름이 GraphGuard다. 분산 모델 출력으로 순차 모델 출력을 재구성할 수 있는지 반복 재작성으로 증명한다."
+  },
+  {
+   "no": 41,
+   "key": "M41",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L76, L79",
+   "claim": "Kernel Contracts(arXiv 2604.22032)는 커널 수준 검증으로, 틀린 뒤에 찾는 사후 탐지 수단에 속한다",
+   "verdict": "일부 다름",
+   "source_url": "https://arxiv.org/pdf/2604.22032v1",
+   "memo": "논문은 존재한다(Cooper Veit, Ashiba Research, 2026-04). 하지만 사후 탐지 도구가 아니라 계약 명세 언어다. 초록: \"Every ML kernel ships with an implicit contract ... People rarely write the contract down\". 계약은 여덟 부분이다(전조건, 후조건, 허용 오차, 참조 오라클, 측정 규약, 위반 서명 등). 정밀도, 순서, 컴파일러, 예외값 계약 12종을 제시한다. 즉 커널 경계에 명시적 계약을 적고 측정으로 대조하는 선언 방식이며, 새로움 3과 일부 겹친다(새로움 점검 참조)."
+  },
+  {
+   "no": 42,
+   "key": "M42",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L59, L72, L145",
+   "claim": "Artificial Analysis Endpoint Accuracy Index(2026-08-04): 자체 참조 배포와 비교하는 지표. gpt-oss-120b의 도구 호출(BFCL)이 업체별로 22~37%. 업체는 양자화, 자체 커널, 설정 조정을 하고 때로는 버그를 낸다",
+   "verdict": "일부 다름",
+   "source_url": "https://artificialanalysis.ai/articles/endpoint-accuracy-index",
+   "memo": "날짜(2026-08-04)와 자체 참조 배포 비교, 업체 설명은 맞다(\"sometimes they simply ship bugs\"). 하지만 37%는 업체 점수가 아니라 참조 배포의 점수다. 원문: \"some endpoints score 22% on BFCL-500 against 37% for the reference\". '업체별 22~37%'가 아니라 '일부 엔드포인트 22%, 참조 37%'다."
+  },
+  {
+   "no": 43,
+   "key": "M43",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L136-145 (Gemma 2 행 제외)",
+   "claim": "HN 반응: ChatGPT 2024-02 293점, Unsloth Gemma 2024-03 166점, Llama 4 INT4 글 없음, Anthropic 2025-09 381점과 InfoQ 기사, Moonshot KVV 2026-04 310점, Anthropic Claude Code 2026-04 942점과 The Register·VentureBeat, Artificial Analysis 2026-08 2점",
+   "verdict": "확인됨",
+   "source_url": "https://hn.algolia.com/api/v1/search?query=A%20postmortem%20of%20three%20recent%20issues&tags=story",
+   "memo": "2026-09-23에 Algolia API로 다시 조회한 값이 모두 같다. 293(id 39462087), 166(39671146), 381(45281139), 310(47838703, 2026-04-20), 942(47878905), 2(49172623, X 링크). 기사도 직접 열어 있음을 확인했다: InfoQ 2025/10, VentureBeat 2026-04-23, The Register 2026-04-24(\"Anthropic admits it dumbed down Claude\"). Llama 4 INT4 관련 글은 검색되지 않았다(없다는 것을 완전히 증명하지는 못한다). Unsloth 글(2024-03-06)에는 RoPE float32와 GELU 근사가 실제로 있다."
+  },
+  {
+   "no": 44,
+   "key": "M44",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L140",
+   "claim": "Gemma 2 출시(2024-06): 27B 출력 이상, 원인은 softcap 누락. HN 2점",
+   "verdict": "일부 다름",
+   "source_url": "https://hn.algolia.com/api/v1/search?query=Gemma%202%20soft%20capping&tags=story",
+   "memo": "2점짜리 글은 Gemma 2 출시 글이 아니다. 2024-07-01에 올라온 llama.cpp PR #8197 링크다(\"Attention and final logit soft-capping, update scaling factor to Gemma2\"). 이 한 건으로 출시·결함에 대한 대중 반응을 대표할 수 없다."
+  },
+  {
+   "no": 45,
+   "key": "M45",
+   "doc": "PROBLEM_STATEMENT.md",
+   "loc": "L34",
+   "claim": "Chromium의 메모리 안전성 통계는 912건, Microsoft는 12년치 CVE였다",
+   "verdict": "확인됨",
+   "source_url": "https://www.chromium.org/Home/chromium-security/memory-safety/ ; https://github.com/microsoft/MSRC-Security-Research/tree/master/presentations/2019_02_BlueHatIL",
+   "memo": "Chromium: \"Analysis based on 912 high or critical severity security bugs since 2015\". Microsoft BlueHat IL 2019 발표 자료의 CVE 비율 그래프는 패치 연도 2006~2018이다(차이로 12년, 연도 수로는 13개). MSRC 블로그(2019-07)에도 약 70% 그림이 있다. '12년'은 흔한 보도 표현이다."
+  },
+  {
+   "no": 46,
+   "key": "M46",
+   "doc": "RESEARCH_PLAN.md",
+   "loc": "L117",
+   "claim": "infer-check는 조회로 확인하지 못했다. 확인 전까지 근거로 쓰지 않는다",
+   "verdict": "사실 주장 아님",
+   "source_url": "https://github.com/NullPointerDepressiveDisorder/infer-check ; https://pypi.org/project/infer-check/",
+   "memo": "문서의 확인 상태를 적은 문장이다. 이번 조회로 존재를 확인했다. 저장소는 2026-03-09에 만들어졌고(별 2개), PyPI 첫 판은 2026-03-12, 현재 0.2.6/2.0.1이다. README: \"runs differential tests across backends, quantization levels, and concurrency conditions\". 즉 사후 탐지(차분 시험) 도구 목록에 더할 수 있다."
+  },
+  {
+   "no": 47,
+   "key": "M47",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L33 (0절 판정 2)",
+   "claim": "선언해서 미리 막는 방식은 합산 상태라는 사실 하나에만 있다. 그것도 학습 코드에서 2026년에 막 시작됐다(JAX, Meta spmd_types)",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/jax-ml/jax/blob/jax-v0.4.14/jax/experimental/shard_map.py ; https://docs.jax.dev/en/latest/jep/14273-shard-map.html",
+   "memo": "시기가 틀렸다. JAX shard_map은 0.4.14(2023-07-27)에 이미 check_rep: bool = True가 기본값이었다. 설계 문서(2023-01)도 잠재적으로 틀린 프로그램을 모두 거부하는 정적 검사를 약속했다. 2026년에 시작된 것은 spmd_types(2026-03)뿐이다. '하나에만 있다'도 과한 일반화다. 같은 문서들이 다른 선언과 검사를 스스로 적었다. vLLM 백엔드 능력 선언의 시작 시점 검증, TensorRT-LLM FP4 형식 태그 assert, NeMo Neural Types가 그렇다. 여기에 GGUF 필수 키와 llama.cpp의 텐서 모양 대조(\"has wrong shape\"), Kernel Contracts 명세도 있다."
+  },
+  {
+   "no": 48,
+   "key": "M48",
+   "doc": "NOVELTY_CHECK.md; RESEARCH_PLAN.md",
+   "loc": "NOVELTY_CHECK L116; RESEARCH_PLAN L136-137",
+   "claim": "계약을 넣자는 제안은 계속 나오지만 엔진들은 받아들이지 않았다(자동 종료되거나 닫혔다). 적힌 이유는 호환성, 로그 비용, 필요성에 대한 의문이었다. 내용을 반박한 기록은 찾지 못했다",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/vllm-project/vllm/issues/24384 ; https://github.com/vllm-project/vllm/pull/28454 ; https://github.com/huggingface/transformers/pull/48962",
+   "memo": "(1) '받아들이지 않았다': #24384는 자동 종료됐지만 핵심이 PR #28454(2026-01-02 병합, ModelArchitectureConfig)로 들어갔다. (2) '반박 기록 없음': #24384에 hmellor의 반대(\"My only objection is ...\", vLLM이 아니라 Transformers에서 고치자)가 있다. (3) 이유: 필요성 의문은 #48962에서 확인된다. '호환성'과 '로그 비용'은 이번에 읽은 스레드(#48962, #32067, #24384, #32613, #48312, #190792, #32432)에서 찾지 못했다. #32613은 이유 없이 비활성 종료됐다. 자동 종료를 거부로 읽을 수 없다. (4) #32613(정확도 시험 확대)도 자동 종료됐지만, vLLM은 2026-07-16 블로그에서 perf-eval 파이프라인을 밝혔다. 매일 밤과 릴리스 후보마다 17개 조합에 GSM8K·GPQA·AIME·BFCL을 돌린다. 제안 방향이 다른 형태로 채택된 셈이다."
+  },
+  {
+   "no": 49,
+   "key": "M49",
+   "doc": "prior_work.md",
+   "loc": "L288",
+   "claim": "오답 버그에는 시험 오라클이 없다(Shen 2021; Chen 2023)",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/ShenQingchao/DLCstudy ; https://xgdsmileboy.github.io/files/paper/study-tosem23.pdf",
+   "memo": "Shen: \"Regarding wrong code bugs, it is difficult to define test oracles\". Chen: 오답 증상은 충돌만큼 뚜렷하지 않아 시험 오라클 문제가 있다고 쓴다(4.2절)."
+  },
+  {
+   "no": 50,
+   "key": "M50",
+   "doc": "prior_work.md",
+   "loc": "L578-580",
+   "claim": "무조건 비율로 보면 오답 버그는 전체의 12~36%다(Islam, Liu, Chen, Shen, Yuan, 타일 프로그램). torch.compile 고우선 이슈에서는 19.2%다(Li 2026)",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/1906.01388 ; https://arxiv.org/html/2605.19652v1",
+   "memo": "각 값은 A 항목들로 확인했다: Islam 12%, Liu 13%+1%, Chen 24.3%, Shen 25.04%, Yuan 22.8%, 타일 36.21%, Li 19.2%. 하한 12%는 Islam의 Stack Overflow 표본만 기준이다. GitHub를 합치면 9.3%라서 범위가 9~36%로 넓어진다(A2·A18의 재계산)."
+  },
+  {
+   "no": 51,
+   "key": "A1",
+   "doc": "prior_work.md",
+   "loc": "L34-44",
+   "claim": "Zhang, Chen, Cheung 외, An Empirical Study on TensorFlow Program Bugs, ISSTA 2018(2018년 7월). 버그 175개(SO 87, GitHub 88). 근본 원인[표 3에서 계산]: TF API change 44(25%), IPS 38(22%), TF API misuse 33(19%), unaligned tensor 24(14%), 계산 모델 혼동 17(10%), structure inefficiency 3, others 16. 증상[계산]: error 112(64%), low effectiveness 40(23%), low efficiency 9(5%), unknown 14(8%).",
+   "verdict": "확인됨",
+   "source_url": "https://xiongyingfei.github.io/papers/ISSTA18b.pdf",
+   "memo": "저자 5명(Yuhao Zhang, Yifan Chen, Shing-Chi Cheung, Yingfei Xiong, Lu Zhang)과 ISSTA'18(7월 16~21일, 암스테르담)은 첫 쪽에서 확인했다. 4절: SO 87개와 GitHub 88개를 합쳐 175개다. 표 3(132쪽) 합계행(SO/GitHub)은 IPS 17/21, UT 15/9, CCM 14/3, APIC 8/36, APIM 27/6, SI 2/1, Others 4/12, 계 87/88이다. 이 값으로 38·24·17·44·33·3·16을 다시 계산했고 비율도 맞다. 증상행은 텍스트 추출이 일부 깨져 열 합으로 복원했다: Error 52+60=112, Low Effectiveness 27+13=40, Low Efficiency 7+2=9, Unknown 1+13=14. 본문에도 Unknown 14(8%), Others 16(9.1%)이 나온다."
+  },
+  {
+   "no": 52,
+   "key": "A1b",
+   "doc": "prior_work.md",
+   "loc": "L45",
+   "claim": "Zhang 2018 논문은 DL 프로그램에서 우연한 정답(버그가 발현돼도 실패가 보이지 않음)이 더 큰 규모로 일어나고 관찰하기 더 어렵다고 한다. 사용자는 여러 번 실행한 통계를 오라클로 썼다고 한다.",
+   "verdict": "일부 다름",
+   "source_url": "https://xiongyingfei.github.io/papers/ISSTA18b.pdf",
+   "memo": "앞부분은 맞다. 6.2절 Challenge 2(135쪽)는 TF 프로그램에서 우연한 정답이 전통 프로그램보다 큰 규모로 일어난다고 쓴다. 계산 실수가 최종 결과에 보이지 않을 가능성이 크기 때문이라고 설명한다. 뒷부분은 부정확하다. Challenge 1에서 사용자가 쓴 통계는 여러 번 실행한 결과가 아니라 많은 입력–출력 쌍에 대한 통계다. 전략 1은 학습·시험 세트의 정확도와 손실을 고정 임계값과 비교하고, 전략 2는 학습 반복 사이의 정확도·손실 변화를 본다. 반복 실행에서 생기는 비결정성은 Challenge 3(stochastic execution)에서 따로 다룬다."
+  },
+  {
+   "no": 53,
+   "key": "A2",
+   "doc": "prior_work.md",
+   "loc": "L47-54",
+   "claim": "Islam, Nguyen, Pan, Rajan, A Comprehensive Study on Deep Learning Bug Characteristics, ESEC/FSE 2019(arXiv 1906.01388, 2019-06-03). SO 게시물 2,716개(버그 415) + GitHub 수정 커밋 500개(버그 555), Caffe·Keras·TF·Theano·Torch, 합 970[computed]. IPS 평균 24%, Torch 버그의 28%가 unaligned tensor, 타입 검사 부재 Theano 30%·TF 15%·Keras 8%, API change TF 9%·Keras 7%, 평균 66% 넘게 crash, 평균 12%가 incorrect functionality(오류 없이 예상 밖 동작).",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/1906.01388",
+   "memo": "모두 논문 문장과 일치한다. 근거는 표 1(2716/415, 500/555), Finding 5·7·8·9(4.1~4.5절), Finding 12·14(5.1·5.3절), 2.6.5절 정의(런타임·컴파일 오류나 경고 없이 예상 밖 동작)다. 970=415+555도 맞다. 주의할 점: 이 Finding들은 Stack Overflow 자료 기준이고 표 3 SO 열과 정확히 같다. SO/GitHub로 나누면 UT Torch 28/20%, API change TF 9/58%, Keras 7/51%, 타입 검사 부재 Theano 30/20%다. crash 66%와 incorrect functionality 12%는 표 4 SO 열을 버그 수로 가중 평균한 값(66.2%, 11.5%, 내 재계산)과 맞는다. GitHub까지 합치면 각각 72.0%, 9.3%다. 문서는 이 범위를 밝히지 않는다."
+  },
+  {
+   "no": 54,
+   "key": "A3",
+   "doc": "prior_work.md",
+   "loc": "L56-68",
+   "claim": "Humbatova 외, Taxonomy of Real Faults in Deep Learning Systems, ICSE 2020(arXiv v3 2019-11-07). 산출물 1,059개(SO 477, GitHub issue·PR 271, 커밋 311) + 인터뷰 20회, 21명 설문으로 검증. 최상위 범주(산출물+인터뷰): Tensors & Inputs 53+20, Training 37+160, Model 29+45, API 20+0, GPU usage 10+1. 산출물 합 149, Tensors & Inputs 36%[computed]. Wrong tensor shape 21+5(산출물에서 가장 많은 태그), Wrong input 32+15(입력 데이터 shape 22+7, 입력 형식 5+5, 입력 타입 5+3). silent/crash 구분 없음.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/1910.11015",
+   "memo": "초록과 1절(477/271/311, 인터뷰 20회, 설문 21명)이 일치한다. 그림 1(7쪽)의 최상위 수치 5개와 하위 수치도 같다: Wrong Tensor Shape 21+5, Wrong Input 32+15, Wrong Shape of Input Data 22+7, Wrong Input Format 5+5, Wrong Type of Input Data 5+3. 표 1에서 DL 관련 산출물은 149개이고, 53/149=35.6%이므로 36%가 맞다. 4.2절은 SO·GitHub 상위 5개 태그의 첫째로 wrong tensor shape(21+5)를 든다. 논문은 근본 원인만 분류하고 증상(silent/crash)은 분류하지 않는다. ICSE 2020은 Crossref로 확인했다(DOI 10.1145/3377811.3380395, 1110-1121쪽)."
+  },
+  {
+   "no": 55,
+   "key": "A4",
+   "doc": "prior_work.md",
+   "loc": "L70-81",
+   "claim": "Chen, Liang, Shen, Jiang, Li, Toward Understanding Deep Learning Framework Bugs, ACM TOSEM 32(6) Art.135, 2023년 9월. TF·PyTorch·MXNet·DL4J 각 250개, 버그 1,000개, PR 1,250개, 원인 13개. Type issue 142(14.2%, 텐서 타입 100), misconfiguration 134(13.4%), API misuse 118(11.8%, wrong API 84), 네 DL 특화 원인 합 50.2%(incorrect algorithm implementation 152, 15.2% 포함). 증상: crash 514(51.4%), incorrect functionality 243(24.3%: 중간 상태 115, 예측 105, 모델 구조 23), build failure 188, poor performance 21, hang 3, unreported 31.",
+   "verdict": "확인됨",
+   "source_url": "https://xgdsmileboy.github.io/files/paper/study-tosem23.pdf",
+   "memo": "첫 쪽 서지(TOSEM 32권 6호 Article 135, 2023년 9월, 저자 5명)가 일치한다. 3절·표 1: PR 1,250개를 수작업으로 분석해 버그 1,000개(각 250)를 얻었다. 4.1.1절: 원인 13개. 4.1.2절: IAI 152, 네 DL 특화 원인 합 50.2%(Finding 1). Type Issue 142(Finding 2, 14.20%)이고 그중 100개가 텐서 타입이며 암묵적 형변환을 언급한다. Misconfiguration 134. 표 2: API Misuse 118 중 wrong API 84(71.19%). 4.2.2절·표 3: Crash 514(51.40%), Incorrect Functionality 243(24.30%; 115/105/23), Build Failure 188, Poor Performance 21, Hang 3, Unreported 31, 합 1,000."
+  },
+  {
+   "no": 56,
+   "key": "A5",
+   "doc": "prior_work.md",
+   "loc": "L98-108",
+   "claim": "Shen, Ma, Chen, Tian, Cheung, Chen, A Comprehensive Study of Deep Learning Compiler Bugs, ESEC/FSE 2021. 버그 수정 PR 1,361개에서 버그 603개(TVM 318, Glow 145, nGraph 140), 원인 12개·증상 6개. Type problem 19.23%(116개: 텐서 62, 일반 34, 노드 20), 가장 흔한 원인. Tensor shape problem 13.27%(shape와 메모리 레이아웃 포함). Incompatibility의 73%가 외부. Crash 59.37%, wrong code 25.04%, build failure 8.29%, bad performance 1.82%, hang 0.83%. 저자 2명이 라벨, Cohen's kappa 보정 후 85%, 이후 95% 초과.",
+   "verdict": "확인됨",
+   "source_url": "https://raw.githubusercontent.com/ShenQingchao/DLCstudy/master/A%20Comprehensive%20Study%20of%20Deep%20Learning%20Compiler%20Bugs.pdf",
+   "memo": "저장소의 논문 PDF로 확인했다. ESEC/FSE '21(2021년 8월 23~28일, 아테네)이고 저자 6명이 일치한다. 표 1: PR 1,361개, 버그 603개(318/145/140). 원인은 3.3.1~3.3.12의 12개, 증상은 3.4.1~3.4.6의 6개다. Finding 1·표 2: Type Problem 19.23%, 116개(62/34/20). 3.3.4절은 Tensor Shape Problem을 shape 또는 레이아웃 관련으로 정의하고 데이터 레이아웃 변환을 포함하며, Finding 3은 13.27%다. 4.1절·표 4: External Incompatibility 73.17%. 표 5·Finding 5~7: Crash 358(59.37%), Wrong Code 151(25.04%), Build Failure 8.29%, Bad Performance 1.82%, Hang 0.83%. 3.2절: kappa는 첫 5%에서 약 30%였고, 교육 후 10% 표본에서 85%, 이후 매번 95%를 넘었다."
+  },
+  {
+   "no": 57,
+   "key": "A6",
+   "doc": "prior_work.md",
+   "loc": "L110-121",
+   "claim": "Li, Li, Liu, Cheung, Demystifying the Silence of Correctness Bugs in PyTorch Compiler, arXiv 2604.08720(2026-04-09). 고우선 PyTorch 이슈 296개의 19.2%가 torch.compile 정확성 버그로 crash 다음 둘째. 확정 버그 116개(2023-04~2025-04). In-place 21.6%, 저수준 코드 생성 19.8%, 연산자 변환 18.1%, 그래프 의미 포착 15.5%, 메모리 레이아웃 충돌 12.1%, 그래프 캐싱 4.3%, 기타 8.6%(precision 3, configuration 5, external library 2). AlignGuard(LLM 기반 테스트 변이)가 새 정확성 버그 23개를 찾았고 14개가 high priority.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/2604.08720",
+   "memo": "저자 4명과 날짜가 일치한다. 초록·1절: 고우선 이슈의 19.2%로, crash 19.57%에 이어 둘째다. 2.2절: 고우선 보고 296개 중 torch.compile 관련 138개, 그중 정확성 버그 57개(57/296=19.26%). 3.1절·표 1: 기간 2023-04-19~2025-04-19, 확정 116개. 그림 4·3.2절 개수는 25/23/21/18/14/5/10(3+5+2)이고 모두 백분율과 맞는다. AlignGuard 23개, high-priority 14/23. 사소한 점: 문서의 풀이 '(layout not preserved)'는 느슨하다. 논문 정의는 실제 텐서 메모리 레이아웃과 하류 연산자의 레이아웃 제약 사이의 불일치다."
+  },
+  {
+   "no": 58,
+   "key": "A7",
+   "doc": "prior_work.md",
+   "loc": "L123-134",
+   "claim": "Yuan 외, Demystifying Deep Learning Compiler Frontend Bugs: An LLM-Aided Empirical Study, arXiv 2607.25651(2026-07-28). PyTorch 2.1~2.6의 TorchDynamo 프런트엔드 버그 123개. 범주 19.5/18.7/14.6/12.2/12.2/6.5/3.3/13.0%. 증상 crash 71.5%, silent inconsistency 22.8%, timeout 5.7%.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/html/2607.25651",
+   "memo": "4.1절: PyTorch 2.1~2.6, 123개. 5.2절 본문 비율과 일치한다: E 24개(19.5%), A 23/123(18.7%), G 18(14.6%), B 15(12.2%), F 15(12.2%), D 8(6.50%), C 4(3.25%). H는 본문에 16개로만 나오며 13.0%는 계산값이다. 증상은 5.1절에 개수로만 나온다(crash 88, inconsistency 28, timeout 7). 71.5/22.8/5.7%는 이 개수로 계산한 값인데 문서에 [computed] 표시가 없다. 논문은 inconsistency를 조용한 오류로 설명한다. 논문 안에 불일치가 있다: 표 2(PDF와 HTML이 같음)의 하위 범주 수를 더하면 A=3+8+7+4=22(17.9%), F=9+7=16(13.0%)이다. 본문 값(23, 15)과 다르며, 문서는 본문 값을 따랐다."
+  },
+  {
+   "no": 59,
+   "key": "A8",
+   "doc": "prior_work.md",
+   "loc": "L136-138",
+   "claim": "Jajal 외, Analysis of Failures and Risks in Deep Learning Model Converters: A Case Study in the ONNX Ecosystem, ISSTA 2024(arXiv 2303.17708). PyTorch·TF ONNX 변환기 이슈 200개 + 엔지니어 92명 설문. 결함의 약 75%가 노드 변환에서 생기고, 보고된 실패의 약 1/3이 의미상 틀린 모델을 만든다.",
+   "verdict": "일부 다름",
+   "source_url": "https://arxiv.org/abs/2303.17708",
+   "memo": "수치는 맞다. 초록에 N=92, N=200, 노드 변환 75%, 의미상 틀린 모델 33%가 있다. 본문 Finding 4는 74%(148/200), 표 9의 Wrong Model은 65(33%)이고, 표 8에서 tf2onnx와 torch.onnx는 각 100개다. 서지는 다르다. 문서의 제목은 arXiv 초록 페이지 메타데이터 제목이고 v1~v4 모두 같다. ISSTA 2024 게재본의 제목은 Interoperability in Deep Learning: A User Survey and Failure Analysis of ONNX Model Converters다(arXiv v4 PDF, DOI 10.1145/3650212.3680374, Crossref로 확인, 1466-1478쪽). ISSTA 2024로 인용하려면 이 제목을 써야 한다."
+  },
+  {
+   "no": 60,
+   "key": "A9",
+   "doc": "prior_work.md",
+   "loc": "L140-142",
+   "claim": "Qiu, Wang, Badhe, Limpanukorn, Kim, Zhang, Finding Compiler-Platform Interaction Bugs in Deep Learning Pipelines via Cross-Layer Constraints(XCheck), arXiv 2606.18421(2026-06-16). 버그 통계가 아닌 테스트 논문이다. 컴파일 층을 가로지르는 제약을 뽑아 런타임 어서션으로 넣는다. DL 컴파일러 3개(TVM·ONNX-MLIR 명시)에서 버그를 드러낸 사례 2,034개를 보고하며, 조용한 예상 밖 컴파일도 포함한다.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/2606.18421",
+   "memo": "제목, 저자 6명, 날짜가 일치한다. 도구 이름은 XCHECK(대문자 표기)로 맞다. 초록에 컴파일러 3개, 사례 2,034개, 조용한 예상 밖 컴파일이 나온다. 세 번째 컴파일러는 GeneSys다. 1절 기여 목록에 GeneSys 1,022, ONNX-MLIR 821, TVM 191이 있고, 평가 절의 유형별 합 691+331+1,012도 2,034다. 문서의 'TVM and ONNX-MLIR are named'는 초록에만 맞는다. 본문은 GeneSys를 밝히며, 사례의 절반이 GeneSys에서 나왔다. 'runtime assertions'도 조금 부정확하다. 어서션은 컴파일러 안의 컴파일 패스 주변에 넣어 컴파일 동작을 감시한다(그림 4)."
+  },
+  {
+   "no": 61,
+   "key": "A10",
+   "doc": "prior_work.md",
+   "loc": "L178-182",
+   "claim": "Towards Understanding Bugs in Distributed Training and Inference Frameworks for Large Language Models, arXiv 2506.10426(2025년 6월). 수정된 버그 308개(DeepSpeed 168, Colossal-AI 131, Megatron-LM 9). 가장 흔한 증상은 crash·incorrect functionality·build failure, 가장 흔한 원인은 API misuse·configuration error·incorrect implementation·missing precondition. 분산 특유 원인에 distributed tensor error가 있다. 수정의 48%가 10줄 이하.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/2506.10426",
+   "memo": "v1(2025-06-12)로 확인했다. 저자는 Xiao Yu, Haoxuan Chen, Feifei Niu, Xing Hu, Jacky Wai Keung, Xin Xia이다(문서에는 저자가 없다). 초록의 308개와 표 I(HTML에서 확인, 168/9/131)이 맞다. Finding 1(상위 증상 3개), Finding 2(상위 원인 4개와 분산 특유 원인 4개, 그중 distributed tensor error), Finding 4(48%가 10 LOC 이하)도 일치한다. 원인 나열 순서는 III-B 본문의 순서와 같다. 다만 그림 9의 개수로는 incorrect implementation(46)이 configuration error(40)보다 많다."
+  },
+  {
+   "no": 62,
+   "key": "A10b",
+   "doc": "prior_work.md",
+   "loc": "L181",
+   "claim": "arXiv 2506.10426 본문은 범주별 개수를 주지 않는다[not verified].",
+   "verdict": "일부 다름",
+   "source_url": "https://arxiv.org/pdf/2506.10426",
+   "memo": "산문에 범주별 개수가 없는 것은 맞다. 하지만 논문 그림 9(원인과 증상의 관계)에 개수가 모두 있다. 원인은 API Misuse 51, Incorrect Implementation 46, Config Error 40, Precondition Missing 35, Distributed Tensor Error 8 등으로 합이 308이다. 증상은 Crash 97, Incorrect Functionality 90 등이다(pdftotext -raw로 그림 텍스트를 다시 확인). 따라서 L605 표의 'distributed tensor errors (no count)'는 틀렸고, 8/308(2.6%)이다. HTML판은 그림이 이미지라 숫자가 보이지 않는다. 문서가 [not verified]로 유보했으므로 '일부 다름'으로 판정한다."
+  },
+  {
+   "no": 63,
+   "key": "A11",
+   "doc": "prior_work.md",
+   "loc": "L184-193",
+   "claim": "Ma, Zhan, Chen, Li, Keung, Sarro, A Comprehensive Study of Bugs in Modern Distributed Deep Learning Systems, arXiv 2512.20345(2025-12-23). 이슈 849개(DeepSpeed 496, Megatron-LM 48, Colossal-AI 305). 추론 단계는 이슈의 10.1%. 추론 원인: 자원·분산 설정 오류 22.1%, 추론 논리 결함 18.6%, 의존성·하드웨어 불일치 17.4%, 프레임워크 API 오용 16.3%, 프레임워크–모델 비호환 12.8%. TP에서 기기 간 출력 불일치는 추론 이슈의 11.6%. 데이터·모델 준비 단계의 파라미터·텐서·구조 불일치 15.7%.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/2512.20345",
+   "memo": "초록, 3장 데이터(849 = 496/48/305), 저자 6명, 날짜가 일치한다. 3.1절 S.5: 추론은 전체 이슈의 10.1%다. 추론 출력 불일치(5.3)는 11.6%로, 다른 증상 비율과 함께 추론 단계 이슈(약 86건) 기준이다. 3.2.5절의 추론 원인 22.1/18.6/17.4/16.3/12.8%가 일치한다. 여섯째 원인 flawed model loading and parallel optimization 7.0%는 문서에 없다. 3.2.3절의 misaligned parameter, tensor, and model structure 15.7%도 일치한다. 세부 차이: 논문은 기기 간 불일치가 흔히 텐서 병렬 때문이라고 할 뿐 TP 상황으로 한정하지 않는다."
+  },
+  {
+   "no": 64,
+   "key": "A12",
+   "doc": "prior_work.md",
+   "loc": "L201-209",
+   "claim": "Wu, Zhou, Zhang, Liu, Zhang, Characterizing and Detecting CUDA Program Bugs, arXiv 1905.01833(2019년 5월). CUDA 프로젝트 5개의 버그 319개. 커널 함수 버그의 63%가 generic error, improper synchronization 27/217(12.4%), non-optimal implementation 8%, poor portability 3%. flaky test 동기화 버그는 중앙값 144일 동안 남아 있었다.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/abs/1905.01833",
+   "memo": "저자 5명과 arXiv 1905가 일치한다(텍스트는 v3, 2019-05-29). 초록: 프로젝트 5개, 버그 319개. 원인 비율의 분모는 커널 함수 실행 단계 버그 217개다(3.2.1절, 217/319=68%). 표 2·3.2.2절: Generic error 136/217(63%), Non-optimal 17/217(8%), Improper synchronization 27/217(12%, 3.3.3절에서 12.4%), Poor portability 6개(3%). 3.3.3절: flaky test 동기화 버그의 생존 기간은 중앙값 144일, 평균 180일이다. 문서가 추출하지 않은 improper resource management는 31/217=14%다."
+  },
+  {
+   "no": 65,
+   "key": "A13",
+   "doc": "prior_work.md",
+   "loc": "L211-214",
+   "claim": "Rathnasuriya 외, An Investigation on Numerical Bugs in GPU Programs Towards Automated Bug Detection, ISSTA 2025. GitHub 수치 버그 표본 397개. GPU-NBDetect가 라이브러리 4개의 수학 함수 186개에서 버그 226개를 찾았고 60개가 확인됐다. 입력값·타입에 의존하고 믿을 만한 오라클이 없다. 저자 목록 확인 요청.",
+   "verdict": "확인됨",
+   "source_url": "https://youngwei.com/publication/gpubug/",
+   "memo": "저자: Ravishka Rathnasuriya, Nidhi Majoju, Zihe Song, Wei Yang(저자 페이지, Crossref, Semantic Scholar 일치). 게재처: Proceedings of the ACM on Software Engineering 2권 ISSTA호, 1654-1677쪽, DOI 10.1145/3728950, 2025-06-22. ISSTA 2025가 맞다. 저자 페이지와 Crossref의 출판사 초록에서 397개, 226개, 함수 186개, 라이브러리 4개, 개발자 확인 60개, 입력값·타입 의존, 오라클 부재를 확인했다. 한계: ACM이 403으로 막아 본문 PDF는 열지 못했으므로 초록 수준의 확인이다. 저자 페이지의 PDF 버튼은 논문이 아니라 /content/project/로 연결된다."
+  },
+  {
+   "no": 66,
+   "key": "A14",
+   "doc": "prior_work.md",
+   "loc": "L216-225",
+   "claim": "Rathnasuriya 외, Characterizing Real-World Bugs in Tile Programs for Automated Bug Detection, ISSTA 2026(arXiv 2605.19652). 보고 401개에서 codegen 버그 301개. 프레임워크 8개(Triton, TileLang, Halide, TVM, XLA, DaCe, NVIDIA Warp, PyTorch), 2022년 1월~2025년 11월. Type & operator 48.84%(암묵적 형변환·혼합 정밀도 19.27% 포함), memory 19.27%(인덱싱·stride·레이아웃 11.63% 포함), IR 구성·변환 16.28%, tile mapping & launch 6.31%, control flow & scheduling 5.32%, device-specific 3.99%. 증상 crash 58.14%, correctness 36.21%, performance 5.65%.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/html/2605.19652v1",
+   "memo": "v1 HTML과 v2 PDF(2026-07-29)의 수치가 같다. 초록: 보고 401개, codegen 버그 301개. 3.1절: 프레임워크 8개(TVM과 PyTorch는 타일 관련 부분만), 기간 2022년 1월~2025년 11월. 표 2 개수는 Type and Operator 147(Data Type Semantics 58), Memory 58(Indexing and Stride 35), IR 49, Tile Mapping 19, Control Flow 16, Device-Specific 12이고 모두 백분율과 맞는다. IR 범주에 메타데이터가 빠진 하위 노드가 포함된다는 설명은 F3과 같다. 표 3·5절: Crash 175, Correctness 109, Performance 17. 게재처: PACMSE 3권 ISSTA호 Article ISSTA180(ISSTA '26)."
+  },
+  {
+   "no": 67,
+   "key": "A15",
+   "doc": "prior_work.md",
+   "loc": "L227-229",
+   "claim": "Zhou, Lezcano, Goucher 외, Linear Layouts: Robust Code Generation of Efficient Tensor Computation Using F2, ASPLOS 2026(arXiv 2505.23819). Triton GitHub 저장소에 올라온 버그의 12%가 레이아웃 관련이다.",
+   "verdict": "확인됨",
+   "source_url": "https://arxiv.org/html/2505.23819v4",
+   "memo": "v4 HTML과 v5 PDF의 1절 모두 같은 내용을 쓴다. 레이아웃과 그 변환을 손으로 구현하면 오류가 나기 쉽고, 지금까지 Triton GitHub에 올라온 버그의 12%가 레이아웃 관련이라는 것이다. 게재처는 ASPLOS '26(2026년 3월 22~26일, 피츠버그, DOI 10.1145/3760250.3762221)이다. 사소한 차이: 둘째 저자의 성은 Lezcano-Casado다."
+  },
+  {
+   "no": 68,
+   "key": "A16",
+   "doc": "prior_work.md",
+   "loc": "L277-279",
+   "claim": "NASA Mars Climate Orbiter Mishap Investigation Board Phase I Report(1999-11-10). 근본 원인: 궤도 모델에 쓰인 지상 소프트웨어 파일 Small Forces가 지정된 미터 단위 대신 영국 단위로 작성됐다.",
+   "verdict": "확인됨",
+   "source_url": "https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf",
+   "memo": "표지에 Phase I Report와 1999년 11월 10일이 있다. 요약(6쪽)과 4절 MCO Root Cause(16쪽): 궤도 모델에 쓰인 지상 소프트웨어 파일 Small Forces를 코딩할 때 미터 단위를 쓰지 않은 것이 근본 원인이다. 추력 데이터가 N-s가 아니라 lbf-s였다. 참고로 L279의 해석(올바른 부품들이 경계에서 단위 사실을 잃음)은 보고서 서술과 다소 다르다. 보고서는 SM_FORCES 출력이 인터페이스 명세(SIS)의 미터 단위 요구를 따르지 않았다고 적어, 한 부품이 명세를 어긴 사례로 규정한다."
+  },
+  {
+   "no": 69,
+   "key": "A17",
+   "doc": "prior_work.md",
+   "loc": "L281-282",
+   "claim": "Sculley 외, Hidden Technical Debt in Machine Learning Systems, NIPS 2015. boundary erosion, entanglement, undeclared consumers, data dependencies, configuration issues 등 ML 특유 위험 요인을 든다.",
+   "verdict": "확인됨",
+   "source_url": "https://papers.nips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html",
+   "memo": "NeurIPS 논문집 페이지에 Advances in NIPS 28(NIPS 2015), D. Sculley 외 10명으로 나온다. 초록은 ML 특유 위험 요인으로 boundary erosion, entanglement, hidden feedback loops, undeclared consumers, data dependencies, configuration issues, 외부 세계의 변화, 시스템 수준 안티패턴을 든다. PDF 2~3절 소제목(Entanglement, Undeclared Consumers, Data Dependencies)에서도 확인했다. 문서는 이 가운데 일부를 'including'으로 적었으므로 맞다."
+  },
+  {
+   "no": 70,
+   "key": "A18",
+   "doc": "prior_work.md",
+   "loc": "L231-248",
+   "claim": "교차 연구 표의 각 행 수치가 해당 논문과 맞는가(불일치만 보고).",
+   "verdict": "일부 다름",
+   "source_url": "https://arxiv.org/abs/1906.01388 ; https://arxiv.org/abs/2506.09713",
+   "memo": "숫자는 모든 행이 논문과 맞는다. 범위 밖이지만 Tambon(77, 20.8%, 13%), Liu(929, 23%, 13%, 1%), Ekka(70, 25.5%) 행도 원문과 대조했다. 불일치 1건: Islam 행은 표본을 970[computed]으로 적었지만, IPS 평균 24%와 incorrect functionality 12%는 Stack Overflow 버그 415개 기준 값이다(A2 참조). GitHub 555개까지 가중하면 incorrect functionality는 9.3%다(내 재계산). 참고: (1) Ma 행의 표본은 849지만 비율은 추론 단계 이슈(10.1%, 약 86건) 기준이며, 행 이름에 inference slice라고 적혀 있다. (2) Yuan 22.8%는 28/123으로 계산한 값이다. (3) Liu 행의 약 9%는 맞다(94/1,053=8.9%). 다만 문서 L156의 분모 1,041은 논문 그림 5의 합(v1 1053, v2 1054)과 다르다. 문서에 적힌 하위 개수의 합도 1,053이다. 이 항목은 범위 밖이라 참고로만 적는다."
+  },
+  {
+   "no": 71,
+   "key": "C1a",
+   "doc": "prior_work.md",
+   "loc": "L455-458",
+   "claim": "vLLM 어텐션 백엔드 문서: 백엔드마다 dtype, KV dtype, head size, block size, 어텐션 종류, sink, non-causal, MM prefix, DCP, compute capability를 선언한다. 명시 선택이 없으면 첫 호환 백엔드를 고르고, 명시 선택은 시작 때 검증해 이유를 보인다. 40개 이상, FLEX_ATTENTION은 sink 없음. sliding window와 softcap은 표의 열이 아니고 본문에만 나온다.",
+   "verdict": "확인됨",
+   "source_url": "https://docs.vllm.ai/en/stable/design/attention_backends/ (페이지 갱신 2026-09-21); 표 생성기 https://github.com/vllm-project/vllm/blob/main/docs/mkdocs/gen_files/generate_attention_backends.py",
+   "memo": "문서 기준으로는 모두 맞다. 범례 열과 자동/명시 선택 동작이 문서와 같고, FLEX_ATTENTION의 Sink 칸은 미지원 표시이다. 백엔드 수는 표의 행 46개, 서로 다른 이름 39개, 본문의 합성 백엔드(TRITON_FLASH_ATTN, TRITON_FLASHINFER)까지 41개라서 '40+'는 세는 방식에 따라 경계선이다. 표 생성기도 sink, non-causal, mm_prefix, dcp만 열로 뽑고 sliding window 열은 없다. 본문에는 FA4 hd256 커널이 soft capping을 지원하지 않는다는 문장과 SWA/R-SWA 언급이 있다. 다만 이것은 문서 표의 사실이고, 코드의 선택 검증은 다르다(C1a-2 참조)."
+  },
+  {
+   "no": 72,
+   "key": "C1a-2",
+   "doc": "prior_work.md",
+   "loc": "L464, L632",
+   "claim": "vLLM이 선언·검증하는 것은 하드웨어와 형식 능력뿐이고, sliding window나 softcap 같은 모델 성질은 다루지 않는다.",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/v1/attention/backend.py#L273-L363 ; https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/model_executor/layers/attention/attention.py#L346-L356 ; https://github.com/vllm-project/vllm/pull/48011",
+   "memo": "softcap에 대해서는 맞고 sliding window에 대해서는 틀리다. validate_configuration에 has_sliding_window 인자가 있고, supports_sliding_window()가 거짓인 백엔드는 'sliding window 미지원' 사유로 후보에서 빠진다(backend.py L286, L326-327). Attention 층이 has_sliding_window=(sliding_window is not None)을 선택기에 넘긴다(attention.py L346-356). 이 검사는 PR #48011(2026-07-13 병합, 슬라이딩 윈도 지원을 백엔드 능력으로 명시)로 들어왔으므로 문서 작성(2026-09-22) 전부터 있었다. 문서 표에 열이 없는 것은 표 생성기가 그 열을 뽑지 않기 때문이다. 세 문서가 다른 이유는 prior_work는 문서 표를, NOVELTY_CHECK와 RESEARCH_PLAN은 코드를 읽었기 때문이며, 코드 기준인 뒤의 두 문서가 맞다."
+  },
+  {
+   "no": 73,
+   "key": "C1b",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L98",
+   "claim": "vLLM: 백엔드 선택 때 sliding window, sinks 등을 검증, 층별 KV 명세 타입, 가중치 누락 검사가 있다. 한계: softcap은 선택 기준에 없다(일부 백엔드는 생성 때 거부), 누락 검사는 비양자화 모델에만, 묶음 가중치 불일치는 경고만, 양자화 파라미터 형식 정보는 재등록 때 사라진다.",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/v1/attention/backend.py#L273-L363 ; https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/model_executor/model_loader/default_loader.py#L434-L470 ; https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/model_executor/layers/linear.py#L857-L866 ; https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/model_executor/layers/quantization/utils/quant_utils.py#L664-L676 ; https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/model_executor/utils.py#L71-L143",
+   "memo": "(1) 선택 검증에 sliding window와 sink가 들어간다: 맞음(backend.py L314, L326). (2) softcap은 validate_configuration과 get_attn_backend 인자에 없다: 맞음. 생성자에서 거부하는 백엔드도 있다: FlexAttention(flex_attention.py L1219-1222), b12x(L346-347), HPC_ATTN(L356-357), TRITON_MLA·FLASHMLA 등 MLA 계열. 덧붙일 점: FLASH_ATTN 안에서는 softcap이 FA 버전 선택(Blackwell hd256에서 FA4 대신 FA2, fa_utils.py L236-251)에 쓰인다. TURBOQUANT 구현체는 logits_soft_cap을 인자로 받지만 저장·사용·거부를 모두 하지 않는다(turboquant_attn.py L314-326; 코드 읽기만 했고 실행 확인은 안 함). (3) 누락 가중치 검사를 비양자화 모델에만 한다는 것은 기본값에 대해서만 맞다(default_loader.py L434-445). PR #41086(2026-04-29) 이후 model_loader_extra_config의 enable_weights_track으로 양자화 모델에도 켤 수 있다. (4) 묶음 가중치: 경고만 하는 경로가 있다. output_dim 속성이 없는 가중치를 MergedColumnParallelLinear/QKVParallelLinear에 적재하면 모든 분할이 같다고 가정하고 경고만 한다(linear.py L861, L1318). 하지만 묶음 샤드 가운데 일부만 양자화되어 있으면 ValueError(quant_utils.py L673)이고, 모양이 다르면 assert한다. 따라서 '불일치는 경고만'은 일부만 맞다. (5) 재등록: replace_parameter 독스트링이 새로 등록할 때 기존 파라미터의 속성을 버린다고 적는다(weight_loader는 유지, prefer_copy 경로는 유지; utils.py L84-85). 맞음. PR #49601(2026-08-06) 이후 새 텐서에 붙은 속성은 옮겨진다."
+  },
+  {
+   "no": 74,
+   "key": "C1c",
+   "doc": "RESEARCH_PLAN.md",
+   "loc": "L131",
+   "claim": "vLLM 백엔드 검증: sliding window는 검증하지만 softcap은 선택 기준에 없다.",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/v1/attention/backend.py#L273-L363 ; https://github.com/vllm-project/vllm/blob/a9f07d0bc59604d3979ba0f232469f4a80eb8175/vllm/v1/attention/selector.py#L105-L117",
+   "memo": "현재 main(a9f07d0, 2026-09-23) 코드와 일치한다. sliding window 검증은 PR #48011(2026-07-13)부터 있다. softcap은 선택기(get_attn_backend, AttentionSelectorConfig)에 없고 구현체 생성자에만 전달된다(attention.py L415-426). 덧붙일 점은 C1b와 같다. FLASH_ATTN 내부의 FA 버전 선택에는 softcap이 쓰이고, TURBOQUANT는 softcap을 받고도 조용히 쓰지 않는다(코드 읽기)."
+  },
+  {
+   "no": 75,
+   "key": "C2",
+   "doc": "prior_work.md",
+   "loc": "L460-463",
+   "claim": "vLLM 층별 KV 캐시 명세: 전체 어텐션, sliding_window_size가 있는 sliding window, chunked local, Mamba. 명세가 블록 할당, 창 밖 블록 해제, 접두 캐시 적중 규칙을 정한다.",
+   "verdict": "확인됨",
+   "source_url": "https://docs.vllm.ai/en/stable/design/hybrid_kv_cache_manager/ ; https://github.com/vllm-project/vllm/blob/main/vllm/v1/kv_cache_interface.py",
+   "memo": "문서에 sw+full, Mamba+full, local chunked+full(Llama4) 조합, 종류별 블록 할당(슬라이딩 층은 최근 sliding_window_size 토큰분만 예약), 창 밖 블록 해제, 종류별 접두 캐시 적중 규칙이 있다. 코드에 FullAttentionSpec, SlidingWindowSpec(필드 sliding_window), ChunkedLocalAttentionSpec(attention_chunk_size), MambaSpec이 있다. 세부 차이: sliding_window_size는 문서 용어이고 코드 필드명은 sliding_window이다. 문서는 옛 커밋 458e74 기준이며 초기 단계라는 경고가 붙어 있다(갱신 2026-08-19). 코드에는 RSWASpec, CircularBufferSpec, MLA, Cross 등 더 많은 명세가 있다."
+  },
+  {
+   "no": 76,
+   "key": "C3",
+   "doc": "NOVELTY_CHECK.md / RESEARCH_PLAN.md",
+   "loc": "NOVELTY_CHECK L99; RESEARCH_PLAN L129",
+   "claim": "SGLang KV canary: KV 칸마다 토큰, 위치, 범위 태그를 달고 매 forward에서 검사한다. 켜야 동작한다(NONE이면 꺼짐). KV 캐시만 다룬다. #33656에서 SWA 위치 오염을 실제로 잡았다.",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/sgl-project/sglang/blob/d4dcce12d4fcdb3eb694d54d6afd31628c2eb7ce/python/sglang/srt/kv_canary/config.py#L17-L20 ; https://github.com/sgl-project/sglang/blob/d4dcce12d4fcdb3eb694d54d6afd31628c2eb7ce/python/sglang/kernels/ops/kv_canary/consts.py#L17-L21 ; https://github.com/sgl-project/sglang/blob/d4dcce12d4fcdb3eb694d54d6afd31628c2eb7ce/python/sglang/srt/arg_groups/fields/observability.py#L205-L216 ; https://github.com/sgl-project/sglang/issues/33656",
+   "memo": "맞는 것: python/sglang/srt/kv_canary 디렉터리가 있다(main d4dcce1). 모드는 none/log/raise이고 --kv-canary 기본값은 none이다. none이면 캐너리를 설치하지 않는다(api.py install_canary). model.forward를 감싸 매 forward 앞뒤에서 배치 요청의 슬롯을 검증하고, 전체 풀 sweep은 기본값 0(꺼짐)이다. 검사 대상은 KV 풀 슬롯뿐이다. 다른 것: 슬롯마다 저장하는 필드는 토큰, 위치, 이전 해시(체인 해시), 실제 KV 해시의 4개이고 '범위' 필드는 없다(consts.py L17-21). 범위는 FULL([0,K))과 SWA([K-window,K)) 두 캐너리 묶음으로 나뉘어 검증 범위를 정한다(buffer_group.py PoolKind). 검증 항목 수가 용량을 넘으면 그 단계의 검증 전체를 건너뛴다(VerifyPlan.enable). #33656: 보고자가 --kv-canary=log로 TAIL_K_SWA write_position 위반(저장 위치 512, 기대 8448)을 잡았다고 적었다. 이슈는 아직 열려 있고, 원인은 기여자들이 HiCache 복원 경로로 논의 중이다(교차 참조 PR #34002)."
+  },
+  {
+   "no": 77,
+   "key": "C4",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L100",
+   "claim": "TensorRT-LLM: FP4 스케일 형식 태그(스위즐 여부)를 소비하는 쪽에서 assert한다. 그 자료형에 한정된다.",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/NVIDIA/TensorRT-LLM/blob/3cfcb0d9622e2ef7a926436dc174c96ebc9367af/tensorrt_llm/_torch/utils.py#L204-L243 ; https://github.com/NVIDIA/TensorRT-LLM/blob/3cfcb0d9622e2ef7a926436dc174c96ebc9367af/tensorrt_llm/_torch/moe/fused_moe/trtllm_gen/fp4_block_scale.py#L225-L240 ; https://github.com/NVIDIA/TensorRT-LLM/blob/3cfcb0d9622e2ef7a926436dc174c96ebc9367af/tensorrt_llm/_torch/modules/linear.py#L1597-L1622",
+   "memo": "맞는 것: Fp4QuantizedTensor에 is_sf_swizzled(기본 True)가 있다(utils.py L204-208). MoE 백엔드(fused_moe_cutlass L821, cute_dsl L1029, densegemm L392, trtllm_gen fp4_block_scale L232)가 통신 전에 스위즐되지 않았음을 assert하고, MLA 슬라이스 함수는 스위즐이 아니면 ValueError를 낸다(attention/mla.py L86-89). 다른 것 1: 모든 소비처가 확인하지는 않는다. NVFP4 Linear의 _input_prepare는 태그를 보지 않고 fp4_tensor와 scaling_factor를 그대로 쓰며(linear.py L1607-1622), (fp4, sf) 튜플 입력에는 태그가 아예 없다. 다른 것 2: FP4에 한정되지 않는다. MxFp8QuantizedTensor에도 같은 is_sf_swizzled(기본 False)가 있고, trtllm_gen MoE가 이것도 assert한다(utils.py L226-243, fp4_block_scale.py L236-240)."
+  },
+  {
+   "no": 78,
+   "key": "C5a",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L101 (적재 보고)",
+   "claim": "transformers의 적재 보고(누락 키, 예상 밖 키)는 경고만 하고 엄격 적재 옵션이 없다.",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/huggingface/transformers/blob/b3c3f5c15b3bfc30ea6d613e24841f73922235a5/src/transformers/utils/loading_report.py#L273-L318 ; https://github.com/huggingface/transformers/pull/48962",
+   "memo": "log_state_dict_report는 누락·예상 밖 키 보고를 logger.warning으로 남긴다(L307). 예외는 error_msgs, 변환 오류, 크기 불일치(ignore_mismatched_sizes=False일 때)에만 난다. from_pretrained에는 누락 키를 오류로 바꾸는 엄격 옵션이 없고, output_loading_info=True로 목록을 돌려받을 수만 있다. 선택형 엄격 적재 PR #48962는 병합되지 않고 2026-09-22에 닫혔다."
+  },
+  {
+   "no": 79,
+   "key": "C5b",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L101 (softcap), L190",
+   "claim": "Gemma 2의 sdpa 경로는 softcap 인자를 받기만 하고 읽지 않는다(2026-09 main). sdpa 함수의 최근 수정은 2026-08-20이다.",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/huggingface/transformers/blob/b3c3f5c15b3bfc30ea6d613e24841f73922235a5/src/transformers/integrations/sdpa_attention.py#L79-L170 ; https://github.com/huggingface/transformers/blob/b3c3f5c15b3bfc30ea6d613e24841f73922235a5/src/transformers/models/gemma2/modeling_gemma2.py#L269-L283 ; https://github.com/huggingface/transformers/blob/b3c3f5c15b3bfc30ea6d613e24841f73922235a5/src/transformers/modeling_utils.py#L1842",
+   "memo": "sdpa_attention_forward는 softcap을 **kwargs로 받고 scaled_dot_product_attention 호출(L158-167)에 넘기지 않는다. Gemma2Attention은 softcap=self.attn_logit_softcapping을 넘긴다(L282). flash_attention.py와 flex_attention.py는 softcap을 적용한다. 영향 범위를 넓히는 사실: main에서 attn_implementation을 지정하지 않으면 기본값이 sdpa이고(modeling_utils.py L1842), Gemma2는 _supports_sdpa=True이며 경고도 없다. 따라서 기본 설정에서 softcap이 조용히 빠진다. 이 파일의 최근 커밋은 2b29630(#46196, 2026-08-20)이다(main b3c3f5c, 2026-09-23 기준)."
+  },
+  {
+   "no": 80,
+   "key": "C5c",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L191",
+   "claim": "관련 이슈를 검색했지만 같은 보고(Gemma 2 sdpa가 softcap을 읽지 않음)는 찾지 못했다.",
+   "verdict": "일부 다름",
+   "source_url": "https://github.com/huggingface/transformers/issues/32390 ; https://github.com/huggingface/transformers/issues/32877 ; https://github.com/huggingface/transformers/blob/v4.47.0/src/transformers/models/gemma2/modeling_gemma2.py#L553-L563",
+   "memo": "2026년 main에 대한 같은 보고는 나도 찾지 못했다(검색어 7개). 하지만 문제 자체는 2024년에 공개적으로 알려져 있었다. #32390에서 유지보수자 ArthurZucker가 2024-08-03에 \"the `sdpa` path does not support logit soft-capping (For Gemma2)\"라고 답했고, #32877은 sdpa 경로에 softcap을 넣자는 기능 요청이었다(#34282로 닫힘, softcap은 flex 경로에만 추가). v4.45~v4.47의 Gemma2는 _check_and_enable_sdpa를 재정의해 softcapping 때문에 기본 SDPA를 eager로 바꿨다(v4.47.0 L553-562). v4.48.0부터 이 재정의가 사라졌고, v4.48에 있던 학습용 eager 권고 경고도 main에는 없다. 따라서 '보고된 적 없는 결함'보다 '있던 보호 장치가 사라진 회귀'로 적는 편이 정확하다. 상류에 보고한다면 이 이력을 함께 적어야 한다."
+  },
+  {
+   "no": 81,
+   "key": "C6",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L102",
+   "claim": "llama.cpp: test-backend-ops가 연산마다 CPU 결과와 비교하고 GGUF 구조를 검사한다. 연산 단위 시험이다. SYCL 재배치 플래그는 검증하지 않는다.",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/ggml-org/llama.cpp/blob/b1ff4ca23630ac7c5a275405353ddb5c486332c9/tests/test-backend-ops.cpp#L11756-L11769 ; https://github.com/ggml-org/llama.cpp/blob/b1ff4ca23630ac7c5a275405353ddb5c486332c9/ggml/src/gguf.cpp#L470-L800 ; https://github.com/ggml-org/llama.cpp/blob/b1ff4ca23630ac7c5a275405353ddb5c486332c9/ggml/src/ggml-sycl/ggml-sycl.cpp#L4687-L4727 ; https://github.com/ggml-org/llama.cpp/issues/21589 ; https://github.com/ggml-org/llama.cpp/issues/26845",
+   "memo": "test-backend-ops의 기본 모드(test)는 연산별 시험 사례를 CPU 백엔드와 비교하고, CPU 백엔드를 참조 구현 모드로 켠다(L11756-11769, 사용법 L12006). gguf.cpp는 매직, 버전, 개수 범위, 중복 키와 텐서 이름, 타입, 정렬, 차원, 블록 크기, 오프셋을 검사하고 어기면 적재를 멈춘다. SYCL 재배치는 '검증 없음'의 뜻을 좁혀 적어야 한다. 첫 소배치 MUL_MAT 때 가중치를 제자리에서 재배치하고 extra->optimized_feature.reorder만 켠다(L4687-4727). dmmv, mmvq, convert는 이 플래그를 각자 확인한다. 그러나 모든 소비처가 따르도록 강제하는 장치는 없다. getrows.cpp는 플래그를 참조하지 않고, get_tensor는 재배치된 바이트를 그대로 복사한다(L715-730). 플래그를 따르지 않은 경로 때문에 실제로 조용한 오답이 났다. #21589는 PR 작성자가 원인을 GEMM 역양자화 경로의 재배치 대응 누락으로 밝혔고, #26845는 guard gap으로 진단되었다."
+  },
+  {
+   "no": 82,
+   "key": "C7",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L103",
+   "claim": "PyTorch custom_op의 mutates_args는 필수다. 틀리게 적어도 검사하지 않고 opcheck 시험에서만 확인한다.",
+   "verdict": "일부 다름",
+   "source_url": "https://docs.pytorch.org/docs/2.14/library.html (custom_op, opcheck) ; https://github.com/pytorch/pytorch/blob/82e11efd09479cfbae9c03a174fa4714b09d1f89/torch/_subclasses/fake_tensor.py#L2958-L2980 ; https://github.com/pytorch/pytorch/blob/82e11efd09479cfbae9c03a174fa4714b09d1f89/torch/_library/utils.py#L467",
+   "memo": "맞는 것: 2.14 문서의 서명에서 mutates_args는 기본값이 없는 필수 키워드 인자이고, 문서는 정확하지 않으면 동작이 정의되지 않는다고 적는다. 기본 실행은 선언된 인자의 버전 카운터만 올리고 실제 변경은 대조하지 않는다. opcheck의 test_schema가 선언과 실제 변경을 대조한다. 다른 것: opcheck만 있는 것은 아니다. FakeTensor의 실제 텐서 전파 모드(torch._functorch.config.fake_tensor_propagate_real_tensors)에서는 사용자 정의 연산마다 MutationChecker가 실제 변경과 스키마를 대조해 RuntimeError를 낸다(fake_tensor.py L2958-2980). schema 문자열을 함께 주면 mutates_args와의 불일치가 정의 시점에 오류가 된다(custom_ops.py L251-260). 기본 실행에서 검사하지 않는다는 요지는 맞다."
+  },
+  {
+   "no": 83,
+   "key": "C8",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L91",
+   "claim": "PyTorch DTensor는 Partial과 Replicate 표기가 있고, 아직 alpha이며 즉시 실행 부담이 크다. transformers의 TP가 사용한다.",
+   "verdict": "확인됨",
+   "source_url": "https://docs.pytorch.org/docs/2.14/distributed.tensor.html ; https://github.com/huggingface/transformers/blob/b3c3f5c15b3bfc30ea6d613e24841f73922235a5/src/transformers/distributed/tensor_parallel.py#L31 ; https://blog.ezyang.com/2026/02/dtensor-erasure/",
+   "memo": "2.14 문서(최종 갱신 2026-07-01)의 머리 주석이 torch.distributed.tensor를 alpha 상태이며 개발 중이라고 적고, 배치 종류는 Shard, Replicate, Partial 세 가지다. transformers main의 TP 구현(src/transformers/distributed/tensor_parallel.py)이 DTensor, Partial, Replicate, Shard를 가져다 쓴다. 즉시 실행 부담은 공식 문서에는 없다. PyTorch 개발자 ezyang의 글(2026-02-01)이 DTensor의 즉시 실행 성능이 나쁘기로 유명하다고 적고, veScale 논문의 학습 35~60% 감속을 인용한다. PyTorch 이슈 #159169(DTensor CPU 부담 벤치마크)도 있다. 수치는 학습 환경 기준이다."
+  },
+  {
+   "no": 84,
+   "key": "C9",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L131",
+   "claim": "vLLM의 TPU 백엔드는 JAX의 검사를 24개 파일에서 끈다.",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/vllm-project/tpu-inference/tree/f7516abcb727d545e84752106aed18c5b82d6082 (grep: check_vma=False) ; https://docs.jax.dev/en/latest/_autosummary/jax.shard_map.html",
+   "memo": "대상 저장소는 vLLM 본 저장소가 아니라 vllm-project/tpu-inference이다(설명: TPU inference for vLLM). vLLM 본 저장소 코드 검색에서는 check_vma가 0건이다. tpu-inference main(f7516ab, 2026-09-23)에서 shard_map에 check_vma=False를 넘기는 .py 파일은 정확히 24개이다. 옛 이름 check_rep=False까지 합치면 26개이고, 테스트 파일을 빼면 24개이다. 두 옵션을 합친 출현 횟수는 46회이다. JAX 문서에서 check_vma(기본 True)는 out_specs와 출력 복제 상태의 일관성 같은 추가 타당성 검사를 켜는 옵션이다. 파일 수는 저장소가 바뀌면 달라진다."
+  },
+  {
+   "no": 85,
+   "key": "C10a",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L58",
+   "claim": "vLLM 블로그(2026-07-16): v0.20.0의 회귀가 CI를 통과해 사용자에게 갔다. 정확도 회귀는 거의 충돌하지 않고, 응답은 정상인데 답이 틀린다. 조용함을 업계가 확인한 사례다.",
+   "verdict": "일부 다름",
+   "source_url": "https://vllm.ai/blog/2026-07-16-keeping-vllm-production-quality",
+   "memo": "맞는 것: v0.20.0(5월) 출시 뒤 며칠 만에 긴급 패치 v0.20.1과 v0.20.2를 냈고, 두 문제가 CI를 지나 사용자에게 갔다고 적는다. 다른 것: '거의 충돌하지 않는다'는 블로그에서 성능 회귀에 대한 말이다. 정확도 회귀에 대해서는 따로, 조용하며 응답은 유효한데 답이 틀린다고 적는다. 또 v0.20.0의 두 문제는 Blackwell에서 TP>1일 때 gpt-oss가 깨진 것과 GB200에서 DeepSeek V4 처리량이 떨어진 것이며, 조용한 오답 사례로 서술되지 않았다. 따라서 '조용함을 확인한 사례'의 근거는 v0.20.0 사례가 아니라 블로그의 일반 서술이다."
+  },
+  {
+   "no": 86,
+   "key": "C10b",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L73",
+   "claim": "vLLM(2026-07) 엔진 CI 정확도 평가: 17개 모델·장비 조합에 GSM8K, GPQA, AIME, BFCL을 매일 밤 실행한다.",
+   "verdict": "확인됨",
+   "source_url": "https://vllm.ai/blog/2026-07-16-keeping-vllm-production-quality",
+   "memo": "블로그에 따르면 매일 밤과 매 릴리스 후보마다 전체 묶음을 실행한다. 과제는 vllm-bench 성능 측정, lm-eval의 GSM8K·GPQA·AIME, BFCL 함수 호출이다. 현재 17개 모델-하드웨어 조합이다(H200, B200, MI300X, MI355X). 파이프라인은 github.com/vllm-project/perf-eval이다. 릴리스 후보마다 실행한다는 점을 덧붙일 수 있다."
+  },
+  {
+   "no": 87,
+   "key": "C11",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L74",
+   "claim": "MLPerf Inference는 제출 정확도가 참조 정확도의 99% 이상 등이어야 한다.",
+   "verdict": "확인됨",
+   "source_url": "https://github.com/mlcommons/inference_policies/blob/d3eba2f21026d868ad65cdcad2bb81e4a17ce3d3/inference_rules.adoc#L265-L308",
+   "memo": "품질 목표는 벤치마크별로 참조 정밀도(FP32/FP16/BF16) 결과 대비 99% 또는 99.9%이다(master d3eba2f, 2026-08-20). 두 등급을 모두 두는 것: Llama3.1-8B, 3D UNET, BERT, Whisper. 99.9%만: Llama2-70B, DLRMv3, PointPainting. 99%: ResNet50, Llama3.1-405B, Mixtral-8x7B, DeepSeek-R1, GPT-OSS-120B, Qwen3-VL, WAN-2.2, RGAT 등. LLM에는 생성 길이가 참조의 90%(일부는 90~110%) 안이어야 한다는 조건이 더 있다. Closed division에만 적용되고, Open division에는 정확도 제약이 없고 보고만 한다(L355-361). '99% 이상 등'은 맞지만 Closed 한정과 99.9% 등급을 적는 편이 정확하다."
+  },
+  {
+   "no": 88,
+   "key": "C12",
+   "doc": "NOVELTY_CHECK.md",
+   "loc": "L71",
+   "claim": "OpenRouter Exacto는 2025-10 출시, Auto Exacto는 2026-03부터 기본값이다. 품질이 나쁜 업체를 피해 요청을 보낸다.",
+   "verdict": "일부 다름",
+   "source_url": "https://openrouter.ai/blog/announcements/auto-exacto/ ; https://openrouter.ai/blog/announcements/provider-variance-introducing-exacto/",
+   "memo": "맞는 것: Exacto 원 공지(Provider Variance: Introducing Exacto)의 게시일은 2025-10-21이고, Auto Exacto 공지는 2026-03-12이다. 다른 것: 기본값은 도구를 포함한 요청에만 적용되고, 도구가 없는 요청은 모델 이름에 :exacto를 붙여야 켜진다. 공지 시점에는 GLM-4.7, GLM-5, DeepSeek V3.2, gpt-oss-120b 등 선택된 도구 호출 모델에 전역 적용했다고 적었다. 동작은 처리량, 도구 호출 텔레메트리, 벤치마크 점수로 약 5분마다 재평가해 통계적 이상치 업체를 뒤로 미는(deranked) 것이다. 완전히 빼는 것은 아니다."
+  }
+ ]
+}

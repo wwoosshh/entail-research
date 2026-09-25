@@ -1,0 +1,73 @@
+{
+ "case": "03_strided_q",
+ "meta": {
+  "id": "03",
+  "title": "strided Q from fused QKV read as packed",
+  "fact": "LAYOUT",
+  "issue": "https://github.com/sgl-project/sglang/issues/31641",
+  "engine": "Triton kernel call convention (mechanism)",
+  "kind": "mechanism",
+  "boundary": "fused QKV projection (strided view) -> attention kernel (assumes packed)",
+  "trigger": {
+   "hardware": "SM120 path in the original report",
+   "feature": "fused QKV + specific backend"
+  },
+  "symptom": "garbled",
+  "expected_detection": "runtime (declared stride/packing vs actual tensor)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 28.64591121673584,
+  "mean_abs": 12.738691315054893,
+  "ref_max_abs": 24.07729721069336,
+  "top1_agree": 0.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 2.86102294921875e-06,
+  "mean_abs": 8.791685104370117e-07,
+  "ref_max_abs": 24.07729721069336,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "layout tag (packed vs strided) at the kernel boundary",
+   "defect": {
+    "flagged": true,
+    "message": "kernel assuming packed Q rows: argument 'q' Layout: expected (Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None),), got Layout(kind='strided', dtype=None, block=None, packing=None, scale_format=None)"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 1.7
+}

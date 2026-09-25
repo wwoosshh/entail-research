@@ -1,0 +1,114 @@
+{
+ "server": "keep",
+ "tag": "on",
+ "env": {},
+ "args": [
+  "--tool-call-parser",
+  "hermes"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='keep', tool_call_format='hermes')",
+ "when": "2026-09-25 07:25:34",
+ "started": true,
+ "start_seconds": 20.0,
+ "requests": {
+  "kept_reasoning": {
+   "what": "pass",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "dropped_reasoning": {
+   "what": "planted",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  }
+ },
+ "stream": {
+  "request": "dropped_reasoning",
+  "status": 200,
+  "comments": [],
+  "data_lines": 4
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.reasoning_history",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.reasoning_history",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "48098 request:vllm.reasoning_history": {
+   "checks": 3,
+   "broken": 2,
+   "refused": 0,
+   "skipped": 1,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "reasoning_history": 1
+   }
+  },
+  "48098 request:vllm.chat_template": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 4
+   }
+  },
+  "48098 request:vllm.request_fields": {
+   "checks": 3,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 3
+   }
+  },
+  "48098 request:vllm.template_settings": {
+   "checks": 3,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 3
+   }
+  },
+  "48193 container:vllm.allocate_slots": {
+   "checks": 8,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 8
+   }
+  }
+ }
+}

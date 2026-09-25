@@ -1,0 +1,66 @@
+W0922 20:32:02.860000 439 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 20:32:02.904000 439 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+attention + mask interface registered
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 20:32:55 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:32:55 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 sdpa: {'first_call_s': 45.558295591000004, 'attention_kernels': ['fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKerne'], 'n_kernel_types': 28}
+USDT:2026-09-22 20:33:39 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:33:39 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 triton_decode: {'first_call_s': 45.288618688, 'attention_kernels': ['_combine_kernel', '_split_kernel'], 'n_kernel_types': 25}
+USDT:2026-09-22 20:34:33 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:34:33 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 flex_declared: {'first_call_s': 59.089084329, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+USDT:2026-09-22 20:34:33 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:34:33 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 flex_slice: {'first_call_s': 0.0692219310000155, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+  B=1 flex_rediscover: {'first_call_s': 0.028746511999997892, 'error': "AcceleratorError: CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"}
+USDT:2026-09-22 20:34:33 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:34:33 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 flex_rediscover_host: {'first_call_s': 0.013361601000013934, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 26}
+USDT:2026-09-22 20:35:23 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:35:23 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 hf_flex: {'first_call_s': 54.092063490000015, 'attention_kernels': ['triton_per_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_per_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t'], 'n_kernel_types': 37}
+  correctness vs sdpa over 6 advancing steps (max|diff|, top1 agree): {'sdpa': (0.0, 1.0), 'triton_decode': (0.25, 1.0), 'flex_declared': (0.25, 1.0), 'flex_slice': (0.25, 1.0), 'flex_rediscover_host': (0.234, 1.0), 'hf_flex': (2.789, 0.6666666865348816)}
+  metadata cost alone: {'declared arithmetic': {'gpu_us_in_graph': 12.22, 'eager_host_ms': 0.2}, 'slice precomputed causal': {'gpu_us_in_graph': 12.335, 'eager_host_ms': 0.17}, 'create_block_mask (rediscover)': {'gpu_us_in_graph': 79.814, 'eager_host_ms': 3.261, 'host_between_replays_ms': 3.726}}
+  B=1 int4 (advancing positions): interleaved 8 rounds x 48 steps, baseline sdpa
+    sdpa             median    9.14 ms (p10 9.04, p90 9.32)
+    triton_decode    median    6.98 ms (p10 6.91, p90 7.17) | vs sdpa: x0.765 [p10 0.751, p90 0.767] faster in 100% of rounds
+    flex_declared    median    7.09 ms (p10 7.00, p90 7.28) | vs sdpa: x0.776 [p10 0.763, p90 0.780] faster in 100% of rounds
+    flex_slice       median    7.09 ms (p10 7.01, p90 7.23) | vs sdpa: x0.778 [p10 0.762, p90 0.780] faster in 100% of rounds
+    flex_rediscover_host median   11.24 ms (p10 10.58, p90 12.58) | vs sdpa: x1.229 [p10 1.182, p90 1.299] faster in 0% of rounds
+    hf_flex          median    7.11 ms (p10 7.00, p90 7.27) | vs sdpa: x0.778 [p10 0.762, p90 0.783] faster in 100% of rounds
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 20:36:51 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:36:51 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 sdpa: {'first_call_s': 68.80319505699998, 'attention_kernels': ['fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKerne'], 'n_kernel_types': 28}
+USDT:2026-09-22 20:37:48 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:37:48 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 triton_decode: {'first_call_s': 61.692650498000035, 'attention_kernels': ['_combine_kernel', '_split_kernel'], 'n_kernel_types': 26}
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_declared: {'first_call_s': 54.60948678799997, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_slice: {'first_call_s': 0.017386543999975856, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_rediscover: {'first_call_s': 0.021047083000041766, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 46}
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:38:41 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_rediscover_host: {'first_call_s': 0.018033963999982916, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 26}
+USDT:2026-09-22 20:39:43 439:439 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:39:43 439:439 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 hf_flex: {'first_call_s': 66.17111341499998, 'attention_kernels': ['triton_poi_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t'], 'n_kernel_types': 37}
+  correctness vs sdpa over 6 advancing steps (max|diff|, top1 agree): {'sdpa': (0.0, 1.0), 'triton_decode': (0.281, 1.0), 'flex_declared': (0.25, 1.0), 'flex_slice': (0.25, 1.0), 'flex_rediscover': (0.344, 0.9791666865348816), 'flex_rediscover_host': (0.344, 0.9791666865348816), 'hf_flex': (11.094, 0.7083333730697632)}
+  metadata cost alone: {'declared arithmetic': {'gpu_us_in_graph': 11.92, 'eager_host_ms': 0.206}, 'slice precomputed causal': {'gpu_us_in_graph': 12.515, 'eager_host_ms': 0.185}, 'create_block_mask (rediscover)': {'gpu_us_in_graph': 86.061, 'eager_host_ms': 3.202, 'host_between_replays_ms': 3.556}}
+  B=8 int4 (advancing positions): interleaved 8 rounds x 48 steps, baseline sdpa
+    sdpa             median   23.19 ms (p10 21.76, p90 23.43)
+    triton_decode    median    9.38 ms (p10 8.75, p90 9.59) | vs sdpa: x0.405 [p10 0.401, p90 0.406] faster in 100% of rounds
+    flex_declared    median    9.17 ms (p10 8.56, p90 9.32) | vs sdpa: x0.396 [p10 0.367, p90 0.400] faster in 100% of rounds
+    flex_slice       median    9.10 ms (p10 8.55, p90 9.31) | vs sdpa: x0.397 [p10 0.369, p90 0.397] faster in 100% of rounds
+    flex_rediscover  median    9.19 ms (p10 8.68, p90 9.50) | vs sdpa: x0.400 [p10 0.383, p90 0.403] faster in 100% of rounds
+    flex_rediscover_host median   13.67 ms (p10 12.53, p90 15.15) | vs sdpa: x0.598 [p10 0.574, p90 0.613] faster in 100% of rounds
+saved <workspace>/phase0/week4/results/e3_rediscovery.json

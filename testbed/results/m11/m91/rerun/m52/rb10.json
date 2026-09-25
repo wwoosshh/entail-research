@@ -1,0 +1,216 @@
+{
+ "torch": "2.14.0+cu130",
+ "compare": "loose",
+ "off": {
+  "defect": {
+   "refused": false,
+   "error": null,
+   "decisions": [],
+   "vs_reference": {
+    "max_abs": 1.3553315103054047,
+    "mean_abs": 0.31341433290253917,
+    "ref_max_abs": 1.0759389400482178,
+    "top1_agree": 0.0,
+    "within": false
+   }
+  },
+  "fixed": {
+   "refused": false,
+   "error": null,
+   "decisions": [],
+   "vs_reference": {
+    "max_abs": 5.960464477539062e-07,
+    "mean_abs": 1.5550858734059148e-07,
+    "ref_max_abs": 1.0759389400482178,
+    "top1_agree": 1.0,
+    "within": true
+   }
+  }
+ },
+ "on_resolve": {
+  "defect": {
+   "refused": false,
+   "error": null,
+   "decisions": [
+    {
+     "verdict": "resolved",
+     "rule": "a reader that reads later was handed a buffer that is written in place",
+     "boundary": "container:transformers.mask_offset",
+     "note": "transformers flex mask: StaticCache.layer 0 length was handed to a reader that reads it later; it is bound to its value now",
+     "resolution": "bind to the value at hand-over (a snapshot)"
+    }
+   ],
+   "vs_reference": {
+    "max_abs": 5.960464477539062e-07,
+    "mean_abs": 1.5550858734059148e-07,
+    "ref_max_abs": 1.0759389400482178,
+    "top1_agree": 1.0,
+    "within": true
+   }
+  },
+  "fixed": {
+   "refused": false,
+   "error": null,
+   "decisions": [],
+   "vs_reference": {
+    "max_abs": 5.960464477539062e-07,
+    "mean_abs": 1.5550858734059148e-07,
+    "ref_max_abs": 1.0759389400482178,
+    "top1_agree": 1.0,
+    "within": true
+   }
+  },
+  "counts": {
+   "container:transformers.mask_offset": {
+    "checks": 0,
+    "broken": 0,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "resolved": 1,
+    "passed": {}
+   },
+   "container:transformers.flex_attention": {
+    "checks": 0,
+    "broken": 0,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "resolved": 0,
+    "passed": {}
+   }
+  }
+ },
+ "on_refuse": {
+  "defect": {
+   "refused": false,
+   "error": null,
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the value reads a buffer that was written after the value was made",
+     "boundary": "container:transformers.flex_attention",
+     "note": "transformers flex attention (layer 0): made from StaticCache.layer 0 length at epoch 0, read at epoch 1: 1 write(s) in between change what it reads, and nothing says so",
+     "resolution": null
+    }
+   ],
+   "vs_reference": {
+    "max_abs": 1.3553315103054047,
+    "mean_abs": 0.31341433290253917,
+    "ref_max_abs": 1.0759389400482178,
+    "top1_agree": 0.0,
+    "within": false
+   }
+  },
+  "fixed": {
+   "refused": false,
+   "error": null,
+   "decisions": [],
+   "vs_reference": {
+    "max_abs": 5.960464477539062e-07,
+    "mean_abs": 1.5550858734059148e-07,
+    "ref_max_abs": 1.0759389400482178,
+    "top1_agree": 1.0,
+    "within": true
+   }
+  },
+  "counts": {
+   "container:transformers.mask_offset": {
+    "checks": 0,
+    "broken": 0,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "resolved": 0,
+    "passed": {}
+   },
+   "container:transformers.flex_attention": {
+    "checks": 2,
+    "broken": 2,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "resolved": 0,
+    "passed": {
+     "epoch_stale": 2
+    }
+   }
+  }
+ },
+ "healthy": {
+  "flex_attention": {
+   "refused": false,
+   "tokens": [
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    1006,
+    1002,
+    1002,
+    1002,
+    1002,
+    1002,
+    1002,
+    1002
+   ],
+   "decisions": [
+    "resolved: a reader that reads later was handed a buffer that is written in place"
+   ]
+  },
+  "sdpa": {
+   "refused": false,
+   "tokens": [
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    1006,
+    1002,
+    1002,
+    1002,
+    1002,
+    1002,
+    1002,
+    1002
+   ],
+   "decisions": []
+  },
+  "static_flex_vs_sdpa": {
+   "max_abs": 2.980232238769531e-07,
+   "mean_abs": 6.408981789718382e-08,
+   "ref_max_abs": 1.048154592514038,
+   "top1_agree": 1.0,
+   "within": true
+  },
+  "same_generate_tokens": true
+ },
+ "healthy_counts": {
+  "container:transformers.mask_offset": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 1,
+   "passed": {}
+  },
+  "container:transformers.flex_attention": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  }
+ }
+}

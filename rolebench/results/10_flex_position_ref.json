@@ -1,0 +1,81 @@
+{
+ "case": "10_flex_position_ref",
+ "meta": {
+  "id": "10",
+  "title": "flex mask reads the position counter after an in-place increment",
+  "fact": "TIME",
+  "issue": "phase0/week4/WEEK4_NOTES.md section 7.2 (latent in normal generate())",
+  "engine": "transformers (installed version)",
+  "kind": "real-engine",
+  "boundary": "StaticCache position counter -> flex attention mask (read time)",
+  "trigger": {
+   "engine": "transformers",
+   "setting": "flex_attention + StaticCache",
+   "state": "stale slot p+1"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "runtime (epoch/read-time contract)",
+  "compare": "loose",
+  "ignore_logs": [
+   "_compile flag on create_block_mask"
+  ]
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [
+    "DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future."
+   ],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [
+    "DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future."
+   ],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 1.3553315103054047,
+  "mean_abs": 0.31341433290253917,
+  "ref_max_abs": 1.0759389400482178,
+  "top1_agree": 0.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 5.960464477539062e-07,
+  "mean_abs": 1.5550858734059148e-07,
+  "ref_max_abs": 1.0759389400482178,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "read-time contract on the mask's query offset (real transformers path)",
+   "defect": {
+    "flagged": true,
+    "message": "flex attention (read-time contract): query offset was 64 when the mask was built but is 65 when attention reads it"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 4.6
+}

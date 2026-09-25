@@ -1,0 +1,1062 @@
+{
+  "env": {
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cudnn": 92400,
+    "device": "NVIDIA GeForce RTX 4070 Ti",
+    "cc": "8.9",
+    "sms": 60,
+    "mem_gib": 12.0,
+    "triton": "3.8.0"
+  },
+  "model_source": "hub-config",
+  "model_id": "Qwen/Qwen3-4B",
+  "params": 4022468096,
+  "int4": "ok (26.4s)",
+  "results": [
+    {
+      "label": "llm_decode_int4/eager/B1",
+      "workload": "llm_decode_int4",
+      "mode": "eager",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 89.68244300000094,
+      "step_ms_median": 36.041670499997736,
+      "step_ms_min": 34.57423600001164,
+      "step_ms_max": 40.059955999993235,
+      "peak_mem_gib": 3.2814884185791016,
+      "kernels": {
+        "kernels_per_step": 2292.0,
+        "kernel_time_ms_per_step": 8.60468025,
+        "gpu_busy_ms_per_step": 8.81215185546875,
+        "span_ms_per_step": 55.791536376953125,
+        "idle_frac_upper_bound": 0.8420521744386134,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 5.710974750000004
+          },
+          "elementwise_reduce": {
+            "count": 1966.0,
+            "ms": 2.570272250000004
+          },
+          "attention": {
+            "count": 72.0,
+            "ms": 0.3224909999999998
+          },
+          "other": {
+            "count": 1.0,
+            "ms": 0.00094225
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 5.710974750000004,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::BinaryFun",
+            "count": 216.0,
+            "ms": 0.3446779999999996,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy_vectorized<at::native::(anonymous namesp",
+            "count": 72.0,
+            "ms": 0.2785410000000002,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float,",
+            "count": 145.0,
+            "ms": 0.2784075,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorB",
+            "count": 147.0,
+            "ms": 0.25329775000000027,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, ",
+            "count": 36.0,
+            "ms": 0.22617999999999985,
+            "cls": "attention"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFun",
+            "count": 145.0,
+            "ms": 0.17502900000000016,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array",
+            "count": 217.0,
+            "ms": 0.15920600000000074,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<at::native::(anonymous namespace)::Opaqu",
+            "count": 72.0,
+            "ms": 0.14844174999999982,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBa",
+            "count": 145.0,
+            "ms": 0.13394675000000097,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::BFloat16>, std::a",
+            "count": 144.0,
+            "ms": 0.1312222500000008,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scal",
+            "count": 145.0,
+            "ms": 0.13013100000000039,
+            "cls": "elementwise_reduce"
+          }
+        ]
+      },
+      "dynamo_stats": {},
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/eager/B4",
+      "workload": "llm_decode_int4",
+      "mode": "eager",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 728.1531389999998,
+      "step_ms_median": 42.73103149999713,
+      "step_ms_min": 41.148083999999585,
+      "step_ms_max": 45.062644999987356,
+      "peak_mem_gib": 3.943574905395508,
+      "kernels": {
+        "kernels_per_step": 2509.0,
+        "kernel_time_ms_per_step": 10.735533,
+        "gpu_busy_ms_per_step": 10.766795654296875,
+        "span_ms_per_step": 55.46048022460938,
+        "idle_frac_upper_bound": 0.8058654448953122,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.327666749999995
+          },
+          "elementwise_reduce": {
+            "count": 2183.0,
+            "ms": 3.6761542499999997
+          },
+          "attention": {
+            "count": 72.0,
+            "ms": 0.7308342499999998
+          },
+          "other": {
+            "count": 1.0,
+            "ms": 0.0008777500000000001
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.327666749999995,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy_vectorized<at::native::(anonymous namesp",
+            "count": 72.0,
+            "ms": 0.8360454999999998,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, ",
+            "count": 36.0,
+            "ms": 0.6409969999999998,
+            "cls": "attention"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::BinaryFun",
+            "count": 289.0,
+            "ms": 0.5054490000000031,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float,",
+            "count": 145.0,
+            "ms": 0.33984349999999963,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_co",
+            "count": 217.0,
+            "ms": 0.33621424999999966,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorB",
+            "count": 147.0,
+            "ms": 0.2708482499999998,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFun",
+            "count": 145.0,
+            "ms": 0.1834622499999999,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<at::native::(anonymous namespace)::Opaqu",
+            "count": 72.0,
+            "ms": 0.17450349999999984,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array",
+            "count": 217.0,
+            "ms": 0.15818850000000034,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBa",
+            "count": 145.0,
+            "ms": 0.1361117499999996,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scal",
+            "count": 145.0,
+            "ms": 0.13206999999999947,
+            "cls": "elementwise_reduce"
+          }
+        ]
+      },
+      "dynamo_stats": {},
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/eager/B8",
+      "workload": "llm_decode_int4",
+      "mode": "eager",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 1393.0731880000026,
+      "step_ms_median": 43.79055449999214,
+      "step_ms_min": 41.95369699999674,
+      "step_ms_max": 49.23151200000575,
+      "peak_mem_gib": 4.826314926147461,
+      "kernels": {
+        "kernels_per_step": 2509.0,
+        "kernel_time_ms_per_step": 13.00172875,
+        "gpu_busy_ms_per_step": 13.03415087890625,
+        "span_ms_per_step": 56.49885473632813,
+        "idle_frac_upper_bound": 0.7693023878141474,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 7.178981000000011
+          },
+          "elementwise_reduce": {
+            "count": 2183.0,
+            "ms": 4.741667749999997
+          },
+          "attention": {
+            "count": 72.0,
+            "ms": 1.0801880000000001
+          },
+          "other": {
+            "count": 1.0,
+            "ms": 0.000892
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 7.178981000000011,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy_vectorized<at::native::(anonymous namesp",
+            "count": 72.0,
+            "ms": 1.7515044999999991,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, ",
+            "count": 36.0,
+            "ms": 0.9852717500000001,
+            "cls": "attention"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::BinaryFun",
+            "count": 289.0,
+            "ms": 0.5269609999999985,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float,",
+            "count": 145.0,
+            "ms": 0.39137749999999916,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_co",
+            "count": 217.0,
+            "ms": 0.3453214999999999,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorB",
+            "count": 147.0,
+            "ms": 0.27534249999999993,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFun",
+            "count": 145.0,
+            "ms": 0.1921187500000001,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<at::native::(anonymous namespace)::Opaqu",
+            "count": 72.0,
+            "ms": 0.17773650000000005,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array",
+            "count": 217.0,
+            "ms": 0.16630000000000017,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::BFloat16>, std::a",
+            "count": 144.0,
+            "ms": 0.1438065000000003,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBa",
+            "count": 145.0,
+            "ms": 0.1398110000000003,
+            "cls": "elementwise_reduce"
+          }
+        ]
+      },
+      "dynamo_stats": {},
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/compile_default/B1",
+      "workload": "llm_decode_int4",
+      "mode": "compile_default",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 47391.334303999996,
+      "step_ms_median": 12.079925499996591,
+      "step_ms_min": 11.688572000011277,
+      "step_ms_max": 24.561697000009985,
+      "peak_mem_gib": 3.3130035400390625,
+      "kernels": {
+        "kernels_per_step": 851.0,
+        "kernel_time_ms_per_step": 8.48756425,
+        "gpu_busy_ms_per_step": 8.488595458984374,
+        "span_ms_per_step": 19.658830322265626,
+        "idle_frac_upper_bound": 0.568204449612133,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.502814249999997
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 1.0810217499999994
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 0.8450014999999994
+          },
+          "elementwise_reduce": {
+            "count": 73.0,
+            "ms": 0.05872674999999997
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.502814249999997,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 1.0810217499999994,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 0.3777939999999994,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06796725000000019,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.05764974999999998,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.04282774999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.042350499999999944,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.036584500000000034,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.03376749999999993,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_16",
+            "count": 17.0,
+            "ms": 0.03269525000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.03141549999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.031212749999999987,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 2961,
+        "unique_graphs": 1
+      },
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/compile_default/B4",
+      "workload": "llm_decode_int4",
+      "mode": "compile_default",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 77507.77565,
+      "step_ms_median": 15.859040000009372,
+      "step_ms_min": 15.591583999992054,
+      "step_ms_max": 17.023892999986856,
+      "peak_mem_gib": 4.126387119293213,
+      "kernels": {
+        "kernels_per_step": 851.0,
+        "kernel_time_ms_per_step": 12.66209125,
+        "gpu_busy_ms_per_step": 12.662948974609375,
+        "span_ms_per_step": 20.46505078125,
+        "idle_frac_upper_bound": 0.3812402856966708,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 7.22391500000001
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 3.0921670000000017
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 2.28795125
+          },
+          "elementwise_reduce": {
+            "count": 73.0,
+            "ms": 0.05805799999999986
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 7.22391500000001,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 3.0921670000000017,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 1.8018237499999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06815649999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.056990499999999854,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.05149224999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.04858299999999996,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.04774149999999996,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.03611825000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.03454125000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.030324999999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_16",
+            "count": 17.0,
+            "ms": 0.030176250000000012,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 5922,
+        "unique_graphs": 2
+      },
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/compile_default/B8",
+      "workload": "llm_decode_int4",
+      "mode": "compile_default",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 25.52447700000471,
+      "step_ms_median": 24.7866130000034,
+      "step_ms_min": 24.39534199999116,
+      "step_ms_max": 25.726514000012912,
+      "peak_mem_gib": 5.329283237457275,
+      "kernels": {
+        "kernels_per_step": 851.0,
+        "kernel_time_ms_per_step": 21.711147,
+        "gpu_busy_ms_per_step": 21.712013427734377,
+        "span_ms_per_step": 23.037817626953125,
+        "idle_frac_upper_bound": 0.05754903614080287,
+        "by_class": {
+          "attention": {
+            "count": 36.0,
+            "ms": 7.786170999999999
+          },
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 7.026018500000001
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 6.840035249999999
+          },
+          "elementwise_reduce": {
+            "count": 73.0,
+            "ms": 0.058922249999999905
+          }
+        },
+        "top": [
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 7.786170999999999,
+            "cls": "attention"
+          },
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 7.026018500000001,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 6.307532499999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.08776525000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06684674999999991,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.05784899999999991,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.05023299999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.049879749999999945,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.03955000000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.034891000000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.030987249999999945,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_16",
+            "count": 17.0,
+            "ms": 0.029634,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 5922,
+        "unique_graphs": 2
+      },
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/compile_graphs/B1",
+      "workload": "llm_decode_int4",
+      "mode": "compile_graphs",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 40126.810347000006,
+      "step_ms_median": 10.307115499998076,
+      "step_ms_min": 9.703545000007807,
+      "step_ms_max": 11.937507999988384,
+      "peak_mem_gib": 3.673616886138916,
+      "kernels": {
+        "kernels_per_step": 852.0,
+        "kernel_time_ms_per_step": 8.270134749999999,
+        "gpu_busy_ms_per_step": 8.271145751953124,
+        "span_ms_per_step": 8.4720234375,
+        "idle_frac_upper_bound": 0.02371070937525066,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.377938499999997
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 1.0700580000000004
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 0.7673547499999994
+          },
+          "elementwise_reduce": {
+            "count": 74.0,
+            "ms": 0.05478350000000015
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.377938499999997,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 1.0700580000000004,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 0.3512867499999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06169649999999989,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.051970250000000155,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.03972349999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.03943124999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.03114724999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.031025249999999956,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.028668499999999975,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.027695749999999988,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_16",
+            "count": 17.0,
+            "ms": 0.026906750000000004,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 8883,
+        "unique_graphs": 3
+      },
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/compile_graphs/B4",
+      "workload": "llm_decode_int4",
+      "mode": "compile_graphs",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 63336.765764,
+      "step_ms_median": 15.425659500010624,
+      "step_ms_min": 15.039233999971202,
+      "step_ms_max": 16.30485499998713,
+      "peak_mem_gib": 4.129072666168213,
+      "kernels": {
+        "kernels_per_step": 852.0,
+        "kernel_time_ms_per_step": 13.118716000000001,
+        "gpu_busy_ms_per_step": 13.111959716796875,
+        "span_ms_per_step": 13.307657470703125,
+        "idle_frac_upper_bound": 0.01470565006178437,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 7.442701000000011
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 3.3109585
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 2.275288
+          },
+          "elementwise_reduce": {
+            "count": 74.0,
+            "ms": 0.08976850000000007
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 7.442701000000011,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 3.3109585,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 1.8026537500000008,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.08714075000000009,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06326649999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.052728749999999984,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.050802999999999945,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.045867750000000006,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.03563800000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.03231724999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.03166499999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.02770674999999999,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 11844,
+        "unique_graphs": 4
+      },
+      "status": "ok"
+    },
+    {
+      "label": "llm_decode_int4/compile_graphs/B8",
+      "workload": "llm_decode_int4",
+      "mode": "compile_graphs",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "int4wo+bf16",
+      "first_call_ms": 29.371242000024722,
+      "step_ms_median": 24.539916500003756,
+      "step_ms_min": 24.041908000015155,
+      "step_ms_max": 25.451037999971504,
+      "peak_mem_gib": 5.333433628082275,
+      "kernels": {
+        "kernels_per_step": 852.0,
+        "kernel_time_ms_per_step": 22.177653,
+        "gpu_busy_ms_per_step": 22.126765869140623,
+        "span_ms_per_step": 22.281884521484375,
+        "idle_frac_upper_bound": 0.006961648696912626,
+        "by_class": {
+          "attention": {
+            "count": 36.0,
+            "ms": 8.111192750000004
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 7.129759750000003
+          },
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.855108749999998
+          },
+          "elementwise_reduce": {
+            "count": 74.0,
+            "ms": 0.08159174999999987
+          }
+        },
+        "top": [
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 8.111192750000004,
+            "cls": "attention"
+          },
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.855108749999998,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 6.614894000000004,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.08602649999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.07897674999999987,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06341050000000012,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.050332749999999975,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.04662649999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.040784249999999966,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.032594,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.03219549999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.028080500000000005,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 11844,
+        "unique_graphs": 4
+      },
+      "status": "ok"
+    }
+  ]
+}

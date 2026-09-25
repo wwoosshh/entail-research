@@ -1,0 +1,76 @@
+{
+ "model": "Qwen3-4B bf16, attn_implementation=eager",
+ "new_tokens": 64,
+ "reps": 5,
+ "torch": "2.14.0+cu130",
+ "transformers": "5.17.0",
+ "seconds": {
+  "off": [
+   2.197,
+   2.131,
+   2.186,
+   2.139,
+   2.184
+  ],
+  "intercept": [
+   3.934,
+   3.826,
+   3.934,
+   4.291,
+   3.898
+  ],
+  "intercept_functions": [
+   2.738,
+   2.743,
+   2.752,
+   2.919,
+   2.715
+  ],
+  "propagate_aten": [
+   4.52,
+   4.271,
+   4.845,
+   4.87,
+   4.808
+  ],
+  "propagate_untagged": [
+   2.776,
+   2.721,
+   2.761,
+   2.814,
+   2.707
+  ],
+  "propagate": [
+   2.983,
+   3.062,
+   3.042,
+   3.16,
+   3.078
+  ]
+ },
+ "median_x_off": {
+  "off": 1.0,
+  "intercept": 1.801,
+  "intercept_functions": 1.256,
+  "propagate_aten": 2.202,
+  "propagate_untagged": 1.264,
+  "propagate": 1.402
+ },
+ "ops_counted_by_propagation": {
+  "off": 0,
+  "intercept": 0,
+  "intercept_functions": 0,
+  "propagate_aten": 273413,
+  "propagate_untagged": 0,
+  "propagate": 231747
+ },
+ "function_calls_per_run": 231747,
+ "same_tokens_as_off": {
+  "off": true,
+  "intercept": true,
+  "intercept_functions": true,
+  "propagate_aten": true,
+  "propagate_untagged": true,
+  "propagate": true
+ }
+}

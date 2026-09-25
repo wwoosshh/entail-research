@@ -1,0 +1,16 @@
+RESULT attn_logit_softcapping triton void differs=None 43.5s the control run did not reproduce
+RESULT attn_logit_softcapping flashinfer dropped differs=0 66.8s 
+RESULT attn_logit_softcapping torch_native dropped differs=0 38.0s 
+RESULT attn_logit_softcapping flex_attention dropped differs=0 51.8s 
+RESULT final_logit_softcapping triton void differs=None 32.6s the control run did not reproduce
+RESULT final_logit_softcapping flashinfer void differs=None 29.7s the control run did not reproduce
+RESULT final_logit_softcapping torch_native honoured differs=6 34.4s 
+RESULT final_logit_softcapping flex_attention honoured differs=6 42.0s 
+RESULT sliding_window triton honoured differs=5 31.7s 
+RESULT sliding_window flashinfer honoured differs=5 30.9s 
+RESULT sliding_window torch_native honoured differs=5 36.7s 
+RESULT sliding_window flex_attention dropped differs=0 40.8s 
+RESULT rope_theta triton honoured differs=5 30.3s 
+RESULT rope_theta flashinfer honoured differs=5 31.2s 
+RESULT rope_theta torch_native honoured differs=5 37.8s 
+RESULT rope_theta flex_attention honoured differs=5 45.0s 

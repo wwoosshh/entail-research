@@ -1,0 +1,7 @@
+[entail] broken at load:transformers.config.rope_scaling: Rotary declared Rotary(rope_type='yarn', theta=1000000, factor=4.0, original_max_position=32768) (user: Qwen3Config.rope_scaling written after the config was built, read as config.json reads it, declared); transformers.rotary_embedding uses Rotary(rope_type='yarn', theta=None, factor=4.0, original_max_position=32768) (engine: Qwen3Config.rope_parameters after the write as transformers performs it, verified); rule: the consumer differs from the declaration and the policy repairs nothing; reported, not stopped
+[entail] where: meaning broke at load:transformers.config.rope_scaling
+[entail]   suspect: meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing
+
+--- stderr ---
+W0924 14:58:04.654000 604 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 14:58:04.676000 604 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.

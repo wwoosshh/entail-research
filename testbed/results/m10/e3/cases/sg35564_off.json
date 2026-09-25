@@ -1,0 +1,138 @@
+{
+ "entail": "off",
+ "parsers": {
+  "cohere_command4": {
+   "same": false,
+   "final": {
+    "0": [
+     "f",
+     "{}"
+    ]
+   },
+   "streamed": {
+    "1": [
+     "f",
+     "{}"
+    ]
+   }
+  },
+  "gemma4": {
+   "same": false,
+   "final": {
+    "0": [
+     "f",
+     "{}"
+    ]
+   },
+   "streamed": {
+    "1": [
+     "f",
+     "{}"
+    ]
+   }
+  },
+  "glm": {
+   "same": false,
+   "final": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": 123}"
+    ]
+   },
+   "streamed": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": \"123\"}"
+    ]
+   }
+  },
+  "glm45": {
+   "same": false,
+   "final": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": 123}"
+    ]
+   },
+   "streamed": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": \"123\"}"
+    ]
+   }
+  },
+  "glm47": {
+   "same": true,
+   "final": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": 123}"
+    ]
+   },
+   "streamed": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": 123}"
+    ]
+   }
+  },
+  "minimax-m2": {
+   "same": false,
+   "final": {
+    "0": [
+     "get_weather",
+     "{}"
+    ]
+   },
+   "streamed": {}
+  },
+  "mistral": {
+   "same": false,
+   "final": {
+    "0": [
+     "get_weather",
+     "{}"
+    ],
+    "1": [
+     "get_weather",
+     "{}"
+    ]
+   },
+   "streamed": {
+    "0": [
+     "get_weather",
+     "{}"
+    ]
+   }
+  },
+  "step3": {
+   "same": false,
+   "final": {
+    "0": [
+     "get_weather",
+     "{\"get_weather\": \"hello\"}"
+    ]
+   },
+   "streamed": {
+    "0": [
+     "get_weather",
+     ""
+    ],
+    "1": [
+     "get_weather",
+     "{\"get_weather\": \"hello\"}"
+    ]
+   }
+  }
+ },
+ "parsers_that_differ": [
+  "cohere_command4",
+  "gemma4",
+  "glm",
+  "glm45",
+  "minimax-m2",
+  "mistral",
+  "step3"
+ ],
+ "reproduced": true
+}

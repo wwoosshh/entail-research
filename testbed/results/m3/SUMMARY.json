@@ -1,0 +1,961 @@
+{
+ "S3_S4": [
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 5.056,
+   "load_s_on": 1.672,
+   "entail_ms": 16.5,
+   "processes": 1,
+   "same_output": true,
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "verdicts": {
+    "pass": 4,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.0099
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 14.149,
+   "load_s_on": 14.98,
+   "entail_ms": 34.7,
+   "processes": 2,
+   "same_output": true,
+   "backend_off": "default",
+   "backend_on": "default",
+   "verdicts": {
+    "pass": 7,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.0023
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 13.736,
+   "load_s_on": 12.797,
+   "entail_ms": 37.0,
+   "processes": 3,
+   "same_output": true,
+   "backend_off": "default",
+   "backend_on": "default",
+   "verdicts": {
+    "pass": 8,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.0029
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 4.215,
+   "load_s_on": 1.726,
+   "entail_ms": 20.3,
+   "processes": 1,
+   "same_output": true,
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "verdicts": {
+    "pass": 4,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.0118
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 13.952,
+   "load_s_on": 15.1,
+   "entail_ms": 31.1,
+   "processes": 2,
+   "same_output": true,
+   "backend_off": "default",
+   "backend_on": "default",
+   "verdicts": {
+    "pass": 7,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.0021
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 14.145,
+   "load_s_on": 15.516,
+   "entail_ms": 57.0,
+   "processes": 3,
+   "same_output": true,
+   "backend_off": "default",
+   "backend_on": "default",
+   "verdicts": {
+    "pass": 12,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.0037
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 3.507,
+   "load_s_on": 2.753,
+   "entail_ms": 28.4,
+   "processes": 1,
+   "same_output": true,
+   "backend_off": "sdpa",
+   "backend_on": "eager",
+   "verdicts": {
+    "pass": 5,
+    "resolved": 1,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [
+    [
+     "transformers.attention.sdpa",
+     "eager"
+    ]
+   ],
+   "unknown": [],
+   "entail_share_of_load": 0.0103
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 15.636,
+   "load_s_on": 17.297,
+   "entail_ms": 33.8,
+   "processes": 2,
+   "same_output": true,
+   "backend_off": "default",
+   "backend_on": "default",
+   "verdicts": {
+    "pass": 8,
+    "resolved": 0,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [],
+   "unknown": [],
+   "entail_share_of_load": 0.002
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "load_s_off": 13.382,
+   "load_s_on": 14.474,
+   "entail_ms": 38.7,
+   "processes": 3,
+   "same_output": false,
+   "backend_off": "default",
+   "backend_on": "default",
+   "verdicts": {
+    "pass": 8,
+    "resolved": 1,
+    "refused": 0,
+    "unknown": 0
+   },
+   "resolved": [
+    [
+     "sglang.attention.flashinfer",
+     "triton"
+    ]
+   ],
+   "unknown": [],
+   "entail_share_of_load": 0.0027
+  }
+ ],
+ "S1": [
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:transformers.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "fact": "Rotary",
+   "boundary": "load:transformers.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:vllm.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "fact": "Rotary",
+   "boundary": "load:vllm.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:sglang.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "fact": "Rotary",
+   "boundary": "load:sglang.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:transformers.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "fact": "Rotary",
+   "boundary": "load:transformers.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:vllm.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "fact": "Rotary",
+   "boundary": "load:vllm.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:sglang.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "fact": "Rotary",
+   "boundary": "load:sglang.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "fact": "ModelProps (attention)",
+   "boundary": "load:transformers.attention",
+   "state": "reached",
+   "verdicts": [
+    "resolved",
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:transformers.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "fact": "Rotary",
+   "boundary": "load:transformers.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "fact": "ModelProps (attention)",
+   "boundary": "load:vllm.attention",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:vllm.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "fact": "Rotary",
+   "boundary": "load:vllm.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "fact": "Coverage (config keys)",
+   "boundary": "load:transformers.config",
+   "state": "reached",
+   "verdicts": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "fact": "ModelProps (attention)",
+   "boundary": "load:sglang.attention",
+   "state": "reached",
+   "verdicts": [
+    "resolved"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "fact": "ModelProps (tie)",
+   "boundary": "load:sglang.loader",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "fact": "Rotary",
+   "boundary": "load:sglang.config.rope_parameters",
+   "state": "reached",
+   "verdicts": [
+    "pass"
+   ]
+  }
+ ],
+ "S2": {
+  "rb-08": {
+   "kind": "real engine (transformers, tiny Gemma 2)",
+   "default_off": "sdpa",
+   "default_on": "eager",
+   "used_with_entail": "eager",
+   "asked_sdpa_later_used": "eager",
+   "defect_off_right": false,
+   "defect_on_right": true,
+   "max_abs_off": 1.7681557866816113,
+   "max_abs_on": 2.8129302609425366e-06,
+   "decisions": [
+    [
+     "load:transformers.attention",
+     "transformers.attention.sdpa",
+     "resolved",
+     "the consumer differs from the declaration; a registered resolution repairs it",
+     "eager"
+    ],
+    [
+     "load:transformers.attention",
+     "transformers.attention.eager",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.loader",
+     "transformers.loader",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.config.rope_parameters",
+     "transformers.rotary_embedding",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.attention",
+     "transformers.attention.sdpa",
+     "resolved",
+     "the consumer differs from the declaration; a registered resolution repairs it",
+     "eager"
+    ],
+    [
+     "load:transformers.attention",
+     "transformers.attention.eager",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.loader",
+     "transformers.loader",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.config.rope_parameters",
+     "transformers.rotary_embedding",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ]
+   ],
+   "lines": [
+    "[entail] resolved at load:transformers.attention: ModelProps declared ModelProps(softcap=5.0, sliding_window=256, tie_word_embeddings=None) (config: Gemma2Config held by the engine#attn_logit_softcapping,sliding_window,tie_word_embeddings, declared); transformers.attention.sdpa uses ModelProps(softcap=None, sliding_window=256, tie_word_embeddings=None) (engine: transformers.attention.sdpa [softcap: drops (measured); sliding_window: honours (measured)], verified); rule: the consumer differs from the declaration; a registered resolution repairs it; changed: route to a backend measured to honour it (to eager)",
+    "[entail] resolved at load:transformers.attention: ModelProps declared ModelProps(softcap=5.0, sliding_window=256, tie_word_embeddings=None) (config: Gemma2Config held by the engine#attn_logit_softcapping,sliding_window,tie_word_embeddings, declared); transformers.attention.sdpa uses ModelProps(softcap=None, sliding_window=256, tie_word_embeddings=None) (engine: transformers.attention.sdpa [softcap: drops (measured); sliding_window: honours (measured)], verified); rule: the consumer differs from the declaration; a registered resolution repairs it; changed: route to a backend measured to honour it (to eager)"
+   ],
+   "seconds": 6.8
+  },
+  "rb-15": {
+   "kind": "real engine (transformers)",
+   "defect": {
+    "static": [
+     [
+      "load:transformers.loader",
+      "pass",
+      "the consumer uses the declared value"
+     ],
+     [
+      "load:transformers.config",
+      "refused",
+      "the consumer differs from the declaration and no resolution is registered"
+     ]
+    ],
+    "runtime_stopped": "[entail] refused at load:transformers.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=27, taken=26, left=('rope_scale',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here",
+    "output_right": null,
+    "decisions": [
+     [
+      "load:transformers.config",
+      "transformers.config",
+      "refused",
+      "the consumer differs from the declaration and no resolution is registered",
+      null
+     ]
+    ]
+   },
+   "fixed": {
+    "static": [
+     [
+      "load:transformers.loader",
+      "pass",
+      "the consumer uses the declared value"
+     ],
+     [
+      "load:transformers.config",
+      "pass",
+      "the consumer uses the declared value"
+     ]
+    ],
+    "runtime_stopped": null,
+    "output_right": true,
+    "decisions": [
+     [
+      "load:transformers.config",
+      "transformers.config",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ],
+     [
+      "load:transformers.loader",
+      "transformers.loader",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ],
+     [
+      "load:transformers.config.rope_parameters",
+      "transformers.rotary_embedding",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ]
+    ]
+   },
+   "seconds": 0.1
+  },
+  "rb-07": {
+   "kind": "real engine (transformers), checkpoint written from the case's tensors",
+   "defect": {
+    "static": [
+     [
+      "load:transformers.loader",
+      "refused",
+      "the declaration contradicts the data"
+     ],
+     [
+      "load:transformers.config",
+      "pass",
+      "the consumer uses the declared value"
+     ]
+    ],
+    "runtime_stopped": "[entail] refused at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /tmp/m35_rb07_ti7gox7f/config.json#tie_word_embeddings, declared); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (engine: transformers.loader ties the head to the embedding exactly when the config it holds says tie_word_embeddings, verified); rule: the declaration contradicts the data; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (data: /tmp/m35_rb07_ti7gox",
+    "decisions": [
+     [
+      "load:transformers.config",
+      "transformers.config",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ],
+     [
+      "load:transformers.loader",
+      "transformers.loader",
+      "refused",
+      "the declaration contradicts the data",
+      null
+     ],
+     [
+      "load:transformers.config.rope_parameters",
+      "transformers.rotary_embedding",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ]
+    ]
+   },
+   "fixed": {
+    "static": [
+     [
+      "load:transformers.loader",
+      "pass",
+      "the consumer uses the declared value"
+     ],
+     [
+      "load:transformers.config",
+      "pass",
+      "the consumer uses the declared value"
+     ]
+    ],
+    "runtime_stopped": null,
+    "decisions": [
+     [
+      "load:transformers.config",
+      "transformers.config",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ],
+     [
+      "load:transformers.loader",
+      "transformers.loader",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ],
+     [
+      "load:transformers.config.rope_parameters",
+      "transformers.rotary_embedding",
+      "pass",
+      "the consumer uses the declared value",
+      null
+     ]
+    ]
+   },
+   "seconds": 0.1
+  },
+  "rb-02": {
+   "kind": "mechanism (the case's kernel, declared in a test table)",
+   "defect": {
+    "observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32')",
+    "decisions": [
+     [
+      "load:rb02.linear",
+      "refused",
+      "the consumer differs from the declaration and no resolution is registered"
+     ]
+    ]
+   },
+   "fixed": {
+    "observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='ue8m0')",
+    "decisions": [
+     [
+      "load:rb02.linear",
+      "pass",
+      "the consumer uses the declared value"
+     ]
+    ]
+   },
+   "seconds": 0.0
+  },
+  "rb-06": {
+   "kind": "mechanism (the case's kernel, declared in a test table)",
+   "decisions": [
+    [
+     "load:rb06.attention",
+     "resolved",
+     "the consumer differs from the declaration; a registered resolution repairs it",
+     "window_in_mask"
+    ]
+   ],
+   "defect_right": false,
+   "routed_right": true,
+   "seconds": 8.5
+  },
+  "fd_softcap_sglang_torch_native": {
+   "ok": true,
+   "backend_used": "torch_native",
+   "error": "",
+   "decisions": [
+    [
+     "load:sglang.attention",
+     "sglang.attention.torch_native",
+     "resolved",
+     "triton"
+    ]
+   ]
+  },
+  "fd_softcap_sglang_flex_attention": {
+   "ok": true,
+   "backend_used": "flex_attention",
+   "error": "",
+   "decisions": [
+    [
+     "load:sglang.attention",
+     "sglang.attention.flex_attention",
+     "resolved",
+     "triton"
+    ]
+   ]
+  },
+  "fd_softcap_transformers_paged": {
+   "ok": false,
+   "backend_used": null,
+   "error": "RoleError: [entail] refused at load:transformers.paged_attention: ModelProps declared ModelProps(softcap=50.0, sliding_window=4096, tie_word_embeddings=None) (config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, declared); transformers.paged_attention.eager uses ModelProps(softcap=None, sliding_window=4096, tie_word_embeddings=None) (engine: transformers.page",
+   "decisions": [
+    [
+     "load:transformers.attention",
+     "transformers.attention.sdpa",
+     "resolved",
+     "eager"
+    ],
+    [
+     "load:transformers.paged_attention",
+     "transformers.paged_attention.eager",
+     "refused",
+     null
+    ]
+   ]
+  },
+  "fd_shift": {
+   "ok": false,
+   "backend_used": null,
+   "error": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "decisions": [
+    [
+     "load:vllm.weights",
+     "vllm.loader",
+     "refused",
+     null
+    ],
+    [
+     "load:vllm.weights",
+     "vllm.loader",
+     "unknown",
+     null
+    ]
+   ]
+  },
+  "fd_rope": {
+   "LC_entail_v2_gsm8k": "380/500",
+   "LC_entail_v2_rope_in_engine": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3",
+    "rope_theta": 500000.0
+   },
+   "LA_m35_gsm8k": "380/500",
+   "earlier": "LA 379/500, LC 279/500, LC_rolecheck 378/500 (issue_track/rope_override/SUMMARY.json)",
+   "decisions": [
+    [
+     "load:transformers.config.rope_scaling",
+     "resolved",
+     "the consumer differs from the declaration; a registered resolution repairs it",
+     "user"
+    ],
+    [
+     "load:vllm.config.rope_parameters",
+     "pass",
+     "the consumer uses the declared value",
+     "config"
+    ]
+   ]
+  },
+  "rb-17": {
+   "defect_vs_triton": {
+    "mean_abs": 0.7156812169175122,
+    "max_abs": 5.974820613861084,
+    "n": 255
+   },
+   "entail_torch_native_vs_triton": {
+    "mean_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 255
+   },
+   "decisions": [
+    [
+     "load:transformers.config",
+     "pass",
+     null
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     null
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     null
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     null
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     null
+    ],
+    [
+     "load:sglang.loader",
+     "pass",
+     null
+    ],
+    [
+     "load:sglang.config.rope_parameters",
+     "pass",
+     null
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     null
+    ],
+    [
+     "load:sglang.attention",
+     "resolved",
+     "triton"
+    ]
+   ]
+  }
+ }
+}

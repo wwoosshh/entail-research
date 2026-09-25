@@ -1,0 +1,142 @@
+{
+ "tag": "vae_on",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "policy": "resolve",
+ "load_seconds": 19.22,
+ "vae_scaling_factor_as_loaded": 0.18215,
+ "vae_scaling_factor": 0.13025,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "epsilon",
+  "rescale_betas_zero_snr": false
+ },
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 11.9,
+   "image": "/home/<user>/m63_out/vae_on_seed11.png",
+   "stats": {
+    "mean": 168.66,
+    "std": 58.2,
+    "saturation": 51.32
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 9.87,
+   "image": "/home/<user>/m63_out/vae_on_seed22.png",
+   "stats": {
+    "mean": 161.07,
+    "std": 60.71,
+    "saturation": 54.06
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 13.47,
+   "image": "/home/<user>/m63_out/vae_on_seed33.png",
+   "stats": {
+    "mean": 163.07,
+    "std": 63.81,
+    "saturation": 52.65
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 9.843
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 7.164
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.853
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.183
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.107
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.148
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "LatentScale(scale=0.13025, shift=None)",
+   "declared_from": "<workspace>/testbed/results/m63/manifests/a5f58eb1c33616c4f06bca55af39876a7b817913cd829caa8acb111b770c85cc.json#LatentScale",
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 17904.911
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "apply the declared latent scale at the encoder and decoder (to LatentScale(scale=0.13025, shift=None))",
+   "target": "LatentScale(scale=0.13025, shift=None)",
+   "note": "",
+   "declared": "LatentScale(scale=0.13025, shift=None)",
+   "declared_from": "<workspace>/testbed/results/m63/manifests/a5f58eb1c33616c4f06bca55af39876a7b817913cd829caa8acb111b770c85cc.json#LatentScale",
+   "chosen": "LatentScale(scale=0.18215, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.latent_scale",
+   "ms": 0.397
+  }
+ ],
+ "when": "2026-09-24 09:54:29"
+}

@@ -1,0 +1,49 @@
+W0922 19:44:44.415000 5988 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 19:44:44.443000 5988 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+attention + mask interface registered
+  B=1 eager vs eager default (max abs logit diff): {'default': 0.0, 'tri_attn': 0.125, 'bi': 0.09765625}
+USDT:2026-09-22 19:44:53 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:44:53 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    default: {'compile_s': 5.4034, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.02, 'max_abs_diff_vs_eager_default': 0.125, 'logit_scale': 14.0625, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:44:57 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:44:57 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    tri_attn: {'compile_s': 4.2387, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.014, 'max_abs_diff_vs_eager_default': 0.1562, 'logit_scale': 14.0625, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:45:15 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:45:15 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    bi: {'compile_s': 17.4037, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0182, 'max_abs_diff_vs_eager_default': 0.1562, 'logit_scale': 14.0625, 'n_kernel_types': 16, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=1 bf16: interleaved 24 rounds x 12 steps, baseline default
+    default          median   23.27 ms (p10 19.86, p90 23.97)
+    tri_attn         median   22.00 ms (p10 18.90, p90 22.90) | vs default: x0.947 [p10 0.931, p90 0.967] faster in 96% of rounds
+    bi               median   22.73 ms (p10 19.40, p90 23.49) | vs default: x0.978 [p10 0.942, p90 0.995] faster in 92% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=4 eager vs eager default (max abs logit diff): {'default': 0.0, 'tri_attn': 0.158203125, 'bi': 0.1875}
+USDT:2026-09-22 19:45:42 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:45:42 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    default: {'compile_s': 4.2032, 'max_abs_diff_vs_eager_same_variant': 0.1875, 'mean_abs_diff_vs_eager_same_variant': 0.0249, 'max_abs_diff_vs_eager_default': 0.1875, 'logit_scale': 15.625, 'n_kernel_types': 22, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:45:47 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:45:47 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    tri_attn: {'compile_s': 4.8159, 'max_abs_diff_vs_eager_same_variant': 0.1406, 'mean_abs_diff_vs_eager_same_variant': 0.0138, 'max_abs_diff_vs_eager_default': 0.1289, 'logit_scale': 15.625, 'n_kernel_types': 20, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:46:06 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:46:06 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    bi: {'compile_s': 18.4803, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.0144, 'max_abs_diff_vs_eager_default': 0.1602, 'logit_scale': 15.625, 'n_kernel_types': 15, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=4 bf16: interleaved 24 rounds x 12 steps, baseline default
+    default          median   29.78 ms (p10 25.93, p90 31.20)
+    tri_attn         median   23.69 ms (p10 20.17, p90 24.21) | vs default: x0.791 [p10 0.681, p90 0.881] faster in 100% of rounds
+    bi               median   23.60 ms (p10 20.07, p90 24.19) | vs default: x0.789 [p10 0.740, p90 0.810] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=8 eager vs eager default (max abs logit diff): {'default': 0.0, 'tri_attn': 0.1875, 'bi': 0.1875}
+USDT:2026-09-22 19:46:36 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:46:36 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    default: {'compile_s': 4.4269, 'max_abs_diff_vs_eager_same_variant': 0.3125, 'mean_abs_diff_vs_eager_same_variant': 0.0226, 'max_abs_diff_vs_eager_default': 0.3125, 'logit_scale': 17.625, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:46:42 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:46:42 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    tri_attn: {'compile_s': 5.1025, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.0224, 'max_abs_diff_vs_eager_default': 0.25, 'logit_scale': 17.625, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:47:00 5988:5988 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:47:00 5988:5988 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    bi: {'compile_s': 18.3579, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.0176, 'max_abs_diff_vs_eager_default': 0.1875, 'logit_scale': 17.625, 'n_kernel_types': 15, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=8 bf16: interleaved 24 rounds x 12 steps, baseline default
+    default          median   39.21 ms (p10 33.88, p90 40.11)
+    tri_attn         median   24.60 ms (p10 21.09, p90 24.95) | vs default: x0.628 [p10 0.573, p90 0.688] faster in 100% of rounds
+    bi               median   24.74 ms (p10 21.10, p90 25.10) | vs default: x0.630 [p10 0.604, p90 0.691] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+saved <workspace>/phase0/week3/results/bi_speed_v2.json

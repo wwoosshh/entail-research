@@ -1,0 +1,156 @@
+{
+ "healthy_none": {
+  "quant": "none",
+  "seed": "-",
+  "entail": "load",
+  "false_declaration": "refuse",
+  "text": "Paris. The capital of Germany is Berlin",
+  "stopped": false,
+  "seed_changed": 0,
+  "decisions": {
+   "Coverage pass": 1,
+   "Layout pass": 1
+  },
+  "weights": {
+   "Coverage pass": 144,
+   "Layout pass": 144
+  },
+  "ms_before_and_after": [
+   99.9,
+   46.752
+  ],
+  "notes": []
+ },
+ "healthy_fp8": {
+  "quant": "fp8",
+  "seed": "-",
+  "entail": "load",
+  "false_declaration": "refuse",
+  "text": "Paris. The capital of Germany is Berlin",
+  "stopped": false,
+  "seed_changed": 0,
+  "decisions": {
+   "Coverage pass": 1,
+   "Layout pass": 1
+  },
+  "weights": {
+   "Coverage pass": 144,
+   "Layout pass": 144
+  },
+  "ms_before_and_after": [
+   58.873,
+   30.821
+  ],
+  "notes": []
+ },
+ "roll_on": {
+  "quant": "none",
+  "seed": "roll_output",
+  "entail": "load",
+  "false_declaration": "refuse",
+  "text": null,
+  "stopped": true,
+  "seed_changed": 144,
+  "decisions": {
+   "Coverage refused": 1,
+   "Layout pass": 1
+  },
+  "weights": {
+   "Coverage refused": 144,
+   "Layout pass": 144
+  },
+  "ms_before_and_after": [
+   71.47,
+   121.07
+  ],
+  "notes": [
+   "Coverage refused: 144 weight(s): model.layers.0.self_attn.qkv_proj: 16 of 16 sampled values moved (first: flat index 0: -0.000217438 -> -0.00350952); model.layers.0.self_attn.o_p"
+  ]
+ },
+ "roll_off": {
+  "quant": "none",
+  "seed": "roll_output",
+  "entail": "off",
+  "false_declaration": "refuse",
+  "text": "ホール絜andering(sec coron uczCARD目に",
+  "stopped": false,
+  "seed_changed": 144,
+  "decisions": {},
+  "weights": {},
+  "ms_before_and_after": [],
+  "notes": []
+ },
+ "transpose_on": {
+  "quant": "none",
+  "seed": "transpose_all",
+  "entail": "load",
+  "false_declaration": "refuse",
+  "text": null,
+  "stopped": true,
+  "seed_changed": 144,
+  "decisions": {
+   "Coverage refused": 1,
+   "Layout refused": 1
+  },
+  "weights": {
+   "Coverage refused": 144,
+   "Layout refused": 144
+  },
+  "ms_before_and_after": [
+   75.276,
+   16.754
+  ],
+  "notes": [
+   "Layout refused: 144 weight(s): model.layers.0.self_attn.qkv_proj: orientation out_in -> in_out; model.layers.0.self_attn.o_proj: orientation out_in -> in_out; model.layers.0.ml",
+   "Coverage refused: 144 weight(s): model.layers.0.self_attn.qkv_proj: 16 of 16 sampled values moved (first: it went from (6144, 2560) bfloat16 to (2560, 6144) bfloat16); model.laye"
+  ]
+ },
+ "strided_on": {
+  "quant": "none",
+  "seed": "strided_weights",
+  "entail": "load",
+  "false_declaration": "refuse",
+  "text": null,
+  "stopped": true,
+  "seed_changed": 144,
+  "decisions": {
+   "Coverage pass": 1,
+   "Layout refused": 1
+  },
+  "weights": {
+   "Coverage pass": 144,
+   "Layout refused": 144
+  },
+  "ms_before_and_after": [
+   55.017,
+   112.198
+  ],
+  "notes": [
+   "Layout refused: 144 weight(s): model.layers.0.self_attn.qkv_proj: kind dense -> strided; model.layers.0.self_attn.o_proj: kind dense -> strided; model.layers.0.mlp.gate_up_proj"
+  ]
+ },
+ "strided_usedata": {
+  "quant": "none",
+  "seed": "strided_weights",
+  "entail": "load",
+  "false_declaration": "use_data",
+  "text": "Paris. The capital of Germany is Berlin",
+  "stopped": false,
+  "seed_changed": 144,
+  "decisions": {
+   "Coverage pass": 1,
+   "Layout resolved": 1
+  },
+  "weights": {
+   "Coverage pass": 144,
+   "Layout resolved": 144
+  },
+  "ms_before_and_after": [
+   70.8,
+   116.703
+  ],
+  "notes": [
+   "Layout resolved: 144 weight(s): model.layers.0.self_attn.qkv_proj: kind dense -> strided; model.layers.0.self_attn.o_proj: kind dense -> strided; model.layers.0.mlp.gate_up_proj"
+  ]
+ }
+}

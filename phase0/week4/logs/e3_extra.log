@@ -1,0 +1,63 @@
+W0922 21:05:50.573000 6255 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 21:05:50.609000 6255 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+attention + mask interface registered
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 21:06:00 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:00 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 sdpa: {'first_call_s': 5.793291646999933, 'attention_kernels': ['fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKerne'], 'n_kernel_types': 28}
+USDT:2026-09-22 21:06:06 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:06 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 flex_declared: {'first_call_s': 8.409568661999856, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+  B=1 flex_rediscover: {'first_call_s': 0.01791763000028368, 'error': "AcceleratorError: CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\n"}
+USDT:2026-09-22 21:06:06 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:06 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 flex_rediscover_host: {'first_call_s': 0.01152511999998751, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 26}
+<workspace>/phase0/week4/e3_rediscovery.py:144: DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future.
+  copy_bm(bm0, create_block_mask(valid_len_mask, B=B, H=None, Q_LEN=1, KV_LEN=max_len, device="cuda",
+<workspace>/phase0/week4/e3_rediscovery.py:144: DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future.
+  copy_bm(bm0, create_block_mask(valid_len_mask, B=B, H=None, Q_LEN=1, KV_LEN=max_len, device="cuda",
+USDT:2026-09-22 21:06:11 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:11 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=1 flex_rediscover_compiled: {'first_call_s': 4.212353687999894, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 35}
+  flex pairwise bitwise: {'flex_declared~flex_rediscover_host': False, 'flex_declared~flex_rediscover_compiled': False, 'flex_rediscover_host~flex_rediscover_compiled': True} | metadata same: False
+  correctness vs sdpa over 6 advancing steps (max|diff|, top1 agree): {'sdpa': (0.0, 1.0), 'flex_declared': (0.188, 1.0), 'flex_rediscover_host': (0.25, 1.0), 'flex_rediscover_compiled': (0.25, 1.0)}
+<workspace>/phase0/week4/e3_rediscovery.py:144: DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future.
+  copy_bm(bm0, create_block_mask(valid_len_mask, B=B, H=None, Q_LEN=1, KV_LEN=max_len, device="cuda",
+  metadata cost alone: {'declared arithmetic': {'gpu_us_in_graph': 14.262, 'eager_host_ms': 0.201}, 'slice precomputed causal': {'gpu_us_in_graph': 12.554, 'eager_host_ms': 0.172}, 'create_block_mask (rediscover)': {'gpu_us_in_graph': 79.981, 'eager_host_ms': 3.485, 'host_between_replays_ms': 3.065}, 'create_block_mask compiled (rediscover)': {'gpu_us_in_graph': 31.277, 'eager_host_ms': 1.013}}
+  B=1 int4 (advancing positions): interleaved 8 rounds x 48 steps, baseline sdpa
+    sdpa             median    9.18 ms (p10 9.11, p90 9.35)
+    flex_declared    median    7.07 ms (p10 7.00, p90 7.21) | vs sdpa: x0.769 [p10 0.762, p90 0.772] faster in 100% of rounds
+    flex_rediscover_host median   11.37 ms (p10 10.64, p90 12.56) | vs sdpa: x1.243 [p10 1.169, p90 1.247] faster in 0% of rounds
+    flex_rediscover_compiled median    7.11 ms (p10 6.66, p90 7.22) | vs sdpa: x0.775 [p10 0.712, p90 0.778] faster in 100% of rounds
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 21:06:38 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:38 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 sdpa: {'first_call_s': 8.680433813000036, 'attention_kernels': ['fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKerne'], 'n_kernel_types': 28}
+USDT:2026-09-22 21:06:51 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:51 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_declared: {'first_call_s': 13.207612014999995, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+USDT:2026-09-22 21:06:51 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:51 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_rediscover: {'first_call_s': 0.016472640999836585, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 46}
+USDT:2026-09-22 21:06:52 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:52 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_rediscover_host: {'first_call_s': 0.014408749000267562, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 26}
+<workspace>/phase0/week4/e3_rediscovery.py:144: DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future.
+  copy_bm(bm0, create_block_mask(valid_len_mask, B=B, H=None, Q_LEN=1, KV_LEN=max_len, device="cuda",
+USDT:2026-09-22 21:06:56 6255:6255 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 21:06:56 6255:6255 SyncActivityProfilerHandler.cpp:46] profiler_stop
+  B=8 flex_rediscover_compiled: {'first_call_s': 4.389227848000246, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 35}
+  flex pairwise bitwise: {'flex_declared~flex_rediscover': False, 'flex_declared~flex_rediscover_host': False, 'flex_declared~flex_rediscover_compiled': False, 'flex_rediscover~flex_rediscover_host': True, 'flex_rediscover~flex_rediscover_compiled': True, 'flex_rediscover_host~flex_rediscover_compiled': True} | metadata same: False
+  correctness vs sdpa over 6 advancing steps (max|diff|, top1 agree): {'sdpa': (0.0, 1.0), 'flex_declared': (0.281, 0.9583333730697632), 'flex_rediscover': (0.312, 0.9583333730697632), 'flex_rediscover_host': (0.312, 0.9583333730697632), 'flex_rediscover_compiled': (0.312, 0.9583333730697632)}
+<workspace>/phase0/week4/e3_rediscovery.py:144: DeprecationWarning: _compile flag on create_block_mask was originally added to work around a torch.compile limitation. That limitation has since been addressed. So, to compile create_block_mask, we suggest doing torch.compile(create_block_mask). This still works for now, but will be removed in the future.
+  copy_bm(bm0, create_block_mask(valid_len_mask, B=B, H=None, Q_LEN=1, KV_LEN=max_len, device="cuda",
+  metadata cost alone: {'declared arithmetic': {'gpu_us_in_graph': 12.164, 'eager_host_ms': 0.202}, 'slice precomputed causal': {'gpu_us_in_graph': 12.323, 'eager_host_ms': 0.178}, 'create_block_mask (rediscover)': {'gpu_us_in_graph': 85.685, 'eager_host_ms': 3.554, 'host_between_replays_ms': 3.14}, 'create_block_mask compiled (rediscover)': {'gpu_us_in_graph': 31.371, 'eager_host_ms': 1.015}}
+  B=8 int4 (advancing positions): interleaved 8 rounds x 48 steps, baseline sdpa
+    sdpa             median   23.24 ms (p10 21.47, p90 23.49)
+    flex_declared    median    9.24 ms (p10 8.53, p90 9.43) | vs sdpa: x0.399 [p10 0.365, p90 0.429] faster in 100% of rounds
+    flex_rediscover  median    9.38 ms (p10 8.66, p90 9.62) | vs sdpa: x0.404 [p10 0.381, p90 0.406] faster in 100% of rounds
+    flex_rediscover_host median   13.66 ms (p10 12.66, p90 14.75) | vs sdpa: x0.594 [p10 0.578, p90 0.602] faster in 100% of rounds
+    flex_rediscover_compiled median    9.31 ms (p10 8.66, p90 9.54) | vs sdpa: x0.402 [p10 0.398, p90 0.403] faster in 100% of rounds
+saved results/e3_rediscovery_extra.json

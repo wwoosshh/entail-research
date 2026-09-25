@@ -1,0 +1,722 @@
+{
+ "size": "2b",
+ "vllm_version": "0.30.0",
+ "seconds": 2.7,
+ "summary": {
+  "eager": {
+   "top1_agree_vs_vllm": 0.9864601769911504,
+   "mean_abs_dlogprob_vs_vllm": 0.02719581216025799,
+   "positions": 22600
+  },
+  "flex_attention": {
+   "top1_agree_vs_vllm": 0.9861504424778761,
+   "mean_abs_dlogprob_vs_vllm": 0.02652967726634729,
+   "positions": 22600
+  },
+  "sdpa": {
+   "top1_agree_vs_vllm": 0.9861504424778761,
+   "mean_abs_dlogprob_vs_vllm": 0.028213431062344762,
+   "positions": 22600
+  },
+  "eager_nocap": {
+   "top1_agree_vs_vllm": 0.9832743362831858,
+   "mean_abs_dlogprob_vs_vllm": 0.028726603471711586,
+   "positions": 22600
+  }
+ },
+ "per_sequence": [
+  {
+   "kind": "chat",
+   "name": "Explain in three sentences why the sky is blue.",
+   "len": 78,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.019520631292806293
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.022988914222181737
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.022423791342420212
+   },
+   "eager_nocap": {
+    "top1_agree": 0.987012987012987,
+    "mean_abs_dlogprob": 0.019229084335982645
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Write a Python function that returns the n-th Fi",
+   "len": 157,
+   "eager": {
+    "top1_agree": 0.9871794871794872,
+    "mean_abs_dlogprob": 0.01286230755003546
+   },
+   "flex_attention": {
+    "top1_agree": 0.9871794871794872,
+    "mean_abs_dlogprob": 0.012610480851369177
+   },
+   "sdpa": {
+    "top1_agree": 0.9935897435897436,
+    "mean_abs_dlogprob": 0.012051818889716875
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9871794871794872,
+    "mean_abs_dlogprob": 0.012521233127774688
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "A train leaves at 3:40 pm and the trip takes 2 h",
+   "len": 148,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.015261498740266402
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.014211687019930664
+   },
+   "sdpa": {
+    "top1_agree": 0.9931972789115646,
+    "mean_abs_dlogprob": 0.012879446515562346
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9931972789115646,
+    "mean_abs_dlogprob": 0.017499944964870937
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "List five differences between TCP and UDP.",
+   "len": 145,
+   "eager": {
+    "top1_agree": 0.9791666666666666,
+    "mean_abs_dlogprob": 0.020951602346280997
+   },
+   "flex_attention": {
+    "top1_agree": 0.9861111111111112,
+    "mean_abs_dlogprob": 0.02371751574551827
+   },
+   "sdpa": {
+    "top1_agree": 0.9722222222222222,
+    "mean_abs_dlogprob": 0.024405820742009796
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9861111111111112,
+    "mean_abs_dlogprob": 0.023355993167237885
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Summarize the plot of Romeo and Juliet in one pa",
+   "len": 149,
+   "eager": {
+    "top1_agree": 0.9797297297297297,
+    "mean_abs_dlogprob": 0.022663570132715884
+   },
+   "flex_attention": {
+    "top1_agree": 0.9797297297297297,
+    "mean_abs_dlogprob": 0.020654906623021285
+   },
+   "sdpa": {
+    "top1_agree": 0.9797297297297297,
+    "mean_abs_dlogprob": 0.021186193551746186
+   },
+   "eager_nocap": {
+    "top1_agree": 0.972972972972973,
+    "mean_abs_dlogprob": 0.021449834573059042
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "What is the derivative of x^3 * sin(x)? Explain ",
+   "len": 154,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.009870587863316661
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.0108124957325473
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.013617751279825356
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9869281045751634,
+    "mean_abs_dlogprob": 0.010692634284170686
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Translate into French: 'The meeting was postpone",
+   "len": 146,
+   "eager": {
+    "top1_agree": 0.9862068965517241,
+    "mean_abs_dlogprob": 0.02057821078776856
+   },
+   "flex_attention": {
+    "top1_agree": 0.9793103448275862,
+    "mean_abs_dlogprob": 0.018470996897652338
+   },
+   "sdpa": {
+    "top1_agree": 0.993103448275862,
+    "mean_abs_dlogprob": 0.016833953841271763
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9655172413793104,
+    "mean_abs_dlogprob": 0.019221594819585283
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Give me a short poem about autumn rain, four lin",
+   "len": 64,
+   "eager": {
+    "top1_agree": 0.9841269841269841,
+    "mean_abs_dlogprob": 0.0355670749539268
+   },
+   "flex_attention": {
+    "top1_agree": 0.9841269841269841,
+    "mean_abs_dlogprob": 0.03634763364696442
+   },
+   "sdpa": {
+    "top1_agree": 0.9841269841269841,
+    "mean_abs_dlogprob": 0.029719109004843796
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9682539682539683,
+    "mean_abs_dlogprob": 0.03340971727822873
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "If a rectangle has perimeter 36 and its length i",
+   "len": 158,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.010727368346406299
+   },
+   "flex_attention": {
+    "top1_agree": 0.9936305732484076,
+    "mean_abs_dlogprob": 0.013579126555012113
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.011459958432581203
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9872611464968153,
+    "mean_abs_dlogprob": 0.010726756540962149
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Explain what a hash table is to a 12-year-old.",
+   "len": 153,
+   "eager": {
+    "top1_agree": 0.9802631578947368,
+    "mean_abs_dlogprob": 0.026004056880359356
+   },
+   "flex_attention": {
+    "top1_agree": 0.9868421052631579,
+    "mean_abs_dlogprob": 0.025177616468500676
+   },
+   "sdpa": {
+    "top1_agree": 0.9868421052631579,
+    "mean_abs_dlogprob": 0.02606251385923805
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9868421052631579,
+    "mean_abs_dlogprob": 0.02519775103932674
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Write a SQL query that returns the top 3 custome",
+   "len": 153,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.01386806898253568
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.012877632276076167
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.013763977634956232
+   },
+   "eager_nocap": {
+    "top1_agree": 0.993421052631579,
+    "mean_abs_dlogprob": 0.010326659109032235
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "What are the main causes of inflation? Answer br",
+   "len": 140,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.016678517742871355
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.01757689660055338
+   },
+   "sdpa": {
+    "top1_agree": 0.9928057553956835,
+    "mean_abs_dlogprob": 0.01654090214435213
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9856115107913669,
+    "mean_abs_dlogprob": 0.016757757057235853
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Describe how photosynthesis works in simple term",
+   "len": 145,
+   "eager": {
+    "top1_agree": 0.9930555555555556,
+    "mean_abs_dlogprob": 0.02271208265101537
+   },
+   "flex_attention": {
+    "top1_agree": 0.9930555555555556,
+    "mean_abs_dlogprob": 0.02287393623701099
+   },
+   "sdpa": {
+    "top1_agree": 0.9930555555555556,
+    "mean_abs_dlogprob": 0.025498283012385017
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9861111111111112,
+    "mean_abs_dlogprob": 0.023357207944926923
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "A shop sells pens at 3 for $2. How much do 18 pe",
+   "len": 133,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.012058948799763831
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.014651021971329592
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.014106252287154774
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9924242424242424,
+    "mean_abs_dlogprob": 0.01190791403701184
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Write a haiku about a quiet library.",
+   "len": 40,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.03286522855350898
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.03129471906582616
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.03086112071871862
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9743589743589743,
+    "mean_abs_dlogprob": 0.03005536700881553
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Compare Python lists and tuples in a short table",
+   "len": 147,
+   "eager": {
+    "top1_agree": 0.9794520547945206,
+    "mean_abs_dlogprob": 0.02379155597475658
+   },
+   "flex_attention": {
+    "top1_agree": 0.9794520547945206,
+    "mean_abs_dlogprob": 0.02139024627103913
+   },
+   "sdpa": {
+    "top1_agree": 0.9726027397260274,
+    "mean_abs_dlogprob": 0.021366601557473015
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9657534246575342,
+    "mean_abs_dlogprob": 0.018096638193758716
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Explain recursion with a simple example in JavaS",
+   "len": 146,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.015934452428125464
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.01605698428113455
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.015807450896587815
+   },
+   "eager_nocap": {
+    "top1_agree": 0.993103448275862,
+    "mean_abs_dlogprob": 0.012991169372493441
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "What is the capital of Australia, and why is it ",
+   "len": 151,
+   "eager": {
+    "top1_agree": 0.9866666666666667,
+    "mean_abs_dlogprob": 0.02828059236498842
+   },
+   "flex_attention": {
+    "top1_agree": 0.9866666666666667,
+    "mean_abs_dlogprob": 0.024908926755385103
+   },
+   "sdpa": {
+    "top1_agree": 0.9666666666666667,
+    "mean_abs_dlogprob": 0.028961328493849116
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9733333333333334,
+    "mean_abs_dlogprob": 0.02611068773196262
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Name three strategies to improve sleep quality.",
+   "len": 145,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.012675444034650147
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.011733707001208928
+   },
+   "sdpa": {
+    "top1_agree": 0.9930555555555556,
+    "mean_abs_dlogprob": 0.011880774853071445
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9930555555555556,
+    "mean_abs_dlogprob": 0.013022402458389757
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Solve for x: 3x + 7 = 25. Show the steps.",
+   "len": 138,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.01098840298623489
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.014855920183145226
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.013331145960360388
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9927007299270073,
+    "mean_abs_dlogprob": 0.012893269546031318
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "하늘이 파란 이유를 세 문장으로 설명해 주세요.",
+   "len": 150,
+   "eager": {
+    "top1_agree": 0.9865771812080537,
+    "mean_abs_dlogprob": 0.025162497833002055
+   },
+   "flex_attention": {
+    "top1_agree": 0.9865771812080537,
+    "mean_abs_dlogprob": 0.02521220285908831
+   },
+   "sdpa": {
+    "top1_agree": 0.9798657718120806,
+    "mean_abs_dlogprob": 0.02677164884667958
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9798657718120806,
+    "mean_abs_dlogprob": 0.026472003384717505
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "파이썬으로 리스트에서 중복을 제거하는 방법 두 가지를 알려 주세요.",
+   "len": 158,
+   "eager": {
+    "top1_agree": 0.9872611464968153,
+    "mean_abs_dlogprob": 0.02209464475821598
+   },
+   "flex_attention": {
+    "top1_agree": 0.9936305732484076,
+    "mean_abs_dlogprob": 0.02115042288010305
+   },
+   "sdpa": {
+    "top1_agree": 0.9936305732484076,
+    "mean_abs_dlogprob": 0.021800156316273772
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9808917197452229,
+    "mean_abs_dlogprob": 0.0223761786620012
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "사과 12개를 4명이 똑같이 나누고, 각자 1개씩 먹으면 한 사람에게 몇 개가 남나요?",
+   "len": 185,
+   "eager": {
+    "top1_agree": 0.9836956521739131,
+    "mean_abs_dlogprob": 0.025857762798317058
+   },
+   "flex_attention": {
+    "top1_agree": 0.9891304347826086,
+    "mean_abs_dlogprob": 0.024969232133817184
+   },
+   "sdpa": {
+    "top1_agree": 0.9782608695652174,
+    "mean_abs_dlogprob": 0.025918189044013256
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9782608695652174,
+    "mean_abs_dlogprob": 0.02783247353026234
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "서울에서 가 볼 만한 곳 세 군데를 추천하고 이유를 적어 주세요.",
+   "len": 159,
+   "eager": {
+    "top1_agree": 0.9936708860759493,
+    "mean_abs_dlogprob": 0.024707080685943242
+   },
+   "flex_attention": {
+    "top1_agree": 0.9936708860759493,
+    "mean_abs_dlogprob": 0.023642243343410717
+   },
+   "sdpa": {
+    "top1_agree": 0.9936708860759493,
+    "mean_abs_dlogprob": 0.027458927007630744
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9873417721518988,
+    "mean_abs_dlogprob": 0.027950786478804366
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "재귀 함수가 무엇인지 초등학생도 이해할 수 있게 설명해 주세요.",
+   "len": 160,
+   "eager": {
+    "top1_agree": 0.9559748427672956,
+    "mean_abs_dlogprob": 0.0275470148244342
+   },
+   "flex_attention": {
+    "top1_agree": 0.9685534591194969,
+    "mean_abs_dlogprob": 0.027965733466612686
+   },
+   "sdpa": {
+    "top1_agree": 0.9685534591194969,
+    "mean_abs_dlogprob": 0.025769105691672733
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9622641509433962,
+    "mean_abs_dlogprob": 0.02683008342183359
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "다음 문장을 영어로 번역해 주세요: '회의는 폭풍 때문에 연기되었습니다.'",
+   "len": 145,
+   "eager": {
+    "top1_agree": 0.9791666666666666,
+    "mean_abs_dlogprob": 0.02565180667902297
+   },
+   "flex_attention": {
+    "top1_agree": 0.9930555555555556,
+    "mean_abs_dlogprob": 0.01898562601568272
+   },
+   "sdpa": {
+    "top1_agree": 0.9861111111111112,
+    "mean_abs_dlogprob": 0.01942982341519986
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9791666666666666,
+    "mean_abs_dlogprob": 0.020518022895498658
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "가을비에 대한 짧은 시를 네 줄로 써 주세요.",
+   "len": 89,
+   "eager": {
+    "top1_agree": 0.9886363636363636,
+    "mean_abs_dlogprob": 0.03857856948012655
+   },
+   "flex_attention": {
+    "top1_agree": 0.9772727272727273,
+    "mean_abs_dlogprob": 0.040163022275512855
+   },
+   "sdpa": {
+    "top1_agree": 0.9772727272727273,
+    "mean_abs_dlogprob": 0.036214980648918586
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9772727272727273,
+    "mean_abs_dlogprob": 0.038990663365071454
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "TCP와 UDP의 차이를 세 가지만 설명해 주세요.",
+   "len": 152,
+   "eager": {
+    "top1_agree": 0.9933774834437086,
+    "mean_abs_dlogprob": 0.024429251193920063
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.021701332358571523
+   },
+   "sdpa": {
+    "top1_agree": 0.9933774834437086,
+    "mean_abs_dlogprob": 0.02376997642038037
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9867549668874173,
+    "mean_abs_dlogprob": 0.023036176996418495
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "3x + 7 = 25일 때 x를 구하는 과정을 보여 주세요.",
+   "len": 160,
+   "eager": {
+    "top1_agree": 0.9937106918238994,
+    "mean_abs_dlogprob": 0.01753357132803665
+   },
+   "flex_attention": {
+    "top1_agree": 0.9937106918238994,
+    "mean_abs_dlogprob": 0.016114768250774826
+   },
+   "sdpa": {
+    "top1_agree": 0.9937106918238994,
+    "mean_abs_dlogprob": 0.016932297840296994
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9874213836477987,
+    "mean_abs_dlogprob": 0.017901572906199162
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "건강한 수면 습관 세 가지를 알려 주세요.",
+   "len": 153,
+   "eager": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.022651991256414684
+   },
+   "flex_attention": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.022945688901615226
+   },
+   "sdpa": {
+    "top1_agree": 1.0,
+    "mean_abs_dlogprob": 0.023317145726336707
+   },
+   "eager_nocap": {
+    "top1_agree": 0.993421052631579,
+    "mean_abs_dlogprob": 0.021881772556784206
+   }
+  },
+  {
+   "kind": "doc",
+   "name": "korean_research_plan",
+   "len": 6144,
+   "eager": {
+    "top1_agree": 0.978512127624939,
+    "mean_abs_dlogprob": 0.035018888886994656
+   },
+   "flex_attention": {
+    "top1_agree": 0.9773726192414129,
+    "mean_abs_dlogprob": 0.03510970110318582
+   },
+   "sdpa": {
+    "top1_agree": 0.9798144229203972,
+    "mean_abs_dlogprob": 0.03711570268562975
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9767214715936838,
+    "mean_abs_dlogprob": 0.03773326332789538
+   }
+  },
+  {
+   "kind": "doc",
+   "name": "english_gpl3",
+   "len": 6144,
+   "eager": {
+    "top1_agree": 0.9842096695425688,
+    "mean_abs_dlogprob": 0.034155455917652275
+   },
+   "flex_attention": {
+    "top1_agree": 0.9840468826306364,
+    "mean_abs_dlogprob": 0.03217955820082255
+   },
+   "sdpa": {
+    "top1_agree": 0.9840468826306364,
+    "mean_abs_dlogprob": 0.03342945067897064
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9820934396874491,
+    "mean_abs_dlogprob": 0.03391123961394281
+   }
+  },
+  {
+   "kind": "doc",
+   "name": "python_code",
+   "len": 6144,
+   "eager": {
+    "top1_agree": 0.9941396711704379,
+    "mean_abs_dlogprob": 0.01692922173056937
+   },
+   "flex_attention": {
+    "top1_agree": 0.9933257366107765,
+    "mean_abs_dlogprob": 0.01662420380304149
+   },
+   "sdpa": {
+    "top1_agree": 0.9925118020511151,
+    "mean_abs_dlogprob": 0.019389333734090547
+   },
+   "eager_nocap": {
+    "top1_agree": 0.9910467198437246,
+    "mean_abs_dlogprob": 0.0203703164467103
+   }
+  }
+ ]
+}

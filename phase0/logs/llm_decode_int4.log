@@ -1,0 +1,37 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+W0922 17:35:47.874000 385 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 17:35:47.977000 385 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+LLM built from hub-config: 4.02B params, 30.1s
+int4 quantization ok (26.4s)
+USDT:2026-09-22 17:36:47 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:36:48 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/eager/B1", "workload": "llm_decode_int4", "mode": "eager", "batch": 1, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 89.68244300000094, "step_ms_median": 36.041670499997736, "step_ms_min": 34.57423600001164, "step_ms_max": 40.059955999993235, "peak_mem_gib": 3.2814884185791016, "dynamo_stats": {}, "status": "ok"}
+USDT:2026-09-22 17:36:52 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:36:52 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/eager/B4", "workload": "llm_decode_int4", "mode": "eager", "batch": 4, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 728.1531389999998, "step_ms_median": 42.73103149999713, "step_ms_min": 41.148083999999585, "step_ms_max": 45.062644999987356, "peak_mem_gib": 3.943574905395508, "dynamo_stats": {}, "status": "ok"}
+USDT:2026-09-22 17:36:57 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:36:57 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/eager/B8", "workload": "llm_decode_int4", "mode": "eager", "batch": 8, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 1393.0731880000026, "step_ms_median": 43.79055449999214, "step_ms_min": 41.95369699999674, "step_ms_max": 49.23151200000575, "peak_mem_gib": 4.826314926147461, "dynamo_stats": {}, "status": "ok"}
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 17:37:46 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:37:46 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/compile_default/B1", "workload": "llm_decode_int4", "mode": "compile_default", "batch": 1, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 47391.334303999996, "step_ms_median": 12.079925499996591, "step_ms_min": 11.688572000011277, "step_ms_max": 24.561697000009985, "peak_mem_gib": 3.3130035400390625, "dynamo_stats": {"calls_captured": 2961, "unique_graphs": 1}, "status": "ok"}
+USDT:2026-09-22 17:39:05 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:39:05 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/compile_default/B4", "workload": "llm_decode_int4", "mode": "compile_default", "batch": 4, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 77507.77565, "step_ms_median": 15.859040000009372, "step_ms_min": 15.591583999992054, "step_ms_max": 17.023892999986856, "peak_mem_gib": 4.126387119293213, "dynamo_stats": {"calls_captured": 5922, "unique_graphs": 2}, "status": "ok"}
+USDT:2026-09-22 17:39:09 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:39:10 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/compile_default/B8", "workload": "llm_decode_int4", "mode": "compile_default", "batch": 8, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 25.52447700000471, "step_ms_median": 24.7866130000034, "step_ms_min": 24.39534199999116, "step_ms_max": 25.726514000012912, "peak_mem_gib": 5.329283237457275, "dynamo_stats": {"calls_captured": 5922, "unique_graphs": 2}, "status": "ok"}
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 17:39:51 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:39:51 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/compile_graphs/B1", "workload": "llm_decode_int4", "mode": "compile_graphs", "batch": 1, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 40126.810347000006, "step_ms_median": 10.307115499998076, "step_ms_min": 9.703545000007807, "step_ms_max": 11.937507999988384, "peak_mem_gib": 3.673616886138916, "dynamo_stats": {"calls_captured": 8883, "unique_graphs": 3}, "status": "ok"}
+USDT:2026-09-22 17:40:56 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:40:56 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/compile_graphs/B4", "workload": "llm_decode_int4", "mode": "compile_graphs", "batch": 4, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 63336.765764, "step_ms_median": 15.425659500010624, "step_ms_min": 15.039233999971202, "step_ms_max": 16.30485499998713, "peak_mem_gib": 4.129072666168213, "dynamo_stats": {"calls_captured": 11844, "unique_graphs": 4}, "status": "ok"}
+USDT:2026-09-22 17:41:00 385:385 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:41:00 385:385 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode_int4/compile_graphs/B8", "workload": "llm_decode_int4", "mode": "compile_graphs", "batch": 8, "prompt_len": 512, "dtype": "int4wo+bf16", "first_call_ms": 29.371242000024722, "step_ms_median": 24.539916500003756, "step_ms_min": 24.041908000015155, "step_ms_max": 25.451037999971504, "peak_mem_gib": 5.333433628082275, "dynamo_stats": {"calls_captured": 11844, "unique_graphs": 4}, "status": "ok"}
+saved <workspace>/phase0/results/llm_decode_int4.json

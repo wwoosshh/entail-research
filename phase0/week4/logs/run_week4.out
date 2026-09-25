@@ -1,0 +1,120 @@
+== e3 start 20:31:57
+  B=1 sdpa: {'first_call_s': 45.558295591000004, 'attention_kernels': ['fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKerne'], 'n_kernel_types': 28}
+  B=1 triton_decode: {'first_call_s': 45.288618688, 'attention_kernels': ['_combine_kernel', '_split_kernel'], 'n_kernel_types': 25}
+  B=1 flex_declared: {'first_call_s': 59.089084329, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_
+  B=1 flex_slice: {'first_call_s': 0.0692219310000155, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_fl
+  B=1 flex_rediscover: {'first_call_s': 0.028746511999997892, 'error': "AcceleratorError: CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more informatio
+  B=1 flex_rediscover_host: {'first_call_s': 0.013361601000013934, 'attention_kernels': ['triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_c
+  B=1 hf_flex: {'first_call_s': 54.092063490000015, 'attention_kernels': ['triton_per_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_per_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attenti
+  correctness vs sdpa over 6 advancing steps (max|diff|, top1 agree): {'sdpa': (0.0, 1.0), 'triton_decode': (0.25, 1.0), 'flex_declared': (0.25, 1.0), 'flex_slice': (0.25, 1.0), 'flex_rediscover_host': (0.234, 1.0), 'hf_flex': (2.789, 0.6666666865348816)}
+  metadata cost alone: {'declared arithmetic': {'gpu_us_in_graph': 12.22, 'eager_host_ms': 0.2}, 'slice precomputed causal': {'gpu_us_in_graph': 12.335, 'eager_host_ms': 0.17}, 'create_block_mask (rediscover)': {'gpu_us_in_graph': 79.814, 'eager_host_ms': 3.261, 'host_between_replays_ms': 3.726}}
+  B=1 int4 (advancing positions): interleaved 8 rounds x 48 steps, baseline sdpa
+    sdpa             median    9.14 ms (p10 9.04, p90 9.32)
+    triton_decode    median    6.98 ms (p10 6.91, p90 7.17) | vs sdpa: x0.765 [p10 0.751, p90 0.767] faster in 100% of rounds
+    flex_declared    median    7.09 ms (p10 7.00, p90 7.28) | vs sdpa: x0.776 [p10 0.763, p90 0.780] faster in 100% of rounds
+    flex_slice       median    7.09 ms (p10 7.01, p90 7.23) | vs sdpa: x0.778 [p10 0.762, p90 0.780] faster in 100% of rounds
+    flex_rediscover_host median   11.24 ms (p10 10.58, p90 12.58) | vs sdpa: x1.229 [p10 1.182, p90 1.299] faster in 0% of rounds
+    hf_flex          median    7.11 ms (p10 7.00, p90 7.27) | vs sdpa: x0.778 [p10 0.762, p90 0.783] faster in 100% of rounds
+  B=8 sdpa: {'first_call_s': 68.80319505699998, 'attention_kernels': ['fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKerne'], 'n_kernel_types': 28}
+  B=8 triton_decode: {'first_call_s': 61.692650498000035, 'attention_kernels': ['_combine_kernel', '_split_kernel'], 'n_kernel_types': 26}
+  B=8 flex_declared: {'first_call_s': 54.60948678799997, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+  B=8 flex_slice: {'first_call_s': 0.017386543999975856, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 29}
+  B=8 flex_rediscover: {'first_call_s': 0.021047083000041766, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 46}
+  B=8 flex_rediscover_host: {'first_call_s': 0.018033963999982916, 'attention_kernels': ['triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_', 'triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mean_mul_pow_'], 'n_kernel_types': 26}
+  B=8 hf_flex: {'first_call_s': 66.17111341499998, 'attention_kernels': ['triton_poi_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attention_mean_mul_pow_rsqrt_t', 'triton_tem_fused__to_copy_add_bmm_cat_expand_flex_attentio
+  correctness vs sdpa over 6 advancing steps (max|diff|, top1 agree): {'sdpa': (0.0, 1.0), 'triton_decode': (0.281, 1.0), 'flex_declared': (0.25, 1.0), 'flex_slice': (0.25, 1.0), 'flex_rediscover': (0.344, 0.9791666865348816), 'flex_rediscover_host': (0.344, 0.9791666865348816), 'hf_flex': (11.094, 
+  metadata cost alone: {'declared arithmetic': {'gpu_us_in_graph': 11.92, 'eager_host_ms': 0.206}, 'slice precomputed causal': {'gpu_us_in_graph': 12.515, 'eager_host_ms': 0.185}, 'create_block_mask (rediscover)': {'gpu_us_in_graph': 86.061, 'eager_host_ms': 3.202, 'host_between_replays_ms': 3.556}}
+  B=8 int4 (advancing positions): interleaved 8 rounds x 48 steps, baseline sdpa
+    sdpa             median   23.19 ms (p10 21.76, p90 23.43)
+    triton_decode    median    9.38 ms (p10 8.75, p90 9.59) | vs sdpa: x0.405 [p10 0.401, p90 0.406] faster in 100% of rounds
+    flex_declared    median    9.17 ms (p10 8.56, p90 9.32) | vs sdpa: x0.396 [p10 0.367, p90 0.400] faster in 100% of rounds
+    flex_slice       median    9.10 ms (p10 8.55, p90 9.31) | vs sdpa: x0.397 [p10 0.369, p90 0.397] faster in 100% of rounds
+    flex_rediscover  median    9.19 ms (p10 8.68, p90 9.50) | vs sdpa: x0.400 [p10 0.383, p90 0.403] faster in 100% of rounds
+    flex_rediscover_host median   13.67 ms (p10 12.53, p90 15.15) | vs sdpa: x0.598 [p10 0.574, p90 0.613] faster in 100% of rounds
+== e3b start 20:40:17
+{'N': 2048, 'documents': 2, 'declared_ms': 1.4723, 'rediscover_compiled_first_call_s': 3.4816, 'rediscover_compiled_ms': 0.999, 'rediscover_eager_ms': 4.3996, 'same_partial_blocks': True, 'same_full_blocks': True, 'blocks_total': 136, 'blocks_partial': 31, 'blocks_full': 105, 'outputs_bitwise_equal': True, 'outputs_max_abs_diff': 0.0, 'flex_attention_fwd_ms': 0.7157, 'rediscover_compiled_share_of_
+{'N': 4096, 'documents': 4, 'declared_ms': 1.3525, 'rediscover_compiled_first_call_s': 3.8918, 'rediscover_compiled_ms': 1.0189, 'rediscover_eager_ms': 4.6076, 'same_partial_blocks': True, 'same_full_blocks': True, 'blocks_total': 528, 'blocks_partial': 67, 'blocks_full': 226, 'outputs_bitwise_equal': True, 'outputs_max_abs_diff': 0.0, 'flex_attention_fwd_ms': 1.4175, 'rediscover_compiled_share_of
+{'N': 8192, 'documents': 8, 'declared_ms': 1.5066, 'rediscover_compiled_first_call_s': 0.0024, 'rediscover_compiled_ms': 0.974, 'rediscover_eager_ms': 7.2329, 'same_partial_blocks': True, 'same_full_blocks': True, 'blocks_total': 2080, 'blocks_partial': 168, 'blocks_full': 282, 'outputs_bitwise_equal': True, 'outputs_max_abs_diff': 0.0, 'flex_attention_fwd_ms': 4.4404, 'rediscover_compiled_share_o
+{'N': 16384, 'documents': 16, 'declared_ms': 1.4596, 'rediscover_compiled_first_call_s': 0.0041, 'rediscover_compiled_ms': 3.1185, 'rediscover_eager_ms': 21.9532, 'same_partial_blocks': True, 'same_full_blocks': True, 'blocks_total': 8256, 'blocks_partial': 307, 'blocks_full': 720, 'outputs_bitwise_equal': True, 'outputs_max_abs_diff': 0.0, 'flex_attention_fwd_ms': 4.6793, 'rediscover_compiled_sha
+{'N': 32768, 'documents': 32, 'declared_ms': 1.4223, 'rediscover_compiled_first_call_s': 0.0055, 'rediscover_compiled_ms': 5.025, 'same_partial_blocks': True, 'same_full_blocks': True, 'blocks_total': 32896, 'blocks_partial': 707, 'blocks_full': 1963, 'outputs_bitwise_equal': True, 'outputs_max_abs_diff': 0.0, 'flex_attention_fwd_ms': 11.0701, 'rediscover_compiled_share_of_attention_in_forward': 0
+== e4 start 20:40:32
+  B=8 bf16 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.21875, 'mean': 0.021160852164030075}, 'triton_decode': {'max': 0.21875, 'mean': 0.019605347886681557}, 'sdpa_bound_static': {'max': 0.21875, 'mean': 0.02207120507955
+    kernels sdpa               {'gemm': 19.854, 'attention': 8.446, 'kv_copy_or_mask': 6.294, 'other': 0.342, 'total': 34.936}
+    kernels sdpa_gqa           {'gemm': 19.402, 'attention': 5.663, 'other': 0.301, 'kv_copy_or_mask': 0.125, 'total': 25.49}
+    kernels maskmod_decode     {'gemm': 19.421, 'attention': 1.85, 'other': 0.243, 'kv_copy_or_mask': 0.102, 'total': 21.617}
+    kernels triton_decode      {'gemm': 19.518, 'attention': 1.795, 'other': 0.244, 'kv_copy_or_mask': 0.095, 'total': 21.653}
+    kernels sdpa_bound_static  {'gemm': 19.483, 'attention': 1.694, 'other': 0.243, 'kv_copy_or_mask': 0.047, 'total': 21.467}
+    sdpa             median   36.18 ms (p10 35.72, p90 36.39)
+    sdpa_gqa         median   26.52 ms (p10 26.20, p90 26.80) | vs sdpa: x0.734 [p10 0.732, p90 0.738] faster in 100% of rounds
+    maskmod_decode   median   22.53 ms (p10 22.22, p90 22.70) | vs sdpa: x0.623 [p10 0.621, p90 0.624] faster in 100% of rounds
+    triton_decode    median   22.49 ms (p10 22.23, p90 22.71) | vs sdpa: x0.622 [p10 0.621, p90 0.625] faster in 100% of rounds
+    sdpa_bound_static median   22.29 ms (p10 22.02, p90 22.53) | vs sdpa: x0.617 [p10 0.615, p90 0.619] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=1 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.09375, 'mean': 0.01683395355939865}, 'triton_decode': {'max': 0.125, 'mean': 0.016506869345903397}, 'sdpa_bound_static': {'max': 0.09375, 'mean': 0.01914828456938266
+    kernels sdpa               {'gemm': 6.836, 'attention': 1.149, 'kv_copy_or_mask': 0.561, 'other': 0.382, 'total': 8.928}
+    kernels sdpa_gqa           {'gemm': 6.012, 'attention': 1.215, 'other': 0.379, 'kv_copy_or_mask': 0.129, 'total': 7.735}
+    kernels maskmod_decode     {'gemm': 6.035, 'attention': 0.396, 'other': 0.333, 'kv_copy_or_mask': 0.088, 'total': 6.851}
+    kernels triton_decode      {'gemm': 6.033, 'attention': 0.325, 'other': 0.319, 'kv_copy_or_mask': 0.092, 'total': 6.769}
+    kernels sdpa_bound_static  {'gemm': 6.022, 'attention': 0.471, 'other': 0.318, 'kv_copy_or_mask': 0.054, 'total': 6.865}
+    sdpa             median    9.28 ms (p10 9.15, p90 9.46)
+    sdpa_gqa         median    8.07 ms (p10 7.87, p90 8.24) | vs sdpa: x0.868 [p10 0.853, p90 0.877] faster in 100% of rounds
+    maskmod_decode   median    7.14 ms (p10 7.04, p90 7.38) | vs sdpa: x0.769 [p10 0.758, p90 0.780] faster in 100% of rounds
+    triton_decode    median    7.04 ms (p10 6.92, p90 7.18) | vs sdpa: x0.757 [p10 0.749, p90 0.768] faster in 100% of rounds
+    sdpa_bound_static median    7.16 ms (p10 7.02, p90 7.29) | vs sdpa: x0.769 [p10 0.759, p90 0.780] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=4 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.1875, 'mean': 0.02813291922211647}, 'triton_decode': {'max': 0.1875, 'mean': 0.02692604251205921}, 'sdpa_bound_static': {'max': 0.1875, 'mean': 0.025842057541012764}
+    kernels sdpa               {'gemm': 7.829, 'attention': 3.421, 'kv_copy_or_mask': 1.859, 'other': 0.442, 'total': 13.552}
+    kernels sdpa_gqa           {'gemm': 6.106, 'attention': 3.519, 'other': 0.39, 'kv_copy_or_mask': 0.129, 'total': 10.144}
+    kernels maskmod_decode     {'gemm': 6.109, 'attention': 1.05, 'other': 0.34, 'kv_copy_or_mask': 0.092, 'total': 7.59}
+    kernels triton_decode      {'gemm': 6.141, 'attention': 1.031, 'other': 0.363, 'kv_copy_or_mask': 0.105, 'total': 7.64}
+    kernels sdpa_bound_static  {'gemm': 6.106, 'attention': 1.085, 'other': 0.354, 'kv_copy_or_mask': 0.071, 'total': 7.616}
+    sdpa             median   13.97 ms (p10 12.92, p90 14.24)
+    sdpa_gqa         median   10.52 ms (p10 9.70, p90 10.73) | vs sdpa: x0.752 [p10 0.748, p90 0.760] faster in 100% of rounds
+    maskmod_decode   median    7.94 ms (p10 7.36, p90 8.17) | vs sdpa: x0.569 [p10 0.564, p90 0.579] faster in 100% of rounds
+    triton_decode    median    7.99 ms (p10 7.41, p90 8.18) | vs sdpa: x0.574 [p10 0.531, p90 0.578] faster in 100% of rounds
+    sdpa_bound_static median    7.97 ms (p10 7.39, p90 8.16) | vs sdpa: x0.571 [p10 0.566, p90 0.576] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=8 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.3125, 'mean': 0.04017447680234909}, 'triton_decode': {'max': 0.234375, 'mean': 0.02978644147515297}, 'sdpa_bound_static': {'max': 0.3125, 'mean': 0.02694162540137767
+    kernels sdpa               {'attention': 8.682, 'gemm': 7.031, 'kv_copy_or_mask': 6.499, 'other': 0.427, 'total': 22.64}
+    kernels sdpa_gqa           {'gemm': 6.618, 'attention': 5.859, 'other': 0.403, 'kv_copy_or_mask': 0.121, 'total': 13.001}
+    kernels maskmod_decode     {'gemm': 6.586, 'attention': 1.894, 'other': 0.335, 'kv_copy_or_mask': 0.092, 'total': 8.907}
+    kernels triton_decode      {'gemm': 6.765, 'attention': 1.841, 'other': 0.344, 'kv_copy_or_mask': 0.099, 'total': 9.049}
+    kernels sdpa_bound_static  {'gemm': 6.635, 'attention': 1.718, 'other': 0.334, 'kv_copy_or_mask': 0.047, 'total': 8.735}
+    sdpa             median   23.03 ms (p10 22.88, p90 23.26)
+    sdpa_gqa         median   13.36 ms (p10 13.23, p90 13.58) | vs sdpa: x0.580 [p10 0.572, p90 0.587] faster in 100% of rounds
+    maskmod_decode   median    9.25 ms (p10 9.13, p90 9.51) | vs sdpa: x0.402 [p10 0.397, p90 0.405] faster in 100% of rounds
+    triton_decode    median    9.39 ms (p10 9.28, p90 9.64) | vs sdpa: x0.407 [p10 0.403, p90 0.411] faster in 100% of rounds
+    sdpa_bound_static median    9.07 ms (p10 8.97, p90 9.26) | vs sdpa: x0.394 [p10 0.390, p90 0.397] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+== e2 auto start 20:53:58
+auto B=1: {"batch": 1, "first_step_ms": 45145.87, "steady_ms": 21.78, "steady_min_ms": 21.33, "steady_max_ms": 22.57, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+auto B=4: {"batch": 4, "first_step_ms": 66308.5, "steady_ms": 30.02, "steady_min_ms": 29.62, "steady_max_ms": 30.38, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+auto B=8: {"batch": 8, "first_step_ms": 36.63, "steady_ms": 36.06, "steady_min_ms": 35.61, "steady_max_ms": 36.89, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+auto B=2: {"batch": 2, "first_step_ms": 29.33, "steady_ms": 28.07, "steady_min_ms": 27.84, "steady_max_ms": 29.29, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+auto: unique graphs 2 | compile_inner None
+== e2 dynamic_flag start 20:55:56
+dynamic_flag B=1: {"batch": 1, "first_step_ms": 65504.32, "steady_ms": 22.43, "steady_min_ms": 21.79, "steady_max_ms": 22.93, "compiles_during_batch": 1, "compile_s_during_batch": 60.07}
+dynamic_flag B=4: {"batch": 4, "first_step_ms": 105561.85, "steady_ms": 30.37, "steady_min_ms": 30.02, "steady_max_ms": 31.35, "compiles_during_batch": 1, "compile_s_during_batch": 97.63}
+dynamic_flag B=8: {"batch": 8, "first_step_ms": 36.14, "steady_ms": 36.56, "steady_min_ms": 36.03, "steady_max_ms": 37.46, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+dynamic_flag B=2: {"batch": 2, "first_step_ms": 29.13, "steady_ms": 28.14, "steady_min_ms": 27.95, "steady_max_ms": 29.37, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+dynamic_flag: unique graphs 2 | compile_inner {'n': 2, 's': 157.695600829}
+== e2 mark_dynamic start 20:58:49
+mark_dynamic B=1: {"batch": 1, "first_step_ms": 46790.23, "steady_ms": 23.51, "steady_min_ms": 23.23, "steady_max_ms": 24.22, "compiles_during_batch": 1, "compile_s_during_batch": 41.65}
+mark_dynamic B=4: {"batch": 4, "first_step_ms": 69177.89, "steady_ms": 29.92, "steady_min_ms": 29.5, "steady_max_ms": 31.12, "compiles_during_batch": 1, "compile_s_during_batch": 63.83}
+mark_dynamic B=8: {"batch": 8, "first_step_ms": 35.84, "steady_ms": 35.92, "steady_min_ms": 32.86, "steady_max_ms": 36.41, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+mark_dynamic B=2: {"batch": 2, "first_step_ms": 25.61, "steady_ms": 25.68, "steady_min_ms": 25.47, "steady_max_ms": 26.28, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+mark_dynamic: unique graphs 2 | compile_inner {'n': 2, 's': 105.476028051}
+== e2 unbacked start 21:00:49
+unbacked B=1: {"batch": 1, "first_step_ms": 70280.67, "steady_ms": 22.65, "steady_min_ms": 21.89, "steady_max_ms": 23.01, "compiles_during_batch": 1, "compile_s_during_batch": 64.41}
+unbacked B=4: {"batch": 4, "first_step_ms": 29.0, "steady_ms": 30.36, "steady_min_ms": 27.95, "steady_max_ms": 31.31, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+unbacked B=8: {"batch": 8, "first_step_ms": 36.63, "steady_ms": 36.54, "steady_min_ms": 36.17, "steady_max_ms": 37.39, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+unbacked B=2: {"batch": 2, "first_step_ms": 28.12, "steady_ms": 28.51, "steady_min_ms": 28.19, "steady_max_ms": 29.09, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+unbacked: unique graphs 1 | compile_inner {'n': 1, 's': 64.408626512}
+== e2 static start 21:02:05
+static: precompiled 4 batch sizes in 199.8 s
+static B=1: {"batch": 1, "first_step_ms": 22.04, "steady_ms": 21.73, "steady_min_ms": 21.63, "steady_max_ms": 22.22, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+static B=4: {"batch": 4, "first_step_ms": 27.5, "steady_ms": 29.85, "steady_min_ms": 29.47, "steady_max_ms": 30.78, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+static B=8: {"batch": 8, "first_step_ms": 36.03, "steady_ms": 36.14, "steady_min_ms": 35.72, "steady_max_ms": 36.79, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+static B=2: {"batch": 2, "first_step_ms": 28.33, "steady_ms": 27.7, "steady_min_ms": 27.51, "steady_max_ms": 28.45, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+static: unique graphs 4 | compile_inner {'n': 4, 's': 180.32218909099998}
+DONE week4 21:05:23

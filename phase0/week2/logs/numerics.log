@@ -1,0 +1,34 @@
+W0922 18:27:54.242000 834 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 18:27:54.275000 834 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:   5%|▌         | 20/398 [00:00<00:01, 192.15it/s]
+Loading weights:  10%|█         | 40/398 [00:00<00:02, 164.65it/s]
+Loading weights:  18%|█▊        | 73/398 [00:00<00:01, 232.09it/s]
+Loading weights:  25%|██▍       | 98/398 [00:00<00:01, 231.24it/s]
+Loading weights:  32%|███▏      | 127/398 [00:00<00:01, 249.05it/s]
+Loading weights:  39%|███▉      | 156/398 [00:00<00:00, 259.65it/s]
+Loading weights:  46%|████▌     | 183/398 [00:00<00:00, 256.37it/s]
+Loading weights:  53%|█████▎    | 209/398 [00:00<00:00, 232.11it/s]
+Loading weights:  59%|█████▊    | 233/398 [00:01<00:00, 231.42it/s]
+Loading weights:  65%|██████▍   | 257/398 [00:01<00:00, 225.40it/s]
+Loading weights:  70%|███████   | 280/398 [00:01<00:00, 224.10it/s]
+Loading weights: 100%|██████████| 398/398 [00:01<00:00, 322.14it/s]
+  using common prompt length 17 tokens (per-prompt lengths [19, 26, 24, 17])
+== eager reference (B=4) and run-to-run reproducibility
+  eager vs eager (rerun)                   max|dlogit|=0.0000 mean=0.00000 tokens agree 100.0% first div [None, None, None, None]
+  sample continuation: ' The first step is to determine the number of cycles spent on each stage of the pipeline. This is done by using a tool l'
+== batch invariance: prompt 0 alone (B=1) vs inside B=4
+  eager B=1 vs row0 of B=4                 max|dlogit|=32.1602 mean=1.95656 tokens agree 37.5% first div [24]
+== compile_default (static cache) vs eager
+W0922 18:28:17.344000 834 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+  compile_default vs eager                 max|dlogit|=34.7812 mean=0.80372 tokens agree 75.0% first div [24, 39, None, None]
+  compile_default rerun                    max|dlogit|=0.0000 mean=0.00000 tokens agree 100.0% first div [None, None, None, None]
+  compile_default B=1 vs row0 of B=4       max|dlogit|=36.7578 mean=1.10054 tokens agree 60.9% first div [38]
+== compile_graphs (static cache) vs eager
+  compile_graphs vs eager                  max|dlogit|=34.7812 mean=0.80372 tokens agree 75.0% first div [24, 39, None, None]
+  compile_graphs rerun                     max|dlogit|=0.0000 mean=0.00000 tokens agree 100.0% first div [None, None, None, None]
+  compile_graphs B=1 vs row0 of B=4        max|dlogit|=36.7578 mean=1.10054 tokens agree 60.9% first div [38]
+== int4 weight-only (torchao) vs bf16 eager
+  int4 eager vs bf16 eager                 max|dlogit|=39.8750 mean=3.17786 tokens agree 8.6% first div [1, 7, 7, 0]
+saved <workspace>/phase0/week2/results/numerics.json

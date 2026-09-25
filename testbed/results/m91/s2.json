@@ -1,0 +1,876 @@
+{
+ "when": "2026-09-24 18:23:20",
+ "files": {
+  "m91/rerun/m43/SUMMARY.json": {
+   "state": "same",
+   "values": 50,
+   "differs": {}
+  },
+  "m91/rerun/m3/problems.json": {
+   "state": "differs",
+   "values": 26,
+   "differs": {
+    ".rb-02.defect.decisions[][]": {
+     "milestone": [
+      "refused"
+     ],
+     "final": [
+      "broken"
+     ]
+    },
+    ".rb-07.defect.decisions[][]": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    },
+    ".rb-07.defect.runtime_stopped": {
+     "milestone": [
+      "[entail] refused at load"
+     ],
+     "final": [
+      "None"
+     ]
+    },
+    ".rb-07.defect.static[][]": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    },
+    ".rb-15.defect.decisions[][]": {
+     "milestone": [
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass",
+      "unknown"
+     ]
+    },
+    ".rb-15.defect.output_right": {
+     "milestone": null,
+     "final": [
+      "False"
+     ]
+    },
+    ".rb-15.defect.runtime_stopped": {
+     "milestone": [
+      "[entail] refused at load"
+     ],
+     "final": [
+      "None"
+     ]
+    },
+    ".rb-15.defect.static[][]": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m55/rolebench.json": {
+   "state": "same",
+   "values": 103,
+   "differs": {}
+  },
+  "m91/rerun/m52/rb10.json": {
+   "state": "differs",
+   "values": 26,
+   "differs": {
+    ".on_refuse.counts.container:transformers.flex_attention.refused": {
+     "milestone": [
+      "1"
+     ],
+     "final": [
+      "0"
+     ]
+    },
+    ".on_refuse.defect.decisions[].verdict": {
+     "milestone": [
+      "refused"
+     ],
+     "final": [
+      "broken"
+     ]
+    },
+    ".on_refuse.defect.refused": {
+     "milestone": [
+      "True"
+     ],
+     "final": [
+      "False"
+     ]
+    },
+    ".on_refuse.defect.vs_reference.within": {
+     "milestone": null,
+     "final": [
+      "False"
+     ]
+    }
+   }
+  },
+  "m91/rb17/compare.json": {
+   "state": "differs",
+   "values": 5,
+   "differs": {
+    ".record[].boundaries.container:sglang.prepare_for_decode.refused": {
+     "milestone": null,
+     "final": [
+      "0"
+     ]
+    }
+   }
+  },
+  "m91/rb17/ids.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rb17/lp_torch_native_load.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rb17/lp_torch_native_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rb17/lp_triton_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rb17/record.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/engines/fd_softcap_sglang_torch_native.json": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/engines/fd_softcap_sglang_torch_native.record.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/engines/fd_softcap_sglang_flex_attention.json": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/engines/fd_softcap_sglang_flex_attention.record.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/engines/fd_softcap_transformers_paged.json": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".backend_used": {
+     "milestone": null,
+     "final": [
+      "eager"
+     ]
+    },
+    ".ok": {
+     "milestone": [
+      "False"
+     ],
+     "final": [
+      "True"
+     ]
+    }
+   }
+  },
+  "m91/engines/fd_softcap_transformers_paged.record.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused",
+      "resolved"
+     ],
+     "final": [
+      "broken",
+      "pass",
+      "resolved"
+     ]
+    }
+   }
+  },
+  "m91/engines/fd_shift.json": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".backend_used": {
+     "milestone": null,
+     "final": [
+      "default"
+     ]
+    },
+    ".ok": {
+     "milestone": [
+      "False"
+     ],
+     "final": [
+      "True"
+     ]
+    }
+   }
+  },
+  "m91/engines/fd_shift.record.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused",
+      "unknown"
+     ],
+     "final": [
+      "broken",
+      "pass",
+      "unknown"
+     ]
+    }
+   }
+  },
+  "m91/engines/rope_user.json": {
+   "state": "same",
+   "values": 1,
+   "differs": {}
+  },
+  "m91/engines/rope_user.record.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m51/sglang_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m51/sglang_on.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m51/sglang_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m51/sglang_seeded.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m51/transformers.json": {
+   "state": "differs",
+   "values": 7,
+   "differs": {
+    ".seeded_on.refused": {
+     "milestone": [
+      "True"
+     ],
+     "final": [
+      "False"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m51/vllm_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m51/vllm_on.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m51/vllm_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m51/vllm_seeded.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m51/vllm_seeded.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m42/healthy_fp8.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m42/healthy_none.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m42/roll_on.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m42/strided_on.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m42/strided_usedata.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m42/transpose_on.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m63/diffusers_i01_off.json": {
+   "state": "same",
+   "values": 1,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_i01_on.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_i01_strict.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_i04_observe.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_i04_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_i04_on.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_i04_reference.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_lora_other_off.json": {
+   "state": "same",
+   "values": 1,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_lora_other_on.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_lora_other_strict.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_lora_right_off.json": {
+   "state": "same",
+   "values": 1,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_lora_right_on.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_m7_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_m7_on.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_m7_reference.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_s3_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_s3_on.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_vae_observe.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_vae_off.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_vae_on.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m63/diffusers_vae_reference.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m55/l05.json": {
+   "state": "same",
+   "values": 40,
+   "differs": {}
+  },
+  "m91/rerun/m53/healthy_off.json": {
+   "state": "same",
+   "values": 14,
+   "differs": {}
+  },
+  "m91/rerun/m53/healthy_on.json": {
+   "state": "differs",
+   "values": 22,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "refused"
+     ],
+     "final": [
+      "broken"
+     ]
+    },
+    ".requests.effort_level.status": {
+     "milestone": [
+      "400"
+     ],
+     "final": [
+      "200"
+     ]
+    },
+    ".requests.misspelt_setting.status": {
+     "milestone": [
+      "400"
+     ],
+     "final": [
+      "200"
+     ]
+    },
+    ".requests.request_template.status": {
+     "milestone": [
+      "400"
+     ],
+     "final": [
+      "200"
+     ]
+    },
+    ".requests.unknown_field.status": {
+     "milestone": [
+      "400"
+     ],
+     "final": [
+      "200"
+     ]
+    },
+    ".summaries.<pid> request:vllm.chat_template.refused": {
+     "milestone": [
+      "1"
+     ],
+     "final": [
+      "0"
+     ]
+    },
+    ".summaries.<pid> request:vllm.request_fields.refused": {
+     "milestone": [
+      "1"
+     ],
+     "final": [
+      "0"
+     ]
+    },
+    ".summaries.<pid> request:vllm.template_settings.refused": {
+     "milestone": [
+      "2"
+     ],
+     "final": [
+      "0"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m53/healthy_on.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m53/keep_off.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m53/keep_on.json": {
+   "state": "differs",
+   "values": 11,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "refused"
+     ],
+     "final": [
+      "broken"
+     ]
+    },
+    ".requests.dropped_reasoning.status": {
+     "milestone": [
+      "400"
+     ],
+     "final": [
+      "200"
+     ]
+    },
+    ".summaries.<pid> request:vllm.reasoning_history.refused": {
+     "milestone": [
+      "1"
+     ],
+     "final": [
+      "0"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m53/keep_on.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m53/overhead.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m53/tool_off.json": {
+   "state": "same",
+   "values": 1,
+   "differs": {}
+  },
+  "m91/rerun/m53/tool_on.json": {
+   "state": "same",
+   "values": 9,
+   "differs": {}
+  },
+  "m91/rerun/m53/tool_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m53/tool_refuse.json": {
+   "state": "differs",
+   "values": 9,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "refused"
+     ],
+     "final": [
+      "broken"
+     ]
+    },
+    ".requests.tool_call.status": {
+     "milestone": null,
+     "final": [
+      "200"
+     ]
+    },
+    ".summaries.<pid> container:vllm.allocate_slots.refused": {
+     "milestone": null,
+     "final": [
+      "0"
+     ]
+    },
+    ".summaries.<pid> request:vllm.chat_template.refused": {
+     "milestone": null,
+     "final": [
+      "0"
+     ]
+    },
+    ".summaries.<pid> request:vllm.reasoning_history.refused": {
+     "milestone": null,
+     "final": [
+      "0"
+     ]
+    },
+    ".summaries.<pid> request:vllm.request_fields.refused": {
+     "milestone": null,
+     "final": [
+      "0"
+     ]
+    },
+    ".summaries.<pid> request:vllm.template_settings.refused": {
+     "milestone": null,
+     "final": [
+      "0"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m53/tool_refuse.jsonl": {
+   "state": "differs",
+   "values": 2,
+   "differs": {
+    ".decisions[].verdict": {
+     "milestone": [
+      "pass",
+      "refused"
+     ],
+     "final": [
+      "broken",
+      "pass"
+     ]
+    }
+   }
+  },
+  "m91/rerun/m54/healthy_note.json": {
+   "state": "same",
+   "values": 23,
+   "differs": {}
+  },
+  "m91/rerun/m54/healthy_note.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/healthy_on.json": {
+   "state": "same",
+   "values": 23,
+   "differs": {}
+  },
+  "m91/rerun/m54/healthy_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/healthy_strict.json": {
+   "state": "same",
+   "values": 23,
+   "differs": {}
+  },
+  "m91/rerun/m54/healthy_strict.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/keep_on.json": {
+   "state": "same",
+   "values": 12,
+   "differs": {}
+  },
+  "m91/rerun/m54/keep_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/tool_observe.json": {
+   "state": "same",
+   "values": 9,
+   "differs": {}
+  },
+  "m91/rerun/m54/tool_observe.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/tool_observe_strict.json": {
+   "state": "same",
+   "values": 3,
+   "differs": {}
+  },
+  "m91/rerun/m54/tool_observe_strict.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/tool_on.json": {
+   "state": "same",
+   "values": 9,
+   "differs": {}
+  },
+  "m91/rerun/m54/tool_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m54/vllm_seeded_report.json": {
+   "state": "same",
+   "values": 0,
+   "differs": {}
+  },
+  "m91/rerun/m54/vllm_seeded_report.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_bug_off.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_bug_on.json": {
+   "state": "same",
+   "values": 12,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_bug_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_bug_strict.json": {
+   "state": "same",
+   "values": 12,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_bug_strict.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_clean_off.json": {
+   "state": "same",
+   "values": 4,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_clean_on.json": {
+   "state": "same",
+   "values": 12,
+   "differs": {}
+  },
+  "m91/rerun/m55/market_clean_on.jsonl": {
+   "state": "same",
+   "values": 2,
+   "differs": {}
+  }
+ },
+ "counts": {
+  "same": 75,
+  "differs": 19
+ }
+}

@@ -1,0 +1,86 @@
+{
+ "case": "15_config_alias",
+ "meta": {
+  "id": "15",
+  "title": "config key under an unrecognized name silently ignored",
+  "fact": "MAPPING",
+  "issue": "https://github.com/sgl-project/sglang/issues/30176 (mechanism); consumer here: transformers",
+  "engine": "transformers (installed version)",
+  "kind": "real-engine",
+  "boundary": "checkpoint config (key names) -> model builder (recognized fields)",
+  "trigger": {
+   "model": "config written with a key name the loader does not recognize"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "load (unknown or ignored config key is an error)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 0.02443426474928856,
+  "mean_abs": 0.002909495516958004,
+  "ref_max_abs": 0.9576677083969116,
+  "top1_agree": 0.98046875
+ },
+ "fixed_vs_reference": {
+  "max_abs": 0.0,
+  "mean_abs": 0.0,
+  "ref_max_abs": 0.9576677083969116,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "load",
+   "checks": "unknown config keys are an error",
+   "defect": {
+    "flagged": true,
+    "message": "transformers LlamaConfig: unrecognised config keys ['rope_scale']"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "probe": {
+  "result": {
+   "unknown_key_kept_as_attribute": 4.0,
+   "rope_parameters_used": {
+    "rope_theta": 10000.0,
+    "rope_type": "default"
+   }
+  },
+  "notes": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "seconds": 0.2
+}

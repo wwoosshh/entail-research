@@ -1,0 +1,52 @@
+{
+ "when": "2026-09-24 15:41:18",
+ "torch": "2.14.0+cu130",
+ "transformers": "5.17.0",
+ "batch": 8,
+ "prompt": 512,
+ "slots": 640,
+ "attention_in_transformers": "sdpa",
+ "stored": {
+  "q_proj": "int4_packed",
+  "lm_head": "int4_packed",
+  "embed": "dense"
+ },
+ "logit_scale": 15.4375,
+ "frontend": {
+  "torch": {
+   "nodes": 834,
+   "trace_seconds": 0.04,
+   "notes": [],
+   "max_abs_vs_transformers": 0.0,
+   "mean_abs_vs_transformers": 0.0,
+   "same_next_token": 8,
+   "of": 8,
+   "cache_row_max_abs_vs_transformers": 0.0
+  },
+  "triton": {
+   "nodes": 835,
+   "trace_seconds": 0.041,
+   "notes": [],
+   "max_abs_vs_transformers": 0.234375,
+   "mean_abs_vs_transformers": 0.02978644147515297,
+   "same_next_token": 8,
+   "of": 8,
+   "cache_row_max_abs_vs_transformers": 0.59375
+  },
+  "flex": {
+   "nodes": 835,
+   "trace_seconds": 0.005,
+   "notes": [],
+   "max_abs_vs_transformers": 0.3125,
+   "mean_abs_vs_transformers": 0.04017447680234909,
+   "same_next_token": 8,
+   "of": 8,
+   "cache_row_max_abs_vs_transformers": 0.53125
+  }
+ },
+ "refused": {
+  "declared dense, stored int4": "load contract: weights are not stored as the program declares: layers[0].q: declared dense, stored int4_packed; layers[0].k: declared dense, stored int4_packed; layers[0].v: declared dense, stored int4_packed; layers[0].o: declared dense, stored int4_packed; layers[0].gate: declared dense, stored in",
+  "a RoPE scaling no lowering computes": "rope: no lowering computes Rotary(rope_type='yarn', theta=1000000.0, factor=4.0, original_max_position=32768) (computed: default)",
+  "a cache declared one slot longer": "program input cache[0].keys: dim slots is 640, the type declares 641"
+ }
+}

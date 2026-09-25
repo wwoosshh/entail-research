@@ -1,0 +1,73 @@
+{
+ "case": "12_session_restore",
+ "meta": {
+  "id": "12",
+  "title": "session restore resumes one position too far",
+  "fact": "RANGE",
+  "issue": "https://github.com/ggml-org/llama.cpp/issues/23400",
+  "engine": "session save/restore (mechanism)",
+  "kind": "mechanism",
+  "boundary": "session file (token count) -> KV cache (valid length)",
+  "trigger": {
+   "feature": "session save and restore",
+   "turn": "resume after restore"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "load (declared valid length vs actual KV entries)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 1.2347991466522217,
+  "mean_abs": 0.28247999954328407,
+  "ref_max_abs": 8.7553071975708,
+  "top1_agree": 1.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 0.0,
+  "mean_abs": 0.0,
+  "ref_max_abs": 8.7553071975708,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "load",
+   "checks": "declared valid length vs resume position",
+   "defect": {
+    "flagged": true,
+    "message": "decode after session restore: position 12 does not follow the valid KV length 11 (Valid.length)"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 1.0
+}

@@ -1,0 +1,226 @@
+{
+ "server": "healthy",
+ "tag": "note",
+ "env": {
+  "ENTAIL_RESPONSE_NOTE": "1"
+ },
+ "args": [
+  "--tool-call-parser",
+  "hermes",
+  "--trust-request-chat-template"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-24 17:44:26",
+ "started": true,
+ "start_seconds": 22.0,
+ "requests": {
+  "plain": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "multi_turn": {
+   "what": "pass",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "tool_call": {
+   "what": "pass",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 0,
+   "tool_calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Paris\"}"
+    }
+   ],
+   "finish_reason": "tool_calls",
+   "entail_field": null
+  },
+  "thinking": {
+   "what": "pass",
+   "status": 200,
+   "content": "\n\nParis.",
+   "reasoning_chars": 685,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "effort_none": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "request_template": {
+   "what": "planted",
+   "status": 200,
+   "content": "<think>\nOkay, the user is asking for the capital of France in one word. Let me think. I know that France is a country in Europe. The capital is a city that serves as the political, economic, and cultu",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": [
+    "[entail] broken at request:vllm.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (manifest: <workspace>/testbed/results/m91/rerun/m53/manifests/healthy/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a.json#Template, declared); vllm.chat_template uses Template(chat_template_sha256='17762d2e5131cb2a950db7dd5700c50095547773d3302b52baebe9ae32257a55', reasoning_history=None, tool_call_format=None) (user: vllm chat template, named by the request or --chat-template, verified); rule: the user's explicit choice contradicts the declaration; it is not overridden; reported, not stopped",
+    "[entail] broken at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: enable_thinking, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('enable_thinking',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest, verified); rule: the consumer differs from the declaration and no resolution is registered; reported, not stopped"
+   ]
+  },
+  "unknown_field": {
+   "what": "planted",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": [
+    "[entail] broken at request:vllm.request_fields: Coverage declared Coverage(total=6, taken=6, left=()) (user: the fields the request sets: chat_template_kwargs, guided_json, max_tokens, messages, model, temperature, declared); vllm.chat_request uses Coverage(total=6, taken=5, left=('guided_json',)) (engine: vllm ChatCompletionRequest: a field the schema does not know is kept in model_extra and ignored (logged at debug level), verified); rule: the consumer differs from the declaration and no resolution is registered; reported, not stopped"
+   ]
+  },
+  "misspelt_setting": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": [
+    "[entail] broken at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: enable_thinkng, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('enable_thinkng',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest, verified); rule: the consumer differs from the declaration and no resolution is registered; reported, not stopped"
+   ]
+  },
+  "effort_level": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": [
+    "[entail] broken at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: reasoning_effort, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('reasoning_effort',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest, verified); rule: the consumer differs from the declaration and no resolution is registered; reported, not stopped"
+   ]
+  }
+ },
+ "stream": {
+  "request": "misspelt_setting",
+  "status": 200,
+  "comments": [
+   ": entail: [entail] broken at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: enable_thinkng, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('enable_thinkng',)) (engine: vllm chat template: a settin"
+  ],
+  "data_lines": 65
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.chat_template",
+   "verdict": "broken",
+   "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.request_fields",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "760 request:vllm.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 11,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "760 request:vllm.chat_template": {
+   "checks": 11,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 10
+   }
+  },
+  "760 request:vllm.request_fields": {
+   "checks": 10,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 9
+   }
+  },
+  "760 request:vllm.template_settings": {
+   "checks": 9,
+   "broken": 4,
+   "refused": 0,
+   "skipped": 1,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 5
+   }
+  },
+  "855 container:vllm.allocate_slots": {
+   "checks": 256,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 256
+   }
+  }
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "tag": "lora_right_on",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "lora": "nagito/nagito_illustrious_v3.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "on_broken": "report",
+ "outcome": "loaded",
+ "adapters": {
+  "unet": [
+   "t"
+  ]
+ },
+ "modules_with_the_adapter": 788,
+ "log": [
+  "WARNING diffusers.quantizers.torchao.torchao_quantizer: Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+  "WARNING diffusers.models.modeling_utils: There are modules in UNet2DConditionModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModel found with the prefix='text_encoder'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModel related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue if you think it's unexpected: h",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModelWithProjection found with the prefix='text_encoder_2'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModelWithProjection related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue i"
+ ],
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 13.89,
+   "image": "/home/<user>/m63_out_rerun/lora_right_on_seed11.png",
+   "stats": {
+    "mean": 167.7,
+    "std": 61.06,
+    "saturation": 38.21
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 11.48,
+   "image": "/home/<user>/m63_out_rerun/lora_right_on_seed22.png",
+   "stats": {
+    "mean": 173.33,
+    "std": 55.91,
+    "saturation": 39.72
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 11.65,
+   "image": "/home/<user>/m63_out_rerun/lora_right_on_seed33.png",
+   "stats": {
+    "mean": 162.15,
+    "std": 65.56,
+    "saturation": 49.7
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.548
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 6.989
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.951
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.174
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.086
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.178
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 20.562
+  },
+  {
+   "boundary": "load:diffusers.lora",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=788, taken=788, left=())",
+   "declared_from": "LoRA /mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_illustrious_v3.safetensors on StableDiffusionXLPipeline (every module the LoRA carries weights for)",
+   "chosen": "Coverage(total=788, taken=788, left=())"
+  },
+  {
+   "timing": "load:diffusers.lora",
+   "ms": 1.158
+  }
+ ],
+ "when": "2026-09-25 07:13:01"
+}

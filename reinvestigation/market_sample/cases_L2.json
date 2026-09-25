@@ -1,0 +1,1340 @@
+[
+ {
+  "case_id": "L001",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 899,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/899",
+  "title": "Tensor shape mismatch when doing smoothquant for Yi-34B",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "Yi-34B를 hf_llama_convert.py로 smoothquant(0.5) 변환한 뒤 build.py로 엔진을 빌드하면, load_from_binary가 qkv int8 가중치 파일을 reshape하다 ValueError로 멈춘다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문 traceback: \"ValueError: cannot reshape array of size 66060288 into shape (7168,8960)\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "tensorrt_llm/models/llama/weight.py의 load_from_binary가 smoothquant로 저장된 qkv 가중치 파일(model.layers.0.attention.query_key_value.weight.int8.col.0.bin)을 읽을 때 기대 shape를 잘못 계산했다. 그래서 파일의 실제 원소 수(66060288)와 맞지 않는 (7168, 8960)으로 reshape하려다 빌드가 실패했다. 댓글 작성자가 L1011의 식을 `(n_embd // n_groups) // mapping.tp_size * 2)`로 고치라고 했고, 다른 사용자가 이것으로 해결됐다고 했다.",
+  "components_involved": [
+   "tensorrt_llm/models/llama/weight.py (load_from_binary, fromfile)",
+   "examples/llama/hf_llama_convert.py (smoothquant 변환 산출물)",
+   "examples/llama/build.py"
+  ],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/899#issuecomment-1905320520",
+   "summary": "댓글 제안: weight.py L1011의 qkv shape 식을 `(n_embd // n_groups) // mapping.tp_size * 2)`로 바꿈(병합된 PR은 아님)."
+  },
+  "trigger": "TensorRT-LLM 0.7.1(소스 빌드), TensorRT 9.2.0, 4×RTX 3090, Yi-34B, hf_llama_convert.py --smoothquant 0.5 --storage-type fp16(TP 1과 4 모두), build.py --use_smooth_quant --per_channel --per_token --world_size 4 --pp_size 4",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/899#issuecomment-1905320520",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/899#issuecomment-1910028211",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/895"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "빌드 단계 충돌이며 틀린 출력 보고가 아니다. 수정은 일반 사용자의 댓글 제안이고 병합 PR이나 유지보수자 확인은 없다. 원래 L1011 식은 확인하지 않았다. #895는 같은 보고자가 템플릿 없이 먼저 올린 같은 내용의 이슈이고, 템플릿 요청을 받고 #899로 다시 올렸다. 보고자가 설명 없이 닫았다."
+ },
+ {
+  "case_id": "L002",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 12877,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/12877",
+  "title": "[Bug]: Garbage output with modelopt FP8 checkpoint in 1.2.0: use_fp8_context_fmha forced True, regression from 1.1.0",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "TRT-LLM 1.2.0 TRT 백엔드에서 modelopt FP8 체크포인트(kv_cache_quant_algo FP8)로 빌드한 LLaMA-3.1-8B/3.2-3B 엔진이 대부분의 프롬프트에 '##.##.##...' 같은 깨진 출력이나 반복을 낸다. 1.1.0에서는 같은 체크포인트가 정상이었다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "none",
+  "message_evidence": "빌드 시 정보 로그 \"FP8 Context FMHA is enabled to support FP8 Paged Context FMHA.\"만 나온다. 보고자는 --use_fp8_context_fmha disable이 \"silently overridden\"된다고 썼고, 실행 시 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "builder.py (use_fp8_context_fmha 강제, 보고자 분석)",
+   "modeling_utils.py (attention_output_orig_quant_scale 합성, 보고자 분석)",
+   "컴파일된 attention 커널(보고자 추정)"
+  ],
+  "fix": null,
+  "trigger": "TRT-LLM 1.2.0 TRT 백엔드(trtllm-build --kv_cache_type paged), modelopt FP8 체크포인트(quant_algo FP8, kv_cache_quant_algo FP8), LLaMA-3.1-8B-Instruct와 LLaMA-3.2-3B-Instruct, NVIDIA L4(SM 89). 1.1.0은 정상. 아주 짧은 프롬프트는 가끔 정상 출력.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/12877",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/12877#issuecomment-4257446544",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/12877#issuecomment-4427158500",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/12877#issuecomment-4890220551"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자는 builder.py와 modeling_utils.py가 1.1.0과 1.2.0에서 바이트 단위로 같으므로 회귀가 컴파일된 attention 커널에 있다고 추정했다. 유지보수자는 원인을 조사하지 않았다. Tracin은 최신 코드의 PyTorch 워크플로(Llama-3.2-1B FP8)에서는 정상이라고 했고, TRT 백엔드 폐기 예정을 이유로 PyTorch 백엔드를 쓰라며 닫았다. message_at_failure는 보고자의 'silently' 표현과, 정보 로그 말고는 메시지가 없었다는 서술을 근거로 none으로 적었다."
+ },
+ {
+  "case_id": "L003",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 10639,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/10639",
+  "title": "[AutoDeploy][Bug]: Investigate accuracy test for sharded NemotronMOE",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "AutoDeploy CI의 accuracy/test_llm_api_autodeploy.py::TestNemotronMOE::test_fp8[4](4 GPU 샤딩)에서 평가 정확도가 기준 86.884(임계 83.681)보다 훨씬 낮은 0.644로 나왔다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "CI 정확도 가설검정 실패(AssertionError)만 제시되어 있고 실행 로그나 경고는 없다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "AutoDeploy, NemotronMOE FP8, 4 GPU 샤딩(DGX_H100-4_GPUs CI 단계), 평가 샘플 1319개",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10639",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10639#issuecomment-3836452451"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "기여자(lucaslie)가 'already fixed'라고만 쓰고 닫았고, 어떤 수정인지 링크나 설명이 없다. 출력 텍스트가 없어서 깨진 출력인지 그럴듯한 오답인지 알 수 없다. 정확도 하락으로 보고 fluent_wrong으로 적었다. 템플릿은 feature 양식이지만 라벨은 bug다."
+ },
+ {
+  "case_id": "L004",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 6755,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/6755",
+  "title": "Accuracy drop for Gemma 3-1b-it model",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "TRT-LLM 엔진으로 돌린 Gemma-3-1b-it의 MMLU 가중 평균 정확도가 HF 39.86 대비 FP32 16.22, FP16 9.51, INT8 9.46으로 크게 떨어졌다. 같은 표에서 Gemma 2B와 7B의 FP32 엔진도 8.74와 1.77로 낮다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자가 정확도 표만 제시했고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "TensorRT-LLM 엔진(워크플로는 명시되지 않음. 유지보수자가 TRT 워크플로라면 PyTorch 워크플로로 바꾸라고 함), google/gemma-3-1b-it, FP32/FP16/INT8, MMLU",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/6755",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/6755#issuecomment-3184640595",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/6755#issuecomment-3312978764"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "유지보수자는 CI에 PyTorch 워크플로의 Gemma3 1B MMLU 테스트가 있다며 PyTorch 워크플로로 옮기라고 했다. 보고자가 시도해 보겠다고 한 뒤 원인 조사 없이 닫혔다. 타임라인의 PR #18164 교차 참조는 그 PR 댓글의 CI 빌드 번호 '#6755'가 자동 링크된 것이라 이 이슈와 관계없다. 라벨은 Performance지만 내용은 정확도 문제다."
+ },
+ {
+  "case_id": "L005",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 10446,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/10446",
+  "title": "[Usage]: The activation function `gelu_pytorch_tanh` has incorrect logic.",
+  "output_problem": "no",
+  "not_output_reason": "question",
+  "symptom": "보고자가 코드를 읽고, TRT-LLM이 gelu_pytorch_tanh를 tanh 근사 없는 일반 gelu로 매핑해 transformers와 다르다고 문제를 제기했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음. 틀린 출력을 관찰한 보고가 아니라 코드 읽기에서 나온 의문이다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "결함이 아니었다. 유지보수자에 따르면 tensorrt_llm/functional.py의 gelu가 이미 tanh 근사를 구현하므로 'gelu_pytorch_tanh': gelu 매핑은 맞다. 보고자도 tanh 근사가 쓰인다고 확인했다.",
+  "components_involved": [
+   "tensorrt_llm/functional.py (gelu)",
+   "활성 함수 매핑 'gelu_pytorch_tanh'"
+  ],
+  "fix": null,
+  "trigger": "TensorRT-LLM main, NVIDIA L20, CUDA 12.8(코드 읽기 기반 보고)",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10446#issuecomment-3717461256",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10446#issuecomment-3717489533"
+  ],
+  "extractor_confidence": "high",
+  "notes": "라벨은 question, waiting for feedback, Customized kernels다. 오보로 끝났다."
+ },
+ {
+  "case_id": "L006",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 11125,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/11125",
+  "title": "[Bug]: Gibberish outputs on Llama8B with Eagle3",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "TRTLLM 1.2.0rc8의 trtllm-serve로 Llama-3.1-8B-Instruct에 Eagle3 추측 디코딩(max_draft_len 3)을 켜면, temperature 0 응답이 'I!!!!!!...'처럼 깨진다. 추측 디코딩 없이는 정상적인 이야기가 나온다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "응답 JSON만 제시되어 있다(finish_reason length). 서버 로그나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "TRTLLM 1.2.0rc8 사전 빌드 wheel, NVIDIA RTX PRO 6000 Blackwell, Llama-3.1-8B-Instruct와 yuhuili/EAGLE3-LLaMA3.1-Instruct-8B, speculative_config decoding_type Eagle, max_draft_len 3, temperature 0, max_tokens 512. enable_block_reuse false, overlap scheduler 끔, autotuner 끔, cuda_graph max_batch_size 1로 바꿔도 같은 증상.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/11125",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/11125#issuecomment-3820850374"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자(협업자)가 올린 지 약 30분 만에 설명 없이 닫았다. 원인이나 수정 기록이 없다. 깨진 응답에서는 cached_tokens 46, avg_decoded_tokens_per_iter 3.94였다."
+ },
+ {
+  "case_id": "L007",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 1668,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/1668",
+  "title": "Alpha scaling incorrect when using rslora",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "rslora로 학습한 LoRA 어댑터를 TRT-LLM에 올리면 어댑터 가중치에 잘못된 스케일이 적용되어 생성 결과가 매우 나빠진다고 보고했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자는 코드 위치와 'very bad generations'만 적었고, 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "tensorrt_llm/lora_manager.py의 load_from_model_dir가 HF adapter_config.json의 use_rslora 값을 보지 않았다. 그래서 LoRA 출력 가중치 스케일을 항상 lora_alpha / r로 계산했다. rslora로 학습한 어댑터는 lora_alpha / sqrt(r)로 스케일해야 하므로 잘못된 크기의 어댑터 가중치가 적용됐고, 생성 품질이 나빠졌다. 수정은 use_rslora가 참이면 lora_alpha / sqrt(r)를 쓰게 했고, examples/hf_lora_convert.py에도 같은 스케일을 적용했다.",
+  "components_involved": [
+   "tensorrt_llm/lora_manager.py (load_from_model_dir의 scale 계산)",
+   "examples/hf_lora_convert.py",
+   "adapter_config.json (use_rslora, lora_alpha, r)"
+  ],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/pull/1669",
+   "summary": "use_rslora일 때 LoRA 스케일을 lora_alpha / sqrt(r)로 계산하도록 lora_manager.py와 hf_lora_convert.py를 고침. GitHub에서는 미병합으로 닫혔지만 유지보수자가 코드베이스에 병합했다고 밝힘."
+  },
+  "trigger": "use_rslora=true로 학습한 HF LoRA 어댑터를 TRT-LLM LoRA로 로드할 때. 시스템 정보는 'Any'.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/1669",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/1669#issuecomment-2145016050",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1668#issuecomment-2232629356"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 코드를 읽어 원인을 지목했다. PR #1669는 GitHub 상태로는 병합되지 않았지만, nv-guomingz가 코드베이스에 병합했다고 했고 byshiue도 'The fix is merged'라며 닫았다(내부 동기화 방식). 증상 표현이 'very bad generations'뿐이라 깨진 출력인지 품질 저하인지 알 수 없어 visible_effect를 other로 적었다."
+ },
+ {
+  "case_id": "L008",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 8389,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/8389",
+  "title": "[Bug]:  Attention pattern matching yield incorrect num_kv_heads",
+  "output_problem": "no",
+  "not_output_reason": "performance",
+  "symptom": "AutoDeploy에서 NemotronMoe의 캐시를 초기화할 때 kv 삽입 패스가 kv 헤드 수를 32(어텐션 헤드 수)로 잡는다. 실제는 2라서 캐시 페이지가 16배 커지고 처리량이 제한된다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(메모리·처리량 문제). 보고자가 직접 출력한 디버그 줄 'k_fake: shape ... num_kv_heads: 32'만 있다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "AutoDeploy의 어텐션 패턴 매칭(tensorrt_llm/_torch/auto_deploy/transform/library/attention.py) 결과, KV 캐시 삽입 패스가 받은 k의 헤드 차원이 어텐션 헤드 수(32)였다. 그래서 kv 헤드 수 2 대신 32로 캐시를 할당했다. 병합된 수정은 grouped attention 매칭을 SDPA→torch_attention과 repeat_kv+torch_attention→torch_attention 두 단계로 나눴다. 이렇게 해서 repeat_kv가 붙은 형태도 grouped attention으로 매칭되게 했다.",
+  "components_involved": [
+   "tensorrt_llm/_torch/auto_deploy/transform/library/attention.py (grouped attention 패턴 매칭)",
+   "tensorrt_llm/_torch/auto_deploy/config/default.yaml",
+   "KV 캐시 삽입 패스",
+   "repeat_kv"
+  ],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/pull/8638",
+   "summary": "grouped attention 패턴 매칭을 SDPA→torch_attention과 repeat_kv+torch_attention→torch_attention 두 패스로 나눔."
+  },
+  "trigger": "AutoDeploy(build_and_run_ad.py), NemotronMoe(어텐션 헤드 32, kv 헤드 2)",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/8389#issuecomment-3407984262",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/8389#issuecomment-3416913701",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/8638"
+  ],
+  "extractor_confidence": "high",
+  "notes": "출력이 틀렸다는 보고가 아니라 캐시 크기와 처리량 문제다. 논의 일부는 내부 Slack에 있다."
+ },
+ {
+  "case_id": "L009",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 8953,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/8953",
+  "title": "[Bug]:  AutoDeploy: nano3 TP8 accuracy degradation",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "AutoDeploy의 Nemotron H MoE 샤딩(PR #8744)으로 nano3를 world_size 8(TP8)로 돌리면 GSM8K가 76.649로, world_size 1·2·4의 81.994~83.027보다 낮게 나왔다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "PR #8744 댓글에 정확도 수치만 있고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "AutoDeploy, nano3(Nemotron H MoE), TP=8(world_size 8), GSM8K(MMLU도 77.632로 약간 낮음). PR #8744 병합 직후.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/8744#issuecomment-3489456944",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/8953#issuecomment-3523109474"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "이슈 본문은 조사 요청 한 줄이고, 증상 수치는 링크된 PR #8744 댓글에서 읽었다. 협업자가 'FP32 Mamba cache'와 최신 브랜치에서 시험하니 해결됐다고만 하고 닫았다. 자세한 내용은 내부 Slack이라 원인을 알 수 없다."
+ },
+ {
+  "case_id": "L010",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 1216,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/1216",
+  "title": "enable_chunked_context causing worse accuracy",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "TRT-LLM v0.8.0에서 enable_chunked_context를 켠 MythoMax-L2-13b 엔진이 문장 중간에 '<<HUMAN>>' 같은 있어서는 안 될 표기를 넣었고, 전반적인 정확도도 크게 떨어졌다. 끈 엔진은 정상이었다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자와 다른 사용자 모두 정확도 저하만 적었고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/1216#issuecomment-2022111011",
+   "summary": "유지보수자가 정확성 문제를 고친 최신 코드를 main 브랜치에 올렸다고 함. 구체적 커밋이나 내용은 밝히지 않음."
+  },
+  "trigger": "TRT-LLM v0.8.0(tritonserver 24.02-trtllm 컨테이너), H100 PCIe, MythoMax-L2-13b fp16, enable_chunked_context True, use_paged_context_fmha enable, max_num_tokens 1024, paged KV cache. context_fmha_fp32_acc를 켜고 끄거나 max_num_tokens를 2048로 바꿔도 개선되지 않음.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1216#issuecomment-1982783744",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1216#issuecomment-1985125380",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1216#issuecomment-2022111011",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1216#issuecomment-2025182360"
+  ],
+  "extractor_confidence": "high",
+  "notes": "협업자가 'correctness issues'를 작업 중이라고 인정했다. 코드 동기화 뒤 보고자가 정확도가 고쳐졌다고 확인했다. 무엇이 틀렸는지는 설명되지 않아 unconfirmed로 적었다. 다른 사용자도 같은 빌드 설정에서 같은 저하를 겪었다. 보고자에 따르면 chunked context로 처리량은 거의 2배였다."
+ },
+ {
+  "case_id": "L011",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 2796,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/2796",
+  "title": "Multimodal Cross-attention incorrect results in",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "TRT-LLM v0.17.0으로 빌드한 Llama-3.2-11B-Vision(-Instruct) 엔진이 이미지 과제에서 틀린 답을 냈다. 층별 출력을 torch와 비교하면 cross-attention이 있는 4번째 층부터 상관계수가 약 0.99에서 0.5~0.8로 떨어졌다. 표 이미지의 합계를 물으면 HF는 '2,173'을 답했지만 TRT-LLM은 엉뚱한 숫자와 문장을 냈다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자와 다른 사용자 모두 출력과 정확도만 제시했고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "tensorrt_llm/models/mllama/model.py가 cross-attention에 넘기는 마스크와 마스크 적용 위치가 잘못되어 있었다. 보고자는 불일치가 cross-attention 블록에서 시작해 디코딩까지 누적된다고 측정했다. 이 이슈를 고쳤다고 릴리스 노트에 적힌 동기화 PR #2873은 두 가지를 바꿨다. 먼저 cross_attention_mask를 '1에서 뺀 값(반전)'과 full_text_row_masked_out_mask의 반전을 조합한 final_mask로 바꿨다. 또 full_text_row_masked_out_mask를 cross-attention 출력에 곱하는 위치를 뒤로 옮겼다. prepare_inputs의 cross KV 층 번호도 fusion_schedule 대신 cross_attention_layers에서 찾게 했다.",
+  "components_involved": [
+   "tensorrt_llm/models/mllama/model.py (cross_attention_mask, full_text_row_masked_out_mask, prepare_inputs)",
+   "tensorrt_llm/functional.py",
+   "tensorrt_llm/runtime/processor_wrapper/mllama_processor_wrapper.py, processor_wrapper.py (decode)",
+   "examples/multimodal/eval.py, utils.py"
+  ],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/pull/2873",
+   "summary": "TRT-LLM 동기화 PR. 릴리스 노트에 'Fixed incorrect output for Llama-3.2-11B-Vision-Instruct. (#2796)'이 있고, mllama cross-attention 마스크 계산과 적용 위치를 바꿈."
+  },
+  "trigger": "TRT-LLM v0.17.0(tritonserver 24.12-trtllm 컨테이너), H100 80G, Llama-3.2-11B-Vision-Instruct와 Llama-3.2-11B-Vision, 양자화 없이 공식 multimodal 예제로 변환·빌드, cross-attention이 건너뛰어지지 않는 시각 입력 과제. 일부 이미지에서만 틀림. 다른 사용자에 따르면 FP16 엔진은 아무것도 생성하지 않았고 BF16은 틀린 설명을 냈다.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2796#issuecomment-2668317520",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2796#issuecomment-2699760698",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2796#issuecomment-2711985815",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2796#issuecomment-2773134644",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/2873"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "유지보수자는 원인을 말로 설명하지 않고 필요한 변경 위치 링크만 줬다(model.py L626-635 등). 원인 기술은 동기화 PR #2873의 해당 파일 diff에서 읽었다. 유지보수자가 재현했을 때는 'Question: 2.' 반복 같은 깨진 출력도 나왔다. 보고자의 AI2D 평가는 60%로 가이드 기준 65%보다 낮았다. PR #3055는 임의 이미지 테스트를 추가했다. 이슈는 2025-12에 정리 차원에서 닫혔다."
+ },
+ {
+  "case_id": "L012",
+  "repo": "ggml-org/llama.cpp",
+  "number": 12357,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/12357",
+  "title": "Eval bug: Gemma 3 Outputs Gibberish After Context Shift",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "llama-server에서 Gemma 3(gemma-3-4b-it Q4_K_M)이 컨텍스트 길이에 도달해 context shift를 하면, 그 뒤로 '1111...' 같은 의미 없는 출력을 낸다. 같은 설정의 Qwen2.5 3B는 정상이었다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "none",
+  "message_evidence": "첨부 로그에는 'slot context shift, n_keep = 20, n_left = 491, n_discard = 245' 같은 정보 줄만 있고 경고나 오류가 없다(can_shift = 1).",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "context shift 때 KV 캐시의 K에 RoPE를 다시 적용하는 build_kv_self_shift(src/llama-context.cpp)가 모든 층에 전역 rope_freq_base와 rope_freq_scale을 썼다. Gemma 3의 sliding window 층은 RoPE를 freq_base 10000, freq_scale 1.0으로 적용한다. 그래서 이 층들의 캐시된 K가 모델과 다른 주파수로 다시 회전되어 위치가 어긋났고, shift 뒤 출력이 깨졌다. 수정은 Gemma 3의 sliding 층이면 층별 freq_base와 freq_scale을 build_rope_shift에 넘기게 했다. sliding 층 판정도 hparams.is_sliding()으로 모았다.",
+  "components_involved": [
+   "src/llama-context.cpp (build_kv_self_shift, build_rope_shift)",
+   "src/llama-hparams.cpp/.h (is_sliding, n_swa_pattern)",
+   "src/llama-graph.cpp (build_attn)",
+   "src/llama-model.cpp (load_hparams, llm_build_gemma3)"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/12373",
+   "summary": "KV 캐시 shift 때 Gemma 3 sliding 층에는 freq_base 10000, freq_scale 1.0을 쓰도록 층별 RoPE 매개변수를 넘김."
+  },
+  "trigger": "llama.cpp b4879(f08f4b31), Metal(Apple M3 Pro), llama-server, ggml-org/gemma-3-4b-it-GGUF Q4_K_M, -c 512(더 긴 컨텍스트에서도 발생), n_keep 19, 생성이 컨텍스트 길이에 도달해 context shift가 일어난 뒤. 다른 사용자는 CUDA와 CPU 빌드에서, -fa와 -nkvo 유무와 상관없이 재현했다.",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/12357#issuecomment-2720122073",
+   "https://github.com/ggml-org/llama.cpp/issues/12357#issuecomment-2720302584",
+   "https://github.com/ggml-org/llama.cpp/pull/12373"
+  ],
+  "extractor_confidence": "high",
+  "notes": "ggerganov가 처음에 context shift 구현이 sliding window 캐시와 맞지 않을 수 있다고 추정했고, 다음 날 PR로 고쳤다. 다른 프로젝트(pocketpal-ai, ipex-llm)의 같은 증상 이슈가 교차 참조됐다."
+ },
+ {
+  "case_id": "L013",
+  "repo": "ggml-org/llama.cpp",
+  "number": 16880,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/16880",
+  "title": "Eval bug: Qwen 3 VL provides incorrect bounding boxes on sizes that are not 1000x1000px / non-square",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "llama-server로 Qwen3-VL(30B-A3B Instruct)에 경계 상자를 물었다. 800×800 이미지에서는 좌표를 1.25배 해야 맞았고, 400×800처럼 정사각형이 아닌 이미지에서는 상자 비율이 틀리게 나왔다고 보고했다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "Relevant log output은 'N/a'다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "원래 보고된 증상은 llama.cpp 결함이 아니었다. Qwen3-VL은 원본 크기와 상관없이 0~1000 상대 좌표를 내는데, 보고자의 시각화 HTML은 이를 픽셀 좌표로 그렸다. 기여자가 좌표를 1000 기준으로 재척도하는 예제로 맞는 상자를 보였고, 보고자가 수긍했다. 이후 댓글에서 재척도 뒤에도 오차가 남는다는 문제가 제기됐다. 병합된 PR #25781은 그 원인을 이렇게 설명했다. tools/mtmd/models/qwen3vl.cpp의 resize_position_embeddings()가 학습된 절대 위치 임베딩을 align_corners=False(half-pixel)로 보간했지만, transformers 참조 구현은 align_corners=True를 쓴다. 이 차이 때문에 상자가 이미지 중심에서 바깥쪽으로 늘어난다고 했다.",
+  "components_involved": [
+   "Qwen3-VL 출력 좌표 규약(0~1000 상대 좌표)",
+   "보고자의 시각화 HTML(#16207 댓글에서 가져옴)",
+   "tools/mtmd/models/qwen3vl.cpp (resize_position_embeddings)",
+   "GGML_SCALE_FLAG_ALIGN_CORNERS",
+   "transformers get_vision_bilinear_indices_and_weights(참조 구현)"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/25781",
+   "summary": "재척도 뒤 남는 오차에 대한 수정: Qwen3-VL 비전 위치 임베딩 보간을 align_corners=True로 바꿈. 원래 보고의 주된 증상은 사용자 쪽 좌표 재척도로 해결됨."
+  },
+  "trigger": "llama.cpp b6887/6891 CPU, unsloth Qwen3-VL-30B-A3B-Instruct UD-Q4_K_XL과 mmproj F16, llama-server --jinja --temp 0, 1000×1000이 아닌 이미지(800×800, 400×800). PR에 따르면 남는 오차는 이미지가 클수록 커지고, 정사각형이 아닌 이미지에서는 축마다 다르다.",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/16880#issuecomment-3472427751",
+   "https://github.com/ggml-org/llama.cpp/issues/16880#issuecomment-3472727764",
+   "https://github.com/ggml-org/llama.cpp/issues/16880#issuecomment-3473595503",
+   "https://github.com/ggml-org/llama.cpp/issues/16880#issuecomment-4979022248",
+   "https://github.com/ggml-org/llama.cpp/pull/25781"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "원래 증상은 Qwen3-VL이 Qwen2.5-VL의 절대 좌표 대신 0~1000 상대 좌표로 바뀐 것을 보고자가 몰라서 생겼다(기여자가 Qwen3-VL 쿡북을 인용). 보고자가 수긍하고 닫았다. 2026-07에 다른 사용자가 재척도 뒤에도 오차가 남는다고 했고, 이것이 PR #25781(병합)로 이어졌다. 그 사용자는 수정을 직접 확인하지 못했고, 한 기여자는 그를 봇이라고 의심했다. 협업자 ngxson은 이슈가 닫힌 뒤 PR #16878로 큰 이미지의 상자 정확도가 좋아질 것이라고 했다. basis는 원래 증상에 대한 재현 예제와 사용자 쪽 해결을 기준으로 골랐다."
+ },
+ {
+  "case_id": "L014",
+  "repo": "ggml-org/llama.cpp",
+  "number": 18973,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/18973",
+  "title": "Misc. bug: llama.cpp b7783 produces infinite loop garbage on v1/chat but works on built-in GUI at 8080",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "llama.cpp b7783(Vulkan, Windows)에서 GLM-4.7-Flash Q8_0을 띄우고 OpenAI 호환 /v1 엔드포인트로 외부 클라이언트(Jan.AI, ChatBox, Witsy, llama-swap 경유)에서 요청하면, 생성이 끝나지 않고 깨진 출력이 무한 반복됐다. 내장 웹 UI에서는 정상이었다고 보고했다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "로그 칸이 비어 있고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "GLM-4.7-Flash GGUF(deepseek2 아키텍처)에는 MoE 게이팅 함수(expert_gating_func) 값이 없었다. 원본 config.json에 \"scoring_func\": \"sigmoid\"가 빠져 있어 변환 때 기록되지 않았기 때문이다(GLM과 DeepSeek의 기본값이 다름). 값이 없으면 src/llama-model.cpp의 load_hparams가 옛 DeepSeek V2 GGUF 호환용 기본값 SOFTMAX를 썼다. 그런데 GLM 4.7 Lite는 SIGMOID를 쓰므로 전문가 게이팅이 틀린 함수로 계산되어 출력이 망가졌다. PR #18980은 게이팅 값이 없는 GGUF가 GLM 4.7 Lite(n_layer 47/48, n_vocab 154880)로 판별되면 SIGMOID를 쓰게 했다.",
+  "components_involved": [
+   "GGUF 메타데이터 deepseek2.expert_gating_func",
+   "원본 config.json의 scoring_func 누락",
+   "convert_hf_to_gguf.py (scoring_func를 expert_gating_func로 기록)",
+   "src/llama-model.cpp load_hparams (게이팅 함수 기본값 SOFTMAX)"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/18980",
+   "summary": "expert_gating_func가 없는 GGUF가 GLM 4.7 Lite로 판별되면 SOFTMAX 대신 SIGMOID 게이팅을 기본으로 씀."
+  },
+  "trigger": "llama.cpp b7783 Vulkan, Windows 10, bartowski/zai-org_GLM-4.7-Flash-GGUF:Q8_0(재업로드 전 파일), -c 32000 --jinja, /v1 엔드포인트를 쓰는 외부 클라이언트",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/18973#issuecomment-3776689550",
+   "https://github.com/ggml-org/llama.cpp/issues/18973#issuecomment-3777090509",
+   "https://github.com/ggml-org/llama.cpp/issues/18973#issuecomment-3782851988",
+   "https://github.com/ggml-org/llama.cpp/pull/18980",
+   "https://github.com/ggml-org/llama.cpp/pull/18980#issuecomment-3776364373",
+   "https://github.com/ggml-org/llama.cpp/pull/18980#issuecomment-3776713334"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "기여자(theo77186)가 PR #18980의 결함을 원인으로 지목하고 --override-kv deepseek2.expert_gating_func=int:2 우회법을 줬다. 보고자는 PR 빌드가 아니라 bartowski가 다시 만든 GGUF로 우회법 없이 정상 동작을 확인했다. 내장 웹 UI만 정상이었던 이유는 설명되지 않았다. 보고자는 이후 --no-direct-io 없이는 몇 메시지 뒤 무언가 손상된다고 했는데, 이 부분도 설명되지 않았다. PR 토론에서 ngxson은 수정 뒤 logprob 비교가 참조와 거의 같아졌다고 했다."
+ },
+ {
+  "case_id": "L015",
+  "repo": "ggml-org/llama.cpp",
+  "number": 15516,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/15516",
+  "title": "Eval bug: Partial Gibberish on Long Prompts GPT-OSS 120B ROCm",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "ROCm(2×Radeon PRO W7900)에서 GPT-OSS 120B에 10k 토큰 이상의 긴 프롬프트를 주면 'Dissolution'이나 'oooo...'를 반복 출력한다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "원시 출력만 gist로 제시했고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "ggml 행렬곱(mul_mat, mul_mat_id)의 누산 정밀도(미병합 PR #15619의 가설)",
+   "GGML_CUDA_FORCE_MMQ 빌드 옵션(보고자 우회)"
+  ],
+  "fix": null,
+  "trigger": "llama.cpp 6250(e92734d5), 이후 6464에서도 재현, HIP 백엔드, 2×AMD Radeon PRO W7900(gfx1100), ggml-org/gpt-oss-120b-GGUF(mxfp4), -c 131072 -ngl 999 -b 2048 -ub 2048 -fa, reasoning_effort high, 10k 토큰 이상의 프롬프트. 보고자에 따르면 GGML_CUDA_FORCE_MMQ=ON 없이 빌드하면 여전히 깨진다.",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/15516#issuecomment-3288855677",
+   "https://github.com/ggml-org/llama.cpp/pull/15619",
+   "https://github.com/ggml-org/llama.cpp/pull/15619#issuecomment-3233769618"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "ggerganov의 PR #15619('fix #15274, #15517, #15516')는 attention과 FFN 출력 행렬곱에 F32 누산기를 강제하려 했다. 그는 F16 누산기의 수치 범위 문제가 큰 컨텍스트에서 생길 수 있다고 설명했다. 하지만 이 PR은 병합되지 않고 Vulkan 셰이더 클램프 PR #15652로 대체됐다. 보고자는 그 뒤 빌드 6464에서도 ROCm은 FORCE_MMQ 없이 여전히 깨진다고 했고, 이슈는 stale로 자동 종료됐다."
+ },
+ {
+  "case_id": "L016",
+  "repo": "ggml-org/llama.cpp",
+  "number": 16424,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/16424",
+  "title": "Eval bug: Using llama.cpp with ROCm produces garbage output with --split-mode layer",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "3×AMD Instinct MI50(ROCm)에서 --split-mode layer로 모델을 여러 GPU에 나누면 'hi'에 대한 답이 'ర్తర్త...' 같은 깨진 문자로 나온다. gpt-oss-120b 말고 다른 모델도 그렇다. GPU 하나에 들어가는 작은 모델을 --split-mode none으로 돌리면 정상이다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "none",
+  "message_evidence": "첨부한 전체 실행 로그에 경고나 오류 없이 깨진 출력만 있다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "이슈를 닫은 기여자(IMbackK)는 이것이 llama.cpp 결함이 아니라고 설명했다. 일부 ROCm 시스템에서 GPU 간 PCIe P2P 복사가 호스트 플랫폼 문제(버그 있는 PCIe 하드웨어 구현) 때문에 잘못 동작한다는 것이다. 정확한 원인은 밝혀지지 않았다고 했다. -DGGML_CUDA_NO_PEER_COPY=On으로 P2P 복사를 끄면 해결됐다. 보고자는 IOMMU(VT-d)를 끄면 추가 빌드 플래그 없이도 정상이라고 확인했다.",
+  "components_involved": [
+   "GPU 간 PCIe P2P 복사(ggml HIP 백엔드)",
+   "GGML_CUDA_NO_PEER_COPY 빌드 옵션",
+   "호스트 IOMMU(VT-d)"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/issues/16424#issuecomment-3369206545",
+   "summary": "우회: -DGGML_CUDA_NO_PEER_COPY=On으로 빌드하거나 커널에서 PCIe P2P를 끔. 보고자는 VT-d를 꺼서 해결."
+  },
+  "trigger": "llama.cpp 6688(898acba6), ROCm 6.4.3, Ubuntu 24.04, 3×AMD Instinct MI50/MI60(gfx906), 2×Xeon E5-2683 v4, gpt-oss-120b UD-Q4_K_XL 등, --split-mode layer, -ngl 999, IOMMU(VT-d) 켜짐. --split-mode row는 VT-d를 끈 뒤에도 'Memory access fault' 오류가 난다.",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/16424#issuecomment-3369206545",
+   "https://github.com/ggml-org/llama.cpp/issues/16424#issuecomment-3468203195"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "IMbackK는 저장소 연관이 CONTRIBUTOR로 표시되지만 이슈를 닫을 권한이 있다. 원인을 플랫폼 문제로 돌렸고 정확한 기전은 미확인이라고 했다. 2026-06 댓글은 lemonade-sdk/llamacpp-rocm#75 링크만 남겼다."
+ },
+ {
+  "case_id": "L017",
+  "repo": "ggml-org/llama.cpp",
+  "number": 24067,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/24067",
+  "title": "Eval bug: Plamo2 weights shape mismatch",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "Plamo2 1B를 fp32 GGUF로 변환해 llama-cli로 불러오면 'blk.1.attn_qkv.weight' shape 불일치(기대 2048, 0)로 로드에 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "\"check_tensor_dims: tensor 'blk.1.attn_qkv.weight' has wrong shape; expected 2048, 0\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "Plamo2는 층 0이 헤드 수 0인 Mamba 층이다. 그런데 공통 load_hparams는 층 0의 헤드 수로 어텐션 유무를 판단하므로 어텐션 key/value 길이 메타데이터를 읽지 않았다(보고자 PR #24068의 분석). plamo2 전용 코드가 이 메타데이터를 따로 읽던 부분도 #16075 이후 리팩터링 중 사라졌다(유지보수자 PR #24317 설명). 그래서 헤드 차원이 0으로 남아 qkv 텐서의 기대 크기가 0이 됐다. PR #24317은 plamo2의 load_arch_hparams에서 두 값을 다시 읽게 했고, mamba 층에 잘못 복사된 assert(n_head를 n_heads로, FPE 원인)도 고쳤다.",
+  "components_involved": [
+   "src/models/plamo2.cpp (load_arch_hparams, build_plamo2_mamba_layer의 assert)",
+   "src/llama-model.cpp (llama_model_base::load_hparams의 n_head() > 0 검사)",
+   "GGUF 메타데이터 attention.key_length / value_length",
+   "변환 파일에 들어가는 층별 헤드 배열"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/24317",
+   "summary": "plamo2 load_arch_hparams에서 attention key/value 길이를 다시 읽고, mamba 층 assert의 변수(n_head→n_heads)를 고침."
+  },
+  "trigger": "llama.cpp 9469(d178a1181), Windows, Vulkan/CPU, Plamo2 1B를 새로 fp32 GGUF로 변환",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/pull/24068",
+   "https://github.com/ggml-org/llama.cpp/pull/24068#issuecomment-4646520979",
+   "https://github.com/ggml-org/llama.cpp/pull/24068#issuecomment-4653004014",
+   "https://github.com/ggml-org/llama.cpp/pull/24317",
+   "https://github.com/ggml-org/llama.cpp/issues/24067#issuecomment-4717539285"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자의 PR #24068은 층 0 대신 첫 어텐션 층을 찾는 수정이었다. 유지보수자(CISC)는 처음엔 재현되지 않는다며 닫았다가, 최근 변환이 전체 헤드 배열을 넣으면서 문제가 생긴다고 확인했다. 그리고 그 수정을 'wrong fix'라 하고 #24317로 고쳤다. 보고자는 #24317로 해결됐다며 닫았다."
+ },
+ {
+  "case_id": "L018",
+  "repo": "ggml-org/llama.cpp",
+  "number": 12340,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/12340",
+  "title": "Misc. bug: -sm row produces gibberish",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "3×T4에서 Qwen2.5-7B-Instruct Q4_K_M을 -sm row로 띄우면 첫 생성은 대개 정상이다. 하지만 모델을 내렸다 다시 올린 뒤 후속 질문을 하거나, 첫 프롬프트가 300 토큰을 넘으면 깨진 출력이 나온다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "로그 칸이 비어 있고 오류나 경고는 언급하지 않았다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/issues/12340#issuecomment-2743935517",
+   "summary": "보고자 우회: -ub(마이크로배치 크기)를 128로 낮춤."
+  },
+  "trigger": "llama.cpp docker full-cuda 이미지(버전 4869), 3×NVIDIA T4, Qwen/Qwen2.5-7B-Instruct-GGUF q4_k_m, -sm row -ts 1,1,1 --ctx-size 131072 -ngl 100, 모델 재로드 후 후속 질문 또는 300 토큰 넘는 첫 프롬프트. -ub 128로 낮추면 사라짐.",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/12340#issuecomment-2743935517"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "유지보수자 응답이 없었다. 보고자가 -ub 128로 해결했다며 닫았고 원인 설명은 없다."
+ },
+ {
+  "case_id": "L019",
+  "repo": "ggml-org/llama.cpp",
+  "number": 8349,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/8349",
+  "title": "Bug: Gemma2 tokenization seems incorrect.",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "gemma2 tokenizer.json에는 '[toxicity=0]'이 토큰 255968로 있는데, llama.cpp는 이를 [235309, 1373, 235293, 235276, 235307]로 나눈다. 그래서 llama.cpp의 gemma2는 이 문자열을 그대로 따라 하지만, 호스팅된 gemma2는 텍스트가 없는 것처럼 반응했다.",
+  "visible_effect": "differs_without_clear_wrongness",
+  "message_at_failure": "unknown",
+  "message_evidence": "로그 없음(Relevant log output: No response).",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "결함이 아니었다. 협업자(ngxson)는 HF transformers 토크나이저도 '[toxicity=0]'을 [2, 235309, 1373, 235293, 235276, 235307]로 똑같이 나눈다고 보였다. 이 토큰이 gemma-2의 tokenizer_config.json에서 special token으로 표시되어 있지 않아 한 토큰으로 묶이지 않는다는 설명이다. 호스팅 서비스와의 동작 차이는 설명되지 않았다.",
+  "components_involved": [
+   "llama.cpp 토크나이저",
+   "gemma-2 tokenizer.json, tokenizer_config.json(special 표시)",
+   "HF transformers 토크나이저(참조)"
+  ],
+  "fix": null,
+  "trigger": "llama.cpp 3317(8e558309) Windows MSVC 빌드, Gemma 2(다른 사용자는 27B Q8_0), 입력 문자열 '[toxicity=0]'",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/8349#issuecomment-2212491410",
+   "https://github.com/ggml-org/llama.cpp/issues/8240#issuecomment-2212444937"
+  ],
+  "extractor_confidence": "high",
+  "notes": "ngxson이 #8240의 설명 댓글로 안내했고 보고자가 닫았다. ngxson은 이 토큰이 gemma에서 쓰이지 않는 것 같다고 추정했다. #8240에는 llama.cpp 토크나이저 버그가 의심되면 먼저 HF transformers와 비교하라는 공지가 붙었다."
+ },
+ {
+  "case_id": "L020",
+  "repo": "ggml-org/llama.cpp",
+  "number": 16771,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/16771",
+  "title": "Misc. bug: WebUI incorrectly displays local model names",
+  "output_problem": "no",
+  "not_output_reason": "other(웹 UI가 이전 메시지를 생성한 모델의 이름을 잘못 표시한 UI 문제. 모델 출력 자체는 정상)",
+  "symptom": "b6821부터 llama-server 웹 UI에서, 다른 로컬 GGUF로 서버를 재시작하면 이전 대화의 응답까지 모두 지금 로드된 모델이 생성한 것으로 표시된다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(표시 문제). 로그 칸은 비어 있다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "웹 UI가 /props를 다시 읽지 않아서, 서버가 다른 모델로 재시작돼도 캐시된 모델 정보를 썼다. 또 메시지 말풍선에 각 메시지에 저장된 모델 대신 현재 서버 모델을 표시했다. 기여자는 전에 이를 개선했지만 최근 리팩터링에서 다시 넣지 않았다고 했다(보고자가 지목한 커밋 9b9201f). PR #16784는 추론이 시작될 때 /props를 새로 읽게 했고, 말풍선이 메시지별로 저장된 모델을 먼저 표시하게 했다.",
+  "components_involved": [
+   "llama-server 웹 UI",
+   "/props 엔드포인트와 그 캐시",
+   "메시지별 model 메타데이터"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/16784",
+   "summary": "추론 시작 시 /props를 다시 읽어 모델 메타데이터를 동기화하고, 메시지별로 저장된 모델 이름을 우선 표시함."
+  },
+  "trigger": "llama-server b6821 이후(b6818까지는 정상), --offline -m 로컬 GGUF, 웹 UI의 'Show model information' 켬, 다른 모델로 서버 재시작 후 대화를 이어가거나 재생성",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/16771#issuecomment-3448426258",
+   "https://github.com/ggml-org/llama.cpp/issues/16771#issuecomment-3449805941",
+   "https://github.com/ggml-org/llama.cpp/pull/16784"
+  ],
+  "extractor_confidence": "high",
+  "notes": "틀린 것은 생성 텍스트가 아니라 메시지에 붙는 모델 이름(메타데이터) 표시라서 output_problem을 no로 적었다."
+ },
+ {
+  "case_id": "L021",
+  "repo": "ggml-org/llama.cpp",
+  "number": 5910,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/5910",
+  "title": "“'token_embd.weight' has wrong shape” when loading deepseek-coder-1.3b-base.Q8_0.gguf",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "deepseek-coder-1.3b-base를 convert.py로 GGUF로 변환한 뒤(config.json의 vocab_size를 32022로 고쳐 변환 오류를 피함) main으로 불러오면 token_embd.weight shape 불일치로 로드에 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "\"create_tensor: tensor 'token_embd.weight' has wrong shape; expected 2048, 32022, got 2048, 32256\"",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "convert.py (vocab 크기 검사)",
+   "config.json vocab_size",
+   "added_tokens.json(다른 사용자 추정)"
+  ],
+  "fix": null,
+  "trigger": "llama.cpp 2350(bd836944), Ubuntu 22.04, RTX 3060(OpenCL), deepseek-coder-1.3b-base, convert.py로 변환 후 q8_0, config.json vocab_size를 손으로 바꿈",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/5910#issuecomment-2005763064",
+   "https://github.com/ggml-org/llama.cpp/issues/5910#issuecomment-2008578266",
+   "https://github.com/ggml-org/llama.cpp/issues/5910#issuecomment-2012948563"
+  ],
+  "extractor_confidence": "high",
+  "notes": "유지보수자 응답 없이 stale로 닫혔다. 변환 단계에서 먼저 'Vocab size mismatch (model has 31999, but ... has 32022)' 오류가 났다. 다른 사용자들도 비슷한 vocab·임베딩 크기 불일치를 보고했다. 한 사용자는 added_tokens.json을 지우고 vocab_size를 맞춰 해결했다고 했지만 보고자에게는 효과가 없었다."
+ },
+ {
+  "case_id": "L022",
+  "repo": "ggml-org/llama.cpp",
+  "number": 8445,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/8445",
+  "title": "Bug:  After converting the InternLM2 7b from LLamaFactory and importing it into ollama, i get an error: tensor 'token_embd.weight' has wrong shape.",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "LLaMA-Factory에서 LoRA로 미세조정한 InternLM2 7b-chat을 convert_hf_to_gguf.py로 변환해 ollama나 llama-cli로 불러오면 token_embd.weight shape 불일치로 로드에 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "\"check_tensor_dims: tensor 'token_embd.weight' has wrong shape; expected 4096, 92550, got 4096, 92544\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "협업자(compilade)의 설명은 이렇다. n_vocab은 GGUF에 기록된 토큰 목록의 길이(92550)에서 온다. 그런데 내보낸 모델 폴더의 added_tokens.json에 있는 [UNUSED_TOKEN_141~146] 6개(id 92544~92549)가 이 목록에 더해졌다. 이 토큰들은 모델 텐서(임베딩 92544행)에 대응하지 않으므로 n_vocab이 텐서 크기보다 커졌고, 로더의 shape 검사에서 실패했다.",
+  "components_involved": [
+   "convert_hf_to_gguf.py (InternLM2 set_vocab)",
+   "added_tokens.json, tokenizer.json, tokenizer_config.json(추가 토큰 6개)",
+   "llama.cpp 로더(check_tensor_dims, n_vocab)",
+   "LLaMA-Factory 내보내기"
+  ],
+  "fix": null,
+  "trigger": "2024-07 시점 llama.cpp, LLaMA-Factory로 LoRA 병합·내보낸 InternLM2 7b-chat, convert_hf_to_gguf.py, ollama 또는 llama-cli. 다른 사용자들도 InternLM2.5-20b(미세조정 없이도), gemma-2-2b-it LoRA, DeepSeekV2-Lite-Chat 등에서 비슷한 shape 오류를 보고했다.",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/8445#issuecomment-2232594992",
+   "https://github.com/ggml-org/llama.cpp/issues/8445#issuecomment-2232623810",
+   "https://github.com/ggml-org/llama.cpp/issues/8445#issuecomment-2232643810",
+   "https://github.com/ggml-org/llama.cpp/issues/8445#issuecomment-2242594505"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "stale로 자동 종료됐다. 보고자가 추가 토큰 6개를 added_tokens.json, tokenizer.json, tokenizer_config.json에서 지우고 재변환하자 로드는 됐다. 하지만 성능이 병합 전보다 크게 떨어졌다고 했다. 다른 사용자는 학습 때 추가 토큰을 ChatML 토큰으로 썼기 때문일 수 있다고 추정했다. 변환기가 이 경우를 어떻게 처리해야 하는지는 결론 나지 않았다."
+ },
+ {
+  "case_id": "L023",
+  "repo": "ggml-org/llama.cpp",
+  "number": 7493,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/7493",
+  "title": "Click wrong",
+  "output_problem": "no",
+  "not_output_reason": "other(실수로 만든 빈 이슈. 원래 제목은 MiniCPM-Llama3-V 2.5 변환 지원 여부를 묻는 질문)",
+  "symptom": "본문 없는 이슈다. 원래 제목은 새 MiniCPM V2.5 변환을 이 PR이 지원하는지 묻는 질문이었다. 작성자가 1분 안에 닫고 제목을 'Click wrong'으로 바꿨다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(본문과 댓글 없음).",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "해당 없음",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/7493"
+  ],
+  "extractor_confidence": "high",
+  "notes": "타임라인의 제목 변경 기록으로 원래 제목을 확인했다. 결함 보고가 아니다."
+ },
+ {
+  "case_id": "L024",
+  "repo": "ggml-org/llama.cpp",
+  "number": 8467,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/8467",
+  "title": "glm-4-9b-chat-1m mopdel issue: wrong shape",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "glm-4-9b-chat-1m을 변환·양자화한 GGUF를 불러오면 'blk.0.attn_qkv.weight' shape 불일치(기대 4096×4608, 실제 4096×5120)로 로드에 실패한다. 변환과 양자화에서는 오류가 없었다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "\"check_tensor_dims: tensor 'blk.0.attn_qkv.weight' has wrong shape; expected 4096, 4608, got 4096, 5120\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "src/llama.cpp의 llm_load_tensors가 ChatGLM4 계열의 qkv 가중치와 편향 크기를 n_embd + (n_embd_head_k << 2)라는 고정식으로 계산했다. 이 식은 모델의 KV 헤드 수를 반영하지 않아서, glm-4-9b-chat-1m의 실제 텐서(4096×5120)와 맞지 않았다. PR #9194는 이를 n_embd + 2*n_embd_gqa로 바꿨다.",
+  "components_involved": [
+   "src/llama.cpp (llm_load_tensors, ChatGLM4 wqkv/bqkv shape)"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/9194",
+   "summary": "ChatGLM4 qkv 가중치·편향 크기를 n_embd + 2*n_embd_gqa로 계산하도록 바꿈(glm-4-9b-chat-1m, CausalLM/miniG 대상)."
+  },
+  "trigger": "THUDM/glm-4-9b-chat-1m, 모든 양자화, 2024-07 무렵 llama.cpp",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/pull/9194"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자 이슈는 stale로 자동 종료됐다. 그 전에 병합된 PR #9194가 이 이슈를 해결 대상으로 명시했다."
+ },
+ {
+  "case_id": "L025",
+  "repo": "ggml-org/llama.cpp",
+  "number": 17302,
+  "url": "https://github.com/ggml-org/llama.cpp/issues/17302",
+  "title": "Misc. bug: Running Vulkan backend on Intel DG1 outputs gibberish due to commit 38eaf32",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Intel DG1(Iris Xe) Vulkan 백엔드에서 granite-4.0-h-micro Q4_0을 llama-server로 돌리면 커밋 38eaf32 이후 출력이 깨진다. 그 커밋을 되돌리면 정상이다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "none",
+  "message_evidence": "본문: \"Nothing unusual except output is gibberish\". test-backend-ops MUL_MAT, MUL_MAT_ID도 통과했다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "PR #17158(커밋 38eaf32)은 Vulkan graph_compute를 비동기로 바꾸고 get_tensor_async를 켰다. Intel DG1에서는 이 비동기 경로를 쓰면 출력이 깨졌다. 기여자가 제안한 실험대로 graph_compute 끝에서 동기화하고 get_tensor_async를 끄자 정상으로 돌아왔다. 기여자는 드라이버 문제일 가능성이 크다고 봤다(DG2는 정상). 병합된 PR #17369는 장치 이름에 '(DG1)'이 들어간 Intel 장치에서 비동기를 끄는 우회로 고쳤고, 비동기 경로가 DG1에서 왜 틀리는지는 밝혀지지 않았다.",
+  "components_involved": [
+   "ggml/src/ggml-vulkan/ggml-vulkan.cpp (ggml_backend_vk_graph_compute, get_tensor_async, ggml_vk_synchronize)",
+   "Intel DG1용 Mesa 드라이버(i915, xe)"
+  ],
+  "fix": {
+   "url": "https://github.com/ggml-org/llama.cpp/pull/17369",
+   "summary": "Intel DG1이면 비동기 실행을 끔(graph_compute 끝에서 동기화, get_tensor_async 비활성). GGML_VK_DISABLE_ASYNC 환경 변수도 추가함."
+  },
+  "trigger": "llama.cpp 7079(416e7c7f4), 커밋 38eaf32 이후, Vulkan, Intel Iris Xe Graphics (DG1), Mesa 25.2.6과 25.3, i915와 xe 드라이버 모두, Debian 13, ibm-granite granite-4.0-h-micro Q4_0, -fa off -np 2 --kv-unified",
+  "evidence_urls": [
+   "https://github.com/ggml-org/llama.cpp/issues/17302",
+   "https://github.com/ggml-org/llama.cpp/issues/17302#issuecomment-3543052214",
+   "https://github.com/ggml-org/llama.cpp/issues/17302#issuecomment-3546224084",
+   "https://github.com/ggml-org/llama.cpp/issues/17302#issuecomment-3546413409",
+   "https://github.com/ggml-org/llama.cpp/pull/17369"
+  ],
+  "extractor_confidence": "high",
+  "notes": "GGML_VK_DISABLE_INTEGER_DOT과 GGML_VK_DISABLE_F16으로는 변화가 없었다. 수정 뒤 12월에 DG1에서 mmap을 끈 로딩 문제(오류 또는 다시 깨진 출력)가 보고됐지만 별도 이슈(#18317)에서 다뤘다. 수정 코드는 비동기를 끌 때 디버그 수준 로그 'Async execution disabled on certain Intel devices.'를 남긴다."
+ },
+ {
+  "case_id": "L026",
+  "repo": "huggingface/transformers",
+  "number": 29862,
+  "url": "https://github.com/huggingface/transformers/issues/29862",
+  "title": "Incorrect model_type for ViTHybridModel",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "ViTHybridModel을 인코더로 써서 VisionEncoderDecoderModel을 만들면, AutoConfig가 'vit-hybrid'를 모른다며 ValueError가 난다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "\"ValueError: Unrecognized model identifier: vit-hybrid.\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "ViTHybridConfig(configuration_vit_hybrid.py)의 model_type은 'vit-hybrid'인데, auto 매핑(configuration_auto.py 등)의 키는 'vit_hybrid'였다. VisionEncoderDecoderConfig가 인코더 설정을 AutoConfig.for_model(model_type)로 다시 만들 때 이 문자열이 매핑에 없어서 실패했다. PR 작성자는 공개 체크포인트 설정이 'vit-hybrid'를 쓴다는 점을 확인했다. 그래서 매핑 쪽을 'vit-hybrid'로 바꾸는 수정을 만들었고, 두 초기화 경로가 모두 동작함을 보였다.",
+  "components_involved": [
+   "src/transformers/models/vit_hybrid/configuration_vit_hybrid.py (model_type)",
+   "src/transformers/models/auto/configuration_auto.py 등 auto 매핑",
+   "VisionEncoderDecoderConfig (AutoConfig.for_model)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/29907",
+   "summary": "auto 매핑 키를 'vit_hybrid'에서 'vit-hybrid'로 바꾸는 수정(병합되지 않음)."
+  },
+  "trigger": "transformers 4.39.1, ViTHybridModel(ViTHybridConfig())을 VisionEncoderDecoderModel의 인코더로 씀",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/29862",
+   "https://github.com/huggingface/transformers/pull/29907#issuecomment-2039630104",
+   "https://github.com/huggingface/transformers/pull/29907#issuecomment-2058848077"
+  ],
+  "extractor_confidence": "high",
+  "notes": "유지보수자(asartran)는 하위 호환을 지키며 고치기가 까다롭고 ViT hybrid를 곧 폐기할 예정이라며 수정을 보류하자고 했다. PR은 병합되지 않았고 이슈는 stale로 닫혔다."
+ },
+ {
+  "case_id": "L027",
+  "repo": "huggingface/transformers",
+  "number": 31850,
+  "url": "https://github.com/huggingface/transformers/issues/31850",
+  "title": "Return type annotation for PretrainedConfig.from_pretrained wrong?",
+  "output_problem": "no",
+  "not_output_reason": "other(반환 타입 주석이 틀렸는지 묻는 질문. 결과적으로 주석 누락을 보충함)",
+  "symptom": "PretrainedConfig.from_pretrained의 반환 타입 주석이 'PretrainedConfig'인데 BertModel.from_pretrained는 BertModel을 돌려주니 주석이 틀린 것 아니냐고 물었다. LightningCLI처럼 타입 주석에 기대는 도구에 영향이 있다고 했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(실행 오류나 출력 문제가 아님).",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "PretrainedConfig의 주석은 틀리지 않았다. 유지보수자 설명에 따르면 BertModel은 PretrainedConfig가 아니라 PreTrainedModel을 상속한다. 그래서 BertModel.from_pretrained는 PreTrainedModel.from_pretrained이고 모델 객체를 돌려준다. 다만 이 함수에는 반환 타입 주석이 없었고, PR #31869가 -> \"PreTrainedModel\" 주석을 추가했다.",
+  "components_involved": [
+   "src/transformers/configuration_utils.py (PretrainedConfig.from_pretrained)",
+   "src/transformers/modeling_utils.py (PreTrainedModel.from_pretrained 반환 주석)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/31869",
+   "summary": "PreTrainedModel.from_pretrained에 반환 타입 주석 -> \"PreTrainedModel\"을 추가함."
+  },
+  "trigger": "transformers 4.42.3, BertModel.from_pretrained 반환값의 타입 확인(pytorch-lightning LightningCLI 연동 맥락)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/31850#issuecomment-2217105853",
+   "https://github.com/huggingface/transformers/pull/31869"
+  ],
+  "extractor_confidence": "high",
+  "notes": "질문 형태의 보고였고, 보고자가 직접 주석 추가 PR을 올려 병합됐다."
+ },
+ {
+  "case_id": "L028",
+  "repo": "huggingface/transformers",
+  "number": 43454,
+  "url": "https://github.com/huggingface/transformers/issues/43454",
+  "title": "[BUG] AyaVisionConfig fails to tie lm_head weights causing garbage text generation",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "transformers 5.0.0.dev0에서 CohereForAI/aya-vision-8b를 불러오면 lm_head가 embed_tokens에 묶이지 않고 새로 초기화된다. 그래서 생성 결과가 여러 언어의 단어가 뒤섞인 무의미한 텍스트가 된다. 통합 테스트 4건도 같은 이유로 실패했다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "warning",
+  "message_evidence": "로드 리포트에 \"lm_head.weight | MISSING\"과 \"newly initialized because missing from the checkpoint\" 안내가 나오지만 오류로 멈추지는 않는다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "AyaVisionConfig(configuration_aya_vision.py)에 최상위 tie_word_embeddings가 없었다. 그래서 체크포인트의 text_config.tie_word_embeddings=True가 최상위 설정으로 드러나지 않았고(config.tie_word_embeddings 'NOT FOUND'), 모델이 lm_head를 embed_tokens에 묶지 않았다. 체크포인트에 없는 lm_head.weight는 무작위로 새로 초기화되어 로짓이 틀렸고, 생성이 무의미해졌다. PR #43455는 AyaVisionConfig에 tie_word_embeddings(기본 True)를 추가했다.",
+  "components_involved": [
+   "src/transformers/models/aya_vision/configuration_aya_vision.py (AyaVisionConfig)",
+   "text_config.tie_word_embeddings",
+   "lm_head와 embed_tokens의 가중치 묶기"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/43455",
+   "summary": "AyaVisionConfig에 최상위 tie_word_embeddings(기본 True)를 추가해 lm_head가 embed_tokens에 묶이게 함."
+  },
+  "trigger": "transformers 5.0.0.dev0, CohereForAI/aya-vision-8b(32b도 같은 설정), AutoModelForImageTextToText, bf16, NVIDIA L4",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/43454",
+   "https://github.com/huggingface/transformers/pull/43455"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 곧바로 수정 PR을 올렸고 다음 날 병합됐다. 로드 리포트의 MISSING 표시는 경고 성격의 안내이며, 로딩과 생성은 계속 진행됐다."
+ },
+ {
+  "case_id": "L029",
+  "repo": "huggingface/transformers",
+  "number": 37574,
+  "url": "https://github.com/huggingface/transformers/issues/37574",
+  "title": "Wrong KV cache update for sliding-window attention (SWA) layers when total sequence length reaches window size",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "sliding window 캐시(HybridCache, SlidingWindowCache)에서 프롬프트가 창보다 짧고 생성 중 전체 길이가 창 크기에 이르면, 캐시가 한 단계 일찍 굴러간다. 그래서 앞 토큰들이 밀리고 0 키·값이 끼어들며, 전체 길이가 창의 2배가 되어야 정상 상태로 돌아온다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "재현 코드는 오류 없이 끝나고 틀린 캐시 상태만 출력한다. 경고는 언급되지 않았다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "src/transformers/cache_utils.py의 SlidingWindowCache.update와 HybridCache._sliding_update는 캐시를 굴릴지 to_shift = cache_position >= max_cache_len - 1로 판단했다. 그래서 전체 길이가 창 크기에 닿는 순간 한 단계 일찍 굴렸다. 그 결과 창 안의 키·값이 한 칸 밀리고 빈(0) 키·값이 창에 남아, sliding 층 어텐션이 틀린 캐시를 봤다. 중간 수정 PR #37873은 부등호를 >로 바꿨지만 cache_position을 먼저 clamp한 뒤 비교했다. 그 바람에 창을 넘어도 굴리지 않게 되어 더 나빠졌고, PR #38046이 clamp 전에 엄격 부등호로 비교하도록 순서를 바로잡았다.",
+  "components_involved": [
+   "src/transformers/cache_utils.py (SlidingWindowCache.update, HybridCache._sliding_update)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/38046",
+   "summary": "to_shift 비교를 cache_position clamp 전에 엄격 부등호로 하도록 순서를 바꾸고, 프리필 길이가 창과 같을 때의 분기를 >=로 조정함."
+  },
+  "trigger": "transformers 4.51.2, sliding window 층이 있는 캐시(HybridCache, SlidingWindowCache. 예: Gemma2), 프롬프트 길이가 창보다 짧고 생성 중 전체 길이가 창 크기 이상이 될 때",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/37574#issuecomment-2841382216",
+   "https://github.com/huggingface/transformers/issues/37574#issuecomment-2866896072",
+   "https://github.com/huggingface/transformers/pull/37873",
+   "https://github.com/huggingface/transformers/pull/38046"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자는 캐시 상태를 직접 찍는 재현만 제시했고 생성 텍스트 예시는 없다. 유지보수자(Cyrilvallez)는 수정 뒤 Gemma2 생성이 특히 특수 토큰 면에서 나아 보인다고 했다. 중간 상태에 대해 이슈 댓글은 #37972를, PR #38046 본문은 #37873을 원인으로 적어 두 기록이 다르다."
+ },
+ {
+  "case_id": "L030",
+  "repo": "huggingface/transformers",
+  "number": 40097,
+  "url": "https://github.com/huggingface/transformers/issues/40097",
+  "title": "Wrong function signature introduced in PR #40029 breaking flash attention",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "transformers 4.56.0.dev0에서 flash_attention_2로 generate를 하면, prepare_fa_kwargs_from_position_ids의 반환값을 푸는 곳에서 오류가 난다. 보고자가 이 부분을 고치자 이번에는 CUDA illegal memory access 오류가 났다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "원래 오류는 스크린샷으로 제시됐다. 로컬 수정 뒤에는 \"RuntimeError: CUDA error: an illegal memory access was encountered\"가 났다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "PR #40029(FA2 kwargs 구성 되돌리기) 뒤 src/transformers/generation/utils.py의 prepare_inputs_for_generation이 문제가 됐다. prepare_fa_kwargs_from_position_ids의 반환값 ((cu_seq_lens_q, cu_seq_lens_k), (max_length_q, max_length_k))을 네 개 값으로 풀려고 해서 오류가 났다. 반환값 풀기를 고쳐도 CUDA 메모리 접근 오류가 났고, 협업자는 prepare 함수가 기대대로 동작하지 않는다고 했다. PR #40002는 반환값을 두 튜플로 풀고 model_inputs['position_ids']로 계산하게 했다. position_ids만 있고 attention mask가 없을 때도 항상 varlen 경로를 타던 문제 등 flash attention 통합의 다른 문제들도 함께 고쳤다.",
+  "components_involved": [
+   "src/transformers/generation/utils.py (prepare_inputs_for_generation)",
+   "src/transformers/modeling_flash_attention_utils.py (prepare_fa_kwargs_from_position_ids, _prepare_from_posids)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/40002",
+   "summary": "flash attention 통합 수정: 반환값 풀기와 position_ids 사용을 바로잡고 varlen 경로 선택 등 여러 문제를 고침."
+  },
+  "trigger": "transformers 4.56.0.dev0(main, PR #40029 병합 직후), attn_implementation='flash_attention_2', model.generate, RTX A6000, meta-llama/Llama-3.2-1B",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/40097#issuecomment-3179007368",
+   "https://github.com/huggingface/transformers/issues/40097#issuecomment-3179033389",
+   "https://github.com/huggingface/transformers/issues/40097#issuecomment-3179295832",
+   "https://github.com/huggingface/transformers/pull/40002"
+  ],
+  "extractor_confidence": "high",
+  "notes": "PR #40029는 같은 날 병합된 'Revert FA2 kwargs construction'이다. 보고자가 PR #40002로 해결을 확인했다. NVIDIA/kvpress#115(transformers 호환성 작업)가 이 이슈를 교차 참조했다."
+ },
+ {
+  "case_id": "L031",
+  "repo": "huggingface/transformers",
+  "number": 35897,
+  "url": "https://github.com/huggingface/transformers/issues/35897",
+  "title": "incorrect special_tokens_mask",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "SmolLM2(gpt2도 같음) 토크나이저에 '<|endoftext|><|im_start|>y'처럼 특수 토큰을 직접 넣고 return_special_tokens_mask=True로 부호화하면, special_tokens_mask가 기대한 [1, 1, 0] 대신 [0, 0, 0]으로 나온다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "재현 호출은 오류나 경고 없이 special_tokens_mask [[0, 0, 0]]을 돌려준다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "유지보수자들은 이것을 결함이 아니라 설계된 동작으로 봤다. 토크나이저의 special_tokens_mask는 토크나이저가 스스로 추가한 특수 토큰(add_special_tokens=True)만 표시하게 되어 있고, 사용자가 프롬프트 텍스트에 직접 쓴 특수 토큰은 표시하지 않는다(tokenization_utils_base.py). ArthurZucker는 기능 요청에 가깝다며, 이미 특수 토큰이 든 목록에는 get_special_tokens_mask(already_has_special_tokens=True)를 쓰라고 했다.",
+  "components_involved": [
+   "src/transformers/tokenization_utils_base.py (special_tokens_mask 생성)",
+   "get_special_tokens_mask(already_has_special_tokens)"
+  ],
+  "fix": null,
+  "trigger": "transformers 4.47.1, HuggingFaceTB/SmolLM2-135M 또는 gpt2 토크나이저, 입력 텍스트에 특수 토큰을 직접 포함, return_special_tokens_mask=True",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/35897#issuecomment-2615887397",
+   "https://github.com/huggingface/transformers/issues/35897#issuecomment-2654102570"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자 기준으로는 틀린 값이지만 유지보수자는 의도된 동작으로 정리했고, 코드 변경 없이 stale로 닫혔다. 보고자는 이 토크나이저에서 add_special_tokens=True가 설계상 아무것도 하지 않아(#35862) 이 질문을 하게 됐다고 했다. 값의 의미('토크나이저가 추가한 특수 토큰' 대 '특수 토큰인 토큰')가 사용자 기대와 달랐던 사례다."
+ },
+ {
+  "case_id": "L032",
+  "repo": "huggingface/transformers",
+  "number": 31726,
+  "url": "https://github.com/huggingface/transformers/issues/31726",
+  "title": "Mismatch of implement and comment of attention_mask  in clip encoder?",
+  "output_problem": "no",
+  "not_output_reason": "question",
+  "symptom": "CLIPEncoder의 attention_mask 설명 주석과 구현이 맞지 않는 것 같다고 물었다(보고자는 vision 모델의 마스크 값 범위가 0~1인지 0~-inf인지 궁금해함).",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(코드 읽기 질문).",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "결함이 아니었다. 유지보수자들 설명에 따르면 attention_mask는 내부에서(modeling_attn_mask_utils.py) 0 또는 매우 작은 음수 값의 float 텐서로 바뀌고, forward 안에서 4D 마스크로 확장된다. 또 CLIP vision 모델은 attention mask를 받지 않는다. 보고자가 수긍하고 닫았다.",
+  "components_involved": [
+   "src/transformers/models/clip/modeling_clip.py (CLIPEncoder 주석, 어텐션 구현)",
+   "src/transformers/modeling_attn_mask_utils.py"
+  ],
+  "fix": null,
+  "trigger": "해당 없음(코드 읽기)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/31726#issuecomment-2199698510",
+   "https://github.com/huggingface/transformers/issues/31726#issuecomment-2199741066",
+   "https://github.com/huggingface/transformers/issues/31726#issuecomment-2199765906"
+  ],
+  "extractor_confidence": "high",
+  "notes": "질문으로 끝났다."
+ },
+ {
+  "case_id": "L033",
+  "repo": "huggingface/transformers",
+  "number": 35166,
+  "url": "https://github.com/huggingface/transformers/issues/35166",
+  "title": "Mimi model gives different outputs when using batch encode vs single encode",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Mimi 모델로 같은 오디오를 배치 두 개로 encode한 결과와 하나로 encode한 결과의 audio_codes가 같지 않다((out_batch[0] == out[0]).all()이 False). 차이 나는 코드는 27개였다.",
+  "visible_effect": "differs_without_clear_wrongness",
+  "message_at_failure": "none",
+  "message_evidence": "재현 코드는 오류나 경고 없이 비교 결과 tensor(False)만 출력한다.",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "transformers 4.46.3, torch 2.5.1, NVIDIA A10, Jupyter 노트북, kyutai/mimi, num_quantizers=8, 보고자의 특정 오디오 파일(librispeech 더미 샘플로는 재현 안 됨)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/35166#issuecomment-2528007918",
+   "https://github.com/huggingface/transformers/issues/35166#issuecomment-2528293351",
+   "https://github.com/huggingface/transformers/issues/35166#issuecomment-2531051402"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "HF 담당자(ylacombe)는 자기 환경에서는 보고자 오디오로도 같은 결과(True)가 나와 재현하지 못했다. 보고자 출력에서는 27개 차이를 확인했다. 그는 배치 크기에 따른 행렬 계산의 미세한 차이일 수 있다고 추정하며 걱정할 일이 아니고 품질에도 영향이 없을 것이라고 했다. 처음 재현에서 num_quantizers=8을 from_pretrained에 넘겨 RVQ 층 일부가 빠졌다는 지적도 있었다. 원인은 확인되지 않은 채 stale로 닫혔다."
+ },
+ {
+  "case_id": "L034",
+  "repo": "huggingface/transformers",
+  "number": 40001,
+  "url": "https://github.com/huggingface/transformers/issues/40001",
+  "title": "Possible wrong init call",
+  "output_problem": "no",
+  "not_output_reason": "question",
+  "symptom": "modeling_utils.py에서 _initialize_missing_keys에 누락 키가 아니라 checkpoint_keys(모든 키)를 넘기는 것이 잘못된 호출 같다고 코드 읽기로 제기했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(코드 읽기 의문, 실행 증상 없음).",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "결함이 아니었다. 유지보수자(Cyrilvallez)에 따르면 인자는 체크포인트에 있는 모든 키이고, 함수가 그 여집합을 초기화하므로 모든 가중치가 올바르게 초기화된다. 다른 기여자가 올린 수정 PR #40093은 잘못된 수정이라는 답을 받고 닫혔다.",
+  "components_involved": [
+   "src/transformers/modeling_utils.py (_load_pretrained_model, _initialize_missing_keys)"
+  ],
+  "fix": null,
+  "trigger": "transformers 4.52.4(코드 읽기 기반)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/40001#issuecomment-3245757197",
+   "https://github.com/huggingface/transformers/pull/40093#issuecomment-3245770610"
+  ],
+  "extractor_confidence": "high",
+  "notes": "오보로 끝났고 stale로 닫혔다."
+ },
+ {
+  "case_id": "L035",
+  "repo": "huggingface/transformers",
+  "number": 34138,
+  "url": "https://github.com/huggingface/transformers/issues/34138",
+  "title": "Incorrect average calculation in `Perplexity of fixed-length models`",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "공식 문서 'Perplexity of fixed-length models'의 strided 예제가 창마다 목표 토큰 수가 다른데도 창별 손실을 단순 평균해 perplexity를 약간 틀리게 계산한다고 보고했다(예제에서 16.45, 올바른 계산은 16.44). 짧은 텍스트에서는 차이가 더 커진다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "예제 스크립트는 오류 없이 ppl 값을 출력한다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "문서(docs/source/en/perplexity.md)의 예제 코드는 창마다 outputs.loss(그 창 목표 토큰들의 평균 NLL)를 모은 뒤 단순 평균을 냈다. 그런데 첫 창은 목표 토큰이 1023개, 이후 창은 511개, 마지막 창은 411개로 창마다 수가 달랐다. 그래서 토큰 수로 가중하지 않은 평균은 전체 토큰 평균 NLL과 달라졌다. 보고자의 수정 PR은 창 손실에 (trg_len - 1)을 곱해 더한 뒤 전체 목표 수로 나누게 했다.",
+  "components_involved": [
+   "docs/source/en/perplexity.md (strided perplexity 예제 코드)"
+  ],
+  "fix": null,
+  "trigger": "transformers 문서의 gpt2 strided perplexity 예제(max_length 1024, stride 512), transformers 4.44.0, 보고자는 mps에서 실행",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/34138#issuecomment-2429324667",
+   "https://github.com/huggingface/transformers/pull/34394",
+   "https://github.com/huggingface/transformers/pull/34394#issuecomment-2497515137",
+   "https://github.com/huggingface/transformers/issues/34138#issuecomment-2582848037"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "결함은 라이브러리 코드가 아니라 문서 예제 코드에 있다. 유지보수자는 PR을 올리라고 했다. 보고자의 PR #34394는 병합되지 않았는데, 보고자가 main에 이미 이를 다룬 변경이 있다고 했고 ArthurZucker가 main의 것을 유지하자고 했다. 그 변경의 PR·커밋은 이슈에 연결되지 않아 fix를 null로 두었다. Rocketknight1이 해결된 것으로 보인다며 닫았다."
+ },
+ {
+  "case_id": "L036",
+  "repo": "huggingface/transformers",
+  "number": 40463,
+  "url": "https://github.com/huggingface/transformers/issues/40463",
+  "title": "Number of trainable params is displayed wrong in accelerate logs when using FSDP",
+  "output_problem": "no",
+  "not_output_reason": "other(학습 로그에 표시되는 학습 가능 파라미터 수가 틀림. 모델 출력 문제가 아님)",
+  "symptom": "FSDP(4 GPU)와 QLoRA로 Llama3.1-8B를 미세조정할 때 Trainer 로그의 'Number of trainable parameters'가 136,585,216으로 나오지만 실제는 546,373,632다. 보고자는 GPU 수로 나뉜 값 같다고 했고, DeepSpeed로는 맞게 나온다고 했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(로그 표시값 문제).",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "Trainer의 get_model_param_count(trainable_only=True)(유지보수자가 디버깅 지점으로 제시)"
+  ],
+  "fix": null,
+  "trigger": "transformers 4.55.2, peft 0.17.1, accelerate 1.10.0 FSDP(FULL_SHARD, use_orig_params true, 파라미터 CPU 오프로드), 4×V100 32GB, QLoRA, Llama3.1-8B",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/40463#issuecomment-3227919747"
+  ],
+  "extractor_confidence": "high",
+  "notes": "유지보수자(SunMarc)는 파라미터 수를 세는 함수를 보여 주며 직접 디버깅해 보라고만 했고, 이후 stale로 닫혔다. 보고자 추정: 표시값×4(GPU 수)에 trainable_token_indices 몫 32,768을 더하면 실제 값이 된다."
+ },
+ {
+  "case_id": "L037",
+  "repo": "huggingface/transformers",
+  "number": 43519,
+  "url": "https://github.com/huggingface/transformers/issues/43519",
+  "title": "Incorrect timestamp calculation in Qwen3VL Processor",
+  "output_problem": "unclear",
+  "not_output_reason": null,
+  "symptom": "Qwen3-VL 프로세서가 비디오 타임스탬프를 계산할 때 temporal_patch_size 대신 merge_size를 쓰는 것이 맞느냐고 물었다. 보고자는 공간과 시간의 압축 비율을 다르게 쓰면 비디오 프레임과 타임스탬프의 길이가 어긋난다고 했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "transformers 쪽 증상은 '길이 불일치'라고만 적혀 있다. 같은 결함을 고친 vLLM PR에서는 \"AssertionError: timestamps and tokens_per_frame must have the same length\"가 났다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "Qwen3-VL 프로세서(processing_qwen3_vl.py, modular_qwen3_vl.py)는 _calculate_timestamps에 video_processor.merge_size를 넘겼다. 그래서 프레임을 시간 방향으로 묶어 타임스탬프를 평균할 때, 병합 PR의 설명으로는 공간 병합 크기를 썼다. 시간 방향 묶음 크기는 temporal_patch_size이므로, 두 값이 다른 설정에서는 타임스탬프 묶음이 실제 시간 패치와 어긋난다. 기본 설정에서는 둘 다 2라서 추론에 차이가 없다(유지보수자). PR #43659가 temporal_patch_size를 쓰도록 고쳤다.",
+  "components_involved": [
+   "src/transformers/models/qwen3_vl/processing_qwen3_vl.py, modular_qwen3_vl.py (_calculate_timestamps 호출)",
+   "video_processor.merge_size와 temporal_patch_size",
+   "video_preprocessor_config.json"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/43659",
+   "summary": "비디오 타임스탬프 계산에 merge_size 대신 temporal_patch_size를 넘김."
+  },
+  "trigger": "transformers main(2026-01), Qwen3-VL 비디오 입력, merge_size와 temporal_patch_size가 다른 설정(기본값은 둘 다 2)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/43519#issuecomment-3804317087",
+   "https://github.com/huggingface/transformers/issues/43519#issuecomment-3804392654",
+   "https://github.com/huggingface/transformers/issues/43519#issuecomment-3805080366",
+   "https://github.com/huggingface/transformers/pull/43659",
+   "https://github.com/vllm-project/vllm/pull/37439"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "코드 읽기에서 시작한 보고다. 기본 설정에서는 출력 차이가 없고, 비기본 설정에서 타임스탬프가 어긋난다는 보고자의 서술만 있어 output_problem을 unclear로 적었다. Qwen 팀 기여자는 이 merge_size가 원래 temporal_merge_size라는 뜻(시간 압축 비율)이었고 앞으로 두 값을 다르게 둘 수도 있다고 해, 병합 PR의 '공간 병합' 설명과 결이 다르다. 같은 결함이 vLLM(qwen3_vl.py)에도 있어 PR #37439로 고쳐졌다. vLLM에서는 temporal_patch_size를 바꾸면 AssertionError가 났고 Qwen3.5도 영향을 받았다. PR #43840은 중복으로 닫혔다."
+ },
+ {
+  "case_id": "L038",
+  "repo": "huggingface/transformers",
+  "number": 40214,
+  "url": "https://github.com/huggingface/transformers/issues/40214",
+  "title": "Chunked Attention with left padding causes train–inference mismatch (first chunk truncated)",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Llama 4 같은 chunked attention 모델에서 배치 추론용 왼쪽 패딩을 쓰면, 청크 경계가 패딩을 고려하지 않고 위치 0부터 나뉜다. 그래서 짧은 시퀀스의 첫 청크에는 유효 토큰이 1개만 들어가고, 이후 청크 경계도 패딩 없이 처리할 때와 달라진다(create_chunked_causal_mask 출력으로 확인).",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "create_chunked_causal_mask는 오류나 경고 없이 이 마스크를 돌려준다.",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "src/transformers/masking_utils.py의 chunked_overlay는 청크 번호를 kv_idx // chunk_size == q_idx // chunk_size로 계산했다. 절대 위치 0부터 나누므로 배치 안 각 시퀀스의 왼쪽 패딩 수를 고려하지 않았다. 그래서 왼쪽 패딩된 짧은 시퀀스는 패딩 없이 처리할 때와 다른 청크 경계로 어텐션을 계산했다(학습 때와 다른 패턴). PR #40324는 배치별 left_padding만큼 위치를 빼고 청크를 나누게 했다. torch 2.6 미만에서는 옛 동작을 유지하고 경고를 낸다.",
+  "components_involved": [
+   "src/transformers/masking_utils.py (chunked_overlay, chunked_causal_mask_function, create_chunked_causal_mask)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/40324",
+   "summary": "배치별 왼쪽 패딩 수만큼 위치를 보정해 청크를 나누도록 함(torch 2.6 미만은 옛 동작과 경고)."
+  },
+  "trigger": "transformers 4.56.0.dev0, attention_chunk_size가 있는 모델(Llama 4 등), 길이가 다른 시퀀스를 왼쪽 패딩으로 묶은 배치 추론, 청크 크기를 넘는 프리필이나 디코딩",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/40214#issuecomment-3196832325",
+   "https://github.com/huggingface/transformers/issues/40214#issuecomment-3206185117",
+   "https://github.com/huggingface/transformers/issues/40214#issuecomment-3209465719",
+   "https://github.com/huggingface/transformers/pull/40324"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자는 마스크 값만 제시했고, 성능 저하는 '할 수 있다(may)'고만 적었다. 실제 생성 품질 차이 수치는 없다. 다른 기여자의 PR #40220은 고치지 못한다는 판단을 받고 닫혔다. Cyrilvallez는 자신들도 발견해 살펴보려던 문제라고 했다."
+ },
+ {
+  "case_id": "L039",
+  "repo": "huggingface/transformers",
+  "number": 39914,
+  "url": "https://github.com/huggingface/transformers/issues/39914",
+  "title": "Idefics 3: shape mismatch: value tensor of shape [256, 576] cannot be broadcast to indexing result of shape [192, 576]",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "SmolVLM-256M(Idefics3)을 사용자 데이터로 미세조정하던 중, trainer.train()에서 이미지 임베딩을 끼워 넣는 줄이 shape 불일치 RuntimeError로 멈췄다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "RuntimeError: \"shape mismatch: value tensor of shape [256, 576] cannot be broadcast\" (대상 인덱싱 결과는 [192, 576])",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "SmolVLM-256M(Idefics3) 미세조정, 사용자 데이터셋, Trainer",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/39914",
+   "https://github.com/huggingface/transformers/issues/39914#issuecomment-3155777692"
+  ],
+  "extractor_confidence": "high",
+  "notes": "유지보수자가 최소 재현을 요청했지만 답이 없어 stale로 닫혔다. 오류 위치는 modeling_idefics3.py에서 이미지 임베딩을 병합하는 줄(new_inputs_embeds[special_image_token_mask] = ...)이다. 보고자는 Idefics2의 비슷한 이슈(#31380)를 언급했다."
+ },
+ {
+  "case_id": "L040",
+  "repo": "huggingface/transformers",
+  "number": 39692,
+  "url": "https://github.com/huggingface/transformers/issues/39692",
+  "title": "SigLIP2 documentation example has multiple errors (model/processor mismatch + quantization failure)",
+  "output_problem": "no",
+  "not_output_reason": "docs",
+  "symptom": "SigLIP2 문서 예제는 모델을 siglip2-large-patch16-512로, 프로세서를 siglip2-base-patch16-224로 불러 서로 맞지 않는다. 또 4비트 양자화로 실행하면 dtype 오류로 멈춘다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "\"RuntimeError: self and mat2 must have the same dtype, but got Half and Byte\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "문서(docs/source/en/model_doc/siglip2.md)의 양자화 예제가 서로 다른 체크포인트의 모델(large-512)과 프로세서(base-224)를 불렀다. PR #43652가 모델도 base-224로 맞췄다. 4비트 양자화 실행 오류의 원인은 확인되지 않았다. 유지보수자는 bitsandbytes가 torch의 nn.MultiheadAttention과 잘 맞지 않는 것 같다고만 했다.",
+  "components_involved": [
+   "docs/source/en/model_doc/siglip2.md (4비트 양자화 예제)",
+   "bitsandbytes 4비트 양자화와 torch nn.MultiheadAttention(유지보수자 추정)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/43652",
+   "summary": "문서 양자화 예제의 모델 체크포인트를 프로세서와 같은 siglip2-base-patch16-224로 바꿈."
+  },
+  "trigger": "transformers 4.54.0, Windows, RTX 3090, 문서 예제 그대로 실행(BitsAndBytesConfig load_in_4bit, attn_implementation sdpa)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/39692#issuecomment-3723439734",
+   "https://github.com/huggingface/transformers/pull/43652",
+   "https://github.com/huggingface/transformers/pull/43641"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "두 문제 가운데 체크포인트 불일치만 병합된 문서 수정으로 고쳐졌다. 양자화 오류는 보고자가 불일치를 고친 뒤에도 났고 다른 사용자도 겪었지만, 원인과 수정은 기록되지 않았다. 이슈는 stale로 닫혔다가 유지보수자가 다시 열었고, PR #43652 병합으로 닫혔다. PR #43641(문서 예제 수정)도 이 이슈를 참조했다."
+ },
+ {
+  "case_id": "L041",
+  "repo": "huggingface/transformers",
+  "number": 38739,
+  "url": "https://github.com/huggingface/transformers/issues/38739",
+  "title": "LlamaAttention forward function type hint is incorrect",
+  "output_problem": "no",
+  "not_output_reason": "other(타입 힌트가 실제 반환값과 맞지 않음. 코드 읽기 보고)",
+  "symptom": "transformers 4.52.4의 LlamaAttention.forward 반환 타입 힌트가 실제 반환값과 맞지 않는다고 코드 읽기로 보고했다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(실행 증상 없음).",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "어텐션 리팩터링(#35235) 뒤 LlamaAttention.forward는 두 값(어텐션 출력, 어텐션 가중치)을 돌려주는데, 반환 타입 힌트는 세 값짜리 튜플로 남아 있었다. 유지보수자가 틀린 힌트라고 확인했다. PR #38998이 modeling_llama.py를 포함한 12개 모델 파일의 힌트를 tuple[torch.Tensor, Optional[torch.Tensor]]로 고쳤다.",
+  "components_involved": [
+   "src/transformers/models/llama/modeling_llama.py (LlamaAttention.forward 반환 힌트)",
+   "같은 코드를 가진 다른 모델 파일(arcee, aria, bamba, gemma, glm 등)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/38998",
+   "summary": "어텐션 forward의 반환 타입 힌트를 실제 반환값 두 개에 맞게 고침."
+  },
+  "trigger": "transformers 4.52.4(코드 읽기)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/38739#issuecomment-2962467151",
+   "https://github.com/huggingface/transformers/issues/38739#issuecomment-3075339188",
+   "https://github.com/huggingface/transformers/pull/38998"
+  ],
+  "extractor_confidence": "high",
+  "notes": "다른 기여자가 PR #38795를 올렸다는 댓글도 있었지만, 보고자는 #38998로 고쳐졌다며 닫았다."
+ },
+ {
+  "case_id": "L042",
+  "repo": "huggingface/transformers",
+  "number": 35290,
+  "url": "https://github.com/huggingface/transformers/issues/35290",
+  "title": "Custom 4D tensor caused shape mismatch error",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "샘플 패킹을 위해 GPT-2에 [1, 1, seq_len, seq_len] 모양의 사용자 정의 4D 어텐션 마스크를 넘기면, modeling_attn_mask_utils.to_4d에서 크기 불일치 RuntimeError가 난다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "RuntimeError: \"The size of tensor a (324) must match the size of tensor b (18)\" (dimension 3)",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "유지보수자(ArthurZucker)에 따르면 GPT-2는 사용자 정의 4D 마스크를 지원하지 않는다. 그래서 넘겨받은 4D 마스크에도 일반 마스크 생성 과정(modeling_attn_mask_utils의 to_4d 확장)이 적용되어 크기가 맞지 않았다. 그는 지원하려면 마스크 생성(반전 등)을 건너뛰기만 하면 된다고 했다.",
+  "components_involved": [
+   "src/transformers/modeling_attn_mask_utils.py (to_4d)",
+   "GPT-2 모델의 어텐션 마스크 준비"
+  ],
+  "fix": null,
+  "trigger": "transformers 4.46.3, gpt2, A800, bf16, 패킹용 4D 마스크(-inf와 0 값) 입력",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/35290#issuecomment-2559893695",
+   "https://github.com/huggingface/transformers/issues/35290#issuecomment-2651193099",
+   "https://github.com/huggingface/transformers/issues/35290#issuecomment-2838443745"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "4D 마스크 지원을 추가하려는 PR이 여럿(#35517, #36088, #36782) 올라왔지만 병합되지 않았다. 유지보수자는 패킹에는 평탄화 데이터 콜레이터를 쓰라고 했다. 보고자는 flash_attention과 position_ids로 패킹을 구현하고 닫았다. 유지보수자 관점에서는 기능 요청에 가깝다."
+ },
+ {
+  "case_id": "L043",
+  "repo": "huggingface/transformers",
+  "number": 42204,
+  "url": "https://github.com/huggingface/transformers/issues/42204",
+  "title": "[xpu] [OOB] `pip install -e \".[torch]\"` wrongly installed the CUDA version dependencies",
+  "output_problem": "no",
+  "not_output_reason": "install",
+  "symptom": "XPU 환경에서 transformers 소스를 pip install -e \".[torch]\"로 설치하면 CUDA용 torch, triton, nvidia 패키지가 설치되어 로컬 XPU 패키지를 덮어쓴다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음(설치 문제).",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [],
+  "fix": null,
+  "trigger": "Intel XPU 환경, transformers 소스에서 pip install -e \".[torch]\"(python setup.py develop로는 문제없음)",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/42204"
+  ],
+  "extractor_confidence": "high",
+  "notes": "응답 없이 stale로 닫혔다. 보고자는 USE_XPU=1 같은 환경 변수를 제안했다."
+ },
+ {
+  "case_id": "L044",
+  "repo": "huggingface/transformers",
+  "number": 32603,
+  "url": "https://github.com/huggingface/transformers/issues/32603",
+  "title": "Shape mismatch when generating with multiple processes",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "accelerate FSDP(2 프로세스)로 Llama-2-13b-chat을 synced_gpus=True로 generate하면, 한 프로세스가 먼저 생성을 끝낸 뒤 SDPA 어텐션에서 텐서 크기 불일치 RuntimeError가 난다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "RuntimeError: \"The expanded size of the tensor (105) must match the existing size (104)\"",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "synced_gpus=True에서는 생성을 먼저 끝낸 장치도 다른 장치를 기다리며 더미 forward를 계속 돈다. 이때 generate(generation/utils.py)가 그 장치의 cache_position 갱신을 멈춰서, 캐시는 계속 커지는데 위치 인덱싱이 어긋났다. cache_position을 계속 갱신하면 이번에는 더 이상 늘지 않는 input_ids의 슬라이싱이 범위를 벗어난다. 유지보수자가 이 두 원인을 밝혔고, PR #34095가 대부분 모델에서 이를 고쳤다.",
+  "components_involved": [
+   "src/transformers/generation/utils.py (_sample 루프의 synced_gpus 처리, prepare_inputs_for_generation)",
+   "cache_position",
+   "KV 캐시(past_key_values)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/transformers/pull/34095",
+   "summary": "synced_gpus로 생성할 때 먼저 끝난 장치의 더미 forward에서도 cache_position과 입력 준비가 맞도록 generate를 고침."
+  },
+  "trigger": "transformers 4.42.4(4.44.0에서도 재현), accelerate FSDP 2 프로세스, H100, Llama-2-13b-chat-hf, 왼쪽 패딩, generate(synced_gpus=True), 장치마다 생성 길이가 다를 때",
+  "evidence_urls": [
+   "https://github.com/huggingface/transformers/issues/32603#issuecomment-2324563712",
+   "https://github.com/huggingface/transformers/issues/32885#issuecomment-2324556407",
+   "https://github.com/huggingface/transformers/issues/32603#issuecomment-2407772547",
+   "https://github.com/huggingface/transformers/pull/34095"
+  ],
+  "extractor_confidence": "high",
+  "notes": "유지보수자(gante)가 같은 원인인 #32885로 논의를 옮겼다. 원인 설명은 그쪽 이슈를 따라가 읽었다. 보고자의 수정 PR #32641은 병합되지 않았다. 이슈는 stale로 먼저 닫혔고, 이후 PR #34095 병합 소식이 댓글로 달렸다. PR 댓글에는 use_cache=False에서는 attention_mask 불일치가 남는다는 후속 보고가 있다."
+ }
+]

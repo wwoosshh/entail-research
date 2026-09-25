@@ -1,0 +1,124 @@
+{
+ "lengths": [
+  64,
+  96,
+  128,
+  192,
+  256,
+  320,
+  384,
+  512
+ ],
+ "new_tokens": 64,
+ "runs": {
+  "B8_padded_stock": {
+   "generate_s_median": 3.2262690109999994,
+   "new_tokens_per_s": 158.6972438610452,
+   "gpu_kernel_ms_by_class": {
+    "gemm": 1561.7,
+    "copy_elementwise": 826.4,
+    "attention": 458.2,
+    "other": 0.1
+   },
+   "top_kernels": [
+    [
+     "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616g",
+     1190.2
+    ],
+    [
+     "void at::native::elementwise_kernel<128, 4, at::native::gpu_",
+     465.2
+    ],
+    [
+     "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAtten",
+     458.2
+    ],
+    [
+     "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_re",
+     223.3
+    ],
+    [
+     "void at::native::vectorized_elementwise_kernel<4, at::native",
+     136.5
+    ],
+    [
+     "void at::native::(anonymous namespace)::CatArrayBatchedCopy_",
+     94.4
+    ]
+   ]
+  },
+  "B8_padded_gqa_declared": {
+   "generate_s_median": 3.251611773999997,
+   "new_tokens_per_s": 157.46037214343056,
+   "gpu_kernel_ms_by_class": {
+    "gemm": 1663.7,
+    "copy_elementwise": 453.5,
+    "attention": 348.4,
+    "other": 0.1
+   },
+   "top_kernels": [
+    [
+     "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616g",
+     1285.1
+    ],
+    [
+     "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAtten",
+     348.4
+    ],
+    [
+     "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_re",
+     227.6
+    ],
+    [
+     "void at::native::vectorized_elementwise_kernel<4, at::native",
+     138.3
+    ],
+    [
+     "void at::native::(anonymous namespace)::CatArrayBatchedCopy_",
+     96.1
+    ],
+    [
+     "ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_32x3_tn",
+     91.8
+    ]
+   ]
+  },
+  "B1_nopad_stock": {
+   "generate_s_median": 2.686107976999992,
+   "new_tokens_per_s": 23.8262946046864,
+   "gpu_kernel_ms_by_class": {
+    "gemm": 1237.1,
+    "copy_elementwise": 187.7,
+    "attention": 24.2,
+    "other": 0.1
+   },
+   "top_kernels": [
+    [
+     "std::enable_if<!(false), void>::type internal::gemvx::kernel",
+     1181.5
+    ],
+    [
+     "void at::native::vectorized_elementwise_kernel<4, at::native",
+     61.9
+    ],
+    [
+     "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_re",
+     40.8
+    ],
+    [
+     "void at::native::elementwise_kernel<128, 4, at::native::gpu_",
+     35.1
+    ],
+    [
+     "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<",
+     22.5
+    ],
+    [
+     "void at::native::(anonymous namespace)::CatArrayBatchedCopy_",
+     22.1
+    ]
+   ]
+  }
+ },
+ "b8_identical_rows": 8
+}

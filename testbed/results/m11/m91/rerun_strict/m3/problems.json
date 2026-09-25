@@ -1,0 +1,263 @@
+{
+ "when": "2026-09-25 08:06:41",
+ "rb-08": {
+  "kind": "real engine (transformers, tiny Gemma 2)",
+  "default_off": "sdpa",
+  "default_on": "eager",
+  "used_with_entail": "eager",
+  "asked_sdpa_later_used": "eager",
+  "defect_off_right": false,
+  "defect_on_right": true,
+  "max_abs_off": 1.7681557866816113,
+  "max_abs_on": 2.8129302609425366e-06,
+  "decisions": [
+   [
+    "load:transformers.attention",
+    "transformers.attention.sdpa",
+    "resolved",
+    "the consumer differs from the declaration; a registered resolution repairs it",
+    "eager"
+   ],
+   [
+    "load:transformers.attention",
+    "transformers.attention.eager",
+    "pass",
+    "the consumer uses the declared value",
+    null
+   ],
+   [
+    "load:transformers.loader",
+    "transformers.loader",
+    "pass",
+    "the consumer uses the declared value",
+    null
+   ],
+   [
+    "load:transformers.config.rope_parameters",
+    "transformers.rotary_embedding",
+    "pass",
+    "the consumer uses the declared value",
+    null
+   ],
+   [
+    "load:transformers.attention",
+    "transformers.attention.sdpa",
+    "resolved",
+    "the consumer differs from the declaration; a registered resolution repairs it",
+    "eager"
+   ],
+   [
+    "load:transformers.attention",
+    "transformers.attention.eager",
+    "pass",
+    "the consumer uses the declared value",
+    null
+   ],
+   [
+    "load:transformers.loader",
+    "transformers.loader",
+    "pass",
+    "the consumer uses the declared value",
+    null
+   ],
+   [
+    "load:transformers.config.rope_parameters",
+    "transformers.rotary_embedding",
+    "pass",
+    "the consumer uses the declared value",
+    null
+   ]
+  ],
+  "lines": [
+   "[entail] resolved at load:transformers.attention: ModelProps declared ModelProps(softcap=5.0, sliding_window=256, tie_word_embeddings=None) (config: Gemma2Config held by the engine#attn_logit_softcapping,sliding_window,tie_word_embeddings, declared); transformers.attention.sdpa uses ModelProps(softcap=None, sliding_window=256, tie_word_embeddings=None) (engine: transformers.attention.sdpa [softcap: drops (measured); sliding_window: honours (measured)], verified); rule: the consumer differs from the declaration; a registered resolution repairs it; changed: route to a backend measured to honour it (to eager)",
+   "[entail] resolved at load:transformers.attention: ModelProps declared ModelProps(softcap=5.0, sliding_window=256, tie_word_embeddings=None) (config: Gemma2Config held by the engine#attn_logit_softcapping,sliding_window,tie_word_embeddings, declared); transformers.attention.sdpa uses ModelProps(softcap=None, sliding_window=256, tie_word_embeddings=None) (engine: transformers.attention.sdpa [softcap: drops (measured); sliding_window: honours (measured)], verified); rule: the consumer differs from the declaration; a registered resolution repairs it; changed: route to a backend measured to honour it (to eager)"
+  ],
+  "seconds": 3.5
+ },
+ "rb-15": {
+  "kind": "real engine (transformers)",
+  "defect": {
+   "static": [
+    [
+     "load:transformers.loader",
+     "pass",
+     "the consumer uses the declared value"
+    ],
+    [
+     "load:transformers.config",
+     "broken",
+     "the consumer differs from the declaration and no resolution is registered"
+    ]
+   ],
+   "runtime_stopped": "[entail] refused at load:transformers.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=27, taken=26, left=('rope_scale',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer differs from the declaration and no resolution is registered; note: misspelt: rope_scale (nearest key the vocabulary maps: rope_scaling); stops here",
+   "output_right": null,
+   "decisions": [
+    [
+     "load:transformers.config",
+     "transformers.config",
+     "refused",
+     "the consumer differs from the declaration and no resolution is registered",
+     null
+    ]
+   ]
+  },
+  "fixed": {
+   "static": [
+    [
+     "load:transformers.loader",
+     "pass",
+     "the consumer uses the declared value"
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     "the consumer uses the declared value"
+    ]
+   ],
+   "runtime_stopped": null,
+   "output_right": true,
+   "decisions": [
+    [
+     "load:transformers.config",
+     "transformers.config",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.loader",
+     "transformers.loader",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.config.rope_parameters",
+     "transformers.rotary_embedding",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ]
+   ]
+  },
+  "seconds": 0.1
+ },
+ "rb-07": {
+  "kind": "real engine (transformers), checkpoint written from the case's tensors",
+  "defect": {
+   "static": [
+    [
+     "load:transformers.loader",
+     "broken",
+     "the declaration contradicts the data"
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     "the consumer uses the declared value"
+    ]
+   ],
+   "runtime_stopped": "[entail] refused at load:transformers.loader: ModelProps declared ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True) (config: /tmp/m35_rb07_ot92_7h3/config.json#tie_word_embeddings, declared); transformers.loader uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False) (engine: transformers.loader left the checkpoint's own lm_head.weight as the head: it compares the two and keeps a different one (read from the model), verified); rule: the declaration contradicts the data; the data shows ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=",
+   "decisions": [
+    [
+     "load:transformers.config",
+     "transformers.config",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.loader",
+     "transformers.loader",
+     "refused",
+     "the declaration contradicts the data",
+     null
+    ],
+    [
+     "load:transformers.config.rope_parameters",
+     "transformers.rotary_embedding",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ]
+   ]
+  },
+  "fixed": {
+   "static": [
+    [
+     "load:transformers.loader",
+     "pass",
+     "the consumer uses the declared value"
+    ],
+    [
+     "load:transformers.config",
+     "pass",
+     "the consumer uses the declared value"
+    ]
+   ],
+   "runtime_stopped": null,
+   "decisions": [
+    [
+     "load:transformers.config",
+     "transformers.config",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.loader",
+     "transformers.loader",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ],
+    [
+     "load:transformers.config.rope_parameters",
+     "transformers.rotary_embedding",
+     "pass",
+     "the consumer uses the declared value",
+     null
+    ]
+   ]
+  },
+  "seconds": 0.1
+ },
+ "rb-02": {
+  "kind": "mechanism (the case's kernel, declared in a test table)",
+  "defect": {
+   "observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32', orientation=None, scale_granularity=None)",
+   "decisions": [
+    [
+     "load:rb02.linear",
+     "broken",
+     "the consumer differs from the declaration and no resolution is registered"
+    ]
+   ]
+  },
+  "fixed": {
+   "observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='ue8m0', orientation=None, scale_granularity=None)",
+   "decisions": [
+    [
+     "load:rb02.linear",
+     "pass",
+     "the consumer uses the declared value"
+    ]
+   ]
+  },
+  "seconds": 0.0
+ },
+ "rb-06": {
+  "kind": "mechanism (the case's kernel, declared in a test table)",
+  "decisions": [
+   [
+    "load:rb06.attention",
+    "resolved",
+    "the consumer differs from the declaration; a registered resolution repairs it",
+    "window_in_mask"
+   ]
+  ],
+  "defect_right": false,
+  "routed_right": true,
+  "seconds": 2.6
+ }
+}

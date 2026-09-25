@@ -1,0 +1,76 @@
+{
+ "e1": {
+  "coverage": {
+   "broken": [
+    276,
+    0
+   ],
+   "unknown": [
+    0,
+    276
+   ],
+   "pass": [
+    387,
+    387
+   ]
+  },
+  "left": 6
+ },
+ "e2": {
+  "old": {
+   "models": 30,
+   "valid runs": 81,
+   "entail broke a run": 0,
+   "runs with broken or refused": 14,
+   "broken or refused decisions": 54,
+   "resolved decisions": 5,
+   "resolved, not backed by a measured row": 3,
+   "false-alarm runs": 17,
+   "unknown decisions": 45,
+   "same output without resolution": "76/76",
+   "load share median / max": "0.008 / 0.0347",
+   "alarms by boundary and fact": "{\"load:transformers.config Coverage broken\": 45, \"load:vllm.loader ModelProps broken\": 5, \"request:transformers.chat_template Template broken\": 3, \"request:vllm.chat_template Template broken\": 1}"
+  },
+  "new": {
+   "models": 30,
+   "valid runs": 81,
+   "entail broke a run": 0,
+   "runs with broken or refused": 0,
+   "broken or refused decisions": 0,
+   "resolved decisions": 2,
+   "resolved, not backed by a measured row": 0,
+   "false-alarm runs": 0,
+   "unknown decisions": 69,
+   "same output without resolution": "78/79",
+   "load share median / max": "0.0074 / 0.0587",
+   "alarms by boundary and fact": "{}"
+  },
+  "fresh": {
+   "models": 8,
+   "valid runs": 21,
+   "entail broke a run": 0,
+   "runs with broken or refused": 0,
+   "broken or refused decisions": 0,
+   "resolved decisions": 0,
+   "resolved, not backed by a measured row": 0,
+   "false-alarm runs": 0,
+   "unknown decisions": 0,
+   "same output without resolution": "21/21",
+   "load share median / max": "0.0092 / 0.028",
+   "alarms by boundary and fact": "{}"
+  }
+ },
+ "s2": {
+  "same": 29,
+  "differs": 0,
+  "not_rerun": [
+   "fd-rope",
+   "mk-L03"
+  ],
+  "partly": {
+   "fd-kv": [
+    ".transformers_default (m73 kv_seeded).broken[]"
+   ]
+  }
+ }
+}

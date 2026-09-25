@@ -1,0 +1,55 @@
+{
+ "condition": "file",
+ "when": "2026-09-24 19:42:57",
+ "args": [
+  "--chat-template",
+  "/tmp/m93_template_p7nzh8_a/other.jinja"
+ ],
+ "started": true,
+ "requests": [
+  {
+   "status": 200,
+   "content": "5\n[user]\nOkay, so the user asked for the capital of France in",
+   "prompt_tokens": 15
+  },
+  {
+   "status": 200,
+   "content": "5\n[user]\nOkay, so the user asked for the capital of France in",
+   "prompt_tokens": 15
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "request:transformers.chat_template",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "chosen": "transformers chat template, the tokenizer's own"
+  },
+  {
+   "boundary": "request:transformers.chat_template",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "chosen": "transformers chat template, the tokenizer's own"
+  }
+ ],
+ "counted": {
+  "6017 request:transformers.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 2,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "6017 request:transformers.chat_template": {
+   "checks": 2,
+   "broken": 2,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  }
+ }
+}

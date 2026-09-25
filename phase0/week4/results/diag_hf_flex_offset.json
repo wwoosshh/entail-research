@@ -1,0 +1,57 @@
+{
+ "A_empty_slot": {
+  "hf_flex_vs_sdpa": {
+   "max_abs": 0.0625,
+   "mean_abs": 0.011438418179750443,
+   "same_top1": true
+  },
+  "hf_flex_vs_hand_reading_p+2": {
+   "max_abs": 0.078125,
+   "mean_abs": 0.012590900994837284,
+   "same_top1": true
+  },
+  "hand_p+1_vs_sdpa (sanity)": {
+   "max_abs": 0.09375,
+   "mean_abs": 0.01346441451460123,
+   "same_top1": true
+  },
+  "logit_scale": 14.0
+ },
+ "B_stale_slot": {
+  "hf_flex_vs_sdpa": {
+   "max_abs": 0.8125,
+   "mean_abs": 0.04977395758032799,
+   "same_top1": true
+  },
+  "hf_flex_vs_hand_reading_p+2": {
+   "max_abs": 0.0703125,
+   "mean_abs": 0.014096999540925026,
+   "same_top1": true
+  },
+  "hand_p+1_vs_sdpa (sanity)": {
+   "max_abs": 0.09375,
+   "mean_abs": 0.01346441451460123,
+   "same_top1": true
+  },
+  "logit_scale": 14.0
+ },
+ "C_stale_slot_offset_snapshot": {
+  "hf_flex_vs_sdpa": {
+   "max_abs": 0.09375,
+   "mean_abs": 0.023020541295409203,
+   "same_top1": true
+  },
+  "hf_flex_vs_hand_reading_p+2": {
+   "max_abs": 0.75,
+   "mean_abs": 0.04696621000766754,
+   "same_top1": true
+  },
+  "hand_p+1_vs_sdpa (sanity)": {
+   "max_abs": 0.09375,
+   "mean_abs": 0.01346441451460123,
+   "same_top1": true
+  },
+  "logit_scale": 14.0
+ },
+ "note": "Diagnosis: transformers' built-in flex_attention path with StaticCache attends to one slot too many?\n\nReading transformers 5.17 source:\n  - Cache.get_query_offset() returns StaticLayer.cumulative_length, the live GPU counter tensor itself.\n  - flex_attention_mask wraps the causal mask as mask_mod(q_idx + q_offset, kv_idx), holding that tensor by reference.\n  - create_block_mask fixes the block structure when the mask is created (counter = p).\n  - Each layer's cache update then does cumulative_length.add_(1) in place BEFORE that layer's attention runs,\n    so the element-wise mask_mod evaluated inside the flex kernel reads p+1 and admits key slot p+1,\n    which has not been written in this step. The sdpa path materialises its boolean mask at creation and is not\n    affected.\nTest in EAGER mode (no torch.compile, no CUDA graphs), bf16, batch 1, decode position p = 512:\n  A. slot p+1 is empty (zeros, as in a fresh cache)       -> small deviation expected\n  B. slot p+1 holds stale keys/values (a reused cache)     -> large deviation expected\n  C. same as B, but the query offset is passed as a snapshot (clone) instead of the live counter -> no deviation\nIn every case compare with sdpa (keys 0..p) and with the hand kernel told to read keys 0..p+1.\n"
+}

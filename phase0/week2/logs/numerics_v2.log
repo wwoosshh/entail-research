@@ -1,0 +1,27 @@
+W0922 18:30:56.574000 1186 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 18:30:56.598000 1186 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 4161.85it/s]
+  using common prompt length 17 tokens (per-prompt lengths [19, 26, 24, 17])
+== reference: eager bf16, B=4, greedy
+== run-to-run determinism (eager, same batch)
+  [forced] eager rerun                        max=0.0000 mean=0.00000 p99=0.0000 argmax agree 100.0% bitwise=True
+== batch invariance (prompt 0 alone vs inside B=4)
+  [forced] eager B=1 vs row0 of B=4           max=0.3750 mean=0.03185 p99=0.1250 argmax agree 96.9% bitwise=False
+  [greedy] eager B=1 vs row0 of B=4           first divergent step per row: [24] (of 64)
+== compile_default (static cache) vs eager
+W0922 18:31:17.527000 1186 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+  [forced] compile_default vs eager           max=2.3750 mean=0.04464 p99=0.2188 argmax agree 98.4% bitwise=False
+  [forced] compile_default rerun              max=0.0000 mean=0.00000 p99=0.0000 argmax agree 100.0% bitwise=True
+  [greedy] compile_default vs eager           first divergent step per row: [24, 39, None, None] (of 64)
+  [forced] compile_default B=1 vs row0 of B=4 max=0.6250 mean=0.02639 p99=0.1328 argmax agree 98.4% bitwise=False
+== compile_graphs (static cache) vs eager
+  [forced] compile_graphs vs eager            max=2.3750 mean=0.04464 p99=0.2188 argmax agree 98.4% bitwise=False
+  [forced] compile_graphs rerun               max=0.0000 mean=0.00000 p99=0.0000 argmax agree 100.0% bitwise=True
+  [greedy] compile_graphs vs eager            first divergent step per row: [24, 39, None, None] (of 64)
+  [forced] compile_graphs B=1 vs row0 of B=4  max=0.6250 mean=0.02639 p99=0.1328 argmax agree 98.4% bitwise=False
+== int4 weight-only (torchao) vs bf16, eager
+  [forced] int4 vs bf16 eager                 max=20.0000 mean=0.93399 p99=3.4922 argmax agree 82.4% bitwise=False
+  [greedy] int4 vs bf16 eager                 first divergent step per row: [1, 7, 7, 0] (of 64)
+saved <workspace>/phase0/week2/results/numerics_v2.json

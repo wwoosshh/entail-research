@@ -1,0 +1,54 @@
+
+Multi-thread loading shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Multi-thread loading shards:  33% Completed | 1/3 [00:00<00:00,  2.76it/s]
+Multi-thread loading shards:  67% Completed | 2/3 [00:01<00:00,  1.69it/s]
+Multi-thread loading shards: 100% Completed | 3/3 [00:01<00:00,  2.66it/s]
+[entail-seed] kv_short: took one slot off request 0 at batch 4
+[entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots written, verified); sglang.kv_cache uses KvExtent(held=8, needed=9, written=9, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots reserved, verified); rule: the slots reserved and the slots written disagree; note: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): 8 KV slots reserved but 9 written. Two numbers about the same sequence, and nothing compares them.; stops here
+[entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots its tokens need, verified); sglang.kv_cache uses KvExtent(held=8, needed=9, written=9, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots it holds, verified); rule: the slots held are not the slots the tokens need; note: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): holds 8 KV slots but the sequence has 9 tokens. The length nobody compared is the one that drifts.; stops here
+[2026-09-24 17:49:38] Scheduler hit an exception: Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5857, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1893, in run_event_loop
+    dispatch_event_loop(self)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5703, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1966, in event_loop_overlap
+    plan = self.get_next_batch_to_run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/observability/scheduler_stage_metrics.py", line 155, in wrapper
+    return profiled_func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 3678, in get_next_batch_to_run
+    running_batch = self.update_running_batch(running_batch)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 4182, in update_running_batch
+    batch.prepare_for_decode()
+  File "<workspace>/entail/entail/adapters/sglang_cache_contract.py", line 65, in prepare_for_decode
+    kv_contract.guarded(BOUNDARY, CONSUMER, _decide, self)
+  File "<workspace>/entail/entail/kv_contract.py", line 306, in guarded
+    return _tally.guarded(boundary, consumer, "KvExtent", work, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/tally.py", line 154, in guarded
+    return work(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/sglang_cache_contract.py", line 49, in _decide
+    kv_contract.check(BOUNDARY, CONSUMER, where,
+  File "<workspace>/entail/entail/kv_contract.py", line 150, in check
+    _refuse(boundary, consumer, where, extent, broken, key=where)
+  File "<workspace>/entail/entail/kv_contract.py", line 138, in _refuse
+    load.enforce(decisions)
+  File "<workspace>/entail/entail/load.py", line 859, in enforce
+    raise RoleError("\n".join(_record.line(d) for d in stops))
+entail.core.RoleError: [entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots written, verified); sglang.kv_cache uses KvExtent(held=8, needed=9, written=9, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots reserved, verified); rule: the slots reserved and the slots written disagree; note: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): 8 KV slots reserved but 9 written. Two numbers about the same sequence, and nothing compares them.; stops here
+[entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots its tokens need, verified); sglang.kv_cache uses KvExtent(held=8, needed=9, written=9, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): the slots it holds, verified); rule: the slots held are not the slots the tokens need; note: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21adf1): holds 8 KV slots but the sequence has 9 tokens. The length nobody compared is the one that drifts.; stops here
+
+[2026-09-24 17:49:38] SIGQUIT received. signum=None, frame=None. It usually means one child failed.
+[rank0]:[W924 17:49:39.452871340 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[2026-09-24 17:49:43] No live scheduler processes found; skipping py-spy and CUDA coredump.

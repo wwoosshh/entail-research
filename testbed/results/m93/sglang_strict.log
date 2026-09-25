@@ -1,0 +1,133 @@
+RESULT strict {"started": true, "requests": [{"status": 500, "error": "{'object': 'error', 'message': \"Internal server error: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Tem"}, {"status": 500, "error": "{'object': 'error', 'message': \"Internal server error: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Tem"}], "decis
+call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+[entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+[2026-09-24 19:44:18] Error in request: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1541, in _apply_jinja_template
+    self._render_and_encode_chat_template(
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1639, in _render_and_encode_chat_template
+    rendered_prompt = self.tokenizer_manager.tokenizer.apply_chat_template(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 105, in apply_chat_template
+    request_contract.guarded(TEMPLATE, CONSUMER, _decide, self, conversation, tools, chat_template)
+  File "<workspace>/entail/entail/request_contract.py", line 237, in guarded
+    return _tally.guarded(boundary, consumer, "Template", work, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/tally.py", line 154, in guarded
+    return work(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 89, in _decide
+    request_contract.template(TEMPLATE, CONSUMER, facts, text, named, f"transformers chat template, {how}{other}",
+  File "<workspace>/entail/entail/request_contract.py", line 167, in template
+    return _settle(boundary, "template", decide(contract, {"Template": _projected(facts, "chat_template_sha256")},
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/request_contract.py", line 112, in _settle
+    load.enforce(out)
+  File "<workspace>/entail/entail/load.py", line 866, in enforce
+    raise RoleError("\n".join(_record.line(d) for d in stops))
+entail.core.RoleError: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_base.py", line 92, in handle_request
+    adapted_request, processed_request = self._convert_to_internal_request(
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1121, in _convert_to_internal_request
+    processed_messages = self._process_messages(request, is_multimodal)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1313, in _process_messages
+    result = self._apply_jinja_template(request, tools, is_multimodal)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1559, in _apply_jinja_template
+    self._render_and_encode_chat_template(
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1639, in _render_and_encode_chat_template
+    rendered_prompt = self.tokenizer_manager.tokenizer.apply_chat_template(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 105, in apply_chat_template
+    request_contract.guarded(TEMPLATE, CONSUMER, _decide, self, conversation, tools, chat_template)
+  File "<workspace>/entail/entail/request_contract.py", line 237, in guarded
+    return _tally.guarded(boundary, consumer, "Template", work, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/tally.py", line 154, in guarded
+    return work(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 89, in _decide
+    request_contract.template(TEMPLATE, CONSUMER, facts, text, named, f"transformers chat template, {how}{other}",
+  File "<workspace>/entail/entail/request_contract.py", line 167, in template
+    return _settle(boundary, "template", decide(contract, {"Template": _projected(facts, "chat_template_sha256")},
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/request_contract.py", line 112, in _settle
+    load.enforce(out)
+  File "<workspace>/entail/entail/load.py", line 866, in enforce
+    raise RoleError("\n".join(_record.line(d) for d in stops))
+entail.core.RoleError: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_base.py:128: FastAPIDeprecationWarning: ORJSONResponse is deprecated, FastAPI now serializes data directly to JSON bytes via Pydantic when a return type or response model is set, which is faster and doesn't need a custom response class. Read more in the FastAPI docs: https://fastapi.tiangolo.com/advanced/custom-response/#orjson-or-response-model and https://fastapi.tiangolo.com/tutorial/response-model/
+  return self.create_error_response(
+[entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+[entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+[2026-09-24 19:44:18] Error in request: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1541, in _apply_jinja_template
+    self._render_and_encode_chat_template(
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1639, in _render_and_encode_chat_template
+    rendered_prompt = self.tokenizer_manager.tokenizer.apply_chat_template(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 105, in apply_chat_template
+    request_contract.guarded(TEMPLATE, CONSUMER, _decide, self, conversation, tools, chat_template)
+  File "<workspace>/entail/entail/request_contract.py", line 237, in guarded
+    return _tally.guarded(boundary, consumer, "Template", work, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/tally.py", line 154, in guarded
+    return work(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 89, in _decide
+    request_contract.template(TEMPLATE, CONSUMER, facts, text, named, f"transformers chat template, {how}{other}",
+  File "<workspace>/entail/entail/request_contract.py", line 167, in template
+    return _settle(boundary, "template", decide(contract, {"Template": _projected(facts, "chat_template_sha256")},
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/request_contract.py", line 112, in _settle
+    load.enforce(out)
+  File "<workspace>/entail/entail/load.py", line 866, in enforce
+    raise RoleError("\n".join(_record.line(d) for d in stops))
+entail.core.RoleError: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_base.py", line 92, in handle_request
+    adapted_request, processed_request = self._convert_to_internal_request(
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1121, in _convert_to_internal_request
+    processed_messages = self._process_messages(request, is_multimodal)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1313, in _process_messages
+    result = self._apply_jinja_template(request, tools, is_multimodal)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1559, in _apply_jinja_template
+    self._render_and_encode_chat_template(
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/entrypoints/openai/serving_chat.py", line 1639, in _render_and_encode_chat_template
+    rendered_prompt = self.tokenizer_manager.tokenizer.apply_chat_template(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 105, in apply_chat_template
+    request_contract.guarded(TEMPLATE, CONSUMER, _decide, self, conversation, tools, chat_template)
+  File "<workspace>/entail/entail/request_contract.py", line 237, in guarded
+    return _tally.guarded(boundary, consumer, "Template", work, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/tally.py", line 154, in guarded
+    return work(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/transformers_template.py", line 89, in _decide
+    request_contract.template(TEMPLATE, CONSUMER, facts, text, named, f"transformers chat template, {how}{other}",
+  File "<workspace>/entail/entail/request_contract.py", line 167, in template
+    return _settle(boundary, "template", decide(contract, {"Template": _projected(facts, "chat_template_sha256")},
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/request_contract.py", line 112, in _settle
+    load.enforce(out)
+  File "<workspace>/entail/entail/load.py", line 866, in enforce
+    raise RoleError("\n".join(_record.line(d) for d in stops))
+entail.core.RoleError: [entail] refused at request:transformers.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (config: /home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template, declared); transformers.apply_chat_template uses Template(chat_template_sha256='5da277880c5d66767f1ddf65e1703b0f4004d224b6637ddce9fe765eded6f7ba', reasoning_history=None, tool_call_format=None) (engine: transformers chat template, the tokenizer's own, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+[2026-09-24 19:44:18] SIGTERM received. signum=None frame=None. Draining requests and shutting down...
+[2026-09-24 19:44:18] Subprocess scheduler_0 (pid=6646) crashed with exit code -15. Triggering SIGQUIT for cleanup...
+[2026-09-24 19:44:18] SIGQUIT received. signum=None, frame=None. It usually means one child failed.
+[2026-09-24 19:44:23] No live scheduler processes found; skipping py-spy and CUDA coredump.

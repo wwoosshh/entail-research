@@ -1,0 +1,47 @@
+[06:49:48] start m43_signed
+[06:49:58] end m43_signed (exit 0): 10: defect refused, fixed pass, blocked=True, signatures 5, hand tags 0 (old: 0) 16: defect resolved, fixed pass, blocked=True, signatures 3, hand tags 0 (old: 2) 
+[06:49:58] start m3_problems
+[06:50:12] end m3_problems (exit 0): rb-02 {"kind": "mechanism (the case's kernel, declared in a test table)", "defect": {"observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32', orientation=None, scale_granularity=No
+[06:50:12] start m55_rolebench
+[06:50:21] end m55_rolebench (exit 0):   observe  fixed  stopped=False within=True  max=2.6645352591003757e-15 [] wrote <workspace>/testbed/results/m11/m91/rerun/m55/rolebench.json 
+[06:50:21] start m52_rb10
+[06:50:40] end m52_rb10 (exit 0): healthy: {"static_flex_vs_sdpa": {"max_abs": 2.980232238769531e-07, "mean_abs": 6.408981789718382e-08, "ref_max_abs": 1.048154592514038, "top1_agree": 1.0, "within": true}, "same_generate_tokens": true} {'flex_attention'
+[06:50:40] start rb17_prepare
+[06:50:44] end rb17_prepare (exit 0): 
+[06:51:47] start rb17_compare
+[06:51:47] end rb17_compare (exit 0): {"defect_vs_triton": {"mean_abs": 0.7156812169175122, "max_abs": 5.974820613861084, "n": 255}, "entail_torch_native_vs_triton": {"mean_abs": 0.0, "max_abs": 0.0, "n": 255}, "decisions": [["load:transformers.config", "pas
+[06:52:06] fd_softcap_sglang_torch_native: RESULT sglang gemma-2-2b-it entail=load ok=True load=13.019 used=torch_native 
+[06:52:27] fd_softcap_sglang_flex_attention: RESULT sglang gemma-2-2b-it entail=load ok=True load=13.024 used=flex_attention 
+[06:52:36] fd_softcap_transformers_paged: RESULT transformers gemma-2-2b-it entail=load ok=True load=1.646 used=eager 
+[06:53:07] fd_shift: RESULT vllm Qwen3-4B entail=load ok=True load=20.073 used=default 
+[06:53:31] rope_user: RESULT rope_user {"ok": true, "rope_parameters_in_engine": {"rope_type": "linear", "factor": 2.0, "rope_theta": 500000.0}, "error": null}
+[06:53:31] start m51_engines
+[06:56:50] end m51_engines (exit 0): --- sglang seeded (ENTAIL=load, seed=kv_short) exit=137 [entail-seed] kv_short: took one slot off request 0 at batch 4 
+[06:56:50] start m51_transformers
+[06:59:09] end m51_transformers (exit 0): seeded: off {'finished': True, 'tokens': [13, 576, 6722, 315, 9625, 374]} | on {"refused": false} wrote <workspace>/testbed/results/m11/m91/rerun/m51/transformers.json 
+[06:59:09] start m42_vllm_layout
+[07:01:38] end m42_vllm_layout (exit 0): (EngineCore pid=41625) [entail] resolved at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='strided', dtype='bfloat16', block=None, packing=None, scale_format=None, orientation='out_in'
+[07:01:38] start m63_diffusers
+[07:19:39] end m63_diffusers (exit 0):   log: WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsi   log: WARNING diffusers.loaders.peft: No LoRA keys 
+[07:19:39] start m55_l05
+[07:19:40] end m55_l05 (exit 0):   strict answer_right=True  seen=1000   stopped=False [] wrote <workspace>/testbed/results/m11/m91/rerun/m55/l05.json 
+[07:19:40] start m53_serve
+[07:22:39] end m53_serve (exit 0): {"name": "get_weather", "arguments": {"city": "P | tools=[] | reasoning=0   decision: load:vllm.tool_parser broken the consumer differs from the declaration and the policy rep  
+[07:22:39] start m55_market_serve
+[07:24:06] end m55_market_serve (exit 0):   decision: request:vllm.template_settings refused the consumer differs from the declaration and no resolution is registe   decision: request:vllm.reasoning_history refused the consumer differs from the declaration and n
+[07:24:06] start m54_serve
+[07:27:22] end m54_serve (exit 0): (EngineCore pid=49315) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=17, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, reques
+[07:27:22] start m55_market_clean_on
+[07:27:45] end m55_market_clean_on (exit 0):   history_dropped  L13            200 prompt_tokens=48    decision: request:vllm.reasoning_history broken the consumer differs from the declaration and no resolution is registe 
+[07:27:45] start m54_summarize
+[07:27:45] end m54_summarize (exit 0): wrote <workspace>/testbed/results/m11/m91/rerun/m54/SUMMARY.md 
+[07:27:45] start m63_summarize
+[07:27:47] end m63_summarize (exit 0):  tags found: ['diffusers_i01_off.json', 'diffusers_i01_on.json', 'diffusers_i01_strict.json', 'diffusers_i04_observe.json', 'diffusers_i04_off.json', 'diffusers_i04_on.json', 'diffusers_i04_reference.json', 'diffusers_lo
+[07:27:47] start m3_problems_strict
+[07:27:57] end m3_problems_strict (exit 0): rb-02 {"kind": "mechanism (the case's kernel, declared in a test table)", "defect": {"observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32', orientation=None, scale_granularity=No
+[07:28:15] fd_shift_strict: RESULT vllm Qwen3-4B entail=load ok=False load=None used=None RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+[07:28:15] start m42_strict
+[07:29:08] end m42_strict (exit 0): (EngineCore pid=50924)     raise RoleError("\n".join(_record.line(d) for d in stops)) (EngineCore pid=50924) entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declare
+[07:29:08] start m51_strict
+[07:29:56] end m51_strict (exit 0): [entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (7e92d010d23d4ea7b318bebd426f
+[07:29:56] all done: B S T

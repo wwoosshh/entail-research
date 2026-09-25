@@ -1,0 +1,73 @@
+{
+ "case": "01_reorder_layout",
+ "meta": {
+  "id": "01",
+  "title": "reordered quantized weight read with the original layout",
+  "fact": "LAYOUT",
+  "issue": "https://github.com/ggml-org/llama.cpp/issues/21589 ; https://github.com/ggml-org/llama.cpp/issues/26845",
+  "engine": "llama.cpp SYCL backend (mechanism)",
+  "kind": "mechanism",
+  "boundary": "backend reorder (layout flag in tensor extra) -> second-prompt dequantize path",
+  "trigger": {
+   "hardware": "Intel GPU (SYCL)",
+   "turn": "second prompt"
+  },
+  "symptom": "garbled",
+  "expected_detection": "runtime (closed layout type, exhaustive readers)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": NaN,
+  "mean_abs": NaN,
+  "ref_max_abs": 57.26564025878906,
+  "top1_agree": 0.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 0.0,
+  "mean_abs": 0.0,
+  "ref_max_abs": 57.26564025878906,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "layout tag at the reader boundary",
+   "defect": {
+    "flagged": true,
+    "message": "second-path dequantize (interleaved reader): argument 'buf' Layout: expected (Layout(kind='q8_0', dtype=None, block=None, packing='interleaved', scale_format=None),), got Layout(kind='q8_0', dtype=None, block=None, packing='split', scale_format=None)"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 2.0
+}

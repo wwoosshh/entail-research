@@ -1,0 +1,49 @@
+{
+ "tag": "m7_on",
+ "checkpoint": "entail_test\\astolfocarmixVpredxl_acEvo25EP.safetensors",
+ "node": null,
+ "lora": null,
+ "entail": true,
+ "extra": {},
+ "runs": [
+  {
+   "seed": 11,
+   "status": "success",
+   "seconds": 8.59,
+   "image": "C:\\Users\\<user>\\Desktop\\프로젝트\\ai_compiler\\testbed\\results\\m63\\comfy_images\\m63_m7_on_11_00001_.png"
+  },
+  {
+   "seed": 22,
+   "status": "success",
+   "seconds": 6.14,
+   "image": "C:\\Users\\<user>\\Desktop\\프로젝트\\ai_compiler\\testbed\\results\\m63\\comfy_images\\m63_m7_on_22_00001_.png"
+  },
+  {
+   "seed": 33,
+   "status": "success",
+   "seconds": 6.13,
+   "image": "C:\\Users\\<user>\\Desktop\\프로젝트\\ai_compiler\\testbed\\results\\m63\\comfy_images\\m63_m7_on_33_00001_.png"
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:comfyui.prediction",
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "set the sampler up for the declared prediction (to v-prediction without zero terminal SNR)",
+   "note": "",
+   "declared": "v-prediction",
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:comfyui.latent_scale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "note": "",
+   "declared": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  }
+ ],
+ "when": "2026-09-24 10:20:23"
+}

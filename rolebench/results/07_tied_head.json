@@ -1,0 +1,87 @@
+{
+ "case": "07_tied_head",
+ "meta": {
+  "id": "07",
+  "title": "declared tied head vs separate head in the checkpoint",
+  "fact": "PROPERTY",
+  "issue": "https://github.com/vllm-project/vllm/issues/51063",
+  "engine": "loader logic (mechanism); transformers probe",
+  "kind": "mechanism",
+  "boundary": "checkpoint config (tie flag) -> weight loader",
+  "trigger": {
+   "model": "checkpoint whose config declares tie but stores a separate head"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "load (declared tie vs actual tensors)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 2.2013970613479614,
+  "mean_abs": 0.2580326435195772,
+  "ref_max_abs": 0.8673588037490845,
+  "top1_agree": 0.03125
+ },
+ "fixed_vs_reference": {
+  "max_abs": 0.0,
+  "mean_abs": 0.0,
+  "ref_max_abs": 0.8673588037490845,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "load",
+   "checks": "declared tie vs checkpoint tensors",
+   "defect": {
+    "flagged": true,
+    "message": "loader (declared tie): config declares tied embeddings but the checkpoint holds a different head"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "probe": {
+  "result": {
+   "max_abs_vs_reference": 0.0,
+   "equals_reference": true,
+   "lm_head_shares_embedding_storage": false,
+   "config_tie_after_load": true
+  },
+  "notes": {
+   "warnings": [],
+   "logs": [
+    "WARNING transformers.modeling_utils: The tied weights mapping and config for this model specifies to tie model.embed_tokens.weight to lm_head.weight, but both are present in the checkpoints with different values, so we will NOT tie them. You should update the config with `tie_word_embeddings=False` to silence this warning."
+   ],
+   "error": null
+  }
+ },
+ "seconds": 1.0
+}

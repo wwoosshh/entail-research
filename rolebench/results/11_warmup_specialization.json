@@ -1,0 +1,73 @@
+{
+ "case": "11_warmup_specialization",
+ "meta": {
+  "id": "11",
+  "title": "warm-up specialization reused without guards",
+  "fact": "SPECIALIZATION",
+  "issue": "https://github.com/vllm-project/vllm/issues/43602",
+  "engine": "torch.compile guard skipping (mechanism)",
+  "kind": "mechanism",
+  "boundary": "compile-time assumption (empty extra input) -> runtime input (real embeddings)",
+  "trigger": {
+   "feature": "compile warm-up + guard skipping",
+   "model": "multimodal input path"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "runtime (record specialization, recheck on reuse)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 6.3863019943237305,
+  "mean_abs": 2.520291875252042,
+  "ref_max_abs": 25.198471069335938,
+  "top1_agree": 0.5
+ },
+ "fixed_vs_reference": {
+  "max_abs": 5.7220458984375e-06,
+  "mean_abs": 8.593706297688186e-07,
+  "ref_max_abs": 25.198471069335938,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "recorded specialization rechecked on reuse",
+   "defect": {
+    "flagged": true,
+    "message": "compiled graph reuse: artifact built for {'extra_rows_zero': True} reused for {'extra_rows_zero': False}"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 9.8
+}

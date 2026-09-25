@@ -1,0 +1,472 @@
+{
+  "meta": {
+    "title": "AI 모델 실행 소프트웨어로 인한 품질 저하 사례 (2024~2026)",
+    "compiled_on": "2026-09-23",
+    "case_count": 28,
+    "llm_cases": 20,
+    "image_cases": 8,
+    "inclusion_rule": "같은 모델에서 실행 소프트웨어(추론 엔진, 서빙 업체, 로컬 실행 도구, 에이전트 하네스, 이미지 생성 도구)나 설정 때문에 결과가 나빠진 경우. 모델 자체의 실력 문제는 제외.",
+    "counting_rule": "출처가 밝힌 서로 다른 원인마다 1건. L08~L10은 한 사후 분석(2025-09-17), L14~L16은 한 사후 분석(2026-04-23)에서 나옴. I01은 같은 증상이 세 모델에서 반복된 것을 1건으로 묶음.",
+    "quote_rule": "인용은 원문 그대로, 15단어 이하.",
+    "field_notes": {
+      "date": "사건 시작일 또는 첫 보고일 (date_note에 근거)",
+      "cause_status": "출처 확정 = 업체·유지보수자·병합된 수정 PR이 원인을 적음 / 기여자 분석 = 이슈 참여자가 원인을 제시했으나 유지보수자 확정 기록 없음 / 원인 미기재",
+      "warning_per_source": "출처가 경고·오류 표시 여부를 적은 경우만 기록"
+    }
+  },
+  "cases": [
+    {
+      "id": "L01", "domain": "LLM", "date": "2024-02-20", "date_note": "상태 페이지 기준 발생일",
+      "who": "OpenAI (ChatGPT)", "software_kind": "서빙 업체 (추론 커널)",
+      "user_observed": "ChatGPT가 뜻이 통하지 않는 단어 나열을 출력",
+      "user_observed_quote": {"text": "produced word sequences that made no sense", "by": "OpenAI 상태 페이지"},
+      "discovered_by": "원문 미기재",
+      "time_to_discovery": "2024-02-20 발생, 2024-02-21 해결 (상태 페이지)",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "inference kernels produced incorrect results when used in certain GPU configurations", "by": "OpenAI 상태 페이지 사후 설명"},
+      "fix": "수정 배포 후 해결 확인 (세부 미기재)",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://status.openai.com/incidents/ssg8fh7sfyz3", "type": "1차"}]
+    },
+    {
+      "id": "L02", "domain": "LLM", "date": "2024-04-25", "date_note": "이슈 등록일",
+      "who": "llama.cpp (GGUF 변환과 BPE 토큰화). Ollama/Open WebUI 경유 사용자 포함", "software_kind": "로컬 실행 도구",
+      "user_observed": "'What is 3333+777?'를 meta.ai와 Groq는 맞히는데 llama.cpp의 Llama 3 GGUF(8B fp16, 8B Q8_0, 70B Q4_0)는 모두 같은 방식으로 틀림",
+      "user_observed_quote": {"text": "All of the llama.cpp instances got the problem wrong in exactly the same way.", "by": "이슈 작성자 coder543"},
+      "discovered_by": "사용자가 다른 실행 환경(meta.ai, Groq)과 교차 비교",
+      "time_to_discovery": "이슈 2024-04-25 → 수정 PR #6920 병합 2024-04-29",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "the pre-tokenization splits the input string in the wrong way", "by": "PR #6920 (ggerganov)"},
+      "fix": "BPE 사전 토큰화 종류를 GGUF 헤더에 기록하고 변환 때 토큰 해시로 확인. 수정 전에 만든 GGUF는 기본 사전 토큰화로 되돌아가므로 다시 변환해야 함",
+      "magnitude": "집계 수치 없음 (단일 프롬프트 재현)",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://github.com/ggml-org/llama.cpp/issues/6914", "type": "1차"},
+        {"url": "https://github.com/ggml-org/llama.cpp/pull/6920", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L03", "domain": "LLM", "date": "2024-06-28", "date_note": "첫 보고일 (llama.cpp 지원 PR은 2024-06-27 생성)",
+      "who": "Hugging Face transformers, llama.cpp (Gemma 2)", "software_kind": "추론 엔진, 로컬 실행 도구",
+      "user_observed": "Gemma 2 27B가 환각, 오탈자, 지시 불이행. llama.cpp Q8_0는 Google AI Studio가 맞히는 쉬운 문제를 계속 틀림",
+      "user_observed_quote": {"text": "still gets the answer wrong to even simple problems", "by": "llama.cpp issue #8183 작성자"},
+      "discovered_by": "사용자들이 Google AI Studio, NVIDIA NIM 결과와 비교, eq-bench 측정",
+      "time_to_discovery": "보고 2024-06-28 → transformers 수정 06-28, llama.cpp soft-capping 06-30, sliding window mask 07-01, 9B query scaling 07-14",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "This PR adds the missing attention layer and final logit soft-capping.", "by": "llama.cpp PR #8197"},
+      "fix": "transformers PR #31698 ('Gemma capping is a must for big models'), llama.cpp PR #8197(GGUF 재생성 필요), #8227, #8473(9B는 224가 아니라 256). Hugging Face 직원: 'float16 should not be used for this model'",
+      "magnitude": "수정 전 eq-bench v2 49.16 (수정 후 수치 미기재)",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://huggingface.co/google/gemma-2-27b-it/discussions/10", "type": "1차"},
+        {"url": "https://github.com/ggml-org/llama.cpp/issues/8183", "type": "1차"},
+        {"url": "https://github.com/ggml-org/llama.cpp/pull/8197", "type": "1차"},
+        {"url": "https://github.com/huggingface/transformers/pull/31698", "type": "1차"},
+        {"url": "https://github.com/ggml-org/llama.cpp/pull/8444", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L04", "domain": "LLM", "date": "2024-06-20", "date_note": "issue #8025 등록일",
+      "who": "llama.cpp CUDA 경로 (Qwen2 GGUF, KoboldCpp 등 하류 포함)", "software_kind": "로컬 실행 도구",
+      "user_observed": "Qwen2가 GPU에서 'GGGG...' 같은 무의미한 출력이나 여러 언어가 섞인 무작위 토큰을 냄",
+      "user_observed_quote": {"text": "Previously, Qwen2 models generate nonsense like GGGG... with llama.cpp on GPUs.", "by": "Qwen 공식 문서"},
+      "discovered_by": "사용자 보고",
+      "time_to_discovery": "issue #8025 2024-06-20 → PR #8412 병합 2024-07-11 (b3370)",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "use F32 precision in Qwen2 attention and no FA", "by": "llama.cpp PR #8412 제목"},
+      "fix": "Qwen2 attention을 F32로 계산. 그 전에는 Qwen 문서가 -fa와 전체 GPU 오프로드를 우회책으로 안내",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://qwen.readthedocs.io/en/v2.0/run_locally/llama.cpp.html", "type": "1차 (모델 제작사 문서)"},
+        {"url": "https://github.com/ggml-org/llama.cpp/pull/8412", "type": "1차"},
+        {"url": "https://github.com/ggml-org/llama.cpp/issues/8025", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L05", "domain": "LLM", "date": "2024-09-30", "date_note": "이슈 등록일",
+      "who": "Ollama", "software_kind": "로컬 실행 도구",
+      "user_observed": "기본 컨텍스트(2048)를 넘는 입력이 잘리는데, 사용자에게는 이상한 답만 보임",
+      "user_observed_quote": {"text": "The user can only see some weird behaviour from the LLM's answers.", "by": "issue #7043 댓글 (2025-01-07)"},
+      "discovered_by": "사용자 요청 이슈",
+      "time_to_discovery": "이슈 2024-09-30 등록, 2026-09-23 기준 열림",
+      "cause_status": "출처 확정 (서버 로그)",
+      "cause_quote": {"text": "msg=\"truncating input prompt\" limit=2048 prompt=10983 keep=5 new=2048", "by": "ollama serve 로그 (issue #7043 댓글)"},
+      "fix": "v0.5.13(2025-02-27) OLLAMA_CONTEXT_LENGTH 추가, v0.6.7(2025-04-26) 'Increased default context window to 4096 tokens', v0.15.5(2026-02-03) VRAM에 따라 4k/32k/256k. 별도로 #17427(2026-07): 넘치는 입력은 num_ctx/2+2로 잘림, 유지보수자가 설계 동작이라고 설명하고 닫음",
+      "magnitude": "로그 예: prompt=10983 토큰 → new=2048",
+      "warning_per_source": "서버 로그에만 경고, ollama run 화면에는 전달되지 않음 (#7043 댓글)",
+      "sources": [
+        {"url": "https://github.com/ollama/ollama/issues/7043", "type": "1차"},
+        {"url": "https://github.com/ollama/ollama/releases/tag/v0.6.7", "type": "1차"},
+        {"url": "https://docs.ollama.com/context-length", "type": "1차"},
+        {"url": "https://github.com/ollama/ollama/issues/17427", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L06", "domain": "LLM", "date": "2025-04-05", "date_note": "Llama 4 공개일 (Meta 블로그)",
+      "who": "Llama 4를 서비스한 업체들과 vLLM, transformers, llama.cpp", "software_kind": "서빙 업체, 추론 엔진",
+      "user_observed": "서비스마다 Llama 4 품질이 다르다는 보고",
+      "user_observed_quote": {"text": "reports of mixed quality across different services", "by": "Meta Ahmad Al-Dahle (VentureBeat 인용)"},
+      "discovered_by": "vLLM 기여자(QK norm, MMLU Pro 측정), Unsloth(QK norm epsilon)",
+      "time_to_discovery": "공개 2025-04-05 → vLLM 수정 04-09, transformers 04-10, llama.cpp 04-11",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "QKNorm should not be across head, we need to do qknorm per head", "by": "vLLM PR #16311"},
+      "fix": "vLLM PR #16311(QK norm을 헤드별로), transformers PR #37418(L2Norm에 rms_norm_eps 사용), llama.cpp PR #12889(Scout RoPE 설정 변경 대응). Unsloth: 'this means using 1e-05 and not 1e-06'",
+      "magnitude": "vLLM MMLU Pro 0.6858 → 0.7153",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://github.com/vllm-project/vllm/pull/16311", "type": "1차"},
+        {"url": "https://github.com/huggingface/transformers/pull/37418", "type": "1차"},
+        {"url": "https://github.com/ggml-org/llama.cpp/pull/12889", "type": "1차"},
+        {"url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs", "type": "1차 (Unsloth 자체 설명)"},
+        {"url": "https://venturebeat.com/ai/meta-defends-llama-4-release-against-reports-of-mixed-quality-blames-bugs", "type": "2차"},
+        {"url": "https://x.com/Ahmad_Al_Dahle/status/1909302532306092107", "type": "1차 (X 차단으로 직접 열람 못함)"}
+      ]
+    },
+    {
+      "id": "L07", "domain": "LLM", "date": "2025-08-12", "date_note": "Artificial Analysis 게시 (X 게시물 ID로 계산한 UTC). 모델 공개 2025-08-05, 측정 데이터 2025-08-11 (OpenRouter 블로그)",
+      "who": "gpt-oss-120b API 업체 (Microsoft Azure, Amazon Bedrock, Groq 등)", "software_kind": "서빙 업체",
+      "user_observed": "같은 gpt-oss-120b인데 업체마다 AIME25 점수가 다름",
+      "user_observed_quote": {"text": "Open weight LLMs exhibit inconsistent performance across providers", "by": "Simon Willison 글 제목"},
+      "discovered_by": "제3자 벤치마크 (Artificial Analysis, AIME25 32회·GPQA 16회·IFBench 8회 반복)",
+      "time_to_discovery": "게시 2025-08-12 → Azure 수정 확인(2025-08-15 글) → 2025-08-20 갱신",
+      "cause_status": "출처 확정 (Azure만). AWS 원인 미기재",
+      "cause_quote": {"text": "Old vLLM commits that didn't respect reasoning_effort, so all requests defaulted to medium.", "by": "Microsoft Azure Lucas Pickup (Simon Willison 인용)"},
+      "fix": "Azure는 서빙 인스턴스의 vLLM 갱신. 2025-08-20 갱신에서 Groq와 Azure 93.3%",
+      "magnitude": "AIME25x32: Cerebras·Fireworks·Together 등 93.3% vs Parasail 90.0, Groq 86.7, Amazon 83.3, Azure 80.0 (CompactifAI 36.7은 압축 모델)",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://simonwillison.net/2025/Aug/15/inconsistent-performance/", "type": "2차"},
+        {"url": "https://x.com/ArtificialAnlys/status/1955102409044398415", "type": "1차 (X 차단으로 직접 열람 못함)"}
+      ]
+    },
+    {
+      "id": "L08", "domain": "LLM", "date": "2025-08-05", "date_note": "사후 분석이 밝힌 시작일",
+      "who": "Anthropic (Claude Sonnet 4, 1P API·Amazon Bedrock·Google Vertex AI)", "software_kind": "서빙 업체 (요청 라우팅)",
+      "user_observed": "일부 요청의 응답 품질 저하",
+      "user_observed_quote": {"text": "had at least one message routed to the wrong server type", "by": "Anthropic 사후 분석 (Claude Code 사용자 약 30%)"},
+      "discovered_by": "사용자 보고 누적 → 8월 말 조사 시작",
+      "time_to_discovery": "2025-08-05 시작, 08-29 부하분산 변경으로 확대, 09-04 수정 배포, 09-16(1P·Vertex)/09-18(Bedrock) 롤아웃 완료",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "misrouted to servers configured for the upcoming 1M token context window", "by": "Anthropic 사후 분석"},
+      "fix": "짧은/긴 컨텍스트 요청을 올바른 서버 풀로 보내도록 라우팅 로직 수정",
+      "magnitude": "처음 Sonnet 4 요청의 0.8%, 최악 시간대(08-31) 16%. Bedrock 최대 0.18%, Vertex 0.0004% 미만",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues", "type": "1차"}]
+    },
+    {
+      "id": "L09", "domain": "LLM", "date": "2025-08-25", "date_note": "배포일",
+      "who": "Anthropic (Claude API TPU 서버, Opus 4.1·Opus 4·Sonnet 4)", "software_kind": "서빙 업체 (런타임 최적화 설정)",
+      "user_observed": "영어 질문 답에 태국어·중국어 문자, 코드의 명백한 문법 오류",
+      "user_observed_quote": {"text": "producing Thai or Chinese characters in response to English prompts", "by": "Anthropic 사후 분석"},
+      "discovered_by": "사용자 보고 → 업체 조사",
+      "time_to_discovery": "2025-08-25 배포 → 09-02 롤백 (Opus 4.1/4는 08-25~28, Sonnet 4는 08-25~09-02)",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "we deployed a misconfiguration to the Claude API TPU servers", "by": "Anthropic 사후 분석"},
+      "fix": "롤백. 배포 과정에 예상 밖 문자 출력 검출 테스트 추가",
+      "magnitude": "비율 미기재",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues", "type": "1차"}]
+    },
+    {
+      "id": "L10", "domain": "LLM", "date": "2025-08-25", "date_note": "배포일",
+      "who": "Anthropic (XLA:TPU 컴파일러, Claude Haiku 3.5, 일부 Sonnet 4·Opus 3 가능성)", "software_kind": "서빙 업체 (컴파일러)",
+      "user_observed": "토큰 선택 오류로 인한 품질 저하",
+      "user_observed_quote": {"text": "sometimes returned completely wrong results, but only for certain batch sizes and model configurations", "by": "Anthropic 사후 분석 (근사 top-k)"},
+      "discovered_by": "업체가 Haiku 3.5에서 먼저 관찰, 이후 Opus 3 사용자 보고",
+      "time_to_discovery": "2025-08-25 배포 → Haiku 3.5 롤백 09-04, Opus 3 롤백 09-12",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "inadvertently triggered a latent bug in the XLA:TPU compiler", "by": "Anthropic 사후 분석"},
+      "fix": "근사 top-k를 정확 top-k로 교체, 일부 연산을 fp32로 통일, XLA:TPU 팀과 컴파일러 버그 수정",
+      "magnitude": "비율 미기재",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues", "type": "1차"}]
+    },
+    {
+      "id": "L11", "domain": "LLM", "date": "2025-09-09", "date_note": "K2 Vendor Verifier 저장소 생성일. 아래 수치는 2025-11-15 시험",
+      "who": "Kimi K2 제3자 API 업체들과 오픈소스 엔진(vLLM, SGLang)", "software_kind": "서빙 업체, 추론 엔진",
+      "user_observed": "K2 도구 호출 정확도에 대한 피드백이 많음",
+      "user_observed_quote": {"text": "we have received numerous feedback on the precision of Kimi K2 in toolcall", "by": "Moonshot AI (K2VV README)"},
+      "discovered_by": "모델 제작사가 4,000개 요청으로 각 업체 응답을 공식 API와 비교",
+      "time_to_discovery": "원문 미기재",
+      "cause_status": "출처 확정 (제작사가 업체 측 요인으로 제시)",
+      "cause_quote": {"text": "Some vendors may not meet the requirements due to using incorrect versions.", "by": "Moonshot AI (K2VV README)"},
+      "fix": "권장 엔진 버전(vLLM v0.11.0, SGLang v0.5.3rc0 이상 등), 도구 호출 ID를 functions.func_name:idx 형식으로 바꾸기, guided encoding 추가 권고",
+      "magnitude": "K2-0905 schema_accuracy: 공식 100% vs vLLM 76.00, SGLang 73.13, Volc 72.86, Baseten 72.49, Together 71.96. tool_call_f1: Groq 69.52, Nebius 50.60 (공식 평균 84, 허용 기준 80). K2-Thinking schema: vLLM 87.22, Chutes 83.05",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://github.com/MoonshotAI/K2-Vendor-Verifier", "type": "1차"},
+        {"url": "https://www.kimi.ai/blog/kimi-vendor-verifier", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L12", "domain": "LLM", "date": "2025-10-31", "date_note": "조사 보고서 게시일. 불만은 2025-09-15 GPT-5-Codex 출시 무렵부터",
+      "who": "OpenAI (Codex / GPT-5-Codex 서빙)", "software_kind": "서빙 업체 (하드웨어, 제약 샘플링)",
+      "user_observed": "성능 저하 체감, 최종 답 문장 중간에 다른 언어(예: 한국어)로 바뀜",
+      "user_observed_quote": {"text": "the model would switch languages mid sentence as part of the final answer", "by": "OpenAI Codex 팀 보고서"},
+      "discovered_by": "사용자 불만 → 업체 조사 (하드웨어 종류별 평가, 요청 특성별 예측 모델)",
+      "time_to_discovery": "2025-09-15 이후 불만 증가 → 2025-10-31 보고서",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "A subtle bug in the implementation that led the token sequence to become out-of-distribution", "by": "OpenAI Codex 팀 보고서 (제약 샘플링)"},
+      "fix": "구형 하드웨어를 fleet에서 제거('slight performance issues with some of our older hardware'), 제약 샘플링 수정 배포 예정, 부하분산 개선",
+      "magnitude": "언어 전환 버그: 전체 세션의 0.25% 미만 (하드웨어 차이 크기는 미기재)",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://docs.google.com/document/d/1fDJc1e0itJdh0MXMFJtkRiBcxGEFtye6Xc6Ui7eMX4o/mobilebasic", "type": "1차"}]
+    },
+    {
+      "id": "L13", "domain": "LLM", "date": "2025-11-03", "date_note": "MiniMax 글 게시일",
+      "who": "MiniMax-M2를 OpenAI 호환 Chat Completions로 쓰는 앱·통합", "software_kind": "API 통합",
+      "user_observed": "M2의 다회차 에이전트 작업 품질 저하",
+      "user_observed_quote": {"text": "interleaved thinking is sometimes not applied correctly in practice", "by": "MiniMax"},
+      "discovered_by": "모델 제작사가 사용자 피드백 분석, 이전 사고 유지/폐기 비교 벤치마크",
+      "time_to_discovery": "원문 미기재",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "the widely-used OpenAI Chat Completion API does not support passing reasoning content back", "by": "MiniMax"},
+      "fix": "OpenAI 호환 API에 reasoning_details 필드 도입, OpenRouter·Ollama·Droid·Vercel·Cline과 협력",
+      "magnitude": "이전 사고 유지 vs 폐기: Tau² 87 vs 64, BrowseComp 44.0 vs 31.4, GAIA 75.7 vs 67.9, xBench 72.0 vs 66.0, SWE-Bench Verified 69.4 vs 67.2",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://www.minimax.io/news/why-is-interleaved-thinking-important-for-m2", "type": "1차"}]
+    },
+    {
+      "id": "L14", "domain": "LLM", "date": "2026-03-04", "date_note": "변경일",
+      "who": "Anthropic (Claude Code 기본 설정, Sonnet 4.6·Opus 4.6)", "software_kind": "에이전트 하네스 (기본 추론 수준)",
+      "user_observed": "Claude 응답이 나빠졌다는 보고 (세 변경이 겹쳐 나타남)",
+      "user_observed_quote": {"text": "reports that Claude's responses have worsened for some users", "by": "Anthropic 사후 분석 (2026-04-23)"},
+      "discovered_by": "사용자 보고 → 업체 조사",
+      "time_to_discovery": "2026-03-04 변경 → 04-07 원복. 3월 초부터 조사",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "This was the wrong tradeoff.", "by": "Anthropic (기본 reasoning effort를 high에서 medium으로 바꾼 일)"},
+      "fix": "기본값 원복",
+      "magnitude": "수치 미기재. API는 영향 없음 ('The API was not impacted.')",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://www.anthropic.com/engineering/april-23-postmortem", "type": "1차"}]
+    },
+    {
+      "id": "L15", "domain": "LLM", "date": "2026-03-26", "date_note": "배포일",
+      "who": "Anthropic (Claude Code 컨텍스트 관리, Sonnet 4.6·Opus 4.6)", "software_kind": "에이전트 하네스",
+      "user_observed": "Claude가 잊어버리고 반복하며 이상한 도구를 고름",
+      "user_observed_quote": {"text": "made Claude seem forgetful and repetitive", "by": "Anthropic 사후 분석"},
+      "discovered_by": "사용자 보고 → 업체 조사",
+      "time_to_discovery": "2026-03-26 배포 → 04-10 수정 (v2.1.101)",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "keep happening every turn for the rest of the session instead of just once", "by": "Anthropic (유휴 세션의 이전 사고 기록 삭제가 매 턴 반복)"},
+      "fix": "버그 수정 (v2.1.101)",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재. 탐지: 'it took us over a week to discover and confirm the root cause'",
+      "sources": [{"url": "https://www.anthropic.com/engineering/april-23-postmortem", "type": "1차"}]
+    },
+    {
+      "id": "L16", "domain": "LLM", "date": "2026-04-16", "date_note": "변경일",
+      "who": "Anthropic (Claude Code 시스템 프롬프트, Sonnet 4.6·Opus 4.6·Opus 4.7)", "software_kind": "에이전트 하네스 (시스템 프롬프트 설정)",
+      "user_observed": "코딩 품질 저하",
+      "user_observed_quote": {"text": "In combination with other prompt changes, it hurt coding quality", "by": "Anthropic 사후 분석"},
+      "discovered_by": "업체가 시스템 프롬프트 줄별 제거 실험(ablation)을 넓은 평가 세트로 수행",
+      "time_to_discovery": "2026-04-16 추가 → 04-20 원복 (v2.1.116)",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "we added a system prompt instruction to reduce verbosity", "by": "Anthropic 사후 분석"},
+      "fix": "프롬프트 원복",
+      "magnitude": "한 평가에서 Opus 4.6과 4.7 모두 3% 하락",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://www.anthropic.com/engineering/april-23-postmortem", "type": "1차"}]
+    },
+    {
+      "id": "L17", "domain": "LLM", "date": "2026-05-25", "date_note": "이슈 등록일",
+      "who": "vLLM (prefix caching + MTP 추측 디코딩, Qwen3.5/3.6 등 하이브리드 Mamba/GDN 모델)", "software_kind": "추론 엔진",
+      "user_observed": "두 기능을 함께 켰을 때만 정확도가 떨어짐. 프롬프트를 못 본 듯한 답",
+      "user_observed_quote": {"text": "as if it didn't see the prompt", "by": "issue #43559 댓글 (eblanshey)"},
+      "discovered_by": "사용자가 4가지 설정 조합(둘 다 끔/하나씩/둘 다 켬)으로 같은 데이터셋 비교",
+      "time_to_discovery": "보고 2026-05-25 → PR #51113 병합 2026-08-06 (73일). 후속 이슈 #53912(2026-08-26): v0.28.0에서도 손상, 열림",
+      "cause_status": "출처 확정 (수정 PR)",
+      "cause_quote": {"text": "Every request resuming from that hash silently restores a truncated state.", "by": "vLLM PR #51113"},
+      "fix": "PR #51113 (mamba align 모드 prefill 청크를 블록 경계에 맞춤). 일부 사례는 후속 이슈에서 계속 보고됨",
+      "magnitude": "분류 2,600건 정확도 약 94% → 약 75% (보고자). 도구 호출 시나리오 약 90% → 약 50% (다른 사용자). 재현 못한 보고도 있음(-0.67%)",
+      "warning_per_source": "PR이 'silently restores'로 기술",
+      "sources": [
+        {"url": "https://github.com/vllm-project/vllm/issues/43559", "type": "1차"},
+        {"url": "https://github.com/vllm-project/vllm/pull/51113", "type": "1차"},
+        {"url": "https://github.com/vllm-project/vllm/issues/53912", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L18", "domain": "LLM", "date": "2025-11-27", "date_note": "issue #29595 등록일",
+      "who": "vLLM 0.11.1~0.12.0 (PyTorch 2.9.0/Triton 3.5.0 조합, Qwen3-VL)", "software_kind": "추론 엔진",
+      "user_observed": "Qwen3-VL의 위치 지정(바운딩 박스, 좌표)이 틀어짐",
+      "user_observed_quote": {"text": "The model produces incorrect bounding box coordinates and poor spatial reasoning results.", "by": "issue #29595 작성자"},
+      "discovered_by": "사용자가 vLLM 버전 간 비교 (0.11.0 대비)",
+      "time_to_discovery": "#29595 2025-11-27 등록 → 2026-02-08 닫힘. A100 경로 #36117 2026-03-05 등록 → 03-07 닫힘 (0.17.0에서 해결)",
+      "cause_status": "기여자 분석 (유지보수자는 0.17.0에서 해결됐다고만 기재)",
+      "cause_quote": {"text": "the issue may be in torch 2.9.0 handling of triton 3.5.0", "by": "#29595 기여자 karthickai (추정)"},
+      "fix": "우회: triton 3.4.0으로 내리기 또는 --enforce-eager. vLLM 0.17.0에서 해결 (유지보수자 ywang96)",
+      "magnitude": "Qwen3-VL-2B, A100: PointBench 57.6% → 약 13%, RefCOCO 86% → 19% (v0.11.0 → v0.12.0, #36117/#36228)",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://github.com/vllm-project/vllm/issues/29595", "type": "1차"},
+        {"url": "https://github.com/vllm-project/vllm/issues/36117", "type": "1차"},
+        {"url": "https://github.com/vllm-project/vllm/issues/36228", "type": "1차"}
+      ]
+    },
+    {
+      "id": "L19", "domain": "LLM", "date": "2025-08-07", "date_note": "기사(2025-08-08)가 인용한 발언의 '어제'",
+      "who": "OpenAI (ChatGPT의 GPT-5 실시간 라우터 'autoswitcher')", "software_kind": "서빙 업체 (요청 라우터)",
+      "user_observed": "GPT-5가 훨씬 멍청해 보임",
+      "user_observed_quote": {"text": "the result was GPT-5 seemed way dumber", "by": "Sam Altman (TechCrunch 인용)"},
+      "discovered_by": "원문 미기재 (내부 장애 'sev')",
+      "time_to_discovery": "하루 중 일부 시간",
+      "cause_status": "출처 확정",
+      "cause_quote": {"text": "the autoswitcher was out of commission for a chunk of the day", "by": "Sam Altman (TechCrunch 인용)"},
+      "fix": "라우터 판단 경계 조정, 어느 모델이 답하는지 표시 예정",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://techcrunch.com/2025/08/08/sam-altman-addresses-bumpy-gpt-5-rollout-bringing-4o-back-and-the-chart-crime/", "type": "2차"}]
+    },
+    {
+      "id": "L20", "domain": "LLM", "date": "2025-03-12", "date_note": "이슈 등록일",
+      "who": "LM Studio MLX 런타임, mlx-lm/mlx-vlm, mlx-community 변환본 (Gemma 3)", "software_kind": "로컬 실행 도구",
+      "user_observed": "Gemma 3가 '<pad><pad><pad>'만 출력",
+      "user_observed_quote": {"text": "Using Gemma 3 on MLX only generates <pad><pad><pad> as the output.", "by": "LM Studio bug tracker #513 작성자"},
+      "discovered_by": "사용자 보고 (댓글 60개)",
+      "time_to_discovery": "보고 2025-03-12 → mlx-vlm v0.1.18 수정 03-18, 이슈 닫힘 03-24",
+      "cause_status": "출처 확정 (MLX 쪽 개발자 댓글)",
+      "cause_quote": {"text": "The dynamic range is too large for fp16.", "by": "Blaizzy 댓글이 인용한 설명. awni: 'there was a bug with the window attention.'"},
+      "fix": "bfloat16으로 다시 변환한 모델 배포, mlx-vlm v0.1.18, mlx-lm 수정, LM Studio MLX 런타임 갱신",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://github.com/lmstudio-ai/lmstudio-bug-tracker/issues/513", "type": "1차"}]
+    },
+    {
+      "id": "I01", "domain": "image", "date": "2024-06-13", "date_note": "첫 사례(SD3) 이슈 등록일. 같은 증상이 Flux(2024-08), Z-Image(2025-12~2026-01)에서 반복",
+      "who": "ComfyUI (LoRA 로더)", "software_kind": "이미지 생성 도구",
+      "user_observed": "다른 학습 도구 형식의 LoRA를 넣어도 그림에 효과가 없음",
+      "user_observed_quote": {"text": "images are generated but the effect is not seen", "by": "ComfyUI issue #11158 (Z-Image)"},
+      "discovered_by": "사용자 보고 (콘솔의 'lora key not loaded' 경고)",
+      "time_to_discovery": "SD3: 2024-06-13 보고 → 같은 날 커밋 ac151ac. Flux(SimpleTuner): 2024-08-04 → 08-05 커밋 78e133d. Z-Image(ModelScope): 2026-01-09 → PR #11805 2026-01-12",
+      "cause_status": "출처 확정 (형식별 키 매핑 부재)",
+      "cause_quote": {"text": "Loras trained with Diffusers' scripts can't be loaded with stock Lora Loader", "by": "ComfyUI issue #3701 작성자"},
+      "fix": "형식별 키 매핑 추가 (ac151ac 'Support SD3 diffusers lora.', 78e133d 'Support simple diffusers Flux loras.', PR #11805). Musubi Tuner LoRA는 ComfyUI 형식 변환 필요(#11487)",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "콘솔에 'lora key not loaded' 경고 출력",
+      "sources": [
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/3701", "type": "1차"},
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/4202", "type": "1차"},
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/11158", "type": "1차"},
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/11763", "type": "1차"},
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/11487", "type": "1차"}
+      ]
+    },
+    {
+      "id": "I02", "domain": "image", "date": "2024-08-09", "date_note": "이슈 등록일 (원인 커밋 2024-08-08)",
+      "who": "ComfyUI (lowvram 모드 model_patcher)", "software_kind": "이미지 생성 도구",
+      "user_observed": "8GB GPU에서 Flux LoRA가 일부만 적용돼 효과가 약함. 같은 LoRA가 Forge에서는 기대대로 나옴",
+      "user_observed_quote": {"text": "Seems like a strength of 1 in ComfyUI is more like 0.", "by": "issue #4282 댓글 (rabidcopy)"},
+      "discovered_by": "사용자가 LoRA 강도 0, 수정 전후 커밋, 다른 도구(Forge) 결과와 비교",
+      "time_to_discovery": "원인 커밋 2024-08-08 → 보고 08-09 → 수정 커밋 08-16",
+      "cause_status": "출처 확정 (원인 커밋과 수정 커밋)",
+      "cause_quote": {"text": "LoRA is getting loaded only partially and producing an image with diminished effect", "by": "issue #4282 작성자 (원인 커밋 08f92d5 'Partial model shift support.')"},
+      "fix": "커밋 83f3431 'Fix potential lowvram issue.'",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "'No missing keys reported in the console.' / 'with no error / warnings output' (댓글)",
+      "sources": [{"url": "https://github.com/Comfy-Org/ComfyUI/issues/4282", "type": "1차"}]
+    },
+    {
+      "id": "I03", "domain": "image", "date": "2024-08-22", "date_note": "이슈 등록일 (원인 커밋 2024-08-20)",
+      "who": "ComfyUI (comfy/ops.py 가중치 캐스팅)", "software_kind": "이미지 생성 도구",
+      "user_observed": "Flux + LoRA에서 첫 번째 그림만 정상이고 두 번째부터 노이즈",
+      "user_observed_quote": {"text": "only the first render is good", "by": "issue #4549 작성자"},
+      "discovered_by": "사용자 보고, 다른 사용자가 원인 커밋 지목",
+      "time_to_discovery": "원인 커밋 2024-08-20 → 보고 08-22 → 수정 커밋 08-22",
+      "cause_status": "출처 확정 (원인 커밋과 수정 커밋)",
+      "cause_quote": {"text": "Make cast_to a nop if weight is already good.", "by": "원인 커밋 538cb06 메시지"},
+      "fix": "커밋 c7ee4b3 'Try to fix some lora issues.'",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [{"url": "https://github.com/Comfy-Org/ComfyUI/issues/4549", "type": "1차"}]
+    },
+    {
+      "id": "I04", "domain": "image", "date": "2024-12-14", "date_note": "이슈 등록일",
+      "who": "AUTOMATIC1111 stable-diffusion-webui (릴리스 v1.10.1)", "software_kind": "이미지 생성 도구",
+      "user_observed": "v-prediction 모델(NoobAI-XL V-Pred 0.75S)로 만든 그림이 과포화된 'deep fried' 상태",
+      "user_observed_quote": {"text": "my pictures is just deep fried", "by": "issue #16721 작성자"},
+      "discovered_by": "사용자 보고",
+      "time_to_discovery": "보고 당일 dev 브랜치 전환 안내. v-pred 자동 감지는 dev에 2024-10-19 병합",
+      "cause_status": "출처 확정 (릴리스에 v-pred 지원 없음)",
+      "cause_quote": {"text": "you are on v1.10.1 ... use dev branch", "by": "협업자 w-e-w"},
+      "fix": "dev 브랜치 PR #16567 (state_dict의 v_pred 키로 감지). 2026-09-23 조회 기준 dev가 v1.10.1보다 96커밋 앞서 있고 새 릴리스 없음. dev에서도 검은 출력 보고(#17067, 2025-07, 열림)",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16721", "type": "1차"},
+        {"url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/16567", "type": "1차"},
+        {"url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/17067", "type": "1차"},
+        {"url": "https://huggingface.co/Laxhar/noobai-XL-Vpred-1.0", "type": "1차 (모델 카드)"}
+      ]
+    },
+    {
+      "id": "I05", "domain": "image", "date": "2025-07-28", "date_note": "ComfyUI issue #9077 등록일",
+      "who": "SageAttention 2.x + ComfyUI (Wan 2.1/2.2, Qwen-Image 등)", "software_kind": "이미지 생성 도구 (어텐션 커널)",
+      "user_observed": "영상·그림이 완전히 검게 나옴",
+      "user_observed_quote": {"text": "Sage Attention with WAN FP8 model (or FP8 quantization) causes black output.", "by": "SageAttention issue #221 제목 일부"},
+      "discovered_by": "사용자 보고 다수 (2025-07 ~ 2026-07)",
+      "time_to_discovery": "2025-07-28 보고 이후 2026-07까지 추가 보고. ComfyUI #9077, SageAttention #221 열림",
+      "cause_status": "원인 확정 기록 없음. 관련 이슈에서 유지보수자가 fp16 누산기 overflow를 언급",
+      "cause_quote": {"text": "fp16 has a limited range and may encounter overflow error as the accumulator.", "by": "SageAttention 유지보수자 jason-huang03 (#93, Open-Sora 맥락)"},
+      "fix": "공식 수정 없음. 사용자 우회: SageAttention 2.0.1로 내리기(#9184), fp32 누산 커널 강제, --fast 옵션 제거 등",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "콘솔 RuntimeWarning 'invalid value encountered in cast' (댓글)",
+      "sources": [
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/9077", "type": "1차"},
+        {"url": "https://github.com/Comfy-Org/ComfyUI/issues/9184", "type": "1차"},
+        {"url": "https://github.com/thu-ml/SageAttention/issues/221", "type": "1차"},
+        {"url": "https://github.com/thu-ml/SageAttention/issues/93", "type": "1차"}
+      ]
+    },
+    {
+      "id": "I06", "domain": "image", "date": "2025-06-16", "date_note": "이슈 등록일 (파이프라인 병합 2025-06-14)",
+      "who": "Hugging Face diffusers (ChromaPipeline, main 브랜치)", "software_kind": "이미지 생성 파이프라인",
+      "user_observed": "Chroma 출력 품질이 참조 구현보다 나쁨",
+      "user_observed_quote": {"text": "The masks are computed ... and then thrown away and not returned.", "by": "issue #11724 작성자"},
+      "discovered_by": "사용자가 참조 구현 코드와 대조",
+      "time_to_discovery": "병합 2025-06-14 → 보고 06-16 → 수정 06-18 (v0.34.0 릴리스 06-24 이전)",
+      "cause_status": "출처 확정 (수정 PR)",
+      "cause_quote": {"text": "we neglected passing the modified attention mask to the transformer model, leading to quality issues", "by": "diffusers PR #11725"},
+      "fix": "PR #11725",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://github.com/huggingface/diffusers/issues/11724", "type": "1차"},
+        {"url": "https://github.com/huggingface/diffusers/pull/11725", "type": "1차"}
+      ]
+    },
+    {
+      "id": "I07", "domain": "image", "date": "2026-03-08", "date_note": "이슈 등록일",
+      "who": "Hugging Face diffusers 로더 (Apple MPS, GLM-Image)", "software_kind": "이미지 생성 파이프라인",
+      "user_observed": "완전히 검은 그림. 로딩 중 일부 가중치가 조용히 손상",
+      "user_observed_quote": {"text": "some model parameters become silently corrupted", "by": "issue #13227 작성자"},
+      "discovered_by": "사용자 보고, 다른 기여자가 원인 분석(2026-08-21)",
+      "time_to_discovery": "보고 2026-03-08 → 원인 분석 2026-08-21, 이슈 열림",
+      "cause_status": "기여자 분석",
+      "cause_quote": {"text": "a non-blocking CPU→MPS copy can read source storage that was already released", "by": "기여자 RudraMantri123 (PyTorch #189690 인용)"},
+      "fix": "우회: CPU에 먼저 올린 뒤 MPS로 옮기기. 기여자 분석으로는 GLM에 한정되지 않음",
+      "magnitude": "손상 값 약 1e37",
+      "warning_per_source": "'silently corrupted' (작성자)",
+      "sources": [{"url": "https://github.com/huggingface/diffusers/issues/13227", "type": "1차"}]
+    },
+    {
+      "id": "I08", "domain": "image", "date": "2024-01-08", "date_note": "Civitai 모델 버전 생성일. 사건 기록이 아니라 모델 제작자의 사용 경고",
+      "who": "Pony Diffusion V6 XL을 기본 CLIP skip으로 불러오는 도구들", "software_kind": "이미지 생성 도구 (설정)",
+      "user_observed": "CLIP skip 2가 아니면 품질 낮은 덩어리 그림",
+      "user_observed_quote": {"text": "otherwise you will be getting low quality blobs", "by": "모델 제작자 (Civitai 모델 설명)"},
+      "discovered_by": "모델 제작자가 모델 설명에 명시",
+      "time_to_discovery": "해당 없음",
+      "cause_status": "출처 확정 (필요 설정 명시)",
+      "cause_quote": {"text": "Make sure you load this model with clip skip 2 (or -2 in some software)", "by": "모델 제작자"},
+      "fix": "사용자가 CLIP skip 2로 설정",
+      "magnitude": "수치 미기재",
+      "warning_per_source": "미기재",
+      "sources": [
+        {"url": "https://civitai.com/models/257749/pony-diffusion-v6-xl", "type": "1차 (모델 설명)"},
+        {"url": "https://civitai.com/api/v1/models/257749", "type": "1차 (버전 날짜)"}
+      ]
+    }
+  ]
+}

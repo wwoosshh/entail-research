@@ -1,0 +1,1531 @@
+[
+  {
+    "id": 1,
+    "section": "0-1 / 3.4",
+    "claim": "TensorRT-LLM 1.0(2025-09)에서 PyTorch 백엔드가 기본이 되었다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/NVIDIA/TensorRT-LLM/releases/tag/v1.0.0"
+    ],
+    "note": "v1.0.0(2025-09-24) 릴리스 노트: \"Promote PyTorch to be the default LLM backend\"(BREAKING CHANGE)."
+  },
+  {
+    "id": 2,
+    "section": "0-1 / 3.4 / 4.1",
+    "claim": "TensorRT-LLM 1.2(2026-03)에서 TensorRT 엔진 백엔드를 삭제했다",
+    "verdict": "틀림",
+    "sources": [
+      "https://github.com/NVIDIA/TensorRT-LLM/releases/tag/v1.2.0",
+      "https://github.com/NVIDIA/TensorRT-LLM/releases/tag/v1.3.0rc20",
+      "https://github.com/NVIDIA/TensorRT-LLM/releases/tag/v1.3.0rc21",
+      "https://nvidia.github.io/TensorRT-LLM/legacy/tensorrt-backend-removal.html"
+    ],
+    "note": "v1.2.0(2026-03-12) 노트에는 삭제 언급이 없다. v1.3.0rc20(2026-06-30)이 \"the last one supporting the TensorRT backend\"라고 예고했고, 삭제는 v1.3.0rc21(2026-07-15)부터 rc23까지 단계적으로 들어갔다. 이전 안내 문서는 2026-07-02(PR #15767)에 추가됐다. 2026-09-23 기준 최신 안정판은 v1.2.1(2026-04-20)이고 1.3.0 정식판은 아직 없으므로, 삭제는 프리릴리스에만 반영된 상태다."
+  },
+  {
+    "id": 3,
+    "section": "0-1",
+    "claim": "vLLM·SGLang은 수작업 커널 + CUDA Graph + 부분(piecewise) torch.compile 조합으로 시장을 장악했다",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://docs.vllm.ai/en/latest/design/torch_compile/",
+      "https://docs.sglang.io/docs/advanced_features/server_arguments"
+    ],
+    "note": "vLLM의 piecewise torch.compile + CUDA Graph 기본 구성은 맞다. 그러나 SGLang 문서는 --enable-torch-compile에 \"(Note: This feature is out of maintenance and might cause error)\"라고 표기한다. SGLang에는 prefill용 tc_piecewise CUDA Graph 백엔드(컴파일러를 eager/inductor 중 선택)가 있지만, torch.compile은 SGLang의 기본 경로가 아니다(본문 3.2절도 같은 말을 한다). '시장 장악'은 정량 근거가 없는 평가다."
+  },
+  {
+    "id": 4,
+    "section": "0-2 / 2.1",
+    "claim": "PyTorch 팀: Triton FlexAttention은 Hopper에서 FA3의 약 60%(초기 약 80%), Blackwell에서는 'What was once a small gap has grown to a chasm!'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/flexattention-flashattention-4-fast-and-flexible/"
+    ],
+    "note": "2026-03-04 글. \"roughly at 80%\"(초기), \"achieves roughly 60% of FlashAttention-3's throughput\"(현재) 문구가 있다. 'chasm' 비교 대상은 FA3가 아니라 GB200의 cuDNN 어텐션이다."
+  },
+  {
+    "id": 5,
+    "section": "0-2 / 2.1",
+    "claim": "CuTe DSL 기반 FA4 백엔드가 Triton 대비 1.6~3.2배 빠르다(GB200 forward; backward 1.85~2.3배)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/flexattention-flashattention-4-fast-and-flexible/"
+    ],
+    "note": "원문: \"1.6–3.2× speedup over Triton for forward passes and 1.85–2.3× for backward\"(GB200). TL;DR는 compute-bound에서 1.2~3.2배로 적었다."
+  },
+  {
+    "id": 6,
+    "section": "0-2 / 2.1",
+    "claim": "독립 평가(arXiv 2604.23466): Triton BF16 GEMM은 B200(N=8192)에서 cuBLAS의 62%, H100 N=4096 98%/N=8192 76%, cuTile 52%",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2604.23466",
+      "https://arxiv.org/html/2604.23466v2"
+    ],
+    "note": "Yadav·Zhao·Kumar, \"Evaluating CUDA Tile for AI Workloads on Hopper and Blackwell GPUs\"(v1 2026-04-25, v2 2026-06-03). 표 III: H100 98.4%/75.7%, B200 61.8%, cuTile 52.4%. 초록은 \"Triton sustains 62-101% of cuBLAS\"라고 적었다."
+  },
+  {
+    "id": 7,
+    "section": "0-2 / 2.1 / 4.6",
+    "claim": "Meta TLX 논문: '숨기면 컴파일러가 새 하드웨어를 따라잡아야 하고, 노출하면 조율 부담이 프로그래머에게 돌아온다'; SIMB에서는 '컴파일러가 모든 것을 사용자 대신 발견·구현해야 한다'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2605.10905",
+      "https://arxiv.org/html/2605.10905v1"
+    ],
+    "note": "2026-05-11(v1). 초록: \"if too much execution structure is hidden, the compiler must catch up to new hardware mechanisms; if too much is exposed...\". 본문 1절: \"the compiler must discover and implement all of them on the user's behalf\". 저자는 Meta와 UCSD다."
+  },
+  {
+    "id": 8,
+    "section": "0-3 / 2.2",
+    "claim": "H100은 2022년 가을 출하됐다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://nvidianews.nvidia.com/news/nvidia-hopper-in-full-production"
+    ],
+    "note": "2022-09-20 GTC 발표: 풀 양산 시작, 파트너 제품은 2022년 10월부터 출시."
+  },
+  {
+    "id": 9,
+    "section": "0-3 / 2.2",
+    "claim": "Triton의 자동 warp specialization은 2025-01(Triton 3.2, H100 출하 후 약 2.3년)에 나왔다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/warp-specialization/",
+      "https://pypi.org/project/triton/3.2.0/"
+    ],
+    "note": "Triton 3.2.0 PyPI 업로드일은 2025-01-22다. PyTorch 블로그(2025-02-05)는 \"fully automated Triton warp specialization ... Triton 3.2, which will ship with PyTorch 2.6\"라고 적었다. 2022-10에서 약 2.3년 뒤다."
+  },
+  {
+    "id": 10,
+    "section": "0-3 / 2.2",
+    "claim": "FlashAttention-3(수작업 wgmma/TMA)는 2024-07(H100 출하 후 약 21개월)에 나왔다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://tridao.me/blog/2024/flash3/",
+      "https://arxiv.org/abs/2407.08608"
+    ],
+    "note": "2024-07 공개. HipKittens 논문도 H100 출시부터 최고 성능 오픈소스 어텐션 커널까지 \"two years\"가 걸렸다고 적었다."
+  },
+  {
+    "id": 11,
+    "section": "0-3 / 2.2",
+    "claim": "Blackwell: CUTLASS 즉시, Triton 기본 지원 0~3개월, PyTorch 프로토타입 3개월, 명시적 TMEM/2-CTA 제어 9~20개월",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://raw.githubusercontent.com/NVIDIA/cutlass/main/CHANGELOG.md",
+      "https://github.com/triton-lang/triton/pull/5724",
+      "https://github.com/triton-lang/triton/releases/tag/v3.4.0",
+      "https://github.com/triton-lang/triton/releases/tag/v3.7.0",
+      "https://pytorch.org/blog/pytorch-2-7/"
+    ],
+    "note": "CUTLASS 3.8(2025-01-25), Triton 병합(2025-01-28)·3.3(2025-04-09), PyTorch 2.7(2025-04-23)은 맞다. 그러나 Gluon의 명시적 TMEM/tcgen05 제어는 Triton 3.4(2025-07-30)로 CUDA 12.8에서 약 6개월 뒤였고, Gluon 2-CTA 종단 지원은 Triton 3.7(2026-05-07)로 약 15개월 뒤였다. 본문이 적은 날짜로 계산해도 '9~20개월'이 아니라 약 6~19개월이다."
+  },
+  {
+    "id": 12,
+    "section": "0-3 / 2.2",
+    "claim": "Rubin(sm_107)은 2026-08~09에 Triton 3.8·CUDA 13.4·CUTLASS 4.8에 '초기 지원'으로 들어왔다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/triton-lang/triton/releases/tag/v3.8.0",
+      "https://raw.githubusercontent.com/NVIDIA/cutlass/main/CHANGELOG.md",
+      "https://docs.nvidia.com/cuda/parallel-thread-execution/index.html"
+    ],
+    "note": "Triton 3.8.0(2026-08-28) \"Added initial NVIDIA Rubin (SM107) support\"; CUTLASS 4.8.0(2026-09-17) \"Initial Rubin support\"; PTX ISA 9.4 \"Adds support for sm_107\". '같은 주기가 반복된다'는 해석이다."
+  },
+  {
+    "id": 13,
+    "section": "0-4 / 2.3",
+    "claim": "'The math is portable. Everything else is different.' (Patrick Toulme, 'Portability Is a Myth', 2026-05); MoE grouped matmul TPU Pallas 282줄 vs Blackwell 생성 CUDA 약 400만 줄, 공유 코드 0",
+    "verdict": "확인됨",
+    "sources": [
+      "https://patricktoulme.substack.com/p/portability-is-a-myth-why-the-best"
+    ],
+    "note": "2026-05-16 Substack 글(개인 블로그, 동료 검토 없음). 인용문과 수치가 모두 원문에 있다."
+  },
+  {
+    "id": 14,
+    "section": "0-4 / 2.3",
+    "claim": "HipKittens: AMD에는 TMA·wgmma·mbarrier가 없고 레지스터가 wave 간 정적으로 분할되어 NVIDIA식 wave specialization이 MI355X BF16 GEMM에서 피크의 약 80%에 막힌다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2511.08083",
+      "https://arxiv.org/html/2511.08083v1"
+    ],
+    "note": "원문: \"On the MI355X, wave specialization achieves just 80% of peak BF16 GEMM performance\"; \"AMD hardware statically divides registers across all waves\". XCD 인지 스케줄링 +19%, hipcc의 AGPR 제약도 원문에 있다."
+  },
+  {
+    "id": 15,
+    "section": "0-4 / 2.3 / 3.5",
+    "claim": "XLA의 Triton 경로는 warp 크기 상수(ThreadsPerWarp 32 vs 64) 하나가 잘못되어 MI300X에서 10배 느렸다(XLA #23574)",
+    "verdict": "틀림",
+    "sources": [
+      "https://github.com/openxla/xla/issues/23574",
+      "https://github.com/openxla/xla/pull/23654"
+    ],
+    "note": "warp 크기는 보고자가 처음 추정한 원인일 뿐이다(\"not sure that might explain it\"). 보고자가 warp 크기 수정을 체리픽한 뒤에도 커널은 여전히 5ms였다. 실제 원인은 GFX 아키텍처 이름이 전달되지 않아 tt.dot에 MFMA 명령이 생성되지 않은 것이었다. PR #23654(\"Enable mfma instructions by passing the correct arch name\")로 5ms에서 약 620us가 됐고, 이 PR이 이슈를 닫았다. 처음의 '10배' 비교에는 PyTorch 쪽 벤치마크의 stride 오류도 섞여 있었다."
+  },
+  {
+    "id": 16,
+    "section": "0-5 / 2.4",
+    "claim": "vLLM은 Triton MoE 커널용 튜닝 JSON을 200개 이상(E, N, device, dtype별) 배포한다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/vllm-project/vllm/tree/main/vllm/model_executor/layers/fused_moe/configs"
+    ],
+    "note": "2026-09-23 기준 GitHub API로 센 JSON 파일은 334개다. 파일명은 E=,N=,device_name=,dtype= 형식이다."
+  },
+  {
+    "id": 17,
+    "section": "0-5 / 2.4 / 5-3",
+    "claim": "2026-09 프로덕션 사고: DeepGEMM이 서빙 중 새 shape마다 3~3.6초 nvcc JIT를 돌려 3.4초 엔진 정지; 해결은 1024 토큰 버킷 패딩과 워밍업 프리컴파일(vLLM #56684)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://github.com/vllm-project/vllm/issues/56684"
+    ],
+    "note": "수치(3~3.6초, 3.4초, 1024 토큰 버킷)는 원문과 같다. 다만 이 이슈는 프로덕션 사고가 아니라 한 사용자가 `vllm bench throughput`(8×B200)을 돌리다 발견한 성능 이슈이고, 2026-09-23 현재 열려 있다. 해결책은 제안 PR(#56686)일 뿐 병합이 확인되지 않았다."
+  },
+  {
+    "id": 18,
+    "section": "0-6 / 2.7",
+    "claim": "torch.compile 버그 실증 연구(Li et al., arXiv 2604.08720, 2026-04): 고우선순위 이슈의 19.2%가 컴파일된 모델의 잘못된 출력(2위; 1위 크래시 19.57%)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2604.08720"
+    ],
+    "note": "\"Demystifying the Silence of Correctness Bugs in PyTorch Compiler\"(2026-04-09). 초록에 따르면 19.2%는 논문이 직접 측정한 값이 아니라 \"Data from the PyTorch community\"를 인용한 값이다."
+  },
+  {
+    "id": 19,
+    "section": "0-6 / 2.7",
+    "claim": "eager와 값·dtype·메모리 포맷이 다른 이슈 244건(59건 검증 열림) (이슈 크롤러, 2026-09-18)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/malfet/pytorch_issue_crawler/issues/7"
+    ],
+    "note": "숫자는 원문과 같다. 원문은 이 묶음을 \"largest and least homogeneous group\"이라 부르고 \"several members are arguably eager bugs\"라고 적었다. 따라서 244건을 모두 컴파일러 결함으로 볼 수는 없다. 0절은 '값이 다른 이슈만'이라고 줄여 적었다."
+  },
+  {
+    "id": 20,
+    "section": "0-6 / 2.7",
+    "claim": "LLM 추론 비결정성의 주원인은 배치 크기 가변성이다(Thinking Machines, 2025-09); Qwen3-235B temperature 0 샘플 1,000개에서 80가지 완성",
+    "verdict": "확인됨",
+    "sources": [
+      "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/"
+    ],
+    "note": "2025-09-10 글. \"the primary reason nearly all LLM inference endpoints are nondeterministic is that the load (and thus batch-size) nondeterministically varies\"; \"80 unique completions\"."
+  },
+  {
+    "id": 21,
+    "section": "0-6 / 2.7 / 5-6",
+    "claim": "결정성 커널은 34~110% 느리다(TM 26초→55초, SGLang 평균 34.35%)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+      "https://www.lmsys.org/blog/2025-09-22-sglang-deterministic/"
+    ],
+    "note": "TM 표는 26초 → 55초(+112%, 최적화 안 된 상태) → 42초(개선된 어텐션 커널, +62%)다. TM은 감속의 상당 부분이 vLLM의 FlexAttention 통합이 덜 최적화된 탓이라고 적었다. SGLang 글도 TM의 수치를 61.5%로 인용하고 자신은 평균 34.35%라고 밝혔다. 따라서 상한 110%는 최적화 전 프로토타입 값이다. 정리하면 약 34~62%이고, 최적화 전 값까지 넣으면 112%다."
+  },
+  {
+    "id": 22,
+    "section": "0-6 / 2.7 / 5-5",
+    "claim": "Gimlet(2026-07): KernelBench L1 Triton 커널 26개 중 16개 동치 증명, 2개는 수치 테스트를 통과했지만 비동치, 8개 미확정",
+    "verdict": "확인됨",
+    "sources": [
+      "https://gimletlabs.ai/blog/formally-verifying-ai-generated-kernels"
+    ],
+    "note": "2026-07-08 글의 수치와 같다. 다만 원문은 '26개를 검사했다'고만 적었다. 0절처럼 '수치 테스트를 통과한 26개'라고 명시하지는 않았다. 원문이 든 비동치 예는 fp64 리터럴이 fp32로 바뀌어 clamp 경계에서 0.9999999와 1.0이 갈린 경우다. 즉 비동치는 '수학적 비동치'이며 오차는 미세할 수 있다. 8/26(31%)이 미확정이라 검사기의 한계도 크다."
+  },
+  {
+    "id": 23,
+    "section": "0-7 / 3.6 / 4.5",
+    "claim": "SemiAnalysis 2024-12: 'CUDA moat has yet to be crossed by AMD'(QA 문화 취약); MI300X BF16 GEMM 약 620 vs H100 약 720 TFLOP/s; hipBLASLt 휴리스틱이 대부분 shape에서 잘못된 알고리즘; RCCL 팀 32장 미만 vs EOS 11,000장",
+    "verdict": "확인됨",
+    "sources": [
+      "https://newsletter.semianalysis.com/p/mi300x-vs-h100-vs-h200-benchmark-part-1-training"
+    ],
+    "note": "2024-12-22 글. 인용과 수치가 모두 원문에 있다."
+  },
+  {
+    "id": 24,
+    "section": "0-7 / 3.6",
+    "claim": "SemiAnalysis 2025-05: 환경변수 남발, SGLang ROCm CI 커버리지 NVIDIA의 10% 미만, 모델 25% 정확도 실패",
+    "verdict": "확인됨",
+    "sources": [
+      "https://newsletter.semianalysis.com/p/amd-vs-nvidia-inference-benchmark-who-wins-performance-cost-per-million-tokens"
+    ],
+    "note": "2025-05-23 글. \"AMD made this worse by adding environment variables\"; \"less than 10% parity\"; \"25% of the tested models are failing accuracy tests\"."
+  },
+  {
+    "id": 25,
+    "section": "0-7 / 3.6 / 4.5",
+    "claim": "SemiAnalysis 2026-02: AMD는 오픈소스 분산 추론에서 6개월 이상 뒤; MI355X가 포크 vLLM 0.10.1, 공식 0.15.1은 하드 에러, vLLM CI에 MI355X 테스트 0건",
+    "verdict": "확인됨",
+    "sources": [
+      "https://newsletter.semianalysis.com/p/inferencex-v2-nvidia-blackwell-vs"
+    ],
+    "note": "2026-02-16 InferenceX v2. \"AMD is more than six months behind on open source distributed inferencing and wide expert parallelism\". 나머지 수치도 원문과 같다."
+  },
+  {
+    "id": 26,
+    "section": "0-7 / 4.5",
+    "claim": "2025~2026년 OpenAI·Meta·Anthropic·Microsoft가 AMD와 GW급 계약을 맺었고, 워런트·지분 조건이 ROCm 개선에 연동되어 고객이 ROCm을 고치는 인센티브를 갖는다",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://ir.amd.com/news-events/press-releases/detail/1260/amd-and-openai-announce-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus",
+      "https://ir.amd.com/news-events/press-releases/detail/1279/amd-and-meta-announce-expanded-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus",
+      "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+      "https://ir.amd.com/news-events/press-releases/detail/1291/microsoft-to-deploy-next-gen-amd-instinct-and-amd-epyc-processors-as-the-companies-expand-their-long-term-strategic-partnership"
+    ],
+    "note": "OpenAI(6GW, 2025-10-06)와 Meta(6GW, 2026-02-24)는 최대 1.6억 주 워런트를 받았다. 권리 확정은 배포량, 주가, '기술·상업 마일스톤'에 연동되며 ROCm이라고 명시되지는 않았다. Anthropic(최대 2GW, 2026-07-22)은 워런트가 없고, 반대로 AMD가 최대 50억 달러를 출자하며 'ROCm 개발 가속'은 협력 문구다. Microsoft(2026-07-20) 보도자료에는 GW 규모, 워런트, 지분 조건이 모두 없다. '인센티브 구조'는 SemiAnalysis의 해석이다."
+  },
+  {
+    "id": 27,
+    "section": "0-8 / 4.6",
+    "claim": "KernelBench(2025-02): 프론티어 모델이 PyTorch 기준선을 맞추는 경우가 20% 미만",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2502.10517"
+    ],
+    "note": "2025-02-14 제출. 원문: \"matching the PyTorch baseline in less than 20% of the cases\"(fast_1 기준: 정확하면서 더 빠른 비율)."
+  },
+  {
+    "id": 28,
+    "section": "0-8 / 4.6",
+    "claim": "KernelBench-Verified(2026-06): TF32 기준선·숨김 테스트에서 GPT-5.5 기하평균 1.43배→0.88배, '현실적 기준선에서 PyTorch를 일관되게 이기는 모델 없음', 커널 28%가 피크 메모리 증가, 특정 텐서 값 우회 하드코딩",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2607.16241"
+    ],
+    "note": "2026-06-26 제출. 수치와 인용이 초록에 모두 있다. 단일 턴(single-turn) 평가 조건이다."
+  },
+  {
+    "id": 29,
+    "section": "0-8 / 4.6",
+    "claim": "Meta KernelEvolve: 광고 모델 추론 처리량 60% 개선('수 시간'), MTIA 학습 25%+, ISCA'26, 비트 단위 정확성 검증",
+    "verdict": "확인됨",
+    "sources": [
+      "https://engineering.fb.com/2026/04/02/developer-tools/kernelevolve-how-metas-ranking-engineer-agent-optimizes-ai-infrastructure/"
+    ],
+    "note": "2026-04-02 블로그. \"over 60% inference throughput improvement for the Andromeda Ads model on NVIDIA GPUs\", \"over 25% training throughput\" (MTIA), ISCA 2026, \"bitwise accuracy against reference implementations\". 비교 대상은 torch.compile과 벤더 라이브러리를 쓴 모델이다. 회사 자체 발표이며 독립 재현은 없다."
+  },
+  {
+    "id": 30,
+    "section": "0-8 / 4.6",
+    "claim": "AlphaEvolve: Gemini 핵심 커널 23% 개선 → 학습 시간 1% 단축, FlashAttention 커널 최대 32.5%",
+    "verdict": "확인됨",
+    "sources": [
+      "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/"
+    ],
+    "note": "2025-05-14 글. \"sped up this vital kernel in Gemini's architecture by 23%, leading to a 1% reduction in Gemini's training time\"; \"up to a 32.5% speedup for the FlashAttention kernel\". 회사 자체 발표다."
+  },
+  {
+    "id": 31,
+    "section": "0-8",
+    "claim": "LLM 커널 생성의 공통 병목은 보상 해킹을 막는 정확성 오라클이다",
+    "verdict": "사실 주장 아님",
+    "sources": [],
+    "note": "저자의 종합 판단이다. 근거(Sakana 사과, KernelBench-Verified의 하드코딩, Kevin의 해킹 사례)는 확인되지만 '공통 병목'이라는 결론은 해석이다."
+  },
+  {
+    "id": 32,
+    "section": "0-9 / 4.7",
+    "claim": "OctoAI(TVM 계열)→NVIDIA(2024-09, 약 $165M 보도)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.geekwire.com/2024/chip-giant-nvidia-acquires-octoai-a-seattle-startup-that-helps-companies-run-ai-models/"
+    ],
+    "note": "2024-09-25 GeekWire(2차 출처). 금액은 The Information 보도(\"about $165 million\")이고 공식 발표는 없다. 창업자들이 Apache TVM을 만들었다는 기술도 원문에 있다."
+  },
+  {
+    "id": 33,
+    "section": "0-9 / 2.9 / 4.7",
+    "claim": "CentML(Hidet)→NVIDIA(2025-06); Hidet 저장소 아카이브; Hidet 저자가 NVIDIA Tilus를 이끈다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://betakit.com/nvidia-acquires-canadian-ai-efficiency-startup-centml/",
+      "https://github.com/hidet-org/hidet",
+      "https://github.com/NVIDIA/tilus"
+    ],
+    "note": "인수는 2025-06 말(The Logic·BetaKit 보도, 2차 출처, 금액 미공개, 2025-07-17 운영 종료). hidet-org/hidet은 archived 상태다. 다만 본문이 적은 아카이브 날짜(2026-05)는 API로 확인하지 못했다. NVIDIA/tilus(2025-08 생성)의 최다 기여자는 yaoyaoding(Hidet 제1저자)이다."
+  },
+  {
+    "id": 34,
+    "section": "0-9 / 4.5 / 4.7",
+    "claim": "Brium→AMD(2025-06, 컴파일러·추론 최적화)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.amd.com/en/blogs/2025/amd-acquires-brium-to-strengthen-open-ai-software-ecosystem.html"
+    ],
+    "note": "AMD 블로그(2025-06-04): \"a team of world-class compiler and AI software experts\"; OpenAI Triton, WAVE DSL, SHARK/IREE에 기여할 예정이라고 적었다."
+  },
+  {
+    "id": 35,
+    "section": "0-9 / 3.5 / 4.7",
+    "claim": "Modular(Mojo/MAX)→Qualcomm: 2026-06 발표, 2026-07-29 완료, Lattner는 Qualcomm EVP(Advanced AI Software and Platforms), 금액 비공개",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.modular.com/blog/qualcomm-to-acquire-modular",
+      "https://www.modular.com/blog/qualcomm-completes-acquisition-of-modular"
+    ],
+    "note": "발표일 2026-06-24, 완료일 2026-07-29. EVP 직함도 원문과 같다. 공식 글에 금액은 없다(본문의 '약 39억 달러 보도'는 2차 출처 표시가 맞다)."
+  },
+  {
+    "id": 36,
+    "section": "0-9 / 4.7",
+    "claim": "Groq 자산→NVIDIA 약 200억 달러 비독점 라이선스 + 핵심 인력(2025-12)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://groq.com/newsroom/groq-and-nvidia-enter-non-exclusive-inference-technology-licensing-agreement-to-accelerate-ai-inference-at-global-scale",
+      "https://www.cnbc.com/2025/12/26/nvidia-groq-deal-is-structured-to-keep-fiction-of-competition-alive.html"
+    ],
+    "note": "Groq 공식 발표(2025-12-24)로 비독점 라이선스와 Jonathan Ross 등 합류가 확인된다. 200억 달러는 CNBC가 Groq 투자자에게서 들은 금액이고, 두 회사 모두 금액을 확인하지 않았다(2차 출처)."
+  },
+  {
+    "id": 37,
+    "section": "0-9 / 3.5 / 4.7",
+    "claim": "MLIR는 2024~2025년 거버넌스를 재편했다(2024-11 RFC 'Project Charter and Restructuring', 2025-01 헌장·영역 팀, 2025-02 Tensor Compiler Design Group)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://discourse.llvm.org/t/rfc-mlir-project-charter-and-restructuring/82896",
+      "https://discourse.llvm.org/t/mlir-tensor-compiler-design-group/84386"
+    ],
+    "note": "RFC(2024-11-01)는 Linalg/TOSA/TCP 중복과 LLVM식 '기본 파이프라인' 부재를 적었다. TCDG 제안글은 2025-02-03이다. 3.5절의 'TCDG 11명(AMD·Intel·NVIDIA·Google·Arm·Qualcomm)'은 이번에 확인하지 못했다. 제안글이 센 후보는 17명(AMD 7, Intel 4, NVIDIA 2 등)이었다."
+  },
+  {
+    "id": 38,
+    "section": "0-9 / 3.5 / 5-2",
+    "claim": "2026-09 현재 MLIR 업스트림에 NVIDIA/AMD GPU용 end-to-end 경로가 없다(Lighthouse는 CPU·Intel GPU CI만)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://discourse.llvm.org/t/rfc-mlir-project-lighthouse/86738",
+      "https://discourse.llvm.org/t/mlir-project-lighthouse-update/91790"
+    ],
+    "note": "Lighthouse RFC(2025-06-06): \"This is not about creating an official 'tensor compiler' upstream\". 2026-09-11 업데이트에는 CPU(x86·arm) 사전 CI, XeGPU 사후 CI, Intel GPU 하강 경로만 있고 NVIDIA/AMD 경로는 없다. 다만 MLIR에는 NVVM/ROCDL·nvgpu/amdgpu 등 GPU 코드 생성 방언이 있으므로, 없는 것은 '프레임워크에서 GPU까지 가는 공식 텐서 컴파일러 파이프라인'이라고 읽어야 한다."
+  },
+  {
+    "id": 39,
+    "section": "0-10 / 4.11",
+    "claim": "2025-10 NVIDIA GPU 26만 장 이상 한국 도입 발표(공공 5만, 삼성 5만+, 현대 5만, SK·네이버)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://nvidianews.nvidia.com/news/south-korea-ai-infrastructure"
+    ],
+    "note": "NVIDIA 보도자료(2025-10-30, 미국 시간): \"Adding Over 260,000 NVIDIA GPUs\". 정부 5만+, 삼성 5만+, SK 5만+, 현대 5만, NAVER Cloud 6만+."
+  },
+  {
+    "id": 40,
+    "section": "0-10 / 4.11",
+    "claim": "국가성장펀드가 리벨리온에 직접 출자(2026-03, 기업가치 23.4억 달러)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://rebellions.ai/newsroom/rebellions-closes-400-million-pre-ipo-and-launches-rebelrack-and-rebelpod-to-accelerate-global-expansion/"
+    ],
+    "note": "2026-03-30 발표. 4억 달러 프리IPO를 미래에셋과 국가성장펀드가 주도했고, 기업가치는 약 23.4억 달러다. 리벨리온은 성장펀드의 첫 투자처다."
+  },
+  {
+    "id": 41,
+    "section": "0-10 / 4.11",
+    "claim": "리벨리온·퓨리오사·딥엑스 NPU를 공공조달 혁신제품으로 지정(2026-08-13, 839억 원 시범구매)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://www.digitaltoday.co.kr/en/view/92935/domestic-npu-products-cleared-for-public-procurement-as-rebellion-furiosaai-named"
+    ],
+    "note": "2차 출처(디지털투데이). 2026-08-13은 인증서 수여식 날짜이고, 지정 자체는 2026년 상반기에 이뤄졌다. 839억 원은 조달청의 2026년 혁신제품 시범구매 사업 전체 규모이며 NPU 전용 예산이 아니다."
+  },
+  {
+    "id": 42,
+    "section": "0-10 / 4.11",
+    "claim": "국산 NPU 업체는 CUDA식 독자 스택 대신 vLLM·PyTorch·Triton 'no forks' 전략을 택했다",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://techblog.comsoc.org/2026/08/26/south-korean-startup-rebellions-to-use-open-source-software-for-carriers-to-quickly-build-ai-stacks-with-its-ai-inferencing-chips/"
+    ],
+    "note": "2차 출처(IEEE ComSoc Techblog, 2026-08-26). 'no forks' 규칙은 리벨리온 한 회사의 발언이고, 대상은 \"vLLM and OpenShift to PyTorch\"다. Triton은 이 문장에 없다. 퓨리오사·딥엑스가 같은 전략을 택했다는 근거는 문서에 없으므로 복수형 일반화는 과하다."
+  },
+  {
+    "id": 43,
+    "section": "2.1",
+    "claim": "FlexAttention 블로그: Blackwell 고성능 어텐션의 깊은 파이프라이닝·warp specialization은 'Triton 기반 구현으로 표현할 수 없다'; Gluon 튜토리얼 '수작업 저수준 코드에 질 수 있고, 그럴 때 사용자가 할 수 있는 일은 거의 없다'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/flexattention-flashattention-4-fast-and-flexible/",
+      "https://github.com/triton-lang/triton/blob/main/python/tutorials/gluon/01-intro.py"
+    ],
+    "note": "\"These techniques aren't expressible in our Triton-based implementation.\" Gluon 튜토리얼 인용(\"there is little the user can do\")도 같은 글에 재인용되어 있다."
+  },
+  {
+    "id": 44,
+    "section": "2.2",
+    "claim": "Triton Hopper 지원 초기 병합 2023-08, GMMA/TMA/자동 warp specialization은 '실험적, 기본 비활성'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/triton-lang/triton/pull/2036"
+    ],
+    "note": "PR #2036, 2023-08-07 병합: \"experimental for now and turned off by default\"."
+  },
+  {
+    "id": 45,
+    "section": "2.2 / 2.5",
+    "claim": "FA2는 H100 이론 FLOPS의 35%만 활용; FA3는 740 TFLOPS(75%)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://tridao.me/blog/2024/flash3/"
+    ],
+    "note": "원문: \"FlashAttention-2 achieving only 35% utilization\"; \"up to 740 TFLOPS, i.e., 75% utilization\"."
+  },
+  {
+    "id": 46,
+    "section": "2.2",
+    "claim": "Blackwell: CUDA 12.8(2025-01-31) 첫 지원; CUTLASS 3.8 tcgen05/TMEM/NVFP4(2025-01~02); Triton Blackwell 병합 2025-01-28(NVIDIA·OpenAI 공동); PyTorch 2.7 프로토타입(2025-04); Gluon tcgen05/TMEM 명시 제어(Triton 3.4, 2025-07)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://developer.nvidia.com/blog/cuda-toolkit-12-8-delivers-nvidia-blackwell-support/",
+      "https://raw.githubusercontent.com/NVIDIA/cutlass/main/CHANGELOG.md",
+      "https://github.com/triton-lang/triton/pull/5724",
+      "https://pytorch.org/blog/pytorch-2-7/",
+      "https://github.com/triton-lang/triton/releases/tag/v3.4.0"
+    ],
+    "note": "CUDA 12.8 블로그 2025-01-31(\"the first version of the Toolkit to support the NVIDIA Blackwell architecture\"). CUTLASS 3.8.0은 2025-01-25. PR #5724는 2025-01-28 병합(작성자 OpenAI의 ThomasRaoux). PyTorch 2.7(2025-04-23)은 '[Prototype] NVIDIA Blackwell Architecture Support'. Triton 3.4.0(2025-07-30)에는 Gluon TMEM 관련 변경이 들어갔다."
+  },
+  {
+    "id": 47,
+    "section": "2.2",
+    "claim": "2-CTA·NVFP4×NVFP4 성숙은 Triton 3.8(2026-08)에서",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://github.com/triton-lang/triton/releases/tag/v3.7.0",
+      "https://github.com/triton-lang/triton/releases/tag/v3.8.0"
+    ],
+    "note": "Gluon 2-CTA 종단 지원(\"2CTA Mode End-to-End\")은 Triton 3.7.0(2026-05-07)에 이미 들어갔다. 3.8.0(2026-08-28)이 더한 것은 NVFP4×NVFP4 입력 조합과 2-CTA 예제·테스트다."
+  },
+  {
+    "id": 48,
+    "section": "2.2",
+    "claim": "FA4(CuTe DSL)는 2026-03",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://arxiv.org/abs/2603.05451",
+      "https://github.com/Dao-AILab/flash-attention/commits/main/flash_attn/cute/flash_fwd_sm100.py"
+    ],
+    "note": "논문은 2026-03-05에 제출됐다(20~30배 빠른 컴파일, B200 1613 TFLOPs/s). 그러나 CuTe DSL로 쓴 SM100 forward 커널은 2025-06-29에 공개 저장소에 처음 커밋됐고, 2026-09 현재도 fa4 베타 릴리스가 매주 나온다. '2026-03'은 논문 날짜이지 사용 가능 시점이 아니다."
+  },
+  {
+    "id": 49,
+    "section": "2.2",
+    "claim": "'FA3는 Blackwell에서 동작하지 않았다. WGMMA는 SM100에 존재하지 않는다'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/flexattention-flashattention-4-fast-and-flexible/"
+    ],
+    "note": "원문: \"FA3 ... did not work on Blackwell. WGMMA no longer exists on SM100\"."
+  },
+  {
+    "id": 50,
+    "section": "2.3",
+    "claim": "HipKittens: XCD 인지 스케줄링 +19%, hipcc의 AGPR 처리 제약, 전 기준선 대비 1.2~2.4배, Triton 대비 1.3~3.0배",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://arxiv.org/abs/2511.08083",
+      "https://arxiv.org/html/2511.08083v1"
+    ],
+    "note": "+19%, AGPR, '1.2-2.4×'(초록, 일부 설정)는 원문과 같다. 'Triton 대비 1.3~3.0배'라는 범위는 v1에 없다. 원문은 \"up to 3× the Triton BF16 GEMM\", 어텐션 그림에서 \"1.2−4.5× Triton kernels\"라고 적었다(본문 6절도 이 수치를 2차 요약으로 표시했다)."
+  },
+  {
+    "id": 51,
+    "section": "2.1 / 5-1",
+    "claim": "Meta autoWS 로드맵(2026-01): B200 flash attention forward에서 기본 Triton의 1.5~2배, 'cuDNN이 여전히 10~20% 앞선다'; '최적 warp specialized 코드 생성은 조합(combinatorial) 문제'; warp specialization은 수치·성능 디버깅을 어렵게 한다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/warp-specialization-in-triton-design-and-roadmap/"
+    ],
+    "note": "2026-01-08 글. \"1.5-2x of stock Triton (cuDNN still leads by 10-20%)\"; \"a combinatorial problem\"; \"limited and experimental\". 원문은 같은 벤치에서 autoWS가 \"TFLOPS numbers close to Gluon and cuDNN\"라고도 적었다. 즉 5절 1번의 격차(10~20%)는 이미 좁혀지는 중이다."
+  },
+  {
+    "id": 52,
+    "section": "2.9 / 4.3 / 5-2",
+    "claim": "CUDA Tile IR은 Apache 2.0으로 공개했지만 외부 기여를 받지 않는다; Hopper 지원은 2026-05에 가장 늦게 추가",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/NVIDIA/cuda-tile",
+      "https://github.com/NVIDIA/cuda-tile/releases/tag/v13.3.0"
+    ],
+    "note": "README: \"We are currently not accepting external contributions.\" LICENSE.txt: Apache License v2.0 with LLVM Exceptions. v13.3.0(2026-05-28): \"Added support for Hopper (sm_90)\"."
+  },
+  {
+    "id": 53,
+    "section": "2.2",
+    "claim": "sm_100a 바이너리는 전후방 호환 불가, compute_90a PTX는 Blackwell 미지원",
+    "verdict": "확인됨",
+    "sources": [
+      "https://docs.nvidia.com/cuda/blackwell-compatibility-guide/"
+    ],
+    "note": "원문: \"are not forward or backward compatible. For example, PTX compiled for compute_90a (Hopper) are not supported on the Blackwell architecture.\""
+  },
+  {
+    "id": 54,
+    "section": "2.2",
+    "claim": "소비자용 Blackwell(SM12x)에는 TMEM·tcgen05가 없어 SM100 전용 커널이 실행되지 않는다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/triton-lang/triton/issues/11747"
+    ],
+    "note": "Triton #11747(2026-09-13): ptxas가 \"Instruction 'tcgen05.alloc' not supported on .target 'sm_120a'\"로 거부한다. DGX Spark(SM121)와 FlashMLA·DeepGEMM의 개별 실패 사례는 이번에 따로 확인하지 않았다."
+  },
+  {
+    "id": 55,
+    "section": "2.4 / 5-3",
+    "claim": "정적 배칭 커널이 H800에서 텐서코어 피크 91~95%",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://arxiv.org/abs/2501.16103"
+    ],
+    "note": "원문: \"up to 91% of the peak Tensor Core throughput on NVIDIA H800 GPU and 95% on NVIDIA H20 GPU\". 91%는 H800, 95%는 H20 값이다. 또 이것은 컴파일러가 아니라 프레임워크를 써서 손으로 짠 CUDA 커널의 결과다."
+  },
+  {
+    "id": 56,
+    "section": "2.5 / 5-4",
+    "claim": "Mirage Persistent Kernel: '기존 컴파일러는 소규모 지역 연산자 그룹만 융합할 수 있다… 충실한 단일 커널 생성은 계산적으로 어렵고 종종 불가능'; vLLM/SGLang 대비 최대 1.7배",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2512.22219",
+      "https://arxiv.org/html/2512.22219v2"
+    ],
+    "note": "v1 2025-12-22, v2 2026-06-10. 인용문은 본문 도입부에 있고, 1.7배는 초록에 있다(A100/H100/B200). 'NVIDIA 전용'이라는 5절 문구는 평가 GPU가 NVIDIA뿐이라는 점과 맞는다."
+  },
+  {
+    "id": 57,
+    "section": "2.7 / 5-6",
+    "claim": "2026-09 논문: 같은 커널의 결정적 구현도 비트 단위로 다를 수 있고, 고정 순서 유지 비용 최대 20%, '오토튜너는 비트 동치 구성을 자동 식별하지 못한다'",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://arxiv.org/abs/2609.11356"
+    ],
+    "note": "인용 세 개는 초록에 있다(2026-09-10, \"Taming Bitwise Behavior in GPU Kernels with Tensor Core\"). 그러나 이것은 논문의 문제 제기일 뿐이다. 같은 논문은 (1) 균형 트리 리덕션 강제와 레이아웃 최적화로 GB300·H100 커널 27개 중 19개를 순서 무제약 성능의 10% 이내로 가져왔고, (2) 건전한 비트 동치 검사기를 Triton 오토튜너에 넣어 탐색을 한 비트 동치 부류로 제한했다. 본문은 이 결과를 빼고 한계만 인용했다(5절 6번과 직접 관련)."
+  },
+  {
+    "id": 58,
+    "section": "2.6 / 3.3 / 5-7",
+    "claim": "IBM: Triton FA2 극한 튜닝에 GPU 종류당 약 24시간; 'Triton 커널은 항상 특정 문제 하나에 맞춰 써야 한다'; vLLM: 'Triton은 전역 배리어를 제공하지 않아' 2차 런치 필요",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/html/2511.11581v1",
+      "https://vllm.ai/blog/2026-03-04-vllm-triton-backend-deep-dive"
+    ],
+    "note": "IBM 논문(2025-10-07): \"took nearly 24 hours for each GPU type\"(Ringlein et al., 2025 인용), \"always need to be written around one specific problem\". 전역 배리어 문장은 vLLM 블로그(2026-03-04)에 있다. 같은 글은 동일 Triton 소스로 H100에서 FA3의 100.7%를 냈다고도 적었다."
+  },
+  {
+    "id": 59,
+    "section": "2.6 / 5-7",
+    "claim": "학습 기반 비용 모델은 '한 하드웨어에서 학습하면 다른 하드웨어에서 성능이 나쁘다(cross-hardware unavailability)'(TLP)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2211.03578"
+    ],
+    "note": "2022-11 논문. 원문: \"a cost model trained on one hardware platform usually performs poorly on another ... cross-hardware unavailability\". 같은 논문은 해법으로 MTL-TLP를 제안했다(2022년 자료)."
+  },
+  {
+    "id": 60,
+    "section": "4.6 / 5-8",
+    "claim": "KernelFalcon: 'Structure the problem, don't prompt harder'; KernelBench 250개 과제 100% 정확성",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/kernelfalcon-autonomous-gpu-kernel-generation-via-deep-agents/"
+    ],
+    "note": "2025-11-05 글. 인용문이 있다. 100%는 정확성(허용 오차 내 수치 일치)만 뜻하고, 성능은 후속 글로 미뤘다."
+  },
+  {
+    "id": 61,
+    "section": "4.4 / 5-10",
+    "claim": "Triton for MTIA: 60개 모델 유형, 추론 연산자 커버리지 94.5%, GEMM roofline 80%+, 수작업 대비 31% 빠름",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2608.00325",
+      "https://arxiv.org/html/2608.00325v2"
+    ],
+    "note": "v1 2026-07-31(IEEE Micro 게재 예정). 약 60개 모델 유형(층의 50%, 비GEMM 시간의 47%), GEMM \"over 80% of the architecture roofline\", Inductor 생성 커널 \"31% faster\"가 확인된다. 94.5%는 내부 모델 10개에서 뽑은 연산자 수준 통계다. 그래프 모드에서 GEMM과 layernorm은 여전히 수작업 커널로 내린다."
+  },
+  {
+    "id": 62,
+    "section": "4.1",
+    "claim": "vLLM: 2025-05 PyTorch 재단 합류 시 46.5k stars, 기여자 1,000+",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/pytorch-foundation-welcomes-vllm/"
+    ],
+    "note": "2025-05-07 글: \"over 46,500 GitHub stars and over 1000 contributors\". 2024년 14k→32.6k 수치는 이번에 확인하지 않았다."
+  },
+  {
+    "id": 63,
+    "section": "4.1",
+    "claim": "SGLang: '매일 수조 토큰', '40만 GPU 이상', xAI·Cursor·LinkedIn 등 채택",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/sgl-project/sglang"
+    ],
+    "note": "README 문구와 같다. 프로젝트의 자체 주장이며 독립 검증은 없다."
+  },
+  {
+    "id": 64,
+    "section": "4.1",
+    "claim": "NVIDIA Dynamo(2025-03)는 TRT-LLM·vLLM·SGLang을 동등한 백엔드로 취급하는 서빙 프레임워크다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://nvidianews.nvidia.com/news/nvidia-dynamo-open-source-library-accelerates-and-scales-ai-reasoning-models",
+      "https://github.com/ai-dynamo/dynamo"
+    ],
+    "note": "2025-03-18 GTC 발표: \"supports PyTorch, SGLang, NVIDIA TensorRT-LLM and vLLM\". README: \"it doesn't replace SGLang, TensorRT-LLM, or vLLM\"."
+  },
+  {
+    "id": 65,
+    "section": "4.3 / 4.5 / 4.10",
+    "claim": "SemiAnalysis(2025-04): NVIDIA의 새 moat는 '스택 모든 계층의 파이썬 인터페이스'; AMD '전시 모드', DevRel 사실상 1명(20명 이상 필요)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://newsletter.semianalysis.com/p/amd-2-0-new-sense-of-urgency-mi450x-chance-to-beat-nvidia-nvidias-new-moat"
+    ],
+    "note": "2025-04-23 글. \"NVIDIA has a python interface at every layer of the stack\"; \"AMD is now in wartime mode\"; Anush Elangovan이 \"sole devrel\"; \"a team of 20+ developer relations engineers\" 권고."
+  },
+  {
+    "id": 66,
+    "section": "4.3",
+    "claim": "Jensen Huang은 GTC 2026에서 CUDA-X 라이브러리를 'crown jewels'라 불렀다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.tomshardware.com/news/live/nvidia-gtc-2026-keynote-live-blog-jensen-huang",
+      "https://datacentremagazine.com/news/nvidia-gtc-jensen-huang-on-ai-big-bang-with-us-1tn-ambition"
+    ],
+    "note": "2차 출처(키노트 라이브 블로그, 2026-03-16). NVIDIA 공식 녹취는 확인하지 않았다."
+  },
+  {
+    "id": 67,
+    "section": "4.3",
+    "claim": "cuTile은 CUDA 13.1과 함께 나왔고, NVIDIA는 13.1을 '20년 만의 최대 업데이트'라 불렀다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://developer.nvidia.com/blog/nvidia-cuda-13-1-powers-next-gen-gpu-programming-with-nvidia-cuda-tile-and-performance-gains/"
+    ],
+    "note": "\"the largest and most comprehensive update to the CUDA platform since it was invented two decades ago\". 같은 글은 첫 버전이 Ampere·Ada·Blackwell(CC 8.x, 10.x, 11.x, 12.x)을 지원한다고 적었다. 따라서 3.1절의 '13.1 Blackwell 전용'과는 어긋난다(블로그가 나중에 수정됐을 수 있다)."
+  },
+  {
+    "id": 68,
+    "section": "4.4",
+    "claim": "Microsoft Maia 200 SDK(2026-01)에 'Triton 컴파일러'가 포함된다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/"
+    ],
+    "note": "2026-01-26 글: \"The SDK includes a Triton Compiler, support for PyTorch, low-level programming in NPL\"(프리뷰)."
+  },
+  {
+    "id": 69,
+    "section": "4.4",
+    "claim": "AMD GEAK 에이전트는 전문가가 작성한 ROCm 벤치에서 0.92배",
+    "verdict": "확인됨",
+    "sources": [
+      "https://rocm.blogs.amd.com/software-tools-optimization/triton-kernel-ai/README.html"
+    ],
+    "note": "표 6: ROCm benchmark 정확도 63.33%, 평균 가속 0.92. 같은 표에서 TritonBench-modified는 54.89%·2.59배이고, 30개 중 11개는 전문가 기준선보다 빨랐다."
+  },
+  {
+    "id": 70,
+    "section": "4.5",
+    "claim": "AMD 인수: Brium(2025-06), Taalas(2026-08) 등",
+    "verdict": "확인됨",
+    "sources": [
+      "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market"
+    ],
+    "note": "Taalas 인수 계약 발표는 2026-08-06. Nod.ai, Mipsology, Silo AI, Untether AI 팀은 이번에 따로 확인하지 않았다."
+  },
+  {
+    "id": 71,
+    "section": "4.6",
+    "claim": "Sakana 'AI CUDA Engineer' 보상 해킹(평가 코드 익스플로잇으로 정확성 검사 회피) 사과",
+    "verdict": "확인됨",
+    "sources": [
+      "https://techcrunch.com/2025/02/21/sakana-walks-back-claims-that-its-ai-can-dramatically-speed-up-model-training/"
+    ],
+    "note": "2차 출처(TechCrunch 2025-02-21)가 Sakana의 X 게시물을 인용했다: \"found exploits in the evaluation code ... bypass validations for accuracy\", \"We deeply apologize\"."
+  },
+  {
+    "id": 72,
+    "section": "4.6",
+    "claim": "NVIDIA DeepSeek-R1 15분 루프: L1 100%, L2 96% 정확, FlexAttention 대비 1.1~2.1배",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://developer.nvidia.com/blog/automating-gpu-kernel-generation-with-deepseek-r1-and-inference-time-scaling/"
+    ],
+    "note": "2025-02-12 글에서 100%·96%·15분은 확인된다. '1.1~2.1배'는 본문 텍스트에서 찾지 못했다(그림에만 있을 수 있음)."
+  },
+  {
+    "id": 73,
+    "section": "4.6",
+    "claim": "Atrex-Bench(2026-07): 최고 모델도 프로덕션 연산자에서 roofline의 약 10%, 통과율의 상당 부분이 PyTorch 폴백",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2607.14541"
+    ],
+    "note": "2026-07-16 제출. 초록에 두 문장이 모두 있다."
+  },
+  {
+    "id": 74,
+    "section": "4.6",
+    "claim": "FastKernels(2026-05): 최고 에이전트가 프로덕션 기준선 대비 0.94배",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2605.23215"
+    ],
+    "note": "2026-05-22 제출. \"only 0.94× aggregate speedup over production baselines\"."
+  },
+  {
+    "id": 75,
+    "section": "2.7 / 4.6",
+    "claim": "KernelBenchX(2026-05): 정확한 커널의 46.6%가 PyTorch보다 느림, '양자화는 완전히 미해결(30회 중 0 성공)'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2605.04956"
+    ],
+    "note": "2026-05-06 제출. 초록: \"46.6% of correct kernels are slower than the PyTorch eager baseline\", \"quantization remains completely unsolved (0/30 successes)\"."
+  },
+  {
+    "id": 76,
+    "section": "4.6",
+    "claim": "CUDA Agent(2026-02): 'LLM은 torch.compile 같은 컴파일러 기반 시스템에 여전히 경쟁력이 없다'(자체 시스템은 예외 주장)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2602.24286"
+    ],
+    "note": "2026-02-27 제출. 초록의 문제 제기 문장이며, 논문은 자기 시스템이 이를 넘는다고 주장한다. 본문도 이 점을 적었다."
+  },
+  {
+    "id": 77,
+    "section": "4.6",
+    "claim": "'If it can hack, it will hack'(Simon Guo); CUDA는 The Stack의 0.073%",
+    "verdict": "확인됨",
+    "sources": [
+      "https://simonguo.tech/blog/2025-10-automated-gpu-kernels.html"
+    ],
+    "note": "원문: \"reward-hacking (if it can hack, it will hack)\"; \"CUDA code only makes up ~0.073% of The Stack v1.2\"(StarCoder 논문 인용)."
+  },
+  {
+    "id": 78,
+    "section": "4.6",
+    "claim": "FlashInfer-Bench 리더보드에서 프론티어 모델이 FlashInfer 기준선 아래(0.45~0.63배)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://bench.flashinfer.ai/"
+    ],
+    "note": "2026-09-23 조회: gemini-2.5-pro 0.628x, gpt-5-2025-08-07 0.467x, claude-opus-4-1 0.456x, o3 0.450x. 목록이 2025년 중반 모델뿐이라 '프론티어'는 2025년 기준이다."
+  },
+  {
+    "id": 79,
+    "section": "2.9 / 3.5",
+    "claim": "Taichi는 2024-07 이후 릴리스가 정지됐다",
+    "verdict": "틀림",
+    "sources": [
+      "https://pypi.org/project/taichi/#history",
+      "https://github.com/taichi-dev/taichi/releases"
+    ],
+    "note": "PyPI 기록은 1.7.2(2024-08-22), 1.7.3(2024-12-23), 1.7.4(2025-07-31)다. 마지막 릴리스는 2025-07-31이고 마지막 커밋은 2025-07-30이다. 근거 메모가 1.7.4의 연도를 2024로 잘못 적은 것으로 보인다. '정지' 자체는 2025-08 이후로는 맞다."
+  },
+  {
+    "id": 80,
+    "section": "2.4 / 3.2",
+    "claim": "PyTorch 2.14(2026-09): @dynamic_spec은 재컴파일 대신 데이터 의존 오류를 내는 방식으로 트레이드오프를 옮겼다; simple_overlap 기본 활성; compile-on-one-rank; Helion 등록(ROCm 미지원, 라우팅 op 0); torch.switch; 'torch.compile 없이도 빠른 기본 경험'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/pytorch-2-14-release-blog/"
+    ],
+    "note": "PyTorch 2.14.0 PyPI 2026-09-02. 원문: \"shape-dependent branching now surfaces as a data-dependent error rather than a guard and a recompile\"; \"simple_overlap ... now enabled by default\"; \"unavailable on ROCm builds. No operators are routed through Helion in this release\"; \"without requiring users to reach for torch.compile\". torch.switch는 일반 다방향 분기 연산이며 MoE 전용이 아니다."
+  },
+  {
+    "id": 81,
+    "section": "2.7 / 3.2 / 4.9",
+    "claim": "PyTorch 2.10 DebugMode(텐서 해시)·결정성 모드 존중; 2.11 미분 가능 collective·FA4 백엔드; 2.12 addcdiv FMA 비트 동치(반올림 차이가 '수천 스텝에 걸쳐 누적'); 2.13 CuTeDSL 네이티브 백엔드·서브프로세스 컴파일",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/pytorch-2-10-release-blog/",
+      "https://pytorch.org/blog/pytorch-2-11-release-blog/",
+      "https://pytorch.org/blog/pytorch-2-12-release-blog/",
+      "https://pytorch.org/blog/pytorch-2-13-release-blog/"
+    ],
+    "note": "각 릴리스 블로그에서 확인했다. 2.12 블로그 항목은 XPU용 'FMA-based addcdiv lowering'이고, 원문은 CUDA 쪽이 먼저 구현됐다고 적었다(PR #174912). 따라서 '2.12에서 회복'은 XPU 확장 기준이다."
+  },
+  {
+    "id": 82,
+    "section": "2.4 / 2.8",
+    "claim": "Edward Yang(2025-08): '병적인 컴파일 시간의 대부분은 반복 재컴파일(주로 동적 shape)에서 나온다'; '분산 collective와 DTensor는 컴파일되지만 기본적으로 최적화되지 않는다'; torch.compile은 SPMD를 가정하지 않는다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://blog.ezyang.com/2025/08/state-of-torch-compile-august-2025/"
+    ],
+    "note": "원문: \"most pathological compile times arise from repeated recompilation (often due to dynamic shapes, but sometimes not)\"; \"unoptimized by default\"; \"does not assume the program being compiled is SPMD by default\"."
+  },
+  {
+    "id": 83,
+    "section": "2.7",
+    "claim": "'[PT2] Validation lost' 우산 이슈: '동작하던 코드에 torch.compile을 추가하면 버그를 잡아줄 오류가 사라진다'; Transformer 99.9% 원소 불일치(#162722); DenseNet121에서 max-autotune이 eager보다 1.9배 느림(#161764, SM 수 부족)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/pytorch/pytorch/issues/197554",
+      "https://github.com/pytorch/pytorch/issues/162722",
+      "https://github.com/pytorch/pytorch/issues/161764"
+    ],
+    "note": "#197554(malfet, 2026-09-18) 문구 확인. #162722(2025-09-11): \"Mismatched elements: 2557182 / 2560000 (99.9%)\", 라벨 'module: correctness (silent)'. #161764(2025-08-29): \"Not enough SMs to use max_autotune_gemm mode\"."
+  },
+  {
+    "id": 84,
+    "section": "2.9",
+    "claim": "커널 심볼에 'cutlass'가 들어가면 ptxas가 다르게 최적화(CUTLASS #3389: 같은 sm_100a PTX가 이름에 따라 80 reg/8,076B 스필 vs 168 reg/56B, +31%)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/NVIDIA/cutlass/issues/3389"
+    ],
+    "note": "2026-07-15 이슈. \"8076 bytes spill stores\"/80 registers와 \"56 bytes stack frame\"/168 registers, +31%. 사용자 보고이며 NVIDIA의 원인 확인 여부는 보지 않았다."
+  },
+  {
+    "id": 85,
+    "section": "2.9",
+    "claim": "Triton은 LLVM NVPTX가 sm_103 tcgen05 intrinsic을 선택하지 못해 inline asm으로 회귀했다(2025-09)",
+    "verdict": "틀림",
+    "sources": [
+      "https://github.com/triton-lang/triton/pull/8045",
+      "https://github.com/llvm/llvm-project/pull/156613"
+    ],
+    "note": "근거로 든 Triton PR #8045(inline asm 되돌리기 제안, 2025-09-03)는 병합되지 않고 2025-10-14에 닫혔다. 메인테이너는 NVPTX를 고치라고 제안했고, 그 수정인 LLVM PR #156613(\"[NVPTX] Add support for tcgen05 instructions for sm103 target\")이 2025-09-04에 병합됐다. 즉 inline asm으로 돌아가지 않고 LLVM 쪽을 고쳤다."
+  },
+  {
+    "id": 86,
+    "section": "2.9",
+    "claim": "DeepGEMM은 컴파일된 SASS의 yield/reuse 비트를 직접 패치(FFMA 인터리빙)했고, NVCC 12.9가 이를 자동으로 하면서 폐기; 모든 커널을 DeepJIT로 런타임 컴파일",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/deepseek-ai/DeepGEMM"
+    ],
+    "note": "README(2025-07-20 항목): \"As NVCC 12.9 will automatically do the FFMA interleaving, all post optimizations will be no longer supported\"; \"All kernels are compiled at runtime through DeepJIT\". 소형 M에서 최대 2.7배라는 수치는 현재 README에서 확인하지 못했다."
+  },
+  {
+    "id": 87,
+    "section": "2.9 / 3.7",
+    "claim": "CUDA EULA §1.2(8)(v13.4, 2026-01): SDK 출력물을 비-NVIDIA 플랫폼으로 번역할 목적의 역공학·디컴파일·디스어셈블 금지; ZLUDA는 AMD 법무팀 요청으로 AMD 자금 코드 철회(2024-08)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://docs.nvidia.com/cuda/eula/index.html",
+      "https://www.theregister.com/2024/08/09/amd_zluda_take_down/"
+    ],
+    "note": "EULA v13.4(Last updated January 26, 2026) 조항 문구가 같다. The Register(2024-08-09): \"taken down at AMD's request\"."
+  },
+  {
+    "id": 88,
+    "section": "2.5",
+    "claim": "Hazy Research 메가커널(2025-05): 배치 1에서 vLLM/SGLang은 H100 대역폭의 최대 50%; forward pass 약 100개 커널; 런치 2.1µs(CUDA Graph 1.3µs); 대역폭 78%, vLLM 대비 2.5배",
+    "verdict": "확인됨",
+    "sources": [
+      "https://hazyresearch.stanford.edu/blog/2025-05-27-no-bubbles"
+    ],
+    "note": "원문 수치와 모두 같다(\"almost 2.5x faster than vLLM and over 1.5x faster than SGLang\" on H100). Llama-1B 배치 1이라는 특수한 조건이다."
+  },
+  {
+    "id": 89,
+    "section": "2.5",
+    "claim": "FlexAttention 블로그(2024-08): 변형이 '하이퍼큐브'를 이뤄 지원이 드문드문; MosaicML은 '커널 지원 부재'로 ALiBi 포기; '맞지 않으면 느린 실행과 CUDA OOM이 운명'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/flexattention/"
+    ],
+    "note": "\"hypercube problem\", \"lack of kernel support\", \"you're doomed to slow runtime and CUDA OOMs\"."
+  },
+  {
+    "id": 90,
+    "section": "2.5",
+    "claim": "Ada-MK(2026-05): 런치 오버헤드가 end-to-end 추론 시간의 14.6%; 'Correct but Slow'(2026-07): PyTorch 기준선보다 300배 넘게 느린 TileLang 커널이 정확성 검사를 통과",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2605.11581",
+      "https://arxiv.org/abs/2607.04454"
+    ],
+    "note": "Ada-MK 초록: \"can account for 14.6%\". Correct but Slow 초록: TileLang LayerNorm이 KernelBench 정확성 검사를 통과하면서 \"more than 300× slower\"."
+  },
+  {
+    "id": 91,
+    "section": "2.6",
+    "claim": "Ansor는 BERT 8개 shape 최적화에 V100에서 19.3시간(FTuner, 2024)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/html/2407.21418v1"
+    ],
+    "note": "원문: \"Ansor ... takes about 19.3 hours on V100 GPU to optimize only 8 shapes\". 2020년대 초 Ansor에 대한 2024년 인용이므로 현재 도구의 비용으로 일반화하기는 어렵다."
+  },
+  {
+    "id": 92,
+    "section": "2.6",
+    "claim": "Helion은 커널당 약 10분(1,520개 config 586초)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/helion/"
+    ],
+    "note": "2025-10-22 글: \"typically takes around 10 minutes\"; \"Autotuning complete in 586.6s after searching 1520 configs\"."
+  },
+  {
+    "id": 93,
+    "section": "2.6",
+    "claim": "Meta 프로덕션 모델 컴파일 1,825초 중 오토튠 벤치마크 238초(13%), Inductor 전체 1,238초(67.8%)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pytorch.org/blog/experience-in-reducing-pt2-compilation-time-for-meta-internal-workloads/"
+    ],
+    "note": "표: Total 1825.58, TorchInductor 1238.50 (67.8%), CachingAutotuner.benchmark_all_configs 238.00 (13.0%)."
+  },
+  {
+    "id": 94,
+    "section": "2.6",
+    "claim": "NVIDIA CompileIQ(CUDA 13.3): 진화 탐색으로 이미 최적화된 Triton/CUTLASS 커널에 최대 15%",
+    "verdict": "확인됨",
+    "sources": [
+      "https://developer.nvidia.com/blog/nvidia-cuda-13-3-enhances-gpu-development-with-tile-programming-in-c-compiler-autotuning-and-python-updates"
+    ],
+    "note": "\"up to a 15% speedup on already-optimized Triton attention and CUTLASS GEMM kernels\". 벤더 자체 수치다."
+  },
+  {
+    "id": 95,
+    "section": "2.7 / 4.9",
+    "claim": "Microsoft Volta(2025-11): 'LLM 커널 생성은 형식적 보장이 없다', GPU 커널용 최초 sound 동치 검사기",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2511.12638"
+    ],
+    "note": "\"Equivalence Checking of ML GPU Kernels\"(v1 2025-11-16, v3 2026-08-16). 초록: \"make no formal guarantees\"; \"the first equivalence checker for GPU kernels\"; \"sound and, for a well-defined class ... complete\"; 구현 이름 Volta. 저자는 Microsoft Research와 Stanford(Aiken)다."
+  },
+  {
+    "id": 96,
+    "section": "2.7",
+    "claim": "'Correctness Illusion'(2026-06): 고정 shape allclose가 버그 커널 9/9를 통과시킴",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2606.20128"
+    ],
+    "note": "단독 저자 논문(2026-06-18). 버그 커널 9개는 실제 LLM 출력이 아니라 저자가 전사 오류를 심은 'LLM-style' 합성 변형이다. 초록은 이것이 \"not about the bug rate of any specific deployed LLM\"이라고 밝혔다."
+  },
+  {
+    "id": 97,
+    "section": "2.7",
+    "claim": "'Spec Sheets Are Not Kernels'(2026-08): B300 INT8은 '명목상 존재하지만 기본적으로 배포 불가'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2608.11693"
+    ],
+    "note": "2026-08-12 단독 저자 논문. 초록: \"nominally present on the datasheet is, by default, undeployable\". 원문은 성능을 측정하지 않은 감사(audit) 연구라고 밝혔다."
+  },
+  {
+    "id": 98,
+    "section": "2.4",
+    "claim": "Mitra(2026-04): Triton은 BLOCK_M을 고정해야 하고(오토튠 불가) 2D 누산기 스칼라 인덱싱 불가; 라우팅 편향이 커지면 Megablocks 대비 1.03배→0.70배",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/html/2605.23911v1"
+    ],
+    "note": "단독 저자 논문. 세 문구가 모두 있다. 다만 원문은 하락이 자기 커널이 느려져서가 아니라(지연 3.17~3.18ms로 일정) Megablocks가 편향을 더 잘 흡수하기 때문이라고 적었다. BLOCK_M 고정은 자신의 스케줄 설계에서 나온 제약이다."
+  },
+  {
+    "id": 99,
+    "section": "2.4 / 5-3",
+    "claim": "하이브리드(정적 부분 CUDA Graph + 동적 부분 JIT; arXiv 2604.23467, TTFT 최대 66% 감소)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2604.23467"
+    ],
+    "note": "2026-04-25 제출. \"reduces Time-to-First-Token (TTFT) by up to 66.0%\". LLaMA-2 7B, 단일 GPU, 배치 1, 짧은 시퀀스 조건이다."
+  },
+  {
+    "id": 100,
+    "section": "2.4",
+    "claim": "PyTorch/XLA: 동적 shape 미지원 시 MLP가 100 iteration에 102회 컴파일; SGLang은 CUDA Graph를 작은 배치(160 또는 256 미만)에서만 기본 활성",
+    "verdict": "확인됨",
+    "sources": [
+      "https://docs.pytorch.org/xla/master/learn/dynamic_shape.html",
+      "https://docs.sglang.io/advanced_features/hyperparameter_tuning.html"
+    ],
+    "note": "XLA 문서 표: 컴파일 102회(동적 shape 사용 시 49회). SGLang 문서: \"CUDA graph is enabled only for small batch sizes (e.g., less than 160 or 256)\"."
+  },
+  {
+    "id": 101,
+    "section": "0 (한 줄 결론)",
+    "claim": "GPU AI 컴파일러의 가장 큰 문제는 하드웨어가 세대마다 프로그래밍 모델을 바꾸는 속도를 이식성 있는 추상화가 따라가지 못하는 구조적 딜레마이며, 시장은 이를 컴파일러로 풀기보다 세 갈래 우회로(수작업 커널+얇은 JIT/CUDA Graph, 저수준 파이썬 DSL, LLM 에이전트 커널 탐색)로 대응한다",
+    "verdict": "사실 주장 아님",
+    "sources": [],
+    "note": "종합 해석이다. '추상화 딜레마'라는 이름은 업계 표준 용어가 아니다. 가장 가까운 1차 근거는 TLX 논문의 숨김/노출 긴장('compiler catch-up')과 성능 이식성(performance portability) 문헌이다. 결론 점검 절 참조."
+  },
+  {
+    "id": 102,
+    "section": "0-1",
+    "claim": "정적 그래프 컴파일은 엣지(TensorRT Edge-LLM, TensorRT for RTX)와 비-LLM 비전 모델로 후퇴했다",
+    "verdict": "사실 주장 아님",
+    "sources": [
+      "https://developer.nvidia.com/blog/accelerating-llm-and-vlm-inference-for-automotive-and-robotics-with-nvidia-tensorrt-edge-llm/",
+      "https://developer.nvidia.com/blog/run-high-performance-ai-applications-with-nvidia-tensorrt-for-rtx/",
+      "https://developer.nvidia.com/blog/automating-inference-optimizations-with-nvidia-tensorrt-llm-autodeploy/"
+    ],
+    "note": "두 제품은 실재한다. Edge-LLM은 HF→ONNX→TensorRT 엔진 경로이고, TensorRT for RTX는 AOT에 최종 사용자 GPU에서의 JIT를 더한 구조다. '후퇴'는 해석이다. 같은 NVIDIA가 AutoDeploy(베타)를 \"compiler-driven workflow\"로 내세우므로, TRT-LLM의 변화는 '컴파일러의 후퇴'보다 'TensorRT 엔진에서 PyTorch 기반 컴파일로의 교체'로 읽을 여지도 있다."
+  },
+  {
+    "id": 103,
+    "section": "0-7",
+    "claim": "AMD의 소프트웨어 격차는 줄고 있지만 '6개월 이상' 뒤다(0절 요약의 일반화)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://newsletter.semianalysis.com/p/inferencex-v2-nvidia-blackwell-vs"
+    ],
+    "note": "SemiAnalysis의 '6개월 이상'은 \"open source distributed inferencing and wide expert parallelism and FP4 composability\"로 범위가 한정된 말이다. 0절은 이를 AMD 소프트웨어 격차 전체로 넓혔다."
+  },
+  {
+    "id": 104,
+    "section": "4.5 / 2.8 / 3.6",
+    "claim": "SemiAnalysis(2026-07): '단일 노드 최적화는 한계에 도달', 분산·분리형 추론이 결정적; vLLM 'CUDA 90% 패리티' 목표가 2026-10으로 연기",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://newsletter.semianalysis.com/p/can-amd-break-the-cuda-moat-amd-advancing"
+    ],
+    "note": "'0%→great chance', '105% equity rebate'는 맞다. 그러나 '단일 노드 최적화가 한계'라는 말은 SemiAnalysis가 AMD 자체 ROCm 튜토리얼을 인용한 것이다(\"AMD's own ROCm tutorial says...\"). '2026-10 연기'도 vLLM 90% 패리티 목표가 아니라 MI455X용 vLLM·SGLang nightly 자동 CI 목표에 대한 서술이다."
+  },
+  {
+    "id": 105,
+    "section": "2.8",
+    "claim": "PyTorch Async-TP(2024-09): 'NCCL send/recv 커널이 SM을 사용해 matmul 오버랩용 SM을 줄인다' → SymmetricMemory+copy engine, Llama3-70B forward 최대 약 20%, 노드 내 한정",
+    "verdict": "확인됨",
+    "sources": [
+      "https://discuss.pytorch.org/t/distributed-w-torchtitan-introducing-async-tensor-parallelism-in-pytorch/209487"
+    ],
+    "note": "2024-09-12 글. \"NCCL send/recv kernels utilize SMs\", \"up to ~20% forward pass speedup and ~8% E2E speedup in Llama3 70B\". copy engine과 intra-node 문구도 있다."
+  },
+  {
+    "id": 106,
+    "section": "2.8 / 5-4",
+    "claim": "DeepEP는 문서에 없는 PTX `ld.global.nc.L1::no_allocate.L2::256B`와 'SM을 점유하지 않는 hook 기반 오버랩'을 수작업으로 사용",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://github.com/deepseek-ai/DeepEP/blob/main/docs/legacy.md"
+    ],
+    "note": "두 내용 모두 DeepEP V1 문서(현재 docs/legacy.md)에 있다. 다만 원문 표현은 문서에 없는 명령이 아니라 \"undefined-behavior PTX usage\"다. 문서화된 읽기 전용 명령을 volatile 데이터 읽기에 쓰는 미정의 동작이라는 뜻이다. 현재 V2 README에서는 이 서술이 빠졌다."
+  },
+  {
+    "id": 107,
+    "section": "2.8",
+    "claim": "TokenWeave: 'NVLink 연결에서도 통신 오버헤드 20%'; Triton-distributed(2025-04)는 '분산 오버랩을 네이티브 지원하는 최초의 컴파일러'라고 주장",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2505.11329",
+      "https://arxiv.org/abs/2504.19442"
+    ],
+    "note": "TokenWeave 초록: \"communication overheads of 20% even over GPUs connected via NVLink\". Triton-distributed 초록: \"the first compiler that supports native overlapping optimizations\"(자기 주장)."
+  },
+  {
+    "id": 108,
+    "section": "2.1",
+    "claim": "Lei Zhang(2026-02): 'Gluon 커널은 더 이상 Triton처럼 이식 가능하지 않다', Gluon은 ttg IR의 파이썬 프론트엔드",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.lei.chat/posts/gluon-explicit-performance/"
+    ],
+    "note": "원문: \"Gluon kernels are not portable anymore like Triton\"; \"Gluon is effectively the Python frontend to the ttg IR\". 개인 블로그다."
+  },
+  {
+    "id": 109,
+    "section": "2.3 / 2.10 / 3.3",
+    "claim": "Lattner: Triton은 H100에서 약 20% 손실, Nsight Compute와 맞지 않아 '컴파일러가 무엇을 했는지 추측하게 된다'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.modular.com/blog/democratizing-ai-compute-part-7-what-about-triton-and-python-edsls"
+    ],
+    "note": "2025-03 글: \"it is common to lose 20% on NVIDIA's H100\"; \"Triton doesn't work with these tools\"; \"left guessing what the compiler did\". 글쓴이가 경쟁 제품(Mojo/MAX) 회사 CEO라는 이해관계를 본문은 적지 않았다."
+  },
+  {
+    "id": 110,
+    "section": "2.3",
+    "claim": "Pallas Blackwell matmul 튜토리얼: 150줄 미만으로 cuBLAS의 109.6%, TMA·TMEM·tcgen05·2-CTA MMA·cluster launch control을 명시적으로 사용",
+    "verdict": "확인됨",
+    "sources": [
+      "https://docs.jax.dev/en/latest/pallas/gpu/blackwell_matmul.html"
+    ],
+    "note": "표: Grid tiling 69.44% utilization = 109.6% of cuBLAS(같은 표에서 CUTLASS는 109.3%). \"less than 150 lines\". 특정 shape 하나에서의 값이다."
+  },
+  {
+    "id": 111,
+    "section": "2.3",
+    "claim": "Romeo et al.(2026-06): 동일 OpenMP 코드가 MI250X에서 A100 대비 앱 수준 약 3배, 커널 수준 최대 10배 느리고 레지스터 스필 최대 47배",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://arxiv.org/abs/2606.12753"
+    ],
+    "note": "3배와 '최대 한 자릿수 배(order of magnitude)'는 맞다. 47배는 레지스터 스필의 양이 아니라 \"extreme slowdowns of up to 47x\"(C++ 추상화 계층의 레지스터 압박·스필로 인한 감속)다. 또 AI 컴파일러가 아니라 과학계산용 지시문(OpenMP/OpenACC) 코드에 대한 연구다."
+  },
+  {
+    "id": 112,
+    "section": "2.3",
+    "claim": "Abraham & Okloki(2026-03): ISA 전반에서 불변 프리미티브 10개, 매개변수화 가능 6개, 근본적 분기 6개; 벤더 중립 모델은 6개 벤치마크 중 5개에서 네이티브 수준, 병렬 리덕션은 62.5%",
+    "verdict": "확인됨",
+    "sources": [
+      "https://arxiv.org/abs/2603.28793"
+    ],
+    "note": "수치는 초록과 같다. 저자 이름은 Okoli이고 본문이 Okloki로 잘못 적었다. 검증은 NVIDIA T4와 Apple M1 두 플랫폼에서만 했다."
+  },
+  {
+    "id": 113,
+    "section": "2.3",
+    "claim": "ThunderKittens v2.0(2026-01)은 Blackwell 지원과 함께 Ampere 지원을 제거",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://github.com/HazyResearch/ThunderKittens"
+    ],
+    "note": "2026-01-11 2.0 릴리스. 원문: \"We no longer actively support Ampere GPUs. While ThunderKittens should still work on Ampere...\". 제거가 아니라 적극 지원을 중단한 것이다."
+  },
+  {
+    "id": 114,
+    "section": "2.2",
+    "claim": "Inductor의 Blackwell용 DeepSeek 스케일 GEMM 템플릿 PR은 2026-09-01에도 열려 있음(지연의 사례)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://github.com/pytorch/pytorch/pull/195577"
+    ],
+    "note": "PR #195577은 2026-09-01에 처음 생성됐고 2026-09-23 현재도 열려 있다. '9-1에도 열려 있다'는 오래 방치된 PR처럼 읽히지만 실제로는 그날 올라온 PR이다."
+  },
+  {
+    "id": 115,
+    "section": "3.4",
+    "claim": "TensorRT 11.0(2026-05): IPluginV2 전부 제거, 암시적 INT8 캘리브레이션(IInt8Calibrator) 제거→Q/DQ 명시 양자화",
+    "verdict": "확인됨",
+    "sources": [
+      "https://docs.nvidia.com/deeplearning/tensorrt/latest/getting-started/release-notes-11/11.0.0.html"
+    ],
+    "note": "\"The entire IPluginV2 family has been removed\"; \"Implicit quantization has been removed. The IInt8Calibrator class and all subclasses ... have been removed\"."
+  },
+  {
+    "id": 116,
+    "section": "3.4",
+    "claim": "TensorRT 11.3(2026-09): DeBERTa FP16 16~20% 회귀, SDXL 빌드 실패 잔존, DLA는 10.7이 마지막",
+    "verdict": "확인됨",
+    "sources": [
+      "https://docs.nvidia.com/deeplearning/tensorrt/latest/getting-started/release-notes-11/11.3.0.html"
+    ],
+    "note": "RTX 4090·L40S 약 16.7%, DGX Spark 약 20%. SDXL UNetXL 빌드 실패도 적혀 있다. \"TensorRT 10.7 was the last release that supported DLA.\" FLUX 빌드 실패 문구는 이번 검색에서 확인하지 않았다."
+  },
+  {
+    "id": 117,
+    "section": "3.4",
+    "claim": "ONNX 1.21(opset 26, 2026-03)→ORT 1.28(2026-07) 약 4개월; ORT GenAI는 여전히 0.x(0.16.0, 2026-09)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://pypi.org/project/onnx/#history",
+      "https://pypi.org/project/onnxruntime/#history",
+      "https://pypi.org/project/onnxruntime-genai/#history"
+    ],
+    "note": "PyPI 기준 onnx 1.21.0은 2026-03-27, onnxruntime 1.28.0은 2026-07-25, onnxruntime-genai 0.16.0은 2026-09-13이다. ORT 1.28이 opset 26을 처음 지원했다는 점은 릴리스 노트로 따로 확인하지 않았다."
+  },
+  {
+    "id": 118,
+    "section": "3.4",
+    "claim": "TRT-LLM에서 torch.compile을 켜면 시작 53초→115초(piecewise 한정으로 93초, 2026-09 PR)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://github.com/NVIDIA/TensorRT-LLM/pull/18366"
+    ],
+    "note": "PR 표(Qwen3-8B FP8 TP1): ~53s / ~115s / ~93s. PR은 2026-08-28에 생성됐고 아직 열려 있다(본문의 '2026-09'는 약간 다르다)."
+  },
+  {
+    "id": 119,
+    "section": "3.4 / 4.1",
+    "claim": "AutoDeploy(torch.export 기반)는 베타이며 '컴파일러 주도 워크플로로의 전환'을 표방; vLLM은 torch.compile에 자체 융합 패스(AllReduce+RMSNorm 최대 15% 등)를 둔다",
+    "verdict": "확인됨",
+    "sources": [
+      "https://developer.nvidia.com/blog/automating-inference-optimizations-with-nvidia-tensorrt-llm-autodeploy/",
+      "https://vllm.ai/blog/2025-08-20-torch-compile"
+    ],
+    "note": "AutoDeploy 블로그(2026-02): \"a beta feature\", \"toward a compiler-driven workflow\", 100개 이상 LLM 지원. vLLM 블로그(2025-08-20): 융합 패스(\"up to 15% improvement\"), \"no recompilations during model serving\". 이 두 자료는 0절의 '그래프 컴파일러 후퇴' 서술에 대한 반대 근거로도 읽힌다."
+  },
+  {
+    "id": 120,
+    "section": "4.7",
+    "claim": "NVIDIA 스타트업 투자 2024년 54건→2025년 67건; Enfabrica $900M+(2025-09); SchedMD(Slurm)→NVIDIA(2025-12)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://techcrunch.com/2026/01/02/nvidias-ai-empire-a-look-at-its-top-startup-investments/",
+      "https://www.nextplatform.com/2025/12/18/nvidia-nearly-completes-its-control-freakery-with-slurm-acquisition/"
+    ],
+    "note": "TechCrunch(PitchBook 인용): \"nearly 67\" vs 54. Enfabrica는 \"reportedly spent over $900 million\"(보도). SchedMD 인수(2025-12)는 2차 보도로 확인했고 금액은 미공개다."
+  },
+  {
+    "id": 121,
+    "section": "4.7",
+    "claim": "Lemurian $28M(칩→컴파일러 피벗, '필요한 커널 수는 10^26 규모, 이를 쓸 엔지니어가 세상에 충분치 않다'); Luminal $5.3M; Mako $8.5M",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.eetimes.com/lemurian-labs-raises-28-million-for-ai-portability-software/",
+      "https://techcrunch.com/2025/11/17/luminal-raises-5-3-million-to-build-a-better-gpu-code-framework/",
+      "https://www.makora.com/blog/we-raised-8-5m"
+    ],
+    "note": "Lemurian 2025-12-03 시리즈 A, 인용문도 같다. Luminal 2025-11-17. Mako(현 Makora) 시드 $8.5M(2025-08)."
+  },
+  {
+    "id": 122,
+    "section": "4.7",
+    "claim": "Herdora $4.5M",
+    "verdict": "확인 못 함",
+    "sources": [
+      "https://www.caplight.com/company/herdora-1"
+    ],
+    "note": "$4.5M 라운드를 1차 출처로 확인하지 못했다. 집계 사이트에는 다른 라운드($16M 시리즈 A)가 보인다."
+  },
+  {
+    "id": 123,
+    "section": "4.7",
+    "claim": "Etched $10.3B 기업가치(2026-07)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://techcrunch.com/2026/07/23/ai-chip-startup-etched-defies-skeptics-hits-10-3b-valuation-from-big-name-investors/",
+      "https://techcrunch.com/2026/08/18/etcheds-valuation-doubles-to-21b-in-a-month/"
+    ],
+    "note": "2026-07-23 $300M·$10.3B는 맞다. 그러나 문서 작성일(2026-09-22)보다 앞선 2026-08-18에 $700M·$21B 라운드가 발표됐다. 따라서 작성 시점 기준으로 이미 옛 수치다."
+  },
+  {
+    "id": 124,
+    "section": "4.7",
+    "claim": "Baseten(추론 플랫폼) $13B(2026-06); Modular $250M(기업가치 $1.6B, 2025-09)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.baseten.co/blog/announcing-our-series-f/",
+      "https://www.modular.com/blog/modular-raises-250m-to-scale-ais-unified-compute-layer"
+    ],
+    "note": "Baseten 시리즈 F $1.5B, $13B(2026-06-22). Modular 2025-09-24 $250M, $1.6B."
+  },
+  {
+    "id": 125,
+    "section": "4.7",
+    "claim": "간접 지표: CUDA 개발자 600만(GTC 2025), Triton 20.2k stars, cuTile Python 2.2k, 추론이 2026년 말 AI 컴퓨트 지출의 약 2/3(Micron)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://x.com/nvidianewsroom/status/1996976318466973727",
+      "https://github.com/triton-lang/triton",
+      "https://github.com/NVIDIA/cutile-python",
+      "https://www.micron.com/about/blog/applications/ai/how-memory-and-storage-became-the-backbone-of-the-ai-era"
+    ],
+    "note": "NVIDIA Newsroom 게시물의 \"Over 6M developers\"는 확인했지만 'GTC 2025' 출처 연결은 확인하지 못했다. 2026-09-23 기준 Triton 20,225 stars, cutile-python 2,150 stars다. Micron 블로그에 '2026년 말 추론이 AI 컴퓨트 지출의 2/3'이 있다(각주로 외부 자료를 인용)."
+  },
+  {
+    "id": 126,
+    "section": "4.7",
+    "claim": "PyTorch 재단 우산화: 2025-05 vLLM·DeepSpeed, 이후 Ray·Helion·Safetensors 등 6개 프로젝트",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://pytorch.org/blog/pytorch-foundation-welcomes-vllm/",
+      "https://pytorch.org/blog/pytorch-2-14-release-blog/"
+    ],
+    "note": "vLLM 합류(2025-05-07)는 맞다. 2026-09 pytorch.org 메뉴의 프로젝트 목록은 PyTorch, ExecuTorch, vLLM, DeepSpeed, Ray, Helion, Safetensors의 7개다(중요도 낮음)."
+  },
+  {
+    "id": 127,
+    "section": "4.8",
+    "claim": "NVFP4(2025-06): 16원소 블록·E4M3 스케일 vs MXFP4 32원소·E8M0",
+    "verdict": "확인됨",
+    "sources": [
+      "https://developer.nvidia.com/blog/introducing-nvfp4-for-efficient-and-accurate-low-precision-inference/"
+    ],
+    "note": "\"E4M3 scaling factor to each 16-value micro-block\" + 텐서별 FP32 스케일; MXFP4는 \"1 shared power-of-two scale per 32 value block\"."
+  },
+  {
+    "id": 128,
+    "section": "4.8",
+    "claim": "vLLM gpt-oss MXFP4 day-0(2025-08)에 Blackwell FlashInfer·Hopper Triton matmul_ogs·AMD Triton 3종 커널 필요",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://vllm.ai/blog/2025-08-05-gpt-oss"
+    ],
+    "note": "블로그는 MXFP4 MoE용으로 두 커널(Blackwell의 FlashInfer, Hopper의 Triton matmul_ogs)을 명시한다. AMD 관련 서술은 Triton '어텐션' 커널 개선이며, AMD용 MXFP4 MoE 커널을 세 번째로 명시하지는 않았다."
+  },
+  {
+    "id": 129,
+    "section": "4.8",
+    "claim": "SGLang은 NVFP4 네이티브 SM100/103만, MXFP4는 NVIDIA 미지원·AMD/Ascend 지원(2026-09)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://docs.sglang.io/advanced_features/quantization.html"
+    ],
+    "note": "2026-09-15 커밋 기준 문서 표에서 mxfp4는 NVIDIA GPUs \"Yes\", AMD \"Yes\", Ascend \"Yes\"다. 'MXFP4는 NVIDIA 미지원'은 틀리다. NVFP4는 온라인 방식(nvfp4_online)만 SM100/SM103 전용이고, modelopt_fp4는 SM80~SM90에서 Marlin 대체 경로와 SM100+ 네이티브를 지원한다."
+  },
+  {
+    "id": 130,
+    "section": "4.8",
+    "claim": "TRT-LLM 매트릭스상 소비자 Blackwell SM120은 FP8 블록 스케일·INT4 AWQ/GPTQ·NVFP4 KV 캐시 미지원; DGX Spark(SM121)는 2025-12 'FP4가 제대로 활용되지 않음'(AWQ가 32% 빠름)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://nvidia.github.io/TensorRT-LLM/features/quantization.html",
+      "https://forums.developer.nvidia.com/t/psa-state-of-fp4-nvfp4-support-for-dgx-spark-in-vllm/353069"
+    ],
+    "note": "매트릭스 행 'Blackwell(sm120)': FP8 block scaling·NVFP4 KV Cache·AWQ/GPTQ 모두 '.'(미지원). 포럼 글(2025-12-01, 사용자 보고): \"FP4 is not properly utilized\", AWQ \"roughly 32% faster at single concurrency\". '2026-03 역전'은 확인하지 않았다."
+  },
+  {
+    "id": 131,
+    "section": "4.6",
+    "claim": "AMD ROCm.ai가 Claude·Codex·Cursor·Gemini용 스킬 배포; Hyperloom 38% 개선(3.6)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://newsroom.amd.com/news/aai-2026-rocm-ai-software/"
+    ],
+    "note": "AMD 발표(2026-07)가 명시한 도구는 \"Claude, Cursor and Codex\"이고 Gemini는 없다. Hyperloom은 있지만 '38%'는 1차 출처에서 찾지 못했다(근거 메모의 2차 출처 값)."
+  },
+  {
+    "id": 132,
+    "section": "4.6",
+    "claim": "MLSys 2026 FlashInfer 콘테스트에 '완전 에이전트 생성' 트랙",
+    "verdict": "확인됨",
+    "sources": [
+      "https://mlsys26.flashinfer.ai/"
+    ],
+    "note": "\"fully agent-generated solutions ... will be evaluated separately\"."
+  },
+  {
+    "id": 133,
+    "section": "4.11",
+    "claim": "2025-07 1.46조 원으로 13,000 GPU(NHN B200 7,656, 네이버 H200 3,056, 카카오 B200 2,424)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://oecd.ai/en/dashboards/policy-initiatives/south-korea-national-ai-gpu-infrastructure-initiative-1"
+    ],
+    "note": "2차 출처(OECD.AI 정책 DB). 수치가 모두 같다."
+  },
+  {
+    "id": 134,
+    "section": "4.11",
+    "claim": "2026-05 국가성장펀드 8.4조 원(15,000 GPU 센터, 업스테이지 5,600억)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://zdnet.co.kr/view/?no=20260503135345"
+    ],
+    "note": "2차 출처(ZDNet Korea, 2026-05-03). 공식 명칭은 '국민성장펀드'다. 8.4조 원은 AI 전용 금액이 아니라 누적 11건(소재·바이오 대출 포함)의 집행 총액이다. AI 컴퓨팅센터(첨단 AI 반도체 1만5천 장)의 확정 재원은 4,000억 원이고, 대출은 최대 2조 원 이상을 추진한다. 업스테이지 5,600억은 맞다."
+  },
+  {
+    "id": 135,
+    "section": "4.11",
+    "claim": "리벨리온 2025-09 $250M·$1.4B",
+    "verdict": "확인됨",
+    "sources": [
+      "https://rebellions.ai/newsroom/rebellions-raises-250-million-to-advance-the-next-generation-ai-infrastructure-backed-by-arm-and-samsung/"
+    ],
+    "note": "2025-09-30 시리즈 C $250M, 기업가치 약 $1.4B(Arm, Samsung Ventures 등)."
+  },
+  {
+    "id": 136,
+    "section": "2.9",
+    "claim": "PTX는 가상 ISA이고 폐쇄된 ptxas가 SASS로 낮추며 Volta 이후 명령당 21비트 제어 필드를 쓴다; '공식 SASS 어셈블러는 없다'; 반론: '폐쇄성은 2012년경 면적·전력 이유의 아키텍처 결정의 결과'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.thesoftwarefrontier.com/p/how-the-nvidia-compiler-moat-actually"
+    ],
+    "note": "2026-07-27 Substack 글(개인 저자). \"There is no official SASS assembler\", 21-bit field, Volta 이후 128비트 명령에 제어 정보 삽입, \"around 2012\" 문구가 확인된다."
+  },
+  {
+    "id": 137,
+    "section": "2.9 / 4.3",
+    "claim": "CUDA 원팀 Nicholas Wilt: 'cuTile이 Triton에 대항하기 위해 개발됐다고 의심하지 않기 어렵다'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://hyper.ai/en/news/47715"
+    ],
+    "note": "2차 출처(hyper.ai)가 Wilt의 게시글을 인용했다. 원 게시글은 직접 보지 못했다."
+  },
+  {
+    "id": 138,
+    "section": "3.3 / 4.7",
+    "claim": "Triton 거버넌스: 코어 메인테이너 9명(2026-09-18 기준)에 거부권, 리드 Phil Tillet, 재단 없음",
+    "verdict": "확인됨",
+    "sources": [
+      "https://raw.githubusercontent.com/triton-lang/triton/main/CONTRIBUTING.md"
+    ],
+    "note": "\"List of core maintainers (as of 09/18/2026)\"에 9명이 있고, \"power to veto any decision made at a Module maintainer level\", Lead maintainer는 Phil Tillet이다."
+  },
+  {
+    "id": 139,
+    "section": "3.5 / 4.7",
+    "claim": "Mojo 1.0(2026-08-11) 시점 컴파일러 폐쇄 → 2026-08-18 Apache 2.0 공개, 26.6(2026-09-17)부터 외부 기여 수용",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.modular.com/blog/mojo-open-source",
+      "https://www.modular.com/blog/qualcomm-completes-acquisition-of-modular"
+    ],
+    "note": "2026-08-18 글: \"fully open source under the Apache 2.0 license (with LLVM exceptions)\", \"Last week Mojo hit 1.0\". 'Modular 26.6: Open compiler contributions'(2026-09-17)는 Modular 블로그 목록 제목으로 확인했다."
+  },
+  {
+    "id": 140,
+    "section": "3.7",
+    "claim": "Intel: Gelsinger(2024-11) 'Gaudi 2→3 전환과 소프트웨어 사용 편의성으로 채택 지연', $500M 목표 미달; Falcon Shores는 '내부 테스트 칩'; IPEX 개발 중단(2.8 이후); NVIDIA $5B 투자(2025-09)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.constellationr.com/blog-news/insights/intel-defends-gaudi-3-it-misses-2024-sales-targets",
+      "https://www.servethehome.com/intel-falcon-shores-gpu-not-coming-to-market-in-an-ai-hit/",
+      "https://intel.github.io/intel-extension-for-pytorch/xpu/latest/tutorials/releases.html",
+      "https://nvidianews.nvidia.com/news/nvidia-and-intel-to-develop-ai-infrastructure-and-personal-computing-products"
+    ],
+    "note": "인용문과 날짜가 맞다. IPEX: \"discontinuing active development ... effective immediately after 2.8 release\". NVIDIA는 2025-09-18에 $5B(주당 $23.28) 투자. $300M 상각은 이번에 확인하지 않았다."
+  },
+  {
+    "id": 141,
+    "section": "3.7",
+    "claim": "AWS Neuron 2.27(2025-12): MLIR 기반 NKI 컴파일러 오픈소스(비공개 베타)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://aws.amazon.com/about-aws/whats-new/2025/12/announcing-aws-neuron-2-27"
+    ],
+    "note": "2025-12-22: \"open source NKI Compiler built on MLIR (private beta)\"."
+  },
+  {
+    "id": 142,
+    "section": "3.7",
+    "claim": "Huawei Eric Xu(2025-09): 컴파일러·가상 ISA는 '인터페이스 개방', 나머지 CANN은 오픈소스(2025-12)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech"
+    ],
+    "note": "2025-09-18: \"open interfaces for the compiler and virtual instruction set, and fully open source other software ... by December 31, 2025\". 계획 발표이며, 실제 이행 여부는 이번에 확인하지 않았다."
+  },
+  {
+    "id": 143,
+    "section": "2.9 / 3.7",
+    "claim": "SCALE은 'PyTorch 같은 대형 프레임워크를 포팅할 만큼 CUDA API를 지원하지 못함'",
+    "verdict": "확인됨",
+    "sources": [
+      "https://www.scaleway.com/en/blog/can-your-cuda-code-run-on-all-gpus/"
+    ],
+    "note": "2차 출처(Scaleway 블로그): \"does not support enough CUDA APIs to port significant frameworks like PyTorch\". SCALE 개발사의 1차 문서는 확인하지 않았다."
+  },
+  {
+    "id": 144,
+    "section": "2.2",
+    "claim": "Modular의 Blackwell matmul 시리즈(2025-09): TMA+tcgen05 첫 커널은 cuBLAS의 8.7%, 스위즐링 후 16.4%에서 시작(컴파일러 지연의 증거로 제시)",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://www.modular.com/blog/matrix-multiplication-on-nvidias-blackwell-part-2-using-hardware-features-to-optimize-matmul",
+      "https://www.modular.com/matrix-multiplication-on-blackwell"
+    ],
+    "note": "Part 2(2025-09-05)의 수치 8.7%와 16.4%는 맞다. 다만 이것은 튜토리얼이 단계적으로 최적화해 가는 중간값이다. 같은 시리즈는 Part 3에서 SOTA의 85%에 이르렀고, Part 4(2025-09-19)에서 1772 TFLOPs로 cuBLAS SOTA를 넘었다. 본문은 출발점만 인용해 지연의 증거로 썼다."
+  },
+  {
+    "id": 145,
+    "section": "2.2",
+    "claim": "NVIDIA의 sm_100f 패밀리 타깃(CUDA 12.9)",
+    "verdict": "확인됨",
+    "sources": [
+      "https://developer.nvidia.com/blog/nvidia-blackwell-and-nvidia-cuda-12-9-introduce-family-specific-architecture-features/"
+    ],
+    "note": "compute_100f/sm_100f 패밀리 타깃은 CC 10.x(현재 10.0, 10.3)에서 동작한다."
+  },
+  {
+    "id": 146,
+    "section": "2.4",
+    "claim": "TensorRT는 min/opt/max 최적화 프로파일을 벗어나면 서빙 중 엔진 재생성; Qualcomm QNN EP는 '동적 shape 모델 미지원'; MLX mx.compile은 shape·dtype·입력 수가 바뀌면 재컴파일",
+    "verdict": "일부 다름",
+    "sources": [
+      "https://onnxruntime.ai/docs/execution-providers/TensorRT-ExecutionProvider.html",
+      "https://onnxruntime.ai/docs/execution-providers/QNN-ExecutionProvider.html",
+      "https://ml-explore.github.io/mlx/build/html/usage/compile.html"
+    ],
+    "note": "QNN(\"does not support models with dynamic shapes\")과 MLX의 재컴파일 조건은 맞다. 다만 MLX에는 이를 피하는 shapeless 컴파일 옵션이 있다. '범위를 벗어나면 엔진 재생성'은 TensorRT 자체가 아니라 ONNX Runtime TensorRT EP의 동작이다(\"engine will be recreated\"). 384초(캐시 없음) 수치도 같은 ORT 문서에 있다."
+  }
+]

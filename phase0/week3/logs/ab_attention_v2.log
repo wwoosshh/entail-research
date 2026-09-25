@@ -1,0 +1,110 @@
+W0922 19:31:31.448000 3891 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 19:31:31.474000 3891 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+attention + mask interface registered
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py:2596: UserWarning: flex_attention called without torch.compile() - this will use an unfused implementation that materializes the full scores matrix instead of generating a fused kernel.
+
+SOLUTION: Use torch.compile(flex_attention)(...)
+
+If you want to debug your score_mod/mask_mod, you can set:
+torch.nn.attention.flex_attention._FLEX_ATTENTION_DISABLE_COMPILE_DEBUG = True
+
+This will allow you to use print statements or breakpoints. Note: This doesn't work with the backwards pass and may produce incorrect results.
+  _warn_once(
+  B=1 bf16 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'triton_decode': {'max': 0.109375, 'mean': 0.028159581124782562}, 'maskmod_decode': {'max': 0.140625, 'mean': 0.04507840424776077}} (logit scale 14.69) | eager sdpa rerun bitwise identical: True
+USDT:2026-09-22 19:31:39 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:31:39 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 4.6158, 'max_abs_diff_vs_eager_same_variant': 0.1406, 'mean_abs_diff_vs_eager_same_variant': 0.0316, 'max_abs_diff_vs_eager_sdpa': 0.1406, 'logit_scale': 14.6875, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:31:43 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:31:43 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 3.877, 'max_abs_diff_vs_eager_same_variant': 0.0938, 'mean_abs_diff_vs_eager_same_variant': 0.0125, 'max_abs_diff_vs_eager_sdpa': 0.1016, 'logit_scale': 14.6875, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:31:49 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:31:49 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 5.6821, 'max_abs_diff_vs_eager_same_variant': 0.0938, 'mean_abs_diff_vs_eager_same_variant': 0.0235, 'max_abs_diff_vs_eager_sdpa': 0.1094, 'logit_scale': 14.6875, 'n_kernel_types': 22, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=1 bf16: interleaved 24 rounds x 12 steps, baseline sdpa
+    sdpa             median   21.54 ms (p10 21.20, p90 22.08)
+    triton_decode    median   20.25 ms (p10 20.05, p90 20.75) | vs sdpa: x0.937 [p10 0.930, p90 0.944] faster in 100% of rounds
+    maskmod_decode   median   20.39 ms (p10 20.09, p90 20.87) | vs sdpa: x0.941 [p10 0.934, p90 0.948] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=4 bf16 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'triton_decode': {'max': 0.125, 'mean': 0.01649065688252449}, 'maskmod_decode': {'max': 0.15625, 'mean': 0.02360611781477928}} (logit scale 15.12) | eager sdpa rerun bitwise identical: True
+W0922 19:32:21.978000 3891 torch/_inductor/utils.py:1806] [1/0] Not enough SMs to use max_autotune_gemm mode
+USDT:2026-09-22 19:32:38 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:32:39 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 27.4854, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.0224, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.125, 'n_kernel_types': 22, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:33:03 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:33:03 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 24.0461, 'max_abs_diff_vs_eager_same_variant': 0.375, 'mean_abs_diff_vs_eager_same_variant': 0.0295, 'max_abs_diff_vs_eager_sdpa': 0.375, 'logit_scale': 15.125, 'n_kernel_types': 20, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:33:34 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:33:34 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 31.5429, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.0221, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.125, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=4 bf16: interleaved 24 rounds x 12 steps, baseline sdpa
+    sdpa             median   26.48 ms (p10 26.01, p90 28.52)
+    triton_decode    median   20.71 ms (p10 20.36, p90 22.36) | vs sdpa: x0.782 [p10 0.778, p90 0.785] faster in 100% of rounds
+    maskmod_decode   median   20.70 ms (p10 20.36, p90 22.32) | vs sdpa: x0.780 [p10 0.775, p90 0.790] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=8 bf16 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'triton_decode': {'max': 0.21875, 'mean': 0.019605347886681557}, 'maskmod_decode': {'max': 0.21875, 'mean': 0.021160852164030075}} (logit scale 17.75) | eager sdpa rerun bitwise identical: True
+USDT:2026-09-22 19:34:29 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:34:29 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 30.3577, 'max_abs_diff_vs_eager_same_variant': 0.207, 'mean_abs_diff_vs_eager_same_variant': 0.0242, 'max_abs_diff_vs_eager_sdpa': 0.207, 'logit_scale': 17.75, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:34:54 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:34:54 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 24.3557, 'max_abs_diff_vs_eager_same_variant': 0.2344, 'mean_abs_diff_vs_eager_same_variant': 0.0196, 'max_abs_diff_vs_eager_sdpa': 0.2031, 'logit_scale': 17.75, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:35:23 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:35:23 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 29.4541, 'max_abs_diff_vs_eager_same_variant': 0.1973, 'mean_abs_diff_vs_eager_same_variant': 0.0204, 'max_abs_diff_vs_eager_sdpa': 0.2031, 'logit_scale': 17.75, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=8 bf16: interleaved 24 rounds x 12 steps, baseline sdpa
+    sdpa             median   34.92 ms (p10 34.38, p90 35.91)
+    triton_decode    median   21.73 ms (p10 21.34, p90 22.42) | vs sdpa: x0.621 [p10 0.613, p90 0.630] faster in 100% of rounds
+    maskmod_decode   median   21.69 ms (p10 21.35, p90 22.32) | vs sdpa: x0.620 [p10 0.616, p90 0.626] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=1 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'triton_decode': {'max': 0.125, 'mean': 0.016506869345903397}, 'maskmod_decode': {'max': 0.09375, 'mean': 0.01683395355939865}} (logit scale 13.06) | eager sdpa rerun bitwise identical: True
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 19:36:41 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:36:41 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 48.664, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0178, 'max_abs_diff_vs_eager_sdpa': 0.125, 'logit_scale': 13.0625, 'n_kernel_types': 25, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:37:20 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:37:20 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 38.6506, 'max_abs_diff_vs_eager_same_variant': 0.0938, 'mean_abs_diff_vs_eager_same_variant': 0.0155, 'max_abs_diff_vs_eager_sdpa': 0.0781, 'logit_scale': 13.0625, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:38:07 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:38:07 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 47.0269, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0181, 'max_abs_diff_vs_eager_sdpa': 0.125, 'logit_scale': 13.0625, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=1 int4: interleaved 24 rounds x 12 steps, baseline sdpa
+    sdpa             median    8.76 ms (p10 8.58, p90 9.04)
+    triton_decode    median    6.77 ms (p10 6.64, p90 7.02) | vs sdpa: x0.774 [p10 0.769, p90 0.779] faster in 100% of rounds
+    maskmod_decode   median    6.88 ms (p10 6.76, p90 7.18) | vs sdpa: x0.786 [p10 0.781, p90 0.792] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=4 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'triton_decode': {'max': 0.1875, 'mean': 0.02692604251205921}, 'maskmod_decode': {'max': 0.1875, 'mean': 0.02813291922211647}} (logit scale 13.12) | eager sdpa rerun bitwise identical: True
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 19:39:21 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:39:21 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 63.1513, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.0267, 'max_abs_diff_vs_eager_sdpa': 0.1562, 'logit_scale': 13.125, 'n_kernel_types': 25, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:40:17 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:40:17 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 54.9357, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0232, 'max_abs_diff_vs_eager_sdpa': 0.1562, 'logit_scale': 13.125, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:41:26 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:41:26 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 69.5756, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.0249, 'max_abs_diff_vs_eager_sdpa': 0.2188, 'logit_scale': 13.125, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=4 int4: interleaved 24 rounds x 12 steps, baseline sdpa
+    sdpa             median   13.31 ms (p10 13.20, p90 14.01)
+    triton_decode    median    7.45 ms (p10 7.35, p90 7.79) | vs sdpa: x0.558 [p10 0.554, p90 0.562] faster in 100% of rounds
+    maskmod_decode   median    7.48 ms (p10 7.36, p90 7.84) | vs sdpa: x0.560 [p10 0.555, p90 0.565] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=8 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'triton_decode': {'max': 0.234375, 'mean': 0.02978644147515297}, 'maskmod_decode': {'max': 0.3125, 'mean': 0.04017447680234909}} (logit scale 15.44) | eager sdpa rerun bitwise identical: True
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 19:42:42 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:42:42 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 60.8308, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.027, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 25, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:43:33 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:43:33 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 51.1494, 'max_abs_diff_vs_eager_same_variant': 0.2344, 'mean_abs_diff_vs_eager_same_variant': 0.0275, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 19:44:20 3891:3891 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 19:44:20 3891:3891 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 47.0205, 'max_abs_diff_vs_eager_same_variant': 0.1836, 'mean_abs_diff_vs_eager_same_variant': 0.0271, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+  B=8 int4: interleaved 24 rounds x 12 steps, baseline sdpa
+    sdpa             median   25.11 ms (p10 24.62, p90 25.53)
+    triton_decode    median   10.51 ms (p10 9.12, p90 10.81) | vs sdpa: x0.419 [p10 0.413, p90 0.424] faster in 100% of rounds
+    maskmod_decode   median   10.42 ms (p10 9.09, p90 10.74) | vs sdpa: x0.415 [p10 0.412, p90 0.421] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+saved <workspace>/phase0/week3/results/ab_attention_v2.json

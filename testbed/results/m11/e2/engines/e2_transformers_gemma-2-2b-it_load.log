@@ -1,0 +1,17 @@
+W0925 07:56:58.444000 15081 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0925 07:56:58.473000 15081 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[entail] resolved at load:transformers.attention: ModelProps declared ModelProps(softcap=50.0, sliding_window=4096, tie_word_embeddings=None) (config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, declared); transformers.attention.sdpa uses ModelProps(softcap=None, sliding_window=4096, tie_word_embeddings=None) (engine: transformers.attention.sdpa [softcap: drops (measured); sliding_window: honours (measured)], verified); rule: the consumer differs from the declaration; a registered resolution repairs it; changed: route to a backend measured to honour it (to eager)
+
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]
+Loading weights:  10%|█         | 30/288 [00:00<00:00, 269.91it/s]
+Loading weights:  20%|█▉        | 57/288 [00:00<00:00, 261.80it/s]
+Loading weights:  29%|██▉       | 84/288 [00:00<00:00, 241.43it/s]
+Loading weights:  38%|███▊      | 109/288 [00:00<00:00, 234.95it/s]
+Loading weights:  46%|████▌     | 133/288 [00:00<00:00, 211.36it/s]
+Loading weights:  54%|█████▍    | 155/288 [00:00<00:00, 198.36it/s]
+Loading weights:  61%|██████    | 176/288 [00:00<00:00, 197.55it/s]
+Loading weights: 100%|██████████| 288/288 [00:00<00:00, 322.11it/s]
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=8192) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=8192) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=8192) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+RESULT transformers gemma-2-2b-it entail=load ok=True load=2.885 used=eager 

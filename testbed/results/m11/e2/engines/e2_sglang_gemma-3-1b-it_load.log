@@ -1,0 +1,8 @@
+[entail] unknown at load:transformers.config.rope_parameters: Rotary nothing declared; what transformers.rotary_embedding uses is unknown; rule: this boundary could not be checked; note: Gemma3TextConfig held by transformers#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4
+
+Multi-thread loading shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00,  5.46it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00,  5.45it/s]
+[entail] unknown at load:sglang.config.rope_parameters: Rotary nothing declared; what sglang.rotary_embedding uses is unknown; rule: this boundary could not be checked; note: Gemma3TextConfig held by sglang#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4
+[entail] unknown at load:sglang.attention: ModelProps declared ModelProps(softcap=None, sliding_window=512, tie_word_embeddings=None) (config: /home/<user>/models/gemma-3-1b-it/config.json#sliding_window, declared); sglang.attention.flashinfer uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=None) (engine: sglang.attention.flashinfer [sliding_window: drops (code)], inferred); rule: what the consumer uses is inferred from its code, not measured; nothing is switched on it; note: inferred, not measured: ModelProps.sliding_window (code)
+RESULT sglang gemma-3-1b-it entail=load ok=True load=13.634 used=default 

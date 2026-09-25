@@ -1,0 +1,73 @@
+{
+ "case": "09_stale_graph",
+ "meta": {
+  "id": "09",
+  "title": "stale CUDA Graph replayed after the valid length changed",
+  "fact": "TIME",
+  "issue": "https://github.com/ggml-org/llama.cpp/issues/21726",
+  "engine": "CUDA Graph reuse logic (mechanism)",
+  "kind": "mechanism",
+  "boundary": "graph capture (assumed shape) -> graph replay (actual shape)",
+  "trigger": {
+   "feature": "CUDA Graphs with a growing KV cache",
+   "length": "crosses the captured length"
+  },
+  "symptom": "garbled",
+  "expected_detection": "runtime (record specialization assumptions, recheck on replay)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 0.4244675189256668,
+  "mean_abs": 0.08662349947269377,
+  "ref_max_abs": 0.36677631735801697,
+  "top1_agree": 0.5
+ },
+ "fixed_vs_reference": {
+  "max_abs": 5.960464477539063e-08,
+  "mean_abs": 1.6760964172135573e-08,
+  "ref_max_abs": 0.36677631735801697,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "recorded capture assumption rechecked at replay",
+   "defect": {
+    "flagged": true,
+    "message": "CUDA graph replay: graph captured for valid length 100 replayed with valid length 160"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 1.1
+}

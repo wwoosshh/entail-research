@@ -1,0 +1,73 @@
+{
+ "case": "05_chunk_frame",
+ "meta": {
+  "id": "05",
+  "title": "chunk-relative query vs absolute key in a mask function",
+  "fact": "FRAME",
+  "issue": "https://github.com/vllm-project/vllm/issues/47300",
+  "engine": "PyTorch FlexAttention (mechanism)",
+  "kind": "mechanism",
+  "boundary": "chunked-prefill scheduler (query offset) -> mask function (position frame)",
+  "trigger": {
+   "feature": "chunked prefill with a custom mask",
+   "length": "> one chunk"
+  },
+  "symptom": "garbled",
+  "expected_detection": "runtime (frame tag on query/key indices)",
+  "compare": "loose"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 2.809558227658272,
+  "mean_abs": 0.12479359150383972,
+  "ref_max_abs": 0.45500656962394714,
+  "top1_agree": 0.171875
+ },
+ "fixed_vs_reference": {
+  "max_abs": 4.76837158203125e-07,
+  "mean_abs": 2.737573932994064e-08,
+  "ref_max_abs": 0.45500656962394714,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "position-frame tag at the mask builder",
+   "defect": {
+    "flagged": true,
+    "message": "mask builder (compares absolute positions): argument 'q_pos' Positions: expected Positions(frame='absolute', offset=None), got Positions(frame='chunk_relative', offset=256)"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 9.3
+}

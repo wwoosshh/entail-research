@@ -1,0 +1,10 @@
+{
+ "engine": "transformers",
+ "model": "gemma-2-2b-it",
+ "backend_asked": "sdpa",
+ "paged": true,
+ "entail": "load",
+ "when": "2026-09-23 21:18:24",
+ "ok": false,
+ "error": "RoleError: [entail] refused at load:transformers.paged_attention: ModelProps declared ModelProps(softcap=50.0, sliding_window=4096, tie_word_embeddings=None) (config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, declared); transformers.paged_attention.eager uses ModelProps(softcap=None, sliding_window=4096, tie_word_embeddings=None) (engine: transformers.paged_attention.eager [softcap: drops (measured); sliding_window: honours (measured)], verified); rule: the consumer differs from the declaration and no resolution is registered; stops here"
+}

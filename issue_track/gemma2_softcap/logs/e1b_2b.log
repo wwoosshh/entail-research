@@ -1,0 +1,55 @@
+02:59:13 start e1b 2b torch 2.14.0+cu130
+W0923 02:59:16.966000 1465391 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0923 02:59:17.002000 1465391 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]
+Loading weights:   5%|▍         | 13/288 [00:00<00:02, 129.06it/s]
+Loading weights:   9%|▉         | 27/288 [00:00<00:02, 125.25it/s]
+Loading weights:  16%|█▌        | 45/288 [00:00<00:01, 147.09it/s]
+Loading weights:  21%|██        | 60/288 [00:00<00:01, 122.66it/s]
+Loading weights:  25%|██▌       | 73/288 [00:00<00:01, 124.93it/s]
+Loading weights:  31%|███       | 88/288 [00:00<00:01, 130.84it/s]
+Loading weights:  37%|███▋      | 107/288 [00:00<00:01, 147.35it/s]
+Loading weights:  43%|████▎     | 123/288 [00:00<00:01, 138.58it/s]
+Loading weights:  48%|████▊     | 138/288 [00:01<00:01, 125.33it/s]
+Loading weights:  52%|█████▏    | 151/288 [00:01<00:01, 123.48it/s]
+Loading weights:  58%|█████▊    | 167/288 [00:01<00:00, 129.70it/s]
+Loading weights:  66%|██████▌   | 189/288 [00:01<00:00, 152.39it/s]
+Loading weights: 100%|██████████| 288/288 [00:01<00:00, 200.90it/s]
+02:59:22 33 sequences, lengths [78, 157, 148, 145, 149, 154, 146, 64, 158, 153, 153, 140, 145, 133, 40, 147, 146, 151, 145, 138, 150, 158, 185, 159, 160, 145, 89, 152, 160, 153, 6144, 6144, 6144]
+02:59:43 seq 0 (chat, 78 tok): eager|flex_attention: kl=2.80e-04 top1diff=0.0128, eager|sdpa: kl=5.05e-04 top1diff=0.0256, eager|eager_nocap: kl=2.78e-04 top1diff=0.0128, eager_nocap|sdpa: kl=2.83e-04 top1diff=0.0128
+02:59:44 seq 1 (chat, 157 tok): eager|flex_attention: kl=9.11e-05 top1diff=0.0000, eager|sdpa: kl=1.25e-04 top1diff=0.0127, eager|eager_nocap: kl=9.37e-05 top1diff=0.0064, eager_nocap|sdpa: kl=1.17e-04 top1diff=0.0064
+02:59:45 seq 2 (chat, 148 tok): eager|flex_attention: kl=1.91e-04 top1diff=0.0000, eager|sdpa: kl=1.49e-04 top1diff=0.0068, eager|eager_nocap: kl=1.85e-04 top1diff=0.0000, eager_nocap|sdpa: kl=1.86e-04 top1diff=0.0068
+02:59:45 seq 3 (chat, 145 tok): eager|flex_attention: kl=3.94e-04 top1diff=0.0207, eager|sdpa: kl=4.23e-04 top1diff=0.0069, eager|eager_nocap: kl=4.09e-04 top1diff=0.0069, eager_nocap|sdpa: kl=3.20e-04 top1diff=0.0138
+02:59:46 seq 4 (chat, 149 tok): eager|flex_attention: kl=3.37e-04 top1diff=0.0000, eager|sdpa: kl=4.27e-04 top1diff=0.0268, eager|eager_nocap: kl=4.31e-04 top1diff=0.0134, eager_nocap|sdpa: kl=5.00e-04 top1diff=0.0268
+02:59:47 seq 5 (chat, 154 tok): eager|flex_attention: kl=1.24e-04 top1diff=0.0000, eager|sdpa: kl=1.42e-04 top1diff=0.0130, eager|eager_nocap: kl=1.31e-04 top1diff=0.0065, eager_nocap|sdpa: kl=1.34e-04 top1diff=0.0065
+02:59:48 seq 6 (chat, 146 tok): eager|flex_attention: kl=2.04e-04 top1diff=0.0137, eager|sdpa: kl=2.40e-04 top1diff=0.0137, eager|eager_nocap: kl=3.01e-04 top1diff=0.0205, eager_nocap|sdpa: kl=2.69e-04 top1diff=0.0205
+02:59:49 seq 7 (chat, 64 tok): eager|flex_attention: kl=4.43e-04 top1diff=0.0156, eager|sdpa: kl=6.96e-04 top1diff=0.0156, eager|eager_nocap: kl=5.97e-04 top1diff=0.0156, eager_nocap|sdpa: kl=4.85e-04 top1diff=0.0312
+02:59:50 seq 8 (chat, 158 tok): eager|flex_attention: kl=1.22e-04 top1diff=0.0063, eager|sdpa: kl=1.47e-04 top1diff=0.0063, eager|eager_nocap: kl=1.38e-04 top1diff=0.0000, eager_nocap|sdpa: kl=1.11e-04 top1diff=0.0063
+02:59:51 seq 9 (chat, 153 tok): eager|flex_attention: kl=3.19e-04 top1diff=0.0065, eager|sdpa: kl=3.39e-04 top1diff=0.0261, eager|eager_nocap: kl=3.71e-04 top1diff=0.0196, eager_nocap|sdpa: kl=2.70e-04 top1diff=0.0065
+02:59:52 seq 10 (chat, 153 tok): eager|flex_attention: kl=1.29e-04 top1diff=0.0000, eager|sdpa: kl=1.62e-04 top1diff=0.0065, eager|eager_nocap: kl=1.33e-04 top1diff=0.0000, eager_nocap|sdpa: kl=1.20e-04 top1diff=0.0065
+02:59:52 seq 11 (chat, 140 tok): eager|flex_attention: kl=2.65e-04 top1diff=0.0000, eager|sdpa: kl=3.31e-04 top1diff=0.0143, eager|eager_nocap: kl=2.96e-04 top1diff=0.0071, eager_nocap|sdpa: kl=3.21e-04 top1diff=0.0071
+02:59:53 seq 12 (chat, 145 tok): eager|flex_attention: kl=3.49e-04 top1diff=0.0000, eager|sdpa: kl=4.19e-04 top1diff=0.0069, eager|eager_nocap: kl=3.75e-04 top1diff=0.0000, eager_nocap|sdpa: kl=3.25e-04 top1diff=0.0069
+02:59:54 seq 13 (chat, 133 tok): eager|flex_attention: kl=1.38e-04 top1diff=0.0000, eager|sdpa: kl=1.56e-04 top1diff=0.0075, eager|eager_nocap: kl=1.51e-04 top1diff=0.0000, eager_nocap|sdpa: kl=1.64e-04 top1diff=0.0075
+02:59:55 seq 14 (chat, 40 tok): eager|flex_attention: kl=3.72e-04 top1diff=0.0000, eager|sdpa: kl=3.94e-04 top1diff=0.0250, eager|eager_nocap: kl=2.98e-04 top1diff=0.0000, eager_nocap|sdpa: kl=3.53e-04 top1diff=0.0250
+02:59:54 seq 15 (chat, 147 tok): eager|flex_attention: kl=3.45e-04 top1diff=0.0068, eager|sdpa: kl=4.45e-04 top1diff=0.0272, eager|eager_nocap: kl=4.91e-04 top1diff=0.0068, eager_nocap|sdpa: kl=3.50e-04 top1diff=0.0204
+02:59:54 seq 16 (chat, 146 tok): eager|flex_attention: kl=1.79e-04 top1diff=0.0000, eager|sdpa: kl=1.68e-04 top1diff=0.0068, eager|eager_nocap: kl=1.39e-04 top1diff=0.0000, eager_nocap|sdpa: kl=1.60e-04 top1diff=0.0068
+02:59:55 seq 17 (chat, 151 tok): eager|flex_attention: kl=3.04e-04 top1diff=0.0199, eager|sdpa: kl=4.20e-04 top1diff=0.0331, eager|eager_nocap: kl=4.69e-04 top1diff=0.0199, eager_nocap|sdpa: kl=3.67e-04 top1diff=0.0265
+02:59:56 seq 18 (chat, 145 tok): eager|flex_attention: kl=1.37e-04 top1diff=0.0000, eager|sdpa: kl=1.90e-04 top1diff=0.0138, eager|eager_nocap: kl=1.79e-04 top1diff=0.0000, eager_nocap|sdpa: kl=1.45e-04 top1diff=0.0138
+02:59:57 seq 19 (chat, 138 tok): eager|flex_attention: kl=6.83e-05 top1diff=0.0000, eager|sdpa: kl=9.33e-05 top1diff=0.0072, eager|eager_nocap: kl=6.42e-05 top1diff=0.0000, eager_nocap|sdpa: kl=9.50e-05 top1diff=0.0072
+02:59:58 seq 20 (chat, 150 tok): eager|flex_attention: kl=5.16e-04 top1diff=0.0133, eager|sdpa: kl=6.12e-04 top1diff=0.0200, eager|eager_nocap: kl=5.25e-04 top1diff=0.0133, eager_nocap|sdpa: kl=4.86e-04 top1diff=0.0200
+02:59:59 seq 21 (chat, 158 tok): eager|flex_attention: kl=3.71e-04 top1diff=0.0000, eager|sdpa: kl=3.67e-04 top1diff=0.0127, eager|eager_nocap: kl=3.82e-04 top1diff=0.0063, eager_nocap|sdpa: kl=3.38e-04 top1diff=0.0190
+03:00:00 seq 22 (chat, 185 tok): eager|flex_attention: kl=3.75e-04 top1diff=0.0000, eager|sdpa: kl=4.82e-04 top1diff=0.0108, eager|eager_nocap: kl=4.77e-04 top1diff=0.0162, eager_nocap|sdpa: kl=5.08e-04 top1diff=0.0162
+03:00:01 seq 23 (chat, 159 tok): eager|flex_attention: kl=4.45e-04 top1diff=0.0000, eager|sdpa: kl=4.60e-04 top1diff=0.0063, eager|eager_nocap: kl=4.82e-04 top1diff=0.0000, eager_nocap|sdpa: kl=4.44e-04 top1diff=0.0063
+03:00:01 seq 24 (chat, 160 tok): eager|flex_attention: kl=4.61e-04 top1diff=0.0063, eager|sdpa: kl=4.51e-04 top1diff=0.0250, eager|eager_nocap: kl=4.74e-04 top1diff=0.0125, eager_nocap|sdpa: kl=4.53e-04 top1diff=0.0125
+03:00:02 seq 25 (chat, 145 tok): eager|flex_attention: kl=2.93e-04 top1diff=0.0000, eager|sdpa: kl=5.44e-04 top1diff=0.0069, eager|eager_nocap: kl=4.73e-04 top1diff=0.0000, eager_nocap|sdpa: kl=2.36e-04 top1diff=0.0069
+03:00:03 seq 26 (chat, 89 tok): eager|flex_attention: kl=6.31e-04 top1diff=0.0000, eager|sdpa: kl=6.64e-04 top1diff=0.0225, eager|eager_nocap: kl=7.67e-04 top1diff=0.0225, eager_nocap|sdpa: kl=6.49e-04 top1diff=0.0225
+03:00:04 seq 27 (chat, 152 tok): eager|flex_attention: kl=3.53e-04 top1diff=0.0132, eager|sdpa: kl=3.68e-04 top1diff=0.0066, eager|eager_nocap: kl=4.14e-04 top1diff=0.0000, eager_nocap|sdpa: kl=3.43e-04 top1diff=0.0066
+03:00:05 seq 28 (chat, 160 tok): eager|flex_attention: kl=2.96e-04 top1diff=0.0000, eager|sdpa: kl=3.21e-04 top1diff=0.0187, eager|eager_nocap: kl=2.77e-04 top1diff=0.0063, eager_nocap|sdpa: kl=2.46e-04 top1diff=0.0125
+03:00:06 seq 29 (chat, 153 tok): eager|flex_attention: kl=4.14e-04 top1diff=0.0000, eager|sdpa: kl=3.94e-04 top1diff=0.0065, eager|eager_nocap: kl=4.14e-04 top1diff=0.0000, eager_nocap|sdpa: kl=4.15e-04 top1diff=0.0065
+03:02:25 seq 30 (doc, 6144 tok): eager|flex_attention: kl=5.37e-04 top1diff=0.0163, eager|sdpa: kl=7.57e-04 top1diff=0.0177, eager|eager_nocap: kl=7.66e-04 top1diff=0.0194, eager_nocap|sdpa: kl=5.49e-04 top1diff=0.0161
+03:04:12 seq 31 (doc, 6144 tok): eager|flex_attention: kl=6.58e-04 top1diff=0.0093, eager|sdpa: kl=7.17e-04 top1diff=0.0106, eager|eager_nocap: kl=7.61e-04 top1diff=0.0127, eager_nocap|sdpa: kl=4.54e-04 top1diff=0.0114
+03:07:31 seq 32 (doc, 6144 tok): eager|flex_attention: kl=2.64e-04 top1diff=0.0042, eager|sdpa: kl=6.00e-04 top1diff=0.0072, eager|eager_nocap: kl=4.23e-04 top1diff=0.0059, eager_nocap|sdpa: kl=4.25e-04 top1diff=0.0059
+03:07:32 wrote <workspace>/issue_track/gemma2_softcap/results/e1fp32_2b.json
+03:07:32 wrote <workspace>/issue_track/gemma2_softcap/results/e1fp32_2b_tokens.json
+03:07:33 done

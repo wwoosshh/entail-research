@@ -1,0 +1,359 @@
+{
+ "env": {
+  "torch": "2.14.0+cu130",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti",
+  "passes_counted": {
+   "split reader / Layout": 1,
+   "DeepGEMM UE8M0 kernel / Layout": 3,
+   "kernel taking the row stride / Layout": 1,
+   "all_reduce / Reduction": 2,
+   "consumer of a replicated value / Reduction": 1,
+   "mask builder (compares absolute positions) / Positions": 3,
+   "attention (evaluates the mask) / Epoch": 1,
+   "LoRA path (expects unquantized activations) / Quantized": 1
+  },
+  "repeats": 0
+ },
+ "cases": {
+  "01": {
+   "case": "01_reorder_layout",
+   "expected_defect": "refused",
+   "compare": "fp32",
+   "path": "the case's own functions, signed",
+   "burden": {
+    "signatures": 5,
+    "signature_lines": 5,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 2,
+    "signature_lines": 2,
+    "hand_tags": 2,
+    "read_time_checks": 0
+   },
+   "defect": {
+    "outcome": "refused",
+    "checks_passed": 0,
+    "decisions": [
+     {
+      "verdict": "refused",
+      "name": "Layout",
+      "rule": "the consumer differs from the declaration and no resolution is registered",
+      "boundary": "boundary:second-path dequantize",
+      "resolution": null,
+      "note": "argument buf"
+     }
+    ],
+    "error_head": "[entail] refused at boundary:second-path dequantize: Layout declared Layout(kind='q8_0', dtype=None, block=None, packing='split', scale_format=None, orientation=None, scale_granularity=None) (boundary: backend reorder (interleaved -> split, in place).writes.data, declared); second-path dequantize us"
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 1,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "ref_max_abs": 57.26564025878906,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 0.05,
+   "blocked": true
+  },
+  "02": {
+   "case": "02_scale_pow2",
+   "expected_defect": "refused",
+   "compare": "fp8",
+   "path": "the case's own functions, signed",
+   "burden": {
+    "signatures": 3,
+    "signature_lines": 3,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 1,
+    "signature_lines": 1,
+    "hand_tags": 4,
+    "read_time_checks": 0
+   },
+   "defect": {
+    "outcome": "refused",
+    "checks_passed": 1,
+    "decisions": [
+     {
+      "verdict": "refused",
+      "name": "Layout",
+      "rule": "the consumer differs from the declaration and no resolution is registered",
+      "boundary": "boundary:DeepGEMM UE8M0 kernel",
+      "resolution": null,
+      "note": "argument q"
+     }
+    ],
+    "error_head": "[entail] refused at boundary:DeepGEMM UE8M0 kernel: Layout declared Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32', orientation=None, scale_granularity=None) (boundary: quantize (block FP8).returns, declared); DeepGEMM UE8M0 kernel uses Layout(kind='fp8_block', dt"
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 2,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 8.36175537109375,
+     "mean_abs": 1.4952789052968,
+     "ref_max_abs": 317.958984375,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 0.01,
+   "blocked": true
+  },
+  "03": {
+   "case": "03_strided_q",
+   "expected_defect": "resolved",
+   "compare": "fp32",
+   "path": "the case's own functions, signed",
+   "burden": {
+    "signatures": 3,
+    "signature_lines": 3,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 2,
+    "signature_lines": 2,
+    "hand_tags": 1,
+    "read_time_checks": 0
+   },
+   "defect": {
+    "outcome": "resolved",
+    "checks_passed": 0,
+    "decisions": [
+     {
+      "verdict": "resolved",
+      "name": "Layout",
+      "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+      "boundary": "boundary:kernel assuming packed Q rows",
+      "resolution": "make the tensor contiguous (Layout(kind='strided', dtype=None, block=None, packing=None, scale_format=None, orientation=None, scale_granularity=None) -> Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation=None, scale_granularity=None))",
+      "note": "argument q"
+     }
+    ],
+    "vs_reference": {
+     "max_abs": 2.86102294921875e-06,
+     "mean_abs": 8.791685104370117e-07,
+     "ref_max_abs": 24.07729721069336,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 1,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 2.86102294921875e-06,
+     "mean_abs": 8.791685104370117e-07,
+     "ref_max_abs": 24.07729721069336,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 0.65,
+   "blocked": true
+  },
+  "04": {
+   "case": "04_double_reduce",
+   "expected_defect": "refused",
+   "compare": "fp32",
+   "path": "one process stands in for the two gloo ranks",
+   "burden": {
+    "signatures": 4,
+    "signature_lines": 4,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 2,
+    "signature_lines": 2,
+    "hand_tags": 2,
+    "read_time_checks": 0
+   },
+   "defect": {
+    "outcome": "refused",
+    "checks_passed": 1,
+    "decisions": [
+     {
+      "verdict": "refused",
+      "name": "Reduction",
+      "rule": "the consumer differs from the declaration and no resolution is registered",
+      "boundary": "boundary:dp_gather_partial (reduces its input)",
+      "resolution": null,
+      "note": "argument y"
+     }
+    ],
+    "error_head": "[entail] refused at boundary:dp_gather_partial (reduces its input): Reduction declared Reduction(state='R', dim=None, group=None) (boundary: all_reduce.returns, declared); dp_gather_partial (reduces its input) uses Reduction(state='P', dim=None, group=None) (boundary: dp_gather_partial (reduces its "
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 2,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 2.86102294921875e-06,
+     "mean_abs": 6.385962478816509e-07,
+     "ref_max_abs": 19.679977416992188,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 0.0,
+   "blocked": true
+  },
+  "05": {
+   "case": "05_chunk_frame",
+   "expected_defect": "resolved or refused",
+   "compare": "loose",
+   "path": "the case's own functions, signed",
+   "burden": {
+    "signatures": 4,
+    "signature_lines": 5,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 1,
+    "signature_lines": 1,
+    "hand_tags": 3,
+    "read_time_checks": 0
+   },
+   "defect": {
+    "outcome": "resolved",
+    "checks_passed": 1,
+    "decisions": [
+     {
+      "verdict": "resolved",
+      "name": "Positions",
+      "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+      "boundary": "boundary:mask builder (compares absolute positions)",
+      "resolution": "add the chunk's offset (Positions(frame='chunk_relative', offset=256) -> Positions(frame='absolute', offset=None))",
+      "note": "argument q_pos"
+     }
+    ],
+    "vs_reference": {
+     "max_abs": 4.76837158203125e-07,
+     "mean_abs": 2.737573932994064e-08,
+     "ref_max_abs": 0.45500656962394714,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 2,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 4.76837158203125e-07,
+     "mean_abs": 2.737573932994064e-08,
+     "ref_max_abs": 0.45500656962394714,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 4.3,
+   "blocked": true
+  },
+  "10": {
+   "case": "10_flex_position_ref",
+   "expected_defect": "refused",
+   "compare": "loose",
+   "path": "the mechanism in miniature; the installed transformers path is a container boundary (M5.2)",
+   "burden": {
+    "signatures": 5,
+    "signature_lines": 6,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 0,
+    "signature_lines": 0,
+    "hand_tags": 0,
+    "read_time_checks": 1
+   },
+   "defect": {
+    "outcome": "refused",
+    "checks_passed": 0,
+    "decisions": [
+     {
+      "verdict": "refused",
+      "name": "Epoch",
+      "rule": "arguments that must carry the same fact carry different ones",
+      "boundary": "boundary:attention (evaluates the mask)",
+      "resolution": null,
+      "note": "mask and offset must carry the same Epoch"
+     }
+    ],
+    "error_head": "[entail] refused at boundary:attention (evaluates the mask): Epoch declared Epoch(version=0, owner='cache') (boundary: cache position counter.returns, declared); attention (evaluates the mask) uses Epoch(version=1, owner='cache') (boundary: cache update (writes the new key, increments the counter in"
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 1,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "ref_max_abs": 0.43980249762535095,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 0.01,
+   "blocked": true
+  },
+  "16": {
+   "case": "16_fp8_as_bf16",
+   "expected_defect": "resolved or refused",
+   "compare": "fp8",
+   "path": "the case's own functions, signed",
+   "burden": {
+    "signatures": 3,
+    "signature_lines": 5,
+    "hand_tags": 0
+   },
+   "old_instrumented": {
+    "signatures": 1,
+    "signature_lines": 1,
+    "hand_tags": 2,
+    "read_time_checks": 0
+   },
+   "defect": {
+    "outcome": "resolved",
+    "checks_passed": 0,
+    "decisions": [
+     {
+      "verdict": "resolved",
+      "name": "Quantized",
+      "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+      "boundary": "boundary:LoRA path (expects unquantized activations)",
+      "resolution": "dequantize with its scale (Quantized(dtype='float8_e4m3fn', scale=0.02746535651385784) -> Quantized(dtype='float32', scale=None))",
+      "note": "argument x"
+     }
+    ],
+    "vs_reference": {
+     "max_abs": 0.9330053329467773,
+     "mean_abs": 0.18513164434079954,
+     "ref_max_abs": 43.20866775512695,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "fixed": {
+    "outcome": "pass",
+    "checks_passed": 1,
+    "decisions": [],
+    "vs_reference": {
+     "max_abs": 0.9330053329467773,
+     "mean_abs": 0.18513164434079954,
+     "ref_max_abs": 43.20866775512695,
+     "top1_agree": 1.0,
+     "within": true
+    }
+   },
+   "seconds": 0.02,
+   "blocked": true
+  }
+ }
+}

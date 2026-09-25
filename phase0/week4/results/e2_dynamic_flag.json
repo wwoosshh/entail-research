@@ -1,0 +1,105 @@
+{
+ "approach": "dynamic_flag",
+ "batches": [
+  1,
+  4,
+  8,
+  2
+ ],
+ "prompt_len": 512,
+ "steps": 16,
+ "precompile_s": null,
+ "per_batch": [
+  {
+   "batch": 1,
+   "first_step_ms": 65504.317851999986,
+   "steady_ms": 22.432445500044196,
+   "steady_min_ms": 21.79112399994665,
+   "steady_max_ms": 22.932262999802333,
+   "compiles_during_batch": 1,
+   "compile_s_during_batch": 60.070334888
+  },
+  {
+   "batch": 4,
+   "first_step_ms": 105561.85150500006,
+   "steady_ms": 30.371728500085737,
+   "steady_min_ms": 30.01634399993236,
+   "steady_max_ms": 31.352508000054513,
+   "compiles_during_batch": 1,
+   "compile_s_during_batch": 97.62526594100001
+  },
+  {
+   "batch": 8,
+   "first_step_ms": 36.137989000053494,
+   "steady_ms": 36.56230100000357,
+   "steady_min_ms": 36.0340309998719,
+   "steady_max_ms": 37.457296000184215,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 2,
+   "first_step_ms": 29.126409999889802,
+   "steady_ms": 28.138747999946645,
+   "steady_min_ms": 27.952758000083122,
+   "steady_max_ms": 29.365669000071648,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  }
+ ],
+ "unique_graphs": 2,
+ "dynamo_stats": {
+  "calls_captured": 12588,
+  "unique_graphs": 2
+ },
+ "compile_metrics_total": {
+  "_compile.compile_inner": {
+   "n": 2,
+   "s": 157.695600829
+  },
+  "compile_inner": {
+   "n": 2,
+   "s": 157.695600829
+  },
+  "OutputGraph.call_user_compiler": {
+   "n": 4,
+   "s": 130.77519159
+  },
+  "create_aot_dispatcher_function": {
+   "n": 4,
+   "s": 130.027307682
+  },
+  "compile_attempt_1": {
+   "n": 2,
+   "s": 117.07674000899999
+  },
+  "compile_fx.<locals>.fw_compiler_base": {
+   "n": 2,
+   "s": 79.531075106
+  },
+  "compile_fx_inner": {
+   "n": 2,
+   "s": 77.682366997
+  },
+  "fx_codegen_and_compile": {
+   "n": 2,
+   "s": 76.892312289
+  },
+  "GraphLowering.compile_to_fn": {
+   "n": 2,
+   "s": 57.39703128399999
+  },
+  "GraphLowering.compile_to_module": {
+   "n": 2,
+   "s": 57.396956997
+  },
+  "GraphLowering.codegen": {
+   "n": 2,
+   "s": 57.21369986
+  },
+  "compile_attempt_0": {
+   "n": 2,
+   "s": 39.664011907
+  }
+ }
+}

@@ -1,0 +1,15 @@
+W0925 07:58:03.333000 15757 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0925 07:58:03.360000 15757 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/340 [00:00<?, ?it/s]
+Loading weights:  12%|█▏        | 40/340 [00:00<00:00, 367.88it/s]
+Loading weights:  23%|██▎       | 77/340 [00:00<00:00, 339.40it/s]
+Loading weights:  34%|███▍      | 116/340 [00:00<00:00, 360.58it/s]
+Loading weights:  47%|████▋     | 159/340 [00:00<00:00, 380.28it/s]
+Loading weights:  58%|█████▊    | 198/340 [00:00<00:00, 360.47it/s]
+Loading weights: 100%|██████████| 340/340 [00:00<00:00, 540.92it/s]
+[entail] unknown at load:transformers.config.rope_parameters: Rotary nothing declared; what transformers.rotary_embedding uses is unknown; rule: this boundary could not be checked; note: Gemma3TextConfig held by transformers#rope_parameters: RoPE set per layer type (['full_attention', 'sliding_attention']) is not in vocabulary v4
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+RESULT transformers gemma-3-1b-it entail=load ok=True load=1.731 used=sdpa 

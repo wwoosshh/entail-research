@@ -1,0 +1,41 @@
+attention + mask interface registered
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 4104.60it/s]
+using REAL Qwen3-4B weights
+=== prompt 64: logit scale 12.88
+  sdpa             0.000   1.875   3.672   4.078   7.531   3.859   3.645
+  sdpa_again       1.875   0.000   3.922   4.143   7.375   3.844   3.805
+  triton_decode    3.672   3.922   0.000   3.438   7.438   3.938   2.125
+  triton_again     4.078   4.143   3.438   0.000   7.562   4.562   2.812
+  maskmod_decode   7.531   7.375   7.438   7.562   0.000   4.531   6.812
+  ref_decode       3.859   3.844   3.938   4.562   4.531   0.000   3.000
+  ref_again        3.645   3.805   2.125   2.812   6.812   3.000   0.000
+  (columns in the same order; max |logit difference|)
+  run-to-run bitwise identical sdpa: False
+  run-to-run bitwise identical triton_decode: False
+  run-to-run bitwise identical ref_decode: False
+  layer-0 attention output scale (ref): 0.426
+  sdpa            layer-0 attention output vs ref: 0.2312; first layer with diff > 0.05: (0, 0.231201171875)
+  sdpa_again      layer-0 attention output vs ref: 0.2273; first layer with diff > 0.05: (0, 0.227294921875)
+  triton_decode   layer-0 attention output vs ref: 0.1133; first layer with diff > 0.05: (0, 0.11328125)
+  maskmod_decode  layer-0 attention output vs ref: 0.0762; first layer with diff > 0.05: (0, 0.076171875)
+  ref_again       layer-0 attention output vs ref: 0.1145; first layer with diff > 0.05: (0, 0.114501953125)
+=== prompt 512: logit scale 12.19
+  sdpa             0.000   1.375   6.000   6.938   8.281   7.812   8.188
+  sdpa_again       1.375   0.000   6.875   7.500   8.781   8.312   8.688
+  triton_decode    6.000   6.875   0.000   1.125   3.375   3.812   5.281
+  triton_again     6.938   7.500   1.125   0.000   2.656   4.344   5.719
+  maskmod_decode   8.281   8.781   3.375   2.656   0.000   3.500   5.500
+  ref_decode       7.812   8.312   3.812   4.344   3.500   0.000   2.062
+  ref_again        8.188   8.688   5.281   5.719   5.500   2.062   0.000
+  (columns in the same order; max |logit difference|)
+  run-to-run bitwise identical sdpa: False
+  run-to-run bitwise identical triton_decode: False
+  run-to-run bitwise identical ref_decode: False
+  layer-0 attention output scale (ref): 0.777
+  sdpa            layer-0 attention output vs ref: 0.7852; first layer with diff > 0.05: (0, 0.78515625)
+  sdpa_again      layer-0 attention output vs ref: 0.8477; first layer with diff > 0.05: (0, 0.84765625)
+  triton_decode   layer-0 attention output vs ref: 0.0471; first layer with diff > 0.05: (1, 0.10400390625)
+  maskmod_decode  layer-0 attention output vs ref: 0.0850; first layer with diff > 0.05: (0, 0.0849609375)
+  ref_again       layer-0 attention output vs ref: 0.0335; first layer with diff > 0.05: (1, 0.06640625)

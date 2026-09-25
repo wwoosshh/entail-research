@@ -1,0 +1,34 @@
+[19:35:15] start unit_tests
+[19:36:07] end unit_tests (exit 0): PASS tests/test_vllm_serve.py (10 checks) PASS tests/test_vllm_source.py (7 checks) 
+[19:36:18] s3_transformers_Qwen3-4B_off: RESULT transformers Qwen3-4B entail=off ok=True load=4.851 used=sdpa 
+[19:36:27] s3_transformers_Qwen3-4B_load: RESULT transformers Qwen3-4B entail=load ok=True load=1.992 used=sdpa 
+[19:37:34] s3_vllm_Qwen3-4B_off: RESULT vllm Qwen3-4B entail=off ok=True load=57.054 used=default 
+[19:37:56] s3_vllm_Qwen3-4B_load: RESULT vllm Qwen3-4B entail=load ok=True load=13.395 used=default 
+[19:38:33] s3_sglang_Qwen3-4B_off: RESULT sglang Qwen3-4B entail=off ok=True load=12.691 used=default 
+[19:38:53] s3_sglang_Qwen3-4B_load: RESULT sglang Qwen3-4B entail=load ok=True load=13.277 used=default 
+[19:39:03] s3_transformers_Llama-3.2-3B-Instruct_off: RESULT transformers Llama-3.2-3B-Instruct entail=off ok=True load=3.669 used=sdpa 
+[19:39:12] s3_transformers_Llama-3.2-3B-Instruct_load: RESULT transformers Llama-3.2-3B-Instruct entail=load ok=True load=1.999 used=sdpa 
+[19:39:32] s3_vllm_Llama-3.2-3B-Instruct_off: RESULT vllm Llama-3.2-3B-Instruct entail=off ok=True load=12.793 used=default 
+[19:39:54] s3_vllm_Llama-3.2-3B-Instruct_load: RESULT vllm Llama-3.2-3B-Instruct entail=load ok=True load=13.917 used=default 
+[19:40:14] s3_sglang_Llama-3.2-3B-Instruct_off: RESULT sglang Llama-3.2-3B-Instruct entail=off ok=True load=14.116 used=default 
+[19:40:36] s3_sglang_Llama-3.2-3B-Instruct_load: RESULT sglang Llama-3.2-3B-Instruct entail=load ok=True load=15.064 used=default 
+[19:40:46] s3_transformers_gemma-2-2b-it_off: RESULT transformers gemma-2-2b-it entail=off ok=True load=3.131 used=sdpa 
+[19:41:00] s3_transformers_gemma-2-2b-it_load: RESULT transformers gemma-2-2b-it entail=load ok=True load=2.543 used=eager 
+[19:41:22] s3_vllm_gemma-2-2b-it_off: RESULT vllm gemma-2-2b-it entail=off ok=True load=14.72 used=default 
+[19:41:47] s3_vllm_gemma-2-2b-it_load: RESULT vllm gemma-2-2b-it entail=load ok=True load=16.501 used=default 
+[19:42:06] s3_sglang_gemma-2-2b-it_off: RESULT sglang gemma-2-2b-it entail=off ok=True load=12.76 used=default 
+[19:42:26] s3_sglang_gemma-2-2b-it_load: RESULT sglang gemma-2-2b-it entail=load ok=True load=14.476 used=default 
+[19:42:26] start sglang_healthy
+[19:42:57] end sglang_healthy (exit 0): [2026-09-24 19:42:52] SIGQUIT received. signum=None, frame=None. It usually means one child failed. [2026-09-24 19:42:57] No live scheduler processes found; skipping py-spy and CUDA coredump. 
+[19:42:57] start sglang_file
+[19:43:29] end sglang_file (exit 0): [2026-09-24 19:43:24] SIGQUIT received. signum=None, frame=None. It usually means one child failed. [2026-09-24 19:43:29] No live scheduler processes found; skipping py-spy and CUDA coredump. 
+[19:43:29] start sglang_builtin
+[19:43:56] end sglang_builtin (exit 0): [2026-09-24 19:43:51] SIGQUIT received. signum=None, frame=None. It usually means one child failed. [2026-09-24 19:43:56] No live scheduler processes found; skipping py-spy and CUDA coredump. 
+[19:43:56] start sglang_strict
+[19:44:23] end sglang_strict (exit 0): [2026-09-24 19:44:18] SIGQUIT received. signum=None, frame=None. It usually means one child failed. [2026-09-24 19:44:23] No live scheduler processes found; skipping py-spy and CUDA coredump. 
+[19:44:23] start vllm_healthy_on
+[19:44:57] end vllm_healthy_on (exit 0):   decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution     decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolutio
+[19:44:57] start m51_transformers
+[19:47:15] end m51_transformers (exit 0): seeded: off {'finished': True, 'tokens': [13, 576, 6722, 315, 9625, 374]} | on {"refused": false} wrote <workspace>/testbed/results/m93/rerun/m51/transformers.json 
+[19:48:51] fd_rope LC_m93 (entail on): DONE LC_m93 rope={'factor': 32.0, 'high_freq_factor': 4.0, 'low_freq_factor': 1.0, 'original_max_position_embeddings': 8192, 'rope_type': 'llama3', 'rope_theta': 500000.0} nll={'english_gpl3': 1.1269, 'korean_research_pl
+[19:48:51] all done: U A S W K R

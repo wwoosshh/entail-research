@@ -1,0 +1,53 @@
+{
+ "tag": "i01_off",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "lora": "/mnt/c/Users/<user>/AppData/Local/Temp/claude/C--Users-<user>-Desktop------ai-compiler/1ca95520-f800-4114-8750-ff4f872cd917/scratchpad/m63_loras/nagito_illustrious_v3_peft_names.safetensors",
+ "condition": "off",
+ "entail": "not installed",
+ "on_broken": "report",
+ "outcome": "loaded",
+ "adapters": {},
+ "modules_with_the_adapter": 0,
+ "log": [
+  "WARNING diffusers.quantizers.torchao.torchao_quantizer: Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+  "WARNING diffusers.models.modeling_utils: There are modules in UNet2DConditionModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.loaders.peft: No LoRA keys associated to UNet2DConditionModel found with the prefix='unet'. This is safe to ignore if LoRA state dict didn't originally have any UNet2DConditionModel related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue if you think it's unexpec",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModel found with the prefix='text_encoder'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModel related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue if you think it's unexpected: h",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModelWithProjection found with the prefix='text_encoder_2'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModelWithProjection related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue i"
+ ],
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 11.79,
+   "image": "/home/<user>/m63_out_rerun/i01_off_seed11.png",
+   "stats": {
+    "mean": 168.66,
+    "std": 58.2,
+    "saturation": 51.32
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 9.92,
+   "image": "/home/<user>/m63_out_rerun/i01_off_seed22.png",
+   "stats": {
+    "mean": 161.07,
+    "std": 60.71,
+    "saturation": 54.06
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 13.5,
+   "image": "/home/<user>/m63_out_rerun/i01_off_seed33.png",
+   "stats": {
+    "mean": 163.07,
+    "std": 63.81,
+    "saturation": 52.65
+   }
+  }
+ ],
+ "decisions": [],
+ "when": "2026-09-24 17:27:31"
+}

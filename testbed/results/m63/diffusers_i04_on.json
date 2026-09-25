@@ -1,0 +1,125 @@
+{
+ "tag": "i04_on",
+ "checkpoint": "NoobAI-XL-Vpred-v1.0.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "policy": "resolve",
+ "load_seconds": 13.33,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "v_prediction",
+  "rescale_betas_zero_snr": true
+ },
+ "vae_scaling_factor": 0.13025,
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 11.69,
+   "image": "/home/<user>/m63_out/i04_on_seed11.png",
+   "stats": {
+    "mean": 165.27,
+    "std": 80.76,
+    "saturation": 66.09
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 10.09,
+   "image": "/home/<user>/m63_out/i04_on_seed22.png",
+   "stats": {
+    "mean": 186.77,
+    "std": 77.93,
+    "saturation": 59.87
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 12.13,
+   "image": "/home/<user>/m63_out/i04_on_seed33.png",
+   "stats": {
+    "mean": 154.82,
+    "std": 83.86,
+    "saturation": 72.91
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 6.831
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 8.788
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 1.093
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.249
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.116
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.19
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "set the sampler up for the declared prediction (to v-prediction with zero terminal SNR)",
+   "target": "v-prediction with zero terminal SNR",
+   "note": "",
+   "declared": "v-prediction with zero terminal SNR",
+   "declared_from": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/NoobAI-XL-Vpred-v1.0.safetensors#key v_pred (zsnr from key ztsnr)",
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 16.987
+  }
+ ],
+ "when": "2026-09-24 09:23:42"
+}

@@ -1,0 +1,587 @@
+{
+ "torch": "2.14.0+cu130",
+ "cuda": true,
+ "cases": {
+  "09_stale_graph": {
+   "boundary": "reuse:rolebench09.graph_replay",
+   "compare": "fp32",
+   "off": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 0.4244675189256668,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.960464477539063e-08,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 0,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {}
+    }
+   },
+   "on": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "resolved",
+       "rule": "the artifact is reused under conditions it was not made for",
+       "boundary": "reuse:rolebench09.graph_replay",
+       "resolution": "remake the artifact for the conditions now",
+       "note": "the graph runner replays a captured graph: reused under other conditions (valid_length: 100 -> 160); made again for them"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 5.960464477539063e-08,
+      "within": true
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.960464477539063e-08,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 1,
+     "passed": {}
+    }
+   },
+   "strict": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "resolved",
+       "rule": "the artifact is reused under conditions it was not made for",
+       "boundary": "reuse:rolebench09.graph_replay",
+       "resolution": "remake the artifact for the conditions now",
+       "note": "the graph runner replays a captured graph: reused under other conditions (valid_length: 100 -> 160); made again for them"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 5.960464477539063e-08,
+      "within": true
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.960464477539063e-08,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 1,
+     "passed": {}
+    }
+   },
+   "observe": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "broken",
+       "rule": "the artifact is reused under conditions it was not made for",
+       "boundary": "reuse:rolebench09.graph_replay",
+       "resolution": null,
+       "note": "the graph runner replays a captured graph: reused under other conditions (valid_length: 100 -> 160), and nothing can remake it here"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 0.4244675189256668,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.960464477539063e-08,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 1,
+     "broken": 1,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {}
+    }
+   }
+  },
+  "11_warmup_specialization": {
+   "boundary": "reuse:rolebench11.compiled",
+   "compare": "fp32",
+   "off": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 6.3863019943237305,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.7220458984375e-06,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 0,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {}
+    }
+   },
+   "on": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "resolved",
+       "rule": "the artifact is reused under conditions it was not made for",
+       "boundary": "reuse:rolebench11.compiled",
+       "resolution": "remake the artifact for the conditions now",
+       "note": "a graph compiled without guards is called again: reused under other conditions (arg1: (0, 64) -> (5, 64)); made again for them"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 5.7220458984375e-06,
+      "within": true
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.7220458984375e-06,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 1,
+     "passed": {}
+    }
+   },
+   "strict": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "resolved",
+       "rule": "the artifact is reused under conditions it was not made for",
+       "boundary": "reuse:rolebench11.compiled",
+       "resolution": "remake the artifact for the conditions now",
+       "note": "a graph compiled without guards is called again: reused under other conditions (arg1: (0, 64) -> (5, 64)); made again for them"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 5.7220458984375e-06,
+      "within": true
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.7220458984375e-06,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 1,
+     "passed": {}
+    }
+   },
+   "observe": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "broken",
+       "rule": "the artifact is reused under conditions it was not made for",
+       "boundary": "reuse:rolebench11.compiled",
+       "resolution": null,
+       "note": "a graph compiled without guards is called again: reused under other conditions (arg1: (0, 64) -> (5, 64)), and nothing can remake it here"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 6.3863019943237305,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 5.7220458984375e-06,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 1,
+     "broken": 1,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {}
+    }
+   }
+  },
+  "12_session_restore": {
+   "boundary": "container:rolebench12.session_kv",
+   "compare": "fp32",
+   "off": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 1.2347991466522217,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 0.0,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 0,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {}
+    }
+   },
+   "on": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "broken",
+       "rule": "the slots held are not the slots the tokens need",
+       "boundary": "container:rolebench12.session_kv",
+       "resolution": null,
+       "note": "session KV, decoding at position 12: holds 11 KV slots but the sequence has 12 tokens. The length nobody compared is the one that drifts."
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 1.2347991466522217,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 0.0,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 24,
+     "broken": 1,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kv_needed": 23
+     }
+    }
+   },
+   "strict": {
+    "defect": {
+     "stopped": true,
+     "error": "[entail] refused at container:rolebench12.session_kv: KvExtent declared KvExtent(held=12, needed=None, written=None, window=None, previous=None, granularity=None) (engine: session KV, decoding at position 12: the slots its tokens need, verified); rolebench12.decode uses KvExtent(held=11, needed=12, ",
+     "decisions": [
+      {
+       "verdict": "refused",
+       "rule": "the slots held are not the slots the tokens need",
+       "boundary": "container:rolebench12.session_kv",
+       "resolution": null,
+       "note": "session KV, decoding at position 12: holds 11 KV slots but the sequence has 12 tokens. The length nobody compared is the one that drifts."
+      }
+     ]
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 0.0,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 24,
+     "broken": 0,
+     "refused": 1,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kv_needed": 23
+     }
+    }
+   },
+   "observe": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "broken",
+       "rule": "the slots held are not the slots the tokens need",
+       "boundary": "container:rolebench12.session_kv",
+       "resolution": null,
+       "note": "session KV, decoding at position 12: holds 11 KV slots but the sequence has 12 tokens. The length nobody compared is the one that drifts."
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 1.2347991466522217,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 0.0,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 24,
+     "broken": 1,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kv_needed": 23
+     }
+    }
+   }
+  },
+  "14_beam_reorder": {
+   "boundary": "container:rolebench14.beam_states",
+   "compare": "fp32",
+   "same_as_case": true,
+   "off": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 16.0,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 2.6645352591003757e-15,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 0,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {}
+    }
+   },
+   "on": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "broken",
+       "rule": "the value reads a buffer that was written after the value was made",
+       "boundary": "container:rolebench14.beam_states",
+       "resolution": null,
+       "note": "beam state 'ssm_state' read for the next step: made from BeamCache.beam order at epoch 0, read at epoch 1: 1 write(s) in between change what it reads, and nothing says so"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 16.0,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 2.6645352591003757e-15,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 16,
+     "broken": 7,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "epoch_stale": 16
+     }
+    }
+   },
+   "strict": {
+    "defect": {
+     "stopped": true,
+     "error": "[entail] refused at container:rolebench14.beam_states: Epoch declared Epoch(version=0, owner='BeamCache.beam order') (engine: beam state 'ssm_state' read for the next step: the epoch of BeamCache.beam order when the value was made, verified); rolebench14.step uses Epoch(version=1, owner='BeamCache.b",
+     "decisions": [
+      {
+       "verdict": "refused",
+       "rule": "the value reads a buffer that was written after the value was made",
+       "boundary": "container:rolebench14.beam_states",
+       "resolution": null,
+       "note": "beam state 'ssm_state' read for the next step: made from BeamCache.beam order at epoch 0, read at epoch 1: 1 write(s) in between change what it reads, and nothing says so"
+      }
+     ]
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 2.6645352591003757e-15,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 10,
+     "broken": 0,
+     "refused": 1,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "epoch_stale": 9
+     }
+    }
+   },
+   "observe": {
+    "defect": {
+     "stopped": false,
+     "error": null,
+     "decisions": [
+      {
+       "verdict": "broken",
+       "rule": "the value reads a buffer that was written after the value was made",
+       "boundary": "container:rolebench14.beam_states",
+       "resolution": null,
+       "note": "beam state 'ssm_state' read for the next step: made from BeamCache.beam order at epoch 0, read at epoch 1: 1 write(s) in between change what it reads, and nothing says so"
+      }
+     ],
+     "vs_reference": {
+      "max_abs": 16.0,
+      "within": false
+     }
+    },
+    "fixed": {
+     "stopped": false,
+     "error": null,
+     "decisions": [],
+     "vs_reference": {
+      "max_abs": 2.6645352591003757e-15,
+      "within": true
+     }
+    },
+    "counts": {
+     "checks": 16,
+     "broken": 7,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "epoch_stale": 16
+     }
+    }
+   }
+  }
+ }
+}

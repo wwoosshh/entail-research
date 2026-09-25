@@ -1,0 +1,38 @@
+== 03_strided_q
+{"case": "03_strided_q", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 2.9}
+== 05_chunk_frame
+{"case": "05_chunk_frame", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 3.1}
+== 06_mask_disables_window
+{"case": "06_mask_disables_window", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 2.4}
+== 08_gemma2_softcap
+{"case": "08_gemma2_softcap", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 0.9}
+W0923 03:46:14.699000 1495681 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0923 03:46:14.740000 1495681 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+== 09_stale_graph
+{"case": "09_stale_graph", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 1.2}
+== 10_flex_position_ref
+{"case": "10_flex_position_ref", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 0.7}
+W0923 03:46:22.835000 1495798 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0923 03:46:22.858000 1495798 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+== 11_warmup_specialization
+{"case": "11_warmup_specialization", "reproduced": true, "defect_wrong": true, "fixed_right": true, "defect_silent": true, "seconds": 3.5}
+== 17_sglang_torch_native_softcap
+Loading weights:  57%|█████▋    | 164/288 [00:00<00:00, 320.01it/s]
+Loading weights:  68%|██████▊   | 197/288 [00:00<00:00, 277.53it/s]
+Loading weights: 100%|██████████| 288/288 [00:00<00:00, 357.04it/s]
+Traceback (most recent call last):
+  File "<workspace>/rolebench/run_all.py", line 47, in <module>
+    main(sys.argv[1:])
+  File "<workspace>/rolebench/run_all.py", line 24, in main
+    write_table()
+  File "<workspace>/rolebench/run_all.py", line 31, in write_table
+    m = r["meta"]
+        ~^^^^^^^^
+KeyError: 'meta'
+Traceback (most recent call last):
+  File "<workspace>/rolebench/detection_table.py", line 29, in <module>
+    main()
+  File "<workspace>/rolebench/detection_table.py", line 15, in main
+    rows.append(f"| {r['case']} | {r['meta'].get('fact')} | {'예' if r.get('reproduced') else '아니오'} | — | — | 검출 판 없음 | | |")
+                     ~^^^^^^^^
+KeyError: 'case'

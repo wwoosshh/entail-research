@@ -1,0 +1,26 @@
+attention + mask interface registered
+LLM built from hub-config: 4.02B params, 29.9s
+SOLUTION: Use torch.compile(flex_attention)(...)
+If you want to debug your score_mod/mask_mod, you can set:
+torch.nn.attention.flex_attention._FLEX_ATTENTION_DISABLE_COMPILE_DEBUG = True
+This will allow you to use print statements or breakpoints. Note: This doesn't work with the backwards pass and may produce incorrect results.
+=== prompt 64: logit scale 4.47
+  sdpa             0.000   2.605   3.680   4.539   4.562
+  sdpa_again       2.605   0.000   2.742   3.781   4.281
+  triton_decode    3.680   2.742   0.000   2.213   3.488
+  maskmod_decode   4.539   3.781   2.213   0.000   2.434
+  ref_decode       4.562   4.281   3.488   2.434   0.000
+  (columns in the same order; max |logit difference|)
+  sdpa            layer-0 attention output vs ref: 0.4209; first layer with diff > 0.05: (0, 0.4208984375)
+  triton_decode   layer-0 attention output vs ref: 0.2891; first layer with diff > 0.05: (0, 0.2890625)
+  maskmod_decode  layer-0 attention output vs ref: 0.1543; first layer with diff > 0.05: (0, 0.154296875)
+=== prompt 512: logit scale 5.22
+  sdpa             0.000   3.266   5.211   5.203   5.203
+  sdpa_again       3.266   0.000   3.672   4.426   4.766
+  triton_decode    5.211   3.672   0.000   2.889   4.070
+  maskmod_decode   5.203   4.426   2.889   0.000   3.422
+  ref_decode       5.203   4.766   4.070   3.422   0.000
+  (columns in the same order; max |logit difference|)
+  sdpa            layer-0 attention output vs ref: 0.1675; first layer with diff > 0.05: (0, 0.16748046875)
+  triton_decode   layer-0 attention output vs ref: 0.1135; first layer with diff > 0.05: (0, 0.11346435546875)
+  maskmod_decode  layer-0 attention output vs ref: 0.0663; first layer with diff > 0.05: (0, 0.06634521484375)

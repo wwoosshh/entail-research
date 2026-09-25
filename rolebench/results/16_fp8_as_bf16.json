@@ -1,0 +1,73 @@
+{
+ "case": "16_fp8_as_bf16",
+ "meta": {
+  "id": "16",
+  "title": "FP8-quantized activations consumed as BF16",
+  "fact": "DTYPE",
+  "issue": "https://github.com/vllm-project/vllm/issues/42007",
+  "engine": "vLLM FP8 MoE + LoRA (mechanism)",
+  "kind": "mechanism",
+  "boundary": "activation quantizer (FP8 + scale) -> LoRA consumer (expects BF16)",
+  "trigger": {
+   "model": "FP8 MoE checkpoint",
+   "feature": "LoRA adapters"
+  },
+  "symptom": "garbled",
+  "expected_detection": "runtime (dtype/scale tag on the shared buffer)",
+  "compare": "fp8"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 1440.1203117370605,
+  "mean_abs": 246.84215279856653,
+  "ref_max_abs": 43.20866775512695,
+  "top1_agree": 0.8125
+ },
+ "fixed_vs_reference": {
+  "max_abs": 0.9330053329467773,
+  "mean_abs": 0.18513164434079954,
+  "ref_max_abs": 43.20866775512695,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "dtype/scale tag on the shared activation buffer",
+   "defect": {
+    "flagged": true,
+    "message": "LoRA path (expects unquantized activations): argument 'x' Quantized: expected (Quantized(dtype='float32', scale=None), Quantized(dtype='bfloat16', scale=None)), got Quantized(dtype='float8_e4m3fn', scale=0.02746535651385784)"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 0.9
+}

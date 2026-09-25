@@ -1,0 +1,44 @@
+{
+  "unsloth/gemma-3-1b-it": {
+    "why": "sweep: new facts (rope_local_base_freq, sliding_window_pattern, query_pre_attn_scalar)",
+    "revision": "5b11413a10db4e486ef16a20101fd028f8f2499c",
+    "gated": false,
+    "license": "gemma",
+    "weights_gb": 2.0
+  },
+  "unsloth/Llama-3.2-3B-Instruct": {
+    "why": "sweep: rope_scaling type llama3 (factor, low/high_freq_factor)",
+    "revision": "006f5dcd1393c3add266de40994ba96225e9689d",
+    "gated": false,
+    "license": "llama3.2",
+    "weights_gb": 6.43
+  },
+  "Qwen/Qwen2.5-3B-Instruct": {
+    "why": "sweep: sliding_window declared but use_sliding_window=false",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "gated": false,
+    "license": "other",
+    "weights_gb": 6.17
+  },
+  "microsoft/Phi-3.5-mini-instruct": {
+    "why": "sweep: rope_scaling type longrope (short/long factors)",
+    "revision": "2fe192450127e6a83f7441aef6e3ca586c338b77",
+    "gated": false,
+    "license": "mit",
+    "weights_gb": 7.64
+  },
+  "Qwen/Qwen2.5-3B-Instruct-AWQ": {
+    "why": "deep arm: AWQ int4 checkpoint, packed weights and Marlin repack",
+    "revision": "3559b226e8ce77211e2c1bd7ddfb7686fec4d6dd",
+    "gated": false,
+    "license": "other",
+    "weights_gb": 2.69
+  },
+  "Qwen/Qwen3-4B-FP8": {
+    "why": "deep arm: FP8 checkpoint with block scales (scale-format path)",
+    "revision": "96b30dc13593a244a5e59e84687309f53c375cfa",
+    "gated": false,
+    "license": "apache-2.0",
+    "weights_gb": 5.19
+  }
+}

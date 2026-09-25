@@ -1,0 +1,73 @@
+{
+ "case": "06_mask_disables_window",
+ "meta": {
+  "id": "06",
+  "title": "custom mask disables the kernel's sliding window",
+  "fact": "PROPERTY",
+  "issue": "https://github.com/vllm-project/vllm/issues/47300",
+  "engine": "PyTorch FlexAttention (mechanism)",
+  "kind": "mechanism",
+  "boundary": "model property (sliding window) -> attention kernel call convention",
+  "trigger": {
+   "feature": "custom mask (e.g. multimodal) on a sliding-window layer",
+   "length": "> window"
+  },
+  "symptom": "garbled",
+  "expected_detection": "load (kernel capability vs model property)",
+  "compare": "loose"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 0.4950868785381317,
+  "mean_abs": 0.043243364629614214,
+  "ref_max_abs": 2.908677339553833,
+  "top1_agree": 0.44775390625
+ },
+ "fixed_vs_reference": {
+  "max_abs": 7.152557373046875e-07,
+  "mean_abs": 3.178623740477185e-08,
+  "ref_max_abs": 2.908677339553833,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "load",
+   "checks": "model property vs effective kernel capability",
+   "defect": {
+    "flagged": true,
+    "message": "kernel with a custom mask implementing ['causal']: kernel does not honour declared model properties: sliding_window=256"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 7.9
+}

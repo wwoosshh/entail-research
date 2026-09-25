@@ -1,0 +1,25 @@
+--- healthy_none (quant=none, seed=-, ENTAIL=load, false_declaration=refuse) exit=0 seconds=23.823121196
+TEXT: Paris. The capital of Germany is Berlin
+--- healthy_fp8 (quant=fp8, seed=-, ENTAIL=load, false_declaration=refuse) exit=0 seconds=23.199157135
+TEXT: Paris. The capital of Germany is Berlin
+--- roll_on (quant=none, seed=roll_output, ENTAIL=load, false_declaration=refuse) exit=0 seconds=22.470317951
+(EngineCore pid=10531) [entail-seed] roll_output: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=10531) [entail] broken at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves identity, declared); vllm.quant_method.UnquantizedLinearMet
+TEXT: ホール絜andering(sec coron uczCARD目に
+--- roll_off (quant=none, seed=roll_output, ENTAIL=off, false_declaration=refuse) exit=0 seconds=22.232366307
+(EngineCore pid=10825) [entail-seed] roll_output: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+TEXT: ホール絜andering(sec coron uczCARD目に
+--- transpose_on (quant=none, seed=transpose_all, ENTAIL=load, false_declaration=refuse) exit=1 seconds=18.837649190
+(EngineCore pid=11119) [entail-seed] transpose_all: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=11119) [entail] broken at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_wei
+(EngineCore pid=11119) [entail] broken at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves identity, declared); vllm.quant_method.UnquantizedLinearMet
+(EngineCore pid=11119) ERROR 09-24 17:09:21 [core.py:1366]     output_parallel = self.quant_method.apply(self, input_, bias)
+(EngineCore pid=11119)     output_parallel = self.quant_method.apply(self, input_, bias)
+--- strided_on (quant=none, seed=strided_weights, ENTAIL=load, false_declaration=refuse) exit=0 seconds=22.181076270
+(EngineCore pid=11368) [entail-seed] strided_weights: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=11368) [entail] broken at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_wei
+TEXT: Paris. The capital of Germany is Berlin
+--- strided_usedata (quant=none, seed=strided_weights, ENTAIL=load, false_declaration=use_data) exit=0 seconds=22.633563573
+(EngineCore pid=11662) [entail-seed] strided_weights: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=11662) [entail] resolved at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='strided', dtype='bfloat16', block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity='unscaled') (data: model.layers.0.self_attn.qkv_proj.weight:
+TEXT: Paris. The capital of Germany is Berlin

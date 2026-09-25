@@ -1,0 +1,15 @@
+[transformers] This model config has set a `rope_parameters['original_max_position_embeddings']` field, to be used together with `max_position_embeddings` to determine a scaling factor. Please set the `factor` field of `rope_parameters`with this ratio instead -- we recommend the use of this field over `original_max_position_embeddings`, as it is compatible with most model architectures.
+W0925 07:40:45.255000 1839 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0925 07:40:45.282000 1839 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/195 [00:00<?, ?it/s]
+Loading weights:   8%|▊         | 15/195 [00:00<00:01, 145.39it/s]
+Loading weights:  15%|█▌        | 30/195 [00:00<00:01, 104.94it/s]
+Loading weights:  22%|██▏       | 42/195 [00:00<00:01, 108.74it/s]
+Loading weights:  30%|███       | 59/195 [00:00<00:01, 127.23it/s]
+Loading weights:  38%|███▊      | 75/195 [00:00<00:00, 130.85it/s]
+Loading weights:  50%|█████     | 98/195 [00:00<00:00, 155.71it/s]
+Loading weights:  58%|█████▊    | 114/195 [00:00<00:00, 151.42it/s]
+Loading weights: 100%|██████████| 195/195 [00:00<00:00, 214.76it/s]
+[entail] unknown at load:transformers.config.rope_parameters: Rotary nothing declared; what transformers.rotary_embedding uses is unknown; rule: this boundary could not be checked; note: /home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared
+RESULT transformers Phi-3.5-mini-instruct entail=load ok=True load=4.216 used=sdpa 

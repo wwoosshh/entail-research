@@ -1,0 +1,652 @@
+{
+ "configs": {
+  "A": {
+   "engine": "vllm",
+   "rope": {
+    "rope_theta": 1000000,
+    "rope_type": "default"
+   },
+   "nll": {
+    "english_gpl3": 1.0317,
+    "korean_research_plan": 2.9146,
+    "python_code": 0.9996
+   },
+   "gsm8k": "466/500",
+   "accuracy": 0.932,
+   "wilson95": [
+    0.9065,
+    0.9509
+   ],
+   "rope_warnings": []
+  },
+  "A2": {
+   "engine": "vllm",
+   "rope": {
+    "rope_theta": 1000000,
+    "rope_type": "default"
+   },
+   "nll": {
+    "english_gpl3": 1.0308,
+    "korean_research_plan": 2.9149,
+    "python_code": 0.9998
+   },
+   "gsm8k": "466/500",
+   "accuracy": 0.932,
+   "wilson95": [
+    0.9065,
+    0.9509
+   ],
+   "rope_warnings": []
+  },
+  "B": {
+   "engine": "vllm",
+   "rope": {
+    "rope_type": "yarn",
+    "factor": 4.0,
+    "original_max_position_embeddings": 32768,
+    "rope_theta": 1000000
+   },
+   "nll": {
+    "english_gpl3": 1.0194,
+    "korean_research_plan": 2.9432,
+    "python_code": 1.018
+   },
+   "gsm8k": "454/500",
+   "accuracy": 0.908,
+   "wilson95": [
+    0.8795,
+    0.9303
+   ],
+   "rope_warnings": []
+  },
+  "C": {
+   "engine": "vllm",
+   "rope": {
+    "rope_type": "yarn",
+    "factor": 4.0,
+    "original_max_position_embeddings": 32768
+   },
+   "nll": {
+    "english_gpl3": 1.0194,
+    "korean_research_plan": 2.9432,
+    "python_code": 1.018
+   },
+   "gsm8k": "454/500",
+   "accuracy": 0.908,
+   "wilson95": [
+    0.8795,
+    0.9303
+   ],
+   "rope_warnings": []
+  },
+  "C_rolecheck": {
+   "engine": "vllm",
+   "rope": {
+    "rope_type": "yarn",
+    "factor": 4.0,
+    "original_max_position_embeddings": 32768,
+    "rope_theta": 1000000
+   },
+   "nll": {
+    "english_gpl3": 1.0153,
+    "korean_research_plan": 2.9443,
+    "python_code": 1.0186
+   },
+   "gsm8k": "455/500",
+   "accuracy": 0.91,
+   "wilson95": [
+    0.8817,
+    0.9321
+   ],
+   "rope_warnings": []
+  },
+  "D": {
+   "engine": "vllm",
+   "rope": {
+    "rope_theta": 1000000,
+    "rope_type": "default"
+   },
+   "nll": {
+    "english_gpl3": 1.0301,
+    "korean_research_plan": 2.9142,
+    "python_code": 0.9996
+   },
+   "gsm8k": "464/500",
+   "accuracy": 0.928,
+   "wilson95": [
+    0.9019,
+    0.9475
+   ],
+   "rope_warnings": []
+  },
+  "E": {
+   "engine": "vllm",
+   "rope": {
+    "rope_type": "yarn",
+    "factor": 4.0,
+    "original_max_position_embeddings": 32768,
+    "rope_theta": 10000.0
+   },
+   "nll": {
+    "english_gpl3": 1.6249,
+    "korean_research_plan": 3.1693,
+    "python_code": 1.1878
+   },
+   "gsm8k": "396/500",
+   "accuracy": 0.792,
+   "wilson95": [
+    0.7543,
+    0.8253
+   ],
+   "rope_warnings": []
+  },
+  "LA": {
+   "engine": "vllm",
+   "rope": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3",
+    "rope_theta": 500000.0
+   },
+   "nll": {
+    "english_gpl3": 1.1279,
+    "korean_research_plan": 3.6853,
+    "python_code": 1.2533
+   },
+   "gsm8k": "379/500",
+   "accuracy": 0.758,
+   "wilson95": [
+    0.7186,
+    0.7935
+   ],
+   "rope_warnings": []
+  },
+  "LA2": {
+   "engine": "vllm",
+   "rope": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3",
+    "rope_theta": 500000.0
+   },
+   "nll": {
+    "english_gpl3": 1.1279,
+    "korean_research_plan": 3.6853,
+    "python_code": 1.2533
+   },
+   "gsm8k": "379/500",
+   "accuracy": 0.758,
+   "wilson95": [
+    0.7186,
+    0.7935
+   ],
+   "rope_warnings": []
+  },
+  "LC": {
+   "engine": "vllm",
+   "rope": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3"
+   },
+   "nll": {
+    "english_gpl3": 3.66,
+    "korean_research_plan": 5.9345,
+    "python_code": 3.9496
+   },
+   "gsm8k": "279/500",
+   "accuracy": 0.558,
+   "wilson95": [
+    0.5142,
+    0.6009
+   ],
+   "rope_warnings": []
+  },
+  "LC_rolecheck": {
+   "engine": "vllm",
+   "rope": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3",
+    "rope_theta": 500000.0
+   },
+   "nll": {
+    "english_gpl3": 1.127,
+    "korean_research_plan": 3.6849,
+    "python_code": 1.2534
+   },
+   "gsm8k": "378/500",
+   "accuracy": 0.756,
+   "wilson95": [
+    0.7165,
+    0.7916
+   ],
+   "rope_warnings": []
+  },
+  "LE": {
+   "engine": "vllm",
+   "rope": {
+    "factor": 32.0,
+    "high_freq_factor": 4.0,
+    "low_freq_factor": 1.0,
+    "original_max_position_embeddings": 8192,
+    "rope_type": "llama3",
+    "rope_theta": 10000.0
+   },
+   "nll": {
+    "english_gpl3": 3.66,
+    "korean_research_plan": 5.9345,
+    "python_code": 3.9496
+   },
+   "gsm8k": "279/500",
+   "accuracy": 0.558,
+   "wilson95": [
+    0.5142,
+    0.6009
+   ],
+   "rope_warnings": []
+  },
+  "SA": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 1.2675,
+    "korean_research_plan": 3.8655,
+    "python_code": 1.3996
+   },
+   "gsm8k": "161/200",
+   "accuracy": 0.805,
+   "wilson95": [
+    0.7446,
+    0.8539
+   ],
+   "rope_warnings": []
+  },
+  "SA2": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 1.2675,
+    "korean_research_plan": 3.8655,
+    "python_code": 1.3996
+   },
+   "gsm8k": "161/200",
+   "accuracy": 0.805,
+   "wilson95": [
+    0.7446,
+    0.8539
+   ],
+   "rope_warnings": []
+  },
+  "SA_now": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 1.2675,
+    "korean_research_plan": 3.8449,
+    "python_code": 1.3996
+   },
+   "gsm8k": "161/200",
+   "accuracy": 0.805,
+   "wilson95": [
+    0.7446,
+    0.8539
+   ],
+   "rope_warnings": []
+  },
+  "SC": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 2.1741,
+    "korean_research_plan": 4.3037,
+    "python_code": 1.7111
+   },
+   "gsm8k": "106/200",
+   "accuracy": 0.53,
+   "wilson95": [
+    0.4609,
+    0.598
+   ],
+   "rope_warnings": []
+  },
+  "SC_entail": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 1.2675,
+    "korean_research_plan": 3.8449,
+    "python_code": 1.3996
+   },
+   "gsm8k": "161/200",
+   "accuracy": 0.805,
+   "wilson95": [
+    0.7446,
+    0.8539
+   ],
+   "rope_warnings": []
+  },
+  "SC_pip": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 1.2675,
+    "korean_research_plan": 3.8449,
+    "python_code": 1.3996
+   },
+   "gsm8k": "161/200",
+   "accuracy": 0.805,
+   "wilson95": [
+    0.7446,
+    0.8539
+   ],
+   "rope_warnings": []
+  },
+  "SC_rolecheck": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 1.2675,
+    "korean_research_plan": 3.8655,
+    "python_code": 1.3996
+   },
+   "gsm8k": "161/200",
+   "accuracy": 0.805,
+   "wilson95": [
+    0.7446,
+    0.8539
+   ],
+   "rope_warnings": []
+  },
+  "SE": {
+   "engine": "sglang",
+   "rope": null,
+   "nll": {
+    "english_gpl3": 2.1741,
+    "korean_research_plan": 4.3037,
+    "python_code": 1.7111
+   },
+   "gsm8k": "106/200",
+   "accuracy": 0.53,
+   "wilson95": [
+    0.4609,
+    0.598
+   ],
+   "rope_warnings": []
+  }
+ },
+ "pairs": {
+  "B vs C": {
+   "identical_outputs": "500/500",
+   "accuracy_diff": 0.0,
+   "only_B_correct": 0,
+   "only_C_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": -0.0,
+    "python_code": -0.0
+   }
+  },
+  "C vs E": {
+   "identical_outputs": "0/500",
+   "accuracy_diff": -0.116,
+   "only_C_correct": 68,
+   "only_E_correct": 10,
+   "mcnemar_exact_p": 0.0,
+   "nll_diff": {
+    "english_gpl3": 0.6055,
+    "korean_research_plan": 0.226,
+    "python_code": 0.1698
+   }
+  },
+  "A vs D": {
+   "identical_outputs": "260/500",
+   "accuracy_diff": -0.004,
+   "only_A_correct": 7,
+   "only_D_correct": 5,
+   "mcnemar_exact_p": 0.774414,
+   "nll_diff": {
+    "english_gpl3": -0.0017,
+    "korean_research_plan": -0.0004,
+    "python_code": -0.0
+   }
+  },
+  "A vs B": {
+   "identical_outputs": "2/500",
+   "accuracy_diff": -0.024,
+   "only_A_correct": 23,
+   "only_B_correct": 11,
+   "mcnemar_exact_p": 0.057613,
+   "nll_diff": {
+    "english_gpl3": -0.0123,
+    "korean_research_plan": 0.0286,
+    "python_code": 0.0184
+   }
+  },
+  "B vs E": {
+   "identical_outputs": "0/500",
+   "accuracy_diff": -0.116,
+   "only_B_correct": 68,
+   "only_E_correct": 10,
+   "mcnemar_exact_p": 0.0,
+   "nll_diff": {
+    "english_gpl3": 0.6055,
+    "korean_research_plan": 0.226,
+    "python_code": 0.1698
+   }
+  },
+  "A vs A2": {
+   "identical_outputs": "253/500",
+   "accuracy_diff": 0.0,
+   "only_A_correct": 5,
+   "only_A2_correct": 5,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": -0.0009,
+    "korean_research_plan": 0.0003,
+    "python_code": 0.0002
+   }
+  },
+  "B vs C_rolecheck": {
+   "identical_outputs": "219/500",
+   "accuracy_diff": 0.002,
+   "only_B_correct": 7,
+   "only_C_rolecheck_correct": 8,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": -0.0041,
+    "korean_research_plan": 0.0011,
+    "python_code": 0.0006
+   }
+  },
+  "C vs C_rolecheck": {
+   "identical_outputs": "219/500",
+   "accuracy_diff": 0.002,
+   "only_C_correct": 7,
+   "only_C_rolecheck_correct": 8,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": -0.0041,
+    "korean_research_plan": 0.0011,
+    "python_code": 0.0006
+   }
+  },
+  "LA vs LA2": {
+   "identical_outputs": "500/500",
+   "accuracy_diff": 0.0,
+   "only_LA_correct": 0,
+   "only_LA2_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": 0.0
+   }
+  },
+  "LA vs LC": {
+   "identical_outputs": "0/500",
+   "accuracy_diff": -0.2,
+   "only_LA_correct": 133,
+   "only_LC_correct": 33,
+   "mcnemar_exact_p": 0.0,
+   "nll_diff": {
+    "english_gpl3": 2.5321,
+    "korean_research_plan": 2.2492,
+    "python_code": 2.6963
+   }
+  },
+  "LC vs LE": {
+   "identical_outputs": "500/500",
+   "accuracy_diff": 0.0,
+   "only_LC_correct": 0,
+   "only_LE_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": -0.0
+   }
+  },
+  "LA vs LE": {
+   "identical_outputs": "0/500",
+   "accuracy_diff": -0.2,
+   "only_LA_correct": 133,
+   "only_LE_correct": 33,
+   "mcnemar_exact_p": 0.0,
+   "nll_diff": {
+    "english_gpl3": 2.5321,
+    "korean_research_plan": 2.2492,
+    "python_code": 2.6963
+   }
+  },
+  "LA vs LC_rolecheck": {
+   "identical_outputs": "281/500",
+   "accuracy_diff": -0.002,
+   "only_LA_correct": 13,
+   "only_LC_rolecheck_correct": 12,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": -0.0009,
+    "korean_research_plan": -0.0004,
+    "python_code": 0.0001
+   }
+  },
+  "SA vs SA2": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SA_correct": 0,
+   "only_SA2_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": 0.0
+   }
+  },
+  "SA vs SC": {
+   "identical_outputs": "0/200",
+   "accuracy_diff": -0.275,
+   "only_SA_correct": 63,
+   "only_SC_correct": 8,
+   "mcnemar_exact_p": 0.0,
+   "nll_diff": {
+    "english_gpl3": 0.9066,
+    "korean_research_plan": 0.4382,
+    "python_code": 0.3115
+   }
+  },
+  "SC vs SE": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SC_correct": 0,
+   "only_SE_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": 0.0
+   }
+  },
+  "SA vs SE": {
+   "identical_outputs": "0/200",
+   "accuracy_diff": -0.275,
+   "only_SA_correct": 63,
+   "only_SE_correct": 8,
+   "mcnemar_exact_p": 0.0,
+   "nll_diff": {
+    "english_gpl3": 0.9066,
+    "korean_research_plan": 0.4382,
+    "python_code": 0.3115
+   }
+  },
+  "SA vs SC_rolecheck": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SA_correct": 0,
+   "only_SC_rolecheck_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": 0.0
+   }
+  },
+  "SA vs SC_entail": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SA_correct": 0,
+   "only_SC_entail_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": -0.0206,
+    "python_code": 0.0
+   }
+  },
+  "SA_now vs SC_entail": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SA_now_correct": 0,
+   "only_SC_entail_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": 0.0
+   }
+  },
+  "SA vs SA_now": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SA_correct": 0,
+   "only_SA_now_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": -0.0206,
+    "python_code": 0.0
+   }
+  },
+  "SA_now vs SC_pip": {
+   "identical_outputs": "200/200",
+   "accuracy_diff": 0.0,
+   "only_SA_now_correct": 0,
+   "only_SC_pip_correct": 0,
+   "mcnemar_exact_p": 1.0,
+   "nll_diff": {
+    "english_gpl3": 0.0,
+    "korean_research_plan": 0.0,
+    "python_code": 0.0
+   }
+  }
+ }
+}

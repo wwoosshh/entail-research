@@ -1,0 +1,295 @@
+{
+ "transformers": {
+  "when": "2026-09-24 00:25:49",
+  "model": "/home/<user>/models/Qwen3-4B",
+  "new_tokens": 64,
+  "torch": "2.14.0+cu130",
+  "transformers": "5.17.0",
+  "dynamic": {
+   "cache": "dynamic",
+   "pairs": 8,
+   "seconds": {
+    "off": [
+     2.212,
+     2.183,
+     2.143,
+     2.155,
+     2.357,
+     2.303,
+     2.364,
+     2.23
+    ],
+    "load": [
+     2.286,
+     2.192,
+     2.225,
+     2.4,
+     2.25,
+     2.372,
+     2.279,
+     2.258
+    ],
+    "off_control": [
+     2.109,
+     2.197,
+     2.34,
+     2.184,
+     2.185,
+     2.342,
+     2.26,
+     2.434
+    ]
+   },
+   "median": {
+    "off": 2.23,
+    "load": 2.279,
+    "off_control": 2.26
+   },
+   "multiplier": 1.022,
+   "control_multiplier": 1.013,
+   "same_output": true,
+   "ledger_entries": 0,
+   "update_boundary": {
+    "checks": 18432,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "passed": {
+     "kv_needed": 18432,
+     "kv_layers": 18432,
+     "kv_shrank": 18144
+    }
+   },
+   "after_request": {
+    "checks": 0,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "passed": {}
+   }
+  },
+  "static": {
+   "cache": "static",
+   "pairs": 8,
+   "seconds": {
+    "off": [
+     1.302,
+     1.303,
+     1.329,
+     1.309,
+     1.33,
+     1.409,
+     1.315,
+     1.4
+    ],
+    "load": [
+     1.35,
+     1.419,
+     1.384,
+     1.414,
+     1.327,
+     1.412,
+     1.317,
+     1.44
+    ],
+    "off_control": [
+     1.422,
+     1.317,
+     1.416,
+     1.315,
+     1.364,
+     1.326,
+     1.376,
+     1.317
+    ]
+   },
+   "median": {
+    "off": 1.329,
+    "load": 1.412,
+    "off_control": 1.364
+   },
+   "multiplier": 1.063,
+   "control_multiplier": 1.027,
+   "same_output": true,
+   "ledger_entries": 0,
+   "check_cache_layers": 36,
+   "flushed_on_device": 288,
+   "update_boundary": {
+    "checks": 0,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 288,
+    "passed": {
+     "kv_needed": 1
+    }
+   },
+   "after_request": {
+    "checks": 1,
+    "refused": 0,
+    "skipped": 0,
+    "deferred": 0,
+    "passed": {
+     "kv_request": 1
+    }
+   }
+  },
+  "seeded_off": {
+   "finished": true,
+   "tokens": [
+    13,
+    576,
+    6722,
+    315,
+    9625,
+    374
+   ]
+  },
+  "seeded_on": {
+   "refused": true,
+   "error": "[entail] refused at container:transformers.cache_update: KvExtent declared KvExtent(held=8, needed=None, written=None, window=None, previous=None, granularity=None) (engine: transformers DynamicCache layer 0: what it held at the last check, with what was added since, verified); transformers.kv_cache uses KvExtent(held=7, needed=7, written=None, window=None, previous=8, granularity=None) (engine: transformers DynamicCache layer 0: what it holds now, verified); rule: the slots held shrank since the last check, and nothing said so; note: transformers DynamicCache layer 0: was 8 slots when last ch"
+  }
+ },
+ "engines": {
+  "vllm_off": {
+   "engine": "vllm",
+   "tag": "off",
+   "entail": "off",
+   "seed": null,
+   "when": "2026-09-24 00:28:19",
+   "texts": [
+    "Paris. The capital of Germany is Berlin. The capital of Ital",
+    "Gravity is the force that attracts two objects toward each o",
+    "1, 2, 3, 5, 7, 11, 13, 17, 19,"
+   ],
+   "error": null,
+   "seconds": 25.5,
+   "planted": [],
+   "container": {},
+   "not_passed": []
+  },
+  "vllm_on": {
+   "engine": "vllm",
+   "tag": "on",
+   "entail": "load",
+   "seed": null,
+   "when": "2026-09-24 00:28:45",
+   "texts": [
+    "Paris. The capital of Germany is Berlin. The capital of Ital",
+    "Gravity is the force that attracts two objects toward each o",
+    "1, 2, 3, 5, 7, 11, 13, 17, 19,"
+   ],
+   "error": null,
+   "seconds": 21.6,
+   "planted": [],
+   "container": {
+    "container:vllm.allocate_slots (pid 763)": {
+     "checks": 96,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "passed": {
+      "kv_needed": 96
+     }
+    }
+   },
+   "not_passed": []
+  },
+  "vllm_seeded": {
+   "engine": "vllm",
+   "tag": "seeded",
+   "entail": "load",
+   "seed": "short_blocks",
+   "when": "2026-09-24 00:31:45",
+   "texts": null,
+   "error": "EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.",
+   "seconds": 25.6,
+   "planted": [
+    "short_blocks: 144 linear weights seen, 0 square, 0 changed after post-processing, 0 changed while loading",
+    "short_blocks: the block table now reports one block fewer"
+   ],
+   "container": {
+    "container:vllm.allocate_slots (pid 431)": {
+     "checks": 33,
+     "refused": 1,
+     "skipped": 0,
+     "deferred": 0,
+     "passed": {
+      "kv_needed": 32
+     }
+    }
+   },
+   "not_passed": [
+    "refused at container:vllm.allocate_slots: the slots held are not the slots the tokens need; vllm kv cache group 0, request 1-98cc4cfc: holds 16 KV slots for 17 tokens, which is not one allocation unit (16) of the right size. The slots a sequence holds and the tokens it has are two numbers no"
+   ]
+  },
+  "sglang_off": {
+   "engine": "sglang",
+   "tag": "off",
+   "entail": "off",
+   "seed": null,
+   "when": "2026-09-24 00:29:28",
+   "texts": [
+    "Paris. The capital of Germany is Berlin. The capital of Ital",
+    "Gravity is the force that attracts two objects toward each o",
+    "1, 2, 3, 5, 7, 11, 13, 17, 19,"
+   ],
+   "error": null,
+   "seconds": 40.9,
+   "planted": [],
+   "container": {},
+   "not_passed": []
+  },
+  "sglang_on": {
+   "engine": "sglang",
+   "tag": "on",
+   "entail": "load",
+   "seed": null,
+   "when": "2026-09-24 00:30:11",
+   "texts": [
+    "Paris. The capital of Germany is Berlin. The capital of Ital",
+    "Gravity is the force that attracts two objects toward each o",
+    "1, 2, 3, 5, 7, 11, 13, 17, 19,"
+   ],
+   "error": null,
+   "seconds": 21.7,
+   "planted": [],
+   "container": {
+    "container:sglang.prepare_for_decode (pid 1838)": {
+     "checks": 64,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "passed": {
+      "kv_written": 64,
+      "kv_needed": 64
+     }
+    }
+   },
+   "not_passed": []
+  },
+  "sglang_seeded": {
+   "entail": "load",
+   "texts": null,
+   "error": "no result file: the engine's process group was killed after its scheduler stopped (see the log)",
+   "planted": [
+    "kv_short: took one slot off request 0 at batch 4"
+   ],
+   "container": {
+    "container:sglang.prepare_for_decode (pid 722)": {
+     "checks": 4,
+     "refused": 1,
+     "skipped": 0,
+     "deferred": 0,
+     "passed": {
+      "kv_written": 3,
+      "kv_needed": 3
+     }
+    }
+   },
+   "not_passed": [
+    "refused at container:sglang.prepare_for_decode: the slots reserved and the slots written disagree; sglang request 0 (d3c21b221535497a8535e2d1961b2809): 8 KV slots reserved but 9 written. Two numbers about the same sequence, and nothing compares them.",
+    "refused at container:sglang.prepare_for_decode: the slots held are not the slots the tokens need; sglang request 0 (d3c21b221535497a8535e2d1961b2809): holds 8 KV slots but the sequence has 9 tokens. The length nobody compared is the one that drifts."
+   ]
+  }
+ }
+}

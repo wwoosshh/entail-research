@@ -1,0 +1,73 @@
+{
+ "case": "02_scale_pow2",
+ "meta": {
+  "id": "02",
+  "title": "block scales rounded to powers of two without requantizing FP8 data",
+  "fact": "LAYOUT",
+  "issue": "https://github.com/huggingface/transformers/issues/47030",
+  "engine": "transformers FineGrainedFP8 + DeepGEMM (mechanism)",
+  "kind": "mechanism",
+  "boundary": "checkpoint scale format (fp32) -> kernel scale format (UE8M0)",
+  "trigger": {
+   "hardware": "SM100 (DeepGEMM UE8M0 path)",
+   "model": "block-FP8 checkpoint with fp32 scales"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "load (declared scale format vs kernel requirement)",
+  "compare": "fp8"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 150.74844360351562,
+  "mean_abs": 31.28383962684711,
+  "ref_max_abs": 317.958984375,
+  "top1_agree": 1.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 8.36175537109375,
+  "mean_abs": 1.4952789052968,
+  "ref_max_abs": 317.958984375,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "scale-format tag on data and scales at the kernel boundary",
+   "defect": {
+    "flagged": true,
+    "message": "DeepGEMM UE8M0 kernel: argument 'q' Layout: expected (Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='ue8m0'),), got Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32')"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 1.0
+}

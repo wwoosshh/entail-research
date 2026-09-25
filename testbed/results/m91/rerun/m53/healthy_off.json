@@ -1,0 +1,96 @@
+{
+ "server": "healthy",
+ "tag": "off",
+ "entail": "off",
+ "policy": "resolve",
+ "args": [
+  "--tool-call-parser",
+  "hermes",
+  "--trust-request-chat-template"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-24 17:28:44",
+ "started": true,
+ "start_seconds": 24.0,
+ "requests": {
+  "plain": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop"
+  },
+  "multi_turn": {
+   "what": "pass",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop"
+  },
+  "tool_call": {
+   "what": "pass",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 0,
+   "tool_calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Paris\"}"
+    }
+   ],
+   "finish_reason": "tool_calls"
+  },
+  "thinking": {
+   "what": "pass",
+   "status": 200,
+   "content": "\n\nParis.",
+   "reasoning_chars": 685,
+   "tool_calls": [],
+   "finish_reason": "stop"
+  },
+  "effort_none": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop"
+  },
+  "request_template": {
+   "what": "planted",
+   "status": 200,
+   "content": "<think>\nOkay, the user is asking for the capital of France in one word. Let me think. I know that France is a country in Europe. The capital is a city that serves as the political, economic, and cultu",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "length"
+  },
+  "unknown_field": {
+   "what": "planted",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop"
+  },
+  "misspelt_setting": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length"
+  },
+  "effort_level": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length"
+  }
+ },
+ "decisions": [],
+ "summaries": {}
+}

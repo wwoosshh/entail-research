@@ -1,0 +1,105 @@
+{
+ "approach": "unbacked_shared",
+ "batches": [
+  1,
+  4,
+  8,
+  2
+ ],
+ "prompt_len": 512,
+ "steps": 16,
+ "precompile_s": null,
+ "per_batch": [
+  {
+   "batch": 1,
+   "first_step_ms": 66936.26003099962,
+   "steady_ms": 23.94618400012405,
+   "steady_min_ms": 23.209121000036248,
+   "steady_max_ms": 24.91943299992272,
+   "compiles_during_batch": 1,
+   "compile_s_during_batch": 60.332466997
+  },
+  {
+   "batch": 4,
+   "first_step_ms": 30.91580700038321,
+   "steady_ms": 30.353209000168135,
+   "steady_min_ms": 29.63153400014562,
+   "steady_max_ms": 31.451257999833615,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 8,
+   "first_step_ms": 36.17769899983614,
+   "steady_ms": 36.4783139998508,
+   "steady_min_ms": 35.962201000074856,
+   "steady_max_ms": 37.63225200009401,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 2,
+   "first_step_ms": 28.415922000021965,
+   "steady_ms": 27.629137000076298,
+   "steady_min_ms": 27.417109999987588,
+   "steady_max_ms": 28.7192910000158,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  }
+ ],
+ "unique_graphs": 1,
+ "dynamo_stats": {
+  "calls_captured": 3325,
+  "unique_graphs": 1
+ },
+ "compile_metrics_total": {
+  "_compile.compile_inner": {
+   "n": 1,
+   "s": 60.332466997
+  },
+  "compile_inner": {
+   "n": 1,
+   "s": 60.332466997
+  },
+  "compile_attempt_0": {
+   "n": 1,
+   "s": 60.019080333
+  },
+  "OutputGraph.call_user_compiler": {
+   "n": 1,
+   "s": 53.531020279
+  },
+  "create_aot_dispatcher_function": {
+   "n": 1,
+   "s": 53.317448605
+  },
+  "compile_fx.<locals>.fw_compiler_base": {
+   "n": 1,
+   "s": 43.378592253
+  },
+  "compile_fx_inner": {
+   "n": 1,
+   "s": 42.310145727
+  },
+  "fx_codegen_and_compile": {
+   "n": 1,
+   "s": 42.02612618
+  },
+  "GraphLowering.compile_to_fn": {
+   "n": 1,
+   "s": 30.023036405
+  },
+  "GraphLowering.compile_to_module": {
+   "n": 1,
+   "s": 30.022988037
+  },
+  "GraphLowering.codegen": {
+   "n": 1,
+   "s": 29.921053441
+  },
+  "Scheduler.__init__": {
+   "n": 1,
+   "s": 17.534130535
+  }
+ }
+}

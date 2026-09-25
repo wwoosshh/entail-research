@@ -1,0 +1,66 @@
+{
+ "n": 2000,
+ "vllm": "0.30.0",
+ "model": "Qwen3-4B",
+ "shapes": {
+  "plain": {
+   "entail_us": 59.89,
+   "render_us": 64.02,
+   "ratio": 0.9355
+  },
+  "ten_messages": {
+   "entail_us": 62.07,
+   "render_us": 183.71,
+   "ratio": 0.3378
+  },
+  "tool_call": {
+   "entail_us": 61.48,
+   "render_us": 199.32,
+   "ratio": 0.3084
+  }
+ },
+ "counts": {
+  "request:vllm.chat_template": {
+   "checks": 6300,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 6300
+   }
+  },
+  "request:vllm.template_settings": {
+   "checks": 6300,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 6300
+   }
+  },
+  "request:vllm.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 6300,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "request:vllm.request_fields": {
+   "checks": 6300,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 6300
+   }
+  }
+ }
+}

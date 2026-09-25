@@ -1,0 +1,19 @@
+W0924 21:37:44.691000 12383 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 21:37:44.724000 12383 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading pipeline components...:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading pipeline components...: 100%|██████████| 2/2 [00:00<00:00, 92.21it/s]
+[entail] unknown at load:diffusers.pipeline: Prediction nothing declared; what diffusers.scheduler uses is unknown; rule: this boundary could not be checked; note: 'google/ddpm-cifar10-32' is not a local folder; entail reads only local folders
+
+  0%|          | 0/20 [00:00<?, ?it/s]
+ 10%|█         | 2/20 [00:00<00:01, 15.39it/s]
+ 25%|██▌       | 5/20 [00:00<00:00, 21.57it/s]
+ 40%|████      | 8/20 [00:00<00:00, 23.51it/s]
+ 55%|█████▌    | 11/20 [00:00<00:00, 24.45it/s]
+ 70%|███████   | 14/20 [00:00<00:00, 23.66it/s]
+ 85%|████████▌ | 17/20 [00:00<00:00, 25.01it/s]
+100%|██████████| 20/20 [00:00<00:00, 24.79it/s]
+100%|██████████| 20/20 [00:00<00:00, 23.82it/s]
+RESULT {"entail": "load", "issue_repro_nan_counts": {"DDPMScheduler": 8, "DDPMParallelScheduler": 8}, "pipeline_nan_pixels": 3072, "pipeline_pixels": 3072, "reproduced": true}

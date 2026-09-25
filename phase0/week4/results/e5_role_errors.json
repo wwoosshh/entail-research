@@ -1,0 +1,129 @@
+{
+ "sanity": {
+  "raw_correct_call": {
+   "nan": false,
+   "max_abs": 0.0022777318954467773,
+   "rel": 0.0022806338651032584
+  },
+  "rolec_correct_call": {
+   "nan": false,
+   "max_abs": 0.0019412040710449219,
+   "rel": 0.001943677283683543
+  }
+ },
+ "cases": [
+  {
+   "case": "swap key/value",
+   "ko": "키와 값을 바꿔 넘김",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 1.5154036283493042,
+    "rel": 1.517334345197754
+   },
+   "rolec": {
+    "outcome": "caught before running",
+    "error": "role '키' takes Key, got Value"
+   }
+  },
+  {
+   "case": "GQA expand with repeat instead of repeat_interleave",
+   "ko": "헤드 공유 방식 착오",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 1.3839627504348755,
+    "rel": 1.3857260035708088
+   },
+   "rolec": {
+    "outcome": "impossible to express: sharing is declared as Share(group), the front end maps heads itself"
+   }
+  },
+  {
+   "case": "mask polarity inverted (MultiheadAttention key_padding_mask convention)",
+   "ko": "마스크 참/거짓 뜻 반대",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 1.7567654848098755,
+    "rel": 1.7590037114162036
+   },
+   "rolec": {
+    "outcome": "impossible to express: there is no mask argument, validity is declared as Until(last)"
+   }
+  },
+  {
+   "case": "boolean mask passed as additive float mask",
+   "ko": "불리언/덧셈 마스크 혼동",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 0.644317626953125,
+    "rel": 0.6451385269924542
+   },
+   "rolec": {
+    "outcome": "impossible to express: there is no mask argument"
+   }
+  },
+  {
+   "case": "valid range off by one (exclusive instead of inclusive)",
+   "ko": "까지의 포함 여부 착오",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 0.23505666851997375,
+    "rel": 0.23535614508302405
+   },
+   "rolec": {
+    "outcome": "removed by a language rule: 까지 is inclusive"
+   }
+  },
+  {
+   "case": "sliding_window argument silently ignored by transformers sdpa_attention_forward",
+   "ko": "받지 않는 인자 무시",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 1.822596788406372,
+    "rel": 0.8183780484201593
+   },
+   "rolec": {
+    "outcome": "caught before running",
+    "error": "TypeError: 주목() got an unexpected keyword argument '창'"
+   }
+  },
+  {
+   "case": "layout [B,L,H,D] read as [B,H,L,D] when L == H",
+   "ko": "차원 순서 착오",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 3.2493672370910645,
+    "rel": 1.1180618450205813
+   },
+   "rolec": {
+    "outcome": "ran",
+    "nan": false,
+    "max_abs": 0.007376909255981445,
+    "rel": 0.0025382913568968413
+   }
+  },
+  {
+   "case": "is_causal with fewer queries than keys (top-left vs bottom-right alignment)",
+   "ko": "인과 마스크 정렬 기준 착오",
+   "raw": {
+    "raised": false,
+    "nan": false,
+    "max_abs": 3.877228260040283,
+    "rel": 3.8474903426946057
+   },
+   "rolec": {
+    "outcome": "ran",
+    "nan": false,
+    "max_abs": 0.0023897886276245117,
+    "rel": 0.0023714592098251067,
+    "note": "alignment derived from declared absolute positions; the ambiguous form does not exist"
+   }
+  }
+ ]
+}

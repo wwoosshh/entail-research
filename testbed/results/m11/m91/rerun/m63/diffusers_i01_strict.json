@@ -1,0 +1,114 @@
+{
+ "tag": "i01_strict",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "lora": "/mnt/c/Users/<user>/AppData/Local/Temp/claude/C--Users-<user>-Desktop------ai-compiler/1ca95520-f800-4114-8750-ff4f872cd917/scratchpad/m63_loras/nagito_illustrious_v3_peft_names.safetensors",
+ "condition": "strict",
+ "entail": "load",
+ "on_broken": "stop",
+ "outcome": "RoleError: [entail] refused at load:diffusers.lora: Coverage declared Coverage(total=1348, taken=1348, left=()) (file: LoRA /mnt/c/Users/<user>/AppData/Local/Temp/claude/C--Users-<user>-Desktop------ai-compiler/1ca95520-f800-4114-8750-ff4f872cd917/scratchpad/m63_loras/nagito_illustrious_v3_peft_names.safetensors",
+ "adapters": {},
+ "modules_with_the_adapter": 0,
+ "log": [
+  "WARNING diffusers.quantizers.torchao.torchao_quantizer: Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+  "WARNING diffusers.models.modeling_utils: There are modules in UNet2DConditionModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.loaders.peft: No LoRA keys associated to UNet2DConditionModel found with the prefix='unet'. This is safe to ignore if LoRA state dict didn't originally have any UNet2DConditionModel related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue if you think it's unexpec",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModel found with the prefix='text_encoder'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModel related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue if you think it's unexpected: h",
+  "WARNING diffusers.loaders.lora_base: No LoRA keys associated to CLIPTextModelWithProjection found with the prefix='text_encoder_2'. This is safe to ignore if LoRA state dict didn't originally have any CLIPTextModelWithProjection related params. You can also try specifying `prefix=None` to resolve the warning. Otherwise, open an issue i"
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.461
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 5.704
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.926
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.178
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.079
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.165
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 17.595
+  },
+  {
+   "boundary": "load:diffusers.lora",
+   "name": "Coverage",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "note": "it carries nothing for the parts it was applied to",
+   "declared": "Coverage(total=1348, taken=1348, left=())",
+   "declared_from": "LoRA /mnt/c/Users/<user>/AppData/Local/Temp/claude/C--Users-<user>-Desktop------ai-compiler/1ca95520-f800-4114-8750-ff4f872cd917/scratchpad/m63_loras/nagito_illustrious_v3_peft_names.safetensors on StableDiffusionXLPipeline (every module the LoRA carries weights for)",
+   "chosen": "Coverage(total=1348, taken=0, left=('base_model.model.down_blocks.1.0.conv1', 'base_model.model.down_blocks.1.0.conv2', 'base_model.model.down_blocks.1.0.time_emb_proj', 'base_model.model.down_blocks.2.0.conv1', 'base_model.model.down_blocks.2.0.conv2', '... and 1343 more'))"
+  },
+  {
+   "timing": "load:diffusers.lora",
+   "ms": 439.686
+  }
+ ],
+ "when": "2026-09-25 07:19:39"
+}

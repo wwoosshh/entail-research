@@ -1,0 +1,431 @@
+{
+ "n": 50,
+ "kind": {
+  "garbled": 26,
+  "plausible_but_wrong": 24
+ },
+ "tags": {
+  "repetition": 1,
+  "language_mixing": 0,
+  "hang": 1,
+  "ignored_setting": 1,
+  "multimodal": 9,
+  "long_sequence": 4,
+  "later_turn": 5,
+  "specific_hardware": 14
+ },
+ "rows": [
+  {
+   "repo": "vllm",
+   "issue": 52276,
+   "title": "DeepSeek-V4 NIXL receive failure returns corrupted reasoning",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 51063,
+   "title": "Mistral3 VLM ties lm_head from top-level config, drops real lm_head",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 41207,
+   "title": "DeepSeek-OCR multimodal output broken after Transformers upgrade",
+   "kind": "garbled",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 47300,
+   "title": "Gemma4 gibberish for long inputs with images on SM90 FA4",
+   "kind": "garbled",
+   "tags": [
+    "multimodal",
+    "long_sequence",
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 40018,
+   "title": "ROCM_AITER_MLA_SPARSE prefill garbage above ~20K tokens (GLM-5.1-FP8)",
+   "kind": "garbled",
+   "tags": [
+    "long_sequence",
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 47087,
+   "title": "MTP spec decode degenerates into garbage loops (Qwen3.6 hybrid)",
+   "kind": "garbled",
+   "tags": [
+    "repetition"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 51094,
+   "title": "OffloadingConnector wrong output at exact chunk boundary (mamba all mode)",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 43559,
+   "title": "~20% accuracy drop with prefix caching + MTP (Qwen3.6-35B-A3B)",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 41472,
+   "title": "ROCM_ATTN incorrect output for LFM2 (hybrid)",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 50681,
+   "title": "Qwen3.6-35B-A3B corrupted with EP + sequence parallelism",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 48611,
+   "title": "FlashMLA sparse dense-MHA split: OOB write, corrupted fp8_ds_mla gather",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 48324,
+   "title": "FlashInfer allreduce+RMSNorm+quant fusion corrupts output (FP32 norm weights)",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 42007,
+   "title": "FP8 MoE models corrupted when serving LoRA adapters",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 42182,
+   "title": "Qwen3.5-27B P/D GSM8K collapse with async scheduling",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "vllm",
+   "issue": 48831,
+   "title": "Qwen3-Reranker wrong scores on >8K-token inputs",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "long_sequence"
+   ]
+  },
+  {
+   "repo": "vllm",
+   "issue": 43602,
+   "title": "Qwen3-VL-2B Geo3K accuracy below SGLang",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "sglang",
+   "issue": 30176,
+   "title": "LongCat-2.0 `oe_*` config keys mismatch, ngram weights dropped, garbled output",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "sglang",
+   "issue": 31833,
+   "title": "NemotronH extra_buffer accuracy drop (Mamba state tracking)",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "sglang",
+   "issue": 31482,
+   "title": "DeepSeek-V4 PD HiSparse lower accuracy",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "sglang",
+   "issue": 37187,
+   "title": "GPT-OSS + DP attention garbage output (GSM8K 0/128)",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "sglang",
+   "issue": 27125,
+   "title": "Wan2.2 T2V native backend mosaic video",
+   "kind": "garbled",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "sglang",
+   "issue": 31699,
+   "title": "DeepSeek-V4 DP attention garbage (dp_gather_partial on replicated data)",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "sglang",
+   "issue": 34227,
+   "title": "MiniMax-H3 `--use-fsdp-inference` corrupted video/audio",
+   "kind": "garbled",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "sglang",
+   "issue": 31490,
+   "title": "DeepSeek-V4-Flash-FP8 GSM8K regression on gfx950 (after #29275)",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "sglang",
+   "issue": 31641,
+   "title": "NVFP4 KV cache batched decode corrupted (trtllm_mha, SM120)",
+   "kind": "garbled",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "transformers",
+   "issue": 47752,
+   "title": "Pipeline ignores values set on model.generation_config",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "ignored_setting"
+   ]
+  },
+  {
+   "repo": "transformers",
+   "issue": 45910,
+   "title": "DeepSeek-V4 RoPE theta mismatch, main vs compressed KV",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 45242,
+   "title": "Gemma 4: use_cache=False gives garbage logits",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 44671,
+   "title": "CamemBERT wrong masked-LM predictions in v5",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 46032,
+   "title": "Mamba2Mixer: use_cache with seq_len > 1 gives wrong results",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 45381,
+   "title": "Qwen2.5-VL video vision_position_ids wrong (5.3+)",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "transformers",
+   "issue": 44155,
+   "title": "AudioFlamingo3 batched inference leaks embeddings across items",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "transformers",
+   "issue": 48293,
+   "title": "SwitchTransformers router: cumsum over wrong dim; router_logits equal probs",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 47030,
+   "title": "FineGrainedFP8 DeepGEMM silently wrong on SM100 (UE8M0 scale rounding)",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "transformers",
+   "issue": 47246,
+   "title": "Nemotron-H Mamba2 slow path: wrong inter-chunk recurrence",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 47475,
+   "title": "Zamba2 torch_forward causality violation",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 47328,
+   "title": "Qwen2.5-Omni Token2Wav DiT: half-split cos/sin with interleaved rotate",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "multimodal"
+   ]
+  },
+  {
+   "repo": "transformers",
+   "issue": 43697,
+   "title": "RTDetrV2 different outputs in v5.0 with identical inputs",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "transformers",
+   "issue": 46612,
+   "title": "Beam search cache reorder skipped for Mamba, XLNet, RWKV, Reformer",
+   "kind": "plausible_but_wrong",
+   "tags": []
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 25382,
+   "title": "DeepSeek-V4 quantized K-cache garbage (attention rotation)",
+   "kind": "garbled",
+   "tags": []
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 23400,
+   "title": "Last token of saved session replayed at wrong position",
+   "kind": "plausible_but_wrong",
+   "tags": [
+    "later_turn"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 26845,
+   "title": "SYCL garbage on the second prompt",
+   "kind": "garbled",
+   "tags": [
+    "later_turn",
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 21589,
+   "title": "SYCL Qwen3.5 garbage on the second prompt",
+   "kind": "garbled",
+   "tags": [
+    "later_turn",
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 21715,
+   "title": "Second interaction hangs / gibberish after SYCL Q8_0 reorder",
+   "kind": "garbled",
+   "tags": [
+    "hang",
+    "later_turn",
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 21734,
+   "title": "server-intel gibberish at second turn",
+   "kind": "garbled",
+   "tags": [
+    "later_turn",
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 28537,
+   "title": "HIP: sequence joining another's decode batch gets corrupted logits",
+   "kind": "garbled",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 23321,
+   "title": "Vulkan `-nkvo` gibberish on Qwen3-Coder-Next / Qwen3.6",
+   "kind": "garbled",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 23717,
+   "title": "Gibberish when K and V cache use the same quant type (RTX 5060 Ti)",
+   "kind": "garbled",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 20097,
+   "title": "Vulkan gibberish on 3x Intel GPU after b8183",
+   "kind": "garbled",
+   "tags": [
+    "specific_hardware"
+   ]
+  },
+  {
+   "repo": "llama.cpp",
+   "issue": 21726,
+   "title": "Gemma 4 gibberish after about 230 tokens with `-nkvo`",
+   "kind": "garbled",
+   "tags": [
+    "long_sequence"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "engine": "transformers",
+ "consumer": "transformers.paged_attention.sdpa",
+ "fact": "ModelProps.softcap",
+ "model": "/home/<user>/models/gemma-2-2b-it",
+ "bind": 5.0,
+ "prompts": 6,
+ "new_tokens": 24,
+ "when": "2026-09-23 20:33:49",
+ "measured": "ignores",
+ "differing_prompts": 0,
+ "gate": {
+  "consumer": "transformers.attention.eager",
+  "measured": "honours",
+  "differing_prompts": 4
+ },
+ "seconds": 28.3,
+ "table": {
+  "honours": false,
+  "evidence": "measured",
+  "ref": "entail/audits/cap_probe.json; sweep/results/transformers_gemma-2-2b-it.json"
+ },
+ "agrees": true
+}

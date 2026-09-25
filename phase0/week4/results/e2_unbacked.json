@@ -1,0 +1,105 @@
+{
+ "approach": "unbacked",
+ "batches": [
+  1,
+  4,
+  8,
+  2
+ ],
+ "prompt_len": 512,
+ "steps": 16,
+ "precompile_s": null,
+ "per_batch": [
+  {
+   "batch": 1,
+   "first_step_ms": 70280.67032500007,
+   "steady_ms": 22.648872499985373,
+   "steady_min_ms": 21.88966700009587,
+   "steady_max_ms": 23.01473099987561,
+   "compiles_during_batch": 1,
+   "compile_s_during_batch": 64.408626512
+  },
+  {
+   "batch": 4,
+   "first_step_ms": 28.997500000059517,
+   "steady_ms": 30.360254500010342,
+   "steady_min_ms": 27.950552999982392,
+   "steady_max_ms": 31.31061699991733,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 8,
+   "first_step_ms": 36.63442000015493,
+   "steady_ms": 36.53503200007435,
+   "steady_min_ms": 36.1731289999625,
+   "steady_max_ms": 37.38582799996948,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 2,
+   "first_step_ms": 28.122197000129745,
+   "steady_ms": 28.51207649985099,
+   "steady_min_ms": 28.19322700020166,
+   "steady_max_ms": 29.093603999854167,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  }
+ ],
+ "unique_graphs": 1,
+ "dynamo_stats": {
+  "calls_captured": 3253,
+  "unique_graphs": 1
+ },
+ "compile_metrics_total": {
+  "_compile.compile_inner": {
+   "n": 1,
+   "s": 64.408626512
+  },
+  "compile_inner": {
+   "n": 1,
+   "s": 64.408626512
+  },
+  "compile_attempt_0": {
+   "n": 1,
+   "s": 64.107249318
+  },
+  "OutputGraph.call_user_compiler": {
+   "n": 1,
+   "s": 57.517519167
+  },
+  "create_aot_dispatcher_function": {
+   "n": 1,
+   "s": 57.317089877
+  },
+  "compile_fx.<locals>.fw_compiler_base": {
+   "n": 1,
+   "s": 46.43630545
+  },
+  "compile_fx_inner": {
+   "n": 1,
+   "s": 45.325292392
+  },
+  "fx_codegen_and_compile": {
+   "n": 1,
+   "s": 45.019553056
+  },
+  "GraphLowering.compile_to_fn": {
+   "n": 1,
+   "s": 32.323543115
+  },
+  "GraphLowering.compile_to_module": {
+   "n": 1,
+   "s": 32.323504871
+  },
+  "GraphLowering.codegen": {
+   "n": 1,
+   "s": 32.205905198
+  },
+  "Scheduler.__init__": {
+   "n": 1,
+   "s": 19.071937652
+  }
+ }
+}

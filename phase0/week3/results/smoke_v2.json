@@ -1,0 +1,157 @@
+{
+ "env": {
+  "torch": "2.14.0+cu130",
+  "cuda": "13.0",
+  "cudnn": 92400,
+  "device": "NVIDIA GeForce RTX 4070 Ti",
+  "cc": "8.9",
+  "sms": 60,
+  "mem_gib": 12.0,
+  "triton": "3.8.0"
+ },
+ "model_source": "real Qwen3-4B weights (~/models/Qwen3-4B)",
+ "params": 4022468096,
+ "args": {
+  "batches": [
+   1
+  ],
+  "dtypes": [
+   "bf16"
+  ],
+  "prompt_len": 512,
+  "rounds": 4,
+  "steps": 6,
+  "warmup_s": 1.0,
+  "random_weights": false,
+  "out": "results/smoke_v2.json"
+ },
+ "harness": "v2+rewind",
+ "runs": [
+  {
+   "batch": 1,
+   "dtype": "bf16",
+   "prompt_len": 512,
+   "eager_sdpa_rerun_bitwise": true,
+   "eager_vs_eager_sdpa": {
+    "sdpa": {
+     "max": 0.0,
+     "mean": 0.0
+    },
+    "triton_decode": {
+     "max": 0.109375,
+     "mean": 0.028159581124782562
+    },
+    "maskmod_decode": {
+     "max": 0.140625,
+     "mean": 0.04507840424776077
+    }
+   },
+   "logit_scale": 14.6875,
+   "variants": {
+    "sdpa": {
+     "compile_s": 27.359803467999882,
+     "max_abs_diff_vs_eager_same_variant": 0.140625,
+     "mean_abs_diff_vs_eager_same_variant": 0.03156963363289833,
+     "max_abs_diff_vs_eager_sdpa": 0.140625,
+     "logit_scale": 14.6875,
+     "n_kernel_types": 23,
+     "uses_expected_path": true,
+     "kernels_of_interest": [
+      "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass:",
+      "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv",
+      "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv"
+     ],
+     "correct": true,
+     "timed": true
+    },
+    "triton_decode": {
+     "compile_s": 23.01375414999984,
+     "max_abs_diff_vs_eager_same_variant": 0.09375,
+     "mean_abs_diff_vs_eager_same_variant": 0.012499643489718437,
+     "max_abs_diff_vs_eager_sdpa": 0.1015625,
+     "logit_scale": 14.6875,
+     "n_kernel_types": 21,
+     "uses_expected_path": true,
+     "kernels_of_interest": [
+      "_split_kernel",
+      "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv",
+      "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv"
+     ],
+     "correct": true,
+     "timed": true
+    },
+    "maskmod_decode": {
+     "compile_s": 29.646349257999645,
+     "max_abs_diff_vs_eager_same_variant": 0.09375,
+     "mean_abs_diff_vs_eager_same_variant": 0.02347283624112606,
+     "max_abs_diff_vs_eager_sdpa": 0.109375,
+     "logit_scale": 14.6875,
+     "n_kernel_types": 22,
+     "uses_expected_path": true,
+     "kernels_of_interest": [
+      "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv",
+      "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv",
+      "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_flex_attention_mean_mul_p",
+      "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_flex_attention_mean_mul_p",
+      "triton_tem_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_flex_attention_mean_mul_p"
+     ],
+     "correct": true,
+     "timed": true
+    }
+   },
+   "timing": {
+    "baseline": "sdpa",
+    "rounds": 4,
+    "steps_per_round": 6,
+    "warmup_s": 1.0,
+    "variants": {
+     "sdpa": {
+      "median_ms": 21.42860499998278,
+      "p10_ms": 21.045627000603417,
+      "p90_ms": 21.670911999535747,
+      "steps": 24,
+      "round_medians_ms": [
+       21.378678499786474,
+       21.316074499736715,
+       21.31409599996914,
+       21.44691449984748
+      ]
+     },
+     "triton_decode": {
+      "median_ms": 20.047491999775957,
+      "p10_ms": 19.877196000379627,
+      "p90_ms": 20.255901999917114,
+      "steps": 24,
+      "round_medians_ms": [
+       20.007178500236478,
+       19.955843499701587,
+       20.084635500097647,
+       20.112272999995184
+      ],
+      "ratio_vs_base_median": 0.9369787733044024,
+      "ratio_vs_base_p10": 0.9358472975977586,
+      "ratio_vs_base_p90": 0.9377699995091701,
+      "rounds_faster_than_base": 1.0
+     },
+     "maskmod_decode": {
+      "median_ms": 20.187975999760965,
+      "p10_ms": 20.003351000013936,
+      "p90_ms": 20.66910900066432,
+      "steps": 24,
+      "round_medians_ms": [
+       20.197852499677538,
+       20.103897499666346,
+       20.138174000294384,
+       20.25335400003314
+      ],
+      "ratio_vs_base_median": 0.944557166145513,
+      "ratio_vs_base_p10": 0.9431331974334514,
+      "ratio_vs_base_p90": 0.9447661837413978,
+      "rounds_faster_than_base": 1.0
+     }
+    }
+   },
+   "position_counter_after": 513
+  }
+ ]
+}

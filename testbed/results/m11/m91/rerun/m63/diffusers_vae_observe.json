@@ -1,0 +1,142 @@
+{
+ "tag": "vae_observe",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "condition": "observe",
+ "entail": "load",
+ "policy": "refuse",
+ "load_seconds": 1.38,
+ "vae_scaling_factor_as_loaded": 0.18215,
+ "vae_scaling_factor": 0.18215,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "epsilon",
+  "rescale_betas_zero_snr": false
+ },
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 12.87,
+   "image": "/home/<user>/m63_out_rerun/vae_observe_seed11.png",
+   "stats": {
+    "mean": 161.01,
+    "std": 43.77,
+    "saturation": 37.85
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 9.55,
+   "image": "/home/<user>/m63_out_rerun/vae_observe_seed22.png",
+   "stats": {
+    "mean": 155.4,
+    "std": 45.18,
+    "saturation": 39.37
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 10.91,
+   "image": "/home/<user>/m63_out_rerun/vae_observe_seed33.png",
+   "stats": {
+    "mean": 157.16,
+    "std": 48.07,
+    "saturation": 37.68
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.579
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 91.186
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 4.178
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.19
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.086
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.187
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "LatentScale(scale=0.13025, shift=None)",
+   "declared_from": "<workspace>/testbed/results/m63/manifests/a5f58eb1c33616c4f06bca55af39876a7b817913cd829caa8acb111b770c85cc.json#LatentScale",
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 22.491
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and the policy repairs nothing",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "LatentScale(scale=0.13025, shift=None)",
+   "declared_from": "<workspace>/testbed/results/m63/manifests/a5f58eb1c33616c4f06bca55af39876a7b817913cd829caa8acb111b770c85cc.json#LatentScale",
+   "chosen": "LatentScale(scale=0.18215, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.latent_scale",
+   "ms": 2.511
+  }
+ ],
+ "when": "2026-09-25 07:17:24"
+}

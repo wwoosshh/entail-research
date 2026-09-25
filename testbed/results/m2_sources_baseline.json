@@ -1,0 +1,1179 @@
+{
+ "when": "2026-09-23 19:15",
+ "roots": [
+  "/home/<user>/models",
+  "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models"
+ ],
+ "summary": {
+  "llm_folder": {
+   "files": 7,
+   "facts": {
+    "ModelProps": {
+     "declared": 7,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    },
+    "Rotary": {
+     "declared": 5,
+     "declared_partly": 2,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    },
+    "Template": {
+     "declared": 7,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    }
+   },
+   "conflicting_files": 0,
+   "declares_outside_v1": 0
+  },
+  "llm_folder_quantized": {
+   "files": 2,
+   "facts": {
+    "ModelProps": {
+     "declared": 2,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    },
+    "Rotary": {
+     "declared": 2,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    },
+    "Template": {
+     "declared": 2,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    },
+    "Layout": {
+     "declared": 2,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    }
+   },
+   "conflicting_files": 0,
+   "declares_outside_v1": 0
+  },
+  "image_checkpoint": {
+   "files": 17,
+   "facts": {
+    "Prediction": {
+     "declared": 2,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 15
+    },
+    "LatentScale": {
+     "declared": 0,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 17
+    }
+   },
+   "conflicting_files": 0,
+   "declares_outside_v1": 2
+  },
+  "3d_model": {
+   "files": 3,
+   "facts": {},
+   "conflicting_files": 0,
+   "declares_outside_v1": 0
+  },
+  "diffusion_model": {
+   "files": 3,
+   "facts": {
+    "Prediction": {
+     "declared": 0,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 3
+    }
+   },
+   "conflicting_files": 0,
+   "declares_outside_v1": 0
+  },
+  "lora": {
+   "files": 22,
+   "facts": {
+    "Prediction": {
+     "declared": 22,
+     "declared_partly": 0,
+     "stated_not_representable": 0,
+     "not_stated": 0
+    }
+   },
+   "conflicting_files": 0,
+   "declares_outside_v1": 22
+  }
+ },
+ "rows": [
+  {
+   "path": "/home/<user>/models/Llama-3.2-3B-Instruct",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared_partly",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+     "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#tie_word_embeddings"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='llama3', theta=500000.0, factor=32.0, original_max_position=8192)",
+     "where": "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#rope_theta,rope_scaling"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='5816fce10444e03c2e9ee1ef8a4a1ea61ae7e69e438613f3b17b69d0426223a4', reasoning_history=None)",
+     "where": "/home/<user>/models/Llama-3.2-3B-Instruct/tokenizer_config.json#chat_template"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='5816fce10444e03c2e9ee1ef8a4a1ea61ae7e69e438613f3b17b69d0426223a4', reasoning_history=None)",
+     "where": "/home/<user>/models/Llama-3.2-3B-Instruct/chat_template.jinja"
+    }
+   ],
+   "conflicts": [],
+   "problems": [
+    "/home/<user>/models/Llama-3.2-3B-Instruct/config.json#rope_theta,rope_scaling: RoPE keys ['high_freq_factor', 'low_freq_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ],
+   "outside_v1": [],
+   "seconds": 0.002
+  },
+  {
+   "path": "/home/<user>/models/Phi-3.5-mini-instruct",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared_partly",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=262144, tie_word_embeddings=False)",
+     "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#sliding_window,tie_word_embeddings"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='longrope', theta=10000.0, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='78d976a442bcde2f0be15aafbb8e3050e1104f86732266f68403251b89982a90', reasoning_history=None)",
+     "where": "/home/<user>/models/Phi-3.5-mini-instruct/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [
+    "/home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v1; the Rotary fact does not carry them"
+   ],
+   "outside_v1": [],
+   "seconds": 0.001
+  },
+  {
+   "path": "/home/<user>/models/Qwen2.5-3B-Instruct",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json#tie_word_embeddings"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=1000000.0, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct/config.json#rope_theta"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f', reasoning_history=None)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.001
+  },
+  {
+   "path": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ",
+   "kind": "llm_folder_quantized",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared",
+    "Layout": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#tie_word_embeddings"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=1000000.0, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#rope_theta"
+    },
+    {
+     "name": "Layout",
+     "value": "Layout(kind='int4_packed', dtype=None, block=(128,), packing=None, scale_format=None)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/config.json#quantization_config"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f', reasoning_history=None)",
+     "where": "/home/<user>/models/Qwen2.5-3B-Instruct-AWQ/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.0
+  },
+  {
+   "path": "/home/<user>/models/Qwen3-4B",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+     "where": "/home/<user>/models/Qwen3-4B/config.json#tie_word_embeddings"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=1000000, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/Qwen3-4B/config.json#rope_theta"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None)",
+     "where": "/home/<user>/models/Qwen3-4B/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.0
+  },
+  {
+   "path": "/home/<user>/models/Qwen3-4B-FP8",
+   "kind": "llm_folder_quantized",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared",
+    "Layout": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+     "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#tie_word_embeddings"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=1000000, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#rope_theta"
+    },
+    {
+     "name": "Layout",
+     "value": "Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format=None)",
+     "where": "/home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None)",
+     "where": "/home/<user>/models/Qwen3-4B-FP8/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.0
+  },
+  {
+   "path": "/home/<user>/models/gemma-2-2b-it",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=50.0, sliding_window=4096, tie_word_embeddings=None)",
+     "where": "/home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/gemma-2-2b-it/config.json#rope_theta"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='ecd6ae513fe103f0eb62e8ab5bfa8d0fe45c1074fa398b089c93a7e70c15cfd6', reasoning_history=None)",
+     "where": "/home/<user>/models/gemma-2-2b-it/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.001
+  },
+  {
+   "path": "/home/<user>/models/gemma-2-9b-it",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=50.0, sliding_window=4096, tie_word_embeddings=None)",
+     "where": "/home/<user>/models/gemma-2-9b-it/config.json#attn_logit_softcapping,sliding_window"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/gemma-2-9b-it/config.json#rope_theta"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='ecd6ae513fe103f0eb62e8ab5bfa8d0fe45c1074fa398b089c93a7e70c15cfd6', reasoning_history=None)",
+     "where": "/home/<user>/models/gemma-2-9b-it/tokenizer_config.json#chat_template"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.001
+  },
+  {
+   "path": "/home/<user>/models/gemma-3-1b-it",
+   "kind": "llm_folder",
+   "status": {
+    "ModelProps": "declared",
+    "Rotary": "declared",
+    "Template": "declared"
+   },
+   "facts": [
+    {
+     "name": "ModelProps",
+     "value": "ModelProps(softcap=None, sliding_window=512, tie_word_embeddings=None)",
+     "where": "/home/<user>/models/gemma-3-1b-it/config.json#sliding_window"
+    },
+    {
+     "name": "Rotary",
+     "value": "Rotary(rope_type='default', theta=1000000, factor=None, original_max_position=None)",
+     "where": "/home/<user>/models/gemma-3-1b-it/config.json#rope_theta"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='7de1c58e208eda46e9c7f86397df37ec49883aeece39fb961e0a6b24088dd3c4', reasoning_history=None)",
+     "where": "/home/<user>/models/gemma-3-1b-it/tokenizer_config.json#chat_template"
+    },
+    {
+     "name": "Template",
+     "value": "Template(chat_template_sha256='7de1c58e208eda46e9c7f86397df37ec49883aeece39fb961e0a6b24088dd3c4', reasoning_history=None)",
+     "where": "/home/<user>/models/gemma-3-1b-it/chat_template.jinja"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.005
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/AnythingXL_v50.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.016
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/JANKUTrainedChenkinNoobai_v777.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.025
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/NoobAI-XL-Vpred-v1.0.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "declared",
+    "LatentScale": "not_stated"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "v-prediction with zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/NoobAI-XL-Vpred-v1.0.safetensors#key v_pred (zsnr from key ztsnr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/amixaAsyncsMIXANIMA_v1.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.017
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/entail_test/NoobAI-XL-Vpred-v1.0-no-marker.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.032
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/entail_test/astolfocarmixVpredxl_acEvo25EP.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "declared",
+    "LatentScale": "not_stated"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "v-prediction",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/entail_test/astolfocarmixVpredxl_acEvo25EP.safetensors#__metadata__.modelspec.prediction_type"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture"
+   ],
+   "seconds": 0.025
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/hunyuan3d-dit-v2-mv_fp16.safetensors",
+   "kind": "3d_model",
+   "status": {},
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.013
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/hunyuan3d-dit-v2_fp16.safetensors",
+   "kind": "3d_model",
+   "status": {},
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.014
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/hunyuan_3d_v2.1.safetensors",
+   "kind": "3d_model",
+   "status": {},
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.013
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/miaomiaoHarem_anima13.safetensors",
+   "kind": "diffusion_model",
+   "status": {
+    "Prediction": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.012
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/ntrMIXIllustriousXL_xiii.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture"
+   ],
+   "seconds": 0.029
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/oneObsession_v24.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/prefectIllustriousXL_v5.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/waiIllustriousSDXL_v160.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/waiIllustriousSDXL_v170.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/waiNSFWIllustrious_v140.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/waiNTRMIXIllustrious_v11.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.018
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/AhegaoFaceRef-AndroidXL.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/AhegaoFaceRef-AndroidXL.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/Dayama-000008.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/Dayama-000008.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/E88289E6849FE794BBE9A38E20E6.uh74.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/E88289E6849FE794BBE9A38E20E6.uh74.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/Lativi_V2_epoch_10.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/Lativi_V2_epoch_10.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.085
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/NTR_MIX_4.0_LORA-000007.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/NTR_MIX_4.0_LORA-000007.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.033
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/Ohogao_illustrious_v1.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/Ohogao_illustrious_v1.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e1.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e1.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.022
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e2.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e2.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e3.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e3.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e4.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e4.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e5.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e5.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e6.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e6.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e7.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e7.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e8.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/bodydetail/bd_v1_locon_e8.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/mesugaki_Illust_v1.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/mesugaki_Illust_v1.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.018
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/mikzn-illustrious-ty_lee.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/mikzn-illustrious-ty_lee.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_anima_e10.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_anima_e10.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.017
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_illustrious_v3.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_illustrious_v3.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_wai_v2.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/nagito/nagito_wai_v2.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/perfectpantyhose-a.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/perfectpantyhose-a.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.019
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/sagging breasts-IL2.0.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/sagging breasts-IL2.0.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/tarasu_mc-000018.safetensors",
+   "kind": "lora",
+   "status": {
+    "Prediction": "declared"
+   },
+   "facts": [
+    {
+     "name": "Prediction",
+     "value": "eps without zero terminal SNR",
+     "where": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/loras/tarasu_mc-000018.safetensors#__metadata__.modelspec.prediction_type (zsnr from ss_zero_terminal_snr)"
+    }
+   ],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [
+    "modelspec.architecture",
+    "ss_base_model_version"
+   ],
+   "seconds": 0.02
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/diffusion_models/anima-aesthetic-v1.1.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.014
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/diffusion_models/anima-base-v1.0.safetensors",
+   "kind": "diffusion_model",
+   "status": {
+    "Prediction": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.011
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/diffusion_models/anima-turbo-v1.1.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.015
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/diffusion_models/fnMixAnimaTurbo_baseNoTurbo.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.016
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/diffusion_models/novaAnimeAM_v40.safetensors",
+   "kind": "image_checkpoint",
+   "status": {
+    "Prediction": "not_stated",
+    "LatentScale": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.015
+  },
+  {
+   "path": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/unet/qwen-image-edit-2511-Q4_K_M.gguf",
+   "kind": "diffusion_model",
+   "status": {
+    "Prediction": "not_stated"
+   },
+   "facts": [],
+   "conflicts": [],
+   "problems": [],
+   "outside_v1": [],
+   "seconds": 0.007
+  }
+ ]
+}

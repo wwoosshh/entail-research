@@ -1,0 +1,49 @@
+W0922 17:55:53.449000 670 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 17:55:53.485000 670 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+attention + mask interface registered
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+LLM built from hub-config: 4.02B params, 30.5s
+equivalence bf16: {'max_abs_logit_diff': 5.703125, 'mean_abs_logit_diff': 0.25628548860549927, 'logit_scale': 5.15625, 'argmax_agreement': 0.625}
+W0922 17:56:39.548000 670 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+USDT:2026-09-22 17:56:58 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:56:58 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_bf16/sdpa/compile_graphs/B1", "workload": "decode_bf16", "attn": "sdpa", "mode": "compile_graphs", "batch": 1, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 31284.61958400001, "step_ms_median": 22.939026000003082, "step_ms_min": 22.07584699999643, "step_ms_max": 23.64162999998598, "peak_mem_gib": 7.78910493850708, "dynamo_stats": {"calls_captured": 2961, "unique_graphs": 1}, "status": "ok"}
+USDT:2026-09-22 17:57:44 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:57:44 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_bf16/sdpa/compile_graphs/B4", "workload": "decode_bf16", "attn": "sdpa", "mode": "compile_graphs", "batch": 4, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 44251.45534099999, "step_ms_median": 29.414803999998185, "step_ms_min": 28.949207999971804, "step_ms_max": 29.82416300000068, "peak_mem_gib": 8.60175609588623, "dynamo_stats": {"calls_captured": 5922, "unique_graphs": 2}, "status": "ok"}
+USDT:2026-09-22 17:57:46 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:57:46 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_bf16/sdpa/compile_graphs/B8", "workload": "decode_bf16", "attn": "sdpa", "mode": "compile_graphs", "batch": 8, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 41.37343999997256, "step_ms_median": 37.97125700000947, "step_ms_min": 37.32180400004381, "step_ms_max": 38.629522999997334, "peak_mem_gib": 9.806239128112793, "dynamo_stats": {"calls_captured": 5922, "unique_graphs": 2}, "status": "ok"}
+USDT:2026-09-22 17:58:14 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:58:14 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_bf16/triton_decode/compile_graphs/B1", "workload": "decode_bf16", "attn": "triton_decode", "mode": "compile_graphs", "batch": 1, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 26785.67145400001, "step_ms_median": 21.404756500004396, "step_ms_min": 21.146149000003334, "step_ms_max": 22.128102000010585, "peak_mem_gib": 8.163634300231934, "dynamo_stats": {"calls_captured": 8693, "unique_graphs": 3}, "status": "ok"}
+USDT:2026-09-22 17:58:53 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:58:53 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_bf16/triton_decode/compile_graphs/B4", "workload": "decode_bf16", "attn": "triton_decode", "mode": "compile_graphs", "batch": 4, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 37163.474687000016, "step_ms_median": 23.782055499964372, "step_ms_min": 23.12211599996772, "step_ms_max": 24.301659000002473, "peak_mem_gib": 8.59931468963623, "dynamo_stats": {"calls_captured": 11464, "unique_graphs": 4}, "status": "ok"}
+USDT:2026-09-22 17:58:54 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:58:54 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_bf16/triton_decode/compile_graphs/B8", "workload": "decode_bf16", "attn": "triton_decode", "mode": "compile_graphs", "batch": 8, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 28.043331999981547, "step_ms_median": 25.04748350000341, "step_ms_min": 24.724158999958945, "step_ms_max": 25.42747600000439, "peak_mem_gib": 9.799403190612793, "dynamo_stats": {"calls_captured": 11464, "unique_graphs": 4}, "status": "ok"}
+equivalence int4: {'max_abs_logit_diff': 5.359375, 'mean_abs_logit_diff': 0.372740238904953, 'logit_scale': 4.90625, 'argmax_agreement': 0.375}
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 17:59:51 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:59:51 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_int4/sdpa/compile_graphs/B1", "workload": "decode_int4", "attn": "sdpa", "mode": "compile_graphs", "batch": 1, "prompt_len": 512, "dtype": "int4", "first_call_ms": 50125.21757399997, "step_ms_median": 12.043069500009551, "step_ms_min": 11.288305999983095, "step_ms_max": 12.788816000011138, "peak_mem_gib": 3.670199394226074, "dynamo_stats": {"calls_captured": 14425, "unique_graphs": 5}, "status": "ok"}
+USDT:2026-09-22 18:01:23 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 18:01:23 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_int4/sdpa/compile_graphs/B4", "workload": "decode_int4", "attn": "sdpa", "mode": "compile_graphs", "batch": 4, "prompt_len": 512, "dtype": "int4", "first_call_ms": 89942.81534700003, "step_ms_median": 17.64010900001267, "step_ms_min": 17.099798999993254, "step_ms_max": 18.772253000065575, "peak_mem_gib": 4.119063377380371, "dynamo_stats": {"calls_captured": 17386, "unique_graphs": 6}, "status": "ok"}
+USDT:2026-09-22 18:01:27 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 18:01:27 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_int4/sdpa/compile_graphs/B8", "workload": "decode_int4", "attn": "sdpa", "mode": "compile_graphs", "batch": 8, "prompt_len": 512, "dtype": "int4", "first_call_ms": 31.401926999933494, "step_ms_median": 25.71312000003445, "step_ms_min": 25.127109000095516, "step_ms_max": 27.296449999994365, "peak_mem_gib": 5.322997093200684, "dynamo_stats": {"calls_captured": 17386, "unique_graphs": 6}, "status": "ok"}
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 18:02:11 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 18:02:11 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_int4/triton_decode/compile_graphs/B1", "workload": "decode_int4", "attn": "triton_decode", "mode": "compile_graphs", "batch": 1, "prompt_len": 512, "dtype": "int4", "first_call_ms": 42951.368258999995, "step_ms_median": 9.610726000062186, "step_ms_min": 8.980529000041315, "step_ms_max": 10.610453999902347, "peak_mem_gib": 3.6683340072631836, "dynamo_stats": {"calls_captured": 20157, "unique_graphs": 7}, "status": "ok"}
+USDT:2026-09-22 18:03:28 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 18:03:28 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_int4/triton_decode/compile_graphs/B4", "workload": "decode_int4", "attn": "triton_decode", "mode": "compile_graphs", "batch": 4, "prompt_len": 512, "dtype": "int4", "first_call_ms": 75116.02523600004, "step_ms_median": 9.426523000001907, "step_ms_min": 9.124894000024142, "step_ms_max": 10.106587999985095, "peak_mem_gib": 4.1228132247924805, "dynamo_stats": {"calls_captured": 22928, "unique_graphs": 8}, "status": "ok"}
+USDT:2026-09-22 18:03:32 670:670 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 18:03:32 670:670 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "decode_int4/triton_decode/compile_graphs/B8", "workload": "decode_int4", "attn": "triton_decode", "mode": "compile_graphs", "batch": 8, "prompt_len": 512, "dtype": "int4", "first_call_ms": 34.92399399999613, "step_ms_median": 11.164960000030533, "step_ms_min": 10.764607999931286, "step_ms_max": 12.268844999994144, "peak_mem_gib": 5.326170921325684, "dynamo_stats": {"calls_captured": 22928, "unique_graphs": 8}, "status": "ok"}
+saved <workspace>/phase0/week2/results/decode_attn_swap.json

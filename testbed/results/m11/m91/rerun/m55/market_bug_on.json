@@ -1,0 +1,111 @@
+{
+ "tag": "bug_on",
+ "env": {
+  "ENTAIL": "load",
+  "ENTAIL_SEED": "drop_effort"
+ },
+ "declared": "Template(chat_template_sha256='09498b1e816c1e6eade7528b7db37d2ac798e6fdd2b40bae68305424b2224647', reasoning_history='keep', tool_call_format='hermes')",
+ "when": "2026-09-25 07:23:23",
+ "started": true,
+ "requests": {
+  "plain": {
+   "case": "no effort set",
+   "status": 200,
+   "prompt_tokens": 21,
+   "content": "Paris."
+  },
+  "effort_high": {
+   "case": "L07",
+   "status": 200,
+   "prompt_tokens": 17,
+   "content": ""
+  },
+  "history_kept": {
+   "case": "L13 reference",
+   "status": 200,
+   "prompt_tokens": 67,
+   "content": "6"
+  },
+  "history_dropped": {
+   "case": "L13",
+   "status": 200,
+   "prompt_tokens": 48,
+   "content": "6"
+  }
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.reasoning_history",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "46603 request:vllm.reasoning_history": {
+   "checks": 2,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 3,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "reasoning_history": 1
+   }
+  },
+  "46603 request:vllm.chat_template": {
+   "checks": 5,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 5
+   }
+  },
+  "46603 request:vllm.request_fields": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 4
+   }
+  },
+  "46603 request:vllm.template_settings": {
+   "checks": 4,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 3
+   }
+  },
+  "46720 container:vllm.allocate_slots": {
+   "checks": 16,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 16
+   }
+  }
+ }
+}

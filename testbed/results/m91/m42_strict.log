@@ -1,0 +1,21 @@
+--- roll_on (quant=none, seed=roll_output, ENTAIL=load, false_declaration=refuse) exit=1 seconds=17.675442280
+(EngineCore pid=3673) [entail-seed] roll_output: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=3673) [entail] refused at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves identity, declared); vllm.quant_method.UnquantizedLinearMet
+(EngineCore pid=3673) ERROR 09-24 17:48:20 [core.py:1366]     raise RoleError("\n".join(_record.line(d) for d in stops))
+(EngineCore pid=3673) ERROR 09-24 17:48:20 [core.py:1366] entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves 
+(EngineCore pid=3673)     raise RoleError("\n".join(_record.line(d) for d in stops))
+(EngineCore pid=3673) entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves identity, declared); vllm.quant_meth
+--- transpose_on (quant=none, seed=transpose_all, ENTAIL=load, false_declaration=refuse) exit=1 seconds=17.019654450
+(EngineCore pid=3921) [entail-seed] transpose_all: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=3921) [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_wei
+(EngineCore pid=3921) [entail] refused at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves identity, declared); vllm.quant_method.UnquantizedLinearMet
+(EngineCore pid=3921) ERROR 09-24 17:48:37 [core.py:1366]     raise RoleError("\n".join(_record.line(d) for d in stops))
+(EngineCore pid=3921) ERROR 09-24 17:48:37 [core.py:1366] entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boun
+(EngineCore pid=3921) ERROR 09-24 17:48:37 [core.py:1366] [entail] refused at load:vllm.quant_method.process_weights_after_loading: Coverage declared Coverage(total=16, taken=16, left=()) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.moves identity, declared); vl
+--- strided_on (quant=none, seed=strided_weights, ENTAIL=load, false_declaration=refuse) exit=1 seconds=16.875630672
+(EngineCore pid=4169) [entail-seed] strided_weights: 144 linear weights seen, 0 square, 144 changed after post-processing, 0 changed while loading
+(EngineCore pid=4169) [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boundary: vllm.quant_method.UnquantizedLinearMethod.process_wei
+(EngineCore pid=4169) ERROR 09-24 17:48:54 [core.py:1366]     raise RoleError("\n".join(_record.line(d) for d in stops))
+(EngineCore pid=4169) ERROR 09-24 17:48:54 [core.py:1366] entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boun
+(EngineCore pid=4169)     raise RoleError("\n".join(_record.line(d) for d in stops))
+(EngineCore pid=4169) entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None) (boundary: vllm.quant_method.UnquantizedL

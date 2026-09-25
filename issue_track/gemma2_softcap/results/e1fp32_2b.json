@@ -1,0 +1,1100 @@
+{
+ "size": "2b",
+ "weights": "bf16",
+ "attention_fp32": true,
+ "summary_pairs": {
+  "eager|flex_attention": {
+   "kl_mean": 0.0004500506894041381,
+   "top1_disagree": 0.008880837714841161,
+   "max_abs_logit_diff": 8.25550365447998,
+   "positions": 22633
+  },
+  "eager|sdpa": {
+   "kl_mean": 0.0006265013289781843,
+   "top1_disagree": 0.01223876640303981,
+   "max_abs_logit_diff": 17.454809188842773,
+   "positions": 22633
+  },
+  "eager|eager_nocap": {
+   "kl_mean": 0.000591117696194586,
+   "top1_disagree": 0.011576017319842707,
+   "max_abs_logit_diff": 10.76262092590332,
+   "positions": 22633
+  },
+  "eager_nocap|sdpa": {
+   "kl_mean": 0.0004432991783449881,
+   "top1_disagree": 0.011355100958777007,
+   "max_abs_logit_diff": 17.38474464416504,
+   "positions": 22633
+  }
+ },
+ "per_sequence": [
+  {
+   "kind": "chat",
+   "name": "Explain in three sentences why the sky is blue.",
+   "len": 78,
+   "eager|flex_attention": {
+    "kl_mean": 0.0002804277703548089,
+    "top1_disagree": 0.01282051282051282,
+    "max_abs_logit_diff": 0.4364328384399414
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0005052995223265428,
+    "top1_disagree": 0.02564102564102564,
+    "max_abs_logit_diff": 0.4390087127685547
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00027751292173679057,
+    "top1_disagree": 0.01282051282051282,
+    "max_abs_logit_diff": 0.46033191680908203
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00028331377185308014,
+    "top1_disagree": 0.01282051282051282,
+    "max_abs_logit_diff": 0.6031885147094727
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Write a Python function that returns the n-th Fi",
+   "len": 157,
+   "eager|flex_attention": {
+    "kl_mean": 9.110185560906768e-05,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.555048942565918
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00012483069329125108,
+    "top1_disagree": 0.012738853503184714,
+    "max_abs_logit_diff": 0.6556100845336914
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 9.370475390534493e-05,
+    "top1_disagree": 0.006369426751592357,
+    "max_abs_logit_diff": 0.7637367248535156
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00011707140002281043,
+    "top1_disagree": 0.006369426751592357,
+    "max_abs_logit_diff": 0.6601457595825195
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "A train leaves at 3:40 pm and the trip takes 2 h",
+   "len": 148,
+   "eager|flex_attention": {
+    "kl_mean": 0.00019139660572683488,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.6449089050292969
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0001486470117359548,
+    "top1_disagree": 0.006756756756756757,
+    "max_abs_logit_diff": 0.6768083572387695
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00018537615904131452,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.7866315841674805
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00018579132754254984,
+    "top1_disagree": 0.006756756756756757,
+    "max_abs_logit_diff": 0.8774995803833008
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "List five differences between TCP and UDP.",
+   "len": 145,
+   "eager|flex_attention": {
+    "kl_mean": 0.00039448637900681334,
+    "top1_disagree": 0.020689655172413793,
+    "max_abs_logit_diff": 0.45756053924560547
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00042264160924944383,
+    "top1_disagree": 0.006896551724137931,
+    "max_abs_logit_diff": 0.4974365234375
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004090607680123428,
+    "top1_disagree": 0.006896551724137931,
+    "max_abs_logit_diff": 0.6622574329376221
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00031952272201406543,
+    "top1_disagree": 0.013793103448275862,
+    "max_abs_logit_diff": 0.473726749420166
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Summarize the plot of Romeo and Juliet in one pa",
+   "len": 149,
+   "eager|flex_attention": {
+    "kl_mean": 0.0003370346638980328,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.4180796146392822
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0004272182415795806,
+    "top1_disagree": 0.026845637583892617,
+    "max_abs_logit_diff": 0.627777099609375
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00043097563437967493,
+    "top1_disagree": 0.013422818791946308,
+    "max_abs_logit_diff": 0.5392212867736816
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.000500002763415343,
+    "top1_disagree": 0.026845637583892617,
+    "max_abs_logit_diff": 0.43319153785705566
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "What is the derivative of x^3 * sin(x)? Explain ",
+   "len": 154,
+   "eager|flex_attention": {
+    "kl_mean": 0.0001244292195354189,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.40012359619140625
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0001419893429650889,
+    "top1_disagree": 0.012987012987012988,
+    "max_abs_logit_diff": 0.44670629501342773
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0001313730397007682,
+    "top1_disagree": 0.006493506493506494,
+    "max_abs_logit_diff": 0.5101146697998047
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0001344509277637903,
+    "top1_disagree": 0.006493506493506494,
+    "max_abs_logit_diff": 0.4020509719848633
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Translate into French: 'The meeting was postpone",
+   "len": 146,
+   "eager|flex_attention": {
+    "kl_mean": 0.0002043126788857865,
+    "top1_disagree": 0.0136986301369863,
+    "max_abs_logit_diff": 0.5743236541748047
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00024048611521720886,
+    "top1_disagree": 0.0136986301369863,
+    "max_abs_logit_diff": 0.6432228088378906
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0003012218193648613,
+    "top1_disagree": 0.02054794520547945,
+    "max_abs_logit_diff": 0.5432710647583008
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00026851157619528574,
+    "top1_disagree": 0.02054794520547945,
+    "max_abs_logit_diff": 0.8266830444335938
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Give me a short poem about autumn rain, four lin",
+   "len": 64,
+   "eager|flex_attention": {
+    "kl_mean": 0.00044254394015297294,
+    "top1_disagree": 0.015625,
+    "max_abs_logit_diff": 0.578423023223877
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0006960689788684249,
+    "top1_disagree": 0.015625,
+    "max_abs_logit_diff": 0.878389835357666
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0005965371383354068,
+    "top1_disagree": 0.015625,
+    "max_abs_logit_diff": 0.7393028736114502
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0004848853568546474,
+    "top1_disagree": 0.03125,
+    "max_abs_logit_diff": 0.43633270263671875
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "If a rectangle has perimeter 36 and its length i",
+   "len": 158,
+   "eager|flex_attention": {
+    "kl_mean": 0.00012243796092799948,
+    "top1_disagree": 0.006329113924050633,
+    "max_abs_logit_diff": 0.49133968353271484
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00014668791495923755,
+    "top1_disagree": 0.006329113924050633,
+    "max_abs_logit_diff": 0.48394107818603516
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00013775630747970148,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5825619697570801
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00011068778230419642,
+    "top1_disagree": 0.006329113924050633,
+    "max_abs_logit_diff": 0.45442676544189453
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Explain what a hash table is to a 12-year-old.",
+   "len": 153,
+   "eager|flex_attention": {
+    "kl_mean": 0.0003189383427691615,
+    "top1_disagree": 0.006535947712418301,
+    "max_abs_logit_diff": 0.469207763671875
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00033889808296378143,
+    "top1_disagree": 0.026143790849673203,
+    "max_abs_logit_diff": 0.5486159324645996
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0003708770218627905,
+    "top1_disagree": 0.0196078431372549,
+    "max_abs_logit_diff": 0.5112709999084473
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00026969786952523627,
+    "top1_disagree": 0.006535947712418301,
+    "max_abs_logit_diff": 0.6333189010620117
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Write a SQL query that returns the top 3 custome",
+   "len": 153,
+   "eager|flex_attention": {
+    "kl_mean": 0.00012910100661851223,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.7117242813110352
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00016227683502864214,
+    "top1_disagree": 0.006535947712418301,
+    "max_abs_logit_diff": 1.26393461227417
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0001331299689470553,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 1.0375418663024902
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00011979932196779189,
+    "top1_disagree": 0.006535947712418301,
+    "max_abs_logit_diff": 0.5145111083984375
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "What are the main causes of inflation? Answer br",
+   "len": 140,
+   "eager|flex_attention": {
+    "kl_mean": 0.0002650477524314608,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.44527244567871094
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00033099108508655005,
+    "top1_disagree": 0.014285714285714285,
+    "max_abs_logit_diff": 0.4755086898803711
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00029561067266123636,
+    "top1_disagree": 0.007142857142857143,
+    "max_abs_logit_diff": 0.4963836669921875
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00032111060406480517,
+    "top1_disagree": 0.007142857142857143,
+    "max_abs_logit_diff": 0.4963836669921875
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Describe how photosynthesis works in simple term",
+   "len": 145,
+   "eager|flex_attention": {
+    "kl_mean": 0.000348569812445805,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5138130187988281
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0004194711816721949,
+    "top1_disagree": 0.006896551724137931,
+    "max_abs_logit_diff": 0.46503639221191406
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0003750772311769683,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.48767662048339844
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0003254621193326753,
+    "top1_disagree": 0.006896551724137931,
+    "max_abs_logit_diff": 0.42440128326416016
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "A shop sells pens at 3 for $2. How much do 18 pe",
+   "len": 133,
+   "eager|flex_attention": {
+    "kl_mean": 0.00013764457483040658,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.7013397216796875
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00015647053942644505,
+    "top1_disagree": 0.007518796992481203,
+    "max_abs_logit_diff": 0.6354770660400391
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00015142947939553655,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.6890802383422852
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00016406796088344172,
+    "top1_disagree": 0.007518796992481203,
+    "max_abs_logit_diff": 0.6067991256713867
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Write a haiku about a quiet library.",
+   "len": 40,
+   "eager|flex_attention": {
+    "kl_mean": 0.00037178359925746916,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.4249696731567383
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0003938556648790836,
+    "top1_disagree": 0.025,
+    "max_abs_logit_diff": 0.5251593589782715
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00029756044968962667,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.3452262878417969
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0003533647861331701,
+    "top1_disagree": 0.025,
+    "max_abs_logit_diff": 0.4177665710449219
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Compare Python lists and tuples in a short table",
+   "len": 147,
+   "eager|flex_attention": {
+    "kl_mean": 0.0003445324342267043,
+    "top1_disagree": 0.006802721088435374,
+    "max_abs_logit_diff": 0.6046704649925232
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00044519778619818136,
+    "top1_disagree": 0.027210884353741496,
+    "max_abs_logit_diff": 1.44073486328125
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004905940724067948,
+    "top1_disagree": 0.006802721088435374,
+    "max_abs_logit_diff": 1.6829643249511719
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0003504422144824956,
+    "top1_disagree": 0.02040816326530612,
+    "max_abs_logit_diff": 0.7204564809799194
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Explain recursion with a simple example in JavaS",
+   "len": 146,
+   "eager|flex_attention": {
+    "kl_mean": 0.00017870985583899772,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.39397621154785156
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00016809806023558525,
+    "top1_disagree": 0.00684931506849315,
+    "max_abs_logit_diff": 0.5618724822998047
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00013941051821186117,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.8388490676879883
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0001601775062002548,
+    "top1_disagree": 0.00684931506849315,
+    "max_abs_logit_diff": 0.47890138626098633
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "What is the capital of Australia, and why is it ",
+   "len": 151,
+   "eager|flex_attention": {
+    "kl_mean": 0.0003040183261530289,
+    "top1_disagree": 0.019867549668874173,
+    "max_abs_logit_diff": 0.4318380355834961
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0004202577451996456,
+    "top1_disagree": 0.033112582781456956,
+    "max_abs_logit_diff": 0.5254154205322266
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00046919587234787595,
+    "top1_disagree": 0.019867549668874173,
+    "max_abs_logit_diff": 0.7384796142578125
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0003673270443417379,
+    "top1_disagree": 0.026490066225165563,
+    "max_abs_logit_diff": 0.5379618406295776
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Name three strategies to improve sleep quality.",
+   "len": 145,
+   "eager|flex_attention": {
+    "kl_mean": 0.00013684591856496088,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.45756053924560547
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00019007856989728994,
+    "top1_disagree": 0.013793103448275862,
+    "max_abs_logit_diff": 0.46565985679626465
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00017886015361753002,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.4417457580566406
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0001445258485859838,
+    "top1_disagree": 0.013793103448275862,
+    "max_abs_logit_diff": 0.3769855499267578
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "Solve for x: 3x + 7 = 25. Show the steps.",
+   "len": 138,
+   "eager|flex_attention": {
+    "kl_mean": 6.831789632206377e-05,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.49079322814941406
+   },
+   "eager|sdpa": {
+    "kl_mean": 9.330602335757104e-05,
+    "top1_disagree": 0.007246376811594203,
+    "max_abs_logit_diff": 0.5733044147491455
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 6.423465421666269e-05,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.4273632764816284
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 9.499401852920435e-05,
+    "top1_disagree": 0.007246376811594203,
+    "max_abs_logit_diff": 0.5965246558189392
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "하늘이 파란 이유를 세 문장으로 설명해 주세요.",
+   "len": 150,
+   "eager|flex_attention": {
+    "kl_mean": 0.0005158192912737529,
+    "top1_disagree": 0.013333333333333334,
+    "max_abs_logit_diff": 0.4755096435546875
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0006118324398994445,
+    "top1_disagree": 0.02,
+    "max_abs_logit_diff": 0.5653090476989746
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0005246974527835846,
+    "top1_disagree": 0.013333333333333334,
+    "max_abs_logit_diff": 0.6186485290527344
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0004863638679186503,
+    "top1_disagree": 0.02,
+    "max_abs_logit_diff": 0.45190179347991943
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "파이썬으로 리스트에서 중복을 제거하는 방법 두 가지를 알려 주세요.",
+   "len": 158,
+   "eager|flex_attention": {
+    "kl_mean": 0.0003711396144537986,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5159397125244141
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00036718458220174043,
+    "top1_disagree": 0.012658227848101266,
+    "max_abs_logit_diff": 0.512089729309082
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00038163005551205404,
+    "top1_disagree": 0.006329113924050633,
+    "max_abs_logit_diff": 0.4807403087615967
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0003380675246066685,
+    "top1_disagree": 0.0189873417721519,
+    "max_abs_logit_diff": 0.4255247116088867
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "사과 12개를 4명이 똑같이 나누고, 각자 1개씩 먹으면 한 사람에게 몇 개가 남나요?",
+   "len": 185,
+   "eager|flex_attention": {
+    "kl_mean": 0.00037468518759753254,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.6097683906555176
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0004824818388835804,
+    "top1_disagree": 0.010810810810810811,
+    "max_abs_logit_diff": 1.0448408126831055
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004766876230368743,
+    "top1_disagree": 0.016216216216216217,
+    "max_abs_logit_diff": 0.6985602378845215
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0005076187285217078,
+    "top1_disagree": 0.016216216216216217,
+    "max_abs_logit_diff": 0.5379447937011719
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "서울에서 가 볼 만한 곳 세 군데를 추천하고 이유를 적어 주세요.",
+   "len": 159,
+   "eager|flex_attention": {
+    "kl_mean": 0.00044459858967823055,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5749673843383789
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0004601913428156631,
+    "top1_disagree": 0.006289308176100629,
+    "max_abs_logit_diff": 0.5448088645935059
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004820433333984711,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5719442367553711
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00044413824688713504,
+    "top1_disagree": 0.006289308176100629,
+    "max_abs_logit_diff": 0.5662765502929688
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "재귀 함수가 무엇인지 초등학생도 이해할 수 있게 설명해 주세요.",
+   "len": 160,
+   "eager|flex_attention": {
+    "kl_mean": 0.00046099899336695673,
+    "top1_disagree": 0.00625,
+    "max_abs_logit_diff": 0.654414176940918
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0004514586180448532,
+    "top1_disagree": 0.025,
+    "max_abs_logit_diff": 0.6121330261230469
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004737166687846184,
+    "top1_disagree": 0.0125,
+    "max_abs_logit_diff": 0.5702557563781738
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00045302221551537516,
+    "top1_disagree": 0.0125,
+    "max_abs_logit_diff": 0.45244503021240234
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "다음 문장을 영어로 번역해 주세요: '회의는 폭풍 때문에 연기되었습니다.'",
+   "len": 145,
+   "eager|flex_attention": {
+    "kl_mean": 0.00029345565828783757,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.7129154205322266
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0005435765817247588,
+    "top1_disagree": 0.006896551724137931,
+    "max_abs_logit_diff": 1.6131653785705566
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00047321576496650434,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 1.3679041862487793
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00023614450775343796,
+    "top1_disagree": 0.006896551724137931,
+    "max_abs_logit_diff": 0.48168087005615234
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "가을비에 대한 짧은 시를 네 줄로 써 주세요.",
+   "len": 89,
+   "eager|flex_attention": {
+    "kl_mean": 0.0006307813056399313,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.49874067306518555
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0006639530484595995,
+    "top1_disagree": 0.02247191011235955,
+    "max_abs_logit_diff": 0.42882871627807617
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0007669499583458632,
+    "top1_disagree": 0.02247191011235955,
+    "max_abs_logit_diff": 0.6120572090148926
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0006485898256971595,
+    "top1_disagree": 0.02247191011235955,
+    "max_abs_logit_diff": 0.4328727722167969
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "TCP와 UDP의 차이를 세 가지만 설명해 주세요.",
+   "len": 152,
+   "eager|flex_attention": {
+    "kl_mean": 0.00035338402774773146,
+    "top1_disagree": 0.013157894736842105,
+    "max_abs_logit_diff": 0.8594455718994141
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0003683853306268391,
+    "top1_disagree": 0.006578947368421052,
+    "max_abs_logit_diff": 0.46243715286254883
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004141267977262798,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.43524014949798584
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00034295478345532164,
+    "top1_disagree": 0.006578947368421052,
+    "max_abs_logit_diff": 0.5503263473510742
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "3x + 7 = 25일 때 x를 구하는 과정을 보여 주세요.",
+   "len": 160,
+   "eager|flex_attention": {
+    "kl_mean": 0.0002961348043754697,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.831565260887146
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00032097413204610346,
+    "top1_disagree": 0.01875,
+    "max_abs_logit_diff": 0.6014223098754883
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.00027667074464261533,
+    "top1_disagree": 0.00625,
+    "max_abs_logit_diff": 0.738479733467102
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00024609318934381007,
+    "top1_disagree": 0.0125,
+    "max_abs_logit_diff": 0.5685768127441406
+   }
+  },
+  {
+   "kind": "chat",
+   "name": "건강한 수면 습관 세 가지를 알려 주세요.",
+   "len": 153,
+   "eager|flex_attention": {
+    "kl_mean": 0.0004137464208540574,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5217132568359375
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.00039382975280674457,
+    "top1_disagree": 0.006535947712418301,
+    "max_abs_logit_diff": 0.5716476440429688
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004141930661170311,
+    "top1_disagree": 0.0,
+    "max_abs_logit_diff": 0.5519227981567383
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00041530295914294675,
+    "top1_disagree": 0.006535947712418301,
+    "max_abs_logit_diff": 0.4586648941040039
+   }
+  },
+  {
+   "kind": "doc",
+   "name": "korean_research_plan",
+   "len": 6144,
+   "eager|flex_attention": {
+    "kl_mean": 0.0005365727083699312,
+    "top1_disagree": 0.016276041666666668,
+    "max_abs_logit_diff": 8.25550365447998
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0007572970134788193,
+    "top1_disagree": 0.017740885416666668,
+    "max_abs_logit_diff": 9.077083587646484
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0007657459209440276,
+    "top1_disagree": 0.019368489583333332,
+    "max_abs_logit_diff": 10.76262092590332
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.0005490097670796482,
+    "top1_disagree": 0.01611328125,
+    "max_abs_logit_diff": 3.378486156463623
+   }
+  },
+  {
+   "kind": "doc",
+   "name": "english_gpl3",
+   "len": 6144,
+   "eager|flex_attention": {
+    "kl_mean": 0.0006583365878517119,
+    "top1_disagree": 0.00927734375,
+    "max_abs_logit_diff": 6.714329242706299
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.000717039549878488,
+    "top1_disagree": 0.010579427083333334,
+    "max_abs_logit_diff": 6.362181186676025
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0007611426711567523,
+    "top1_disagree": 0.0126953125,
+    "max_abs_logit_diff": 6.808155059814453
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00045412387650382396,
+    "top1_disagree": 0.011393229166666666,
+    "max_abs_logit_diff": 1.8997529745101929
+   }
+  },
+  {
+   "kind": "doc",
+   "name": "python_code",
+   "len": 6144,
+   "eager|flex_attention": {
+    "kl_mean": 0.0002639534426028452,
+    "top1_disagree": 0.004231770833333333,
+    "max_abs_logit_diff": 7.41892147064209
+   },
+   "eager|sdpa": {
+    "kl_mean": 0.0005999949292648429,
+    "top1_disagree": 0.007161458333333333,
+    "max_abs_logit_diff": 17.454809188842773
+   },
+   "eager|eager_nocap": {
+    "kl_mean": 0.0004225180582579924,
+    "top1_disagree": 0.005859375,
+    "max_abs_logit_diff": 9.304219245910645
+   },
+   "eager_nocap|sdpa": {
+    "kl_mean": 0.00042483410106797237,
+    "top1_disagree": 0.005859375,
+    "max_abs_logit_diff": 17.38474464416504
+   }
+  }
+ ],
+ "pre_softcap_scores": [
+  {
+   "layer": 0,
+   "type": "sliding_attention",
+   "max_abs": 33.441,
+   "frac_gt_10": 0.11018517226008841,
+   "frac_gt_20": 0.0010972803873515271,
+   "frac_gt_30": 9.62526655571515e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 1,
+   "type": "full_attention",
+   "max_abs": 26.819,
+   "frac_gt_10": 0.2406265293943312,
+   "frac_gt_20": 0.0001363920318463145,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 2,
+   "type": "sliding_attention",
+   "max_abs": 33.774,
+   "frac_gt_10": 0.2698602123031717,
+   "frac_gt_20": 0.007211780327210887,
+   "frac_gt_30": 8.391258022931156e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 3,
+   "type": "full_attention",
+   "max_abs": 37.573,
+   "frac_gt_10": 0.5562399828732422,
+   "frac_gt_20": 0.006872095358129492,
+   "frac_gt_30": 3.4947549523487527e-06,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 4,
+   "type": "sliding_attention",
+   "max_abs": 24.63,
+   "frac_gt_10": 0.12811555317107812,
+   "frac_gt_20": 8.981114101601905e-06,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 5,
+   "type": "full_attention",
+   "max_abs": 36.193,
+   "frac_gt_10": 0.3555805313945252,
+   "frac_gt_20": 0.013116522189867542,
+   "frac_gt_30": 5.307988363554827e-06,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 6,
+   "type": "sliding_attention",
+   "max_abs": 40.403,
+   "frac_gt_10": 0.0728312403693038,
+   "frac_gt_20": 0.0005535910359092929,
+   "frac_gt_30": 2.0163699425690455e-06,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 7,
+   "type": "full_attention",
+   "max_abs": 36.067,
+   "frac_gt_10": 0.23262109949346074,
+   "frac_gt_20": 0.0004671578559386845,
+   "frac_gt_30": 1.514686505729045e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 8,
+   "type": "sliding_attention",
+   "max_abs": 31.817,
+   "frac_gt_10": 0.01391299949605066,
+   "frac_gt_20": 2.4384008607811714e-06,
+   "frac_gt_30": 4.9360341311359745e-09,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 9,
+   "type": "full_attention",
+   "max_abs": 30.594,
+   "frac_gt_10": 0.15221909651417337,
+   "frac_gt_20": 4.622647599658294e-05,
+   "frac_gt_30": 2.19519783438992e-09,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 10,
+   "type": "sliding_attention",
+   "max_abs": 29.884,
+   "frac_gt_10": 0.1414384843389904,
+   "frac_gt_20": 0.0002987509977699393,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 11,
+   "type": "full_attention",
+   "max_abs": 28.474,
+   "frac_gt_10": 0.11483163069691596,
+   "frac_gt_20": 1.75747538621257e-05,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 12,
+   "type": "sliding_attention",
+   "max_abs": 26.17,
+   "frac_gt_10": 0.04163640548675338,
+   "frac_gt_20": 1.725143928832023e-06,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 13,
+   "type": "full_attention",
+   "max_abs": 34.108,
+   "frac_gt_10": 0.17754936578451558,
+   "frac_gt_20": 0.0036023811117732217,
+   "frac_gt_30": 7.507576593613526e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 14,
+   "type": "sliding_attention",
+   "max_abs": 24.309,
+   "frac_gt_10": 0.009854088757949285,
+   "frac_gt_20": 6.120682322608608e-07,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 15,
+   "type": "full_attention",
+   "max_abs": 34.981,
+   "frac_gt_10": 0.23569564967635057,
+   "frac_gt_20": 0.00020524441192195435,
+   "frac_gt_30": 1.3390706789778514e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 16,
+   "type": "sliding_attention",
+   "max_abs": 30.817,
+   "frac_gt_10": 0.023033174019211993,
+   "frac_gt_20": 3.0578731442387358e-06,
+   "frac_gt_30": 2.4680170655679873e-09,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 17,
+   "type": "full_attention",
+   "max_abs": 28.546,
+   "frac_gt_10": 0.12213366872209772,
+   "frac_gt_20": 1.573298287907256e-05,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 18,
+   "type": "sliding_attention",
+   "max_abs": 32.669,
+   "frac_gt_10": 0.12172245606080626,
+   "frac_gt_20": 3.138824103989366e-05,
+   "frac_gt_30": 2.714818772124786e-08,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 19,
+   "type": "full_attention",
+   "max_abs": 34.861,
+   "frac_gt_10": 0.23215994989399477,
+   "frac_gt_20": 0.00036719513215407074,
+   "frac_gt_30": 1.1634548522266577e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 20,
+   "type": "sliding_attention",
+   "max_abs": 27.601,
+   "frac_gt_10": 0.1779453680927014,
+   "frac_gt_20": 0.00010060871567787899,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 21,
+   "type": "full_attention",
+   "max_abs": 32.966,
+   "frac_gt_10": 0.3068848683362487,
+   "frac_gt_20": 0.0035373264239510764,
+   "frac_gt_30": 1.843966180887533e-07,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 22,
+   "type": "sliding_attention",
+   "max_abs": 25.202,
+   "frac_gt_10": 0.03554658818556677,
+   "frac_gt_20": 1.352473351931257e-06,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 23,
+   "type": "full_attention",
+   "max_abs": 27.401,
+   "frac_gt_10": 0.0626886509114918,
+   "frac_gt_20": 9.823510308894892e-06,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 24,
+   "type": "sliding_attention",
+   "max_abs": 26.62,
+   "frac_gt_10": 0.12110669814303236,
+   "frac_gt_20": 2.9492803933537445e-06,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  },
+  {
+   "layer": 25,
+   "type": "full_attention",
+   "max_abs": 29.921,
+   "frac_gt_10": 0.29577873247029157,
+   "frac_gt_20": 9.783557708308996e-05,
+   "frac_gt_30": 0.0,
+   "frac_gt_50": 0.0
+  }
+ ],
+ "thresholds": [
+  10.0,
+  20.0,
+  30.0,
+  50.0
+ ]
+}

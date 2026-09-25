@@ -1,0 +1,1035 @@
+{
+ "rule": "M10_PROTOCOL.md 3.2, screened in the seeded order (seed 20260924) until 12 passed (protocol 6)",
+ "screened": 73,
+ "passed": 12,
+ "failed_1_not_an_output_report": 24,
+ "failed_2_cannot_run_on_one_12gb_card": 37,
+ "sample": [
+  {
+   "position": 12,
+   "repo": "vllm-project/vllm",
+   "number": 53019,
+   "url": "https://github.com/vllm-project/vllm/issues/53019",
+   "title": "[Bug]: NemotronParseForConditionalGeneration does not tie lm_head.weight to decoder.embed_tokens.weight, produces garbage output",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "garbage output; NemotronParse is small; reported on RTX 6000 Ada (sm_89)"
+  },
+  {
+   "position": 19,
+   "repo": "sgl-project/sglang",
+   "number": 25790,
+   "url": "https://github.com/sgl-project/sglang/issues/25790",
+   "title": "[Bug] Logprob mismatch between Prefill and Decode (Exactly at Index 96) when using FP8 KV Cache on H100",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "logprob mismatch; the report says model- and GPU-agnostic, single GPU; FP8 KV cache runs on sm_89"
+  },
+  {
+   "position": 22,
+   "repo": "sgl-project/sglang",
+   "number": 37606,
+   "url": "https://github.com/sgl-project/sglang/issues/37606",
+   "title": "[Bug] Prefill breakable CUDA graph reuses weak-ref'd break inputs across buckets → wrong greedy output / IMA; e2e validation of #37448",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "wrong greedy output; the report gives a model-free reproducer and says any CUDA GPU"
+  },
+  {
+   "position": 24,
+   "repo": "vllm-project/vllm",
+   "number": 49377,
+   "url": "https://github.com/vllm-project/vllm/issues/49377",
+   "title": "[Bug]: Token truncation leaves stale Request.block_hashes and can cause incorrect KV cache hits",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "incorrect KV cache hits; not environment-dependent per the report"
+  },
+  {
+   "position": 32,
+   "repo": "sgl-project/sglang",
+   "number": 35564,
+   "url": "https://github.com/sgl-project/sglang/issues/35564",
+   "title": "[Bug]  8 tool-call parsers give wrong or missing calls in token-by-token streaming",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "wrong or missing streamed tool calls; the mistral format has small (quantized) models"
+  },
+  {
+   "position": 37,
+   "repo": "vllm-project/vllm",
+   "number": 49449,
+   "url": "https://github.com/vllm-project/vllm/issues/49449",
+   "title": "[Bug]: V1 streaming-session rebuild leaves stale prefix-cache block hashes and can produce incorrect output",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "incorrect output from a stale prefix-cache key; reported on one RTX 4090"
+  },
+  {
+   "position": 53,
+   "repo": "huggingface/diffusers",
+   "number": 14569,
+   "url": "https://github.com/huggingface/diffusers/issues/14569",
+   "title": "fixed_large_log variance sampling returns NaNs",
+   "populations": [
+    "A",
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "NaN images from DDPMScheduler fixed_large_log; any small DDPM pipeline"
+  },
+  {
+   "position": 56,
+   "repo": "sgl-project/sglang",
+   "number": 33493,
+   "url": "https://github.com/sgl-project/sglang/issues/33493",
+   "title": "[Bug] DSPARK retrieves wrong key \"acc_linear_penalities\" from sampling_info",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "penalties ignored by a misspelt getattr key in DFLASH/DSPARK verification; MiniCPM5-2B with its DSpark drafter fits 12 GB"
+  },
+  {
+   "position": 57,
+   "repo": "vllm-project/vllm",
+   "number": 49918,
+   "url": "https://github.com/vllm-project/vllm/issues/49918",
+   "title": "[Bug]: Prefill with prompt length == 1 + num_speculative_tokens misclassified as uniform decode → FULL spec-verify cudagraph skips GDN/hybrid recurrent-state write → deterministic garbage (any spec method incl. ngram; v0.25.1 & v0.26.0)",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "garbage for recurrent-state models (the report: GDN hybrids, Mamba presumably); Nemotron-H 4B fits"
+  },
+  {
+   "position": 62,
+   "repo": "sgl-project/sglang",
+   "number": 39626,
+   "url": "https://github.com/sgl-project/sglang/issues/39626",
+   "title": "[Bug] Block-FP8 Triton matmul silently accepts an unsupported K tile and returns wrong results",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "wrong results from block-FP8 Triton matmul with an unsupported K tile; runs on sm_89"
+  },
+  {
+   "position": 68,
+   "repo": "vllm-project/vllm",
+   "number": 58138,
+   "url": "https://github.com/vllm-project/vllm/issues/58138",
+   "title": "[Bug]: Cross-encoder `padding=\"max_length\"` produces incorrect `token_type_ids`",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "incorrect token_type_ids for cross-encoders; small BERT-class models"
+  },
+  {
+   "position": 73,
+   "repo": "huggingface/transformers",
+   "number": 48967,
+   "url": "https://github.com/huggingface/transformers/issues/48967",
+   "title": "Incorrect model predictions (because of incorrect tokenization output) after the 5.0 update",
+   "populations": [
+    "A"
+   ],
+   "decision": "pass",
+   "reason": "incorrect predictions from a BERT model after the 5.0 tokenizer change; small model"
+  }
+ ],
+ "rows": [
+  {
+   "position": 1,
+   "repo": "vllm-project/vllm",
+   "number": 54785,
+   "url": "https://github.com/vllm-project/vllm/issues/54785",
+   "title": "[Bug][XPU] XPU graph capture + MTP num_speculative_tokens=4 produce non-deterministic, wrong logits at temperature=0 (k<=3 clean, eager clean, bs>=2 eager fallback clean, compile-independent)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Intel XPU (Arc B70) only"
+  },
+  {
+   "position": 2,
+   "repo": "sgl-project/sglang",
+   "number": 33187,
+   "url": "https://github.com/sgl-project/sglang/issues/33187",
+   "title": "[Bug/Design] `SGLANG_SANITIZE_NAN_LOGITS`: a fully-NaN logits row becomes a uniform-random sample — garbage streamed to clients as normal output; proposal: opt-in per-request abort",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Kimi-K3 in production; needs that model's NaN rows"
+  },
+  {
+   "position": 3,
+   "repo": "huggingface/diffusers",
+   "number": 13811,
+   "url": "https://github.com/huggingface/diffusers/issues/13811",
+   "title": "Fix incorrect batch handling in _prepare_image_ids usage in train_dreambooth_lora_flux2_img2img.py",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a training script (DreamBooth LoRA), not inference output"
+  },
+  {
+   "position": 4,
+   "repo": "vllm-project/vllm",
+   "number": 54924,
+   "url": "https://github.com/vllm-project/vllm/issues/54924",
+   "title": "[Bug]: GLM-5.3 accuracy collapses on ROCm (GSM8K 91.6% -> 14.9%) after #53155 forces MRV1",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "ROCm MI350, TP=4, GLM-5.3"
+  },
+  {
+   "position": 5,
+   "repo": "vllm-project/vllm",
+   "number": 50837,
+   "url": "https://github.com/vllm-project/vllm/issues/50837",
+   "title": "[Bug]: Qwen3.5 DFlash speculative decoding produces repetitive/degenerate output",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Qwen3.5-9B bf16 + DFlash drafter: over 12 GB"
+  },
+  {
+   "position": 6,
+   "repo": "sgl-project/sglang",
+   "number": 33828,
+   "url": "https://github.com/sgl-project/sglang/issues/33828",
+   "title": "MiniMax-H3 + DBCache: default residual_diff_threshold is inert, and T2VA cannot reach the documented quality bar",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "B200, MiniMax-H3 video"
+  },
+  {
+   "position": 7,
+   "repo": "sgl-project/sglang",
+   "number": 30570,
+   "url": "https://github.com/sgl-project/sglang/issues/30570",
+   "title": "[Bug] RuntimeError in DSA attention backend during EAGLE verify when sequence approaches `context-length` (tensor size mismatch 614406 vs 614408)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a RuntimeError (loud), not a wrong output"
+  },
+  {
+   "position": 8,
+   "repo": "sgl-project/sglang",
+   "number": 39193,
+   "url": "https://github.com/sgl-project/sglang/issues/39193",
+   "title": "[Bug] DeepSeek-V4.1 fp8 wo_a absorb GEMM is silently ~25% wrong when DEEPGEMM_SCALE_UE8M0 is false (SM121)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "SM121 (GB10), DeepSeek-V4.1"
+  },
+  {
+   "position": 9,
+   "repo": "vllm-project/vllm",
+   "number": 54547,
+   "url": "https://github.com/vllm-project/vllm/issues/54547",
+   "title": "[Bug][Quantization] Quark MXFP4 checkpoints are unloadable for multimodal models: exclude list is in checkpoint naming while vLLM matches module naming (plus 4 related name-granularity mismatches)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "checkpoint unloadable (loud)"
+  },
+  {
+   "position": 10,
+   "repo": "sgl-project/sglang",
+   "number": 40843,
+   "url": "https://github.com/sgl-project/sglang/issues/40843",
+   "title": "[Bug] Severe repetition and degenerate loops in reasoning/output when serving GLM-5.3 with DFLASH speculative decoding",
+   "populations": [
+    "A",
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "GLM-5.3"
+  },
+  {
+   "position": 11,
+   "repo": "vllm-project/vllm",
+   "number": 55766,
+   "url": "https://github.com/vllm-project/vllm/issues/55766",
+   "title": "[Bug] Qwen3.5/3.8 hybrid GDN: NaN logits after a prefix-cache hit when the previous prefill ended 4-10 tokens past a block boundary (v0.28.0, mamba cache mode align)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Qwen3.8-27B, TP2 on 2x H100"
+  },
+  {
+   "position": 12,
+   "repo": "vllm-project/vllm",
+   "number": 53019,
+   "url": "https://github.com/vllm-project/vllm/issues/53019",
+   "title": "[Bug]: NemotronParseForConditionalGeneration does not tie lm_head.weight to decoder.embed_tokens.weight, produces garbage output",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "garbage output; NemotronParse is small; reported on RTX 6000 Ada (sm_89)"
+  },
+  {
+   "position": 13,
+   "repo": "vllm-project/vllm",
+   "number": 49896,
+   "url": "https://github.com/vllm-project/vllm/issues/49896",
+   "title": "[Bug] DeepSeek-V4 on SM12x: NaN MQA logits drive top_k_per_row_prefill to emit uninitialized smem as indices -> illegal memory access",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "SM120 Blackwell, DeepSeek-V4, TP=4"
+  },
+  {
+   "position": 14,
+   "repo": "sgl-project/sglang",
+   "number": 31924,
+   "url": "https://github.com/sgl-project/sglang/issues/31924",
+   "title": "[diffusion] update_weights_from_disk transformer reload fails (shape mismatch 400) — diffusers checkpoint layout not reconciled with sglang params",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "HTTP 400 on weight update (loud)"
+  },
+  {
+   "position": 15,
+   "repo": "vllm-project/vllm",
+   "number": 42508,
+   "url": "https://github.com/vllm-project/vllm/issues/42508",
+   "title": "[Performance]: Inconsistent speculative decoding acceptance metrics between vLLM and SpecForge on Qwen3-32B baselines",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "speculative acceptance metrics, not output"
+  },
+  {
+   "position": 16,
+   "repo": "sgl-project/sglang",
+   "number": 34895,
+   "url": "https://github.com/sgl-project/sglang/issues/34895",
+   "title": "[Bug] compressed-tensors FP8 lm_head weight_scale silently dropped → degenerate repetition with unsloth/Qwen3.8-27B-NVFP4",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "NVFP4 (Blackwell) 27B"
+  },
+  {
+   "position": 17,
+   "repo": "vllm-project/vllm",
+   "number": 50821,
+   "url": "https://github.com/vllm-project/vllm/issues/50821",
+   "title": "[Bug]: Native CPU offloading can compute inconsistent num_cpu_blocks across PP ranks",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "4x B300, pipeline parallel"
+  },
+  {
+   "position": 18,
+   "repo": "sgl-project/sglang",
+   "number": 37342,
+   "url": "https://github.com/sgl-project/sglang/issues/37342",
+   "title": "[Bug] DeepSeek-V4-Flash-0731 fails to load on v0.5.17/v0.5.18: AssertionError: Hidden size mismatch in the mxfp4 MoE path (works on main)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "load fails (loud)"
+  },
+  {
+   "position": 19,
+   "repo": "sgl-project/sglang",
+   "number": 25790,
+   "url": "https://github.com/sgl-project/sglang/issues/25790",
+   "title": "[Bug] Logprob mismatch between Prefill and Decode (Exactly at Index 96) when using FP8 KV Cache on H100",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "logprob mismatch; the report says model- and GPU-agnostic, single GPU; FP8 KV cache runs on sm_89"
+  },
+  {
+   "position": 20,
+   "repo": "vllm-project/vllm",
+   "number": 46787,
+   "url": "https://github.com/vllm-project/vllm/issues/46787",
+   "title": "[Bug]: MLA indexer block_table shape mismatch when max_model_len is auto-reduced after InputBatch creation",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "shape mismatch error with GLM-5.1 (loud; huge model)"
+  },
+  {
+   "position": 21,
+   "repo": "vllm-project/vllm",
+   "number": 42395,
+   "url": "https://github.com/vllm-project/vllm/issues/42395",
+   "title": "[Bug]: Possible MooncakeConnector data inconsistency under PD load (`dst != src_post`) with `mooncake-transfer-engine-cuda13==0.3.10.post2`",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "8-GPU prefill/decode disaggregation"
+  },
+  {
+   "position": 22,
+   "repo": "sgl-project/sglang",
+   "number": 37606,
+   "url": "https://github.com/sgl-project/sglang/issues/37606",
+   "title": "[Bug] Prefill breakable CUDA graph reuses weak-ref'd break inputs across buckets → wrong greedy output / IMA; e2e validation of #37448",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "wrong greedy output; the report gives a model-free reproducer and says any CUDA GPU"
+  },
+  {
+   "position": 23,
+   "repo": "vllm-project/vllm",
+   "number": 57224,
+   "url": "https://github.com/vllm-project/vllm/issues/57224",
+   "title": "[Bug]: Silent garbage output on GPUs in Confidential Computing mode: V2 model runner's UVA views of pinned host memory are stale under CC (works with VLLM_USE_V2_MODEL_RUNNER=0)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "H100 in confidential-computing mode"
+  },
+  {
+   "position": 24,
+   "repo": "vllm-project/vllm",
+   "number": 49377,
+   "url": "https://github.com/vllm-project/vllm/issues/49377",
+   "title": "[Bug]: Token truncation leaves stale Request.block_hashes and can cause incorrect KV cache hits",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "incorrect KV cache hits; not environment-dependent per the report"
+  },
+  {
+   "position": 25,
+   "repo": "vllm-project/vllm",
+   "number": 45212,
+   "url": "https://github.com/vllm-project/vllm/issues/45212",
+   "title": "[Bug] NVFP4 MoE: missing per-expert input_scale keys load as silent zeros -> 1/0 = inf gscale -> NaN/pad-token output",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "NVFP4 MoE (Blackwell)"
+  },
+  {
+   "position": 26,
+   "repo": "sgl-project/sglang",
+   "number": 31774,
+   "url": "https://github.com/sgl-project/sglang/issues/31774",
+   "title": "[RFC] Backend, KV dtype and platform compatibility is checked case by case, and the responses are inconsistent",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "an RFC, not an output report"
+  },
+  {
+   "position": 27,
+   "repo": "vllm-project/vllm",
+   "number": 43631,
+   "url": "https://github.com/vllm-project/vllm/issues/43631",
+   "title": "[Bug]: enforce_eager=False will generate garbage tokens for InternVL2-8B",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "InternVL2-8B bf16: over 12 GB"
+  },
+  {
+   "position": 28,
+   "repo": "vllm-project/vllm",
+   "number": 44376,
+   "url": "https://github.com/vllm-project/vllm/issues/44376",
+   "title": "[Bug]: [v0.22]MooncakeStoreConnector causes incorrect KV cache memory pre-check calculation for DeepSeek models(PP2 TP8) (fallback to MHA dimension)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a memory pre-check, not output"
+  },
+  {
+   "position": 29,
+   "repo": "sgl-project/sglang",
+   "number": 36179,
+   "url": "https://github.com/sgl-project/sglang/issues/36179",
+   "title": "[Bug] When using hicache to enable L2/L3 storage in DeepSeek V4, token loop repetition occurs very frequently",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "DeepSeek V4"
+  },
+  {
+   "position": 30,
+   "repo": "sgl-project/sglang",
+   "number": 35949,
+   "url": "https://github.com/sgl-project/sglang/issues/35949",
+   "title": "[Bug] Qwen 3.8 27b NVFP4 incorrect coordinate detection on image",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "NVFP4 27B"
+  },
+  {
+   "position": 31,
+   "repo": "vllm-project/vllm",
+   "number": 49844,
+   "url": "https://github.com/vllm-project/vllm/issues/49844",
+   "title": "[Bug]: PP=2 + GlmMoeDsa: inductor compile combined with CUDA-graph capture produces garbage output; either alone is clean (v0.24 & v0.26)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "GLM-5.2 744B, PP=2"
+  },
+  {
+   "position": 32,
+   "repo": "sgl-project/sglang",
+   "number": 35564,
+   "url": "https://github.com/sgl-project/sglang/issues/35564",
+   "title": "[Bug]  8 tool-call parsers give wrong or missing calls in token-by-token streaming",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "wrong or missing streamed tool calls; the mistral format has small (quantized) models"
+  },
+  {
+   "position": 33,
+   "repo": "vllm-project/vllm",
+   "number": 44933,
+   "url": "https://github.com/vllm-project/vllm/issues/44933",
+   "title": "[Bug][vllm-omni] Qwen3-TTS crashes under concurrent TTS with ref_context_size mismatch",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a crash"
+  },
+  {
+   "position": 34,
+   "repo": "sgl-project/sglang",
+   "number": 34974,
+   "url": "https://github.com/sgl-project/sglang/issues/34974",
+   "title": "[Bug] --enable-eplb + --speculative-algorithm DSPARK crashes during draft CUDA graph capture: on_select_experts scatter_add_ dimension mismatch (layer_idx=None)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a crash"
+  },
+  {
+   "position": 35,
+   "repo": "vllm-project/vllm",
+   "number": 42118,
+   "url": "https://github.com/vllm-project/vllm/issues/42118",
+   "title": "[Bug]:  FLASHINFER_CUTLASS_MXFP4_MXFP8 produces wrong output under expert parallelism",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "expert parallelism, MXFP4"
+  },
+  {
+   "position": 36,
+   "repo": "sgl-project/sglang",
+   "number": 36822,
+   "url": "https://github.com/sgl-project/sglang/issues/36822",
+   "title": "[Bug] GPTQ Marlin MoE fails or produces NaNs with BF16 and tensor parallelism",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "tensor parallelism (MoE)"
+  },
+  {
+   "position": 37,
+   "repo": "vllm-project/vllm",
+   "number": 49449,
+   "url": "https://github.com/vllm-project/vllm/issues/49449",
+   "title": "[Bug]: V1 streaming-session rebuild leaves stale prefix-cache block hashes and can produce incorrect output",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "incorrect output from a stale prefix-cache key; reported on one RTX 4090"
+  },
+  {
+   "position": 38,
+   "repo": "vllm-project/vllm",
+   "number": 46710,
+   "url": "https://github.com/vllm-project/vllm/issues/46710",
+   "title": "[Bug] DeepSeekV4-Flash produces incorrect output with inline system messages after PR #46025 when `preserved in-place`",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "DeepSeek-V4-Flash (the model cannot run here; a render-only check is not the engine run)"
+  },
+  {
+   "position": 39,
+   "repo": "vllm-project/vllm",
+   "number": 52480,
+   "url": "https://github.com/vllm-project/vllm/issues/52480",
+   "title": "[Bug]: qwen3_5_mtp fails to load at tensor-parallel-size >= 2 (drafter weight shape mismatch)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "load fails at TP>=2"
+  },
+  {
+   "position": 40,
+   "repo": "sgl-project/sglang",
+   "number": 33720,
+   "url": "https://github.com/sgl-project/sglang/issues/33720",
+   "title": "[diffusion] MiniMax-H3 quality=high (Cache-DiT tier) topology-locked to 4xH200 — request 8xB300 audit",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a topology gate, not output"
+  },
+  {
+   "position": 41,
+   "repo": "huggingface/diffusers",
+   "number": 14194,
+   "url": "https://github.com/huggingface/diffusers/issues/14194",
+   "title": "[Bug] QwenImageEdit produces incorrect outputs with transformers >=5 due to missing mm_token_type_ids",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "QwenImageEdit (20B MMDiT + 7B VLM): over 12 GB"
+  },
+  {
+   "position": 42,
+   "repo": "sgl-project/sglang",
+   "number": 40903,
+   "url": "https://github.com/sgl-project/sglang/issues/40903",
+   "title": "[Bug] DeepSeek chunked-prefix prefill merges base-2 LSE into a natural-log merge_state_v2 (silent accuracy loss on every prefix-cache hit)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "DeepSeek MLA chunked-prefix path (huge models)"
+  },
+  {
+   "position": 43,
+   "repo": "sgl-project/sglang",
+   "number": 35440,
+   "url": "https://github.com/sgl-project/sglang/issues/35440",
+   "title": "[Bug] `mm_input_embeds` is corrupted before the draft model reads it",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "multimodal target + draft (7B+ bf16)"
+  },
+  {
+   "position": 44,
+   "repo": "vllm-project/vllm",
+   "number": 52407,
+   "url": "https://github.com/vllm-project/vllm/issues/52407",
+   "title": "[Bug]: VLLM_BATCH_INVARIANT=1 crashes NVFP4 models: emulation break_fp4_bytes device mismatch (lookup table on CPU, indices on GPU)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a crash (NVFP4)"
+  },
+  {
+   "position": 45,
+   "repo": "vllm-project/vllm",
+   "number": 52475,
+   "url": "https://github.com/vllm-project/vllm/issues/52475",
+   "title": "[Bug]: MTP speculative decoding produces repetition collapse with turboquant_* KV cache on sm120 (Qwen3.8-27B hybrid GDN)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "sm_120, NVFP4 27B"
+  },
+  {
+   "position": 46,
+   "repo": "vllm-project/vllm",
+   "number": 50577,
+   "url": "https://github.com/vllm-project/vllm/issues/50577",
+   "title": "[Bug]: AxionML/Gemma-4-12B-NVFP4 fails with shape mismatch in flashinfer_scaled_fp4_mm on RTX 5060 Ti (sm_120)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "shape mismatch error (NVFP4, sm_120)"
+  },
+  {
+   "position": 47,
+   "repo": "huggingface/transformers",
+   "number": 48947,
+   "url": "https://github.com/huggingface/transformers/issues/48947",
+   "title": "DynamicCache(offloading=True) returns wrong logits after first cache reuse on hybrid Gated-DeltaNet + attention models (e.g. Qwen3.8-27B)",
+   "populations": [
+    "A",
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Qwen3.8-27B hybrid; no small model of that architecture here"
+  },
+  {
+   "position": 48,
+   "repo": "vllm-project/vllm",
+   "number": 55546,
+   "url": "https://github.com/vllm-project/vllm/issues/55546",
+   "title": "[Bug]: One bad multimodal item (feature/placeholder mismatch) kills the entire V1 engine tree instead of failing that request",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "engine crash"
+  },
+  {
+   "position": 49,
+   "repo": "vllm-project/vllm",
+   "number": 47722,
+   "url": "https://github.com/vllm-project/vllm/issues/47722",
+   "title": "RuntimeError: shape mismatch during KV cache init with EP + DP on MoE model",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "startup error"
+  },
+  {
+   "position": 50,
+   "repo": "huggingface/transformers",
+   "number": 47595,
+   "url": "https://github.com/huggingface/transformers/issues/47595",
+   "title": "Repetition penalty is gauge-dependent. Proposing opt-in normalized variant.",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a feature request"
+  },
+  {
+   "position": 51,
+   "repo": "sgl-project/sglang",
+   "number": 39864,
+   "url": "https://github.com/sgl-project/sglang/issues/39864",
+   "title": "[Bug] OpenAI Chat Completions: Python SSE chunks have inconsistent id and created",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "SSE metadata, not model output"
+  },
+  {
+   "position": 52,
+   "repo": "vllm-project/vllm",
+   "number": 48327,
+   "url": "https://github.com/vllm-project/vllm/issues/48327",
+   "title": "[Bug]: Gibberish output with VLLM_XPU_ENABLE_XPU_GRAPH=1 on 2x Intel Arc Pro B70 Battlemage GPU",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Intel XPU"
+  },
+  {
+   "position": 53,
+   "repo": "huggingface/diffusers",
+   "number": 14569,
+   "url": "https://github.com/huggingface/diffusers/issues/14569",
+   "title": "fixed_large_log variance sampling returns NaNs",
+   "populations": [
+    "A",
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "NaN images from DDPMScheduler fixed_large_log; any small DDPM pipeline"
+  },
+  {
+   "position": 54,
+   "repo": "sgl-project/sglang",
+   "number": 36807,
+   "url": "https://github.com/sgl-project/sglang/issues/36807",
+   "title": "[Bug] fast_topk_v2 can silently return wrong top-k sets when a radix threshold bucket exceeds its 4096-entry candidate buffer (k=2048, long rows)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "fast_topk_v2 in DeepSeek sparse attention (huge models)"
+  },
+  {
+   "position": 55,
+   "repo": "vllm-project/vllm",
+   "number": 52150,
+   "url": "https://github.com/vllm-project/vllm/issues/52150",
+   "title": "[Bug][ROCm/gfx942]: GLM-5.2-FP8 — first request after GPU idle emits garbage; piecewise CUDA graph cold replay corrupts the request's own prefill (workaround: cudagraph_mode=FULL_DECODE_ONLY)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "ROCm, GLM-5.2"
+  },
+  {
+   "position": 56,
+   "repo": "sgl-project/sglang",
+   "number": 33493,
+   "url": "https://github.com/sgl-project/sglang/issues/33493",
+   "title": "[Bug] DSPARK retrieves wrong key \"acc_linear_penalities\" from sampling_info",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "penalties ignored by a misspelt getattr key in DFLASH/DSPARK verification; MiniCPM5-2B with its DSpark drafter fits 12 GB"
+  },
+  {
+   "position": 57,
+   "repo": "vllm-project/vllm",
+   "number": 49918,
+   "url": "https://github.com/vllm-project/vllm/issues/49918",
+   "title": "[Bug]: Prefill with prompt length == 1 + num_speculative_tokens misclassified as uniform decode → FULL spec-verify cudagraph skips GDN/hybrid recurrent-state write → deterministic garbage (any spec method incl. ngram; v0.25.1 & v0.26.0)",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "garbage for recurrent-state models (the report: GDN hybrids, Mamba presumably); Nemotron-H 4B fits"
+  },
+  {
+   "position": 58,
+   "repo": "sgl-project/sglang",
+   "number": 32807,
+   "url": "https://github.com/sgl-project/sglang/issues/32807",
+   "title": "[Gemma-3] RMSNorm: higher-rank q_norm/k_norm skip the fused CUDA kernel, and mixed-dtype weights return NaNs",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "mainly a missed fusion (speed); NaN only on a dtype mismatch not observed in serving"
+  },
+  {
+   "position": 59,
+   "repo": "vllm-project/vllm",
+   "number": 57716,
+   "url": "https://github.com/vllm-project/vllm/issues/57716",
+   "title": "[Bug] Kimi-K3 TP8xPP2 + DSpark spec-on: mid-decode target-forward NaN detonates MLA decode under concurrency (fp8 latent-cache bytes carry the corruption)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Kimi-K3 TP8xPP2 on B200"
+  },
+  {
+   "position": 60,
+   "repo": "vllm-project/vllm",
+   "number": 43916,
+   "url": "https://github.com/vllm-project/vllm/issues/43916",
+   "title": "[Parity with CUDA]: Add top 5-10 popular OSS models into mi355, mi325, mi300 into vLLM nightly performance  & accuracy regression testing & dashboard",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a CI feature request"
+  },
+  {
+   "position": 61,
+   "repo": "vllm-project/vllm",
+   "number": 58267,
+   "url": "https://github.com/vllm-project/vllm/issues/58267",
+   "title": "[Bug]: CPU W4A16 Whisper fails: cpu_gemm_wna16 rejects 3-D encoder activations; packed k_proj bias is synthesized incorrectly",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "the CPU backend"
+  },
+  {
+   "position": 62,
+   "repo": "sgl-project/sglang",
+   "number": 39626,
+   "url": "https://github.com/sgl-project/sglang/issues/39626",
+   "title": "[Bug] Block-FP8 Triton matmul silently accepts an unsupported K tile and returns wrong results",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "wrong results from block-FP8 Triton matmul with an unsupported K tile; runs on sm_89"
+  },
+  {
+   "position": 63,
+   "repo": "vllm-project/vllm",
+   "number": 51580,
+   "url": "https://github.com/vllm-project/vllm/issues/51580",
+   "title": "[Bug]: [ROCm] v0.26.0 release image: NaN logits from AITER fused-MoE path on gfx942 (Qwen3.5-397B-A17B-FP8) — fixed on main, requesting 0.26.x backport",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "ROCm"
+  },
+  {
+   "position": 64,
+   "repo": "sgl-project/sglang",
+   "number": 36690,
+   "url": "https://github.com/sgl-project/sglang/issues/36690",
+   "title": "[Bug] gemma-3n-E2B-it/E4B-it: degenerate output (fa3/flashinfer) or crash (triton) in multimodal serving, 0% vision accuracy",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "gemma-3n is gated (not downloadable anonymously)"
+  },
+  {
+   "position": 65,
+   "repo": "vllm-project/vllm",
+   "number": 57156,
+   "url": "https://github.com/vllm-project/vllm/issues/57156",
+   "title": "[Bug]: DeepSeek-V4.1 produces NaN with CUDA graphs on SM120/121 — dummy capture batches poison the null KV block",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "GB10"
+  },
+  {
+   "position": 66,
+   "repo": "sgl-project/sglang",
+   "number": 34209,
+   "url": "https://github.com/sgl-project/sglang/issues/34209",
+   "title": "[Bug] /v1/responses API fails with 400 when stream parameter is not specified (None vs bool type mismatch)",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "HTTP 400"
+  },
+  {
+   "position": 67,
+   "repo": "vllm-project/vllm",
+   "number": 49980,
+   "url": "https://github.com/vllm-project/vllm/issues/49980",
+   "title": "[Bug]: FlashInfer builder ValueError 'provided out is the wrong size for the accumulation' with Llama-4 chunked local attention when a prefill exceeds attention_chunk_size and max_num_seqs is small",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "a ValueError"
+  },
+  {
+   "position": 68,
+   "repo": "vllm-project/vllm",
+   "number": 58138,
+   "url": "https://github.com/vllm-project/vllm/issues/58138",
+   "title": "[Bug]: Cross-encoder `padding=\"max_length\"` produces incorrect `token_type_ids`",
+   "populations": [
+    "B"
+   ],
+   "decision": "pass",
+   "reason": "incorrect token_type_ids for cross-encoders; small BERT-class models"
+  },
+  {
+   "position": 69,
+   "repo": "sgl-project/sglang",
+   "number": 33967,
+   "url": "https://github.com/sgl-project/sglang/issues/33967",
+   "title": "[Bug] It is defined as int32 in SGLang, but the kernel within `ascend_backend` reads it as int64, leading to incorrect memory‑address access.",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Ascend NPU"
+  },
+  {
+   "position": 70,
+   "repo": "vllm-project/vllm",
+   "number": 53968,
+   "url": "https://github.com/vllm-project/vllm/issues/53968",
+   "title": "[Bug]:ling-3.0-flash-fp8 gibberish ",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "Ling-3.0-flash (large MoE)"
+  },
+  {
+   "position": 71,
+   "repo": "vllm-project/vllm",
+   "number": 52442,
+   "url": "https://github.com/vllm-project/vllm/issues/52442",
+   "title": "[Bug][ROCm] Kimi-K3 a8w4 SiTU MoE: AITER_SITUV2_A8W4 without VLLM_ROCM_USE_AITER_MOE_SITUV2_A8W4 silently produces garbage",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-2",
+   "reason": "ROCm, Kimi-K3"
+  },
+  {
+   "position": 72,
+   "repo": "vllm-project/vllm",
+   "number": 48455,
+   "url": "https://github.com/vllm-project/vllm/issues/48455",
+   "title": "HybridKVCacheCoordinator: DSpark draft-model KV-cache group's ephemeral content incorrectly vetoes GPU-tier prefix cache reuse",
+   "populations": [
+    "B"
+   ],
+   "decision": "fail-1",
+   "reason": "cache hit rate, not output"
+  },
+  {
+   "position": 73,
+   "repo": "huggingface/transformers",
+   "number": 48967,
+   "url": "https://github.com/huggingface/transformers/issues/48967",
+   "title": "Incorrect model predictions (because of incorrect tokenization output) after the 5.0 update",
+   "populations": [
+    "A"
+   ],
+   "decision": "pass",
+   "reason": "incorrect predictions from a BERT model after the 5.0 tokenizer change; small model"
+  }
+ ]
+}

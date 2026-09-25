@@ -1,0 +1,112 @@
+{
+ "meta": {
+  "created": "2026-09-23",
+  "target": "realworld/ 실제 버그 기록 파일럿(2026-09-22, 4개 엔진 이슈 100건)과 그 수치",
+  "method": "gh api -X GET만 사용(이슈 본문, 댓글, 타임라인, 연결 PR, 필요 시 커밋 diff). 쓰기 작업 없음. 원자료는 파일로 저장하지 않음",
+  "sampling_code": "rows=json.load(open('realworld/bug_labels_round1.json')); rng=random.Random(20260924); role=[r for r in rows if r['category'].startswith('R')]; other=[r for r in rows if not r['category'].startswith('R')]; s_role=rng.sample(role,20); s_other=rng.sample(other,10)",
+  "saves": ["20건 확인 뒤 1차 저장(10건 시점 저장은 누락)", "30건 확인 뒤 2차 저장", "엔진 주장 확인 뒤 최종 저장"],
+  "files_created": ["reinvestigation/audit/bug_data_audit.md", "reinvestigation/audit/bug_data_audit.json"]
+ },
+ "conclusion": "계산은 맞다. 머리 수치(50/70, 40/68, 46/50, N1 3건, 카파 0.848과 31/33, 13.9일과 12.5일, 26/24)는 결과 파일에서 그대로 다시 나온다. 표본 30건은 모두 존재하고 근거 문구와 조용함 판정은 원문과 맞으며, 엔진 주장 15개도 1차 출처로 확인된다. 그러나 역할 계열 비율은 규칙에 따라 약 55%에서 89%까지 움직이므로 '보수적 59%'는 하한이 아니다. 1차 분류는 가설을 아는 에이전트가 저장소마다 다른 규칙으로 했고, 블라인드 재분류는 분류 단계만 가설 모양의 코드북으로 다시 했으며, 내세운 카파 0.85는 가장 유리한 부분집합의 값이다. 역할 계열 표본 20건 중 5건은 역할 계열 근거로 유지되기 어렵고, 증상 26/24는 의역 제목 기반이라 실제 제목으로는 25/25다. '다수가 부품 간 사실 불일치이고 대부분 경고 없이 틀린다'는 방향은 지지되지만 '약 70%'와 '보수적 59%' 표현은 고쳐야 한다.",
+ "recalculation": [
+  {"item": "역할 계열 비율", "doc": "50/70 (71%)", "recomputed": "50/70 = 0.714 (R1 11, R2 10, R3 20, R4 9; N1 3, N2 7, N3 8, N4 30, N5 2)", "match": true, "note": "'원인이 확인된 70건'에 N5 2건 포함. N5 제외 시 50/68 = 0.735. Wilson 95% 0.60~0.81"},
+  {"item": "저장소별 비율", "doc": "94, 82, 67, 52%", "recomputed": "16/17, 9/11, 14/21, 11/21", "match": true},
+  {"item": "보수적 비율", "doc": "59%", "recomputed": "(11+8+12+9)/(17+11+19+21) = 40/68 = 0.588", "match": true, "note": "SGLang 8/11은 bugs_sglang.md에 없는 값(파일에는 8/10, 14/24). 역할 계열에서 빼기만 한 값이며 경쟁 조건 6건 중 3건은 남김"},
+  {"item": "조용함", "doc": "46/50 (92%)", "recomputed": "yes 46, no 2(SGLang #30176, transformers #44671), unclear 2(vLLM #52276, transformers #45910)", "match": true, "note": "블라인드와 조용함 일치 42/48, 블라인드 기준 역할 계열 조용함 24/27. RESEARCH_PLAN 3.1의 출처 표기(reliability.json)는 틀림"},
+  {"item": "100건 전체 조용함", "doc": "88%", "recomputed": "yes 88, no 6, unclear 6", "match": true, "note": "버그 아닌 사례(vLLM #49692, #50435)도 포함"},
+  {"item": "수치 결함(N1)", "doc": "3건", "recomputed": "llama.cpp #25734, #25027, #23574", "match": true, "note": "같은 48건에서 1차 N1 1건, 블라인드 N1 4건"},
+  {"item": "카파와 일치", "doc": "0.85, 94%(33건)", "recomputed": "31/33, 카파 0.848", "match": true, "note": "9범주 일치 0.771 카파 0.730, 3범주 0.833 카파 0.725, 48건 역할/비역할 0.875 카파 0.749"},
+  {"item": "같은 표본 역할 비중", "doc": "76% 대 69%", "recomputed": "25/33 대 27/39", "match": true},
+  {"item": "수정 기간 중앙값", "doc": "13.9일, 12.5일", "recomputed": "13.9, 12.5 (p75 36.1, 37.7; 표준 분위 38.9, 38.7)", "match": true, "note": "Mann-Whitney p 약 0.97. 실제로는 보고부터 종료까지의 기간"},
+  {"item": "증상 분류", "doc": "깨진 출력 26, 멀쩡해 보이는 오답 24", "recomputed": "파일 26/24, 실제 GitHub 제목 기준 25/25", "match": false, "note": "symptom_tally.py가 bugs_*.md의 의역 제목을 사용. 차이는 vLLM #41207. 두 번째 범주는 잔여 범주이며 #51063(본문에 gibberish)과 출력 증상 없는 #45381, #45910 포함"},
+  {"item": "제목 기준 출력 오류", "doc": "714건(21개월)", "recomputed": "280+183+75+176 = 714. 검색 total_count 재실행: vLLM 566, SGLang 351(문서 350), transformers 200, llama.cpp 258(문서 259)", "match": true, "note": "필터가 저장소마다 다름. 기간은 20.7개월이지만 분류한 100건은 최근 종료분"},
+  {"item": "이슈 존재와 시각", "doc": "-", "recomputed": "100건 모두 closed/completed. 접근 가능한 99건의 created_at, closed_at이 timing json과 일치", "match": true, "note": "llama.cpp #21855는 현재 404"}
+ ],
+ "procedure_assessment": {
+  "who_classified": "저장소마다 가설을 아는 에이전트 1명이 검색, 필터, 선정, 원인 분류, 조용함 판정을 모두 수행. 당시 교차 검증 없음",
+  "blind_recheck": "48건(저장소당 12)을 평가자 2명이 나눠 1인 1건으로 재분류. 범주는 중립 문자지만 정의는 역할 분류 체계를 그대로 옮김. 지시문 미보존. 분류 단계만 재검토하고 필터, 선정, N4 규칙은 재검토하지 않음",
+  "definition_breadth": "R1~R4가 무시된 설정, 모든 인덱스와 위치 불일치, 모든 배치·dtype·스케일·축 불일치, 낡은 상태와 동기화 경쟁까지 흡수. 비역할은 산술, 플랫폼, 토크나이저로 좁음. 2.1절 정의(두 부품 사이)와 달리 한 함수 안 축 오류도 R3로 셈. 대조군 재검토는 비역할 20건 중 12건을 역할로 재해석(89%)",
+  "cross_repo_inconsistency": ["N4 규칙: vLLM은 미병합 PR의 기전도 원인으로 셈(†), SGLang은 N4", "포함 기준: vLLM은 내부 값만 보고한 이슈, 코드 읽기 보고, API 계층 문제를 제외했으나 transformers(#45381, #45910), llama.cpp(#25027), SGLang(#30188)은 포함"],
+  "duplicates": "llama.cpp #21589, #21715, #21734(수정 #21638 공유), vLLM #47087과 #43559(#51113 공유). 결함 단위로 세면 47/66 = 0.712"
+ },
+ "sensitivity": [
+  {"rule": "문서 기준", "role": 50, "denominator": 70, "share": 0.714},
+  {"rule": "A 경쟁·동기화 6건 비역할(vLLM #42182, #48831, llama.cpp #28537, #23321, #23717, #20097)", "role": 44, "denominator": 70, "share": 0.629},
+  {"rule": "B 한 부품 안 축 오류 2건 N1(transformers #47246, #47475)", "role": 42, "denominator": 70, "share": 0.6},
+  {"rule": "C 미출시 브랜치 1건 제외(SGLang #30176)", "role": 41, "denominator": 69, "share": 0.594},
+  {"rule": "D 토크나이저 클래스 경계 1건 N3(vLLM #41207)", "role": 40, "denominator": 69, "share": 0.58},
+  {"rule": "E 원인 약한 확인 5건 제외(vLLM #52276, #41472, #40018, SGLang #27125, llama.cpp #26845)", "role": 35, "denominator": 64, "share": 0.547},
+  {"rule": "참고: 문서의 확장 해석(replay_control.md)", "role": 62, "denominator": 70, "share": 0.886}
+ ],
+ "sample_summary": {
+  "role_20": {"exists": 20, "root_cause_confirmed": 18, "root_cause_inferred": 1, "root_cause_unconfirmed": 1, "silent_consistent": 20, "verdict": {"맞음": 10, "맞음(단서)": 5, "포함 기준 문제": 3, "분류 이견": 2}, "holds_as_role_evidence": "15/20 (0.75, Wilson 0.53~0.89)", "holds_and_confirmed": "13/20"},
+  "other_10": {"exists": 10, "label_consistent_with_rules": 10, "with_caveat": 4},
+  "evidence_phrases": "30/30 원문에 존재(2건은 서식 차이)"
+ },
+ "sample_role": [
+  {"idx": 1, "repo": "vllm-project/vllm", "issue": 52276, "doc_category": "R1 †", "doc_silent": "unclear", "exists": true, "root_cause": "미확정", "fix": "PR #52232 미병합(열림), 이슈보다 약 5시간 먼저 생성, 타임라인 연결 없음. 설정 우회로 보고자가 종료", "silent_check": "unclear 타당", "my_category": "R1(넓은 정의), 사실상 실패 신호 전파 누락", "verdict": "맞음(단서)", "note": "원인 미확정인데 머리 수치 '원인 확인'에 포함"},
+  {"idx": 2, "repo": "ggml-org/llama.cpp", "issue": 25382, "doc_category": "R1", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #25202 병합 2026-07-07, PR 작성자가 같은 날 이슈 종료, PR에 사용자 해결 확인", "silent_check": "맞음", "my_category": "역할 계열(R1 또는 R3; 블라인드 F)", "verdict": "맞음", "note": "bugs_llamacpp.md 메모 오류: #26423은 보고자가 철회함. '유지보수자가 #25202가 고친다고 말함' 댓글은 이슈에 없음", "quote": {"text": "I have to correct this report.", "src": "https://github.com/ggml-org/llama.cpp/issues/26423"}},
+  {"idx": 3, "repo": "huggingface/transformers", "issue": 45381, "doc_category": "R2", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #45400 병합 2026-04-14(Fixes #45381). 문서 표에는 수정 PR 미기재", "silent_check": "맞음(출력 증상 자체가 미보고)", "my_category": "R2", "verdict": "포함 기준 문제", "note": "디버거로 본 내부 위치 번호만 보고. vLLM 규칙이면 제외 대상"},
+  {"idx": 4, "repo": "ggml-org/llama.cpp", "issue": 26845, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "추정", "fix": "연결 PR 없음. 외부 기여자 분석, PR #26336(2026-08-21 병합) 연결은 추정. 보고자가 새 빌드에서 해결 확인", "silent_check": "맞음", "my_category": "R3(분석이 맞다면)", "verdict": "맞음(단서)", "note": "유지보수자가 기전을 확인하지 않음"},
+  {"idx": 5, "repo": "ggml-org/llama.cpp", "issue": 23717, "doc_category": "R4", "doc_silent": "yes", "exists": true, "root_cause": "확인(유지보수자 지목 + 병합 수정)", "fix": "PR #23690 병합 2026-05-26", "silent_check": "맞음", "my_category": "동시성(PDL 동기화 누락 경쟁). 넓은 TIME 정의에서만 R4", "verdict": "맞음(단서)"},
+  {"idx": 6, "repo": "vllm-project/vllm", "issue": 48611, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #48642 병합 2026-07-16, 협업자가 수정으로 명시하고 종료", "silent_check": "맞음(DCP 없을 때)", "my_category": "R3", "verdict": "맞음"},
+  {"idx": 7, "repo": "huggingface/transformers", "issue": 45242, "doc_category": "R1", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #45312 병합 2026-04-09, 유지보수자 명시", "silent_check": "맞음", "my_category": "R1", "verdict": "맞음", "note": "주 증상은 캐시 없는 forward"},
+  {"idx": 8, "repo": "huggingface/transformers", "issue": 44155, "doc_category": "R2", "doc_silent": "yes", "exists": true, "root_cause": "확인(유지보수자 설명)", "fix": "PR #43538 병합 2026-03-30(이슈 종료 5일 뒤)", "silent_check": "맞음", "my_category": "R2", "verdict": "맞음"},
+  {"idx": 9, "repo": "vllm-project/vllm", "issue": 50681, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #50685 병합 2026-08-14(Fixes #50681)", "silent_check": "맞음(요청 성공, 출력만 깨짐)", "my_category": "R3", "verdict": "맞음"},
+  {"idx": 10, "repo": "huggingface/transformers", "issue": 47246, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(수정은 커밋 이력에서 찾음)", "fix": "커밋 a79421ace4(PR #47452, 2026-07-24)가 문제 줄 제거. 이슈는 stale 봇 종료. 보고자가 PR #47250 스레드에서 해결 확인", "silent_check": "맞음", "my_category": "N1(한 함수 안 합산 축 오류)", "verdict": "분류 이견", "note": "RESEARCH_PLAN 2.1의 '두 부품 사이' 정의에 맞지 않음. 블라인드 평가자도 N1"},
+  {"idx": 11, "repo": "sgl-project/sglang", "issue": 30176, "doc_category": "R1", "doc_silent": "no", "exists": true, "root_cause": "확인(보고자 분석 + main 코드)", "fix": "결함은 미병합 브랜치 #30042에 있었음. main 최초 지원 PR #30275(2026-07-07 병합)가 처음부터 oe_* 매핑 포함(#30202는 열린 채, #30042는 미병합 종료)", "silent_check": "no 맞음", "my_category": "R1(포함한다면)", "verdict": "포함 기준 문제", "note": "출시 코드의 버그가 아님"},
+  {"idx": 12, "repo": "sgl-project/sglang", "issue": 31490, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #31727 병합 2026-08-02(Fixes #31490)", "silent_check": "맞음", "my_category": "R3", "verdict": "맞음"},
+  {"idx": 13, "repo": "huggingface/transformers", "issue": 47752, "doc_category": "R1", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #47953 병합 2026-08-18(Fixes #47752)", "silent_check": "맞음", "my_category": "R1/PRECEDENCE(포함한다면)", "verdict": "포함 기준 문제", "note": "재현은 설정 값 assert, 출력 오류 미제시. 유지보수자 한 명은 처음에 현 우선순위가 합리적이라고 봄. 경계 사례"},
+  {"idx": 14, "repo": "ggml-org/llama.cpp", "issue": 21715, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정, 보고자 검증)", "fix": "PR #21638 병합 2026-04-16", "silent_check": "맞음(일부 멈춤)", "my_category": "R3", "verdict": "맞음(단서)", "note": "#21589, #21734와 같은 결함 3건 중복 집계"},
+  {"idx": 15, "repo": "sgl-project/sglang", "issue": 34227, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #34294 병합 2026-08-10", "silent_check": "맞음", "my_category": "R3", "verdict": "맞음"},
+  {"idx": 16, "repo": "sgl-project/sglang", "issue": 31482, "doc_category": "R2", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #31901 병합 2026-08-03(fix #31482)", "silent_check": "맞음", "my_category": "R2", "verdict": "맞음"},
+  {"idx": 17, "repo": "huggingface/transformers", "issue": 44671, "doc_category": "R1", "doc_silent": "no", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #44931 병합 2026-03-23", "silent_check": "no 맞음(LOAD REPORT MISSING)", "my_category": "R1", "verdict": "맞음"},
+  {"idx": 18, "repo": "vllm-project/vllm", "issue": 42007, "doc_category": "R3", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #42120 병합 2026-06-19(보고자 작성)", "silent_check": "맞음", "my_category": "R3/DTYPE", "verdict": "맞음"},
+  {"idx": 19, "repo": "ggml-org/llama.cpp", "issue": 23321, "doc_category": "R4", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #26040 병합 2026-08-20(Fixes #23321)", "silent_check": "맞음", "my_category": "동시성(비동기 분할 간 메모리 재사용 경쟁). 넓은 TIME 정의에서만 R4", "verdict": "맞음(단서)"},
+  {"idx": 20, "repo": "vllm-project/vllm", "issue": 41207, "doc_category": "R1 §", "doc_silent": "yes", "exists": true, "root_cause": "확인(유지보수자 설명 + 병합 수정)", "fix": "vLLM PR #41460(2026-05-05, v4: model_type 재설정), transformers PR #45739(2026-05-04, v5: 허브 토크나이저 클래스 오류)", "silent_check": "맞음", "my_category": "R1과 N3의 경계", "verdict": "분류 이견", "note": "실제 제목은 'MM accuracy issue caused by transformers upgrade'. 문서 제목의 'broken'은 원문에 없고 증상 집계를 바꿈. 출력에 바이트 BPE 표지가 그대로 나옴. 같은 연구가 transformers의 토크나이저 클래스 문제는 N3로 셈"}
+ ],
+ "sample_other": [
+  {"idx": 1, "repo": "sgl-project/sglang", "issue": 30188, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "미병합 PR #30187만 있음", "fix": "없음(봇 종료)", "silent_check": "맞음(3개 하위 문제 중 1개는 크래시)", "my_category": "N4(규칙상). 문서의 대안 N3는 부적절(스트리밍 오프셋 문제로 R2 쪽)", "verdict": "맞음(단서)", "note": "API 계층 문제. vLLM 규칙이면 표본 제외"},
+  {"idx": 2, "repo": "sgl-project/sglang", "issue": 36371, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "보고자 분석과 우회 실험만 있음", "fix": "없음(보고자가 2분 뒤 종료)", "silent_check": "맞음", "my_category": "N4(규칙상), 기전은 R3", "verdict": "맞음(단서)", "note": "vLLM 규칙(†)이면 역할 계열. 저장소 간 규칙 불일치"},
+  {"idx": 3, "repo": "vllm-project/vllm", "issue": 29341, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "유지보수자가 사용자 오류로 판단", "fix": "없음", "silent_check": "맞음", "my_category": "N4", "verdict": "맞음", "note": "경고 없이 쓰레기를 내는 API 계약 문제라 연구에는 의미 있는 사례지만 분모 밖", "quote": {"text": "I believe that in this case it was user error.", "src": "https://github.com/vllm-project/vllm/issues/29341"}},
+  {"idx": 4, "repo": "vllm-project/vllm", "issue": 46347, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "없음", "fix": "보고자가 수정 내용 없이 해결됐다고만 쓰고 종료", "silent_check": "맞음", "my_category": "N4", "verdict": "맞음"},
+  {"idx": 5, "repo": "ggml-org/llama.cpp", "issue": 25734, "doc_category": "N1", "doc_silent": "yes", "exists": true, "root_cause": "확인(병합 수정)", "fix": "PR #27726 병합 2026-08-26", "silent_check": "맞음", "my_category": "N1 또는 역할 계열(호스트 타일 설정과 셰이더 불변식 불일치)", "verdict": "맞음(단서)", "note": "가설과 반대 방향의 경계 판정"},
+  {"idx": 6, "repo": "sgl-project/sglang", "issue": 25882, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "보고자 추정 + 미병합 PR #27635(열림)", "fix": "없음(봇 종료)", "silent_check": "맞음", "my_category": "N4(규칙상), 기전은 R3", "verdict": "맞음(단서)", "note": "#36371과 같은 규칙 불일치"},
+  {"idx": 7, "repo": "huggingface/transformers", "issue": 44945, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "없음", "fix": "없음(stale 봇 종료)", "silent_check": "불분명이 더 정확(블라인드 B도 unclear)", "my_category": "N4", "verdict": "맞음"},
+  {"idx": 8, "repo": "sgl-project/sglang", "issue": 33223, "doc_category": "N4", "doc_silent": "unclear", "exists": true, "root_cause": "없음", "fix": "없음(보고자가 댓글 없이 종료)", "silent_check": "unclear 타당", "my_category": "N4(버그인지도 불명)", "verdict": "맞음"},
+  {"idx": 9, "repo": "vllm-project/vllm", "issue": 50435, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "보고자가 배포 설정 불일치로 철회", "fix": "없음", "silent_check": "해당 없음(버그 아님)", "my_category": "N4", "verdict": "맞음"},
+  {"idx": 10, "repo": "sgl-project/sglang", "issue": 29683, "doc_category": "N4", "doc_silent": "yes", "exists": true, "root_cause": "비결정적 합산으로 좁혔으나 수정 없음", "fix": "없음(봇 종료)", "silent_check": "정확도 모드는 맞음, 다른 모드는 크래시", "my_category": "N4(대안 N5)", "verdict": "맞음"}
+ ],
+ "engine_claims": [
+  {"id": 1, "claim": "vLLM FA 백엔드는 밀집 마스크 없이 길이, 블록 표, 윈도, softcap, 싱크를 넘기고 K/V는 KV 헤드 수 그대로", "source_doc": "engines_notes 1.1, 요약 12줄", "evidence": "vllm@8c1557a flash_attn.py 454-470(마스크 필드 없음), 1388-1413(cu_seqlens_q, seqused_k, block_table, window_size, softcap, s_aux), 1180-1186. 다른 호출 6곳도 길이 인자, 밀집 마스크 인자 없음", "verdict": "확인"},
+  {"id": 2, "claim": "SGLang 메타데이터는 길이, 누적 길이, 윈도, 페이지 표를 담고 층마다 재사용", "source_doc": "engines_notes 1.3", "evidence": "sglang@970e946 flashattention_backend.py 69-95", "verdict": "확인"},
+  {"id": 3, "claim": "TensorRT-LLM은 마스크를 CAUSAL/FULL 열거형(+CUSTOM)으로 두고 윈도와 싱크를 인자로 넘김", "source_doc": "engines_notes 1.4", "evidence": "TensorRT-LLM@f9e3e06 interface.py 881-920. attention_mask_data 텐서 선택지도 있음", "verdict": "확인"},
+  {"id": 4, "claim": "FlashInfer plan()은 window_left, logits_soft_cap, GQA를 받고 CUDA Graph와 torch.compile 안에서 못 씀", "source_doc": "engines_notes 1.2, 5.2", "evidence": "flashinfer@d7a7447 decode.py 1428(plan), 1528-1532(docstring)", "verdict": "확인"},
+  {"id": 5, "claim": "llama.cpp는 유효성, 인과, SWA, ALiBi를 호스트에서 채운 KQ 마스크로 넘기고 GQA는 브로드캐스트", "source_doc": "engines_notes 1.5, 요약 13줄", "evidence": "llama.cpp@9655061 llama-kv-cache.cpp 1541-1572, 1746-1787; @37b53fd ggml.h 2476-2495", "verdict": "확인(단서)", "note": "같은 헤더에 명시 힌트 ggml_flash_attn_ext_set_n_kv_max가 생겨 DSV4 경로에서는 '마스크로만'이 완전하지 않음"},
+  {"id": 6, "claim": "Ollama는 llama-server를 감싸므로 로컬 GPU 경로는 llama.cpp", "source_doc": "engines_notes 1.5, 4; REALWORLD 2절 표", "evidence": "ollama@98acec40(2026-09-15) llm/llama_server.go 1-13", "verdict": "확인(단서)", "note": "같은 커밋에 MLX 러너(x/mlxrunner)도 있음"},
+  {"id": 7, "claim": "transformers SDPA는 마스크가 있으면 repeat_kv로 K/V를 복사하고 softcap은 처리하지 않음", "source_doc": "engines_notes 1.6, 2.2", "evidence": "transformers@2b29630 sdpa_attention.py 27-36, 97-102. softcap 언급 0, 나머지 인자는 **kwargs로 받아 무시", "verdict": "확인(정적 읽기)"},
+  {"id": 8, "claim": "Gemma 2 첫날 vLLM이 softcap 제거, SWA 무시, 4K 절단. 전체 문맥까지 약 5개월", "source_doc": "REALWORLD 2절 표", "evidence": "vLLM PR #5908 병합 2024-06-27, PR #10584 병합 2024-11-23", "verdict": "확인(단서)", "note": "#5908은 경고로 알린다고 명시(조용하지 않음). softcap은 2024-07-04 #6051로 FlashInfer에서 복구"},
+  {"id": 9, "claim": "Llama 4 청크 어텐션이 조용히 꺼짐, 32K 0.000에서 0.944, 2025-07-23 수정", "source_doc": "REALWORLD 2절 표", "evidence": "vLLM PR #21419 병합 2025-07-23, 본문 표", "verdict": "확인"},
+  {"id": 10, "claim": "MLA 지원 vLLM 약 7개월, llama.cpp 약 10.5개월", "source_doc": "REALWORLD 2절 표", "evidence": "vLLM #4650(2024-06-28) → #12528(2025-01-31, 첫 MLA 병합); llama.cpp #7519(2024-05-28) → #12801(2025-04-15), 앞선 #11446은 미병합", "verdict": "확인(단서)", "note": "기간은 각 엔진의 첫 지원 기준. 모델 공개(2024-05) 기준이면 더 김"},
+  {"id": 11, "claim": "gpt-oss 싱크: llama.cpp 첫날 vec 커널만, 3일 뒤 텐서 코어, RTX 4090 프리필 최대 3.99배", "source_doc": "REALWORLD 2절 표", "evidence": "llama.cpp #15091 병합 2025-08-05, #15157 병합 2025-08-08 표(ubatch>=2048 3.99, ubatch 1 1.02, RTX 3090 최대 6.02)", "verdict": "확인"},
+  {"id": 12, "claim": "llama.cpp SWA는 2024-07부터 마스크로 흉내, 요청 뒤 약 20개월에 실제 SWA 캐시", "source_doc": "REALWORLD 2절 표", "evidence": "#3377 2023-09-28 열림, #8227 2024-07-01 병합, #13194 2025-05-20 병합(19.7개월)", "verdict": "확인"},
+  {"id": 13, "claim": "vLLM 어텐션 백엔드 44개, SGLang 27개", "source_doc": "REALWORLD 2절 표, engines 2.9", "evidence": "vLLM AttentionBackendEnum 44항목(NO_ATTENTION, CUSTOM 포함); SGLang *_backend.py 27개(base_attn_backend.py, tbo_backend.py 등 기반과 래퍼 포함)", "verdict": "숫자 확인, 해석 다소 과장"},
+  {"id": 14, "claim": "llama.cpp CUDA 마스크 훑기: 부담 1% 미만, 최대 1.18배, 4090 1.02배, CPU 선계산은 가치 없다고 판단", "source_doc": "REALWORLD 2절", "evidence": "llama.cpp #14924 병합 2025-07-30 본문과 표(RX 6800 1.18, P40 1.10, RTX 4090 1.02)", "verdict": "확인"},
+  {"id": 15, "claim": "DeepSeek V4 명시 힌트로 CPU 32K 1.19배, 524K 2.03배", "source_doc": "REALWORLD 2절", "evidence": "llama.cpp #27970 병합 2026-09-02 본문과 표", "verdict": "수치 확인, 해석 과장", "note": "기준선은 이전 master(마스크 기반 밀집 계산)이지 '재발견' 경로가 아님"}
+ ],
+ "problems": [
+  "역할 계열 비율은 규칙에 따라 약 55%에서 89%까지 움직인다. '약 70%(보수적 59%)'는 이 폭을 감추며 59%는 하한이 아니다.",
+  "1차 분류는 가설을 아는 에이전트 1명이 저장소마다 검색부터 조용함 판정까지 모두 했고, 포함 기준과 N4 규칙이 저장소마다 달랐다.",
+  "블라인드 재분류는 분류 단계만, 가설 모양의 코드북으로, 1건 1평가자로 했고 지시문이 남아 있지 않다. 머리 카파 0.85는 48건 중 33건의 가장 유리한 값이다(9범주 0.73).",
+  "역할 계열 표본 20건 중 5건은 근거로 유지되기 어렵다(분류 이견: transformers #47246, vLLM #41207; 포함 기준: transformers #45381, SGLang #30176, transformers #47752).",
+  "'원인이 확인된 70건'에 N5 2건이 들어 있고, 역할 계열 50건 중 5건은 원인이 추정이거나 미병합 PR에만 있다.",
+  "증상 26/24는 의역 제목 기반으로 실제 제목으로는 25/25이며, '멀쩡해 보이는 오답'은 잔여 범주다. 이 값이 PUBLIC_SUMMARY.md에 실렸다.",
+  "조용함(오류·경고 없음)과 그럴듯함은 다르다. 역할 계열의 절반가량은 눈에 띄게 깨진 출력이었고, 100건 기준 88%에는 버그 아닌 사례가 섞여 있다.",
+  "분류한 100건은 최근 종료분(주로 2026년 2~9월)이라 '21개월'은 후보 기간일 뿐이다. 같은 결함 중복 집계가 있다.",
+  "'수정 기간'은 종료까지의 기간이다(봇 종료, 종료 뒤 병합 포함).",
+  "수치 결함 3건은 규칙에 민감하다(같은 48건에서 블라인드 N1 4건, 1차 1건).",
+  "문서 사실·출처 오류: bugs_llamacpp.md #25382 메모(#26423 철회 누락), bugs_vllm.md #41207 의역 제목, RESEARCH_PLAN 3.1의 출처 표기, SGLang 8/11을 '제시된 최저 해석'이라 부름.",
+  "엔진 주장은 대체로 정확하나 백엔드 수 해석, #27970의 '재발견 대 선언' 해석, Gemma 2 경고 사실, Ollama MLX 경로가 빠지거나 과장됐다.",
+  "이 검증의 한계: 표본 30건만 직접 읽었고, 민감도 표 일부는 문서의 기전 설명에 기댔으며, 분류 판단은 검증 목적을 아는 1인의 판단이다."
+ ]
+}

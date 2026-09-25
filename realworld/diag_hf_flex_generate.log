@@ -1,0 +1,196 @@
+W0922 21:39:41.995000 779 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 21:39:42.043000 779 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 4034.64it/s]
+{"prompt_tokens": 17, "flex_vs_sdpa": {"identical_tokens": true, "first_divergence": null, "max_logit_diff_before_divergence": 0.4375}, "flex_fixed_vs_sdpa": {"identical_tokens": true, "first_divergence": null, "max_logit_diff_before_divergence": 0.4375}, "flex_vs_flex_fixed": {"identical_tokens": true, "first_divergence": null, "max_logit_diff_before_divergence": 0.25}}
+{"prompt_tokens": 19, "flex_vs_sdpa": {"identical_tokens": true, "first_divergence": null, "max_logit_diff_before_divergence": 0.5}, "flex_fixed_vs_sdpa": {"identical_tokens": true, "first_divergence": null, "max_logit_diff_before_divergence": 0.4375}, "flex_vs_flex_fixed": {"identical_tokens": true, "first_divergence": null, "max_logit_diff_before_divergence": 0.5}}
+{"prompt_tokens": 29, "flex_vs_sdpa": {"identical_tokens": false, "first_divergence": 16, "max_logit_diff_before_divergence": 0.375}, "flex_fixed_vs_sdpa": {"identical_tokens": false, "first_divergence": 16, "max_logit_diff_before_divergence": 0.640625}, "flex_vs_flex_fixed": {"identical_tokens": false, "first_divergence": 38, "max_logit_diff_before_divergence": 0.30078125}}
+Traceback (most recent call last):
+  File "<workspace>/realworld/diag_hf_flex_generate.py", line 93, in <module>
+    main()
+  File "<workspace>/realworld/diag_hf_flex_generate.py", line 78, in main
+    n_prompt, seq, scores = run(model, tok, p, impl, fixed)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/realworld/diag_hf_flex_generate.py", line 51, in run
+    out = model.generate(ids, max_new_tokens=NEW, do_sample=False, cache_implementation="static",
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/generation/utils.py", line 2802, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/generation/utils.py", line 3002, in _sample
+    outputs = self._prefill(
+              ^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/generation/utils.py", line 4109, in _prefill
+    return self(**model_inputs, return_dict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 482, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 286, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 413, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/modeling_layers.py", line 109, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 307, in forward
+    hidden_states, _ = self.self_attn(
+                       ^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 266, in forward
+    attn_output, attn_weights = attention_interface(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/integrations/flex_attention.py", line 320, in flex_attention_forward
+    flex_attention_output = compile_friendly_flex_attention(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/transformers/integrations/flex_attention.py", line 124, in compile_friendly_flex_attention
+    return flex_attention_compiled(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1278, in compile_wrapper
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1192, in _compile_fx_inner
+    raise InductorError(e, currentframe()).with_traceback(
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1169, in _compile_fx_inner
+    mb_compiled_graph = fx_codegen_and_compile(
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 2001, in fx_codegen_and_compile
+    return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1660, in codegen_and_compile
+    graph.run(*example_inputs)
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/graph.py", line 1135, in run
+    return super().run(*args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/fx/interpreter.py", line 197, in run
+    self.env[node] = self.run_node(node)
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2062, in run_node
+    result = super().run_node(n)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/fx/interpreter.py", line 294, in run_node
+    return getattr(self, n.op)(n.target, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/graph.py", line 1567, in call_function
+    raise LoweringException(
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/graph.py", line 1544, in call_function
+    out = lowerings[target](*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/lowering.py", line 525, in wrapped
+    out = decomp_fn(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/kernel/flex/flex_attention.py", line 293, in flex_attention
+    return create_flex_decoding_kernel(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/kernel/flex/flex_decoding.py", line 387, in create_flex_decoding_kernel
+    raise_flex_decoding_kernel_options_error(
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_inductor/kernel/flex/flex_decoding.py", line 52, in raise_flex_decoding_kernel_options_error
+    raise ValueError(
+torch._inductor.exc.InductorError: LoweringException: ValueError: Invalid FlexAttention decode kernel options: Q and KV block sizes must be divisible by the selected tile sizes. Got SPARSE_Q_BLOCK_SIZE=128, SPARSE_KV_BLOCK_SIZE=128, and BLOCK_M=512, BLOCK_N=64. Pass compatible values with kernel_options. Available decode tuning options are BLOCK_M, BLOCK_N, num_warps, and num_stages; use the fwd_ prefix to set decode-only options. For example: kernel_options={'fwd_BLOCK_M': 32, 'fwd_BLOCK_N': 64, 'fwd_num_stages': 1, 'fwd_num_warps': 4}. If you did not pin these options, compiling with mode='max-autotune-no-cudagraphs' can also fix this by trying more FlexAttention configs.
+  target: flex_attention
+  args[0]: TensorBox(StorageBox(
+    InputBuffer(name='arg1_1', layout=FixedLayout('cuda:0', torch.bfloat16, size=[1, 32, s37, 128], stride=[4096*s37, 128, 4096, 1]))
+  ))
+  args[1]: TensorBox(StorageBox(
+    InputBuffer(name='arg3_1', layout=FixedLayout('cuda:0', torch.bfloat16, size=[1, 8, s0, 128], stride=[1024*s0, 128*s0, 128, 1]))
+  ))
+  args[2]: TensorBox(StorageBox(
+    InputBuffer(name='arg5_1', layout=FixedLayout('cuda:0', torch.bfloat16, size=[1, 8, s43, 128], stride=[1024*s43, 128*s43, 128, 1]))
+  ))
+  args[3]: Subgraph(name='sdpa_score0', graph_module=<lambda>(), inductor_config_patches=None, graph=None)
+  args[4]: (s37, s71, TensorBox(StorageBox(
+    InputBuffer(name='arg10_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1], stride=[1, 1, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg7_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1, s72], stride=[s72, s72, s72, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg11_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1], stride=[1, 1, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg13_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1, s4], stride=[s4, s4, s4, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg15_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s56], stride=[s56, s56, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg17_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s84, 1], stride=[s84, s84, 1, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg19_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s99], stride=[s99, s99, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg21_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s5, 1], stride=[s5, s5, 1, 1]))
+  )), None, None, None, None, 128, 128, Subgraph(name='sdpa_mask0', graph_module=<lambda>(), inductor_config_patches=None, graph=None))
+  args[5]: 0.08838834764831845
+  args[6]: {'BACKEND': 'AUTO', 'PRESCALE_QK': False, 'ROWS_GUARANTEED_SAFE': False, 'BLOCKS_ARE_CONTIGUOUS': False, 'WRITE_DQ': True, 'OUTPUT_LOGSUMEXP': True, 'OUTPUT_MAX': False}
+  args[7]: ()
+  args[8]: ()ValueError: Invalid FlexAttention decode kernel options: Q and KV block sizes must be divisible by the selected tile sizes. Got SPARSE_Q_BLOCK_SIZE=128, SPARSE_KV_BLOCK_SIZE=128, and BLOCK_M=512, BLOCK_N=64. Pass compatible values with kernel_options. Available decode tuning options are BLOCK_M, BLOCK_N, num_warps, and num_stages; use the fwd_ prefix to set decode-only options. For example: kernel_options={'fwd_BLOCK_M': 32, 'fwd_BLOCK_N': 64, 'fwd_num_stages': 1, 'fwd_num_warps': 4}. If you did not pin these options, compiling with mode='max-autotune-no-cudagraphs' can also fix this by trying more FlexAttention configs.
+  target: flex_attention
+  args[0]: TensorBox(StorageBox(
+    InputBuffer(name='arg1_1', layout=FixedLayout('cuda:0', torch.bfloat16, size=[1, 32, s37, 128], stride=[4096*s37, 128, 4096, 1]))
+  ))
+  args[1]: TensorBox(StorageBox(
+    InputBuffer(name='arg3_1', layout=FixedLayout('cuda:0', torch.bfloat16, size=[1, 8, s0, 128], stride=[1024*s0, 128*s0, 128, 1]))
+  ))
+  args[2]: TensorBox(StorageBox(
+    InputBuffer(name='arg5_1', layout=FixedLayout('cuda:0', torch.bfloat16, size=[1, 8, s43, 128], stride=[1024*s43, 128*s43, 128, 1]))
+  ))
+  args[3]: Subgraph(name='sdpa_score0', graph_module=<lambda>(), inductor_config_patches=None, graph=None)
+  args[4]: (s37, s71, TensorBox(StorageBox(
+    InputBuffer(name='arg10_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1], stride=[1, 1, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg7_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1, s72], stride=[s72, s72, s72, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg11_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1], stride=[1, 1, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg13_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, 1, s4], stride=[s4, s4, s4, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg15_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s56], stride=[s56, s56, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg17_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s84, 1], stride=[s84, s84, 1, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg19_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s99], stride=[s99, s99, 1]))
+  )), TensorBox(StorageBox(
+    InputBuffer(name='arg21_1', layout=FixedLayout('cuda:0', torch.int32, size=[1, 1, s5, 1], stride=[s5, s5, 1, 1]))
+  )), None, None, None, None, 128, 128, Subgraph(name='sdpa_mask0', graph_module=<lambda>(), inductor_config_patches=None, graph=None))
+  args[5]: 0.08838834764831845
+  args[6]: {'BACKEND': 'AUTO', 'PRESCALE_QK': False, 'ROWS_GUARANTEED_SAFE': False, 'BLOCKS_ARE_CONTIGUOUS': False, 'WRITE_DQ': True, 'OUTPUT_LOGSUMEXP': True, 'OUTPUT_MAX': False}
+  args[7]: ()
+  args[8]: ()
+Found from : 
+   File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py", line 2577, in flex_attention
+    out, lse, max_scores = flex_attention_hop(
+                           ^^^^^^^^^^^^^^^^^^^
+
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

@@ -1,0 +1,1446 @@
+{
+  "env": {
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cudnn": 92400,
+    "device": "NVIDIA GeForce RTX 4070 Ti",
+    "cc": "8.9",
+    "sms": 60,
+    "mem_gib": 12.0,
+    "triton": "3.8.0"
+  },
+  "model_source": "hub-config",
+  "params": 4022468096,
+  "registration": "attention + mask interface registered",
+  "equivalence_bf16": {
+    "max_abs_logit_diff": 5.703125,
+    "mean_abs_logit_diff": 0.25628548860549927,
+    "logit_scale": 5.15625,
+    "argmax_agreement": 0.625
+  },
+  "int4_quantize_s": 2.046585101000005,
+  "equivalence_int4": {
+    "max_abs_logit_diff": 5.359375,
+    "mean_abs_logit_diff": 0.372740238904953,
+    "logit_scale": 4.90625,
+    "argmax_agreement": 0.375
+  },
+  "results": [
+    {
+      "label": "decode_bf16/sdpa/compile_graphs/B1",
+      "workload": "decode_bf16",
+      "attn": "sdpa",
+      "mode": "compile_graphs",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 31284.61958400001,
+      "step_ms_median": 22.939026000003082,
+      "step_ms_min": 22.07584699999643,
+      "step_ms_max": 23.64162999998598,
+      "peak_mem_gib": 7.78910493850708,
+      "kernels": {
+        "kernels_per_step": 727.0,
+        "kernel_time_ms_per_step": 21.40339575,
+        "gpu_busy_ms_per_step": 21.4061953125,
+        "span_ms_per_step": 22.070892578125,
+        "idle_frac_upper_bound": 0.030116465080519572,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 19.55335225000001
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 1.0659642500000004
+          },
+          "triton": {
+            "count": 362.0,
+            "ms": 0.7239467499999998
+          },
+          "elementwise_reduce": {
+            "count": 76.0,
+            "ms": 0.06013250000000016
+          }
+        },
+        "top": [
+          {
+            "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16,",
+            "count": 216.0,
+            "ms": 13.331175000000007,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16,",
+            "count": 37.0,
+            "ms": 6.222177250000002,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 1.0659642500000004,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 0.34266849999999965,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_13",
+            "count": 17.0,
+            "ms": 0.06691799999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.05493075000000016,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.04340449999999996,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_s",
+            "count": 35.0,
+            "ms": 0.04197674999999994,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__17",
+            "count": 36.0,
+            "ms": 0.0330515,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_14",
+            "count": 17.0,
+            "ms": 0.03112049999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_mul_silu_7",
+            "count": 36.0,
+            "ms": 0.029862750000000063,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_add_arange_index_copy_transpose_view_3",
+            "count": 36.0,
+            "ms": 0.02815050000000003,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 2961,
+        "unique_graphs": 1
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_bf16/sdpa/compile_graphs/B4",
+      "workload": "decode_bf16",
+      "attn": "sdpa",
+      "mode": "compile_graphs",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 44251.45534099999,
+      "step_ms_median": 29.414803999998185,
+      "step_ms_min": 28.949207999971804,
+      "step_ms_max": 29.82416300000068,
+      "peak_mem_gib": 8.60175609588623,
+      "kernels": {
+        "kernels_per_step": 728.0,
+        "kernel_time_ms_per_step": 27.636703750000002,
+        "gpu_busy_ms_per_step": 27.60850634765625,
+        "span_ms_per_step": 28.21449951171875,
+        "idle_frac_upper_bound": 0.021478075973341393,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 22.125938999999995
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 3.2037827500000002
+          },
+          "triton": {
+            "count": 362.0,
+            "ms": 2.2142412499999993
+          },
+          "elementwise_reduce": {
+            "count": 77.0,
+            "ms": 0.09274074999999991
+          }
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_",
+            "count": 253.0,
+            "ms": 22.125938999999995,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 3.2037827500000002,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 1.7732177499999986,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.08861075000000002,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.08665074999999992,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_s",
+            "count": 35.0,
+            "ms": 0.05275275000000006,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.046016250000000064,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_mul_silu_7",
+            "count": 36.0,
+            "ms": 0.04426324999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__17",
+            "count": 36.0,
+            "ms": 0.03249850000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_14",
+            "count": 17.0,
+            "ms": 0.032175249999999996,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_13",
+            "count": 17.0,
+            "ms": 0.031108249999999997,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_add_arange_index_copy_transpose_view_3",
+            "count": 36.0,
+            "ms": 0.027682250000000012,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 5922,
+        "unique_graphs": 2
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_bf16/sdpa/compile_graphs/B8",
+      "workload": "decode_bf16",
+      "attn": "sdpa",
+      "mode": "compile_graphs",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 41.37343999997256,
+      "step_ms_median": 37.97125700000947,
+      "step_ms_min": 37.32180400004381,
+      "step_ms_max": 38.629522999997334,
+      "peak_mem_gib": 9.806239128112793,
+      "kernels": {
+        "kernels_per_step": 728.0,
+        "kernel_time_ms_per_step": 36.3064515,
+        "gpu_busy_ms_per_step": 36.2429521484375,
+        "span_ms_per_step": 36.8075888671875,
+        "idle_frac_upper_bound": 0.01534022564714499,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 20.761129999999998
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 8.882344499999999
+          },
+          "triton": {
+            "count": 362.0,
+            "ms": 6.5718172500000005
+          },
+          "elementwise_reduce": {
+            "count": 77.0,
+            "ms": 0.09115975000000004
+          }
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_",
+            "count": 252.0,
+            "ms": 18.976912499999997,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 8.882344499999999,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 6.148483250000001,
+            "cls": "triton"
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x1_tn_align8>(cutlass_",
+            "count": 1.0,
+            "ms": 1.7842175,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.08498125000000005,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.0652445,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_s",
+            "count": 35.0,
+            "ms": 0.052679749999999984,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.049004250000000076,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_mul_silu_7",
+            "count": 36.0,
+            "ms": 0.04693149999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__17",
+            "count": 36.0,
+            "ms": 0.03293475000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_14",
+            "count": 17.0,
+            "ms": 0.031243499999999993,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_13",
+            "count": 17.0,
+            "ms": 0.0304815,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 5922,
+        "unique_graphs": 2
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_bf16/triton_decode/compile_graphs/B1",
+      "workload": "decode_bf16",
+      "attn": "triton_decode",
+      "mode": "compile_graphs",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 26785.67145400001,
+      "step_ms_median": 21.404756500004396,
+      "step_ms_min": 21.146149000003334,
+      "step_ms_max": 22.128102000010585,
+      "peak_mem_gib": 8.163634300231934,
+      "kernels": {
+        "kernels_per_step": 582.0,
+        "kernel_time_ms_per_step": 19.387754,
+        "gpu_busy_ms_per_step": 19.39182373046875,
+        "span_ms_per_step": 20.019340087890626,
+        "idle_frac_upper_bound": 0.03134550662843527,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 18.732365000000012
+          },
+          "other": {
+            "count": 72.0,
+            "ms": 0.34923949999999987
+          },
+          "triton": {
+            "count": 254.0,
+            "ms": 0.3029397500000001
+          },
+          "elementwise_reduce": {
+            "count": 3.0,
+            "ms": 0.0032097499999999995
+          }
+        },
+        "top": [
+          {
+            "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16,",
+            "count": 216.0,
+            "ms": 12.882125000000014,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16,",
+            "count": 37.0,
+            "ms": 5.850239999999999,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "_split_kernel",
+            "count": 36.0,
+            "ms": 0.3135747499999999,
+            "cls": "other"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_decode_attention_expand_mean_mul_neg_pow_r",
+            "count": 36.0,
+            "ms": 0.04144600000000007,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_s",
+            "count": 35.0,
+            "ms": 0.04036600000000006,
+            "cls": "triton"
+          },
+          {
+            "name": "_combine_kernel",
+            "count": 36.0,
+            "ms": 0.035664749999999974,
+            "cls": "other"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__15",
+            "count": 36.0,
+            "ms": 0.03085425,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_12",
+            "count": 17.0,
+            "ms": 0.029761999999999997,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_11",
+            "count": 17.0,
+            "ms": 0.029106000000000007,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_mul_silu_5",
+            "count": 36.0,
+            "ms": 0.028861750000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_add_arange_index_copy_transpose_view_3",
+            "count": 36.0,
+            "ms": 0.027061499999999995,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_10",
+            "count": 17.0,
+            "ms": 0.023614750000000007,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 8693,
+        "unique_graphs": 3
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_bf16/triton_decode/compile_graphs/B4",
+      "workload": "decode_bf16",
+      "attn": "triton_decode",
+      "mode": "compile_graphs",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 37163.474687000016,
+      "step_ms_median": 23.782055499964372,
+      "step_ms_min": 23.12211599996772,
+      "step_ms_max": 24.301659000002473,
+      "peak_mem_gib": 8.59931468963623,
+      "kernels": {
+        "kernels_per_step": 583.0,
+        "kernel_time_ms_per_step": 21.936805250000003,
+        "gpu_busy_ms_per_step": 21.92737353515625,
+        "span_ms_per_step": 22.464464111328127,
+        "idle_frac_upper_bound": 0.023908452634801014,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 20.47715249999999
+          },
+          "other": {
+            "count": 72.0,
+            "ms": 1.1001657500000002
+          },
+          "triton": {
+            "count": 254.0,
+            "ms": 0.35466775000000017
+          },
+          "elementwise_reduce": {
+            "count": 4.0,
+            "ms": 0.004819250000000001
+          }
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_",
+            "count": 253.0,
+            "ms": 20.47715249999999,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "_split_kernel",
+            "count": 36.0,
+            "ms": 1.0543927499999999,
+            "cls": "other"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_s",
+            "count": 35.0,
+            "ms": 0.05148900000000004,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_decode_attention_expand_mean_mul_neg_pow_r",
+            "count": 36.0,
+            "ms": 0.05139275000000002,
+            "cls": "triton"
+          },
+          {
+            "name": "_combine_kernel",
+            "count": 36.0,
+            "ms": 0.04577300000000002,
+            "cls": "other"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_mul_silu_5",
+            "count": 36.0,
+            "ms": 0.041355749999999955,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__15",
+            "count": 36.0,
+            "ms": 0.03316150000000002,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_11",
+            "count": 17.0,
+            "ms": 0.03191524999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_12",
+            "count": 17.0,
+            "ms": 0.03074425,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_add_arange_index_copy_transpose_view_3",
+            "count": 36.0,
+            "ms": 0.02811050000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__unsafe_view_argmax_select_14",
+            "count": 1.0,
+            "ms": 0.02700075,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_10",
+            "count": 17.0,
+            "ms": 0.025244500000000017,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 11464,
+        "unique_graphs": 4
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_bf16/triton_decode/compile_graphs/B8",
+      "workload": "decode_bf16",
+      "attn": "triton_decode",
+      "mode": "compile_graphs",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 28.043331999981547,
+      "step_ms_median": 25.04748350000341,
+      "step_ms_min": 24.724158999958945,
+      "step_ms_max": 25.42747600000439,
+      "peak_mem_gib": 9.799403190612793,
+      "kernels": {
+        "kernels_per_step": 583.0,
+        "kernel_time_ms_per_step": 22.94519775,
+        "gpu_busy_ms_per_step": 22.936037353515626,
+        "span_ms_per_step": 23.451012939453125,
+        "idle_frac_upper_bound": 0.021959630795782115,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 20.773259999999993
+          },
+          "other": {
+            "count": 72.0,
+            "ms": 1.8018355
+          },
+          "triton": {
+            "count": 254.0,
+            "ms": 0.36478700000000014
+          },
+          "elementwise_reduce": {
+            "count": 4.0,
+            "ms": 0.0053152500000000005
+          }
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_",
+            "count": 252.0,
+            "ms": 18.886091749999995,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x1_tn_align8>(cutlass_",
+            "count": 1.0,
+            "ms": 1.88716825,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "_split_kernel",
+            "count": 36.0,
+            "ms": 1.745464,
+            "cls": "other"
+          },
+          {
+            "name": "_combine_kernel",
+            "count": 36.0,
+            "ms": 0.05637149999999994,
+            "cls": "other"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_decode_attention_expand_mean_mul_neg_pow_r",
+            "count": 36.0,
+            "ms": 0.05273925000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_s",
+            "count": 35.0,
+            "ms": 0.05123225000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_mul_silu_5",
+            "count": 36.0,
+            "ms": 0.048177500000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__15",
+            "count": 36.0,
+            "ms": 0.03338050000000002,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_11",
+            "count": 17.0,
+            "ms": 0.03165725,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy__unsafe_view_add_mean_mul_pow_rsqrt_12",
+            "count": 17.0,
+            "ms": 0.03117475000000001,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__unsafe_view_add_arange_index_copy_transpose_view_3",
+            "count": 36.0,
+            "ms": 0.029562250000000047,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__unsafe_view_argmax_select_14",
+            "count": 1.0,
+            "ms": 0.027335750000000002,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 11464,
+        "unique_graphs": 4
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_int4/sdpa/compile_graphs/B1",
+      "workload": "decode_int4",
+      "attn": "sdpa",
+      "mode": "compile_graphs",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "int4",
+      "first_call_ms": 50125.21757399997,
+      "step_ms_median": 12.043069500009551,
+      "step_ms_min": 11.288305999983095,
+      "step_ms_max": 12.788816000011138,
+      "peak_mem_gib": 3.670199394226074,
+      "kernels": {
+        "kernels_per_step": 854.0,
+        "kernel_time_ms_per_step": 8.927654,
+        "gpu_busy_ms_per_step": 8.929117919921875,
+        "span_ms_per_step": 9.982400634765625,
+        "idle_frac_upper_bound": 0.1055139693728071,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.793032749999999
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 1.1673085000000005
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 0.9122057499999998
+          },
+          "elementwise_reduce": {
+            "count": 76.0,
+            "ms": 0.05510700000000023
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.793032749999999,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 1.1673085000000005,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 0.503519,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.056868999999999795,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.05021575000000023,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.04536299999999997,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.038387499999999984,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.03383224999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.029822750000000044,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.02678949999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.026748500000000015,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.02631175000000002,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 14425,
+        "unique_graphs": 5
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_int4/sdpa/compile_graphs/B4",
+      "workload": "decode_int4",
+      "attn": "sdpa",
+      "mode": "compile_graphs",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "int4",
+      "first_call_ms": 89942.81534700003,
+      "step_ms_median": 17.64010900001267,
+      "step_ms_min": 17.099798999993254,
+      "step_ms_max": 18.772253000065575,
+      "peak_mem_gib": 4.119063377380371,
+      "kernels": {
+        "kernels_per_step": 855.0,
+        "kernel_time_ms_per_step": 13.976051,
+        "gpu_busy_ms_per_step": 13.96577392578125,
+        "span_ms_per_step": 15.300480224609375,
+        "idle_frac_upper_bound": 0.08723296780459067,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 8.162268249999999
+          },
+          "attention": {
+            "count": 36.0,
+            "ms": 3.410525999999999
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 2.3001977499999993
+          },
+          "elementwise_reduce": {
+            "count": 77.0,
+            "ms": 0.10305900000000011
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 8.162268249999999,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 3.410525999999999,
+            "cls": "attention"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 1.8463514999999997,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.09673075000000012,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06265575000000012,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.04808925000000004,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.04490500000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.040299499999999995,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.03530499999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.033404250000000024,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.02869375000000002,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.027738750000000003,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 17386,
+        "unique_graphs": 6
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_int4/sdpa/compile_graphs/B8",
+      "workload": "decode_int4",
+      "attn": "sdpa",
+      "mode": "compile_graphs",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "int4",
+      "first_call_ms": 31.401926999933494,
+      "step_ms_median": 25.71312000003445,
+      "step_ms_min": 25.127109000095516,
+      "step_ms_max": 27.296449999994365,
+      "peak_mem_gib": 5.322997093200684,
+      "kernels": {
+        "kernels_per_step": 855.0,
+        "kernel_time_ms_per_step": 22.123282749999998,
+        "gpu_busy_ms_per_step": 22.074450439453123,
+        "span_ms_per_step": 23.104375732421875,
+        "idle_frac_upper_bound": 0.04457706647851467,
+        "by_class": {
+          "attention": {
+            "count": 36.0,
+            "ms": 8.463643500000003
+          },
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.909321750000008
+          },
+          "triton": {
+            "count": 489.0,
+            "ms": 6.657321000000005
+          },
+          "elementwise_reduce": {
+            "count": 77.0,
+            "ms": 0.09299650000000008
+          }
+        },
+        "top": [
+          {
+            "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_",
+            "count": 36.0,
+            "ms": 8.463643500000003,
+            "cls": "attention"
+          },
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.909321750000008,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 72.0,
+            "ms": 6.1970570000000045,
+            "cls": "triton"
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1",
+            "count": 72.0,
+            "ms": 0.08696275000000009,
+            "cls": "elementwise_reduce"
+          },
+          {
+            "name": "triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.06407275,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06099324999999977,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__scaled_dot_product_efficient_attention__to_copy__unsafe_view_add_arange_bmm_cat_cl",
+            "count": 36.0,
+            "ms": 0.04615450000000008,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.04113024999999996,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_9",
+            "count": 36.0,
+            "ms": 0.03488049999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__20",
+            "count": 36.0,
+            "ms": 0.03194074999999997,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.027460250000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_17",
+            "count": 17.0,
+            "ms": 0.02683725,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 17386,
+        "unique_graphs": 6
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_int4/triton_decode/compile_graphs/B1",
+      "workload": "decode_int4",
+      "attn": "triton_decode",
+      "mode": "compile_graphs",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "int4",
+      "first_call_ms": 42951.368258999995,
+      "step_ms_median": 9.610726000062186,
+      "step_ms_min": 8.980529000041315,
+      "step_ms_max": 10.610453999902347,
+      "peak_mem_gib": 3.6683340072631836,
+      "kernels": {
+        "kernels_per_step": 709.0,
+        "kernel_time_ms_per_step": 6.573130750000001,
+        "gpu_busy_ms_per_step": 6.577037109375,
+        "span_ms_per_step": 7.700807373046875,
+        "idle_frac_upper_bound": 0.14592888891171518,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 5.875141249999996
+          },
+          "triton": {
+            "count": 381.0,
+            "ms": 0.38220275000000026
+          },
+          "other": {
+            "count": 72.0,
+            "ms": 0.312459
+          },
+          "elementwise_reduce": {
+            "count": 3.0,
+            "ms": 0.00332775
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 5.875141249999996,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "_split_kernel",
+            "count": 36.0,
+            "ms": 0.2760515,
+            "cls": "other"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06070675000000013,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.03930425000000004,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_decode_attention_expand_mean_mul_neg_pow_rsqrt_slice_tr",
+            "count": 36.0,
+            "ms": 0.03811650000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "_combine_kernel",
+            "count": 36.0,
+            "ms": 0.03640749999999999,
+            "cls": "other"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__18",
+            "count": 36.0,
+            "ms": 0.03192874999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_7",
+            "count": 36.0,
+            "ms": 0.03016675000000004,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.02809575000000005,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_15",
+            "count": 17.0,
+            "ms": 0.02757524999999998,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_14",
+            "count": 17.0,
+            "ms": 0.02564475,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_13",
+            "count": 17.0,
+            "ms": 0.024186250000000006,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 20157,
+        "unique_graphs": 7
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_int4/triton_decode/compile_graphs/B4",
+      "workload": "decode_int4",
+      "attn": "triton_decode",
+      "mode": "compile_graphs",
+      "batch": 4,
+      "prompt_len": 512,
+      "dtype": "int4",
+      "first_call_ms": 75116.02523600004,
+      "step_ms_median": 9.426523000001907,
+      "step_ms_min": 9.124894000024142,
+      "step_ms_max": 10.106587999985095,
+      "peak_mem_gib": 4.1228132247924805,
+      "kernels": {
+        "kernels_per_step": 710.0,
+        "kernel_time_ms_per_step": 7.4996935,
+        "gpu_busy_ms_per_step": 7.50253662109375,
+        "span_ms_per_step": 8.32870556640625,
+        "idle_frac_upper_bound": 0.09919535979814731,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.069836250000008
+          },
+          "other": {
+            "count": 72.0,
+            "ms": 1.0131372500000002
+          },
+          "triton": {
+            "count": 381.0,
+            "ms": 0.4119297500000003
+          },
+          "elementwise_reduce": {
+            "count": 4.0,
+            "ms": 0.00479025
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.069836250000008,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "_split_kernel",
+            "count": 36.0,
+            "ms": 0.9667292500000001,
+            "cls": "other"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06220475000000006,
+            "cls": "triton"
+          },
+          {
+            "name": "_combine_kernel",
+            "count": 36.0,
+            "ms": 0.04640800000000005,
+            "cls": "other"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.04388074999999999,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_decode_attention_expand_mean_mul_neg_pow_rsqrt_slice_tr",
+            "count": 36.0,
+            "ms": 0.041383499999999976,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_14",
+            "count": 17.0,
+            "ms": 0.03412100000000002,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_7",
+            "count": 36.0,
+            "ms": 0.03216075000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__18",
+            "count": 36.0,
+            "ms": 0.03203625000000003,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_15",
+            "count": 17.0,
+            "ms": 0.029655999999999995,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.02946925000000009,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_13",
+            "count": 17.0,
+            "ms": 0.028458499999999998,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 22928,
+        "unique_graphs": 8
+      },
+      "status": "ok"
+    },
+    {
+      "label": "decode_int4/triton_decode/compile_graphs/B8",
+      "workload": "decode_int4",
+      "attn": "triton_decode",
+      "mode": "compile_graphs",
+      "batch": 8,
+      "prompt_len": 512,
+      "dtype": "int4",
+      "first_call_ms": 34.92399399999613,
+      "step_ms_median": 11.164960000030533,
+      "step_ms_min": 10.764607999931286,
+      "step_ms_max": 12.268844999994144,
+      "peak_mem_gib": 5.326170921325684,
+      "kernels": {
+        "kernels_per_step": 710.0,
+        "kernel_time_ms_per_step": 8.94061075,
+        "gpu_busy_ms_per_step": 8.94343310546875,
+        "span_ms_per_step": 9.9894619140625,
+        "idle_frac_upper_bound": 0.10471322855951037,
+        "by_class": {
+          "gemm_lib": {
+            "count": 253.0,
+            "ms": 6.612048000000001
+          },
+          "other": {
+            "count": 72.0,
+            "ms": 1.9015054999999992
+          },
+          "triton": {
+            "count": 381.0,
+            "ms": 0.42221949999999997
+          },
+          "elementwise_reduce": {
+            "count": 4.0,
+            "ms": 0.00483775
+          }
+        },
+        "top": [
+          {
+            "name": "void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM<(at::native::KReductionType)0",
+            "count": 253.0,
+            "ms": 6.612048000000001,
+            "cls": "gemm_lib"
+          },
+          {
+            "name": "_split_kernel",
+            "count": 36.0,
+            "ms": 1.843898749999999,
+            "cls": "other"
+          },
+          {
+            "name": "triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_rsqrt_view_1",
+            "count": 91.0,
+            "ms": 0.06375099999999997,
+            "cls": "triton"
+          },
+          {
+            "name": "_combine_kernel",
+            "count": 36.0,
+            "ms": 0.057606750000000054,
+            "cls": "other"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_decode_attention_expand_mean_mul_neg_pow_rsqrt_slice_tr",
+            "count": 36.0,
+            "ms": 0.044695000000000006,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_per_fused__to_copy_add_arange_bmm_cat_expand_index_copy_mean_mul_neg_pow_rsqrt_slice_transpos",
+            "count": 35.0,
+            "ms": 0.044379249999999995,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_constant_pad_nd_mul_silu_view_7",
+            "count": 36.0,
+            "ms": 0.035302000000000014,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_14",
+            "count": 17.0,
+            "ms": 0.033992499999999995,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_copy__18",
+            "count": 36.0,
+            "ms": 0.032250749999999995,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_poi_fused_add_arange_index_copy_transpose_view_4",
+            "count": 36.0,
+            "ms": 0.02979424999999994,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_15",
+            "count": 17.0,
+            "ms": 0.029663000000000016,
+            "cls": "triton"
+          },
+          {
+            "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_view_13",
+            "count": 17.0,
+            "ms": 0.02840925,
+            "cls": "triton"
+          }
+        ]
+      },
+      "dynamo_stats": {
+        "calls_captured": 22928,
+        "unique_graphs": 8
+      },
+      "status": "ok"
+    }
+  ]
+}

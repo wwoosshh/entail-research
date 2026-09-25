@@ -1,0 +1,192 @@
+W0922 20:40:36.046000 2533 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 20:40:36.084000 2533 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+attention + mask interface registered
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py:2596: UserWarning: flex_attention called without torch.compile() - this will use an unfused implementation that materializes the full scores matrix instead of generating a fused kernel.
+
+SOLUTION: Use torch.compile(flex_attention)(...)
+
+If you want to debug your score_mod/mask_mod, you can set:
+torch.nn.attention.flex_attention._FLEX_ATTENTION_DISABLE_COMPILE_DEBUG = True
+
+This will allow you to use print statements or breakpoints. Note: This doesn't work with the backwards pass and may produce incorrect results.
+  _warn_once(
+  B=8 bf16 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.21875, 'mean': 0.021160852164030075}, 'triton_decode': {'max': 0.21875, 'mean': 0.019605347886681557}, 'sdpa_bound_static': {'max': 0.21875, 'mean': 0.02207120507955551}} (logit scale 17.75) | eager sdpa rerun bitwise identical: True
+W0922 20:40:51.354000 2533 torch/_inductor/utils.py:1806] [1/0] Not enough SMs to use max_autotune_gemm mode
+USDT:2026-09-22 20:41:11 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:41:11 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 33.0029, 'max_abs_diff_vs_eager_same_variant': 0.2109, 'mean_abs_diff_vs_eager_same_variant': 0.0256, 'max_abs_diff_vs_eager_sdpa': 0.2109, 'logit_scale': 17.75, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:41:40 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:41:40 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_gqa: {'compile_s': 30.3498, 'max_abs_diff_vs_eager_same_variant': 0.2109, 'mean_abs_diff_vs_eager_same_variant': 0.0265, 'max_abs_diff_vs_eager_sdpa': 0.2109, 'logit_scale': 17.75, 'n_kernel_types': 22, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:42:12 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:42:12 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 34.2916, 'max_abs_diff_vs_eager_same_variant': 0.1973, 'mean_abs_diff_vs_eager_same_variant': 0.0204, 'max_abs_diff_vs_eager_sdpa': 0.2031, 'logit_scale': 17.75, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:42:37 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:42:37 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 27.5686, 'max_abs_diff_vs_eager_same_variant': 0.2344, 'mean_abs_diff_vs_eager_same_variant': 0.0196, 'max_abs_diff_vs_eager_sdpa': 0.2031, 'logit_scale': 17.75, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:43:04 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:04 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_bound_static: {'compile_s': 28.5153, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.0272, 'max_abs_diff_vs_eager_sdpa': 0.2188, 'logit_scale': 17.75, 'n_kernel_types': 21, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:31 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    kernels sdpa               {'gemm': 19.854, 'attention': 8.446, 'kv_copy_or_mask': 6.294, 'other': 0.342, 'total': 34.936}
+      top [('void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1', 19.854), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 8.446), ('triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__uns', 6.197), ('void at::native::vectorized_elementwise_kernel<2, at::native::FillFunc', 0.099)]
+    kernels sdpa_gqa           {'gemm': 19.402, 'attention': 5.663, 'other': 0.301, 'kv_copy_or_mask': 0.125, 'total': 25.49}
+      top [('void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1', 19.402), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 5.663), ('void at::native::vectorized_elementwise_kernel<2, at::native::FillFunc', 0.054), ('triton_poi_fused__unsafe_view_mul_silu_6', 0.052)]
+    kernels maskmod_decode     {'gemm': 19.421, 'attention': 1.85, 'other': 0.243, 'kv_copy_or_mask': 0.102, 'total': 21.617}
+      top [('void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1', 19.421), ('triton_tem_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_flex_', 1.819), ('triton_per_fused__to_copy__unsafe_view_add_arange_bmm_cat_expand_mean_', 0.055), ('triton_poi_fused__unsafe_view_mul_silu_7', 0.052)]
+    kernels triton_decode      {'gemm': 19.518, 'attention': 1.795, 'other': 0.244, 'kv_copy_or_mask': 0.095, 'total': 21.653}
+      top [('void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1', 19.518), ('_split_kernel', 1.736), ('_combine_kernel', 0.059), ('triton_poi_fused__unsafe_view_mul_silu_5', 0.05)]
+    kernels sdpa_bound_static  {'gemm': 19.483, 'attention': 1.694, 'other': 0.243, 'kv_copy_or_mask': 0.047, 'total': 21.467}
+      top [('void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1', 19.483), ('void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<1', 1.546), ('void pytorch_flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_', 0.09), ('triton_per_fused__scaled_dot_product_flash_attention__to_copy__unsafe_', 0.058)]
+  B=8 bf16: interleaved 20 rounds x 10 steps, baseline sdpa
+    sdpa             median   36.18 ms (p10 35.72, p90 36.39)
+    sdpa_gqa         median   26.52 ms (p10 26.20, p90 26.80) | vs sdpa: x0.734 [p10 0.732, p90 0.738] faster in 100% of rounds
+    maskmod_decode   median   22.53 ms (p10 22.22, p90 22.70) | vs sdpa: x0.623 [p10 0.621, p90 0.624] faster in 100% of rounds
+    triton_decode    median   22.49 ms (p10 22.23, p90 22.71) | vs sdpa: x0.622 [p10 0.621, p90 0.625] faster in 100% of rounds
+    sdpa_bound_static median   22.29 ms (p10 22.02, p90 22.53) | vs sdpa: x0.617 [p10 0.615, p90 0.619] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=1 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.09375, 'mean': 0.01683395355939865}, 'triton_decode': {'max': 0.125, 'mean': 0.016506869345903397}, 'sdpa_bound_static': {'max': 0.09375, 'mean': 0.019148284569382668}} (logit scale 13.06) | eager sdpa rerun bitwise identical: True
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 20:43:45 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:43:45 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 10.4336, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0178, 'max_abs_diff_vs_eager_sdpa': 0.125, 'logit_scale': 13.0625, 'n_kernel_types': 25, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:44:30 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:44:30 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_gqa: {'compile_s': 48.8838, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0178, 'max_abs_diff_vs_eager_sdpa': 0.125, 'logit_scale': 13.0625, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:44:47 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:44:47 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 17.3532, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0219, 'max_abs_diff_vs_eager_sdpa': 0.125, 'logit_scale': 13.0625, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:44:53 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:44:53 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 7.9973, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.0217, 'max_abs_diff_vs_eager_sdpa': 0.125, 'logit_scale': 13.0625, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:45:34 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:45:34 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_bound_static: {'compile_s': 42.6765, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0212, 'max_abs_diff_vs_eager_sdpa': 0.0938, 'logit_scale': 13.0625, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:45:45 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    kernels sdpa               {'gemm': 6.836, 'attention': 1.149, 'kv_copy_or_mask': 0.561, 'other': 0.382, 'total': 8.928}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.836), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 1.149), ('triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__uns', 0.469), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.067)]
+    kernels sdpa_gqa           {'gemm': 6.012, 'attention': 1.215, 'other': 0.379, 'kv_copy_or_mask': 0.129, 'total': 7.735}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.012), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 1.215), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.066), ('triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_', 0.059)]
+    kernels maskmod_decode     {'gemm': 6.035, 'attention': 0.396, 'other': 0.333, 'kv_copy_or_mask': 0.088, 'total': 6.851}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.035), ('triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mea', 0.305), ('triton_per_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mea', 0.091), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.066)]
+    kernels triton_decode      {'gemm': 6.033, 'attention': 0.325, 'other': 0.319, 'kv_copy_or_mask': 0.092, 'total': 6.769}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.033), ('_split_kernel', 0.285), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.065), ('triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_', 0.063)]
+    kernels sdpa_bound_static  {'gemm': 6.022, 'attention': 0.471, 'other': 0.318, 'kv_copy_or_mask': 0.054, 'total': 6.865}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.022), ('void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<1', 0.319), ('void pytorch_flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_', 0.096), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.067)]
+  B=1 int4: interleaved 20 rounds x 10 steps, baseline sdpa
+    sdpa             median    9.28 ms (p10 9.15, p90 9.46)
+    sdpa_gqa         median    8.07 ms (p10 7.87, p90 8.24) | vs sdpa: x0.868 [p10 0.853, p90 0.877] faster in 100% of rounds
+    maskmod_decode   median    7.14 ms (p10 7.04, p90 7.38) | vs sdpa: x0.769 [p10 0.758, p90 0.780] faster in 100% of rounds
+    triton_decode    median    7.04 ms (p10 6.92, p90 7.18) | vs sdpa: x0.757 [p10 0.749, p90 0.768] faster in 100% of rounds
+    sdpa_bound_static median    7.16 ms (p10 7.02, p90 7.29) | vs sdpa: x0.769 [p10 0.759, p90 0.780] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=4 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.1875, 'mean': 0.02813291922211647}, 'triton_decode': {'max': 0.1875, 'mean': 0.02692604251205921}, 'sdpa_bound_static': {'max': 0.1875, 'mean': 0.025842057541012764}} (logit scale 13.12) | eager sdpa rerun bitwise identical: True
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 20:46:55 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:46:55 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 74.7789, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.028, 'max_abs_diff_vs_eager_sdpa': 0.1562, 'logit_scale': 13.125, 'n_kernel_types': 25, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:47:59 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:47:59 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_gqa: {'compile_s': 67.0192, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.0269, 'max_abs_diff_vs_eager_sdpa': 0.1562, 'logit_scale': 13.125, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:49:07 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:49:07 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 71.7514, 'max_abs_diff_vs_eager_same_variant': 0.1562, 'mean_abs_diff_vs_eager_same_variant': 0.022, 'max_abs_diff_vs_eager_sdpa': 0.1562, 'logit_scale': 13.125, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:50:05 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:50:05 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 62.4804, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0242, 'max_abs_diff_vs_eager_sdpa': 0.1562, 'logit_scale': 13.125, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:50:54 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:50:54 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_bound_static: {'compile_s': 51.5392, 'max_abs_diff_vs_eager_same_variant': 0.125, 'mean_abs_diff_vs_eager_same_variant': 0.0212, 'max_abs_diff_vs_eager_sdpa': 0.1875, 'logit_scale': 13.125, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:51:05 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    kernels sdpa               {'gemm': 7.829, 'attention': 3.421, 'kv_copy_or_mask': 1.859, 'other': 0.442, 'total': 13.552}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 7.829), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 3.421), ('triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__uns', 1.755), ('void at::native::vectorized_elementwise_kernel<2, at::native::FillFunc', 0.096)]
+    kernels sdpa_gqa           {'gemm': 6.106, 'attention': 3.519, 'other': 0.39, 'kv_copy_or_mask': 0.129, 'total': 10.144}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.106), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 3.519), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.069), ('triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_', 0.06)]
+    kernels maskmod_decode     {'gemm': 6.109, 'attention': 1.05, 'other': 0.34, 'kv_copy_or_mask': 0.092, 'total': 7.59}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.109), ('triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mea', 0.986), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.074), ('triton_poi_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mea', 0.064)]
+    kernels triton_decode      {'gemm': 6.141, 'attention': 1.031, 'other': 0.363, 'kv_copy_or_mask': 0.105, 'total': 7.64}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.141), ('_split_kernel', 0.981), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.079), ('triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_', 0.073)]
+    kernels sdpa_bound_static  {'gemm': 6.106, 'attention': 1.085, 'other': 0.354, 'kv_copy_or_mask': 0.071, 'total': 7.616}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.106), ('void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<1', 0.953), ('void pytorch_flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_', 0.087), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.08)]
+  B=4 int4: interleaved 20 rounds x 10 steps, baseline sdpa
+    sdpa             median   13.97 ms (p10 12.92, p90 14.24)
+    sdpa_gqa         median   10.52 ms (p10 9.70, p90 10.73) | vs sdpa: x0.752 [p10 0.748, p90 0.760] faster in 100% of rounds
+    maskmod_decode   median    7.94 ms (p10 7.36, p90 8.17) | vs sdpa: x0.569 [p10 0.564, p90 0.579] faster in 100% of rounds
+    triton_decode    median    7.99 ms (p10 7.41, p90 8.18) | vs sdpa: x0.574 [p10 0.531, p90 0.578] faster in 100% of rounds
+    sdpa_bound_static median    7.97 ms (p10 7.39, p90 8.16) | vs sdpa: x0.571 [p10 0.566, p90 0.576] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+  B=8 int4 eager vs eager sdpa: {'sdpa': {'max': 0.0, 'mean': 0.0}, 'sdpa_gqa': {'max': 0.0, 'mean': 0.0}, 'maskmod_decode': {'max': 0.3125, 'mean': 0.04017447680234909}, 'triton_decode': {'max': 0.234375, 'mean': 0.02978644147515297}, 'sdpa_bound_static': {'max': 0.3125, 'mean': 0.026941625401377678}} (logit scale 15.44) | eager sdpa rerun bitwise identical: True
+/home/<user>/venvs/gpu/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: Int4TilePackedTo4dTensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+USDT:2026-09-22 20:51:16 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:51:16 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa: {'compile_s': 7.1557, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.0295, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 25, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:52:26 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:52:26 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_gqa: {'compile_s': 74.1124, 'max_abs_diff_vs_eager_same_variant': 0.25, 'mean_abs_diff_vs_eager_same_variant': 0.0293, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 24, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:52:49 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:52:49 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    maskmod_decode: {'compile_s': 25.0268, 'max_abs_diff_vs_eager_same_variant': 0.2031, 'mean_abs_diff_vs_eager_same_variant': 0.0267, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:52:59 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:52:59 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    triton_decode: {'compile_s': 9.2494, 'max_abs_diff_vs_eager_same_variant': 0.1875, 'mean_abs_diff_vs_eager_same_variant': 0.0249, 'max_abs_diff_vs_eager_sdpa': 0.1875, 'logit_scale': 15.4375, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:53:39 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:53:39 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    sdpa_bound_static: {'compile_s': 44.6289, 'max_abs_diff_vs_eager_same_variant': 0.2031, 'mean_abs_diff_vs_eager_same_variant': 0.0244, 'max_abs_diff_vs_eager_sdpa': 0.25, 'logit_scale': 15.4375, 'n_kernel_types': 23, 'uses_expected_path': True, 'correct': True, 'timed': True}
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 20:53:55 2533:2533 SyncActivityProfilerHandler.cpp:46] profiler_stop
+    kernels sdpa               {'attention': 8.682, 'gemm': 7.031, 'kv_copy_or_mask': 6.499, 'other': 0.427, 'total': 22.64}
+      top [('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 8.682), ('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 7.031), ('triton_poi_fused__scaled_dot_product_efficient_attention__to_copy__uns', 6.397), ('void at::native::vectorized_elementwise_kernel<2, at::native::FillFunc', 0.095)]
+    kernels sdpa_gqa           {'gemm': 6.618, 'attention': 5.859, 'other': 0.403, 'kv_copy_or_mask': 0.121, 'total': 13.001}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.618), ('fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::Atte', 5.859), ('triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_', 0.069), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.067)]
+    kernels maskmod_decode     {'gemm': 6.586, 'attention': 1.894, 'other': 0.335, 'kv_copy_or_mask': 0.092, 'total': 8.907}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.586), ('triton_tem_fused__to_copy_add_arange_bmm_cat_expand_flex_attention_mea', 1.857), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.069), ('triton_red_fused__to_copy_add_constant_pad_nd_mean_mul_pow_rsqrt_view_', 0.056)]
+    kernels triton_decode      {'gemm': 6.765, 'attention': 1.841, 'other': 0.344, 'kv_copy_or_mask': 0.099, 'total': 9.049}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.765), ('_split_kernel', 1.779), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.067), ('_combine_kernel', 0.063)]
+    kernels sdpa_bound_static  {'gemm': 6.635, 'attention': 1.718, 'other': 0.334, 'kv_copy_or_mask': 0.047, 'total': 8.735}
+      top [('void at::native::tinygemm_m16n8k16_chunk_kernel<at::native::ALayout_RM', 6.635), ('void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<1', 1.578), ('void pytorch_flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_', 0.093), ('triton_poi_fused__to_copy_add_constant_pad_nd_embedding_mean_mul_pow_r', 0.068)]
+  B=8 int4: interleaved 20 rounds x 10 steps, baseline sdpa
+    sdpa             median   23.03 ms (p10 22.88, p90 23.26)
+    sdpa_gqa         median   13.36 ms (p10 13.23, p90 13.58) | vs sdpa: x0.580 [p10 0.572, p90 0.587] faster in 100% of rounds
+    maskmod_decode   median    9.25 ms (p10 9.13, p90 9.51) | vs sdpa: x0.402 [p10 0.397, p90 0.405] faster in 100% of rounds
+    triton_decode    median    9.39 ms (p10 9.28, p90 9.64) | vs sdpa: x0.407 [p10 0.403, p90 0.411] faster in 100% of rounds
+    sdpa_bound_static median    9.07 ms (p10 8.97, p90 9.26) | vs sdpa: x0.394 [p10 0.390, p90 0.397] faster in 100% of rounds
+  position counter after all calls: 513 (expected 513)
+saved <workspace>/phase0/week4/results/e4_fact_ablation.json

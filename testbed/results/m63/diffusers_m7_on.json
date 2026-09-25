@@ -1,0 +1,125 @@
+{
+ "tag": "m7_on",
+ "checkpoint": "entail_test/astolfocarmixVpredxl_acEvo25EP.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "policy": "resolve",
+ "load_seconds": 1.36,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "v_prediction",
+  "rescale_betas_zero_snr": false
+ },
+ "vae_scaling_factor": 0.13025,
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 11.36,
+   "image": "/home/<user>/m63_out/m7_on_seed11.png",
+   "stats": {
+    "mean": 165.02,
+    "std": 34.75,
+    "saturation": 28.43
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 10.13,
+   "image": "/home/<user>/m63_out/m7_on_seed22.png",
+   "stats": {
+    "mean": 156.03,
+    "std": 29.45,
+    "saturation": 25.44
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 12.66,
+   "image": "/home/<user>/m63_out/m7_on_seed33.png",
+   "stats": {
+    "mean": 161.43,
+    "std": 26.79,
+    "saturation": 31.91
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 5.311
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 6.153
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 1.06
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.192
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.094
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.172
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "set the sampler up for the declared prediction (to v-prediction without zero terminal SNR)",
+   "target": "v-prediction without zero terminal SNR",
+   "note": "",
+   "declared": "v-prediction",
+   "declared_from": "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models/checkpoints/entail_test/astolfocarmixVpredxl_acEvo25EP.safetensors#__metadata__.modelspec.prediction_type",
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 12.522
+  }
+ ],
+ "when": "2026-09-24 09:27:56"
+}

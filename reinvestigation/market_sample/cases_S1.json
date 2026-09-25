@@ -1,0 +1,512 @@
+[
+ {
+  "case_id": "S001",
+  "repo": "huggingface/diffusers",
+  "number": 9761,
+  "url": "https://github.com/huggingface/diffusers/issues/9761",
+  "title": "[docstring] Incorrect docstring reference for `return_dict` in `pipeline_stable_diffusion_3.py`",
+  "output_problem": "no",
+  "not_output_reason": "docs",
+  "symptom": "StableDiffusion3Pipeline의 return_dict 설명이 StableDiffusion3PipelineOutput이 아니라 StableDiffusionXLPipelineOutput을 가리킨다는 docstring 오류 보고.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "해당 없음: 실행 실패가 아니라 docstring 내용 오류 보고",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "SD3 파이프라인 세 파일(pipeline_stable_diffusion_3.py, _img2img.py, _inpaint.py)의 __call__ docstring에서 return_dict 설명이 SDXL의 출력 클래스 StableDiffusionXLPipelineOutput을 참조하고 있었다. 기여자 a-r-r-o-w가 'This is indeed incorrect'라고 확인했고, 병합된 PR #9765가 세 파일의 참조를 StableDiffusion3PipelineOutput으로 고쳤다. PR이 바꾼 것은 docstring 줄뿐이다.",
+  "components_involved": [
+   "src/diffusers/pipelines/stable_diffusion_3/pipeline_stable_diffusion_3.py",
+   "src/diffusers/pipelines/stable_diffusion_3/pipeline_stable_diffusion_3_img2img.py",
+   "src/diffusers/pipelines/stable_diffusion_3/pipeline_stable_diffusion_3_inpaint.py",
+   "StableDiffusion3Pipeline.__call__ docstring"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/9765",
+   "summary": "SD3 파이프라인 세 파일의 return_dict docstring 참조를 StableDiffusion3PipelineOutput으로 바꿨다."
+  },
+  "trigger": "해당 없음(문서). 커밋 24c7d578 기준 pipeline_stable_diffusion_3.py 765행 docstring",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/9761#issuecomment-2435217833",
+   "https://github.com/huggingface/diffusers/pull/9765"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 직접 수정 PR을 열었고 다음 날 병합되어 이슈가 닫혔다. 보고자 표현으로는 'minor issue but could be confusing for users'."
+ },
+ {
+  "case_id": "S002",
+  "repo": "huggingface/diffusers",
+  "number": 7334,
+  "url": "https://github.com/huggingface/diffusers/issues/7334",
+  "title": "VAE config mismatch when using StableDiffusionInpainting ",
+  "output_problem": "unclear",
+  "not_output_reason": null,
+  "symptom": "유지보수자(sayakpaul)가 실패하는 테스트를 보고했다. StableDiffusionInpaintPipeline의 VAE config sample_size가 diffusers 체크포인트에서는 256, 단일 파일 체크포인트에서 추론하면 512로 달라, 두 경로의 VAE가 서로 다른 타일링 설정을 갖게 된다고 지적했다.",
+  "visible_effect": "differs_without_clear_wrongness",
+  "message_at_failure": "unknown",
+  "message_evidence": "테스트 test_single_file_component_configs의 단언 실패로 발견. 일반 실행 때 경고가 나오는지는 스레드에 언급 없음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "from_pretrained('runwayml/stable-diffusion-inpainting')로 읽은 VAE config의 sample_size는 256이고, from_single_file(sd-v1-5-inpainting.ckpt)이 추론한 값은 512였다. 유지보수자 DN6는 'the configs on the repo are incorrect'라며 예상된 실패라고 설명했다. AutoencoderKL(autoencoder_kl.py)은 config.sample_size로 tile_sample_min_size와 tile_latent_min_size를 정하므로, 두 로딩 경로의 VAE는 타일링을 켤 때 서로 다른 타일 크기를 쓴다. DN6는 저장소 config를 고치면 하류 사용처가 바뀔 수 있다고 해서 고치지 않았다.",
+  "components_involved": [
+   "src/diffusers/models/autoencoders/autoencoder_kl.py (AutoencoderKL의 tile_sample_min_size, tile_latent_min_size)",
+   "from_single_file의 config 추론",
+   "runwayml/stable-diffusion-inpainting의 VAE config (sample_size)",
+   "tests/pipelines/stable_diffusion/test_stable_diffusion_inpaint.py::test_single_file_component_configs",
+   "tests/single_file/test_stable_diffusion_upscale_single_file.py"
+  ],
+  "fix": null,
+  "trigger": "StableDiffusionInpaintPipeline을 from_pretrained('runwayml/stable-diffusion-inpainting', variant='fp16')와 from_single_file(sd-v1-5-inpainting.ckpt)로 각각 읽어 VAE config를 비교할 때. 코드 주석상 타일링 값은 'only relevant if vae tiling is enabled'.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/7334",
+   "https://github.com/huggingface/diffusers/issues/7334#issuecomment-2030861801",
+   "https://github.com/huggingface/diffusers/issues/7334#issuecomment-2510737320",
+   "https://github.com/huggingface/diffusers/pull/10127"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "틀린 이미지를 보고한 것이 아니라 두 로딩 경로의 config 값 차이를 테스트가 잡은 것이라 output_problem을 unclear로 둠. yiyixuxu는 PR #7496(from_single_file 리팩터)으로 해결될 것이라 했지만 2024-11에도 CI가 이 문제로 깨져 있었다. 이슈는 PR #10127(config 불일치 테스트를 xfail로 표시, 사유 'mismatches in the configs')로 닫혔고 원인은 고치지 않았다. PR #10127은 upscale 단일 파일 테스트 파일만 바꿨다. DN6 발언의 'repo'가 어느 저장소인지는 명시되지 않았다."
+ },
+ {
+  "case_id": "S003",
+  "repo": "huggingface/diffusers",
+  "number": 11779,
+  "url": "https://github.com/huggingface/diffusers/issues/11779",
+  "title": "Incorrect mask padding in Wan VACE pipeline",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "WanVACEPipeline에 reference_images를 주면 참조 이미지가 생성 영상에 새어 들어가고(leaked) 프롬프트 추종이 나빠졌다. 보고자가 수정 전후 영상을 비교해 보였다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "이슈의 Logs 칸이 비어 있고, 파이프라인이 영상을 내보낸 뒤 결과 비교로 발견",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "pipeline_wan_vace.py의 prepare_masks는 참조 이미지 수만큼 0으로 채운 마스크 패딩을 만들어 붙이는데, 이를 영상 마스크 뒤에 붙였다(torch.cat([mask_, mask_padding], dim=1)). 참조 이미지 잠재값은 다른 잠재값 앞에 놓이므로 그 마스크도 앞에 있어야 하고, 공식 VACE 구현(wan_vace.py 187행)도 앞에 붙인다. 이 때문에 마스크 순서가 잠재값 순서와 어긋났고, 참조 이미지가 영상에 새어 들어가고 프롬프트 추종이 나빠졌다. 리뷰어 a-r-r-o-w는 처음 구현할 때 자신이 실수했다고 확인했다.",
+  "components_involved": [
+   "src/diffusers/pipelines/wan/pipeline_wan_vace.py",
+   "WanVACEPipeline.prepare_masks",
+   "reference_images 처리",
+   "공식 구현 ali-vilab/VACE vace/models/wan/wan_vace.py"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/11778",
+   "summary": "prepare_masks에서 마스크 패딩을 영상 마스크 앞에 붙이도록 torch.cat 순서를 [mask_padding, mask_]로 바꿨다."
+  },
+  "trigger": "WanVACEPipeline에 reference_images를 줄 때. 재현: Wan-AI/Wan2.1-VACE-1.3B-diffusers, 480x832, 21프레임, 30스텝, guidance_scale 5.0, UniPC flow_shift 3.0. diffusers 0.34.0.dev0(main cd813499), A800 80GB.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/11779",
+   "https://github.com/huggingface/diffusers/pull/11778"
+  ],
+  "extractor_confidence": "high",
+  "notes": "보고자가 이슈와 함께 수정 PR을 올렸고 약 30분 만에 병합되었다. 리뷰 승인 문구: 'you're absolutely right! ... I made a mistake initially'."
+ },
+ {
+  "case_id": "S004",
+  "repo": "huggingface/diffusers",
+  "number": 7294,
+  "url": "https://github.com/huggingface/diffusers/issues/7294",
+  "title": "Wrong Text-encoder Grad Setting in Custom_Diffusion",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "train_custom_diffusion.py로 여러 개념을 학습하면 마지막 개념이 학습되지 않는다고 보고했다(단일 개념은 정상). 보고자는 실행 결과가 아니라 코드를 읽고 지적했다.",
+  "visible_effect": "setting_no_effect",
+  "message_at_failure": "none",
+  "message_evidence": "Logs 칸 'No response'. 기울기를 0으로 만드는 코드 경로에 경고가 없고 학습은 그대로 진행되는 것으로 설명됨",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "examples/custom_diffusion/train_custom_diffusion.py는 새로 추가한 modifier token만 학습하려고, 나머지 토큰 임베딩의 기울기를 0으로 만드는 마스크 index_grads_to_zero를 만든다. 그런데 반복문이 range(len(modifier_token_id[1:]))로 i=0부터 돌며 modifier_token_id[i]와 비교해서, 마지막 modifier token이 마스크에서 빠지지 않았다. 그래서 개념이 둘 이상이면 마지막 토큰의 기울기도 매 스텝 0이 되어 그 개념의 임베딩이 학습되지 않았다. 병합된 PR #7302가 반복 범위를 range(1, len(modifier_token_id))로 고쳤다.",
+  "components_involved": [
+   "examples/custom_diffusion/train_custom_diffusion.py",
+   "index_grads_to_zero (텍스트 인코더 입력 임베딩 기울기 0 처리)",
+   "modifier_token_id",
+   "--modifier_token"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/7302",
+   "summary": "기울기를 0으로 만들지 않을 토큰을 고르는 반복문을 range(1, len(modifier_token_id))로 바꿔 모든 modifier token이 마스크에서 빠지게 했다."
+  },
+  "trigger": "Custom Diffusion 학습에서 --modifier_token '<new1>+<new2>'처럼 개념을 둘 이상 지정할 때. 단일 개념은 정상. diffusers 0.27.0.dev0, runwayml/stable-diffusion-v1-5.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/7294",
+   "https://github.com/huggingface/diffusers/pull/7302"
+  ],
+  "extractor_confidence": "high",
+  "notes": "출력은 학습된 가중치(마지막 개념의 토큰 임베딩)다. 보고자는 코드를 읽고 결함을 찾았고, 생성 이미지 비교는 스레드에 없다. 유지보수자 sayakpaul이 수정 PR을 승인해 병합했다."
+ },
+ {
+  "case_id": "S005",
+  "repo": "huggingface/diffusers",
+  "number": 10697,
+  "url": "https://github.com/huggingface/diffusers/issues/10697",
+  "title": "Inconsistent random transform between source and target image in  train_instruct_pix2pix",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "InstructPix2Pix 학습 예제에서 원본과 목표 이미지에 무작위 자르기와 뒤집기가 따로 적용된다고 보고했다. 보고자가 random crop을 끄려고 resolution 512로 학습한 편집 모델이 대칭 이미지를 자주 내놓았다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "Logs 칸 비어 있음. 학습된 모델의 출력(대칭 이미지)으로 알아챔",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "examples/instruct_pix2pix/train_instruct_pix2pix.py",
+   "examples/instruct_pix2pix/train_instruct_pix2pix_sdxl.py",
+   "preprocess_images, preprocess_train",
+   "train_transforms (RandomCrop, RandomHorizontalFlip)",
+   "examples/research_projects/instructpix2pix_lora/train_instruct_pix2pix_lora.py"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/10698",
+   "summary": "두 학습 스크립트에서 원본과 편집 이미지를 np.concatenate 대신 np.stack으로 묶어 train_transforms를 적용하고, chunk(2) 대신 바로 나눠 받도록 바꿨다."
+  },
+  "trigger": "InstructPix2Pix 학습 예제(train_instruct_pix2pix.py, train_instruct_pix2pix_sdxl.py)에서 random crop이나 random flip을 쓸 때. 보고자는 resolution 512로 random crop을 껐다. diffusers 0.33.0.dev0.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/10697",
+   "https://github.com/huggingface/diffusers/pull/10698",
+   "https://github.com/huggingface/diffusers/pull/12507"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "수정 PR #10698은 유지보수자 승인('Thank you!')으로 병합되어 이슈가 닫혔다. 그러나 유지보수자의 원인 설명이 없고, 수정 뒤 대칭 이미지 증상이 사라졌는지 확인한 기록도 없다. 수정 전 코드도 주석('ensure ... undergo the same augmentation transforms')대로 두 이미지를 한 텐서로 합친 뒤 train_transforms를 한 번 호출하는 구조라서, 스레드만으로는 변환이 어떻게 따로 적용되었는지 드러나지 않아 unconfirmed로 두었다. 같은 보고자가 LoRA 연구 예제에 같은 수정 PR #12507을 올렸다(승인됨, 미병합)."
+ },
+ {
+  "case_id": "S006",
+  "repo": "huggingface/diffusers",
+  "number": 12066,
+  "url": "https://github.com/huggingface/diffusers/issues/12066",
+  "title": "Qwen Image incorrect device assignment during prompt encode",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "QwenImagePipeline을 오프로딩과 함께 쓰면 프롬프트 인코딩 단계에서 장치 불일치 RuntimeError로 멈춘다. 보고자는 SD.Next에서 qwen-image를 막는 문제라고 했다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "Logs: 'RuntimeError: Expected all tensors to be on the same device ...'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "QwenImagePipeline._get_qwen_prompt_embeds(pipeline_qwenimage.py)가 토크나이저 출력을 함수 인자로 받은 device가 아니라 self.device로 옮겼다. 보고자에 따르면 self.device는 파이프라인 전체 배치를 따르므로 오프로딩을 쓰면 텍스트 인코더가 실제로 도는 장치와 맞지 않는다. 그래서 index_select에서 CPU에 있는 입력 id와 cuda:0의 텐서가 만나 RuntimeError가 났다. 유지보수자 yiyixuxu가 PR #12099('device typo')에서 .to(device)로 고쳤다.",
+  "components_involved": [
+   "src/diffusers/pipelines/qwenimage/pipeline_qwenimage.py",
+   "QwenImagePipeline._get_qwen_prompt_embeds",
+   "self.device와 인자 device",
+   "모델 오프로딩"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/12099",
+   "summary": "토크나이저 출력을 self.device 대신 인자로 받은 device로 옮기도록 한 줄을 고쳤다."
+  },
+  "trigger": "QwenImagePipeline을 모델 오프로딩(보고자 표현 'any type of offloading')과 함께 쓸 때. diffusers 커밋 7ea065c5, SD.Next.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/12066",
+   "https://github.com/huggingface/diffusers/issues/12066#issuecomment-3165864534",
+   "https://github.com/huggingface/diffusers/pull/12099"
+  ],
+  "extractor_confidence": "high",
+  "notes": "틀린 출력이 아니라 실행 중단(충돌) 보고다. 재현 코드는 'N/A'로 적혀 있다."
+ },
+ {
+  "case_id": "S007",
+  "repo": "huggingface/diffusers",
+  "number": 7799,
+  "url": "https://github.com/huggingface/diffusers/issues/7799",
+  "title": "Mismatching size in matmul when using StableDiffusionInstructPix2Pix pipeline with IP-Adapter",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "StableDiffusionInstructPix2PixPipeline에 IP-Adapter(ip-adapter_sd15.bin)를 불러와 ip_adapter_image를 주면 행렬곱 크기 불일치 RuntimeError가 난다. SD나 SDXL 파이프라인에서는 된다고 했다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "Logs: 'RuntimeError: mat1 and mat2 shapes cannot be multiplied (771x1280 and 1024x3072)'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "수정 전 StableDiffusionInstructPix2PixPipeline.__call__은 unet.encoder_hid_proj가 ImageProjection인지로 이미지 인코더 은닉 상태를 쓸지(output_hidden_state) 정했다. 트레이스를 보면 IP-Adapter를 불러온 뒤 encoder_hid_proj는 MultiIPAdapterImageProjection이고 그 안에 ImageProjection이 있어, 이 검사가 은닉 상태 쪽을 골랐다. 그 결과 1280차원 입력이 1024차원 입력을 기대하는 ImageProjection 선형층에 들어가 크기 불일치 오류가 났다. 유지보수자 yiyixuxu가 재현한 뒤 PR #7820에서 투영층마다 판단하는 prepare_ip_adapter_image_embeds를 이 파이프라인에 넣었다.",
+  "components_involved": [
+   "src/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion_instruct_pix2pix.py (__call__, encode_image, prepare_ip_adapter_image_embeds)",
+   "UNet2DConditionModel.encoder_hid_proj",
+   "MultiIPAdapterImageProjection, ImageProjection (src/diffusers/models/embeddings.py)",
+   "load_ip_adapter"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/7820",
+   "summary": "InstructPix2Pix 파이프라인에 ip_adapter_image_embeds 인자와, 투영층별로 output_hidden_state를 정하는 prepare_ip_adapter_image_embeds를 넣었다."
+  },
+  "trigger": "StableDiffusionInstructPix2PixPipeline(timbrooks/instruct-pix2pix)에 load_ip_adapter('h94/IP-Adapter', ip-adapter_sd15.bin)를 하고 ip_adapter_image를 줄 때. diffusers 0.27.2, torch 2.1.2.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/7799#issuecomment-2083854019",
+   "https://github.com/huggingface/diffusers/issues/7799#issuecomment-2084135885",
+   "https://github.com/huggingface/diffusers/pull/7820"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "실행 중단(충돌) 보고다. 유지보수자는 원인을 말로 설명하지 않았고, 원인 서술은 PR #7820의 변경 내용과 오류 트레이스에서 읽은 것이다. 보고자는 수정 브랜치로 동작을 확인했다('It works for me too!')."
+ },
+ {
+  "case_id": "S008",
+  "repo": "huggingface/diffusers",
+  "number": 11137,
+  "url": "https://github.com/huggingface/diffusers/issues/11137",
+  "title": "LattePipeline fails with dtype mismatch",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "LattePipeline을 float16이나 bfloat16으로 불러 실행하면, 기본값인 temporal attention이 켜져 있을 때 transformer 블록에서 dtype 불일치 RuntimeError가 난다. temporal attention을 끄면 동작한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "Logs: 'RuntimeError: mat1 and mat2 must have the same dtype, but got Float and Half'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "LatteTransformer3DModel.forward(latte_transformer_3d.py)에서 temp_pos_embed는 float32인데, 첫 temporal 블록 전에 fp16/bf16인 hidden_states에 이를 더하면서 hidden_states가 float32로 바뀌었다. 그 뒤 반정밀도 가중치를 가진 선형층에 float32 입력이 들어가 dtype 불일치 오류가 났다. 병합된 PR #11139(hlky)는 temp_pos_embed를 hidden_states.dtype으로 바꿔 더하도록 고쳤다.",
+  "components_involved": [
+   "src/diffusers/models/transformers/latte_transformer_3d.py",
+   "LatteTransformer3DModel.forward",
+   "temp_pos_embed",
+   "enable_temporal_attentions",
+   "src/diffusers/pipelines/latte/pipeline_latte.py"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/11139",
+   "summary": "temp_pos_embed를 hidden_states.dtype으로 캐스팅한 뒤 더하도록 한 줄을 고쳤다."
+  },
+  "trigger": "LattePipeline을 torch_dtype=float16 또는 bfloat16으로 불러 enable_temporal_attentions=True(기본값)로 실행할 때. 코드상 첫 블록이고 num_frame > 1일 때 더해진다. diffusers main, SD.Next.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/11137",
+   "https://github.com/huggingface/diffusers/pull/11139"
+  ],
+  "extractor_confidence": "high",
+  "notes": "실행 중단(충돌) 보고다. 원인 설명은 PR #11139 본문에 있고('temp_pos_embed is in float32 ... then it becomes float32'), a-r-r-o-w가 승인했다."
+ },
+ {
+  "case_id": "S009",
+  "repo": "huggingface/diffusers",
+  "number": 10518,
+  "url": "https://github.com/huggingface/diffusers/issues/10518",
+  "title": "Some wrong in \"diffusers/examples/research_projects/sd3_lora_colab /train_dreambooth_lora_sd3_miniature.py\"",
+  "output_problem": "unclear",
+  "not_output_reason": null,
+  "symptom": "train_dreambooth_lora_sd3_miniature.py 768행에서 'unet'을 'transformer'로 바꿔야 한다는 코드 오류 지적이다. 증상이나 실행 결과는 적혀 있지 않다.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "Logs 'No response', Reproduction 'see the link'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "SD3 LoRA 학습 예제(train_dreambooth_lora_sd3_miniature.py)의 load_model_hook은 LoRA 상태 사전에서 키를 골라 'transformer.' 접두사를 떼고 transformer에 넣는데, 고르는 조건이 k.startswith('unet.')이었다. 떼는 접두사('transformer.')와 고르는 접두사('unet.')가 어긋나 있었고, 병합된 PR #10554가 조건을 k.startswith('transformer.')로 고쳤다. 이것이 어떤 증상으로 이어졌는지는 스레드에 나오지 않는다.",
+  "components_involved": [
+   "examples/research_projects/sd3_lora_colab/train_dreambooth_lora_sd3_miniature.py",
+   "load_model_hook",
+   "StableDiffusion3Pipeline.lora_state_dict",
+   "set_peft_model_state_dict"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/10554",
+   "summary": "load_model_hook에서 LoRA 키를 고르는 조건을 'unet.'에서 'transformer.'로 바꿨다."
+  },
+  "trigger": "train_dreambooth_lora_sd3_miniature.py의 load_model_hook가 불릴 때(커밋 89e4d62 768행). diffusers 0.31.0.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/10518",
+   "https://github.com/huggingface/diffusers/pull/10554"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자는 코드 줄 링크와 스크린샷만 올렸다. 출력에 어떤 영향이 있었는지(예: 이어 학습할 때 가중치가 불러와지지 않았는지) 스레드에 서술이 없어 output_problem을 unclear로 두었다. 수정은 hlky가 올렸고 sayakpaul이 승인했다."
+ },
+ {
+  "case_id": "S010",
+  "repo": "huggingface/diffusers",
+  "number": 7183,
+  "url": "https://github.com/huggingface/diffusers/issues/7183",
+  "title": "scheduler.config._class_name displays wrong class name if the scheduler is changed",
+  "output_problem": "no",
+  "not_output_reason": "other(스케줄러 config의 _class_name 표시 값이 틀림. 생성 이미지는 정상이라고 보고자가 확인)",
+  "symptom": "pipe.scheduler를 다른 스케줄러 클래스의 from_config로 바꾼 뒤 pipe.scheduler._class_name과 pipe.scheduler.config._class_name이 새 클래스가 아니라 이전 스케줄러 이름을 보인다. type(pipe.scheduler)와 생성 이미지는 바뀐 스케줄러대로 나온다.",
+  "visible_effect": "other",
+  "message_at_failure": "none",
+  "message_evidence": "로그의 FutureWarning은 _class_name 직접 접근의 사용 중단 안내뿐이고, 오히려 틀린 값인 scheduler.config._class_name을 쓰라고 안내한다",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "ConfigMixin.from_config(configuration_utils.py)는 새 스케줄러를 만든 뒤, 호환 클래스용으로 남겨 둔 숨은 설정(hidden_dict)을 register_to_config로 다시 등록한다. 이 hidden_dict에 원래 config의 _class_name(이전 스케줄러 이름)이 들어 있어 새 스케줄러 config의 _class_name을 덮어썼다. 유지보수자 yiyixuxu의 PR #7192는 등록 전에 hidden_dict['_class_name']을 cls.__name__으로 바꾸도록 고쳤다.",
+  "components_involved": [
+   "src/diffusers/configuration_utils.py (ConfigMixin.from_config, hidden_dict, register_to_config)",
+   "스케줄러 config의 _class_name",
+   "LCMScheduler, EulerAncestralDiscreteScheduler, EulerDiscreteScheduler"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/7192",
+   "summary": "from_config에서 hidden_dict의 _class_name을 새 클래스 이름으로 바꾼 뒤 config에 등록하도록 했다."
+  },
+  "trigger": "SchedulerClass.from_config(pipe.scheduler.config)로 스케줄러를 바꿀 때. 보고자는 SDXL base 1.0에서 Euler, LCM, EulerAncestral 순으로 바꿨다. diffusers 0.26.3, macOS.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/7183",
+   "https://github.com/huggingface/diffusers/issues/7183#issuecomment-1974835502",
+   "https://github.com/huggingface/diffusers/pull/7192"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자가 'Actually running the pipe gives the images I'm expect'라고 해서 생성 출력 문제는 아니라고 보고 output_problem을 no로 두었다. 틀린 것은 구성 메타데이터 값(config._class_name)이며, 이 값을 출력으로 보면 판정이 달라질 수 있다. print(pipe.scheduler)를 먼저 하면 _class_name은 맞게 나오고 config._class_name은 하나 뒤처지는 등 접근 순서에 따라 표시가 달랐다."
+ },
+ {
+  "case_id": "S011",
+  "repo": "huggingface/diffusers",
+  "number": 8236,
+  "url": "https://github.com/huggingface/diffusers/issues/8236",
+  "title": "Wrong learning rate scheduler training step count for examples with multi-gpu when setting `--num_train_epochs`",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "여러 GPU에서 --max_train_steps 대신 --num_train_epochs로 학습하면 학습률 스케줄러에 넘기는 총 스텝 수가 실제의 약 num_processes배가 되어 의도하지 않은 값이 get_scheduler에 들어간다. 수정 PR은 학습률이 기대보다 num_processes배 느리게 감소한다고 설명했다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "이슈의 Logs 'No response'. 수정 PR #8312가 이 불일치를 알리는 logger.warning을 새로 넣었다(수정 전에는 경고 없음)",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "예제 학습 스크립트(train_text_to_image.py 등)는 train_dataloader를 단일 프로세스용으로 만든 뒤 accelerator.prepare로 프로세스마다 나누는데, 학습률 스케줄러는 prepare 전에 만든다. 그래서 --num_train_epochs를 쓰면 나누기 전 길이 len(train_dataloader)로 num_update_steps_per_epoch와 max_train_steps를 계산해 값이 약 num_processes배 커졌다. 스케줄러에는 준비된 스케줄러가 최적화 스텝마다 num_processes번 step하는 것을 반영해 max_train_steps × num_processes를 넘기는데, max_train_steps가 이미 커져 있어 총 스텝도 그만큼 커졌고 학습률이 기대보다 num_processes배 느리게 감소했다. 기존 코드 작성자 eliphatfs도 에폭 기반에서는 이 값이 틀렸다고 확인했고, PR #8312가 train_text_to_image_lora.py에서 샤딩 후 길이(ceil(len/num_processes))로 계산하도록 고쳤다.",
+  "components_involved": [
+   "examples/text_to_image/train_text_to_image.py",
+   "examples/text_to_image/train_text_to_image_lora.py",
+   "get_scheduler(num_training_steps, num_warmup_steps)",
+   "accelerate의 accelerator.prepare(BatchSamplerShard, 준비된 스케줄러)",
+   "train_dataloader"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/8312",
+   "summary": "train_text_to_image_lora.py에서 스케줄러용 총 스텝을 샤딩 후 dataloader 길이로 계산하고, prepare 뒤 길이가 다르면 경고를 내도록 했다."
+  },
+  "trigger": "여러 GPU(num_processes > 1)에서 --max_train_steps 없이 --num_train_epochs로 학습할 때. diffusers 0.27.2. 스텝 기반(--max_train_steps) 학습은 해당 없음.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/8236#issuecomment-2126552532",
+   "https://github.com/huggingface/diffusers/issues/8236#issuecomment-2131414808",
+   "https://github.com/huggingface/diffusers/pull/8312"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "출력은 학습 과정의 학습률 일정과 그로 인한 학습 결과다. 생성 이미지 비교는 없고, PR #8312에 학습률 곡선 실험이 있다. PR #8312는 유지보수자 요청으로 train_text_to_image_lora.py 한 파일만 고쳤고, 이슈가 예로 든 train_text_to_image.py 등 나머지 스크립트는 커뮤니티 후속 작업 목록으로 남겼다. 병합 뒤 PR 댓글에서 lr_warmup_steps에 num_processes를 곱하는 것이 맞는지 논쟁이 있었으나 결론은 없었다."
+ },
+ {
+  "case_id": "S012",
+  "repo": "huggingface/diffusers",
+  "number": 13411,
+  "url": "https://github.com/huggingface/diffusers/issues/13411",
+  "title": "`LTXEulerAncestralRFScheduler.set_timesteps(sigmas=...)` does not validate monotonicity, causing silent incorrect denoising",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "LTXEulerAncestralRFScheduler.set_timesteps(sigmas=...)에 단조 감소가 아닌 시그마 목록을 주면 step()이 예외, NaN, 경고 없이 유한하지만 틀린 값을 낸다. 보고자 예제에서는 잡음 제거 대신 샘플의 부호가 뒤집히고 약 1.45배로 커졌다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "본문: 'no exception, no NaN, no warning'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "repro_and_fix",
+  "root_cause": "scheduling_ltx_euler_ancestral_rf.py의 set_timesteps는 외부에서 받은 sigmas가 단조 감소인지, [0, 1] 안에 있는지 검사하지 않는다. step()은 downstep_ratio = 1 + (sigma_next/sigma - 1)·eta, sigma_down = sigma_next·downstep_ratio, alpha_down = 1 - sigma_down으로 계산하는데, 시그마가 커지는 구간(예: 0.2에서 0.8)에서는 sigma_down이 3.2로 [0, 1]을 벗어나고 alpha_down이 음수가 된다. 그 결과 샘플 계수가 -1.45가 되어 잡음 제거가 일어나지 않지만 값은 유한해서 조용히 틀린다. 보고자의 재현 코드와 수치 추적이 코드의 step() 식과 맞는다.",
+  "components_involved": [
+   "src/diffusers/schedulers/scheduling_ltx_euler_ancestral_rf.py",
+   "LTXEulerAncestralRFScheduler.set_timesteps (sigmas 인자)",
+   "LTXEulerAncestralRFScheduler.step (downstep_ratio, sigma_down, alpha_down, renoise_coeff)"
+  ],
+  "fix": null,
+  "trigger": "LTXEulerAncestralRFScheduler.set_timesteps에 증가 구간이 있는 sigmas(예: [0.2, 0.8, 0.5, 0.0])를 직접 넘길 때, eta=1.0. 보고자는 잘못 구성된 ComfyUI 워크플로가 이런 목록을 낼 수 있다고 했다. FlowMatchEulerDiscreteScheduler는 sigmas 인자를 노출하지 않아 해당 없다고 했다.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/13411",
+   "https://github.com/huggingface/diffusers/pull/13412",
+   "https://github.com/huggingface/diffusers/pull/13412#issuecomment-4194872811"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "검증을 넣는 PR #13412는 유지보수자 yiyixuxu가 거절했다. 이 인자는 사용자가 원하는 어떤 일정이든 넣으라는 것이라 검사를 넣는 것이 의미 없다고 했다. PR은 병합 없이 닫혔고, 이슈는 보고자가 not_planned로 닫았다. 유지보수자는 수치 분석 자체에는 반박하지 않았다. 재현은 파이프라인 이미지가 아니라 스케줄러 단위의 합성 예제다. 수정안(검증 추가)이 병합되지 않아 기반을 repro_and_fix로 적었다."
+ },
+ {
+  "case_id": "S013",
+  "repo": "huggingface/diffusers",
+  "number": 7133,
+  "url": "https://github.com/huggingface/diffusers/issues/7133",
+  "title": "SDXL Dreambooth LoRA - size mismatch in text encoders when resuming from checkpoint",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "SDXL DreamBooth LoRA 학습(--train_text_encoder)을 체크포인트에서 이어 하면 텍스트 인코더 LoRA 가중치를 불러오다 크기 불일치 RuntimeError로 멈춘다. 끊지 않고 학습하면 정상 완료된다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "Logs: 'RuntimeError: Error(s) in loading state_dict for CLIPTextModel: size mismatch ...'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "train_dreambooth_lora_sdxl.py의 load_model_hook가 'text_encoder_2.' 접두사의 LoRA 가중치를 text_encoder_two_가 아니라 text_encoder_one_에 넣었다. 두 번째 텍스트 인코더용 가중치(1280차원)가 첫 번째 인코더(768차원)에 들어가 크기 불일치 오류가 났다. 유지보수자 sayakpaul의 PR #7166('Such a silly mistake')이 대상을 text_encoder_two_로 고쳤다.",
+  "components_involved": [
+   "examples/dreambooth/train_dreambooth_lora_sdxl.py",
+   "load_model_hook",
+   "_set_state_dict_into_text_encoder (src/diffusers/training_utils.py)",
+   "peft set_peft_model_state_dict",
+   "accelerator.load_state"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/7166",
+   "summary": "load_model_hook에서 'text_encoder_2.' 가중치를 text_encoder_two_에 넣도록 인자 하나를 고쳤다."
+  },
+  "trigger": "train_dreambooth_lora_sdxl.py를 --train_text_encoder로 돌리다 끊고 --resume_from_checkpoint=latest로 이어 할 때. diffusers 0.26.1, RTX 3080 Ti, WSL2.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/7133#issuecomment-1972717105",
+   "https://github.com/huggingface/diffusers/pull/7166"
+  ],
+  "extractor_confidence": "high",
+  "notes": "실행 중단(충돌) 보고다. 보고자가 PR을 승인하며 'It's always the little stuff'라고 했다."
+ },
+ {
+  "case_id": "S014",
+  "repo": "huggingface/diffusers",
+  "number": 12606,
+  "url": "https://github.com/huggingface/diffusers/issues/12606",
+  "title": "Wrong import of scripts/convert_sd3_to_diffusers.py",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "scripts/convert_sd3_to_diffusers.py를 실행하면 load_model_dict_into_meta를 가져오지 못해 ImportError가 난다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "Reproduction: 'ImportError: cannot import name load_model_dict_into_meta ...'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "load_model_dict_into_meta 함수가 diffusers/models/modeling_utils.py에서 model_loading_utils.py로 옮겨졌는데, 변환 스크립트들의 import 문은 그대로여서 실행 시 ImportError가 났다. 병합된 PR #12616(커밋 0fd58c7)이 같은 문제가 있던 변환 스크립트 6개의 import 경로를 고쳤다.",
+  "components_involved": [
+   "scripts/convert_sd3_to_diffusers.py",
+   "scripts/convert_stable_cascade.py",
+   "scripts/convert_stable_cascade_lite.py",
+   "scripts/convert_stable_audio.py",
+   "scripts/convert_sana_to_diffusers.py",
+   "scripts/convert_sana_controlnet_to_diffusers.py",
+   "src/diffusers/models/model_loading_utils.py (load_model_dict_into_meta)",
+   "src/diffusers/models/modeling_utils.py"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/12616",
+   "summary": "변환 스크립트 6개에서 load_model_dict_into_meta를 diffusers.models.model_loading_utils에서 가져오도록 바꿨다."
+  },
+  "trigger": "scripts/convert_sd3_to_diffusers.py를 실행할 때(커밋 9f669e7 10행의 import). diffusers 0.36.0.dev0.",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/12606#issuecomment-3507244005",
+   "https://github.com/huggingface/diffusers/pull/12616",
+   "https://github.com/huggingface/diffusers/commit/0fd58c7706ac69e046587c374320637c29b62b06"
+  ],
+  "extractor_confidence": "high",
+  "notes": "실행 중단(충돌) 보고다. 함수가 옮겨졌다는 설명은 병합 커밋 메시지에 있다. 유지보수자 DN6가 병합했다."
+ },
+ {
+  "case_id": "S015",
+  "repo": "huggingface/diffusers",
+  "number": 13292,
+  "url": "https://github.com/huggingface/diffusers/issues/13292",
+  "title": "[Bug] train_dreambooth_lora_flux2_klein.py: batch size mismatch with --with_prior_preservation",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "train_dreambooth_lora_flux2_klein.py를 --with_prior_preservation으로 돌리면 프롬프트 임베딩이 잠재값 배치의 두 배로 반복되어 배치 크기가 맞지 않는다(train_batch_size=1에서 잠재값 2개에 임베딩 4개). 다른 기여자가 같은 조건에서 크기 불일치 RuntimeError를 재현했다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "PR #13396 댓글의 재현: 'RuntimeError: The size of tensor a (2) must match the size of tensor b (4)'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "Flux2 계열 DreamBooth LoRA 학습 스크립트에서 --with_prior_preservation을 쓰면 prompt_embeds는 앞에서 torch.cat([instance_embeds, class_embeds])로 이미 두 배가 되어 있는데, collate_fn도 prompts 목록에 클래스 프롬프트를 붙여 len(prompts)가 두 배가 된다. 반복 횟수를 len(prompts)로 잡아 임베딩이 잠재값보다 두 배 많아졌고, 이것이 크기 불일치 오류로 이어졌다. Qwen-Image 스크립트에도 같은 문제가 있었다. 병합된 PR #13396(Qwen-Image)과 #13415(Flux2, Flux2 Klein)가 반복 횟수를 len(prompts) // 2로 고쳤다.",
+  "components_involved": [
+   "examples/dreambooth/train_dreambooth_lora_flux2_klein.py",
+   "examples/dreambooth/train_dreambooth_lora_flux2.py",
+   "examples/dreambooth/train_dreambooth_lora_flux2_klein_img2img.py",
+   "examples/dreambooth/train_dreambooth_lora_qwen_image.py",
+   "collate_fn",
+   "prompt_embeds와 text_ids의 반복(num_repeat_elements)"
+  ],
+  "fix": {
+   "url": "https://github.com/huggingface/diffusers/pull/13415",
+   "summary": "Flux2와 Flux2 Klein 스크립트에서 prior preservation일 때 반복 횟수를 len(prompts) // 2로 줄이고, repeat_interleave로 배치 순서를 맞추고, weighting도 두 부분으로 나누도록 했다."
+  },
+  "trigger": "train_dreambooth_lora_flux2_klein.py(그리고 flux2, qwen_image 스크립트)에서 --with_prior_preservation, train_batch_size=1. 재현자 조건: 사용자 지정 캡션 없음, 잠재값 캐시 없음. diffusers 0.38.0.dev0(main).",
+  "evidence_urls": [
+   "https://github.com/huggingface/diffusers/issues/13292",
+   "https://github.com/huggingface/diffusers/pull/13307",
+   "https://github.com/huggingface/diffusers/pull/13396",
+   "https://github.com/huggingface/diffusers/pull/13396#issuecomment-4187481166",
+   "https://github.com/huggingface/diffusers/pull/13415"
+  ],
+  "extractor_confidence": "high",
+  "notes": "실행 중단(충돌) 보고다. 이슈는 Qwen-Image 스크립트를 고친 PR #13396이 병합될 때 닫혔고, 보고된 flux2_klein 스크립트는 뒤에 병합된 PR #13415로 고쳐졌다. 이슈를 직접 겨냥한 PR #13307(세 스크립트)은 열린 상태다. PR #13415 작성자는 수정 중 train_batch_size>1에서 임베딩 순서가 [inst, class, inst, class]로 섞이는 문제와 weighting 크기 불일치를 추가로 찾아 함께 고쳤고, Qwen-Image 쪽은 PR #13441('batch ordering')로 따로 고쳐졌다. 이 순서 문제는 이 이슈에서 보고된 증상이 아니다."
+ }
+]

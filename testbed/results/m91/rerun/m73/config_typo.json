@@ -1,0 +1,70 @@
+{
+ "when": "2026-09-24 17:50:06",
+ "mode": "load",
+ "policy": "resolve",
+ "planted": "config.json gives the yarn scaling under a misspelt key, rope_scalling",
+ "rope_parameters_in_the_model": {
+  "rope_theta": 1000000,
+  "rope_type": "default"
+ },
+ "tokens": [
+  10061,
+  594,
+  1438,
+  419,
+  1495,
+  3019,
+  553,
+  3019,
+  1447,
+  16,
+  13,
+  3070,
+  28046,
+  15829,
+  95518,
+  2303,
+  256,
+  41601,
+  685,
+  6088,
+  3070,
+  19,
+  23,
+  26111,
+  334,
+  304,
+  5813,
+  382,
+  17,
+  13,
+  3070,
+  11109
+ ],
+ "text": "Let's break this down step by step:\n\n1. **April Sales**:  \n   Natalia sold **48 clips** in April.\n\n2. **May",
+ "output_wrong": true,
+ "located": {
+  "broken_at": "load:transformers.config",
+  "all_intact": false,
+  "unchecked": [],
+  "suspects": [
+   "boundary load:transformers.config"
+  ],
+  "broken": [
+   "load:transformers.config"
+  ],
+  "lost_by": [],
+  "intact": [
+   "load:transformers.loader",
+   "load:transformers.config.rope_parameters"
+  ],
+  "layers": [],
+  "why": [
+   "meaning broke at load:transformers.config: Coverage: the consumer differs from the declaration and no resolution is registered"
+  ]
+ },
+ "lines": [
+  "[entail] where: meaning broke at load:transformers.config",
+  "[entail]   suspect: meaning broke at load:transformers.config: Coverage: the consumer differs from the declaration and no resolution is registered"
+ ]
+}

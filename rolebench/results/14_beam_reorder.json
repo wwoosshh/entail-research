@@ -1,0 +1,73 @@
+{
+ "case": "14_beam_reorder",
+ "meta": {
+  "id": "14",
+  "title": "beam search skips reordering a non-standard cache",
+  "fact": "TIME",
+  "issue": "https://github.com/huggingface/transformers/issues/46612",
+  "engine": "beam search cache reorder (mechanism)",
+  "kind": "mechanism",
+  "boundary": "beam selection (parent indices) -> per-beam recurrent state",
+  "trigger": {
+   "feature": "beam search",
+   "model": "recurrent or custom cache (Mamba, XLNet, RWKV, Reformer)"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "runtime (per-beam axis role on every cache entry)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 16.0,
+  "mean_abs": 1.640021555865737,
+  "ref_max_abs": 30.0,
+  "top1_agree": 1.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 2.6645352591003757e-15,
+  "mean_abs": 2.6645352591003756e-16,
+  "ref_max_abs": 30.0,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "per-beam axis declared on every cache entry",
+   "defect": {
+    "flagged": true,
+    "message": "beam step: beam-axis cache entries not reordered: ['ssm_state']"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 0.9
+}

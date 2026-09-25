@@ -1,0 +1,30 @@
+{
+ "when": "2026-09-24 17:50:02",
+ "mode": "debug",
+ "policy": "refuse",
+ "stopped": "[entail] refused at load:transformers.config.rope_scaling: Rotary declared Rotary(rope_type='yarn', theta=1000000, factor=4.0, original_max_position=32768) (user: Qwen3Config.rope_scaling written after the config was built, read as config.json reads it, declared); transformers.rotary_embedding uses Rotary(rope_type='yarn', theta=None, factor=4.0, original_max_position=32768) (engine: Qwen3Config.rope_parameters after the write as transformers performs it, verified); rule: the consumer differs from the declaration and the policy repairs nothing; stops here",
+ "output_wrong": null,
+ "located": {
+  "broken_at": "load:transformers.config.rope_scaling",
+  "all_intact": false,
+  "unchecked": [],
+  "suspects": [
+   "boundary load:transformers.config.rope_scaling"
+  ],
+  "broken": [
+   "load:transformers.config.rope_scaling"
+  ],
+  "lost_by": [],
+  "intact": [
+   "load:transformers.config"
+  ],
+  "layers": [],
+  "why": [
+   "meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+  ]
+ },
+ "lines": [
+  "[entail] where: meaning broke at load:transformers.config.rope_scaling",
+  "[entail]   suspect: meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+ ]
+}

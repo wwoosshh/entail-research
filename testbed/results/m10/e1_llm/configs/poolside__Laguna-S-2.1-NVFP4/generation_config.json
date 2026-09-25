@@ -1,0 +1,24 @@
+{
+  "bos_token_id": 2,
+  "do_sample": true,
+  "eos_token_id": [
+    2,
+    24
+  ],
+  "pad_token_id": 9,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "min_p": 0.0,
+  "top_k": 20,
+  "tool_call_parser": "poolside_v1",
+  "reasoning_parser": "poolside_v1",
+  "default_chat_template_kwargs": {
+    "enable_thinking": true
+  },
+  "speculative_config": {
+    "method": "dflash",
+    "source": "huggingface",
+    "model": "poolside/Laguna-S-2.1-DFlash",
+    "num_speculative_tokens": 15
+  }
+}

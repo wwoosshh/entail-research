@@ -1,0 +1,54 @@
+(EngineCore pid=4429) 
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+(EngineCore pid=4429) 
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:00<00:00,  2.84it/s]
+(EngineCore pid=4429) 
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:00<00:00,  3.01it/s]
+(EngineCore pid=4429) 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:00<00:00,  4.39it/s]
+(EngineCore pid=4429) 
+(EngineCore pid=4429) [entail-seed] short_blocks: the block table now reports one block fewer
+
+Rendering prompts:   0%|          | 0/3 [00:00<?, ?it/s]
+Rendering prompts: 100%|██████████| 3/3 [00:00<00:00, 341.82it/s]
+
+Processed prompts:   0%|          | 0/3 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s](EngineCore pid=4429) [entail] refused at container:vllm.allocate_slots: KvExtent declared KvExtent(held=17, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 1-af843e7d: the slots its tokens need, verified); vllm.kv_cache uses KvExtent(held=16, needed=17, written=None, window=None, previous=None, granularity=16) (engine: vllm kv cache group 0, request 1-af843e7d: the slots it holds, verified); rule: the slots held are not the slots the tokens need; note: vllm kv cache group 0, request 1-af843e7d: holds 16 KV slots for 17 tokens, which is not one allocation unit (16) of the right size. The slots a sequence holds and the tokens it has are two numbers nobody compares.; stops here
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368] EngineCore encountered a fatal error.
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368] Traceback (most recent call last):
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1352, in run_engine_core
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     engine_core.run_busy_loop()
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/v1/fault_tolerance/engine_core_sentinel.py", line 179, in run_with_fault_tolerance
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     busy_loop_func(self)
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1411, in run_busy_loop
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     self._process_engine_step()
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1464, in _process_engine_step
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     outputs, model_executed = self.step_fn()
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]                               ^^^^^^^^^^^^^^
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 658, in step_with_batch_queue
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     scheduler_output = self.scheduler.schedule(self._should_throttle_prefills())
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/v1/core/sched/scheduler.py", line 729, in schedule
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     new_blocks = self.kv_cache_manager.allocate_slots(
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/adapters/vllm_cache_contract.py", line 84, in allocate_slots
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     kv_contract.guarded(BOUNDARY, CONSUMER, _decide, self, request, num_new_tokens, given)
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/kv_contract.py", line 306, in guarded
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     return _tally.guarded(boundary, consumer, "KvExtent", work, *args, **kwargs)
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/tally.py", line 154, in guarded
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     return work(*args, **kwargs)
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/adapters/vllm_cache_contract.py", line 64, in _decide
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     kv_contract.check(BOUNDARY, CONSUMER, f"vllm kv cache group {g}, request {request.request_id}",
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/kv_contract.py", line 150, in check
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     _refuse(boundary, consumer, where, extent, broken, key=where)
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/kv_contract.py", line 138, in _refuse
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     load.enforce(decisions)
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]   File "<workspace>/entail/entail/load.py", line 859, in enforce
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368]     raise RoleError("\n".join(_record.line(d) for d in stops))
+(EngineCore pid=4429) ERROR 09-24 17:49:14 [core.py:1368] entail.core.RoleError: [entail] refused at container:vllm.allocate_slots: KvExtent declared KvExtent(held=17, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 1-af843e7d: the slots its tokens need, verified); vllm.kv_cache uses KvExtent(held=16, needed=17, written=None, window=None, previous=None, granularity=16) (engine: vllm kv cache group 0, request 1-af843e7d: the slots it holds, verified); rule: the slots held are not the slots the tokens need; note: vllm kv cache group 0, request 1-af843e7d: holds 16 KV slots for 17 tokens, which is not one allocation unit (16) of the right size. The slots a sequence holds and the tokens it has are two numbers nobody compares.; stops here
+
+Processed prompts:   0%|          | 0/3 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+RESULT {"engine": "vllm", "tag": "seeded", "entail": "load", "seed": "short_blocks", "when": "2026-09-24 17:48:56", "texts": null, "error": "EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.", "seconds": 18.8}
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

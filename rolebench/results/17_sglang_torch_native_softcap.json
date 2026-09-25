@@ -1,0 +1,87 @@
+{
+ "case": "17_sglang_torch_native_softcap",
+ "meta": {
+  "id": "17",
+  "title": "SGLang torch_native attention ignores the declared logit cap",
+  "fact": "PROPERTY",
+  "issue": "local finding by code reading (2026-09-23); no upstream report searched yet",
+  "engine": "SGLang 0.5.20 (installed)",
+  "kind": "real-engine",
+  "boundary": "model config (attn_logit_softcapping) -> SGLang attention backend (torch_native)",
+  "trigger": {
+   "engine": "SGLang",
+   "setting": "--attention-backend torch_native (or a fallback to it)",
+   "model": "Gemma 2 (logit cap)"
+  },
+  "symptom": "plausible_but_wrong",
+  "expected_detection": "load (backend capability vs model property)",
+  "compare": "noise"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [
+    "WARNING torch.utils._pytree: <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.",
+    "WARNING torch.utils._pytree: <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release."
+   ],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 5.975621223449707,
+  "mean_abs": 0.7225062458821127,
+  "ref_max_abs": 19.561187744140625,
+  "top1_agree": 0.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 0.26671409606933594,
+  "mean_abs": 0.030082996427411083,
+  "ref_max_abs": 19.561187744140625,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "load",
+   "checks": "model property vs attention-backend capability",
+   "defect": {
+    "flagged": true,
+    "message": "SGLang attention backend 'torch_native' (Gemma 2): kernel does not honour declared model properties: softcap=5.0"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "probe": {
+  "result": {
+   "torch_native_engine_lines_mentioning_cap_or_warn": []
+  },
+  "notes": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "seconds": 49.5
+}

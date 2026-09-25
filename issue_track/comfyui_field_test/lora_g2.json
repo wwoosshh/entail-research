@@ -1,0 +1,37 @@
+{
+ "none": {
+  "status": "success",
+  "seconds": 10.783,
+  "image": "C:\\Users\\<user>\\Desktop\\ComfyUI\\ComfyUI-new\\output\\entail_test\\lora_g2_none_00001_.png"
+ },
+ "right": {
+  "status": "success",
+  "seconds": 6.936,
+  "image": "C:\\Users\\<user>\\Desktop\\ComfyUI\\ComfyUI-new\\output\\entail_test\\lora_g2_right_00001_.png",
+  "vs_none": {
+   "identical": false,
+   "mean_abs_diff": 35.248
+  }
+ },
+ "wrong": {
+  "status": "error",
+  "error": "LoraLoaderModelOnly: entail.core.RoleError: LoRA nagito\\nagito_anima_e10.safetensors cannot reach this model: none of its 280 modules match a weight of the loaded SDXL model. It declares it was trained for anima. It would change nothing. Use the version made for SDXL, or remove it.\n"
+ },
+ "log": {
+  "lora_key_not_loaded": 0,
+  "entail_lines": [
+   "[entail] installed entail.adapters.comfyui:install_schedule_record in pid 8784",
+   "[entail] installed entail.adapters.comfyui:install_schedule_check in pid 8784",
+   "[entail] installed entail.adapters.comfyui:install_buffer_guard in pid 8784",
+   "[entail] installed entail.adapters.comfyui in pid 8784",
+   "[entail] installed entail.adapters.comfyui:install_sampling in pid 8784",
+   "[entail] installed entail.adapters.comfyui:install_nodes in pid 8784",
+   "[entail] installed entail.adapters.rope_alias in pid 8784",
+   "[entail] installed entail.adapters.transformers_adapter in pid 8784",
+   "  0%|          | 0/20 [00:00<?, ?it/s,   Model Initializing ...  ][entail] ComfyUI SDXL model behaves like eps as set up (probe 1.00)",
+   "[entail] LoRA nagito\\nagito_illustrious_v3.safetensors: all 788 model and 0 text-encoder modules reach the SDXL model",
+   "    raise core.RoleError(said[1])",
+   "entail.core.RoleError: LoRA nagito\\nagito_anima_e10.safetensors cannot reach this model: none of its 280 modules match a weight of the loaded SDXL model. It declares it was trained for anima. It would change nothing. Use the version made for SDXL, or remove it."
+  ]
+ }
+}

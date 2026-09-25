@@ -1,0 +1,62 @@
+{
+ "n": 2000,
+ "vllm": "0.30.0",
+ "model": "Qwen3-4B",
+ "shapes": {
+  "plain": {
+   "entail_us": 58.23,
+   "render_us": 63.9,
+   "ratio": 0.9113
+  },
+  "ten_messages": {
+   "entail_us": 59.85,
+   "render_us": 181.49,
+   "ratio": 0.3298
+  },
+  "tool_call": {
+   "entail_us": 58.29,
+   "render_us": 194.13,
+   "ratio": 0.3002
+  }
+ },
+ "counts": {
+  "request:vllm.chat_template": {
+   "checks": 6300,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 6300
+   }
+  },
+  "request:vllm.template_settings": {
+   "checks": 6300,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 6300
+   }
+  },
+  "request:vllm.reasoning_history": {
+   "checks": 0,
+   "refused": 0,
+   "skipped": 6300,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "request:vllm.request_fields": {
+   "checks": 6300,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 6300
+   }
+  }
+ }
+}

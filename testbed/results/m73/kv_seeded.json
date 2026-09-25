@@ -1,0 +1,46 @@
+{
+ "when": "2026-09-24 14:58:17",
+ "mode": "load",
+ "policy": "resolve",
+ "tokens": [
+  594,
+  1438,
+  1495,
+  279,
+  3491,
+  3019,
+  553,
+  3019,
+  1447,
+  44364,
+  14374,
+  14822
+ ],
+ "text": "'s break down the problem step by step:\n\n---\n\n### Step",
+ "output_wrong": true,
+ "located": {
+  "broken_at": "container:transformers.cache_update",
+  "all_intact": false,
+  "unchecked": [],
+  "suspects": [
+   "boundary container:transformers.cache_update"
+  ],
+  "broken": [
+   "container:transformers.cache_update"
+  ],
+  "lost_by": [],
+  "intact": [
+   "load:transformers.config",
+   "load:transformers.loader",
+   "load:transformers.config.rope_parameters"
+  ],
+  "layers": [],
+  "why": [
+   "meaning broke at container:transformers.cache_update: KvExtent: the slots held shrank since the last check, and nothing said so"
+  ]
+ },
+ "lines": [
+  "[entail] where: meaning broke at container:transformers.cache_update",
+  "[entail]   suspect: meaning broke at container:transformers.cache_update: KvExtent: the slots held shrank since the last check, and nothing said so"
+ ]
+}

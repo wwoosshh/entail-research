@@ -1,0 +1,683 @@
+{
+ "when": "2026-09-24 15:01:17",
+ "scenarios": {
+  "reference": {
+   "exit": 0,
+   "seconds": 15.2
+  },
+  "rope_observe": {
+   "exit": 0,
+   "seconds": 5.1,
+   "mode": "load",
+   "policy": "refuse",
+   "expect": {
+    "kind": "boundary",
+    "at": "load:transformers.config.rope_scaling"
+   },
+   "output_wrong": true,
+   "stopped": false,
+   "in_process": {
+    "broken_at": "load:transformers.config.rope_scaling",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary load:transformers.config.rope_scaling"
+    ],
+    "broken": [
+     "load:transformers.config.rope_scaling"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/rope_observe/record-2026-09-24.jsonl"
+    ],
+    "broken_at": "load:transformers.config.rope_scaling",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary load:transformers.config.rope_scaling"
+    ],
+    "broken": [
+     "load:transformers.config.rope_scaling"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/rope_observe/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "rope_debug": {
+   "exit": 0,
+   "seconds": 4.0,
+   "mode": "debug",
+   "policy": "refuse",
+   "expect": {
+    "kind": "boundary",
+    "at": "load:transformers.config.rope_scaling"
+   },
+   "output_wrong": null,
+   "stopped": true,
+   "in_process": {
+    "broken_at": "load:transformers.config.rope_scaling",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary load:transformers.config.rope_scaling"
+    ],
+    "broken": [
+     "load:transformers.config.rope_scaling"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/rope_debug/record-2026-09-24.jsonl"
+    ],
+    "broken_at": "load:transformers.config.rope_scaling",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary load:transformers.config.rope_scaling"
+    ],
+    "broken": [
+     "load:transformers.config.rope_scaling"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/rope_debug/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "config_typo": {
+   "exit": 0,
+   "seconds": 7.8,
+   "mode": "load",
+   "policy": "resolve",
+   "expect": {
+    "kind": "boundary",
+    "at": "load:transformers.config"
+   },
+   "output_wrong": true,
+   "stopped": false,
+   "in_process": {
+    "broken_at": "load:transformers.config",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary load:transformers.config"
+    ],
+    "broken": [
+     "load:transformers.config"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at load:transformers.config: Coverage: the consumer differs from the declaration and no resolution is registered"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/config_typo/record-2026-09-24.jsonl"
+    ],
+    "broken_at": "load:transformers.config",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary load:transformers.config"
+    ],
+    "broken": [
+     "load:transformers.config"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at load:transformers.config: Coverage: the consumer differs from the declaration and no resolution is registered"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/config_typo/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "kv_seeded": {
+   "exit": 0,
+   "seconds": 6.9,
+   "mode": "load",
+   "policy": "resolve",
+   "expect": {
+    "kind": "boundary",
+    "at": "container:transformers.cache_update"
+   },
+   "output_wrong": true,
+   "stopped": false,
+   "in_process": {
+    "broken_at": "container:transformers.cache_update",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary container:transformers.cache_update"
+    ],
+    "broken": [
+     "container:transformers.cache_update"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at container:transformers.cache_update: KvExtent: the slots held shrank since the last check, and nothing said so"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/kv_seeded/record-2026-09-24.jsonl"
+    ],
+    "broken_at": "container:transformers.cache_update",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary container:transformers.cache_update"
+    ],
+    "broken": [
+     "container:transformers.cache_update"
+    ],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at container:transformers.cache_update: KvExtent: the slots held shrank since the last check, and nothing said so"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/kv_seeded/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "code_rb01": {
+   "exit": 0,
+   "seconds": 1.4,
+   "mode": "debug",
+   "policy": "resolve",
+   "expect": {
+    "kind": "boundary",
+    "at": "boundary:second-path dequantize"
+   },
+   "output_wrong": null,
+   "stopped": true,
+   "in_process": {
+    "broken_at": "boundary:second-path dequantize",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary boundary:second-path dequantize"
+    ],
+    "broken": [
+     "boundary:second-path dequantize"
+    ],
+    "lost_by": [],
+    "intact": [],
+    "layers": [],
+    "why": [
+     "meaning broke at boundary:second-path dequantize: Layout: the consumer differs from the declaration and no resolution is registered"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/code_rb01/record-2026-09-24.jsonl"
+    ],
+    "broken_at": "boundary:second-path dequantize",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary boundary:second-path dequantize"
+    ],
+    "broken": [
+     "boundary:second-path dequantize"
+    ],
+    "lost_by": [],
+    "intact": [],
+    "layers": [],
+    "why": [
+     "meaning broke at boundary:second-path dequantize: Layout: the consumer differs from the declaration and no resolution is registered"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/code_rb01/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "code_rb04": {
+   "exit": 0,
+   "seconds": 1.6,
+   "mode": "debug",
+   "policy": "resolve",
+   "expect": {
+    "kind": "boundary",
+    "at": "boundary:dp_gather_partial (reduces its input)"
+   },
+   "output_wrong": null,
+   "stopped": true,
+   "in_process": {
+    "broken_at": "boundary:dp_gather_partial (reduces its input)",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary boundary:dp_gather_partial (reduces its input)"
+    ],
+    "broken": [
+     "boundary:dp_gather_partial (reduces its input)"
+    ],
+    "lost_by": [],
+    "intact": [
+     "boundary:all_reduce"
+    ],
+    "layers": [],
+    "why": [
+     "meaning broke at boundary:dp_gather_partial (reduces its input): Reduction: the consumer differs from the declaration and no resolution is registered"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/code_rb04/record-2026-09-24.jsonl"
+    ],
+    "broken_at": "boundary:dp_gather_partial (reduces its input)",
+    "all_intact": false,
+    "unchecked": [],
+    "suspects": [
+     "boundary boundary:dp_gather_partial (reduces its input)"
+    ],
+    "broken": [
+     "boundary:dp_gather_partial (reduces its input)"
+    ],
+    "lost_by": [],
+    "intact": [],
+    "layers": [],
+    "why": [
+     "meaning broke at boundary:dp_gather_partial (reduces its input): Reduction: the consumer differs from the declaration and no resolution is registered"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/code_rb04/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "op_transpose": {
+   "exit": 0,
+   "seconds": 1.5,
+   "mode": "debug",
+   "policy": "resolve",
+   "expect": {
+    "kind": "op",
+    "at": "boundary:second-path dequantize",
+    "op": "t"
+   },
+   "output_wrong": null,
+   "stopped": true,
+   "in_process": {
+    "broken_at": null,
+    "all_intact": false,
+    "unchecked": [
+     "boundary:second-path dequantize (Layout: what it carried was made untrue on the way, and nothing says what it holds now)"
+    ],
+    "suspects": [
+     "operation t on the way to boundary:second-path dequantize"
+    ],
+    "broken": [],
+    "lost_by": [
+     "Layout at boundary:second-path dequantize, made untrue by t"
+    ],
+    "intact": [],
+    "layers": [],
+    "why": [
+     "meaning was lost on the way to boundary:second-path dequantize: t made what it needs untrue, and nothing said what the value holds after it (Layout: what it carried was made untrue on the way, and nothing says what it holds now)"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/op_transpose/record-2026-09-24.jsonl"
+    ],
+    "broken_at": null,
+    "all_intact": false,
+    "unchecked": [
+     "boundary:second-path dequantize (Layout: what it carried was made untrue on the way, and nothing says what it holds now)"
+    ],
+    "suspects": [
+     "operation t on the way to boundary:second-path dequantize"
+    ],
+    "broken": [],
+    "lost_by": [
+     "Layout at boundary:second-path dequantize, made untrue by t"
+    ],
+    "intact": [],
+    "layers": [],
+    "why": [
+     "meaning was lost on the way to boundary:second-path dequantize: t made what it needs untrue, and nothing said what the value holds after it (Layout: what it carried was made untrue on the way, and nothing says what it holds now)"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/op_transpose/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "inside_attention": {
+   "exit": 0,
+   "seconds": 9.3,
+   "mode": "debug",
+   "policy": "resolve",
+   "expect": {
+    "kind": "inside",
+    "layer": "attention"
+   },
+   "output_wrong": true,
+   "stopped": false,
+   "in_process": {
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [],
+    "suspects": [
+     "inside attention"
+    ],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters",
+     "container:transformers.cache_update"
+    ],
+    "layers": [
+     "rmsnorm agrees with rmsnorm_reference on the same inputs (largest difference 0.00769 of the reference's scale, tolerance 0.03; 145 calls compared)",
+     "attention (instance 9) differs from manual_attention on the same inputs (largest difference 0.135 of the reference's scale, tolerance 0.03; 36 calls compared)",
+     "mlp agrees with mlp_reference on the same inputs (largest difference 0.00746 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ],
+    "why": [
+     "inside attention: attention (instance 9) differs from manual_attention on the same inputs (largest difference 0.135 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/inside_attention/record-2026-09-24.jsonl"
+    ],
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [],
+    "suspects": [
+     "inside attention"
+    ],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters",
+     "container:transformers.cache_update"
+    ],
+    "layers": [
+     "rmsnorm agrees with rmsnorm_reference on the same inputs (largest difference 0.00769 of the reference's scale, tolerance 0.03; 145 calls compared)",
+     "attention (instance 9) differs from manual_attention on the same inputs (largest difference 0.135 of the reference's scale, tolerance 0.03; 36 calls compared)",
+     "mlp agrees with mlp_reference on the same inputs (largest difference 0.00746 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ],
+    "why": [
+     "inside attention: attention (instance 9) differs from manual_attention on the same inputs (largest difference 0.135 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/inside_attention/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "inside_mlp": {
+   "exit": 0,
+   "seconds": 9.4,
+   "mode": "debug",
+   "policy": "resolve",
+   "expect": {
+    "kind": "inside",
+    "layer": "mlp"
+   },
+   "output_wrong": true,
+   "stopped": false,
+   "in_process": {
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [],
+    "suspects": [
+     "inside mlp"
+    ],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters",
+     "container:transformers.cache_update"
+    ],
+    "layers": [
+     "rmsnorm agrees with rmsnorm_reference on the same inputs (largest difference 0.00746 of the reference's scale, tolerance 0.03; 145 calls compared)",
+     "attention agrees with manual_attention on the same inputs (largest difference 0.00546 of the reference's scale, tolerance 0.03; 36 calls compared)",
+     "mlp (instance 3) differs from mlp_reference on the same inputs (largest difference 0.813 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ],
+    "why": [
+     "inside mlp: mlp (instance 3) differs from mlp_reference on the same inputs (largest difference 0.813 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/inside_mlp/record-2026-09-24.jsonl"
+    ],
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [],
+    "suspects": [
+     "inside mlp"
+    ],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters",
+     "container:transformers.cache_update"
+    ],
+    "layers": [
+     "rmsnorm agrees with rmsnorm_reference on the same inputs (largest difference 0.00746 of the reference's scale, tolerance 0.03; 145 calls compared)",
+     "attention agrees with manual_attention on the same inputs (largest difference 0.00546 of the reference's scale, tolerance 0.03; 36 calls compared)",
+     "mlp (instance 3) differs from mlp_reference on the same inputs (largest difference 0.813 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ],
+    "why": [
+     "inside mlp: mlp (instance 3) differs from mlp_reference on the same inputs (largest difference 0.813 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/inside_mlp/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "healthy": {
+   "exit": 0,
+   "seconds": 9.9,
+   "mode": "debug",
+   "policy": "resolve",
+   "expect": {
+    "kind": "healthy"
+   },
+   "output_wrong": false,
+   "stopped": false,
+   "in_process": {
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [],
+    "suspects": [],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters",
+     "container:transformers.cache_update"
+    ],
+    "layers": [
+     "rmsnorm agrees with rmsnorm_reference on the same inputs (largest difference 0.00781 of the reference's scale, tolerance 0.03; 145 calls compared)",
+     "attention agrees with manual_attention on the same inputs (largest difference 0.00599 of the reference's scale, tolerance 0.03; 36 calls compared)",
+     "mlp agrees with mlp_reference on the same inputs (largest difference 0.0073 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ],
+    "why": []
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/healthy/record-2026-09-24.jsonl"
+    ],
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [],
+    "suspects": [],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters",
+     "container:transformers.cache_update"
+    ],
+    "layers": [
+     "rmsnorm agrees with rmsnorm_reference on the same inputs (largest difference 0.00781 of the reference's scale, tolerance 0.03; 145 calls compared)",
+     "attention agrees with manual_attention on the same inputs (largest difference 0.00599 of the reference's scale, tolerance 0.03; 36 calls compared)",
+     "mlp agrees with mlp_reference on the same inputs (largest difference 0.0073 of the reference's scale, tolerance 0.03; 36 calls compared)"
+    ],
+    "why": []
+   },
+   "records": [
+    "testbed/results/m73/logs/healthy/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "unchecked": {
+   "exit": 0,
+   "seconds": 8.0,
+   "mode": "load",
+   "policy": "resolve",
+   "expect": {
+    "kind": "unchecked",
+    "at": "load:transformers.attention"
+   },
+   "output_wrong": true,
+   "stopped": false,
+   "in_process": {
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [
+     "load:transformers.attention (ModelProps: what the consumer uses is unknown (not read, or not in the capability table))"
+    ],
+    "suspects": [
+     "boundary load:transformers.attention and beside it config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted",
+     "inside a layer"
+    ],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters"
+    ],
+    "layers": [],
+    "why": [
+     "load:transformers.attention vouches for nothing (ModelProps: what the consumer uses is unknown (not read, or not in the capability table)), so it and config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted stay suspect",
+     "the output is wrong but no checked boundary broke, so the fault is not in the plumbing: it is inside a layer - the model itself, a compiler, a kernel, the hardware"
+    ]
+   },
+   "from_records": {
+    "records": [
+     "<workspace>/testbed/results/m73/logs/unchecked/record-2026-09-24.jsonl"
+    ],
+    "broken_at": null,
+    "all_intact": true,
+    "unchecked": [
+     "load:transformers.attention (ModelProps: what the consumer uses is unknown (not read, or not in the capability table))"
+    ],
+    "suspects": [
+     "boundary load:transformers.attention and beside it config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted",
+     "inside a layer"
+    ],
+    "broken": [],
+    "lost_by": [],
+    "intact": [
+     "load:transformers.config",
+     "load:transformers.loader",
+     "load:transformers.config.rope_parameters"
+    ],
+    "layers": [],
+    "why": [
+     "load:transformers.attention vouches for nothing (ModelProps: what the consumer uses is unknown (not read, or not in the capability table)), so it and config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted stay suspect",
+     "the output is wrong but no checked boundary broke, so the fault is not in the plumbing: it is inside a layer - the model itself, a compiler, a kernel, the hardware"
+    ]
+   },
+   "records": [
+    "testbed/results/m73/logs/unchecked/record-2026-09-24.jsonl"
+   ],
+   "located_in_process": true,
+   "located_from_records": true
+  },
+  "cost": {
+   "exit": 0,
+   "seconds": 130.0
+  }
+ },
+ "located": 11,
+ "of": 11
+}

@@ -1,0 +1,35 @@
+{
+ "when": "2026-09-24 17:49:57",
+ "mode": "load",
+ "policy": "refuse",
+ "rope_parameters_after_the_write": {
+  "rope_type": "yarn",
+  "factor": 4.0,
+  "original_max_position_embeddings": 32768
+ },
+ "failed": "TypeError: unsupported operand type(s) for ** or pow(): 'NoneType' and 'Tensor'",
+ "output_wrong": true,
+ "located": {
+  "broken_at": "load:transformers.config.rope_scaling",
+  "all_intact": false,
+  "unchecked": [],
+  "suspects": [
+   "boundary load:transformers.config.rope_scaling"
+  ],
+  "broken": [
+   "load:transformers.config.rope_scaling"
+  ],
+  "lost_by": [],
+  "intact": [
+   "load:transformers.config"
+  ],
+  "layers": [],
+  "why": [
+   "meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+  ]
+ },
+ "lines": [
+  "[entail] where: meaning broke at load:transformers.config.rope_scaling",
+  "[entail]   suspect: meaning broke at load:transformers.config.rope_scaling: Rotary: the consumer differs from the declaration and the policy repairs nothing"
+ ]
+}

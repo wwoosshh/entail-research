@@ -1,0 +1,36 @@
+(APIServer pid=14052) WARNING 09-24 17:28:51 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=14052) WARNING 09-24 17:28:51 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=14147) WARNING 09-24 17:28:59 [buffer_utils.py:47] Pinned memory is not available on this platform; falling back to device memory for UVA buffers.
+(EngineCore pid=14147) 
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+(EngineCore pid=14147) 
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:01<00:02,  1.19s/it]
+(EngineCore pid=14147) 
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.19s/it]
+(EngineCore pid=14147) 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:02<00:00,  1.23it/s]
+(EngineCore pid=14147) 
+(EngineCore pid=14147) WARNING 09-24 17:29:06 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=14147) WARNING 09-24 17:29:06 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=14052) WARNING 09-24 17:29:06 [model.py:1772] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=14052) INFO:     Started server process [14052]
+(APIServer pid=14052) INFO:     Waiting for application startup.
+(APIServer pid=14052) INFO:     Application startup complete.
+(APIServer pid=14052) INFO:     127.0.0.1:41242 - "GET /health HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:41258 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:41270 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:41276 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:41290 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:41298 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:41306 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) WARNING 09-24 17:29:13 [protocol.py:65] Request contains the removed guided-decoding field(s) ['guided_json'], which are ignored; output will NOT be constrained. Use `structured_outputs` (or `response_format`) instead; see docs/features/structured_outputs.md.
+(APIServer pid=14052) INFO:     127.0.0.1:47732 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:47736 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) INFO:     127.0.0.1:47750 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=14052) WARNING 09-24 17:29:16 [utils.py:652] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=14052) WARNING 09-24 17:29:16 [utils.py:657] [shutdown] Process manager: force killing remaining process EngineCore pid 14147
+(APIServer pid=14052) INFO:     Shutting down
+(APIServer pid=14052) INFO:     Waiting for application shutdown.
+(APIServer pid=14052) INFO:     Application shutdown complete.
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

@@ -1,0 +1,102 @@
+=== B=1 Lmax=640 valid=[576] | KV read floor 4.7 us ===
+  flash_gqa_nomask_full             36.1 us   err=nan
+  flash_repeat_nomask_full          80.2 us   err=nan
+  efficient_mask_repeat            122.3 us   err=0.0010
+  efficient_mask_gqa                86.6 us   err=0.0010
+  cudnn_mask_repeat                100.6 us   err=0.0010
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Memory efficient kernel not used because: (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:1240.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Memory Efficient attention has been runtime disabled. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/sdp_utils_cpp.h:600.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Flash attention kernel not used because: (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:1242.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Flash Attention does not support non-null attn_mask. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/sdp_utils_cpp.h:281.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: cuDNN attention kernel not used because: (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:1244.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: cuDNN attention has been runtime disabled. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:922.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                    214.7 us   err=0.0000
+  flash_sliced_gqa                  40.5 us   err=0.0010
+  triton_valid_gqa                  57.6 us   err=0.0000
+  repeat_kv_only                    47.5 us   err=nan
+=== B=1 Lmax=2048 valid=[1984] | KV read floor 16.1 us ===
+  flash_gqa_nomask_full             49.8 us   err=nan
+  flash_repeat_nomask_full         136.7 us   err=nan
+  efficient_mask_repeat            188.7 us   err=0.0005
+  efficient_mask_gqa               153.4 us   err=0.0005
+  cudnn_mask_repeat                117.6 us   err=0.0005
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Memory efficient kernel not used because: (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:1240.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Memory Efficient attention has been runtime disabled. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/sdp_utils_cpp.h:600.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Flash attention kernel not used because: (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:1242.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: Flash Attention does not support non-null attn_mask. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/sdp_utils_cpp.h:281.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: cuDNN attention kernel not used because: (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:1244.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+<workspace>/phase0/week2/attn_path_experiment.py:65: UserWarning: cuDNN attention has been runtime disabled. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/sdp_utils.cpp:922.)
+  lambda: F.scaled_dot_product_attention(q, repeat_kv(k), repeat_kv(v), attn_mask=mask), True),
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                    562.5 us   err=0.0000
+  flash_sliced_gqa                  53.7 us   err=0.0005
+  triton_valid_gqa                  57.3 us   err=0.0000
+  repeat_kv_only                    79.6 us   err=nan
+=== B=1 Lmax=8192 valid=[8128] | KV read floor 66.1 us ===
+  flash_gqa_nomask_full             72.1 us   err=nan
+  flash_repeat_nomask_full         727.3 us   err=nan
+  efficient_mask_repeat            786.9 us   err=0.0002
+  efficient_mask_gqa               438.0 us   err=0.0002
+  cudnn_mask_repeat                699.9 us   err=0.0002
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                   2395.3 us   err=0.0000
+  flash_sliced_gqa                  74.5 us   err=0.0002
+  triton_valid_gqa                  86.2 us   err=0.0000
+  repeat_kv_only                   405.7 us   err=nan
+=== B=4 Lmax=640 valid=[576, 568, 560, 552] | KV read floor 18.3 us ===
+  flash_gqa_nomask_full             49.2 us   err=nan
+  flash_repeat_nomask_full         247.2 us   err=nan
+  efficient_mask_repeat            240.3 us   err=0.0020
+  efficient_mask_gqa               148.8 us   err=0.0020
+  cudnn_mask_repeat                178.9 us   err=0.0020
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                    706.9 us   err=0.0001
+  flash_sliced_gqa                  51.2 us   err=0.0010
+  triton_valid_gqa                  64.3 us   err=0.0001
+  repeat_kv_only                   136.0 us   err=nan
+=== B=4 Lmax=2048 valid=[1984, 1976, 1968, 1960] | KV read floor 64.1 us ===
+  flash_gqa_nomask_full             75.1 us   err=nan
+  flash_repeat_nomask_full         844.6 us   err=nan
+  efficient_mask_repeat            797.8 us   err=0.0005
+  efficient_mask_gqa               332.2 us   err=0.0005
+  cudnn_mask_repeat                731.5 us   err=0.0005
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                   2375.5 us   err=0.0002
+  flash_sliced_gqa                  78.4 us   err=0.0010
+  triton_valid_gqa                  99.3 us   err=0.0002
+  repeat_kv_only                   405.3 us   err=nan
+=== B=8 Lmax=640 valid=[576, 568, 560, 552, 544, 536, 528, 520] | KV read floor 35.6 us ===
+  flash_gqa_nomask_full             56.5 us   err=nan
+  flash_repeat_nomask_full         456.2 us   err=nan
+  efficient_mask_repeat            494.7 us   err=0.0020
+  efficient_mask_gqa               209.1 us   err=0.0020
+  cudnn_mask_repeat                469.2 us   err=0.0020
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                   1467.5 us   err=0.0002
+  flash_sliced_gqa                  60.6 us   err=0.0020
+  triton_valid_gqa                  84.0 us   err=0.0002
+  repeat_kv_only                   277.1 us   err=nan
+=== B=8 Lmax=2048 valid=[1984, 1976, 1968, 1960, 1952, 1944, 1936, 1928] | KV read floor 127.2 us ===
+  flash_gqa_nomask_full            184.8 us   err=nan
+  flash_repeat_nomask_full        1573.6 us   err=nan
+  efficient_mask_repeat           1484.1 us   err=0.0010
+  efficient_mask_gqa               537.1 us   err=0.0010
+  cudnn_mask_repeat               1414.4 us   err=0.0010
+  flash_mask_repeat            ERROR RuntimeError: No available kernel. Aborting execution.
+  math_mask_gqa                   5162.4 us   err=0.0000
+  flash_sliced_gqa                 176.9 us   err=0.0010
+  triton_valid_gqa                 189.9 us   err=0.0002
+  repeat_kv_only                   792.1 us   err=nan
+saved <workspace>/phase0/week2/results_attn_path.json

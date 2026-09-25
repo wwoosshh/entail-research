@@ -1,0 +1,102 @@
+[16:51:59] s3_transformers_Qwen3-4B_off: RESULT transformers Qwen3-4B entail=off ok=True load=4.842 used=sdpa 
+[16:52:08] s3_transformers_Qwen3-4B_load: RESULT transformers Qwen3-4B entail=load ok=True load=2.068 used=sdpa 
+[16:53:15] s3_vllm_Qwen3-4B_off: RESULT vllm Qwen3-4B entail=off ok=True load=57.494 used=default 
+[16:53:38] s3_vllm_Qwen3-4B_load: RESULT vllm Qwen3-4B entail=load ok=True load=13.749 used=default 
+[16:54:16] s3_sglang_Qwen3-4B_off: RESULT sglang Qwen3-4B entail=off ok=True load=13.669 used=default 
+[16:54:37] s3_sglang_Qwen3-4B_load: RESULT sglang Qwen3-4B entail=load ok=True load=13.676 used=default 
+[16:54:47] s3_transformers_Llama-3.2-3B-Instruct_off: RESULT transformers Llama-3.2-3B-Instruct entail=off ok=True load=3.969 used=sdpa 
+[16:54:55] s3_transformers_Llama-3.2-3B-Instruct_load: RESULT transformers Llama-3.2-3B-Instruct entail=load ok=True load=1.479 used=sdpa 
+[16:55:15] s3_vllm_Llama-3.2-3B-Instruct_off: RESULT vllm Llama-3.2-3B-Instruct entail=off ok=True load=12.754 used=default 
+[16:55:38] s3_vllm_Llama-3.2-3B-Instruct_load: RESULT vllm Llama-3.2-3B-Instruct entail=load ok=True load=14.049 used=default 
+[16:55:58] s3_sglang_Llama-3.2-3B-Instruct_off: RESULT sglang Llama-3.2-3B-Instruct entail=off ok=True load=14.157 used=default 
+[16:56:20] s3_sglang_Llama-3.2-3B-Instruct_load: RESULT sglang Llama-3.2-3B-Instruct entail=load ok=True load=15.016 used=default 
+[16:56:30] s3_transformers_gemma-2-2b-it_off: RESULT transformers gemma-2-2b-it entail=off ok=True load=3.138 used=sdpa 
+[16:56:39] s3_transformers_gemma-2-2b-it_load: RESULT transformers gemma-2-2b-it entail=load ok=True load=1.46 used=eager 
+[16:57:01] s3_vllm_gemma-2-2b-it_off: RESULT vllm gemma-2-2b-it entail=off ok=True load=15.164 used=default 
+[16:57:28] s3_vllm_gemma-2-2b-it_load: RESULT vllm gemma-2-2b-it entail=load ok=True load=17.361 used=default 
+[16:57:47] s3_sglang_gemma-2-2b-it_off: RESULT sglang gemma-2-2b-it entail=off ok=True load=13.32 used=default 
+[16:58:09] s3_sglang_gemma-2-2b-it_load: RESULT sglang gemma-2-2b-it entail=load ok=True load=14.763 used=default 
+[16:58:09] start m43_signed
+[16:58:20] end m43_signed (exit 0): 10: defect refused, fixed pass, blocked=True, signatures 5, hand tags 0 (old: 0) 16: defect resolved, fixed pass, blocked=True, signatures 3, hand tags 0 (old: 2) 
+[16:58:20] start m3_problems
+[16:58:33] end m3_problems (exit 0): rb-02 {"kind": "mechanism (the case's kernel, declared in a test table)", "defect": {"observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32', orientation=None, scale_granularity=No
+[16:58:33] start m55_rolebench
+[16:58:43] end m55_rolebench (exit 0):   observe  fixed  stopped=False within=True  max=2.6645352591003757e-15 [] wrote <workspace>/testbed/results/m91/rerun/m55/rolebench.json 
+[16:58:43] start m52_rb10
+[16:59:02] end m52_rb10 (exit 0): healthy: {"static_flex_vs_sdpa": {"max_abs": 2.980232238769531e-07, "mean_abs": 6.408981789718382e-08, "ref_max_abs": 1.048154592514038, "top1_agree": 1.0, "within": true}, "same_generate_tokens": true} {'flex_attention'
+[16:59:02] start rb17_prepare
+[16:59:06] end rb17_prepare (exit 0): 
+[17:00:07] start rb17_compare
+[17:00:07] end rb17_compare (exit 0): {"defect_vs_triton": {"mean_abs": 0.7156812169175122, "max_abs": 5.974820613861084, "n": 255}, "entail_torch_native_vs_triton": {"mean_abs": 0.0, "max_abs": 0.0, "n": 255}, "decisions": [["load:transformers.config", "pas
+[17:00:28] fd_softcap_sglang_torch_native: RESULT sglang gemma-2-2b-it entail=load ok=True load=14.802 used=torch_native 
+[17:00:50] fd_softcap_sglang_flex_attention: RESULT sglang gemma-2-2b-it entail=load ok=True load=15.065 used=flex_attention 
+[17:00:58] fd_softcap_transformers_paged: RESULT transformers gemma-2-2b-it entail=load ok=True load=1.499 used=eager 
+[17:01:24] fd_shift: RESULT vllm Qwen3-4B entail=load ok=True load=16.948 used=default 
+[17:01:49] rope_user: RESULT rope_user {"ok": true, "rope_parameters_in_engine": {"rope_type": "linear", "factor": 2.0, "rope_theta": 500000.0}, "error": null}
+[17:01:49] start m51_engines
+[17:05:09] end m51_engines (exit 0): --- sglang seeded (ENTAIL=load, seed=kv_short) exit=137 [entail-seed] kv_short: took one slot off request 0 at batch 4 
+[17:05:09] start m51_transformers
+[17:07:33] end m51_transformers (exit 0): seeded: off {'finished': True, 'tokens': [13, 576, 6722, 315, 9625, 374]} | on {"refused": false} wrote <workspace>/testbed/results/m91/rerun/m51/transformers.json 
+[17:07:33] start m42_vllm_layout
+[17:10:08] end m42_vllm_layout (exit 0): (EngineCore pid=11662) [entail] resolved at load:vllm.quant_method.process_weights_after_loading: Layout declared Layout(kind='strided', dtype='bfloat16', block=None, packing=None, scale_format=None, orientation='out_in'
+[17:10:08] start m63_diffusers
+[17:28:44] end m63_diffusers (exit 0):   log: WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsi   log: WARNING diffusers.loaders.peft: No LoRA keys 
+[17:28:44] start m55_l05
+[17:28:44] end m55_l05 (exit 0):   strict answer_right=True  seen=1000   stopped=False [] wrote <workspace>/testbed/results/m91/rerun/m55/l05.json 
+[17:28:44] start m53_serve
+[17:31:30] end m53_serve (exit 0): {"name": "get_weather", "arguments": {"city": "P | tools=[] | reasoning=0   decision: load:vllm.tool_parser broken the consumer differs from the declaration and the policy rep  
+[17:31:30] start m55_market_serve
+[17:32:54] end m55_market_serve (exit 0):   decision: request:vllm.template_settings refused the consumer differs from the declaration and no resolution is registe   decision: request:vllm.reasoning_history refused the consumer differs from the declaration and n
+[17:32:54] start m55_graph
+[17:37:15] end m55_graph (exit 0): wrote <workspace>/testbed/results/m91/rerun/m55/graph.json [rank0]:[W924 17:37:15.439641516 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can l
+[17:37:15] start m53_overhead
+[17:37:22] end m53_overhead (exit 0): tool_call {'entail_us': 59.38, 'render_us': 197.04, 'ratio': 0.3013} wrote <workspace>/testbed/results/m91/rerun/m53/overhead.json 
+[17:37:25] start offstate
+[17:37:28] end offstate (exit 0):  "modules_imported_with_entail_unset": [] } 
+[17:39:37] fd_rope LC_m91 (entail on): DONE LC_m91 rope={'factor': 32.0, 'high_freq_factor': 4.0, 'low_freq_factor': 1.0, 'original_max_position_embeddings': 8192, 'rope_type': 'llama3', 'rope_theta': 500000.0} nll={'english_gpl3': 1.127, 'korean_research_pla
+[17:41:00] fd_rope LC_off_m91 (entail off): DONE LC_off_m91 rope={'factor': 32.0, 'high_freq_factor': 4.0, 'low_freq_factor': 1.0, 'original_max_position_embeddings': 8192, 'rope_type': 'llama3'} nll={'english_gpl3': 3.6583, 'korean_research_plan': 5.9095, 'python
+[17:42:20] fd_rope LA_m91 (control): DONE LA_m91 rope={'factor': 32.0, 'high_freq_factor': 4.0, 'low_freq_factor': 1.0, 'original_max_position_embeddings': 8192, 'rope_type': 'llama3', 'rope_theta': 500000.0} nll={'english_gpl3': 1.1279, 'korean_research_pl
+[17:42:20] all done: sglang sglang
+[17:43:03] start m54_serve
+[17:47:06] end m54_serve (exit 0): (EngineCore pid=2553) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=17, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request
+[17:47:06] start m55_market_clean_on
+[17:47:27] end m55_market_clean_on (exit 0):   history_dropped  L13            200 prompt_tokens=48    decision: request:vllm.reasoning_history broken the consumer differs from the declaration and no resolution is registe 
+[17:47:27] start m54_summarize
+[17:47:27] end m54_summarize (exit 0): wrote <workspace>/testbed/results/m91/rerun/m54/SUMMARY.md 
+[17:47:27] start m63_summarize
+[17:47:30] end m63_summarize (exit 0):  tags found: ['diffusers_i01_off.json', 'diffusers_i01_on.json', 'diffusers_i01_strict.json', 'diffusers_i04_observe.json', 'diffusers_i04_off.json', 'diffusers_i04_on.json', 'diffusers_i04_reference.json', 'diffusers_lo
+[17:47:30] start m3_problems_strict
+[17:47:47] end m3_problems_strict (exit 0): rb-02 {"kind": "mechanism (the case's kernel, declared in a test table)", "defect": {"observed": "Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='fp32', orientation=None, scale_granularity=No
+[17:48:04] fd_shift_strict: RESULT vllm Qwen3-4B entail=load ok=False load=None used=None RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+[17:48:04] start m42_strict
+[17:48:56] end m42_strict (exit 0): (EngineCore pid=4169)     raise RoleError("\n".join(_record.line(d) for d in stops)) (EngineCore pid=4169) entail.core.RoleError: [entail] refused at load:vllm.quant_method.process_weights_after_loading: Layout declared 
+[17:48:56] start m51_strict
+[17:49:43] end m51_strict (exit 0): [entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (a84d82bab59c48e4ab3d2d2e4c21
+[17:49:43] start m73_locate
+[17:53:09] end m73_locate (exit 0): unchecked         exit 0 wrong=True in-process True records True located 11 of 11 
+[17:53:09] start m73_tolerance
+[17:53:43] end m73_tolerance (exit 0): SiLU of a 5% larger input {'max': 0.22488038277511962, 'prompt_pass_max': 0.10112359550561797, 'first': 0.05063291139240506} True wrote <workspace>/testbed/results/m91/rerun/m73/tolerance.json 
+[17:53:43] start m73_summarize
+[17:53:43] end m73_summarize (exit 0): wrote <workspace>/testbed/results/m91/rerun/m73/SUMMARY.md 
+[18:10:45] m92 softcap_sglang_torch_native: DONE softcap_sglang_torch_native sglang gemma-2-2b-it backend=torch_native entail=off seed=None gsm8k=313/500
+[18:12:09] m92 softcap_sglang_triton: DONE softcap_sglang_triton sglang gemma-2-2b-it backend=triton entail=off seed=None gsm8k=316/500
+[18:13:22] m92 softcap_sglang_triton2: DONE softcap_sglang_triton2 sglang gemma-2-2b-it backend=triton entail=off seed=None gsm8k=316/500
+[18:16:49] m92 shift_control: DONE shift_control vllm Qwen3-4B backend=None entail=off seed=None gsm8k=468/500
+[18:18:47] m92 shift_control2: DONE shift_control2 vllm Qwen3-4B backend=None entail=off seed=None gsm8k=466/500
+[18:22:50] m92 shift_seeded: DONE shift_seeded vllm Qwen3-4B backend=None entail=load seed=corrupt_at_load gsm8k=3/500
+[18:22:50] all done: S T D E
+[18:35:12] start v_unit_tests
+[18:36:00] end v_unit_tests (exit 0): PASS tests/test_vllm_serve.py (10 checks) PASS tests/test_vllm_source.py (7 checks) 
+[18:36:12] v_transformers_Qwen3-4B_load: RESULT transformers Qwen3-4B entail=load ok=True load=4.758 used=sdpa 
+[18:36:38] v_vllm_Qwen3-4B_load: RESULT vllm Qwen3-4B entail=load ok=True load=14.72 used=default 
+[18:37:19] v_sglang_Qwen3-4B_load: RESULT sglang Qwen3-4B entail=load ok=True load=14.295 used=default 
+[18:37:42] v_fd_shift: (EngineCore pid=2305) [entail-seed] corrupt_at_load: rolled model.layers.0.self_attn.q_proj.weight by one row (EngineCore pid=2305) [entail] broken at load:vllm.weights: Coverage declared Coverage(total=145, taken=145, left=()) (file: /home/<user>/models/Qwen3-4B (every weight, sampled, where the loader's mapp (EngineCore pid=2305) [entail-seed] corrupt_at_load: 144 linear weights seen, 0 square, 0 changed after post-processing, 1 changed while loading 
+[18:37:42] start v_m51_seeded
+[18:39:28] end v_m51_seeded (exit 0): --- sglang seeded (ENTAIL=load, seed=kv_short) exit=137 [entail-seed] kv_short: took one slot off request 0 at batch 4 
+[18:39:28] start v_market_bug_on
+[18:39:52] end v_market_bug_on (exit 0):   decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution is registe   decision: request:vllm.reasoning_history broken the consumer differs from the declaration and no 
+[18:39:52] start v_m51_transformers_strict
+[18:42:11] end v_m51_transformers_strict (exit 0): seeded: off {'finished': True, 'tokens': [13, 576, 6722, 315, 9625, 374]} | on {"refused": true, "error": "[entail] refused at container:transformers.cache_update: KvExtent declared KvExtent(held=8, needed=None, written=
+[18:42:15] start offstate_v
+[18:42:18] end offstate_v (exit 0):  "modules_imported_with_entail_unset": [] } 
+[18:42:18] all done: V

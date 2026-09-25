@@ -1,0 +1,73 @@
+{
+ "when": "2026-09-24 14:58:59",
+ "mode": "load",
+ "policy": "resolve",
+ "planted": "an attention implementation the capability table does not know, its scale x2.0",
+ "attn_implementation": "planted",
+ "tokens": [
+  4858,
+  235303,
+  235256,
+  1368,
+  577,
+  11560,
+  573,
+  3210,
+  4065,
+  235290,
+  1547,
+  235290,
+  8847,
+  235292,
+  109,
+  688,
+  235274,
+  235265,
+  33562,
+  35382,
+  7596,
+  575,
+  2782,
+  66058,
+  109,
+  235287,
+  101268,
+  7596,
+  3933,
+  685,
+  1767,
+  35382
+ ],
+ "text": "Here's how to solve the problem step-by-step:\n\n**1. Calculate clips sold in May:**\n\n* Natalia sold half as many clips",
+ "planted_calls": 832,
+ "output_wrong": true,
+ "located": {
+  "broken_at": null,
+  "all_intact": true,
+  "unchecked": [
+   "load:transformers.attention (ModelProps: what the consumer uses is unknown (not read, or not in the capability table))"
+  ],
+  "suspects": [
+   "boundary load:transformers.attention and beside it config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted",
+   "inside a layer"
+  ],
+  "broken": [],
+  "lost_by": [],
+  "intact": [
+   "load:transformers.config",
+   "load:transformers.loader",
+   "load:transformers.config.rope_parameters"
+  ],
+  "layers": [],
+  "why": [
+   "load:transformers.attention vouches for nothing (ModelProps: what the consumer uses is unknown (not read, or not in the capability table)), so it and config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted stay suspect",
+   "the output is wrong but no checked boundary broke, so the fault is not in the plumbing: it is inside a layer - the model itself, a compiler, a kernel, the hardware"
+  ]
+ },
+ "lines": [
+  "[entail] where: every checked boundary kept its meaning (3 boundaries)",
+  "[entail]   suspect: load:transformers.attention vouches for nothing (ModelProps: what the consumer uses is unknown (not read, or not in the capability table)), so it and config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted stay suspect",
+  "[entail]   suspect: the output is wrong but no checked boundary broke, so the fault is not in the plumbing: it is inside a layer - the model itself, a compiler, a kernel, the hardware",
+  "[entail]   not checked: load:transformers.attention (ModelProps: what the consumer uses is unknown (not read, or not in the capability table))"
+ ]
+}

@@ -1,0 +1,213 @@
+{
+ "server": "healthy",
+ "tag": "on",
+ "env": {},
+ "args": [
+  "--tool-call-parser",
+  "hermes",
+  "--trust-request-chat-template"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-24 19:44:23",
+ "started": true,
+ "start_seconds": 24.0,
+ "requests": {
+  "plain": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "multi_turn": {
+   "what": "pass",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "tool_call": {
+   "what": "pass",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 0,
+   "tool_calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Paris\"}"
+    }
+   ],
+   "finish_reason": "tool_calls",
+   "entail_field": null
+  },
+  "thinking": {
+   "what": "pass",
+   "status": 200,
+   "content": "\n\nParis.",
+   "reasoning_chars": 685,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "effort_none": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "request_template": {
+   "what": "planted",
+   "status": 200,
+   "content": "<think>\nOkay, the user is asking for the capital of France in one word. Let me think. I know that France is a country in Europe. The capital is a city that serves as the political, economic, and cultu",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": null
+  },
+  "unknown_field": {
+   "what": "planted",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "misspelt_setting": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": null
+  },
+  "effort_level": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": null
+  }
+ },
+ "stream": {
+  "request": "misspelt_setting",
+  "status": 200,
+  "comments": [],
+  "data_lines": 65
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.chat_template",
+   "verdict": "broken",
+   "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.request_fields",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "6863 request:vllm.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 11,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "6863 request:vllm.chat_template": {
+   "checks": 11,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 10
+   }
+  },
+  "6863 request:vllm.request_fields": {
+   "checks": 10,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 9
+   }
+  },
+  "6863 request:vllm.template_settings": {
+   "checks": 9,
+   "broken": 4,
+   "refused": 0,
+   "skipped": 1,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 5
+   }
+  },
+  "6958 container:vllm.allocate_slots": {
+   "checks": 256,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 256
+   }
+  }
+ }
+}

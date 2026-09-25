@@ -1,0 +1,706 @@
+{#--------TOOL RENDERING FUNCTIONS---------#}
+
+{#---------------------------------------------------------------
+  Jinja2 macro version of `json_schema_to_typescript`
+  Converts JSON Schema (dict) to a TypeScript type definition
+  Uses whitespace trimming with '-' modifiers for clean output
+----------------------------------------------------------------#}
+{%- macro json_schema_to_typescript(schema, indent="", indent_factor=2) -%}
+	{%- set ADDITIONAL_JSON_KEYS = ['format', 'maxItems', 'maximum', 'minItems', 'minimum', 'pattern'] -%}
+	{%- set ty = schema.get("type") -%}
+
+	{# ---------------- OBJECT ---------------- #}
+	{%- if ty == "object" -%}
+		{{- "{\n" -}}
+
+		{# Start building property list #}
+		{%- set ns = namespace(pairs=[]) -%}
+		{%- for k, v in schema.get("properties", {}).items() -%}
+			{%- set ns.pairs = ns.pairs + [(k, v)] -%}
+		{%- endfor -%}
+
+		{# Handle additionalProperties #}
+		{%- if schema.get("additionalProperties") is defined -%}
+			{%- if schema.additionalProperties == true -%}
+				{%- set ns.pairs = ns.pairs + [['[key: string]', {'type': 'any'}]] -%}
+			{%- elif schema.additionalProperties is mapping -%}
+				{%- set ns.pairs = ns.pairs + [['[key: string]', schema.additionalProperties]] -%}
+			{%- endif -%}
+		{%- endif -%}
+
+		{%- set props = dict.from_keys(ns.pairs) -%}
+		{%- set required = schema.get("required", []) + ['[key: string]'] -%}
+
+		{%- for key, val in props.items() -%}
+			{# ---------- Description Comments ---------- #}
+			{%- if "description" in val -%}
+				{%- for line in val['description'].splitlines() -%}
+					{%- if line.strip() -%}
+						{{- indent + '// ' + line + '\n' -}}
+					{%- endif -%}
+				{%- endfor -%}
+			{%- endif -%}
+
+			{# ---------- Additional JSON Keys ---------- #}
+			{%- for add_key, add_val in val.items() if add_key in ADDITIONAL_JSON_KEYS -%}
+				{%- if add_val is string -%}
+					{{- indent + '// ' + add_key + ': "' + add_val + '"' + '\n'  -}}
+				{%- else -%}
+					{{- indent + '// ' + add_key + ': ' ~ add_val ~ '\n' -}}
+				{%- endif -%}
+			{%- endfor -%}
+
+			{# ---------- Property Definition ---------- #}
+            {%- set type_str = json_schema_to_typescript(
+                val, 
+                indent + (' ' * indent_factor), 
+                indent_factor
+            ) -%}
+
+			{{- indent + key + ('' if key in required else '?') + ': ' + type_str + ',' -}}
+
+			{%- if "default" in val or "defalut_value" in val -%}
+				{%- set default = val.get("default", val.get("defalut_value")) -%}
+				{%- if default is string -%}
+					{{- ' // default: "' + default + '"' -}}
+				{%- else -%}
+					{{- ' // default: ' ~ default -}}
+				{%- endif -%}
+			{%- endif -%}
+
+			{{- "\n" -}}
+		{%- endfor -%}
+
+		{{- indent[:-indent_factor] + '}' -}}
+
+	{# ---------------- STRING ---------------- #}
+	{%- elif ty == "string" -%}
+		{%- if schema.get("enum") -%}
+            {%- set ns = namespace(enum = []) -%}
+            {%- for en in schema['enum'] -%}
+                {%- set ns.enum = ns.enum + ['"' ~ en ~ '"'] -%}
+            {%- endfor -%}
+			{{- ns.enum | join(' | ') -}}
+		{%- elif schema.get("format") in ['date-time', 'date'] -%}
+			{{- 'Date' -}}
+		{%- else -%}
+			{{- 'string' -}}
+		{%- endif -%}
+
+	{# ---------------- NUMBER / INTEGER ---------------- #}
+	{%- elif ty in ["number", "integer"] -%}
+		{%- if schema.get("enum") -%}
+			{{- schema.enum | join(' | ') -}}
+		{%- else -%}
+			{{- 'number' -}}
+		{%- endif -%}
+
+	{# ---------------- BOOLEAN ---------------- #}
+	{%- elif ty == "boolean" -%}
+		{{- 'boolean' -}}
+
+	{# ---------------- ARRAY ---------------- #}
+	{%- elif ty == "array" -%}
+		{%- if "items" in schema -%}
+			{{- json_schema_to_typescript(schema['items'], indent, indent_factor) + '[]' -}}
+		{%- else -%}
+			{{- 'Array<any>' -}}
+		{%- endif -%}
+
+	{# ---------------- FALLBACK ---------------- #}
+	{%- else -%}
+		{{- 'any' -}}
+	{%- endif -%}
+{%- endmacro -%}
+
+{#---------------------------------------------------------------
+  render_tool_namespace
+  Renders a namespace and its tool definitions in TypeScript style
+  Each tool’s parameters are converted via json_schema_to_typescript()
+  Whitespace-trimmed with '-' modifiers
+----------------------------------------------------------------#}
+
+{%- macro render_tool_namespace(namespace_name, tools) -%}
+	{%- set ns = namespace(sections = ['namespace ' ~ namespace_name ~ ' {']) -%}
+
+	{%- for tool in tools -%}
+		{%- set ns_tool = namespace(content_lines=[]) -%}
+
+		{# ---------- TOOL DESCRIPTION ---------- #}
+		{%- if tool.get('description') -%}
+			{%- for line in tool['description'].splitlines() -%}
+				{%- if line.strip() -%}
+					{%- set ns_tool.content_lines = ns_tool.content_lines + ['// ' ~ line] -%}
+				{%- endif -%}
+			{%- endfor -%}
+		{%- endif -%}
+
+		{# ---------- TOOL SIGNATURE ---------- #}
+		{%- set main_body = "" -%}
+		{%- set params = tool.get("parameters") -%}
+		{%- if params and params.get("properties") -%}
+			{%- set param_type = json_schema_to_typescript(params, "  ") -%}
+			{%- set main_body = 'type ' ~ tool.name ~ ' = (_: ' ~ param_type ~ ') => ' -%}
+		{%- else -%}
+			{%- set main_body = 'type ' ~ tool.name ~ ' = () => ' -%}
+		{%- endif -%}
+
+		{# ---------- RETURN TYPE ---------- #}
+		{%- set return_params = tool.get("return_parameters") -%}
+		{%- if return_params and return_params.get("properties") -%}
+			{%- set return_type = json_schema_to_typescript(return_params, "  ") -%}
+			{%- set main_body = main_body ~ return_type -%}
+		{%- else -%}
+			{%- set main_body = main_body ~ 'any' -%}
+		{%- endif -%}
+
+		{%- set main_body = main_body ~ ';\n' -%}
+
+		{%- set ns_tool.content_lines = ns_tool.content_lines + [main_body] -%}
+
+		{# ---------- ADD TOOL TO SECTIONS ---------- #}
+		{%- set ns.sections = ns.sections + [ns_tool.content_lines | join('\n')] -%}
+	{%- endfor -%}
+
+	{%- set ns.sections = ns.sections + ['} // namespace ' ~ namespace_name] -%}
+
+	{{- ns.sections | join('\n') -}}
+{%- endmacro -%}
+
+
+{# ---------------- TOOL EXAMPLES RENDERING ---------------- #}
+
+{%- macro align_json_order_to_schema(json_obj, json_schema) -%}
+    {%- set ns = namespace(result=none, kv_list=[]) -%}
+
+    {%- if 'type' not in json_schema -%}
+        {%- if json_obj is string or json_obj is boolean -%}
+            {%- set ns.result = json_obj | tojson(ensure_ascii=False) -%}
+        {%- else -%}
+            {%- set ns.result = json_obj -%}
+        {%- endif -%}
+
+    {%- elif json_schema['type'] == 'object' -%}
+        {%- set key_set = json_obj.keys() if json_obj is mapping else [] -%}
+        {%- set properties = json_schema.get('properties', {}) -%}
+
+        {%- for key, prop_schema in properties.items() -%}
+            {%- if key in key_set -%}
+                {%- set item = json_obj[key] -%}
+                {%- if item is mapping or (prop_schema.get('type') == 'array') -%}
+                    {%- set aligned_item = align_json_order_to_schema(item, prop_schema) -%}
+                {%- elif item is string or item is boolean -%}
+                    {%- set aligned_item = item | tojson(ensure_ascii=False) -%}
+                {%- else -%}
+                    {%- set aligned_item = item -%}
+                {%- endif -%}
+                {%- set ns.kv_list = ns.kv_list + [(key, aligned_item)] -%}
+            {%- endif -%}
+        {%- endfor -%}
+
+        {%- set new_obj = dict.from_keys(ns.kv_list) -%}
+        {{- '{' -}}
+        {%- set ns_new_obj = namespace(result = []) -%}
+        {%- for key, val in new_obj.items() -%}
+            {%- set ns_new_obj.result = ns_new_obj.result + ['"' ~ key ~ '": ' ~ val] -%}
+        {%- endfor -%}
+        {{- ns_new_obj.result | join(', ') -}}
+        {{- '}' -}}
+
+    {%- elif json_schema['type'] == 'array' -%}
+        {%- if json_obj is iterable and not json_obj is string -%}
+            {%- set item_schema = json_schema.get('items', {}) -%}
+            {%- set ns.result = [] -%}
+            {%- for item in json_obj -%}
+                {%- set ns.result = ns.result + [align_json_order_to_schema(item, item_schema)] -%}
+            {%- endfor -%}
+            {{- '[' -}}
+            {{- ns.result | join(', ') -}}
+            {{- ']' -}}
+        {%- else -%}
+            {%- if json_obj is string or json_obj is boolean -%}
+                {{- json_obj | tojson(ensure_ascii=False) -}}
+            {%- else -%}
+                {{- json_obj -}}
+            {%- endif -%}
+        {%- endif -%}
+
+    {%- else -%}
+        {%- if json_obj is string or json_obj is boolean -%}
+            {{- json_obj | tojson(ensure_ascii=False) -}}
+        {%- else -%}
+            {{- json_obj -}}
+        {%- endif -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+
+{%- macro render_examples(functions) -%}
+    {%- set ns_prompt = namespace(prompt="\n\n") -%}
+    {%- set indent = "  " -%}
+    {%- if functions | length > 0 and functions | selectattr("few_shot_examples") | list | length > 0 -%}
+        {%- set ns_prompt.prompt = ns_prompt.prompt + '//Examples:' -%}
+        {%- for function in functions -%}
+            
+            {%- if function.few_shot_examples is defined -%}
+                {%- for example in function.few_shot_examples -%}
+                    {%- if (
+                        function.parameters is defined and 
+                        function.parameters.properties is defined) -%}
+                        {%- set params = align_json_order_to_schema(example['params'], function['parameters']) -%}
+                    {%- else -%}
+                        {%- set params = example['params'] | tojson(ensure_ascii=False) -%}
+                    {%- endif -%}
+                    {%- set call = '{"name": "' ~ function['name'] ~ '", "arguments": ' ~ params ~ '}' -%}
+                    {%- set ns_prompt.prompt = ns_prompt.prompt + '\n//' + indent + example.request | tojson(ensure_ascii=False) + ' -> ' ~ call -%}
+                {%- endfor -%}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+
+    {{- ns_prompt.prompt -}}
+{%- endmacro -%}
+
+
+{# ----------- MESSAGE RENDERING HELPER FUNCTIONS ------------ #}
+
+
+{%- macro prepare_devsystem(devsystem, add_tokens) -%}
+    {%- if add_tokens.role_sep not in devsystem or add_tokens.message_sep not in devsystem -%}
+        {%- set devsystem = (
+                devsystem | 
+                replace('<|role_sep|>', '<|role_sep|>\n') | 
+                replace('<|message_sep|>', '<|message_sep|>\n\n')
+            )
+        -%}
+    {%- endif -%}
+    {{- devsystem -}}
+{%- endmacro -%}
+
+{%- macro render_role_message(message, role=none, add_message_sep_token=True) -%}
+    {%- if not role -%}
+        {%- set role = message["role"] -%}
+    {%- endif -%}
+
+    {%- set message_content = message['content'] if message['content'] is not none else '' -%}
+    {%- if message_content is not string -%}
+        {%- set message_content = message_content | tojson(ensure_ascii=False) -%}
+    {%- endif -%}
+
+    {%- if message.get('embed_files', []) -%}
+        {%- set ns_embed_result = namespace(result_text = message_content) -%}
+            {%- for f in message.embed_files[::-1] -%}
+                {%- set tokenized = (
+                    add_tokens.file_start ~
+                    (dict(id=f.id | string, name=f.name | string, type=f.type | string) | tojson) ~
+                    (add_tokens[f.type] if f.type != 'doc' else (f.content | default(''))) ~
+                    add_tokens.file_end
+                    ) -%}
+                {%- if message.get("file_placeholders", False) -%}
+                    {%- set placeholder = '<file_placeholder_' ~ f.id ~ '>' -%}
+                    {%- set ns_embed_result.result_text = ns_embed_result.result_text | replace(placeholder, tokenized) -%}
+                {%- else -%}
+                    {%- set ns_embed_result.result_text = tokenized + ns_embed_result.result_text -%}
+                {%- endif -%}
+            {%- endfor -%}
+
+        {%- set message_final_content = ns_embed_result.result_text -%}
+    {%- else -%}
+        {%- set message_final_content = message_content -%}
+    {%- endif -%}
+                
+    {{- role + (add_tokens.role_sep if role else '') + message_final_content + (add_tokens.message_sep if add_message_sep_token else "") -}}
+
+{%- endmacro -%}
+
+
+{%- macro render_function_descriptions(message) -%}
+    {%- if 'function_descriptions' not in message -%}
+        {{- raise_exception("no 'function_descriptions' field provided for function description role!!!") -}}
+    {%- endif -%}
+
+    {%- set function_ids = message['function_descriptions'] -%}
+
+    {%- set ns_current_tools = namespace(tools=[]) -%}
+    {%- for idx in function_ids -%}
+        {%- set ns_current_tools.tools = ns_current_tools.tools + [FUNCTION_ID2DESCRIPTION[idx]] -%}
+    {%- endfor -%}
+
+    {%- set content = render_tool_namespace('functions', ns_current_tools.tools) + render_examples(ns_current_tools.tools) -%}
+
+    {{- render_role_message({'role': 'function descriptions', 'content': content}) -}}
+{%- endmacro -%}
+
+
+
+{%- macro render_function_call(message) -%}
+    {%- set call = message['content'] -%}
+    {%- if call.function -%}
+        {%- set call = call.function -%}
+    {%- endif -%}
+
+    {%- if message.get("align_argument_order_to_description", False) -%}
+        {%- set arguments = align_json_order_to_schema(
+            call['arguments'], FUNCTION_NAME2DESCRIPTION[call['name']]['parameters']
+        ) -%}
+    {%- else -%}
+        {%- set arguments = call['arguments'] -%}
+        {%- if arguments is not string -%}
+            {%- set arguments = arguments| tojson(ensure_ascii=False) -%}
+        {%- endif -%}
+    {%- endif -%}
+
+    {{- add_tokens.function_call -}}
+    {{- render_role_message(
+        {
+            'role': '',
+            'content': '{"name": "' ~ call['name'] ~ '", "arguments": ' ~ arguments ~ '}'
+        }
+    ) -}}
+{%- endmacro -%}
+
+
+{# ----- DEFAULT DEVSYSTEM ----- #}
+
+{%- set DEVSYSTEM = 
+"""<role_description>
+Description of the roles available in the dialog.
+
+`developer system`
+A message added by Sber before the main dialog. It has the highest priority and sets global, non-overridable conditions (for example, conversation rules, the safety policy, the assistant's overall response style, etc.).
+
+`system`
+A system instruction added by developers or by the user, but with a lower priority than `developer system`. It usually describes the assistant's instructions, a specific response style, and other conditions for this particular dialog.
+
+`user`
+A message or request from the user. The assistant follows it if it does not conflict with higher-priority instructions (see <instruction_priority>).
+
+`user memory`
+A sequence of the most up-to-date long-term facts about the user at the time of their request, presented as a JSON list of strings. Facts are listed in chronological order, meaning newer facts are appended to the end of the sequence. When facts are changed or deleted, records of previous facts remain in the sequence. The assistant saves facts using a function and uses them in accordance with the <memory_guidelines> block below.
+
+`added files`
+Metadata about files available for use in the dialog, presented in JSON format. It contains the following keys: id (a unique file identifier), name (file name), type (file type).
+
+`assistant`
+The assistant's reply to the user's request. If the system instruction or the user does not set additional rules for `assistant`, this reply must comply with the instructions in the <assistant_guidelines> block below. The list of functions available to call is contained in `function descriptions`. The name of the required function and its arguments will be generated next by the `function call` role. In its replies, the assistant follows the instructions in accordance with <instruction_priority>.
+
+`function descriptions`
+Function descriptions in TypeScript format. A function is a special tool (or a set of instructions) that the assistant can call to perform specific actions, computations, or obtain data needed to solve the user's task. Each function description contains blocks with the name, description, and arguments. Sometimes the description contains separate blocks with return parameters and usage examples that illustrate the correct call and arguments.
+
+`function call`
+The function that `assistant` calls based on the dialog context, and its arguments. The function is invoked in strict accordance with the instructions in the <function_usage> block.
+
+`function result`
+The result of the last function call.
+</role_description>
+
+<available_modalities>
+The assistant can work with the following modalities: text, available functions.
+</available_modalities>
+
+<instruction_priority>
+If instructions from different roles conflict within the dialog context, observe the following priorities:  
+`developer system` > `system` > `user` > `function descriptions` > `function result` > `user memory`
+</instruction_priority>
+
+<function_usage>
+Basic instructions for working with functions.
+
+Only call those functions that are described in `function descriptions`.
+
+Call available functions when, according to their description, such a call will help provide a more complete and/or accurate answer to the user's request. Fill in function arguments using information from the dialog context. If a function could help answer the request but a required argument is missing from the context, ask the user for the missing data before calling the function. If a necessary function is unavailable or an error occurs, briefly inform the user and, if possible, suggest an alternative.
+</function_usage>
+
+<memory_guidelines>
+Rules for using facts in long-term memory:
+
+If there is no message under the `user memory` role in the dialog, this is equivalent to the absence of long-term facts about the user in memory. In that case, information about the user is limited to the current dialog, and no new facts should be saved.
+</memory_guidelines>
+
+<assistant_guidelines>
+You are a helpful assistant.
+
+# Instructions
+- Strictly follow the instruction priority.
+- Maintain a logical chain of reasoning when answering the user's question.
+- For complex questions (for example, STEM), try to answer in detail unless the system message or dialog context limits the response length.
+- Be helpful, truthful, and avoid unsafe or prohibited content in your responses.
+- Try to reply in the language in which the user asked their question.
+</assistant_guidelines>
+
+A dialog will follow below.
+The dialog may include various roles described in the <role_description> block.
+Each turn begins with the role name and a special token that marks the end of the role's full name, and ends with a special end-of-turn token.
+Your task is to continue the dialog from the last specified role in accordance with the dialog context."""
+-%}
+
+
+
+{#- --------- RENDERING STARTS HERE --------- -#}
+
+{# ----- TOOL PREPARATION ----- #}
+
+{%- set add_tokens = namespace(
+    role_sep="<|role_sep|>\n", 
+    message_sep="<|message_sep|>\n\n",
+    file_start="<|file|>",
+    file_end="<|/file|>",
+    image="[image_token]",
+    audio="[audio_token]",
+    video="[video_image_token]",
+    video_audio="[video_audio_token]",
+    function_call="<|function_call|>"
+) -%}
+
+{%- if tools -%}
+    {%- set ns = namespace(id2desc_tools_pairs = [], name2desc_tools_pairs=[]) -%}
+    {%- for item in tools -%}
+        {# Unwrap nested {"function": {...}} #}
+        {%- set item = item["function"] if "function" in item else item -%}
+
+        {%- set id_key = item.id if item.id is defined else item.name -%}
+        {%- set name_key = item.name -%}
+
+        {%- set ns.id2desc_tools_pairs = ns.id2desc_tools_pairs + [(id_key, item)] -%}
+        {%- set ns.name2desc_tools_pairs = ns.name2desc_tools_pairs + [(name_key, item)] -%}
+    {%- endfor -%}
+
+    {%- set FUNCTION_ID2DESCRIPTION = dict.from_keys(ns.id2desc_tools_pairs) -%}
+    {%- set FUNCTION_NAME2DESCRIPTION = dict.from_keys(ns.name2desc_tools_pairs) -%}
+{%- else -%}
+    {%- set FUNCTION_ID2DESCRIPTION = {} -%}
+    {%- set FUNCTION_NAME2DESCRIPTION = {} -%}
+{%- endif -%}
+
+
+{#- ---------- HELPER FLAGS ----------- -#}
+
+{# -----KWARGS FROM CHAT_TEMPLATE ---- #}
+{%- if reasoning is not defined -%}
+    {%- set reasoning = False -%}
+{%- endif -%}
+
+{%- if use_devsystem is not defined -%}
+    {%- set use_devsystem = True -%}
+{%- endif -%}
+
+{%- if use_suggester is not defined -%}
+    {%- set use_suggester = True -%}
+{%- endif -%}
+
+
+
+{# ----- DIALOG STRUCTURE CHECKERS ---- #}
+{%- set ns_roles = namespace(current_assistant_role='reasoning') -%}
+{%-set ns_role_presence = namespace(
+    has_available_functions=False, 
+    has_function_descriptions=False,
+    has_devsystem=False
+) -%}
+{%- for message in messages -%}
+    {%- if message["role"] == "available functions" -%}
+        {%- set ns_role_presence.has_available_functions = True -%}
+    {%- endif -%}
+
+    {%- if message["role"] == "function descriptions" -%}
+        {%- set ns_role_presence.has_function_descriptions = True -%}
+    {%- endif -%}
+
+    {%- if message["role"] in  ["developer system", "developer_system"] -%}
+        {%- set ns_role_presence.has_devsystem = True -%}
+    {%- endif -%}
+
+{%- endfor -%}
+
+
+{# ----- RENDER BOS TOKEN ----- #}
+{{- bos_token -}}
+
+
+{# ----- INCLUDE DEFAULT DEVSYSTEM/ EXLUDE DEVSYSTEM ----- #}
+
+{%- if not ns_role_presence.has_devsystem and use_devsystem -%}
+    {%- set devsystem_content = (
+        prepare_devsystem(default_devsystem, add_tokens)
+        if default_devsystem is defined
+        else prepare_devsystem(DEVSYSTEM, add_tokens) 
+    )-%}
+
+    {{- render_role_message({"role": "developer system", "content": devsystem_content}) -}}
+
+{%- elif ns_role_presence.has_devsystem and not use_devsystem -%}
+    {# Assuming devsystem message comes 1st #}
+    {%- set messages = messages[1:] -%}
+
+{%- elif ns_role_presence.has_devsystem and use_devsystem -%}
+    {# Assuming devsystem message comes 1st #}
+
+    {%- set devsystem_content = prepare_devsystem(messages[0]['content'], add_tokens) -%}
+    {{- render_role_message({"role": "developer system", "content": devsystem_content}) -}}
+    {%- set messages = messages[1:] -%}
+{%- endif -%}
+
+
+{# ----- RENDER SYSTEM IF PRESENT ----- #}
+{%- if messages and messages[0]['role'] == 'system' -%}
+    {{- render_role_message(messages[0]) -}}
+    {%- set messages = messages[1:] -%}
+{%- endif -%}
+
+{# ----- RENDER FUNCTION DESCRIPTIONS IF MISSED ----- #}
+{%- if not ns_role_presence.has_function_descriptions and tools -%}
+    {{- render_function_descriptions(
+        {
+            "role": "function descriptions", 
+            "function_descriptions": FUNCTION_ID2DESCRIPTION.keys() | list
+        }
+    ) -}}
+{%- endif -%}
+
+
+
+{# ----- MAIN MESSAGE LOOP ----- #}
+{%- for message in messages -%}
+
+    {# ----- REASONING - AS SEPARATE MESSAGE  ----- #}
+    {%- if message['role'] in ['reasoning', 'assistant reasoning', 'assistant thinking']  -%}
+        {%- if not reasoning -%}
+            {{- raise_exception("Reasoning role obtained, but 'reasoning' is False. Provide 'reasoning = True' in .apply_chat_template") -}}
+        {%- endif -%}
+
+        
+        {%- set current_function_call = message.function_call is defined and message.function_call -%}
+        {%- set future_function_call = not loop.last and loop.nextitem.role in ['function call', 'reasoning function call'] -%}
+
+        {%- set add_message_sep_token = not (current_function_call or future_function_call) -%}
+
+        {{- render_role_message(message, role='reasoning', add_message_sep_token=add_message_sep_token) -}}
+        
+        {# --- SBER API CASE: REASONING FUNCTION CALL ---- #}
+        {%- if current_function_call -%}
+            {{- render_function_call(
+                {
+                    'role': 'reasoning function call', 
+                    'content': message.function_call
+                }
+            ) -}}
+        {%- endif -%}
+
+
+    {# ----- AVAILABLE FUNCTIONS AS ROLE ----- #}
+    {%- elif message['role'] == 'available functions' -%}
+        {%- if use_suggester -%}
+            {{- render_role_message(message) -}}
+        {%- endif -%}
+    
+
+    {# ----- FUNCTION DESCRIPTIONS MESSAGE ----- #}
+    {%- elif message['role'] == 'function descriptions' -%}
+        {{- render_function_descriptions(message) -}}
+
+
+    {# ----- FUNCTION CALL MESSAGE ----- #}
+    {%- elif message['role'] in ['function call', 'reasoning function call'] -%}
+        {{- render_function_call(message) -}}
+
+    {# ----- USER/FUNCTION MESSAGE -------#}
+    {%- elif message['role'] in ['user', 'tool', 'function', 'function result', 'function results'] -%}
+
+        {%- if message['role'] == 'user' -%}
+            {{- render_role_message(message, role='user') -}}
+
+            {# ------ SWITCHING ASSISTANT ROLE AFTER USER QUERY ------- #}
+            {%- set ns_roles.current_assistant_role = 'reasoning' -%}
+        {%- else -%}
+            {{- render_role_message(message, role='function result') -}}
+        {%- endif -%}
+
+        {# ------ SUGGESTER USAGE -------- #}
+        {%- if not ns_role_presence.has_available_functions and use_suggester -%}
+            {%- if message.functions is defined and message.functions -%}
+                {{- render_role_message({"role": "available functions", "content": message.functions}) -}}
+            {%- else -%}
+                {{- render_role_message({"role": "available functions", "content": (FUNCTION_NAME2DESCRIPTION.keys() | list) or []}) -}}
+            {%- endif -%}
+        {%- endif -%}
+
+
+    {# ----- ASSISTANT MESSAGE - MAIN CHALLENGES ----- #}
+    {%- elif message['role'] == 'assistant' -%}
+        {# ----- REASONING PART CHECKING----- #}
+        {%- if message.reasoning_content is defined and message.reasoning_content -%}
+            {%- if not reasoning -%}
+                {{- raise_exception("Reasoning role obtained, but 'reasoning' is False. Provide 'reasoning = True' in .apply_chat_template") -}}
+            {%- endif -%}
+            {%- set has_reasoning = True -%}
+        {%- else -%}
+            {%- set has_reasoning = False -%}
+        {%- endif -%}
+
+        {# ----- ASSISTANT PART CHECKING ----- #}
+        {%- if message.content -%}
+            {%- set has_content = True -%}
+        {%- else -%}
+            {%- set has_content = False -%}
+        {%- endif -%}
+
+        {# ----- FUNCTION CALL PART CHECKING: OPENAL/SBER, SINGLE CALL SETUP !!!! ----- #}
+        {%- if message.tool_calls is defined and message.tool_calls -%}
+            {%- set function_call = message.tool_calls[0] -%}
+        {%- elif message.function_call is defined and message.function_call -%}
+            {%- set function_call = message.function_call -%}
+        {%- else -%}
+            {%- set function_call = none -%}
+        {%- endif -%}
+
+        {%- set future_function_call = not loop.last and loop.nextitem.role in ['function call', 'reasoning function call'] -%}
+        {%- set add_message_sep_token = not (function_call or future_function_call) -%}
+
+
+        {# ----- CONSISTENCY CHECKING ----- #}
+        {%- if has_reasoning and has_content and function_call -%}
+            {{- raise_exception("Pleae specify only one of ['content', 'reasoning_content'] with function call !!!") -}}
+        {%- elif not function_call and has_reasoning and not has_content -%}
+            {{- raise_exception("Reasoning provided, function call is not -> and assistant content is empty !!!") -}}
+        {%- endif -%}
+
+        {# ----- MAIN ASSISTANT RENDERING ----- #}
+        {%- if has_reasoning -%}
+            {{- render_role_message(
+                {'role': 'reasoning', 'content': message.reasoning_content},
+                add_message_sep_token=add_message_sep_token
+            ) -}}
+            {%- if function_call -%}
+                {{- render_function_call({'role': 'reasoning function call', 'content': function_call}) -}}
+            {%- else -%}
+                {{- render_role_message({'role': 'assistant', 'content': message.content}) -}}
+            {%- endif -%}
+        {%- else -%}
+            {# ------ SWITCHING ASSISTANT ROLE AFTER ABSENCE OF REASONING ------- #}
+            {%- set ns_roles.current_assistant_role = 'assistant' -%}
+
+            {{- render_role_message(
+                {'role': 'assistant', 'content': message.content}, 
+                add_message_sep_token=add_message_sep_token
+            ) -}}
+            {%- if function_call -%}
+                {{- render_function_call({'role': 'function call', 'content': function_call}) -}}
+            {%- endif -%}
+        {%- endif -%}
+
+        
+    {# ----- OTHER MESSAGES ----- #}
+    {%- else -%}
+        {{- render_role_message(message) -}}
+    {%- endif -%}
+
+    {%- if loop.last and add_generation_prompt and message['role'] not in [
+        'assistant', 'function call', 'reasoning', 'assistant reasoning', 'assistant thinking', 'reasoning function call'
+    ] -%}
+        {%- if reasoning -%}
+            {{- ns_roles.current_assistant_role + add_tokens.role_sep -}}
+        {%- else -%}
+            {{- 'assistant' + add_tokens.role_sep -}}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}

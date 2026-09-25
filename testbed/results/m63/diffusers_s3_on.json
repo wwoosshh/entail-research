@@ -1,0 +1,125 @@
+{
+ "tag": "s3_on",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "policy": "resolve",
+ "load_seconds": 1.47,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "epsilon",
+  "rescale_betas_zero_snr": false
+ },
+ "vae_scaling_factor": 0.13025,
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 12.04,
+   "image": "/home/<user>/m63_out/s3_on_seed11.png",
+   "stats": {
+    "mean": 168.66,
+    "std": 58.2,
+    "saturation": 51.32
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 9.9,
+   "image": "/home/<user>/m63_out/s3_on_seed22.png",
+   "stats": {
+    "mean": 161.07,
+    "std": 60.71,
+    "saturation": 54.06
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 13.66,
+   "image": "/home/<user>/m63_out/s3_on_seed33.png",
+   "stats": {
+    "mean": 163.07,
+    "std": 63.81,
+    "saturation": 52.65
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "openai/clip-vit-large-patch14 config.json (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 5.024
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 6.867
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 1.039
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.195
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.093
+  },
+  {
+   "timing": "load:transformers.loader",
+   "ms": 0.16
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 10.264
+  }
+ ],
+ "when": "2026-09-24 09:20:49"
+}

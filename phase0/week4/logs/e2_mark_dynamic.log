@@ -1,0 +1,8 @@
+W0922 20:58:52.342000 5042 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 20:58:52.375000 5042 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 20:59:05.862000 5042 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+mark_dynamic B=1: {"batch": 1, "first_step_ms": 46790.23, "steady_ms": 23.51, "steady_min_ms": 23.23, "steady_max_ms": 24.22, "compiles_during_batch": 1, "compile_s_during_batch": 41.65}
+mark_dynamic B=4: {"batch": 4, "first_step_ms": 69177.89, "steady_ms": 29.92, "steady_min_ms": 29.5, "steady_max_ms": 31.12, "compiles_during_batch": 1, "compile_s_during_batch": 63.83}
+mark_dynamic B=8: {"batch": 8, "first_step_ms": 35.84, "steady_ms": 35.92, "steady_min_ms": 32.86, "steady_max_ms": 36.41, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+mark_dynamic B=2: {"batch": 2, "first_step_ms": 25.61, "steady_ms": 25.68, "steady_min_ms": 25.47, "steady_max_ms": 26.28, "compiles_during_batch": 0, "compile_s_during_batch": 0.0}
+mark_dynamic: unique graphs 2 | compile_inner {'n': 2, 's': 105.476028051}

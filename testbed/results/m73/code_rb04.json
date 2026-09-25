@@ -1,0 +1,30 @@
+{
+ "when": "2026-09-24 14:58:26",
+ "mode": "debug",
+ "policy": "resolve",
+ "stopped": "[entail] refused at boundary:dp_gather_partial (reduces its input): Reduction declared Reduction(state='R', dim=None, group=None) (boundary: all_reduce.returns, declared); dp_gather_partial (reduces its input) uses Reduction(state='P', dim=None, group=None) (boundary: dp_gather_partial (reduces its input).takes.y, declared); rule: the consumer differs from the declaration and no resolution is registered; note: argument y; stops here",
+ "output_wrong": null,
+ "located": {
+  "broken_at": "boundary:dp_gather_partial (reduces its input)",
+  "all_intact": false,
+  "unchecked": [],
+  "suspects": [
+   "boundary boundary:dp_gather_partial (reduces its input)"
+  ],
+  "broken": [
+   "boundary:dp_gather_partial (reduces its input)"
+  ],
+  "lost_by": [],
+  "intact": [
+   "boundary:all_reduce"
+  ],
+  "layers": [],
+  "why": [
+   "meaning broke at boundary:dp_gather_partial (reduces its input): Reduction: the consumer differs from the declaration and no resolution is registered"
+  ]
+ },
+ "lines": [
+  "[entail] where: meaning broke at boundary:dp_gather_partial (reduces its input)",
+  "[entail]   suspect: meaning broke at boundary:dp_gather_partial (reduces its input): Reduction: the consumer differs from the declaration and no resolution is registered"
+ ]
+}

@@ -1,0 +1,34 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+W0922 17:27:58.882000 1370 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0922 17:27:58.982000 1370 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+LLM built from hub-config: 4.02B params, 32.0s
+USDT:2026-09-22 17:28:32 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:28:32 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/eager/B1", "workload": "llm_decode", "mode": "eager", "batch": 1, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 146.68581399996583, "step_ms_median": 29.41844599996557, "step_ms_min": 28.277367000043796, "step_ms_max": 47.00722900003029, "peak_mem_gib": 7.771261215209961, "dynamo_stats": {}, "status": "ok"}
+USDT:2026-09-22 17:28:34 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:28:34 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/eager/B4", "workload": "llm_decode", "mode": "eager", "batch": 4, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 186.2924209999619, "step_ms_median": 35.335003499994855, "step_ms_min": 32.95814099999461, "step_ms_max": 45.931207999956314, "peak_mem_gib": 8.424715042114258, "dynamo_stats": {}, "status": "ok"}
+USDT:2026-09-22 17:28:36 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:28:37 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/eager/B8", "workload": "llm_decode", "mode": "eager", "batch": 8, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 375.3157270000429, "step_ms_median": 36.72067700000525, "step_ms_min": 34.18001799997228, "step_ms_max": 41.72873300001356, "peak_mem_gib": 9.29582405090332, "dynamo_stats": {}, "status": "ok"}
+W0922 17:28:48.747000 1370 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+USDT:2026-09-22 17:29:06 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:29:06 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/compile_default/B1", "workload": "llm_decode", "mode": "compile_default", "batch": 1, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 28511.518200000013, "step_ms_median": 24.29352149999886, "step_ms_min": 23.43375200001674, "step_ms_max": 24.725493000005372, "peak_mem_gib": 7.789104461669922, "dynamo_stats": {"calls_captured": 2961, "unique_graphs": 1}, "status": "ok"}
+USDT:2026-09-22 17:29:49 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:29:50 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/compile_default/B4", "workload": "llm_decode", "mode": "compile_default", "batch": 4, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 42370.95135800001, "step_ms_median": 29.179039999974066, "step_ms_min": 28.75844199996891, "step_ms_max": 29.793738999956076, "peak_mem_gib": 8.601755619049072, "dynamo_stats": {"calls_captured": 5922, "unique_graphs": 2}, "status": "ok"}
+USDT:2026-09-22 17:29:52 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:29:52 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/compile_default/B8", "workload": "llm_decode", "mode": "compile_default", "batch": 8, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 37.73661599996103, "step_ms_median": 37.26411650001182, "step_ms_min": 35.8277529999782, "step_ms_max": 37.90499600000885, "peak_mem_gib": 9.806604862213135, "dynamo_stats": {"calls_captured": 5922, "unique_graphs": 2}, "status": "ok"}
+USDT:2026-09-22 17:30:21 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:30:21 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/compile_graphs/B1", "workload": "llm_decode", "mode": "compile_graphs", "batch": 1, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 28225.79685899996, "step_ms_median": 21.842098000036003, "step_ms_min": 21.370345999912388, "step_ms_max": 22.631015000001753, "peak_mem_gib": 8.168028354644775, "dynamo_stats": {"calls_captured": 8883, "unique_graphs": 3}, "status": "ok"}
+USDT:2026-09-22 17:31:05 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:31:05 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/compile_graphs/B4", "workload": "llm_decode", "mode": "compile_graphs", "batch": 4, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 43487.80753000006, "step_ms_median": 28.169067500016354, "step_ms_min": 27.839692000043215, "step_ms_max": 28.72209399993153, "peak_mem_gib": 8.619333744049072, "dynamo_stats": {"calls_captured": 11844, "unique_graphs": 4}, "status": "ok"}
+USDT:2026-09-22 17:31:07 1370:1370 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-09-22 17:31:07 1370:1370 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{"label": "llm_decode/compile_graphs/B8", "workload": "llm_decode", "mode": "compile_graphs", "batch": 8, "prompt_len": 512, "dtype": "bf16", "first_call_ms": 50.02852699999494, "step_ms_median": 36.69158849999121, "step_ms_min": 36.3475640000388, "step_ms_max": 37.92898399990463, "peak_mem_gib": 9.815027713775635, "dynamo_stats": {"calls_captured": 11844, "unique_graphs": 4}, "status": "ok"}
+int4 quantization error: ImportError: cannot import name 'int4_weight_only' from 'torchao.quantization' (/home/<user>/venvs/gpu/lib/python3.12/site-packages/torchao/quantization/__init__.py)
+saved <workspace>/phase0/results/llm_decode.json

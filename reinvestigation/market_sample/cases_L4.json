@@ -1,0 +1,314 @@
+[
+ {
+  "case_id": "L081",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 2589,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/2589",
+  "title": "Wrong result when using lora on multi gpus",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Llama-3.2-3B-Instruct에 fp16 LoRA를 붙여 tp_size=8(A100 8장)로 돌리면 1-GPU 결과와 출력 텍스트·generation logits가 다르고, max_output_len을 키우면 다중 GPU 출력이 'totally garbage'가 된다. LoRA를 끄면 두 결과가 같다.",
+  "visible_effect": "garbled",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문과 댓글 어디에도 실행 중 오류나 경고에 대한 언급이 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "trtllm-build --lora_dir / --lora_plugin",
+   "LoRA adapter_config.json (auto_mapping, task_type)",
+   "examples/run.py C++ 러너와 --use_py_session 파이썬 러너",
+   "텐서 병렬(tp_size=8)"
+  ],
+  "fix": null,
+  "trigger": "TensorRT-LLM 0.15.0, Llama-3.2-3B-Instruct, fp16, --lora_plugin auto, tp_size=8(A100 8장)을 1장 결과와 비교. adapter_config.json에 auto_mapping이 있고 task_type이 null이면 깨진 출력, task_type=CAUSAL_LM이면 깨지지는 않지만 여전히 1-GPU와 다름(trtllm-build에 넘긴 --lora_dir에만 해당). run.py에 --use_py_session을 주거나 LoRA를 끄면 재현되지 않음.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2589#issuecomment-2563054180",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2589#issuecomment-2563994633",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2589#issuecomment-2564066655",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2589#issuecomment-2564083454",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2589#issuecomment-2564111254"
+  ],
+  "extractor_confidence": "high",
+  "notes": "유지보수자 응답이 없었고, 보고자가 '새 버전과 더 나은 재현으로 별도 이슈를 올리겠다'며 직접 닫음. 타임라인에 새 이슈 연결이 없어 따라가지 못함. 보고자는 C++ 러너와 파이썬 러너 사이의 불일치라고 추정했으나 확인되지 않음."
+ },
+ {
+  "case_id": "L082",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 1823,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/1823",
+  "title": "Degraded Performance when in-flight batching being used",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "LoRA를 붙인 llama3-8B를 TP=2(L4 2장) Triton 백엔드로 서빙할 때, 요청을 하나씩 보내면 품질이 좋지만 동시 요청으로 in-flight batching이 작동하면 결과 품질이 떨어지고 같은 입력이 단독일 때와 다른 결과를 낸다(beam 3, seed 고정).",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "본문과 댓글에 오류나 경고 언급이 없음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "use_custom_all_reduce (custom all-reduce)",
+   "in-flight batching",
+   "lora_plugin",
+   "tensorrtllm_backend(Triton)"
+  ],
+  "fix": null,
+  "trigger": "TensorRT-LLM rel 브랜치(tensorrtllm_backend b92bdd79)와 v0.9.0, Llama3-8B + LoRA(rope_scaling dynamic 1.75, rope_theta 875000), bfloat16, tp_size=2, NVIDIA L4 2장, --use_custom_all_reduce enable, max_batch_size 4, beam width 3, 동시 요청. --max_batch_size 1로 빌드하거나 use_custom_all_reduce를 끄면 사라짐.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1823#issuecomment-2182806319",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1823#issuecomment-2184731818",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1823#issuecomment-2185330912"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "제목의 'Performance'는 속도가 아니라 출력 품질을 뜻함. 품질 저하가 구체적으로 어떤 모습인지는 적혀 있지 않음. 협업자가 use_custom_all_reduce를 끄거나 0.10/0.11 dev 버전을 써 보라고 제안했고, 끄자 해결됐다고 보고자가 밝힌 뒤 직접 닫음. 원인 설명이나 수정 커밋이 없어 unconfirmed로 둠. 새 버전으로는 시험하지 않았다고 함."
+ },
+ {
+  "case_id": "L083",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 10331,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/10331",
+  "title": "[Bug]:  Cutlass NVFP4 MoE produces the wrong results",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "AutoDeploy의 Cutlass NVFP4 fused MoE 단위 테스트(test_trtllm_fused_moe_nvfp4, hidden 2688/intermediate 1856)에서 참조 구현과 비교해 원소의 18.1%가 허용 오차를 넘었고, 오차가 약 32원소 간격의 구조를 보였다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "본문 로그의 오류는 참조 비교 단언 'Tensor-likes are not close!'뿐이며 연산 자체의 경고나 오류는 보이지 않음",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "merged_fix",
+  "root_cause": "AutoDeploy의 NVFP4 fused MoE 사용자 연산(trtllm_moe.py의 trtllm_quant_nvfp4_moe_fused)은 cutlass 커널이 요구하는 크기(행 128 배수 등)에 맞추려고 가중치와 block scale을 0으로 패딩하는데, 이슈 본문에 따르면 MoE FC1 가중치 행 수가 128로 나누어떨어지지 않을 때 결과가 틀렸다. 병합된 수정 PR #10727은 이 패딩 경로에서 fc1 block scale도 패딩 크기로 채우고, 이미 패딩된 block scale은 그대로 쓰며, 가중치 복사 범위를 실제 크기로 제한하도록 바꿨다. 같은 PR은 그래프 변환(fused_moe.py의 _prepare_args_cutlass_format_nvfp4)에서 uint8로 묶인 FP4 가중치를 float8로 .to() 값 변환하던 것을 없애고, block scale도 .to(torch.float8_e4m3fn) 값 변환 대신 .view()로 바이트를 재해석하도록 고쳤다. PR은 이 변경들을 묶어 'accuracy issue' 수정이라고만 설명한다.",
+  "components_involved": [
+   "tensorrt_llm/_torch/auto_deploy/custom_ops/fused_moe/trtllm_moe.py (trtllm_quant_nvfp4_moe_fused)",
+   "tensorrt_llm/_torch/auto_deploy/transform/library/fused_moe.py (_prepare_args_cutlass_format_nvfp4)",
+   "cutlass NVFP4 MoE 커널",
+   "tensorrt_llm/_torch/auto_deploy/config/default.yaml (fuse_nvfp4_moe)",
+   "tensorrt_llm/_torch/auto_deploy/models/quant_config_reader.py (_ALWAYS_EXCLUDE)"
+  ],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/pull/10727",
+   "summary": "NVFP4 fused MoE 경로의 패딩 처리(fc1 block scale 패딩, 복사 범위)를 고치고 FP4 가중치와 block scale의 dtype 값 변환(.to)을 없애거나 바이트 재해석(.view)으로 바꾼 뒤 fuse_nvfp4_moe를 다시 켬."
+  },
+  "trigger": "Blackwell GPU, AutoDeploy trtllm 백엔드의 NVFP4 fused MoE, MoE FC1 가중치 행 수가 128로 나누어떨어지지 않을 때(예: hidden 2688, intermediate 1856 = Nemotron-Nano-3-30B-A3 크기).",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10331#issuecomment-3713947483",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10331#issuecomment-3773069382",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/10727"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "협업자가 'Fixed with #10727'이라며 닫음. PR 설명이 짧아 어느 변경이 32원소 간격 오차를 만든 것인지는 명시되지 않음. PR 직전 코드에는 패딩 경로에 들어가면 이 이슈를 가리키는 assert False가 있어 틀린 경로를 막아 두었고, default.yaml에서 fuse_nvfp4_moe가 꺼져 있었음. 디버깅 중 전체 모델이 빈 응답을 낸 단계도 있었다고 협업자가 적음. 보고자와 수정자 모두 NVIDIA 내부 인원."
+ },
+ {
+  "case_id": "L084",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 1695,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/1695",
+  "title": "The TensorRT version of the TensorRT-LLM always mismatch with the TensorRT version of Tritonserver",
+  "output_problem": "no",
+  "not_output_reason": "install",
+  "symptom": "pip로 설치한 최신 pre-release TensorRT-LLM로 만든 llama 7B TP2 엔진을 tritonserver 23.10-trtllm 컨테이너에서 띄우려 하자, 엔진과 Triton 서버의 TensorRT 버전이 맞지 않아 실행되지 않았다. 다른 컨테이너 버전에서는 NCCL 오류가 났다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "본문 'TensorRT version is mismatched between the ENGINE and the Triton Server'; 댓글 로그의 'NCCL error ... internal error'",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "tensorrt_llm pip 패키지(pre-release)",
+   "tritonserver trtllm 컨테이너",
+   "TensorRT 버전",
+   "NCCL 플러그인"
+  ],
+  "fix": null,
+  "trigger": "RTX 3090, CUDA 12.3.2, pip install tensorrt_llm --pre, tritonserver 23.10 컨테이너. 이후 TRT-LLM v0.8.0과 tritonserver 24.02/24.03/24.04에서는 NCCL 오류.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1695#issuecomment-2139056690",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1695#issuecomment-2154519708"
+  ],
+  "extractor_confidence": "high",
+  "notes": "'not a bug' 라벨. 협업자는 컨테이너별 버전 대응표를 보라고 안내하고 NCCL 오류에는 shm-size를 늘려 보라고 했으나 보고자는 효과가 없었다고 함. 이후 main 브랜치의 백엔드와 tensorrt_llm이 함께 갱신된다며 닫음. 출력 오류가 아니라 버전 불일치로 인한 실행 실패. 원인은 오류 문구 자체가 말할 뿐 유지보수자의 설명은 없어 unconfirmed로 둠."
+ },
+ {
+  "case_id": "L085",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 5787,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/5787",
+  "title": "Error in examples/models/core/multimodal/run.py caused by incorrect --image_path parameter",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "InternVL2.5-8B 멀티모달 예제 run.py를 --image_path와 함께 실행하면 --image_path가 잘못 인식되어 오류가 난다(구체 내용은 첨부 스크린샷에만 있음).",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "이슈 제목 'Error in examples/models/core/multimodal/run.py'와 PR #5757 제목 'Fix --image_path param error'",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "examples/models/core/multimodal/run.py",
+   "utils.py add_common_args의 --image_path(nargs='*')",
+   "MultimodalModelRunner.load_test_data"
+  ],
+  "fix": null,
+  "trigger": "TensorRT-LLM release-0.20.0, InternVL2_5-8B, examples/models/core/multimodal/run.py에 --image_path 지정. 다른 사용자도 0.20.0에서 같은 문제를 겪었다고 함.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/5757",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/5787#issuecomment-3047181503",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/5787#issuecomment-5361686141"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "오류 내용은 첨부 이미지에만 있어 직접 확인하지 못함. 보고자가 연 PR #5757은 --image_path가 argparse에서 리스트로 파싱되는데 run.py는 문자열로 가정한다고 설명했지만 병합되지 않고 닫힘. 유지보수자는 TensorRT 엔진 빌드 경로가 PyTorch 백엔드로 대체되었다며 stale로 닫음."
+ },
+ {
+  "case_id": "L086",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 11666,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/11666",
+  "title": "[Bug]: Incorrect detection order for model_dir type causes IN_MEMORY loading failure",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "model_weights_loader.py의 detect_format()과 preload()가 model_dir이 dict나 PreTrainedModel 같은 메모리 객체일 때도 파일 시스템 검사를 먼저 해서 IN_MEMORY 로딩이 실패할 수 있다는 코드 검토 보고.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "재현 절차 없이 코드 검토로 보고되었고 'unexpected behavior or runtime errors'라고만 적힘",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "tensorrt_llm/models/model_weights_loader.py의 detect_format()은 os.path.isfile()/os.path.isdir() 검사를 먼저 하고 dict·PreTrainedModel 검사를 마지막에 해서, 메모리 객체가 파일 경로처럼 다뤄질 수 있었다. preload()의 분기 순서도 detect_format()과 맞지 않았다. 유지보수자가 보고자의 수정 제안이 맞다고 확인했고, 병합된 PR #11753이 두 함수에서 메모리 객체 검사를 먼저 하도록 순서를 바꿨다.",
+  "components_involved": [
+   "tensorrt_llm/models/model_weights_loader.py (detect_format, preload)"
+  ],
+  "fix": {
+   "url": "https://github.com/NVIDIA/TensorRT-LLM/pull/11753",
+   "summary": "detect_format()과 preload()에서 dict/PreTrainedModel 검사를 파일 시스템 검사보다 먼저 하도록 순서를 바꿈."
+  },
+  "trigger": "model_dir에 dict(state dict)나 PreTrainedModel 객체를 넘겨 가중치를 로드할 때",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/11666#issuecomment-3953998843",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/11753"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "재현 코드와 오류 로그 없이 코드 검토로 올라온 보고. 실패의 모습(예외인지 다른 동작인지)이 구체적으로 적혀 있지 않아 제목의 'loading failure'를 따라 crash로 분류했으나 불확실. 수정 PR 병합으로도 원인이 드러남(merged_fix)."
+ },
+ {
+  "case_id": "L087",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 2195,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/2195",
+  "title": "❗ Phi3-Visual: Incorrect outputs",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Phi-3-vision-128k-instruct를 TensorRT-LLM으로 빌드해 멀라이언 사진에 'Which city is this?'라고 물으면 'Singapore' 대신 도시 이름을 알려줄 수 없다는 답을 낸다. 이미지를 묘사하게 하면 균일한 밝은 단색 이미지라고 답한다(HF 원본은 싱가포르라고 답함).",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "none",
+  "message_evidence": "로그에는 C++ 세션 미지원으로 Python 세션으로 전환한다는 경고, Python 런타임 paged KV cache가 실험적이라는 경고 등만 있고, 협업자가 'From the log, TensorRT-LLM works fine.'이라고 판단",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "유지보수자는 재현을 확인한 뒤 처음에는 'This is actually a TensorRT issue'라고 했다가, 이후 #2369와 비슷한 HuggingFace와 torch.onnx 사이의 호환성 문제라고 설명했다. #2369의 설명에 따르면 비전 인코더를 ONNX로 내보내 TensorRT 엔진으로 만드는 과정에서 HF의 SDPA/Flash attention ONNX 내보내기에 문제가 있다. 보고자 실험에서 LLM은 이미지를 균일한 단색으로 인식했고, 보고자는 LLM은 정상이지만 이미지를 제대로 보지 못한다고 봤다. 유지보수자는 TRT-LLM 쪽에서 빠른 수정은 불가하다며 비전 인코더를 PyTorch로 실행하는 우회책을 넣겠다고 했다.",
+  "components_involved": [
+   "build_visual_engine.py (비전 인코더 ONNX→TensorRT 엔진)",
+   "torch.onnx",
+   "HuggingFace transformers 어텐션 구현(SDPA/Flash attention)",
+   "TensorRT",
+   "multimodal_model_runner.py ptuning_setup_phi3(보고자가 의심)"
+  ],
+  "fix": null,
+  "trigger": "TensorRT-LLM 0.13.0.dev2024090300, Phi-3-vision-128k-instruct, fp16, A30, TensorRT 10.3.0, transformers 4.42.4, flash-attn 2.6.3 설치, examples multimodal run.py(Python 세션으로 실행).",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2195#issuecomment-2345874943",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2195#issuecomment-2349237479",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2195#issuecomment-2371042201",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2195#issuecomment-2437753643",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2195#issuecomment-2455889816",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/2369#issuecomment-2455888795"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "원인 설명이 짧고 일관되지 않음('TensorRT issue'에서 'HF와 torch.onnx 호환성'으로 바뀜). 참조된 #2369는 ONNX 내보내기가 flash_attn 연산에서 아예 실패한 경우이고 HF 4.45 변경을 원인으로 들었는데, 이 이슈의 보고 환경은 transformers 4.42.4였음. 유지보수자는 '비슷하다'고만 해 같은 원인인지는 약하게 뒷받침됨. 우회 수정은 '다음 주 main 브랜치 갱신'에 들어간다고만 했고 PR이나 커밋 링크는 없어 fix는 null로 둠. 다른 사용자도 같은 현상을 확인."
+ },
+ {
+  "case_id": "L088",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 10056,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/10056",
+  "title": "[Feature]:  Add an accuracy test for super-v3",
+  "output_problem": "no",
+  "not_output_reason": "feature",
+  "symptom": "Nemotron super-v3 성능 최적화에 앞서 사전학습 체크포인트로 MMLU/GSM8K 정확도 테스트를 추가하자는 내부 기능 요청. 작업 중 main에서 테스트가 state_dict size mismatch로 충돌하는 회귀가 발견됨.",
+  "visible_effect": "other",
+  "message_at_failure": "unknown",
+  "message_evidence": "기능 요청이라 틀린 출력 보고가 없음. 작업 중 발견된 충돌은 'Error(s) in loading state_dict ... size mismatch' 오류를 냄",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "tests/integration/defs/accuracy/test_llm_api_autodeploy.py",
+   "AutoDeploy sharding(중첩 파라미터 삭제)"
+  ],
+  "fix": null,
+  "trigger": "AutoDeploy, Nemotron SuperV3 체크포인트, main ToT(16b02530→4fc603627 구간 회귀, PR #9751로 이분 탐색됨)",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/10131",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10056#issuecomment-3685109224",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/10056#issuecomment-3687393139",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/10376"
+  ],
+  "extractor_confidence": "high",
+  "notes": "테스트 추가 PR #10131이 병합됨(모델 준비 전이라 skip 상태). 작업 중 발견된 로딩 충돌은 PR #9751로 이분 탐색되었고, 중첩 파라미터를 delattr로 지울 때의 AttributeError를 고친 PR #10376이 병합됨. #10318에 막혀 있다는 댓글 뒤 닫힘. 출력 오류 보고는 없음."
+ },
+ {
+  "case_id": "L089",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 3223,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/3223",
+  "title": "Qwen2.5-vl vit accuracy when convert onnx to tensorrt",
+  "output_problem": "yes",
+  "not_output_reason": null,
+  "symptom": "Qwen2.5-VL-7B의 비전 인코더(ViT)를 ONNX로 내보낸 뒤 TensorRT 엔진으로 변환하면 정확도가 크게 떨어진다. 보고자는 MLP의 act_fn(gate_proj(x)) * up_proj(x) 곱셈에서 정밀도 문제가 생긴다고 보았고, 곱셈을 사용자 정의 연산으로 바꾸면 정확도는 돌아오지만 속도가 크게 떨어졌다.",
+  "visible_effect": "fluent_wrong",
+  "message_at_failure": "unknown",
+  "message_evidence": "보고자는 오류나 경고를 언급하지 않음. 닫힌 뒤 다른 사용자는 TensorRT의 자동 'force Reduce/Pow to FP32' 경고가 있었지만 충분하지 않았다고 적음",
+  "root_cause_status": "unconfirmed",
+  "root_cause_basis": null,
+  "root_cause": null,
+  "components_involved": [
+   "Qwen2_5_VLMLP (act_fn(gate_proj) * up_proj)",
+   "torch.onnx 내보내기",
+   "TensorRT 엔진 빌드(연산 융합, fp16 정밀도)"
+  ],
+  "fix": null,
+  "trigger": "Qwen2.5-VL-7B-Instruct의 visual 모듈, ONNX 내보내기 후 TensorRT 엔진 빌드(동적 shape 프로파일). 보고자는 정밀도 설정을 밝히지 않음. 다른 사용자는 Qwen2.5-VL-3B, TensorRT 10.16, --fp16 빌드에서 같은 문제를 겪음.",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/3223#issuecomment-2775739752",
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/3223#issuecomment-4644220271"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "TensorRT-LLM 코드가 아니라 사용자가 직접 만든 ONNX→TensorRT 경로의 문제. 유지보수자는 원인을 설명하지 않고 PyTorch 워크플로를 써 보라고만 했고, 보고자가 해결 언급 없이 닫음. 닫힌 뒤 다른 사용자(비유지보수자)가 naive --fp16 빌드에서 norm 분산과 SwiGLU 곱이 overflow한다며 strongly-typed 빌드로 해결했다고 보고(PyTorch 대비 cosine 0.14에서 0.9997)."
+ },
+ {
+  "case_id": "L090",
+  "repo": "NVIDIA/TensorRT-LLM",
+  "number": 1494,
+  "url": "https://github.com/NVIDIA/TensorRT-LLM/issues/1494",
+  "title": "Incorrect GPU Assignment in MPI Inter-Node Processing with Single GPU Nodes",
+  "output_problem": "no",
+  "not_output_reason": "crash",
+  "symptom": "GPU가 1장씩인 노드 2대에서 mpirun으로 TP=2 추론을 하면 rank 1이 GPU 1에 배정되어 'invalid device ordinal' CUDA 오류로 실패한다.",
+  "visible_effect": "other",
+  "message_at_failure": "error",
+  "message_evidence": "'CUDA runtime error in cudaSetDevice(device): invalid device ordinal'",
+  "root_cause_status": "confirmed",
+  "root_cause_basis": "maintainer_statement",
+  "root_cause": "보고자의 코드 검토에 따르면 C++와 Python 구현 모두 노드당 GPU 수(gpus_per_node)를 기본 8로 두고 rank에서 GPU 번호를 정한다. 그래서 GPU가 1장인 두 번째 노드의 rank 1이 없는 GPU 1을 고르려다 오류가 난다. 협업자는 gpus_per_node가 엔진 빌드 때 정해져 config.json에 저장된다며 이 값을 맞게 설정하라고 안내했다.",
+  "components_involved": [
+   "gpus_per_node (엔진 빌드 설정, config.json)",
+   "cpp/tensorrt_llm/runtime/utils/sessionUtils.cpp (cudaSetDevice)",
+   "Python 런타임의 GPU 배정"
+  ],
+  "fix": null,
+  "trigger": "TensorRT-LLM v0.9.0, Tesla T4 1장씩인 노드 2대, llama2-7b TP=2, mpirun 노드 간 실행",
+  "evidence_urls": [
+   "https://github.com/NVIDIA/TensorRT-LLM/issues/1494#issuecomment-2116983097",
+   "https://github.com/NVIDIA/TensorRT-LLM/pull/1495"
+  ],
+  "extractor_confidence": "medium",
+  "notes": "보고자가 낸 PR #1495는 병합되지 않고 닫힘. 협업자는 코드 수정 대신 설정(gpus_per_node)으로 해결하라고 안내했고 기본값 8은 보고자의 설명임. C++ 쪽은 보고자 수정 뒤에도 NCCL 오류가 났다고 함."
+ }
+]

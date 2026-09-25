@@ -1,0 +1,191 @@
+{
+ "server": "healthy",
+ "tag": "strict",
+ "env": {
+  "ENTAIL_ON_BROKEN": "stop"
+ },
+ "args": [
+  "--tool-call-parser",
+  "hermes",
+  "--trust-request-chat-template"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-25 07:25:08",
+ "started": true,
+ "start_seconds": 21.2,
+ "requests": {
+  "plain": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "multi_turn": {
+   "what": "pass",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "tool_call": {
+   "what": "pass",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 0,
+   "tool_calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Paris\"}"
+    }
+   ],
+   "finish_reason": "tool_calls",
+   "entail_field": null
+  },
+  "thinking": {
+   "what": "pass",
+   "status": 200,
+   "content": "\n\nParis.",
+   "reasoning_chars": 685,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "effort_none": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "request_template": {
+   "what": "planted",
+   "status": 400,
+   "error": "{'message': \"[entail] refused at request:vllm.chat_template: Template declared Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history=None, tool_call_format=None) (manifest: <path>#Template, declared); vllm.chat_template uses Template(chat_template_sha256='17762d2e5131cb2a950db7dd5700c50095547773d3302b52baebe9ae32257a55', reasoning_history=None, tool_call_format=None) (user: vllm chat template, named by the request or --chat-template, verified); rule: the user's explicit choice contradicts the declaration; it is not overridden; stops"
+  },
+  "unknown_field": {
+   "what": "planted",
+   "status": 400,
+   "error": "{'message': \"[entail] refused at request:vllm.request_fields: Coverage declared Coverage(total=6, taken=6, left=()) (user: the fields the request sets: chat_template_kwargs, guided_json, max_tokens, messages, model, temperature, declared); vllm.chat_request uses Coverage(total=6, taken=5, left=('guided_json',)) (engine: vllm ChatCompletionRequest: a field the schema does not know is kept in model_extra and ignored (logged at debug level), verified); rule: the consumer differs from the declaration and no resolution is registered; stops here\", 'type': 'BadRequestError', 'param': None, 'code': 40"
+  },
+  "misspelt_setting": {
+   "what": "planted",
+   "status": 400,
+   "error": "{'message': \"[entail] refused at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: enable_thinkng, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('enable_thinkng',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here\", 'type': 'BadRequestError', 'param': None, 'code': 400}"
+  },
+  "effort_level": {
+   "what": "planted",
+   "status": 400,
+   "error": "{'message': \"[entail] refused at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: reasoning_effort, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('reasoning_effort',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here\", 'type': 'BadRequestError', 'param': None, 'code': 400}"
+  }
+ },
+ "stream": {
+  "request": "misspelt_setting",
+  "status": 400,
+  "comments": [],
+  "data_lines": 0
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.chat_template",
+   "verdict": "refused",
+   "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.request_fields",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "47810 request:vllm.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 10,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "47810 request:vllm.chat_template": {
+   "checks": 10,
+   "broken": 0,
+   "refused": 1,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 9
+   }
+  },
+  "47810 request:vllm.request_fields": {
+   "checks": 10,
+   "broken": 0,
+   "refused": 1,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 9
+   }
+  },
+  "47810 request:vllm.template_settings": {
+   "checks": 7,
+   "broken": 0,
+   "refused": 3,
+   "skipped": 1,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 4
+   }
+  },
+  "47905 container:vllm.allocate_slots": {
+   "checks": 128,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 128
+   }
+  }
+ }
+}

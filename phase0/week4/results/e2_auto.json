@@ -1,0 +1,105 @@
+{
+ "approach": "auto",
+ "batches": [
+  1,
+  4,
+  8,
+  2
+ ],
+ "prompt_len": 512,
+ "steps": 16,
+ "precompile_s": null,
+ "per_batch": [
+  {
+   "batch": 1,
+   "first_step_ms": 45145.865522000124,
+   "steady_ms": 21.7819800000143,
+   "steady_min_ms": 21.33464400003504,
+   "steady_max_ms": 22.574087000066356,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 4,
+   "first_step_ms": 66308.49996800021,
+   "steady_ms": 30.018859000051634,
+   "steady_min_ms": 29.617008000059286,
+   "steady_max_ms": 30.384713000103147,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 8,
+   "first_step_ms": 36.63305899999614,
+   "steady_ms": 36.060236000025725,
+   "steady_min_ms": 35.613639000075636,
+   "steady_max_ms": 36.8881889999102,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  },
+  {
+   "batch": 2,
+   "first_step_ms": 29.328624000072523,
+   "steady_ms": 28.073693500004993,
+   "steady_min_ms": 27.84059900000102,
+   "steady_max_ms": 29.28597400000399,
+   "compiles_during_batch": 0,
+   "compile_s_during_batch": 0.0
+  }
+ ],
+ "unique_graphs": 2,
+ "dynamo_stats": {
+  "calls_captured": 5920,
+  "unique_graphs": 2
+ },
+ "compile_metrics_total": {
+  "_compile.compile_inner": {
+   "n": 2,
+   "s": 103.211562966
+  },
+  "compile_attempt_0": {
+   "n": 2,
+   "s": 102.64792513
+  },
+  "OutputGraph.call_user_compiler": {
+   "n": 2,
+   "s": 91.933227353
+  },
+  "create_aot_dispatcher_function": {
+   "n": 2,
+   "s": 91.623545329
+  },
+  "compile_fx.<locals>.fw_compiler_base": {
+   "n": 2,
+   "s": 76.881937505
+  },
+  "compile_fx_inner": {
+   "n": 2,
+   "s": 75.190942162
+  },
+  "fx_codegen_and_compile": {
+   "n": 2,
+   "s": 74.615225107
+  },
+  "GraphLowering.compile_to_fn": {
+   "n": 2,
+   "s": 54.167793916
+  },
+  "GraphLowering.compile_to_module": {
+   "n": 2,
+   "s": 54.167715129
+  },
+  "GraphLowering.codegen": {
+   "n": 2,
+   "s": 54.018660783
+  },
+  "Scheduler.__init__": {
+   "n": 2,
+   "s": 34.105292264
+  },
+  "Scheduler.fused_nodes": {
+   "n": 2,
+   "s": 28.941128858
+  }
+ }
+}

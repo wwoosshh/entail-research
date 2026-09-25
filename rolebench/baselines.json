@@ -1,0 +1,28 @@
+{
+ "about": "ROADMAP 1.6 / PROTOCOL.md section 6. Judgements by a hypothesis-blind rater agent (2026-09-23): it was not told the research hypothesis; definitions of STANDARD EVAL (vLLM nightly suite, 2026-07-16 blog) and REFERENCE COMPARISON were given. Case descriptions for local findings (08, 10, 17) were written by the researcher-side agent. All answers are judgements (PROTOCOL.md section 6), not measurements.",
+ "summary": {
+  "standard_eval_triggers": {"yes": 0, "no": 14, "uncertain": 2},
+  "score_moves_if_triggered": {"yes": 10, "no": 1, "uncertain": 5},
+  "reference_available": {"yes": 13, "no": 0, "uncertain": 3},
+  "missed_by_both_strict_d_no": 0,
+  "missed_by_both_if_uncertain_counted": ["03", "15", "16"]
+ },
+ "cases": [
+  {"id": "01", "b": "no", "c": "yes", "d": "yes", "reference": "llama.cpp CPU backend, second request after a batch-1 decode", "trigger": "Intel Arc (SYCL) + reorder on + Q8_0/Q2_K + second request", "confidence": "high"},
+  {"id": "02", "b": "uncertain", "c": "yes", "d": "yes", "reference": "transformers Triton fine-grained FP8 kernel on the same B200", "trigger": "SM100 + DeepGEMM hub kernel + fine-grained FP8 checkpoint with fp32 scales", "confidence": "medium"},
+  {"id": "03", "b": "no", "c": "yes", "d": "uncertain", "reference": "none independent named (bs=1 vs concurrent in the same kernel found it)", "trigger": "SM120 + --kv-cache-dtype nvfp4 + trtllm_mha decode + batch > 1", "confidence": "medium"},
+  {"id": "04", "b": "no", "c": "yes", "d": "yes", "reference": "same engine with DP attention off (plain TP)", "trigger": "--enable-dp-attention with TP > 1", "confidence": "medium"},
+  {"id": "05", "b": "no", "c": "uncertain", "d": "yes", "reference": "vLLM TRITON_ATTN on the same GPU; HF parity harness", "trigger": "FA4 on SM90 + Gemma 4 multimodal + image + chunked prefill or prior context", "confidence": "medium"},
+  {"id": "06", "b": "no", "c": "yes", "d": "yes", "reference": "vLLM TRITON_ATTN on the same GPU; HF parity harness", "trigger": "FA4 on SM90 + Gemma 4 sliding-window layers + image + context beyond the window", "confidence": "high"},
+  {"id": "07", "b": "no", "c": "yes", "d": "yes", "reference": "HF transformers on the identical checkpoint", "trigger": "re-exported Mistral3 checkpoint whose tie flag contradicts its weights", "confidence": "high"},
+  {"id": "08", "b": "uncertain", "c": "no", "d": "yes", "reference": "HF transformers eager", "trigger": "transformers default sdpa + Gemma 2", "confidence": "medium"},
+  {"id": "09", "b": "no", "c": "yes", "d": "yes", "reference": "llama.cpp CPU backend or -kvo / CUDA graphs off", "trigger": "-nkvo (non-default) + CUDA graphs + generation > 256 tokens", "confidence": "high"},
+  {"id": "10", "b": "no", "c": "uncertain", "d": "yes", "reference": "HF transformers sdpa", "trigger": "flex_attention + StaticCache + stale slot (reused cache)", "confidence": "medium"},
+  {"id": "11", "b": "no", "c": "yes", "d": "yes", "reference": "SGLang or vLLM with compile off", "trigger": "torch.compile + Qwen3-VL/Omni deepstack + image or video input", "confidence": "high"},
+  {"id": "12", "b": "no", "c": "uncertain", "d": "yes", "reference": "fresh prefill without the session file", "trigger": "llama-completion --prompt-cache saved and reloaded", "confidence": "medium"},
+  {"id": "14", "b": "no", "c": "uncertain", "d": "yes", "reference": "generate() with use_cache=False", "trigger": "beam search on Mamba/RWKV/XLNet/Reformer", "confidence": "medium"},
+  {"id": "15", "b": "no", "c": "yes", "d": "uncertain", "reference": "none independent named", "trigger": "unmerged LongCat-2.0 branch + stock config with oe_* keys", "confidence": "medium"},
+  {"id": "16", "b": "no", "c": "yes", "d": "uncertain", "reference": "only an earlier vLLM version", "trigger": "--enable-lora + FP8 W8A8 MoE + legacy MoE-LoRA kernel", "confidence": "medium"},
+  {"id": "17", "b": "no", "c": "uncertain", "d": "yes", "reference": "SGLang triton/flashinfer backends; HF eager", "trigger": "SGLang torch_native backend (explicit or fallback) + capped model", "confidence": "medium"}
+ ]
+}

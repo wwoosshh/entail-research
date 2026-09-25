@@ -1,0 +1,12 @@
+[transformers] This model config has set a `rope_parameters['original_max_position_embeddings']` field, to be used together with `max_position_embeddings` to determine a scaling factor. Please set the `factor` field of `rope_parameters`with this ratio instead -- we recommend the use of this field over `original_max_position_embeddings`, as it is compatible with most model architectures.
+W0924 21:26:31.021000 5088 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 21:26:31.052000 5088 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/195 [00:00<?, ?it/s]
+Loading weights:   8%|▊         | 16/195 [00:00<00:01, 152.21it/s]
+Loading weights:  16%|█▋        | 32/195 [00:00<00:01, 155.15it/s]
+Loading weights:  25%|██▍       | 48/195 [00:00<00:00, 152.85it/s]
+Loading weights:  38%|███▊      | 74/195 [00:00<00:00, 189.18it/s]
+Loading weights: 100%|██████████| 195/195 [00:00<00:00, 407.51it/s]
+[entail] unknown at load:transformers.config.rope_parameters: Rotary nothing declared; what transformers.rotary_embedding uses is unknown; rule: this boundary could not be checked; note: /home/<user>/models/Phi-3.5-mini-instruct/config.json#rope_theta,rope_scaling: RoPE keys ['long_factor', 'short_factor'] are not in vocabulary v4; the Rotary fact does not carry them; so they are not compared
+RESULT transformers Phi-3.5-mini-instruct entail=load ok=True load=4.248 used=sdpa 

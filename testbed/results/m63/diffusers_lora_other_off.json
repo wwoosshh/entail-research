@@ -1,0 +1,19 @@
+{
+ "tag": "lora_other_off",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "lora": "nagito/nagito_anima_e10.safetensors",
+ "condition": "off",
+ "entail": "not installed",
+ "on_broken": "report",
+ "outcome": "NoMatchingPeftModuleError: Target modules {'layer2', 'layer1', 'q.proj', 'output.proj', 'k.proj', 'v.proj'} not found in the base model. Please check the target modules and try again.",
+ "adapters": {},
+ "modules_with_the_adapter": 0,
+ "log": [
+  "WARNING diffusers.quantizers.torchao.torchao_quantizer: Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+  "WARNING diffusers.models.modeling_utils: There are modules in UNet2DConditionModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "ERROR diffusers.loaders.peft: Loading t was unsuccessful with the following error: \nTarget modules {'layer2', 'layer1', 'q.proj', 'output.proj', 'k.proj', 'v.proj'} not found in the base model. Please check the target modules and try again."
+ ],
+ "decisions": [],
+ "when": "2026-09-24 09:58:09"
+}

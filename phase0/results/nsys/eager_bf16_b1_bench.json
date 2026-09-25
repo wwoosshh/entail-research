@@ -1,0 +1,36 @@
+{
+  "env": {
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cudnn": 92400,
+    "device": "NVIDIA GeForce RTX 4070 Ti",
+    "cc": "8.9",
+    "sms": 60,
+    "mem_gib": 12.0,
+    "triton": "3.8.0"
+  },
+  "model_source": "hub-config",
+  "model_id": "Qwen/Qwen3-4B",
+  "params": 4022468096,
+  "int4": "skipped",
+  "results": [
+    {
+      "label": "llm_decode/eager/B1",
+      "workload": "llm_decode",
+      "mode": "eager",
+      "batch": 1,
+      "prompt_len": 512,
+      "dtype": "bf16",
+      "first_call_ms": 96.11054900000227,
+      "step_ms_median": 37.821788499996956,
+      "step_ms_min": 35.74901900000782,
+      "step_ms_max": 43.19247099999757,
+      "peak_mem_gib": 7.771261215209961,
+      "kernels": {
+        "skipped": "PHASE0_NO_PROFILER set"
+      },
+      "dynamo_stats": {},
+      "status": "ok"
+    }
+  ]
+}

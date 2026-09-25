@@ -1,0 +1,73 @@
+{
+ "case": "04_double_reduce",
+ "meta": {
+  "id": "04",
+  "title": "replicated value reduced again as if it were a partial sum",
+  "fact": "REDUCTION",
+  "issue": "https://github.com/sgl-project/sglang/issues/37187 ; https://github.com/sgl-project/sglang/issues/31699",
+  "engine": "SGLang DP attention (mechanism, gloo on CPU)",
+  "kind": "mechanism",
+  "boundary": "tensor-parallel linear (replicated output) -> data-parallel gather (expects partial)",
+  "trigger": {
+   "feature": "DP attention with tensor parallelism",
+   "world_size": ">= 2"
+  },
+  "symptom": "garbled",
+  "expected_detection": "runtime (R/P reduction-state tag, spmd_types notation)",
+  "compare": "fp32"
+ },
+ "env": {
+  "torch": "2.14.0+cu130",
+  "python": "3.12.3",
+  "transformers": "5.17.0",
+  "gpu": "NVIDIA GeForce RTX 4070 Ti"
+ },
+ "notes": {
+  "reference": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "fixed": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  },
+  "defect": {
+   "warnings": [],
+   "logs": [],
+   "error": null
+  }
+ },
+ "defect_vs_reference": {
+  "max_abs": 19.679977416992188,
+  "mean_abs": 6.751636604720261,
+  "ref_max_abs": 19.679977416992188,
+  "top1_agree": 1.0
+ },
+ "fixed_vs_reference": {
+  "max_abs": 2.86102294921875e-06,
+  "mean_abs": 6.385962478816509e-07,
+  "ref_max_abs": 19.679977416992188,
+  "top1_agree": 1.0
+ },
+ "defect_wrong": true,
+ "fixed_right": true,
+ "defect_silent": true,
+ "reproduced": true,
+ "detection": {
+  "W": {
+   "mode": "debug",
+   "checks": "R/P tag at the second reduction",
+   "defect": {
+    "flagged": true,
+    "message": "dp_gather_partial (reduces its input): argument 'y' Reduction: expected Reduction(state='P', dim=None, group=None), got Reduction(state='R', dim=None, group=None)"
+   },
+   "fixed": {
+    "flagged": false
+   },
+   "detected": true
+  }
+ },
+ "seconds": 1.1
+}

@@ -1,0 +1,729 @@
+{
+ "when": "2026-09-24 18:25:50",
+ "evaluations": {
+  "fd-rope": {
+   "what": "Llama-3.2-3B, vLLM: launch-time rope_scaling (theta lost) vs no override; noise: LA vs LA2",
+   "n": 500,
+   "defect": "273/500",
+   "healthy": "379/500",
+   "defect_wilson95": [
+    0.5022,
+    0.5891
+   ],
+   "healthy_wilson95": [
+    0.7186,
+    0.7935
+   ],
+   "only_healthy_right": 136,
+   "only_defect_right": 30,
+   "mcnemar_p": 0.0,
+   "evaluation_detects": true,
+   "outputs_differ": 500,
+   "outputs_differ_between_healthy_runs": 0,
+   "reference_detects": true
+  },
+  "fd-rope (entail on)": {
+   "what": "the same override with entail on (repaired) vs no override",
+   "n": 500,
+   "defect": "376/500",
+   "healthy": "379/500",
+   "defect_wilson95": [
+    0.7123,
+    0.7878
+   ],
+   "healthy_wilson95": [
+    0.7186,
+    0.7935
+   ],
+   "only_healthy_right": 14,
+   "only_defect_right": 11,
+   "mcnemar_p": 0.69,
+   "evaluation_detects": false,
+   "outputs_differ": 214
+  },
+  "fd-softcap (SGLang)": {
+   "what": "gemma-2-2b-it, SGLang torch_native vs triton",
+   "n": 500,
+   "defect": "313/500",
+   "healthy": "316/500",
+   "defect_wilson95": [
+    0.5828,
+    0.6673
+   ],
+   "healthy_wilson95": [
+    0.5889,
+    0.6731
+   ],
+   "only_healthy_right": 12,
+   "only_defect_right": 9,
+   "mcnemar_p": 0.6636,
+   "evaluation_detects": false,
+   "outputs_differ": 198,
+   "outputs_differ_between_healthy_runs": 0,
+   "reference_detects": true
+  },
+  "fd-softcap (HF 2B)": {
+   "what": "Gemma 2 2b (bf16), transformers sdpa (drops softcap) vs eager; issue_track/gemma2_softcap E3, measured earlier",
+   "n": 500,
+   "defect": "337/500",
+   "healthy": "339/500",
+   "only_healthy_right": 10,
+   "only_defect_right": 8,
+   "mcnemar_p": 0.8145,
+   "evaluation_detects": false,
+   "reference_note": "E1 (logits against eager, teacher forcing): effect 1.4x (2B) / 2.5x (9B) the noise between two correct kernels; confirmed only by the pattern test, which needs a softcap-off control (issue_track/gemma2_softcap/RESULTS.md)"
+  },
+  "fd-softcap (HF 9B)": {
+   "what": "Gemma 2 9b (int4 (TorchAoConfig on load)), transformers sdpa (drops softcap) vs eager; issue_track/gemma2_softcap E3, measured earlier",
+   "n": 500,
+   "defect": "442/500",
+   "healthy": "443/500",
+   "only_healthy_right": 4,
+   "only_defect_right": 3,
+   "mcnemar_p": 1.0,
+   "evaluation_detects": false,
+   "reference_note": "E1 (logits against eager, teacher forcing): effect 1.4x (2B) / 2.5x (9B) the noise between two correct kernels; confirmed only by the pattern test, which needs a softcap-off control (issue_track/gemma2_softcap/RESULTS.md)"
+  },
+  "fd-shift": {
+   "what": "Qwen3-4B, vLLM: one weight's rows rolled at load vs not",
+   "n": 500,
+   "defect": "3/500",
+   "healthy": "468/500",
+   "defect_wilson95": [
+    0.002,
+    0.0175
+   ],
+   "healthy_wilson95": [
+    0.911,
+    0.9543
+   ],
+   "only_healthy_right": 465,
+   "only_defect_right": 0,
+   "mcnemar_p": 0.0,
+   "evaluation_detects": true,
+   "outputs_differ": 500,
+   "outputs_differ_between_healthy_runs": 240,
+   "reference_detects": true
+  }
+ },
+ "problems": {
+  "rb-01": {
+   "fact": "Layout",
+   "entail": [
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "Intel Arc (SYCL) + reorder on + Q8_0/Q2_K + second request",
+    "confidence": "high"
+   }
+  },
+  "rb-02": {
+   "fact": "Layout(scale format)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "uncertain",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "SM100 + DeepGEMM hub kernel + fine-grained FP8 checkpoint with fp32 scales",
+    "confidence": "medium"
+   }
+  },
+  "rb-03": {
+   "fact": "Layout(stride)",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "uncertain",
+    "trigger": "SM120 + --kv-cache-dtype nvfp4 + trtllm_mha decode + batch > 1",
+    "confidence": "medium"
+   }
+  },
+  "rb-04": {
+   "fact": "Reduction",
+   "entail": [
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "--enable-dp-attention with TP > 1",
+    "confidence": "medium"
+   }
+  },
+  "rb-05": {
+   "fact": "Positions",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "uncertain",
+    "reference_in_practice": "yes",
+    "trigger": "FA4 on SM90 + Gemma 4 multimodal + image + chunked prefill or prior context",
+    "confidence": "medium"
+   }
+  },
+  "rb-06": {
+   "fact": "ModelProps(sliding_window)",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "FA4 on SM90 + Gemma 4 sliding-window layers + image + context beyond the window",
+    "confidence": "high"
+   }
+  },
+  "rb-07": {
+   "fact": "ModelProps(tie)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "re-exported Mistral3 checkpoint whose tie flag contradicts its weights",
+    "confidence": "high"
+   }
+  },
+  "rb-08": {
+   "fact": "ModelProps(softcap)",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "uncertain",
+    "score_moves_if_triggered": "no",
+    "reference_in_practice": "yes",
+    "trigger": "transformers default sdpa + Gemma 2",
+    "confidence": "medium"
+   }
+  },
+  "rb-09": {
+   "fact": "Epoch, Assumed",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "-nkvo (non-default) + CUDA graphs + generation > 256 tokens",
+    "confidence": "high"
+   }
+  },
+  "rb-10": {
+   "fact": "Epoch",
+   "entail": [
+    "refused",
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "uncertain",
+    "reference_in_practice": "yes",
+    "trigger": "flex_attention + StaticCache + stale slot (reused cache)",
+    "confidence": "medium"
+   }
+  },
+  "rb-11": {
+   "fact": "Assumed",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "yes",
+    "trigger": "torch.compile + Qwen3-VL/Omni deepstack + image or video input",
+    "confidence": "high"
+   }
+  },
+  "rb-12": {
+   "fact": "KvExtent",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "uncertain",
+    "reference_in_practice": "yes",
+    "trigger": "llama-completion --prompt-cache saved and reloaded",
+    "confidence": "medium"
+   }
+  },
+  "rb-14": {
+   "fact": "Epoch",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "uncertain",
+    "reference_in_practice": "yes",
+    "trigger": "beam search on Mamba/RWKV/XLNet/Reformer",
+    "confidence": "medium"
+   }
+  },
+  "rb-15": {
+   "fact": "Coverage(config keys)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "uncertain",
+    "trigger": "unmerged LongCat-2.0 branch + stock config with oe_* keys",
+    "confidence": "medium"
+   }
+  },
+  "rb-16": {
+   "fact": "Quantized",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "yes",
+    "reference_in_practice": "uncertain",
+    "trigger": "--enable-lora + FP8 W8A8 MoE + legacy MoE-LoRA kernel",
+    "confidence": "medium"
+   }
+  },
+  "rb-17": {
+   "fact": "ModelProps(softcap)",
+   "entail": [
+    "resolved"
+   ],
+   "reference_measured": {
+    "defect_wrong": true,
+    "fixed_right": true,
+    "defect_silent": true,
+    "reproduced": true
+   },
+   "judged": {
+    "standard_eval_triggers": "no",
+    "score_moves_if_triggered": "uncertain",
+    "reference_in_practice": "yes",
+    "trigger": "SGLang torch_native backend (explicit or fallback) + capped model",
+    "confidence": "medium"
+   }
+  },
+  "fd-rope": {
+   "fact": "Rotary",
+   "entail": [
+    "resolved"
+   ],
+   "evaluation_measured": {
+    "fd-rope": {
+     "what": "Llama-3.2-3B, vLLM: launch-time rope_scaling (theta lost) vs no override; noise: LA vs LA2",
+     "n": 500,
+     "defect": "273/500",
+     "healthy": "379/500",
+     "defect_wilson95": [
+      0.5022,
+      0.5891
+     ],
+     "healthy_wilson95": [
+      0.7186,
+      0.7935
+     ],
+     "only_healthy_right": 136,
+     "only_defect_right": 30,
+     "mcnemar_p": 0.0,
+     "evaluation_detects": true,
+     "outputs_differ": 500,
+     "outputs_differ_between_healthy_runs": 0,
+     "reference_detects": true
+    },
+    "fd-rope (entail on)": {
+     "what": "the same override with entail on (repaired) vs no override",
+     "n": 500,
+     "defect": "376/500",
+     "healthy": "379/500",
+     "defect_wilson95": [
+      0.7123,
+      0.7878
+     ],
+     "healthy_wilson95": [
+      0.7186,
+      0.7935
+     ],
+     "only_healthy_right": 14,
+     "only_defect_right": 11,
+     "mcnemar_p": 0.69,
+     "evaluation_detects": false,
+     "outputs_differ": 214
+    }
+   }
+  },
+  "fd-softcap": {
+   "fact": "ModelProps(softcap)",
+   "entail": [
+    "broken",
+    "resolved"
+   ],
+   "evaluation_measured": {
+    "fd-softcap (SGLang)": {
+     "what": "gemma-2-2b-it, SGLang torch_native vs triton",
+     "n": 500,
+     "defect": "313/500",
+     "healthy": "316/500",
+     "defect_wilson95": [
+      0.5828,
+      0.6673
+     ],
+     "healthy_wilson95": [
+      0.5889,
+      0.6731
+     ],
+     "only_healthy_right": 12,
+     "only_defect_right": 9,
+     "mcnemar_p": 0.6636,
+     "evaluation_detects": false,
+     "outputs_differ": 198,
+     "outputs_differ_between_healthy_runs": 0,
+     "reference_detects": true
+    },
+    "fd-softcap (HF 2B)": {
+     "what": "Gemma 2 2b (bf16), transformers sdpa (drops softcap) vs eager; issue_track/gemma2_softcap E3, measured earlier",
+     "n": 500,
+     "defect": "337/500",
+     "healthy": "339/500",
+     "only_healthy_right": 10,
+     "only_defect_right": 8,
+     "mcnemar_p": 0.8145,
+     "evaluation_detects": false,
+     "reference_note": "E1 (logits against eager, teacher forcing): effect 1.4x (2B) / 2.5x (9B) the noise between two correct kernels; confirmed only by the pattern test, which needs a softcap-off control (issue_track/gemma2_softcap/RESULTS.md)"
+    },
+    "fd-softcap (HF 9B)": {
+     "what": "Gemma 2 9b (int4 (TorchAoConfig on load)), transformers sdpa (drops softcap) vs eager; issue_track/gemma2_softcap E3, measured earlier",
+     "n": 500,
+     "defect": "442/500",
+     "healthy": "443/500",
+     "only_healthy_right": 4,
+     "only_defect_right": 3,
+     "mcnemar_p": 1.0,
+     "evaluation_detects": false,
+     "reference_note": "E1 (logits against eager, teacher forcing): effect 1.4x (2B) / 2.5x (9B) the noise between two correct kernels; confirmed only by the pattern test, which needs a softcap-off control (issue_track/gemma2_softcap/RESULTS.md)"
+    }
+   }
+  },
+  "fd-m7": {
+   "fact": "Prediction",
+   "entail": [
+    "resolved"
+   ],
+   "reference_other": {
+    "reference_detects": true,
+    "measured": "diffusers, entail off against the reference, 3 seeds: 94.5 from reference (max 253); 90.09 from reference (max 231); 92.4 from reference (max 217) (rerun/m63/SUMMARY.md); ComfyUI (fd-m7, M6.3): 83-95/255"
+   }
+  },
+  "fd-lora": {
+   "fact": "Coverage(LoRA)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_other": {
+    "reference_detects": "no reference: the LoRA cannot apply",
+    "measured": "ComfyUI 0.34.1 (M6.3, not re-run): the wrong LoRA's images are identical to no LoRA; diffusers refuses the file by itself (NoMatchingPeftModuleError)"
+   }
+  },
+  "fd-kv": {
+   "fact": "KvExtent",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_other": {
+    "reference_detects": false,
+    "measured": "vLLM, block table one block short, 3 prompts x 16 tokens: texts the same as entail off: True (rerun/m51); SGLang's own assertion stopped its seeded run after entail reported broken (rerun/m51/sglang_seeded.log)"
+   }
+  },
+  "fd-shift": {
+   "fact": "Layout(load source)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "evaluation_measured": {
+    "fd-shift": {
+     "what": "Qwen3-4B, vLLM: one weight's rows rolled at load vs not",
+     "n": 500,
+     "defect": "3/500",
+     "healthy": "468/500",
+     "defect_wilson95": [
+      0.002,
+      0.0175
+     ],
+     "healthy_wilson95": [
+      0.911,
+      0.9543
+     ],
+     "only_healthy_right": 465,
+     "only_defect_right": 0,
+     "mcnemar_p": 0.0,
+     "evaluation_detects": true,
+     "outputs_differ": 500,
+     "outputs_differ_between_healthy_runs": 240,
+     "reference_detects": true
+    }
+   }
+  },
+  "fd-repack": {
+   "fact": "Layout, Coverage",
+   "entail": [
+    "broken",
+    "refused",
+    "resolved"
+   ],
+   "reference_other": {
+    "reference_detects": {
+     "roll_off": true,
+     "strided_on": false,
+     "transpose_on": null
+    },
+    "measured": "vLLM Qwen3-4B, the TEXT line against the healthy run (rerun/m42): roll differs; strided same; transpose: no text (the shapes stop matching, loud)"
+   }
+  },
+  "fd-vae": {
+   "fact": "LatentScale",
+   "entail": [
+    "broken",
+    "resolved"
+   ],
+   "reference_other": {
+    "reference_detects": true,
+    "measured": "diffusers, entail off against the reference, 3 seeds: 15.03 from reference (max 133); 15.5 from reference (max 165); 15.93 from reference (max 144) (rerun/m63/SUMMARY.md)"
+   }
+  },
+  "mk-L03": {
+   "fact": "ModelProps(softcap)",
+   "entail": [
+    "broken",
+    "resolved"
+   ],
+   "evaluation_measured": {
+    "fd-softcap (SGLang)": {
+     "what": "gemma-2-2b-it, SGLang torch_native vs triton",
+     "n": 500,
+     "defect": "313/500",
+     "healthy": "316/500",
+     "defect_wilson95": [
+      0.5828,
+      0.6673
+     ],
+     "healthy_wilson95": [
+      0.5889,
+      0.6731
+     ],
+     "only_healthy_right": 12,
+     "only_defect_right": 9,
+     "mcnemar_p": 0.6636,
+     "evaluation_detects": false,
+     "outputs_differ": 198,
+     "outputs_differ_between_healthy_runs": 0,
+     "reference_detects": true
+    },
+    "fd-softcap (HF 2B)": {
+     "what": "Gemma 2 2b (bf16), transformers sdpa (drops softcap) vs eager; issue_track/gemma2_softcap E3, measured earlier",
+     "n": 500,
+     "defect": "337/500",
+     "healthy": "339/500",
+     "only_healthy_right": 10,
+     "only_defect_right": 8,
+     "mcnemar_p": 0.8145,
+     "evaluation_detects": false,
+     "reference_note": "E1 (logits against eager, teacher forcing): effect 1.4x (2B) / 2.5x (9B) the noise between two correct kernels; confirmed only by the pattern test, which needs a softcap-off control (issue_track/gemma2_softcap/RESULTS.md)"
+    },
+    "fd-softcap (HF 9B)": {
+     "what": "Gemma 2 9b (int4 (TorchAoConfig on load)), transformers sdpa (drops softcap) vs eager; issue_track/gemma2_softcap E3, measured earlier",
+     "n": 500,
+     "defect": "442/500",
+     "healthy": "443/500",
+     "only_healthy_right": 4,
+     "only_defect_right": 3,
+     "mcnemar_p": 1.0,
+     "evaluation_detects": false,
+     "reference_note": "E1 (logits against eager, teacher forcing): effect 1.4x (2B) / 2.5x (9B) the noise between two correct kernels; confirmed only by the pattern test, which needs a softcap-off control (issue_track/gemma2_softcap/RESULTS.md)"
+    }
+   }
+  },
+  "mk-L05": {
+   "fact": "Valid, Origin",
+   "entail": [
+    "broken",
+    "resolved"
+   ],
+   "reference_other": {
+    "reference_detects": true,
+    "measured": "the truncated prompt's answer right: False (tokens seen 2048 of 10983)"
+   }
+  },
+  "mk-L07": {
+   "fact": "Coverage(request)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_other": {
+    "reference_detects": "not measurable here",
+    "measured": "prompt tokens 27 (effort rendered) vs 17 (dropped); the 16-token outputs were both '' / '' (reasoning cut at 16 tokens)"
+   }
+  },
+  "mk-L11": {
+   "fact": "Template(tool-call format)",
+   "entail": [
+    "broken",
+    "refused",
+    "resolved"
+   ],
+   "reference_other": {
+    "reference_detects": true,
+    "measured": "entail off: 0 structured tool calls, the call left in the text; repaired: 1 (rerun/m53)"
+   }
+  },
+  "mk-L13": {
+   "fact": "Template(reasoning history)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_other": {
+    "reference_detects": false,
+    "measured": "one request, thinking off: history kept -> '6', dropped -> '6' (rerun/m55)"
+   }
+  },
+  "mk-I01": {
+   "fact": "Coverage(LoRA keys)",
+   "entail": [
+    "broken",
+    "refused"
+   ],
+   "reference_other": {
+    "reference_detects": "only against a reference with the LoRA applied",
+    "measured": "diffusers: the image is pixel-identical to the model without a LoRA (rerun/m63); the same LoRA in the format diffusers reads changes it by 26-42/255"
+   }
+  },
+  "mk-I04": {
+   "fact": "Prediction",
+   "entail": [
+    "broken",
+    "resolved"
+   ],
+   "reference_other": {
+    "reference_detects": true,
+    "measured": "diffusers, entail off against the reference, 3 seeds: 76.38 from reference (max 255); 55.18 from reference (max 255); 82.94 from reference (max 255) (rerun/m63/SUMMARY.md)"
+   }
+  }
+ }
+}

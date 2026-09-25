@@ -1,0 +1,10 @@
+{
+ "engine": "transformers",
+ "model": "gemma-2-2b-it",
+ "backend_asked": "sdpa",
+ "paged": true,
+ "entail": "load",
+ "when": "2026-09-23 21:13:46",
+ "ok": false,
+ "error": "RoleError: [entail] refused at load:transformers.config: Coverage declared Coverage(total=34, taken=34, left=()) (config: unsloth/gemma-2-2b-it config.json (every key it gives), declared); transformers.config uses Coverage(total=34, taken=33, left=('attn_implementation',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer differs from the declaration and no resolution is registered; note: read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (provenance of the tool that wrote the checkpoint); stops here"
+}

@@ -1,0 +1,57 @@
+{
+ "tag": "lora_other_strict",
+ "checkpoint": "waiIllustriousSDXL_v170.safetensors",
+ "node": null,
+ "lora": "nagito\\nagito_anima_e10.safetensors",
+ "entail": true,
+ "extra": {
+  "ENTAIL_ON_BROKEN": "stop"
+ },
+ "runs": [
+  {
+   "seed": 11,
+   "status": "error",
+   "error": "LoraLoaderModelOnly: [entail] refused at load:comfyui.lora: Coverage declared Coverage(total=280, taken=280, left=()) (file: nagito\\nagito_anima_e10.safetensors on the SDXL model (every module the LoRA carries weights for), declared); comfyui.lora_loader uses Coverage(total=280, taken=0, left=('lora_unet_blocks_0_cross_attn_k_proj', 'lora_unet_blocks_0_cross_attn_output_proj', 'lora_unet_blocks_0_cross_attn_q_proj', '"
+  },
+  {
+   "seed": 22,
+   "status": "error",
+   "error": "LoraLoaderModelOnly: [entail] refused at load:comfyui.lora: Coverage declared Coverage(total=280, taken=280, left=()) (file: nagito\\nagito_anima_e10.safetensors on the SDXL model (every module the LoRA carries weights for), declared); comfyui.lora_loader uses Coverage(total=280, taken=0, left=('lora_unet_blocks_0_cross_attn_k_proj', 'lora_unet_blocks_0_cross_attn_output_proj', 'lora_unet_blocks_0_cross_attn_q_proj', '"
+  },
+  {
+   "seed": 33,
+   "status": "error",
+   "error": "LoraLoaderModelOnly: [entail] refused at load:comfyui.lora: Coverage declared Coverage(total=280, taken=280, left=()) (file: nagito\\nagito_anima_e10.safetensors on the SDXL model (every module the LoRA carries weights for), declared); comfyui.lora_loader uses Coverage(total=280, taken=0, left=('lora_unet_blocks_0_cross_attn_k_proj', 'lora_unet_blocks_0_cross_attn_output_proj', 'lora_unet_blocks_0_cross_attn_q_proj', '"
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:comfyui.lora",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "note": "the LoRA's metadata says modelspec.architecture=anima-preview/lora",
+   "declared": "Coverage(total=280, taken=280, left=())",
+   "chosen": "Coverage(total=280, taken=0, left=('lora_unet_blocks_0_cross_attn_k_proj', 'lora_unet_blocks_0_cross_attn_output_proj', 'lora_unet_blocks_0_cross_attn_q_proj', 'lora_unet_blocks_0_cross_attn_v_proj', 'lora_unet_blocks_0_mlp_layer1', '... and 275 more'))"
+  },
+  {
+   "boundary": "load:comfyui.lora",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "note": "the LoRA's metadata says modelspec.architecture=anima-preview/lora",
+   "declared": "Coverage(total=280, taken=280, left=())",
+   "chosen": "Coverage(total=280, taken=0, left=('lora_unet_blocks_0_cross_attn_k_proj', 'lora_unet_blocks_0_cross_attn_output_proj', 'lora_unet_blocks_0_cross_attn_q_proj', 'lora_unet_blocks_0_cross_attn_v_proj', 'lora_unet_blocks_0_mlp_layer1', '... and 275 more'))"
+  },
+  {
+   "boundary": "load:comfyui.lora",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "note": "the LoRA's metadata says modelspec.architecture=anima-preview/lora",
+   "declared": "Coverage(total=280, taken=280, left=())",
+   "chosen": "Coverage(total=280, taken=0, left=('lora_unet_blocks_0_cross_attn_k_proj', 'lora_unet_blocks_0_cross_attn_output_proj', 'lora_unet_blocks_0_cross_attn_q_proj', 'lora_unet_blocks_0_cross_attn_v_proj', 'lora_unet_blocks_0_mlp_layer1', '... and 275 more'))"
+  }
+ ],
+ "when": "2026-09-24 10:27:16"
+}

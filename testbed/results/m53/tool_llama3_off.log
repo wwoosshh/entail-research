@@ -1,0 +1,102 @@
+(APIServer pid=2219) WARNING 09-24 01:38:41 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=2219) WARNING 09-24 01:38:41 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=2314) WARNING 09-24 01:38:48 [buffer_utils.py:47] Pinned memory is not available on this platform; falling back to device memory for UVA buffers.
+(EngineCore pid=2314) 
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+(EngineCore pid=2314) 
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:00<00:00,  2.43it/s]
+(EngineCore pid=2314) 
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:00<00:00,  2.66it/s]
+(EngineCore pid=2314) 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:00<00:00,  3.89it/s]
+(EngineCore pid=2314) 
+(EngineCore pid=2314) WARNING 09-24 01:38:53 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=2314) WARNING 09-24 01:38:53 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=2219) WARNING 09-24 01:38:53 [model.py:1772] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=2219) INFO:     Started server process [2219]
+(APIServer pid=2219) INFO:     Waiting for application startup.
+(APIServer pid=2219) INFO:     Application startup complete.
+(APIServer pid=2219) INFO:     127.0.0.1:54256 - "GET /health HTTP/1.1" 200 OK
+(APIServer pid=2219) INFO:     127.0.0.1:54268 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+(APIServer pid=2219) ERROR:    Exception in ASGI application
+(APIServer pid=2219) Traceback (most recent call last):
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+(APIServer pid=2219)     result = await app(  # type: ignore[func-returns-value]
+(APIServer pid=2219)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+(APIServer pid=2219)     return await self.app(scope, receive, send)
+(APIServer pid=2219)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/fastapi/applications.py", line 1159, in __call__
+(APIServer pid=2219)     await super().__call__(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+(APIServer pid=2219)     await self.middleware_stack(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+(APIServer pid=2219)     raise exc
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+(APIServer pid=2219)     await self.app(scope, receive, _send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/middleware/cors.py", line 88, in __call__
+(APIServer pid=2219)     await self.app(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/prometheus_fastapi_instrumentator/middleware.py", line 180, in __call__
+(APIServer pid=2219)     raise exc
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/prometheus_fastapi_instrumentator/middleware.py", line 178, in __call__
+(APIServer pid=2219)     await self.app(scope, receive, send_wrapper)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+(APIServer pid=2219)     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+(APIServer pid=2219)     raise exc
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+(APIServer pid=2219)     await app(scope, receive, sender)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+(APIServer pid=2219)     await self.app(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/routing.py", line 670, in __call__
+(APIServer pid=2219)     await self.middleware_stack(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/routing.py", line 690, in app
+(APIServer pid=2219)     await route.handle(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/routing.py", line 280, in handle
+(APIServer pid=2219)     await self.app(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+(APIServer pid=2219)     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+(APIServer pid=2219)     raise exc
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+(APIServer pid=2219)     await app(scope, receive, sender)
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+(APIServer pid=2219)     response = await f(request)
+(APIServer pid=2219)                ^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+(APIServer pid=2219)     raw_response = await run_endpoint_function(
+(APIServer pid=2219)                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+(APIServer pid=2219)     return await dependant.call(**values)
+(APIServer pid=2219)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/serve/utils/api_utils.py", line 90, in wrapper
+(APIServer pid=2219)     return handler_task.result()
+(APIServer pid=2219)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/serve/utils/api_utils.py", line 111, in wrapper
+(APIServer pid=2219)     return await func(*args, **kwargs)
+(APIServer pid=2219)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/openai/chat_completion/api_router.py", line 62, in create_chat_completion
+(APIServer pid=2219)     generator = await handler.create_chat_completion(request, raw_request)
+(APIServer pid=2219)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/openai/chat_completion/serving.py", line 254, in create_chat_completion
+(APIServer pid=2219)     return await self._with_kv_transfer_rejection_cleanup(
+(APIServer pid=2219)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/generate/base/serving.py", line 300, in _with_kv_transfer_rejection_cleanup
+(APIServer pid=2219)     return await awaitable
+(APIServer pid=2219)            ^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/openai/chat_completion/serving.py", line 269, in _create_chat_completion
+(APIServer pid=2219)     parser = self.parser_cls(
+(APIServer pid=2219)              ^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/parser/abstract_parser.py", line 128, in __init__
+(APIServer pid=2219)     self._tool_parser = self.__class__.tool_parser_cls(tokenizer, tools)
+(APIServer pid=2219)                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=2219)   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/tool_parsers/llama_tool_parser.py", line 72, in __init__
+(APIServer pid=2219)     raise RuntimeError(
+(APIServer pid=2219) RuntimeError: Llama3JsonToolParser could not locate the bot token '<|python_tag|>' in the tokenizer.
+(APIServer pid=2219) WARNING 09-24 01:38:54 [utils.py:652] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=2219) WARNING 09-24 01:38:54 [utils.py:657] [shutdown] Process manager: force killing remaining process EngineCore pid 2314
+(APIServer pid=2219) INFO:     Shutting down
+(APIServer pid=2219) INFO:     Waiting for application shutdown.
+(APIServer pid=2219) INFO:     Application shutdown complete.
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

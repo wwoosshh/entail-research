@@ -1,0 +1,150 @@
+{
+ "when": "2026-09-24 00:25:49",
+ "model": "/home/<user>/models/Qwen3-4B",
+ "new_tokens": 64,
+ "torch": "2.14.0+cu130",
+ "transformers": "5.17.0",
+ "dynamic": {
+  "cache": "dynamic",
+  "pairs": 8,
+  "seconds": {
+   "off": [
+    2.212,
+    2.183,
+    2.143,
+    2.155,
+    2.357,
+    2.303,
+    2.364,
+    2.23
+   ],
+   "load": [
+    2.286,
+    2.192,
+    2.225,
+    2.4,
+    2.25,
+    2.372,
+    2.279,
+    2.258
+   ],
+   "off_control": [
+    2.109,
+    2.197,
+    2.34,
+    2.184,
+    2.185,
+    2.342,
+    2.26,
+    2.434
+   ]
+  },
+  "median": {
+   "off": 2.23,
+   "load": 2.279,
+   "off_control": 2.26
+  },
+  "multiplier": 1.022,
+  "control_multiplier": 1.013,
+  "same_output": true,
+  "ledger_entries": 0,
+  "update_boundary": {
+   "checks": 18432,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "passed": {
+    "kv_needed": 18432,
+    "kv_layers": 18432,
+    "kv_shrank": 18144
+   }
+  },
+  "after_request": {
+   "checks": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "passed": {}
+  }
+ },
+ "static": {
+  "cache": "static",
+  "pairs": 8,
+  "seconds": {
+   "off": [
+    1.302,
+    1.303,
+    1.329,
+    1.309,
+    1.33,
+    1.409,
+    1.315,
+    1.4
+   ],
+   "load": [
+    1.35,
+    1.419,
+    1.384,
+    1.414,
+    1.327,
+    1.412,
+    1.317,
+    1.44
+   ],
+   "off_control": [
+    1.422,
+    1.317,
+    1.416,
+    1.315,
+    1.364,
+    1.326,
+    1.376,
+    1.317
+   ]
+  },
+  "median": {
+   "off": 1.329,
+   "load": 1.412,
+   "off_control": 1.364
+  },
+  "multiplier": 1.063,
+  "control_multiplier": 1.027,
+  "same_output": true,
+  "ledger_entries": 0,
+  "check_cache_layers": 36,
+  "flushed_on_device": 288,
+  "update_boundary": {
+   "checks": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 288,
+   "passed": {
+    "kv_needed": 1
+   }
+  },
+  "after_request": {
+   "checks": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "passed": {
+    "kv_request": 1
+   }
+  }
+ },
+ "seeded_off": {
+  "finished": true,
+  "tokens": [
+   13,
+   576,
+   6722,
+   315,
+   9625,
+   374
+  ]
+ },
+ "seeded_on": {
+  "refused": true,
+  "error": "[entail] refused at container:transformers.cache_update: KvExtent declared KvExtent(held=8, needed=None, written=None, window=None, previous=None, granularity=None) (engine: transformers DynamicCache layer 0: what it held at the last check, with what was added since, verified); transformers.kv_cache uses KvExtent(held=7, needed=7, written=None, window=None, previous=8, granularity=None) (engine: transformers DynamicCache layer 0: what it holds now, verified); rule: the slots held shrank since the last check, and nothing said so; note: transformers DynamicCache layer 0: was 8 slots when last ch"
+ }
+}

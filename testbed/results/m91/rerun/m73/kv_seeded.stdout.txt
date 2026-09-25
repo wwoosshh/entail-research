@@ -1,0 +1,7 @@
+[entail] broken at container:transformers.cache_update: KvExtent declared KvExtent(held=59, needed=None, written=None, window=None, previous=None, granularity=None) (engine: transformers DynamicCache layer 0: what it held at the last check, with what was added since, verified); transformers.kv_cache uses KvExtent(held=58, needed=58, written=None, window=None, previous=59, granularity=None) (engine: transformers DynamicCache layer 0: what it holds now, verified); rule: the slots held shrank since the last check, and nothing said so; note: transformers DynamicCache layer 0: was 59 slots when last checked, 58 now. Something dropped 1 token(s) in between and said nothing.; reported, not stopped
+[entail] where: meaning broke at container:transformers.cache_update
+[entail]   suspect: meaning broke at container:transformers.cache_update: KvExtent: the slots held shrank since the last check, and nothing said so
+
+--- stderr ---
+W0924 17:50:18.149000 5293 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 17:50:18.171000 5293 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.

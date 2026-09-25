@@ -1,0 +1,37 @@
+W0924 17:53:13.777000 6024 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 17:53:13.802000 6024 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/254 [00:00<01:36,  2.63it/s]
+Loading weights:   4%|▍         | 10/254 [00:00<00:09, 26.47it/s]
+Loading weights:   9%|▊         | 22/254 [00:00<00:04, 51.95it/s]
+Loading weights:  13%|█▎        | 32/254 [00:00<00:03, 65.26it/s]
+Loading weights:  18%|█▊        | 46/254 [00:00<00:02, 85.28it/s]
+Loading weights:  23%|██▎       | 58/254 [00:00<00:02, 86.01it/s]
+Loading weights:  29%|██▊       | 73/254 [00:01<00:01, 102.97it/s]
+Loading weights:  33%|███▎      | 85/254 [00:01<00:01, 103.91it/s]
+Loading weights:  38%|███▊      | 97/254 [00:01<00:01, 102.53it/s]
+Loading weights:  43%|████▎     | 110/254 [00:01<00:01, 107.38it/s]
+Loading weights:  48%|████▊     | 122/254 [00:01<00:01, 107.65it/s]
+Loading weights:  53%|█████▎    | 135/254 [00:01<00:01, 112.01it/s]
+Loading weights:  58%|█████▊    | 147/254 [00:01<00:01, 104.85it/s]
+Loading weights:  62%|██████▏   | 158/254 [00:01<00:00, 103.04it/s]
+Loading weights:  67%|██████▋   | 171/254 [00:01<00:00, 108.04it/s]
+Loading weights:  73%|███████▎  | 185/254 [00:02<00:00, 112.28it/s]
+Loading weights:  80%|███████▉  | 203/254 [00:02<00:00, 124.99it/s]
+Loading weights:  85%|████████▌ | 216/254 [00:02<00:00, 122.36it/s]
+Loading weights:  91%|█████████ | 230/254 [00:02<00:00, 125.12it/s]
+Loading weights:  96%|█████████▌| 243/254 [00:02<00:00, 110.15it/s]
+Loading weights: 100%|██████████| 254/254 [00:02<00:00, 97.99it/s] 
+[transformers] Both `max_new_tokens` (=8) and `max_length`(=131072) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+llama {'attention': {'calls': 224, 'max': 0.0070921985815602835, 'prompt_pass_max': 0.0070921985815602835, 'first': 0.004424778761061947}, 'mlp': {'calls': 224, 'max': 0.016276041666666668, 'prompt_pass_max': 0.01, 'first': 0.0055248618784530384}, 'rmsnorm': {'calls': 456, 'max': 0.0078125, 'prompt_pass_max': 0.006802721088435374, 'first': 0.0037593984962406013}}
+qwen3 {'attention': {'calls': 288, 'max': 0.007407407407407408, 'prompt_pass_max': 0.005988023952095809, 'first': 0.0010080645161290322}, 'mlp': {'calls': 288, 'max': 0.0102880658436214, 'prompt_pass_max': 0.0072992700729927005, 'first': 0.004219409282700422}, 'rmsnorm': {'calls': 1160, 'max': 0.0078125, 'prompt_pass_max': 0.0078125, 'first': 0.005494505494505495}}
+1.01 {'max': 0.03980099502487562, 'prompt_pass_max': 0.010362694300518135, 'first': 0.004032258064516129} True
+1.02 {'max': 0.07317073170731707, 'prompt_pass_max': 0.01893939393939394, 'first': 0.006048387096774193} True
+1.05 {'max': 0.168141592920354, 'prompt_pass_max': 0.04568527918781726, 'first': 0.014112903225806451} True
+1.1 {'max': 0.28482142857142856, 'prompt_pass_max': 0.09149484536082474, 'first': 0.02620967741935484} True
+1.15 {'max': 0.32407407407407407, 'prompt_pass_max': 0.13471502590673576, 'first': 0.04032258064516129} True
+1.3 {'max': 0.5301932367149759, 'prompt_pass_max': 0.26085526315789476, 'first': 0.07862903225806452} True
+GELU for SiLU {'max': 2.8055555555555554, 'prompt_pass_max': 0.8128834355828221, 'first': 0.05063291139240506} True
+SiLU of a 5% larger input {'max': 0.22488038277511962, 'prompt_pass_max': 0.10112359550561797, 'first': 0.05063291139240506} True
+wrote <workspace>/testbed/results/m91/rerun/m73/tolerance.json

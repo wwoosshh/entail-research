@@ -1,0 +1,8 @@
+[entail] broken at load:transformers.config: Coverage declared Coverage(total=30, taken=30, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=30, taken=29, left=('transformers.js_config',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer differs from the declaration and no resolution is registered; reported, not stopped
+[entail] broken at load:transformers.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=31, taken=30, left=('transformers.js_config',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: the consumer differs from the declaration and no resolution is registered; reported, not stopped
+W0924 22:55:55.717000 33127 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 22:55:55.744000 33127 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/272 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 272/272 [00:00<00:00, 3902.83it/s]
+RESULT transformers HuggingFaceTB__SmolLM2-135M-Instruct entail=load ok=True load=0.84 used=sdpa 

@@ -1,0 +1,38 @@
+{
+ "tag": "bug_off",
+ "env": {
+  "ENTAIL": "off",
+  "ENTAIL_SEED": "drop_effort"
+ },
+ "declared": "Template(chat_template_sha256='09498b1e816c1e6eade7528b7db37d2ac798e6fdd2b40bae68305424b2224647', reasoning_history='keep', tool_call_format='hermes')",
+ "when": "2026-09-24 03:18:00",
+ "started": true,
+ "requests": {
+  "plain": {
+   "case": "no effort set",
+   "status": 200,
+   "prompt_tokens": 21,
+   "content": "Paris."
+  },
+  "effort_high": {
+   "case": "L07",
+   "status": 200,
+   "prompt_tokens": 17,
+   "content": ""
+  },
+  "history_kept": {
+   "case": "L13 reference",
+   "status": 200,
+   "prompt_tokens": 67,
+   "content": "6"
+  },
+  "history_dropped": {
+   "case": "L13",
+   "status": 200,
+   "prompt_tokens": 48,
+   "content": "6"
+  }
+ },
+ "decisions": [],
+ "summaries": {}
+}
