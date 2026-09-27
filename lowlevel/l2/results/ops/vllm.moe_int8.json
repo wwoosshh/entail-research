@@ -1,0 +1,277 @@
+{
+ "name": "vllm.moe_int8",
+ "about": "fused_experts, INT8 W8A8, static activation scales, per-channel weight scales (vLLM 0.30.0); vllm#58532's operator",
+ "tol": 0.05,
+ "forms": [
+  {}
+ ],
+ "checks": {
+  "definition": {
+   "status": "fail",
+   "rel": 0.9670199714827139
+  },
+  "layout": {
+   "status": "fail",
+   "rows": [
+    {
+     "input": "x",
+     "status": "refused",
+     "error": "AssertionError: Hidden_states must be contiguous"
+    },
+    {
+     "input": "w1",
+     "status": "refused",
+     "error": "AssertionError: Stride of last dimension must be 1"
+    },
+    {
+     "input": "w2",
+     "status": "refused",
+     "error": "AssertionError: Stride of last dimension must be 1"
+    },
+    {
+     "input": "w1_scale",
+     "status": "fail",
+     "rel": 0.6733929736579296
+    },
+    {
+     "input": "w2_scale",
+     "status": "fail",
+     "rel": 0.6732213295121372
+    },
+    {
+     "input": "topk_w",
+     "status": "refused",
+     "error": "AssertionError: "
+    },
+    {
+     "input": "topk_ids",
+     "status": "fail",
+     "rel": 0.6870264758466408
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.6326846286806342,
+     "op_moved": 0.8011479400292283
+    },
+    {
+     "input": "x",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.6338532841466674,
+     "op_moved": 0.8852869659835976
+    },
+    {
+     "input": "w1",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 1.4588366934267079,
+     "op_moved": 1.4238695269102308
+    },
+    {
+     "input": "w1",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 1.4303060600921231,
+     "op_moved": 1.4561548554985013
+    },
+    {
+     "input": "w2",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 1.369665897457059,
+     "op_moved": 1.537247043017746
+    },
+    {
+     "input": "w2",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 1.4986937953489499,
+     "op_moved": 1.3050388914085174
+    },
+    {
+     "input": "w1_scale",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.6636612392096451,
+     "op_moved": 0.9845554965329392
+    },
+    {
+     "input": "w1_scale",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.6018124727095715,
+     "op_moved": 0.9650803463081546
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "x",
+    "w1_scale",
+    "w2_scale",
+    "a1_scale",
+    "a2_scale",
+    "topk_w"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "x",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "w1_scale",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "w1_scale",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "w2_scale",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "w2_scale",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "a1_scale",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "a1_scale",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "a2_scale",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "a2_scale",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "topk_w",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "topk_w",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "definition_nonfinite": 0.125
+    },
+    {
+     "input": "w1_scale",
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "definition_nonfinite": 0.375
+    },
+    {
+     "input": "w2_scale",
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "definition_nonfinite": 0.005859375
+    },
+    {
+     "input": "a1_scale",
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "definition_nonfinite": 1.0
+    },
+    {
+     "input": "a2_scale",
+     "status": "pass",
+     "op_nonfinite": 1.0,
+     "definition_nonfinite": 1.0
+    },
+    {
+     "input": "topk_w",
+     "status": "pass",
+     "op_nonfinite": 0.125,
+     "definition_nonfinite": 0.125
+    }
+   ]
+  }
+ },
+ "seconds": 0.3
+}

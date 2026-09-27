@@ -1,0 +1,44 @@
+
+Multi-thread loading shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00, 370.95it/s]
+[rank0]:[W927 18:36:23.793107995 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 2298478592 bytes (free: 0, total: 12878086144).
+[rank0]:[W927 18:36:24.773414014 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 2298478592 bytes (free: 0, total: 12878086144).
+[2026-09-27 18:36:24] Scheduler hit an exception: Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5857, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1893, in run_event_loop
+    dispatch_event_loop(self)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5703, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1960, in event_loop_overlap
+    self.ingest_requests()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 2082, in ingest_requests
+    self.process_input_requests(recv_reqs)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/observability/scheduler_stage_metrics.py", line 155, in wrapper
+    return profiled_func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 2108, in process_input_requests
+    output = self._request_dispatcher(recv_req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/utils.py", line 636, in __call__
+    return fn(obj)
+           ^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler_components/flush_wrapper.py", line 33, in handle
+    return FlushCacheReqOutput(success=self._flush_cache())
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 4988, in flush_cache
+    self.token_to_kv_pool_allocator.clear()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/mem_cache/allocator/token.py", line 44, in clear
+    self.free_pages = torch.arange(
+                      ^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.14 GiB. GPU 0 has a total capacity of 11.99 GiB of which 0 bytes is free. Including non-PyTorch memory, this process has 17179869184.00 GiB memory in use. Of the allocated memory 24.12 GiB is allocated by PyTorch, and 26.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+[2026-09-27 18:36:24] SIGQUIT received. signum=None, frame=None. It usually means one child failed.
+[rank0]:[W927 18:36:27.058914016 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[2026-09-27 18:36:29] No live scheduler processes found; skipping py-spy and CUDA coredump.

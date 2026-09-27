@@ -1,0 +1,134 @@
+{
+ "name": "vllm.rms_norm",
+ "about": "control: RMSNorm custom op (vLLM 0.30.0)",
+ "tol": 0.02,
+ "forms": [
+  {}
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 0.00165609062671025
+  },
+  "layout": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "input": "w",
+     "status": "refused",
+     "error": "RuntimeError: rms_norm, /workspace/csrc/libtorch_stable/layernorm_kernels.cu:231, "
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "w",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.35702588933371315,
+     "op_moved": 0.3569863758258692
+    },
+    {
+     "input": "w",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.34992637461496695,
+     "op_moved": 0.3499475403944171
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "x",
+    "w"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016519500849001354
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.001671824242149143
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016672011508273284
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016560685477481202
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.001656219418056023
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "x",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "w",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "w",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "status": "pass",
+     "op_nonfinite": 0.015625,
+     "definition_nonfinite": 0.015625
+    },
+    {
+     "input": "w",
+     "status": "pass",
+     "op_nonfinite": 0.0009765625,
+     "definition_nonfinite": 0.0009765625
+    }
+   ]
+  }
+ },
+ "seconds": 0.3
+}

@@ -1,0 +1,50 @@
+{
+ "rank": 260,
+ "id": "ornith-ai/Ornith-1.5-35B-A3B-MLX",
+ "model_type": "qwen3_5_moe",
+ "files": [
+  "tokenizer.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 20066834,
+ "mistral_files": [],
+ "rows": {
+  "n": 248320,
+  "where": "language_model.model.embed_tokens.weight [248320, 2048] in model-00001-of-00014.safetensors (header only)",
+  "config_vocab_size": 248320
+ },
+ "sources": {
+  "candidates": [
+   [
+    248044,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 248320,
+  "rows_where": "language_model.model.embed_tokens.weight [248320, 2048] in model-00001-of-00014.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "Qwen2Tokenizer",
+  "vocab_size": 248044,
+  "reach": 248077
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=10000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": [
+   "<workspace>/testbed/results/m10/e1_llm/configs/ornith-ai__Ornith-1.5-35B-A3B-MLX/config.json#text_config.rope_parameters: RoPE keys ['mrope_interleaved', 'mrope_section', 'partial_rotary_factor'] are not in vocabulary v6; the Rotary fact does not carry them"
+  ]
+ },
+ "other_problems": [],
+ "seconds": 5.6
+}

@@ -1,0 +1,57 @@
+{
+ "vl58406": {
+  "issue": 58406,
+  "verdict": "missed",
+  "note": "reproduced on vLLM 0.30.0 with the report's snippet (merge_mm_processor_kwargs then overlay_modality_mm_kwargs: the effective video settings are fps None and size {'shortest_edge': 200} instead of fps 2 and {'shortest_edge': 200, 'longest_edge': 1800}); entail on: no decision (no site at the processor-kwargs merge; the snippet is config-level)"
+ },
+ "vl57353": {
+  "issue": 57353,
+  "verdict": "unknown_only",
+  "note": "reproduced on vLLM 0.30.0 through the server's route (ParserManager.get_parser for kimi_k3, a stand-in tokenizer with the K3 markers): streamed as reasoning (127 characters, no content), the whole-text parse returns it as content (reasoning None); entail on: unknown at request:vllm.parser, the expected site - the parse contract saw the difference ('streamed as reasoning what the whole parse calls content') but, by its rule, does not hold a difference against the parser when the output ended inside its reasoning block (vLLM documents that the two paths differ on unfinished output)"
+ },
+ "df14213": {
+  "issue": 14213,
+  "verdict": "missed",
+  "note": "reproduced on diffusers 0.40.0 with the report's snippet (EulerAncestral step: 192 NaN; KDPM2Ancestral timesteps non-finite; the linear control finite); entail on: no decision (schedulers are not a site)"
+ },
+ "tf48051": {
+  "issue": 48051,
+  "verdict": "missed",
+  "note": "not reproduced on transformers 5.17.0 (shape (2, 3, 1, 1): fixed there); reproduced on 5.12.1 (venv tf5121: shape (2, 2, 1, 1), alpha-blended wrong values); entail on (5.12.1): no decision (video_utils is not a site)",
+  "run": "tf48051_5121"
+ },
+ "tf47328": {
+  "issue": 47328,
+  "verdict": "missed",
+  "note": "reproduced on transformers 5.12.1 with the library's own DiT rotary and the apply function DiTAttention calls (spread of <R_m q, R_m+5 k> over m: 9.9; 4.5e-6 on 5.17.0, the fixed control); entail on (5.12.1): no decision (the rotary pairing contract is a vLLM-side rule; nothing reads the DiT's rotate convention in transformers)",
+  "run": "tf47328_5121"
+ },
+ "tf49066": {
+  "issue": 49066,
+  "verdict": "missed",
+  "note": "reproduced on transformers 5.17.0 with the report's script (Hindi text: the published tokenizer.json gives 6 ids, the loaded Qwen2Tokenizer 10); entail on: the expected site was checked and passed - the tokenizer contract ran the declared tokenizer.json against the built tokenizer on its ten fixed probe texts ('10 probe texts encode alike; 33 declared added tokens match'), none of which holds a combining mark (\\p{M}), the characters whose pre-tokenization differs; plus an unknown for unread config keys"
+ },
+ "tf45491": {
+  "issue": 45491,
+  "verdict": "not_reproduced",
+  "note": "the reported model (google/embeddinggemma-300m) is gated on the Hub (manual license acceptance); the case's download returned 401, so nothing was run; the case script is ready for an account with access"
+ },
+ "vl49250": {
+  "issue": 49250,
+  "verdict": "missed",
+  "note": "reproduced on vLLM 0.30.0 with the report's connector and model (facebook/opt-125m, eager, no prefix caching): the baseline answers ' Rome.', reject-then-recompute gives ' capital of Spain is Madrid.' under sync scheduling and another continuation under async; entail on: unknowns at the config's unread keys, the tokenizer (no tokenizer.json to run) and the chat template, passes at kernel launches and the loader - nothing at the connector's recompute path, the expected site"
+ },
+ "vl43602": {
+  "issue": 43602,
+  "verdict": "missed",
+  "run": "vl43602_0220",
+  "note": "reproduced on vLLM 0.22.0 (the pre-fix _get_deepstack_input_embeds is there; the fix #43617 is not in the 0.22.0 tag) at the mechanism level, with the fixed 0.30.0 as the control: under the default compiled path the image prompts' first-token distributions move from the eager path's by 0.75-3.74 nats over the shared top-5 tokens (0.13-0.25 on 0.30.0, bf16 noise) and one description is wrong ('a blue square with a white border and a white rectangle inside it' against eager's and 0.30.0's 'a solid blue square centered on a white background'). The case's own first criterion (image answers differ, text-only answers equal) was not met: one text-only prompt flips between the paths on both versions (a near tie), so the control on the fixed version was used after the run - disclosed; without it the case would be not_reproduced. The report's Geo3K score was not rerun. entail on: 26 unknowns at kernel:vllm.custom_op ('custom ops enabled under torch.compile'), nothing at the compiled graph's deepstack inputs, the expected site. The first attempt at gpu_memory_utilization 0.6 did not start the compiled engine (KV cache short after the CUDA-graph reservation) on either side; the case was rerun at 0.8, same settings for both paths",
+  "reproduced": true
+ },
+ "vl43962": {
+  "issue": 43962,
+  "verdict": "not_reproduced",
+  "run": "vl43962_0210",
+  "note": "not reproduced on vLLM 0.30.0 nor on the reported 0.21.0 (new venv vllm0210): on this card the default (FlashAttention) and the Triton-attention paths give the same answer, '512' (the report: 1024 default, 81 Triton on L40S); the backends do not diverge here. entail on 0.21.0: the scoring adapter could not install (circular import) - recorded, as the protocol asks"
+ }
+}

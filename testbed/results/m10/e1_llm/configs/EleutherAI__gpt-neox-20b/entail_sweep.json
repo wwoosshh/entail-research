@@ -1,0 +1,53 @@
+{
+ "rank": 154,
+ "id": "EleutherAI/gpt-neox-20b",
+ "model_type": "gpt_neox",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 3708154,
+ "mistral_files": [],
+ "rows": {
+  "n": null,
+  "where": "no embedding tensor found in the headers",
+  "config_vocab_size": 50432
+ },
+ "sources": {
+  "candidates": [
+   [
+    50254,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    50277,
+    "vocab.json"
+   ]
+  ],
+  "rows": 50432,
+  "rows_where": "config.json vocab_size",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GPTNeoXTokenizer",
+  "vocab_size": 50254,
+  "reach": 50277
+ },
+ "vocab": [
+  {
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "note": "the folder declares tokenizer.json (model.vocab) = 50254, vocab.json = 50277; the engine's tokenizer holds 50254, which is none of them, and the model's vocabulary (50432) picks none"
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 2.3
+}

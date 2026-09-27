@@ -1,0 +1,46 @@
+{
+ "case": "gdn_inner2_graph",
+ "target": "sglang.kernels.ops.attention.fla.fused_gdn_gating:fused_gdn_gating",
+ "wrapped": true,
+ "first_call_ms": 0.20643600001335471,
+ "rel_err": {
+  "first": [
+   1.4750234709847068e-07,
+   7.81635874917695e-08
+  ],
+  "later": [
+   1.4750234709847068e-07,
+   7.81635874917695e-08
+  ],
+  "kernel": [
+   0.9370450125396269,
+   0.9067640204247256
+  ]
+ },
+ "later_equals_kernel": false,
+ "ms": {
+  "kernel": 0.04135400000393474,
+  "wrapped_after_decision": 0.1394559999852163
+ },
+ "decisions": [
+  {
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "fused_gdn_gating sent to entail's definition from this call on, for every later call in the process",
+   "note": "fused_gdn_gating (sglang.kernels.ops.attention.fla.fused_gdn_gating:fused_gdn_gating) on a probe of 256 rows made from the engine's warm-up call of 256 rows (its shapes, dtypes and strides; the token values made up, seed 20260927), before any graph of that size is captured, against entail's definition (g = -exp(A_log) * softplus(a + dt_bias), beta = sigmoid(b)): max |kernel - definition| 22.7 over 16384 values; the definition's own noise 0.127 (typical 0.013); scale 25.6; 13658 values beyond FACTOR 8 x noise + 4 ulp (float32, float32); worst ratio to the allowance 218; worst value at output 0 index 7162: kernel -2.933, definition -25.62, reference -25.61, allowed 0.104"
+  }
+ ],
+ "stats": {
+  "instrumented": 1,
+  "sent_to_definition": 1,
+  "warm_decided": 1,
+  "definition_calls": 24,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 1,
+  "passed": {}
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "rank": 63,
+ "id": "apple/OpenELM-1_1B-Instruct",
+ "model_type": "openelm",
+ "files": [],
+ "bytes": 0,
+ "mistral_files": [],
+ "rows": {
+  "n": 32000,
+  "where": "transformer.token_embeddings.weight [32000, 2048] in model.safetensors (header only)",
+  "config_vocab_size": 32000
+ },
+ "sources": {
+  "candidates": [],
+  "rows": 32000,
+  "rows_where": "transformer.token_embeddings.weight [32000, 2048] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "error": "ValueError: Couldn't instantiate the backend tokenizer from one of: \n(1) a `tokenizers` library serialization file, \n(2) a slow toke"
+ },
+ "vocab": [
+  {
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "note": "no tokenizer built: the tokenizer's size was not read"
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 1.5
+}

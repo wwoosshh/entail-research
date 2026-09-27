@@ -1,0 +1,9 @@
+W0927 23:21:27.839000 17442 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0927 23:21:27.861000 17442 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:  23%|██▎       | 92/398 [00:00<00:00, 893.72it/s]
+Loading weights:  46%|████▌     | 182/398 [00:00<00:00, 659.98it/s]
+Loading weights:  63%|██████▎   | 252/398 [00:00<00:00, 407.45it/s]
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 729.39it/s]
+RESULT {"engine": "hf", "model": "/home/<user>/models/m10/Qwen__Qwen3-4B-Instruct-2507", "dtype": "bfloat16", "device": "cuda", "layers": "model.layers: 36 x ['Qwen3DecoderLayer']", "probes": {"story_a": {"tokens": 207, "layers": 36}, "story_b": {"tokens": 204, "layers": 36}, "code": {"tokens": 95, "layers": 36}, "numbers": {"tokens": 69, "layers": 36}, "repeat": {"tokens": 53, "layers": 36}, "short": {"t

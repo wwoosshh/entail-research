@@ -1,0 +1,14 @@
+{
+ "https://github.com/sgl-project/sglang/issues/13431": {"decision": "not_output", "reason": "HiCache transfer raises a dimension mismatch (scheduler exception)"},
+ "https://github.com/sgl-project/sglang/issues/11574": {"decision": "not_output", "reason": "a log line shows default sampling params with top_k 50; no wrong output shown (GLM-4.5-Air-FP8, TP4)"},
+ "https://github.com/vllm-project/vllm/issues/34519": {"decision": "not_output", "reason": "feature request (process name)"},
+ "https://github.com/sgl-project/sglang/issues/11696": {"decision": "cannot_run", "reason": "Ascend NPU attention backend"},
+ "https://github.com/vllm-project/vllm/issues/33748": {"decision": "not_output", "reason": "Docker image tags"},
+ "https://github.com/sgl-project/sglang/issues/16691": {"decision": "cannot_run", "reason": "Qwen3-Coder-30B-A3B with piecewise CUDA graphs and TP"},
+ "https://github.com/sgl-project/sglang/issues/20051": {"decision": "cannot_run", "reason": "Qwen3-Coder-Next (80B) on CPU with TP4"},
+ "https://github.com/vllm-project/vllm/issues/28669": {"decision": "not_output", "reason": "installation (CUDA library mismatch on ARM64)"},
+ "https://github.com/sgl-project/sglang/issues/18690": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"},
+ "https://github.com/huggingface/transformers/issues/42418": {"decision": "not_output", "reason": "a user subclass's own new parameter is re-initialised by post_init at load; parameter values, not a model output (maintainers: by design, override _init_weights)"},
+ "https://github.com/vllm-project/vllm/issues/34532": {"decision": "not_output", "reason": "Realtime API server crash on an unexpected disconnect"},
+ "https://github.com/vllm-project/vllm/issues/32898": {"decision": "cannot_run", "reason": "prefill/decode disaggregation (1P1D) across instances"}
+}

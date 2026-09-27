@@ -1,0 +1,46 @@
+{
+ "case": "gdn_rows",
+ "target": "sglang.kernels.ops.attention.fla.fused_gdn_gating:fused_gdn_gating",
+ "wrapped": true,
+ "first_call_ms": 455.5105620000006,
+ "rel_err": {
+  "first": [
+   9.766593447384874e-08,
+   0.0019983206475899153
+  ],
+  "later": [
+   9.766593447384874e-08,
+   0.0019983206475899153
+  ],
+  "kernel": [
+   9.766593447384874e-08,
+   0.0019983206475899153
+  ]
+ },
+ "later_equals_kernel": true,
+ "ms": {
+  "kernel": 0.039164499995081314,
+  "wrapped_after_decision": 0.03713150000805854
+ },
+ "decisions": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "note": "fused_gdn_gating (sglang.kernels.ops.attention.fla.fused_gdn_gating:fused_gdn_gating) on 64 of 256 rows of its first real call, against entail's definition (g = -exp(A_log) * softplus(a + dt_bias), beta = sigmoid(b)): max |kernel - definition| 0.00195 over 4096 values; the definition's own noise 0.161 (typical 0.0127); scale 27.8; 0 values beyond FACTOR 8 x noise + 4 ulp (float32, float32); worst ratio to the allowance 0.125; worst value at output 1 index 0: kernel 0.9258, definition 0.9258, reference 0.9274, allowed 0.0127"
+  }
+ ],
+ "stats": {
+  "instrumented": 1,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ }
+}

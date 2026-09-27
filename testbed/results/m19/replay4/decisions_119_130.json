@@ -1,0 +1,18 @@
+{
+ "https://github.com/vllm-project/vllm/issues/31918": {"decision": "cannot_run", "reason": "DeepSeek-R1 NVFP4 with DP4 + EP (DeepEP LL, CuteDSL)"},
+ "https://github.com/vllm-project/vllm/issues/28604": {"decision": "cannot_run", "reason": "Llama-4-Scout-17B-16E FP8 on B200"},
+ "https://github.com/sgl-project/sglang/issues/19164": {"decision": "not_output", "reason": "feature request (diffusion evaluation suite)"},
+ "https://github.com/sgl-project/sglang/issues/20388": {"decision": "not_output", "reason": "CI flake: page size mismatch error from a stale bootstrap server"},
+ "https://github.com/vllm-project/vllm/issues/27491": {"decision": "pass", "reason": "NaN log-probabilities from an MLA model under chunked prefill; server command (bzantium/tiny-deepseek-v3, long-prefill-token-threshold 128), request and failure given (merge_attn_states merges a chunk whose query rows have no keys: output 0, LSE -inf, then NaN)",
+   "version": "not stated (Oct 2025, vLLM ~0.11); closed as stale -> 0.30.0 first, else 0.11.0", "model": "bzantium/tiny-deepseek-v3",
+   "expected_boundary": "kernel:vllm.mla.merge_attn_states (partial attention of a context chunk with no valid keys for some query rows: LSE -inf and output 0 merged into NaN)"},
+ "https://github.com/vllm-project/vllm/issues/34892": {"decision": "cannot_run", "reason": "Qwen3.5 FP8 MoE with the FlashInfer CUTLASS MoE backend on H200 (large MoE)"},
+ "https://github.com/vllm-project/vllm/issues/25800": {"decision": "pass", "reason": "with kv_cache_dtype='fp8', waking from sleep(level=2) gives gibberish (level 1 fine); script (Qwen3-0.6B, vLLM's own cumem test with fp8 KV), expected (the same text before and after) and actual given",
+   "version": "vLLM 0.10.2 reported (fixed by #28783) -> 0.10.2 in a new venv", "model": "Qwen/Qwen3-0.6B",
+   "expected_boundary": "container:vllm.kv_cache (the FP8 KV cache's scales are not restored when the cache is re-allocated at wake-up: the cache keeps its dtype but loses its scale)"},
+ "https://github.com/huggingface/transformers/issues/42199": {"decision": "not_output", "reason": "a training loss-dict metric (cardinality error) for DETR variants, not a model output"},
+ "https://github.com/vllm-project/vllm/issues/31864": {"decision": "cannot_run", "reason": "vLLM CPU backend with DP2 (CPU build, two data-parallel ranks)"},
+ "https://github.com/vllm-project/vllm/issues/30939": {"decision": "cannot_run", "reason": "Qwen3-32B (bf16) on 4 x H20"},
+ "https://github.com/huggingface/transformers/issues/43082": {"decision": "no_repro_info", "reason": "chunked prefill sets position_ids to the chunk ('any eval with prefill_chunk_size'); no model, input, or expected/actual outputs"},
+ "https://github.com/huggingface/transformers/issues/43347": {"decision": "not_output", "reason": "dead validation code in the ESM config"}
+}

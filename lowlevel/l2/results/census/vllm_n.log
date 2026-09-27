@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<workspace>/lowlevel/l2/vllm_worker.py", line 159, in <module>
+    main()
+  File "<workspace>/lowlevel/l2/vllm_worker.py", line 79, in main
+    llm = LLM(**kw)
+          ^^^^^^^^^
+  File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 298, in __init__
+    engine_args = EngineArgs(
+                  ^^^^^^^^^^^
+  File "<string>", line 246, in __init__
+  File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/engine/arg_utils.py", line 847, in __post_init__
+    self.model = get_model_path(self.model, self.revision)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/transformers_utils/repo_utils.py", line 294, in get_model_path
+    return hf_api().snapshot_download(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 87, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 135, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/home/<user>/models/m10/n'. Use `repo_type` argument if needed.

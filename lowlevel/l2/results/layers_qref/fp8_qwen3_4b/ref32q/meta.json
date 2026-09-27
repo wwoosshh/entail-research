@@ -1,0 +1,42 @@
+{
+ "engine": "hf",
+ "model": "/home/<user>/models/Qwen3-4B-FP8",
+ "dtype": "float32",
+ "device": "cpu",
+ "layers": "model.layers: 36 x ['Qwen3DecoderLayer']",
+ "probes": {
+  "story_a": {
+   "tokens": 207,
+   "layers": 36
+  },
+  "story_b": {
+   "tokens": 204,
+   "layers": 36
+  },
+  "code": {
+   "tokens": 95,
+   "layers": 36
+  },
+  "numbers": {
+   "tokens": 69,
+   "layers": 36
+  },
+  "repeat": {
+   "tokens": 53,
+   "layers": 36
+  },
+  "short": {
+   "tokens": 5,
+   "layers": 36
+  }
+ },
+ "reference": "dequantized",
+ "load": {
+  "dequantized": 252,
+  "filled": 398,
+  "unexpected": 1,
+  "unexpected_examples": [
+   "lm_head.weight"
+  ]
+ }
+}

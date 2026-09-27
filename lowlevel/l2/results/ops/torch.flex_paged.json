@@ -1,0 +1,79 @@
+{
+ "name": "torch.flex_paged",
+ "about": "FlexAttention over a paged KV pool (torch 2.13); vllm#50427's operator",
+ "tol": 0.01,
+ "forms": [
+  {
+   "block_id": 0
+  },
+  {
+   "block_id": 1024
+  },
+  {
+   "block_id": 32767
+  },
+  {
+   "block_id": 65535
+  },
+  {
+   "block_id": 65536
+  },
+  {
+   "block_id": 68000
+  }
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 0.0
+  },
+  "forms": {
+   "status": "fail",
+   "rows": [
+    {
+     "form": {
+      "block_id": 0
+     },
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "form": {
+      "block_id": 1024
+     },
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "form": {
+      "block_id": 32767
+     },
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "form": {
+      "block_id": 65535
+     },
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "form": {
+      "block_id": 65536
+     },
+     "status": "fail",
+     "rel": 11.666666666666668
+    },
+    {
+     "form": {
+      "block_id": 68000
+     },
+     "status": "fail",
+     "rel": 11.666666666666668
+    }
+   ]
+  }
+ },
+ "seconds": 1.6
+}

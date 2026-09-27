@@ -1,0 +1,54 @@
+{
+ "rank": 100,
+ "id": "farbodtavakkoli/OTel-LLM-27B-IT",
+ "model_type": "gemma3",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "added_tokens.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 0,
+ "mistral_files": [],
+ "rows": {
+  "n": null,
+  "where": "no embedding tensor found in the headers",
+  "config_vocab_size": 262208
+ },
+ "sources": {
+  "candidates": [
+   [
+    262144,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    262144,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 262208,
+  "rows_where": "config.json vocab_size",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GemmaTokenizer",
+  "vocab_size": 262144,
+  "reach": 262145
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='linear', theta=1000000.0, factor=8.0, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=10000.0, partial_rotary_factor=None, local_factor=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 2.4
+}

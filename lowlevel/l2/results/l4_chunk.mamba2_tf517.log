@@ -1,0 +1,14 @@
+W0927 08:04:35.832000 218720 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0927 08:04:35.855000 218720 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/25 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 25/25 [00:00<00:00, 8195.20it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `mamba_chunk_scan_combined` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+
+Loading weights:   0%|          | 0/25 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 25/25 [00:00<00:00, 3234.85it/s]
+
+Loading weights:   0%|          | 0/25 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 25/25 [00:00<00:00, 4625.39it/s]
+RESULT {"engine": "hf_chunk", "model": "/home/<user>/models/l4/tiny-mamba2-random", "chunk": 16, "probes": {"story_a": {"tokens": 64, "layers": 2}, "story_b": {"tokens": 64, "layers": 2}, "code": {"tokens": 64, "layers": 2}, "numbers": {"tokens": 54, "layers": 2}, "repeat": {"tokens": 53, "layers": 2}, "sho

@@ -51,9 +51,29 @@ def props(value):
     return dict(kv.split("=", 1) for kv in (m.group(1).split(", ") if m else []) if "=" in kv)
 
 
+# A repair that is a rule of the core, not a route through the capability table (M14, M15): its evidence is the
+# test problem it was measured on, not a caps row (protocol 2.3, changed 2026-09-26; M10_PROTOCOL.md 6)
+RULE_REPAIRS = {("identity_recompute", "vllm"): "testbed/results/r4/e2e_on.json (vllm#49377: the stale block hash "
+                                                "recomputed, the wrong 16-token cache hit gone)",
+                ("clamp_tile_k", "sglang"): "testbed/results/m15/e3_39626_on.json (sglang#39626: the tile clamped, 288 "
+                                            "where 64 was)",
+                ("add_stops", "transformers"): "testbed/results/m15/stops_replay_on.json, stops_nemotron_on.json (the "
+                                               "declared end added at load; generation stops at the end where it ran "
+                                               "to 160 tokens without)"}
+
+
 def backing(d):
     """A resolved decision against the capability table (protocol 2.3): the fields the declaration states and the
-    consumer drops, each with the evidence of its row; backed when a measured row says the consumer drops one."""
+    consumer drops, each with the evidence of its row; backed when a measured row says the consumer drops one. A
+    rule repair (RULE_REPAIRS) is backed by the measurement of its test problem."""
+    engine = (d.get("consumer") or "").split(".")[0]
+    if d.get("handle") is not None and (d.get("handle"), engine) in RULE_REPAIRS:
+        return {"consumer": d.get("consumer"), "dropped": {d.get("name"): "rule repair"},
+                "backed_by_measured_row": True, "rule_repair_evidence": RULE_REPAIRS[(d["handle"], engine)]}
+    if d.get("handle") in {h for h, _ in RULE_REPAIRS}:
+        return {"consumer": d.get("consumer"), "dropped": {d.get("name"): "rule repair"},
+                "backed_by_measured_row": False,
+                "rule_repair_evidence": f"no measurement of this repair on {engine} (M10_PROTOCOL.md 6, 2026-09-26)"}
     dec, cho = props((d.get("declared") or {}).get("value")), props((d.get("chosen") or {}).get("value"))
     dropped = [k for k, v in dec.items() if v not in ("None", None) and cho.get(k) in ("None", None)]
     ev = {k: caps_rows().get((d.get("consumer"), f"ModelProps.{k}")) for k in dropped}

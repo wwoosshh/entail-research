@@ -1,0 +1,49 @@
+{
+ "entail": "off",
+ "vllm": "0.30.0",
+ "tokenizer": "google/gemma-4-E2B-it",
+ "parser": "vllm.parser.gemma4.Gemma4Parser",
+ "cases": {
+  "_parse_gemma4_args(PR_RAW)": {
+   "parsed": {
+    "pdfs": [
+     "/home/h/.openclaw/pdfs/a.pdf",
+     "/home/h/.openclaw/pdfs/b.pdf"
+    ],
+    "prompt": "analyse these 2 pdfs."
+   },
+   "delimiter_leaked": false
+  },
+  "array_of_strings": {
+   "tool_calls": [
+    {
+     "name": "analyse_pdfs",
+     "arguments": "{\"pdfs\": [\"/home/h/a.pdf\", \"/home/h/b.pdf\"], \"prompt\": \"analyse these 2 pdfs.\"}"
+    }
+   ],
+   "content": null,
+   "delimiter_leaked_or_unparsed": false
+  },
+  "array_of_paths_from_the_fix_pr": {
+   "tool_calls": [
+    {
+     "name": "analyse_pdfs",
+     "arguments": "{\"pdfs\": [\"/home/h/.openclaw/pdfs/a.pdf\", \"/home/h/.openclaw/pdfs/b.pdf\"], \"prompt\": \"analyse these 2 pdfs.\"}"
+    }
+   ],
+   "content": null,
+   "delimiter_leaked_or_unparsed": false
+  },
+  "scalars": {
+   "tool_calls": [
+    {
+     "name": "process",
+     "arguments": "{\"action\": \"poll\", \"sessionId\": \"calm-ridge\", \"timeout\": 20000}"
+    }
+   ],
+   "content": null,
+   "delimiter_leaked_or_unparsed": false
+  }
+ },
+ "reproduced": false
+}

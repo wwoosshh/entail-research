@@ -1,0 +1,308 @@
+{
+ "cases": {
+  "tf47885": {
+   "off": "{\"entail\": \"off\", \"non_finite_input_samples\": 1, \"input_samples\": 16000, \"feature_nan_fraction\": 1.0, \"transcription_with_nan\": \"0\", \"error\": null, \"transcription_clean\": \" Thank you very much.\", \"reproduced\": true}",
+   "on": "{\"entail\": \"load\", \"non_finite_input_samples\": 1, \"input_samples\": 16000, \"feature_nan_fraction\": 1.0, \"transcription_with_nan\": \"0\", \"error\": null, \"transcription_clean\": \" Thank you very much.\", \"reproduced\": true}",
+   "decisions": 7,
+   "non_pass": {
+    "load:transformers.config unknown": 3
+   },
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.generation_config",
+    "load:transformers.loader",
+    "load:transformers.tokenizer",
+    "request:transformers.generate.beam_reorder"
+   ]
+  },
+  "tf48293": {
+   "off": "{\"entail\": \"off\", \"transformers\": \"5.17.0\", \"returns\": [[2, 8, 1], [2, 8, 1, 8], [2, 8, 1]], \"third_return_equals_max_probability\": true, \"third_return_equals_raw_logits\": false, \"tokens\": 16, \"tokens_dropped_for_capacity\": 0, \"expert_capacity\": 1, \"expert_slots_over_capacity\": 3, \"max_tokens",
+   "on": "{\"entail\": \"load\", \"transformers\": \"5.17.0\", \"returns\": [[2, 8, 1], [2, 8, 1, 8], [2, 8, 1]], \"third_return_equals_max_probability\": true, \"third_return_equals_raw_logits\": false, \"tokens\": 16, \"tokens_dropped_for_capacity\": 0, \"expert_capacity\": 1, \"expert_slots_over_capacity\": 3, \"max_token",
+   "decisions": 3,
+   "non_pass": {
+    "load:transformers.config unknown": 1
+   },
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.generation_config",
+    "load:transformers.loader"
+   ]
+  },
+  "df13411": {
+   "off": "{\"entail\": \"off\", \"diffusers\": \"0.40.0\", \"non_monotone\": {\"sigmas\": [0.2, 0.8, 0.5, 0.0], \"set_timesteps_error\": null, \"input_norm\": 15.027975082397461, \"output_norm\": 13.153770446777344, \"ratio\": 0.8752856254577637, \"cosine_output_vs_sample\": -0.17379094660282135, \"finite\": true}, \"control_v",
+   "on": "{\"entail\": \"load\", \"diffusers\": \"0.40.0\", \"non_monotone\": {\"sigmas\": [0.2, 0.8, 0.5, 0.0], \"set_timesteps_error\": null, \"input_norm\": 15.027975082397461, \"output_norm\": 13.153770446777344, \"ratio\": 0.8752856254577637, \"cosine_output_vs_sample\": -0.17379094660282135, \"finite\": true}, \"control_",
+   "decisions": 0,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": []
+  },
+  "tf46032": {
+   "off": "{\"entail\": \"off\", \"transformers\": \"5.12.1\", \"tbt_vs_full_max_abs_err\": 8.344650268554688e-07, \"chunk_shape\": [1, 7, 64], \"error\": null, \"chunk_vs_tbt_max_abs_err\": 2.914670944213867, \"reproduced\": true}",
+   "on": "{\"entail\": \"load\", \"transformers\": \"5.12.1\", \"tbt_vs_full_max_abs_err\": 8.344650268554688e-07, \"chunk_shape\": [1, 7, 64], \"error\": null, \"chunk_vs_tbt_max_abs_err\": 2.914670944213867, \"reproduced\": true}",
+   "decisions": 1,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.loader"
+   ]
+  },
+  "tf46710": {
+   "off": "{\"entail\": \"off\", \"transformers\": \"5.12.1\", \"tokenizer_class\": \"LlamaTokenizer\", \"prompt_ids_match_tokenizer_json\": false, \"prompt_ids_head\": [128000, 128011, 1671, 3689, 16, 10, 16, 30, 16533, 6796, 398, 13], \"reference_ids_head\": [128000, 128011, 3923, 374, 220, 16, 10, 16, 30, 22559, 27851",
+   "on": "{\"entail\": \"load\", \"transformers\": \"5.12.1\", \"tokenizer_class\": \"LlamaTokenizer\", \"prompt_ids_match_tokenizer_json\": false, \"prompt_ids_head\": [128000, 128011, 1671, 3689, 16, 10, 16, 30, 16533, 6796, 398, 13], \"reference_ids_head\": [128000, 128011, 3923, 374, 220, 16, 10, 16, 30, 22559, 2785",
+   "decisions": 2,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.tokenizer"
+   ]
+  },
+  "vl49316": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.30.0\", \"cases\": [{\"tool\": \"set_count\", \"schema_type\": \"integer\", \"model_args\": \"{\\\"count\\\":\\\"3\\\"}\", \"non_streaming\": \"{\\\"count\\\": 3}\", \"streaming\": \"{\\\"count\\\":\\\"3\\\"}\", \"value_types\": {\"non_streaming\": \"int\", \"streaming\": \"str\"}, \"diverged\": true}, {\"tool\": \"set_f",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.30.0\", \"cases\": [{\"tool\": \"set_count\", \"schema_type\": \"integer\", \"model_args\": \"{\\\"count\\\":\\\"3\\\"}\", \"non_streaming\": \"{\\\"count\\\": 3}\", \"streaming\": \"{\\\"count\\\":\\\"3\\\"}\", \"value_types\": {\"non_streaming\": \"int\", \"streaming\": \"str\"}, \"diverged\": true}, {\"tool\": \"set_",
+   "decisions": 2,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.tokenizer"
+   ]
+  },
+  "vl49412": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.30.0\", \"cases\": {\"after_tool\": {\"non_streaming_content\": \"done.\", \"streaming_content\": \" done.\", \"non_streaming_tool_calls\": 1, \"streaming_tool_calls\": 1, \"diverged\": true}, \"before_tool\": {\"non_streaming_content\": \"Sure!\", \"streaming_content\": \"Sure! \", \"non_stre",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.30.0\", \"cases\": {\"after_tool\": {\"non_streaming_content\": \"done.\", \"streaming_content\": \" done.\", \"non_streaming_tool_calls\": 1, \"streaming_tool_calls\": 1, \"diverged\": true}, \"before_tool\": {\"non_streaming_content\": \"Sure!\", \"streaming_content\": \"Sure! \", \"non_str",
+   "decisions": 2,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.tokenizer"
+   ]
+  },
+  "vl48231": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.30.0\", \"dtype\": \"float16\", \"text\": \" our our our our our our our our our our our our our our our our our our our our our our our our our our our our our our our our\", \"finish_reason\": \"length\", \"token_ids_head\": [1023, 1023, 1023, 1023, 1023, 1023, 1023, 1023, 102",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.30.0\", \"dtype\": \"float16\", \"text\": \" our our our our our our our our our our our our our our our our our our our our our our our our our our our our our our our our\", \"finish_reason\": \"length\", \"token_ids_head\": [1023, 1023, 1023, 1023, 1023, 1023, 1023, 1023, 10",
+   "decisions": 58,
+   "non_pass": {
+    "load:transformers.config unknown": 2,
+    "load:vllm.quant_method.process_weights_after_loading unknown": 1
+   },
+   "broken_or_refused": 0,
+   "boundaries": [
+    "container:vllm.request.block_hashes",
+    "kernel:vllm._apply_grammar_bitmask_kernel",
+    "kernel:vllm._apply_write_kernel",
+    "kernel:vllm._bad_words_kernel",
+    "kernel:vllm._bias_kernel",
+    "kernel:vllm._bincount_kernel",
+    "kernel:vllm._combine_sampled_and_draft_tokens_kernel",
+    "kernel:vllm._compute_slot_mappings_kernel",
+    "kernel:vllm._gather_block_tables_kernel",
+    "kernel:vllm._get_num_sampled_and_rejected_kernel",
+    "kernel:vllm._gumbel_sample_kernel",
+    "kernel:vllm._min_p_kernel",
+    "kernel:vllm._penalties_kernel",
+    "kernel:vllm._post_update_kernel",
+    "kernel:vllm._prepare_pos_seq_lens_kernel",
+    "kernel:vllm._prepare_prefill_inputs_kernel",
+    "kernel:vllm._prompt_logprobs_token_ids_kernel",
+    "kernel:vllm._ranks_kernel",
+    "kernel:vllm._temperature_kernel",
+    "kernel:vllm._topk_log_softmax_kernel",
+    "kernel:vllm.kernel_unified_attention",
+    "kernel:vllm.reduce_segments",
+    "kernel:vllm.reshape_and_cache_kernel_flash",
+    "load:transformers.config",
+    "load:transformers.tokenizer",
+    "load:vllm.attention",
+    "load:vllm.config.rope_parameters",
+    "load:vllm.input_processor",
+    "load:vllm.loader",
+    "load:vllm.quant_method.process_weights_after_loading"
+   ]
+  },
+  "sg40835": {
+   "off": "{\"entail\": \"off\", \"sglang\": \"0.5.20\", \"use_rslora=True\": {\"peft_scaling\": 16.0, \"sglang_scaling\": 2.0, \"adapter_config_use_rslora\": true}, \"use_rslora=False\": {\"peft_scaling\": 2.0, \"sglang_scaling\": 2.0, \"adapter_config_use_rslora\": false}, \"reproduced\": true}",
+   "on": "{\"entail\": \"load\", \"sglang\": \"0.5.20\", \"use_rslora=True\": {\"peft_scaling\": 16.0, \"sglang_scaling\": 16.0, \"adapter_config_use_rslora\": true}, \"use_rslora=False\": {\"peft_scaling\": 2.0, \"sglang_scaling\": 2.0, \"adapter_config_use_rslora\": false}, \"reproduced\": false}",
+   "decisions": 4,
+   "non_pass": {
+    "load:sglang.adapter_config resolved": 1
+   },
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:sglang.adapter_config",
+    "load:transformers.config.rope_parameters",
+    "load:transformers.loader"
+   ],
+   "at_expected_boundary": {
+    "resolved": 1,
+    "pass": 1
+   }
+  },
+  "sg21843": {
+   "off": "{\"entail\": \"off\", \"sglang\": \"0.5.20\", \"a_stride\": [32, 2], \"a_contiguous\": false, \"g_noncontig_vs_contig_max_abs\": 4.742772579193115, \"beta_noncontig_vs_contig_max_abs\": 0.7817683219909668, \"g_contig_vs_formula_max_abs\": 2.384185791015625e-07, \"beta_contig_vs_formula_max_abs\": 5.9604644775390",
+   "on": "{\"entail\": \"load\", \"sglang\": \"0.5.20\", \"a_stride\": [32, 2], \"a_contiguous\": false, \"g_noncontig_vs_contig_max_abs\": 4.742772579193115, \"beta_noncontig_vs_contig_max_abs\": 0.7817683219909668, \"g_contig_vs_formula_max_abs\": 2.384185791015625e-07, \"beta_contig_vs_formula_max_abs\": 5.960464477539",
+   "decisions": 3,
+   "non_pass": {
+    "kernel:sglang.fused_gdn_gating_kernel unknown": 2
+   },
+   "broken_or_refused": 0,
+   "boundaries": [
+    "kernel:sglang.fused_gdn_gating_kernel"
+   ],
+   "at_expected_boundary": {
+    "unknown": 2,
+    "pass": 1
+   }
+  },
+  "tf46612": {
+   "off": "{\"entail\": \"off\", \"transformers\": \"5.12.1\", \"greedy\": \"Hello, my dog is cute. I love her. I love her\", \"beam_with_cache\": [\"Hello, my dog is cute. I love her, but he is\", \"Hello, my dog is cute. I love her.\\nbut I\", \"Hello, my dog is cute. I love her.\\nbut he\"], \"beam_without_cache\": [\"Hello,",
+   "on": "{\"entail\": \"load\", \"transformers\": \"5.12.1\", \"greedy\": \"Hello, my dog is cute. I love her. I love her\", \"beam_with_cache\": [\"Hello, my dog is cute. I love her, but he is\", \"Hello, my dog is cute. I love her.\\nbut I\", \"Hello, my dog is cute. I love her.\\nbut he\"], \"beam_without_cache\": [\"Hello",
+   "decisions": 5,
+   "non_pass": {
+    "load:transformers.config unknown": 1,
+    "request:transformers.generate.beam_reorder broken": 1
+   },
+   "broken_or_refused": 1,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.generation_config",
+    "load:transformers.loader",
+    "load:transformers.tokenizer",
+    "request:transformers.generate.beam_reorder"
+   ],
+   "at_expected_boundary": {
+    "broken": 1
+   }
+  },
+  "vl56655": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.30.0\", \"records\": [{\"case\": \"B_cold\", \"cached_tokens\": 0, \"token_ids\": [9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0]}, {\"case\": \"A_cold\", \"cached_tokens\": 0, \"token_ids\": [753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753]}, {\"case\"",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.30.0\", \"records\": [{\"case\": \"B_cold\", \"cached_tokens\": 0, \"token_ids\": [9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0]}, {\"case\": \"A_cold\", \"cached_tokens\": 0, \"token_ids\": [753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753, 753]}, {\"case",
+   "decisions": 48,
+   "non_pass": {
+    "container:vllm.request.block_hashes resolved": 1
+   },
+   "broken_or_refused": 0,
+   "boundaries": [
+    "container:vllm.request.block_hashes",
+    "kernel:vllm._apply_grammar_bitmask_kernel",
+    "kernel:vllm._apply_prompt_embeds_kernel",
+    "kernel:vllm._apply_write_kernel",
+    "kernel:vllm._bad_words_kernel",
+    "kernel:vllm._bias_kernel",
+    "kernel:vllm._bincount_kernel",
+    "kernel:vllm._combine_sampled_and_draft_tokens_kernel",
+    "kernel:vllm._compute_slot_mappings_kernel",
+    "kernel:vllm._gather_block_tables_kernel",
+    "kernel:vllm._get_num_sampled_and_rejected_kernel",
+    "kernel:vllm._gumbel_sample_kernel",
+    "kernel:vllm._min_p_kernel",
+    "kernel:vllm._penalties_kernel",
+    "kernel:vllm._post_update_kernel",
+    "kernel:vllm._prepare_pos_seq_lens_kernel",
+    "kernel:vllm._prepare_prefill_inputs_kernel",
+    "kernel:vllm._prompt_logprobs_token_ids_kernel",
+    "kernel:vllm._ranks_kernel",
+    "kernel:vllm._temperature_kernel",
+    "kernel:vllm._topk_log_softmax_kernel",
+    "kernel:vllm._topk_topp_kernel",
+    "kernel:vllm._topp_sb_mask_kernel",
+    "kernel:vllm._topp_sb_stats_kernel",
+    "kernel:vllm._topp_sb_step_kernel",
+    "load:transformers.config",
+    "load:transformers.tokenizer",
+    "load:vllm.config.rope_parameters",
+    "load:vllm.input_processor",
+    "load:vllm.loader",
+    "load:vllm.quant_method.process_weights_after_loading",
+    "load:vllm.rotary_pairing"
+   ],
+   "at_expected_boundary": {
+    "pass": 1,
+    "resolved": 1
+   }
+  },
+  "vl48895": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.30.0\", \"device\": \"NVIDIA GeForce RTX 4070 Ti\", \"capability\": [8, 9], \"runs\": {\"mul_topk_weights=True\": {\"bad_rows\": 119, \"rows\": 128, \"maxrel\": 1.1050671339035034, \"out_absmax\": 0.1318359375}, \"mul_topk_weights=False+external\": {\"bad_rows\": 0, \"rows\": 128, \"maxrel",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.30.0\", \"device\": \"NVIDIA GeForce RTX 4070 Ti\", \"capability\": [8, 9], \"runs\": {\"mul_topk_weights=True\": {\"bad_rows\": 119, \"rows\": 128, \"maxrel\": 1.1050671339035034, \"out_absmax\": 0.1318359375}, \"mul_topk_weights=False+external\": {\"bad_rows\": 0, \"rows\": 128, \"maxre",
+   "decisions": 0,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": [],
+   "at_expected_boundary": {}
+  },
+  "vl43728_0220": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.22.0\", \"parser\": \"vllm.reasoning.kimi_k2_reasoning_parser.KimiK2ReasoningParser (chat_template_kwargs)\", \"cases\": {\"enable_thinking_false\": {\"chat_template_kwargs\": {\"enable_thinking\": false}, \"reasoning\": \"The capital of France is Paris.\", \"content\": null}, \"thin",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.22.0\", \"parser\": \"vllm.reasoning.kimi_k2_reasoning_parser.KimiK2ReasoningParser (chat_template_kwargs)\", \"cases\": {\"enable_thinking_false\": {\"chat_template_kwargs\": {\"enable_thinking\": false}, \"reasoning\": \"The capital of France is Paris.\", \"content\": null}, \"thi",
+   "decisions": 2,
+   "non_pass": {},
+   "broken_or_refused": 0,
+   "boundaries": [
+    "load:transformers.config",
+    "load:transformers.tokenizer"
+   ],
+   "at_expected_boundary": {}
+  },
+  "vl42016_0220": {
+   "off": "{\"entail\": \"off\", \"vllm\": \"0.22.0\", \"expected_lines\": [\"HELLO WORLD 2026\", \"entail case 42016\"], \"test_images\": \"vllm.assets stop_sign + cherry_blossom\", \"reference_error\": null, \"cases\": {\"rendered_text\": {\"vllm_text\": \"HELLO WORLD 2026 entail case 42016\", \"vllm_token_ids_head\": [4019, 76, 3",
+   "on": "{\"entail\": \"load\", \"vllm\": \"0.22.0\", \"expected_lines\": [\"HELLO WORLD 2026\", \"entail case 42016\"], \"test_images\": \"vllm.assets stop_sign + cherry_blossom\", \"reference_error\": null, \"cases\": {\"rendered_text\": {\"vllm_text\": \"HELLO WORLD 2026 entail case 42016\", \"vllm_token_ids_head\": [4019, 76, ",
+   "decisions": 32,
+   "non_pass": {
+    "load:transformers.config unknown": 3,
+    "load:transformers.generation_config unknown": 1,
+    "load:transformers.tokenizer unknown": 9,
+    "load:vllm.input_processor unknown": 1,
+    "load:vllm.rotary_pairing broken": 1
+   },
+   "broken_or_refused": 1,
+   "boundaries": [
+    "container:vllm.request.block_hashes",
+    "kernel:vllm._compute_slot_mapping_kernel",
+    "kernel:vllm._triton_mrope_forward",
+    "kernel:vllm.rotary_kernel",
+    "load:transformers.config",
+    "load:transformers.config.rope_parameters",
+    "load:transformers.generation_config",
+    "load:transformers.loader",
+    "load:transformers.tokenizer",
+    "load:vllm.config.rope_parameters",
+    "load:vllm.input_processor",
+    "load:vllm.loader",
+    "load:vllm.quant_method.process_weights_after_loading",
+    "load:vllm.rotary_pairing"
+   ],
+   "at_expected_boundary": {
+    "broken": 1
+   }
+  }
+ },
+ "outside_false_alarms": 0,
+ "inside_site_coverage": {
+  "sg40835": true,
+  "sg21843": true,
+  "tf46612": true,
+  "vl56655": true,
+  "vl48895": false,
+  "vl43728_0220": false,
+  "vl42016_0220": true
+ },
+ "inside_verdicts": {
+  "sg40835": "resolved",
+  "sg21843": "unknown_only",
+  "tf46612": "reported",
+  "vl56655": "resolved",
+  "vl48895": "missed",
+  "vl43728_0220": "adapter_not_installed",
+  "vl42016_0220": "reported"
+ },
+ "site_coverage": "5/7",
+ "retro": {
+  "resolved": 2,
+  "unknown_only": 1,
+  "reported": 2,
+  "missed": 1,
+  "adapter_not_installed": 1
+ }
+}

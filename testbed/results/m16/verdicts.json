@@ -1,0 +1,89 @@
+{
+ "tf47885": {
+  "issue": 47885,
+  "verdict": "missed",
+  "note": "reproduced (all-NaN features, transcription '0'); entail on: 3 unknown, all Coverage at load:transformers.config (forced_decoder_ids declared-unread), nothing at the feature-extractor -> pipeline boundary; no broken/refused"
+ },
+ "tf48293": {
+  "issue": 48293,
+  "verdict": "missed",
+  "note": "reproduced (third return = max probability, no token dropped at capacity 1 with 3 experts over capacity); entail on: 1 unknown, Coverage at load:transformers.config (router keys declared-unread), nothing at the router boundary"
+ },
+ "df13411": {
+  "issue": 13411,
+  "verdict": "missed",
+  "note": "reproduced on the sign criterion (cosine(output, sample) = -0.17 on the non-monotone schedule, positive on the valid control; the report's 1.45x norm ratio does not hold, ratio 0.875); entail on: no decision at the scheduler boundary"
+ },
+ "tf46032": {
+  "issue": 46032,
+  "verdict": "missed",
+  "note": "reproduced on 5.12.1 (chunk vs token-by-token max abs err 2.9); entail on: only ModelProps pass, nothing at the Mamba2 cache boundary"
+ },
+ "tf46612": {
+  "issue": 46612,
+  "verdict": "missed",
+  "note": "reproduced on 5.12.1 (beam search with cache differs from beam search without cache); entail on: 1 unknown, Coverage at load:transformers.config (Mamba keys), nothing at the beam reorder boundary"
+ },
+ "tf46710": {
+  "issue": 46710,
+  "verdict": "missed",
+  "note": "reproduced on 5.12.1 (AutoTokenizer gives LlamaTokenizer, prompt ids differ from tokenizer.json, decode differs); entail on: Vocab PASS at load:transformers.tokenizer while the class was substituted - a pass at the boundary"
+ },
+ "sg40835": {
+  "issue": 40835,
+  "verdict": "missed",
+  "note": "reproduced on 0.5.20 (PEFT scaling 16.0 vs SGLang 2.0 with use_rslora); entail on: only transformers-side pass decisions (ModelProps, Rotary), nothing at load:sglang.lora"
+ },
+ "sg21843": {
+  "issue": 21843,
+  "verdict": "missed",
+  "note": "reproduced on 0.5.20 (non-contiguous a/b: g differs by 4.7, beta by 0.78 from the contiguous call; the contiguous call matches the formula); entail on: no record at all - no adapter fires for a bare kernel call"
+ },
+ "vl49316": {
+  "issue": 49316,
+  "verdict": "missed",
+  "note": "reproduced on 0.30.0 (4/4 cases: streaming keeps the model's string, non-streaming coerces to the schema type); entail on: no decision at the parser boundary"
+ },
+ "vl49412": {
+  "issue": 49412,
+  "verdict": "missed",
+  "note": "reproduced on 0.30.0 (after/before/between cases: streaming keeps the boundary whitespace); entail on: no decision at the parser boundary"
+ },
+ "sg38573": {
+  "issue": 38573,
+  "verdict": "not_reproduced",
+  "note": "the W4AFP8 compressed-tensors MoE scheme declares minimum capability 90 and the CUTLASS W4A8 grouped GEMM is Hopper-only; this card is sm89"
+ },
+ "vl56655": {
+  "issue": 56655,
+  "verdict": "missed",
+  "note": "reproduced on 0.30.0 (B after A: 32 cached tokens and A's output [753]*16 instead of B's [9,0]*8); entail on: nine pass decisions at the load boundaries (Coverage, Vocab, Rotary, Stops, ModelProps, Layout), nothing at the prefix-cache key"
+ },
+ "vl48231": {
+  "issue": 48231,
+  "verdict": "missed",
+  "note": "reproduced on 0.30.0 with dtype=float16 forced (the fallback a 2080 Ti takes on its own): one token (1023, ' our') repeated to the length limit for the red-image request, while the bf16 control answers 'The image is a solid color ... deep red'; the report saw token 0 (all-NaN logits), here a constant token - the same degenerate form. Out of class (consensus K2). entail on: Coverage unknown (Gemma4 MoE keys) and a Layout cannot-check on the vision embedding projection; no broken/refused, nothing about the dtype at the vision projection"
+ },
+ "vl43728": {
+  "issue": 43728,
+  "verdict": "missed",
+  "note": "not reproduced on 0.30.0 (the Kimi K2 parser there reads thinking and enable_thinking alike) and on 0.19.0 (the parser predates the kwargs); reproduced on the reported version 0.22.0 with the request's kwargs handed to the parser as the server does: {enable_thinking: false} -> content null, the answer under reasoning; {thinking: false} -> content = the answer; entail on: only a tokenizer Vocab pass, nothing at the request/parser boundary",
+  "run": "vl43728_0220"
+ },
+ "vl48895": {
+  "issue": 48895,
+  "verdict": "missed",
+  "note": "reproduced on 0.30.0 / sm89 with the report's script under 0.30.0's op signatures (mul_topk_weights=True: 119/128 rows off by more than 5%, maxrel 1.1; external multiply: 0/128, maxrel 4e-3); entail on: no record (a bare kernel call, no adapter fires)"
+ },
+ "vl42016": {
+  "issue": 42016,
+  "verdict": "missed",
+  "note": "not reproduced on 0.30.0 (the Triton mrope kernel has an is_neox_style branch since #49906, 2026-07-28; both inputs match the HF reference for 22 and 30 tokens); reproduced on 0.22.0, the release before the fix, with the native GlmOcrForConditionalGeneration and vLLM's two test images: vLLM answers 'STOP' where the HF reference gives the full description (matched tokens 0, the report's own H100 output was 'STOP'); the rendered-text input differs only by a newline. entail on: 14 unknown (cannot-check without a local folder; Coverage keys), nothing about the rotation pairing at the kernel",
+  "run": "vl42016_0220"
+ },
+ "vl39468": {
+  "issue": 39468,
+  "verdict": "not_reproduced",
+  "note": "the report's two call texts and the closed fix PR's own regression string parse cleanly (no delimiter fragment in the arguments) on 0.30.0 (vllm.parser.gemma4) and on the reported 0.19.0 (vllm.tool_parsers.gemma4_tool_parser, both the parser and _parse_gemma4_args directly); the leak shown in the report is not produced at the parser level here (the model, gemma-4-31B-it on 4 GPUs, is out of reach)"
+ }
+}

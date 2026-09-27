@@ -1,0 +1,307 @@
+{
+ "passes": 10,
+ "reproduced": 9,
+ "verdicts": {
+  "missed": 6,
+  "unknown_only": 1,
+  "false": 1,
+  "adapter_not_installed": 1,
+  "not_reproduced": 1
+ },
+ "detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1": 6,
+  "rate": 0.0,
+  "per_rater": {
+   "rating_A": {
+    "denominator": 6,
+    "detected": 0
+   },
+   "rating_B": {
+    "denominator": 5,
+    "detected": 0
+   }
+  }
+ },
+ "low_level_detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1_level_D": 5
+ },
+ "located_outside_class": {
+  "cases": [],
+  "reproduced_K2_to_K5": 3
+ },
+ "caught_at_expected_boundary_all_reproduced": {
+  "numerator": 0,
+  "denominator": 9
+ },
+ "false_alarms": {
+  "cases_with_false": [
+   "vl33091"
+  ],
+  "broken_or_refused_in_non_K1_reproduced": 0
+ },
+ "class_share_among_rated": {
+  "rated": 91,
+  "consensus_counts": {
+   "K7": 45,
+   "K1": 25,
+   "K4": 12,
+   "K5": 1,
+   "K3": 3,
+   "K6": 1,
+   "K2": 4
+  },
+  "K1_share": 0.27472527472527475,
+  "A_K1_share": 0.27472527472527475,
+  "B_K1_share": 0.26373626373626374
+ },
+ "kappa_7": {
+  "n": 91,
+  "observed": 0.8791208791208791,
+  "expected": 0.3056394155295254,
+  "kappa": 0.8259130434782609
+ },
+ "kappa_k1_vs_rest": {
+  "n": 91,
+  "observed": 0.967032967032967,
+  "expected": 0.6064484965583866,
+  "kappa": 0.9162319729978521
+ },
+ "rows": [
+  {
+   "position": 18,
+   "issue": "diffusers#12633",
+   "case": "df12633",
+   "run": "df12633",
+   "engine_version": "0.40.0",
+   "title": "DDIMScheduler.step() logic mismatches set_timesteps() list when using timestep_spacing='linspace'",
+   "version": "diffusers 0.35.2 reported; open -> 0.40.0 (installed)",
+   "expected_boundary": "load:diffusers.scheduler (the declared timestep_spacing is not what step() uses: prev_timestep from a uniform stride instead of the schedule it set)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on diffusers 0.40.0 (9 of 10 DDIM steps move to a timestep off the linspace schedule: step() uses t - 100 where the schedule's next is t - 111); entail on: no decision (no site at the scheduler's step)"
+  },
+  {
+   "position": 21,
+   "issue": "transformers#43697",
+   "case": "tf43697",
+   "run": "tf43697_500",
+   "engine_version": "5.0.0",
+   "title": "RTDetrV2ForObjectDetection produces different outputs in Transformers v5 with identical inputs",
+   "version": "transformers 5.0.0 (reported; fixed in 5.1.0) -> new venv",
+   "expected_boundary": "load:transformers.weights (checkpoint head weights under model.decoder.* not loaded because the tied-weights mapping points the other way; the load report shows nothing missing)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 1,
+    "unknown": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on the reported 5.0.0 (new venv tf500) with the public stand-in PekingU/rtdetr_v2_r18vd: boxes differ from 4.57.6 by up to 0.148 on the same seeded input; 5.17.0 matches 4.57.6 (2e-6). entail on 5.0.0: Coverage pass/unknown and ModelProps unknown at load, nothing about the loaded weights against the checkpoint"
+  },
+  {
+   "position": 35,
+   "issue": "vllm#34186",
+   "case": "vl34186",
+   "run": "vl34186",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: LoRA adapters with mismatched module name prefixes silently produce base-model output",
+   "version": "vLLM 0.15.1 reported; open -> 0.30.0 (installed)",
+   "expected_boundary": "load:vllm.lora (the adapter's module paths against the model's: validation reads only the last name component, the weights are stored under keys the model never asks for)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "unknown": 3,
+    "pass": 68
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 off and on (unsloth/gemma-3-4b-it standing in for the gated google repository): the adapter's keys are base_model.model.model.layers.* with no language_model prefix, and the adapter's greedy output equals the base model's byte for byte. entail on: load:vllm.adapter_config Coverage pass (the adapter config's keys) - a decision at the adapter's load boundary, but nothing compares the adapter's module paths with the model's; the defect passes. The first off run failed for GPU memory (0.9, then no cache blocks at 0.88 while another process held memory); rerun off alone at 0.88 succeeded"
+  },
+  {
+   "position": 39,
+   "issue": "vllm#33560",
+   "case": "vl33560",
+   "run": "vl33560",
+   "engine_version": "0.16.0",
+   "title": "[Bug]: lm-eval shows significant accuracy differences on RedHatAI/Qwen3-8B-NVFP4 model (Turing vs. A",
+   "version": "vLLM 0.16.0rc1 reported (fixed by #33972) -> 0.16.0 in a new venv",
+   "expected_boundary": "kernel:vllm.marlin (NVFP4 Marlin GEMM with float16 activations: the input's global scale not applied before the GEMM, the float16 epilogue overflows to inf/NaN)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 12,
+    "unknown": 1
+   },
+   "rating_A": "K1",
+   "rating_B": "K2",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on the reported vLLM 0.16.0 (new venv vllm0160) with dtype=float16: all 93 prompt log-probabilities are NaN and the outputs are '!!!!!!!!'; the fixed 0.30.0 (control, float16) is finite (perplexity 23.9) and coherent. entail on 0.16.0: no decision at the Marlin kernel (C++); load:vllm.quant_method Layout unknown (CompressedTensorsLinearMethod has no signature). The start path check PASSED all three pairs with margin 0 and move 0: NaN log-probabilities compare as agreement - a defect of the path contract (non-finite values are not treated as a disagreement), recorded in DEFERRED, not fixed (frozen)"
+  },
+  {
+   "position": 47,
+   "issue": "transformers#41494",
+   "case": "tf41494",
+   "run": "tf41494",
+   "engine_version": "5.17.0",
+   "title": "Incorrect tokenizer created for gemma gguf files",
+   "version": "transformers 4.57.0 reported (closed 2025-11-29) -> 5.17.0 first; the reported version if gone",
+   "expected_boundary": "load:transformers.tokenizer (GGUF: the tokenizer model type the checkpoint declares, built as another one)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "unknown": 2,
+    "pass": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "I",
+   "verdict": "unknown_only",
+   "note": "reproduced on transformers 5.17.0 (vllm0220 venv, which has gguf): the tokenizer built from gemma-3-4b-it-Q8_0.gguf is Unigram and splits 'What' into 'Wh','at' where the model's BPE tokenizer keeps 'What'. entail on: load:transformers.tokenizer Vocab unknown for the GGUF-built tokenizer ('no tokenizer file, config vocab_size or embedding to compare with'); the GGUF file's own tokenizer metadata was not used as the declaration. The reference tokenizer passed (Vocab, Tokenization)"
+  },
+  {
+   "position": 57,
+   "issue": "transformers#43450",
+   "case": "tf43450",
+   "run": "tf43450_4576",
+   "engine_version": "4.57.6",
+   "title": "Video processors return incorrect shape when input is batched",
+   "version": "transformers 4.57.6 reported (fixed by #43486) -> 5.17.0 first; 4.57.6 in the existing vllm0210 venv",
+   "expected_boundary": "load:transformers.video_processor (a batched 5-D input taken as one video: the batch axis read as frames)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "level": "D",
+   "verdict": "missed",
+   "note": "not reproduced on 5.17.0 (fixed); reproduced on the reported 4.57.6 (existing vllm0210 venv): a batched 4 x 5 x 3 x 100 x 100 tensor comes back 1 x 1 x 4 x 5 x 3 x 256 x 256; entail on: no decision (no adapter at the video processor)"
+  },
+  {
+   "position": 73,
+   "issue": "vllm#33091",
+   "case": "vl33091",
+   "run": "vl33091",
+   "engine_version": "0.14.0",
+   "title": "[Bug]: Whisper accuracy issue with FA2+CG",
+   "version": "vLLM 0.14.0 reported (fixed by #33360; #33164 disabled graphs for Whisper + FA2 meanwhile) -> 0.14.0 in a new venv",
+   "expected_boundary": "kernel:vllm.attention (cross-attention metadata: CrossAttentionBuilder overrides max_seq_len with the encoder lengths, so a CUDA graph is captured with max_seq_len 0 and replayed for real requests)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 12,
+    "unknown": 1,
+    "broken": 9
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "false",
+   "note": "reproduced on the reported vLLM 0.14.0 (new venv vllm0140, vllm[audio] extras added): with FA2 and CUDA graphs the transcription is ' The end of the day, the end of the day, ...'; the eager control on 0.14.0 and the fixed 0.30.0 transcribe 'Mary had a little lamb'. entail on: no decision at the cross-attention metadata (the defect is missed), and container:vllm.allocate_slots KvExtent BROKEN x9 ('kv cache group 1 holds 0 KV slots for 216 tokens') - unrelated to the defect: the same 9 broken appear in the 0.14.0 eager control and on 0.30.0, where the output is right. A false alarm of the frozen KV extent rule on an encoder-decoder model's cross-attention cache group (its slots follow the encoder length, not the decoder tokens); E2 has no encoder-decoder model. DEFERRED"
+  },
+  {
+   "position": 74,
+   "issue": "vllm#35221",
+   "case": "vl35221",
+   "run": "vl35221",
+   "engine_version": "0.16.0",
+   "title": "[Bug]: `qwen3` reasoning parser incorrectly parse reasoning-only output as `content`",
+   "version": "vLLM between #34779 and #35230 (Feb 2026) -> the 0.16.0 release if it holds the defect, else not runnable",
+   "expected_boundary": "request:vllm.reasoning_parser (a thinking model's output that ends before </think> is read as content, though the template starts the reasoning)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 11,
+    "unknown": 1
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "level": "I",
+   "verdict": "adapter_not_installed",
+   "note": "reproduced on the reported vLLM 0.16.0 (vllm0160) off and on: max_completion_tokens 5 gives content 'Hmm, the user said', reasoning null, finish_reason length. entail on: the parser-reference adapter (vllm_parse) hooks 0.30's ParserManager.get_parser, which 0.16.0 does not have, so it never installed (protocol 8 (2): counted apart); at request:vllm.chat_template the template adapter failed on 0.16's HfRenderer (AttributeError model_config) and said so once (unknown), the request was served. On 0.30 the parse contract's unfinished-output rule would excuse this difference anyway (DEFERRED 32)"
+  },
+  {
+   "position": 125,
+   "issue": "vllm#25800",
+   "case": "vl25800",
+   "run": "vl25800",
+   "engine_version": null,
+   "title": "[Bug]: FP8 KV cache + sleep(level=2) leads to gibberish output, but level=1 is fine",
+   "version": "vLLM 0.10.2 reported (fixed by #28783) -> 0.10.2 in a new venv",
+   "expected_boundary": "container:vllm.kv_cache (the FP8 KV cache's scales are not restored when the cache is re-allocated at wake-up: the cache keeps its dtype but loses its scale)",
+   "reproduced_off": null,
+   "reproduced_on": null,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 10,
+    "unknown": 5
+   },
+   "rating_A": "K3",
+   "rating_B": "K3",
+   "rating_C": null,
+   "consensus": "K3",
+   "level": "D",
+   "verdict": "not_reproduced",
+   "note": "not reproducible on this GPU: vLLM 0.10.2 (new venv vllm0102, transformers pinned to the contemporary 4.56.2) says '--kv-cache-dtype is not supported by the V1 Engine. Falling back to V0' on sm_89 (FlashAttention cannot hold an FP8 KV cache here; the reporter ran V1 on H100), and the V0 worker has no reload_weights, so the report's script stops at collective_rpc('reload_weights') (NotImplementedError) before the second generate; forcing V1 with FlashInfer is refused (FlashInfer not in that venv, config validation). The deep-sleep path of the report is never reached"
+  },
+  {
+   "position": 150,
+   "issue": "vllm#27390",
+   "case": "vl27390",
+   "run": "vl27390",
+   "engine_version": "0.11.0",
+   "title": "[Bug]: Inconsistent `finish_reason` and special token handling between V0 and V1 engines",
+   "version": "vLLM with V0 and V1 (Oct 2025; fixed by #27555) -> 0.11.0 in a new venv (V1 before the fix)",
+   "expected_boundary": "request:vllm.stop (the stop reason: an EOS generated at the token limit reported as the limit)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 11
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "level": "I",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.11.0 (new venv vllm0110; transformers pinned to the contemporary 4.57.1 because 0.11.0 fails with 5.17): with max_tokens 15 the output ends on <|im_end|> (151645) and finish_reason is 'length' (16: 'stop'); the fixed 0.30.0 (control) says 'stop'. entail on 0.11.0: load decisions pass, the start path check passes (its probes run with ignore_eos, so an EOS on the limit never occurs), vllm_identity could not install on 0.11 (said); no adapter reads the stop reason in any version"
+  }
+ ]
+}

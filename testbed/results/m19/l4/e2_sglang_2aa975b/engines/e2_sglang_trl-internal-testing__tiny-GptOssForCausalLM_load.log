@@ -1,0 +1,64 @@
+[2026-09-27 19:21:41] Scheduler hit an exception: Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5841, in run_scheduler_process
+    scheduler = Scheduler(
+                ^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 576, in __init__
+    self.init_model_worker()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1100, in init_model_worker
+    self.init_tp_model_worker()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1022, in init_tp_model_worker
+    self.tp_worker = TpModelWorker(**worker_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/tp_worker.py", line 351, in __init__
+    self._init_model_runner()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/tp_worker.py", line 483, in _init_model_runner
+    self._model_runner = ModelRunner(
+                         ^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_executor/model_runner.py", line 469, in __init__
+    self.initialize()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_executor/model_runner.py", line 663, in initialize
+    self.load_model()
+  File "<workspace>/entail/entail/adapters/sglang_adapter.py", line 134, in load_model
+    out = _ORIG_LOAD(self, *a, **kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_executor/model_runner.py", line 1203, in load_model
+    loaded = load_model_with_memory_saver(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_executor/model_runner_components/load_model_utils.py", line 339, in load_model_with_memory_saver
+    model = loader.load_model(
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_loader/loader.py", line 982, in load_model
+    model = _initialize_model(
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_loader/loader.py", line 304, in _initialize_model
+    return model_class(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/models/gpt_oss.py", line 796, in __init__
+    self.model = GptOssModel(
+                 ^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/models/gpt_oss.py", line 700, in __init__
+    self.layers, self.start_layer, self.end_layer = make_layers(
+                                                    ^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/utils/common.py", line 1484, in make_layers
+    + get_offloader().wrap_modules(
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/utils/offloader.py", line 40, in wrap_modules
+    return list(all_modules_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/utils/common.py", line 1486, in <genexpr>
+    layer_fn(idx=idx, prefix=add_prefix(idx, prefix))
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/models/gpt_oss.py", line 702, in <lambda>
+    lambda idx, prefix: decoder_layer_type(
+                        ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/models/gpt_oss.py", line 586, in __init__
+    self.mlp = GptOssSparseMoeBlock(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/models/gpt_oss.py", line 216, in __init__
+    self.gemm1_clamp_limit = config.swiglu_limit
+                             ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/transformers/configuration_utils.py", line 436, in __getattribute__
+    return super().__getattribute__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'GptOssConfig' object has no attribute 'swiglu_limit'
+
+[2026-09-27 19:21:41] Received sigquit from a child process. It usually means the child failed.

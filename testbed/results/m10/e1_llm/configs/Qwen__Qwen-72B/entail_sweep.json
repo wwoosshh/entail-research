@@ -1,0 +1,41 @@
+{
+ "rank": 23,
+ "id": "Qwen/Qwen-72B",
+ "model_type": "qwen",
+ "files": [
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 48591,
+ "mistral_files": [],
+ "rows": {
+  "n": 152064,
+  "where": "transformer.wte.weight [152064, 8192] in model-00001-of-00082.safetensors (header only)",
+  "config_vocab_size": 152064
+ },
+ "sources": {
+  "candidates": [],
+  "rows": 152064,
+  "rows_where": "transformer.wte.weight [152064, 8192] in model-00001-of-00082.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "error": "ValueError: The repository <workspace>/testbed/results/m10/e1_llm/configs/Qwen__Qwen-72B contains cu"
+ },
+ "vocab": [
+  {
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "note": "no tokenizer built: the tokenizer's size was not read"
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=1000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 3.3
+}

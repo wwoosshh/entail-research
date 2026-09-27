@@ -1,0 +1,18 @@
+{
+ "https://github.com/sgl-project/sglang/issues/19344": {"decision": "not_output", "reason": "the nightly container reports the wrong package version"},
+ "https://github.com/vllm-project/vllm/issues/35407": {"decision": "cannot_run", "reason": "DBO with DP2 + EP (2 GPUs, deepep)"},
+ "https://github.com/vllm-project/vllm/issues/33091": {"decision": "pass", "reason": "whisper-large-v3-turbo transcribes wrongly with FlashAttention 2 and CUDA graphs (fine with FA3, or with graphs/compilation off); script, input (vLLM's mary_had_lamb asset), expected and actual given. FA2 is this GPU's FlashAttention, so the default configuration takes that path",
+   "version": "vLLM 0.14.0 reported (fixed by #33360; #33164 disabled graphs for Whisper + FA2 meanwhile) -> 0.14.0 in a new venv", "model": "openai/whisper-large-v3-turbo",
+   "expected_boundary": "kernel:vllm.attention (cross-attention metadata: CrossAttentionBuilder overrides max_seq_len with the encoder lengths, so a CUDA graph is captured with max_seq_len 0 and replayed for real requests)"},
+ "https://github.com/vllm-project/vllm/issues/35221": {"decision": "pass", "reason": "--reasoning-parser qwen3 returns a reasoning-only output cut by the token limit as content; server command, request, expected (reasoning) and actual (content) given",
+   "version": "vLLM between #34779 and #35230 (Feb 2026) -> the 0.16.0 release if it holds the defect, else not runnable", "model": "Qwen/Qwen3-4B-Thinking-2507",
+   "expected_boundary": "request:vllm.reasoning_parser (a thinking model's output that ends before </think> is read as content, though the template starts the reasoning)"},
+ "https://github.com/sgl-project/sglang/issues/16274": {"decision": "cannot_run", "reason": "DeepSeek-R1 NVFP4, TP4 + DP4 on GB300"},
+ "https://github.com/vllm-project/vllm/issues/31202": {"decision": "cannot_run", "reason": "Mixtral-8x7B FP8 with TP2 (47B)"},
+ "https://github.com/sgl-project/sglang/issues/20078": {"decision": "cannot_run", "reason": "Z-Image-Turbo (6B DiT with a 4B text encoder, bf16) does not fit 12 GB"},
+ "https://github.com/vllm-project/vllm/issues/31495": {"decision": "cannot_run", "reason": "GPT-OSS-120B on 2 x H200"},
+ "https://github.com/vllm-project/vllm/issues/25994": {"decision": "cannot_run", "reason": "DeepSeek-V3.1 on 8 x B200"},
+ "https://github.com/vllm-project/vllm/issues/28307": {"decision": "not_output", "reason": "engine crash when repetition_penalty is set"},
+ "https://github.com/sgl-project/sglang/issues/12574": {"decision": "not_output", "reason": "AMD CI tests fail with an exception at start"},
+ "https://github.com/vllm-project/vllm/issues/36669": {"decision": "not_output", "reason": "DeepSeek-OCR crashes (EngineDeadError) on small images"}
+}

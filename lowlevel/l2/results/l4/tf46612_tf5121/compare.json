@@ -1,0 +1,428 @@
+{
+ "model": "/home/<user>/.cache/huggingface/hub/models--state-spaces--mamba-130m-hf/snapshots/1e76775f628fbf1350fbe4dbb3d971ba64af25a1/",
+ "errors": {
+  "sdpa": "ValueError: MambaForCausalLM does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue",
+  "static": "AttributeError: 'LinearAttentionLayer' object has no attribute 'max_cache_len'",
+  "chunked": "ValueError: Cannot use prefill chunking without a cache"
+ },
+ "comparisons": {
+  "sdpa_vs_eager": {
+   "verdict": "mode failed",
+   "error": "ValueError: MambaForCausalLM does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue"
+  },
+  "nocache_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 3.667626524261891e-06,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 1.239776611328125e-05,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 1.1801719665527344e-05,
+      "pdrift": 2.6136753784322675e-06,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 214
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 8.821487426757812e-06,
+      "pdrift": 1.891240791418447e-06,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 209
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 9.894371032714844e-06,
+      "pdrift": 3.516146247939389e-06,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 115
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 1.239776611328125e-05,
+      "pdrift": 3.6600974578915313e-06,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 53
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 5.692243576049805e-06,
+      "pdrift": 3.667626524261891e-06,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 6.67572021484375e-06,
+      "pdrift": 1.936363891896775e-06,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "static_vs_eager": {
+   "verdict": "mode failed",
+   "error": "AttributeError: 'LinearAttentionLayer' object has no attribute 'max_cache_len'"
+  },
+  "chunked_vs_eager": {
+   "verdict": "mode failed",
+   "error": "ValueError: Cannot use prefill chunking without a cache"
+  },
+  "batch_left_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 9.295204878356778e-06,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 2.8133392333984375e-05,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 2.8133392333984375e-05,
+      "pdrift": 8.150515266591718e-06,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 1.823902130126953e-05,
+      "pdrift": 6.045992013647972e-06,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 2.110004425048828e-05,
+      "pdrift": 9.295204878356778e-06,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 2.2172927856445312e-05,
+      "pdrift": 4.8056629025072795e-06,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 5.632638931274414e-06,
+      "pdrift": 3.6292219498523792e-06,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 1.621246337890625e-05,
+      "pdrift": 3.7141259379702696e-06,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "pad_right_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 9.806841469561789e-06,
+   "gen_drift": 0.0,
+   "prompt_drift": 6.604194641113281e-05,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 1.71661376953125e-05,
+      "pdrift": 4.776364252334631e-06,
+      "positions": 214
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 1.71661376953125e-05,
+      "pdrift": 3.526238137929738e-06,
+      "positions": 209
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 6.604194641113281e-05,
+      "pdrift": 9.806841469561789e-06,
+      "positions": 115
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 4.38690185546875e-05,
+      "pdrift": 4.519668671987276e-06,
+      "positions": 53
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 2.4318695068359375e-05,
+      "pdrift": 4.266859374046916e-06,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 2.3365020751953125e-05,
+      "pdrift": 4.7269215044942747e-07,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "beam_nocache_vs_beam_cache": {
+   "verdict": {
+    "differs": true,
+    "probe": "story_a",
+    "why": [
+     "generated token 14 changed where the base was confident (margin 27.81)"
+    ]
+   },
+   "gen_flip_margin": 31.477087020874023,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": 14,
+    "story_b": 4,
+    "code": 6,
+    "numbers": 0,
+    "repeat": null,
+    "short": 0
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 14,
+      "base_margin_at_diff": 27.805992126464844,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 4,
+      "base_margin_at_diff": 30.535438537597656,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "code": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 31.477087020874023,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 0,
+      "base_margin_at_diff": 0.10797309875488281,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "short": {
+     "generated": {
+      "first_diff": 0,
+      "base_margin_at_diff": 19.28240966796875,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  }
+ }
+}

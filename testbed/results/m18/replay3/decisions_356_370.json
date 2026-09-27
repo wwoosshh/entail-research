@@ -1,0 +1,17 @@
+{
+ "https://github.com/huggingface/diffusers/issues/13445": {"decision": "not_output", "reason": "a training script's CLI default (text encoder layers 10, 20, 30) differs from the layers the Flux 2 Klein pipeline uses (9, 18, 27); the report names possible confusion, no wrong model output"},
+ "https://github.com/vllm-project/vllm/issues/40509": {"decision": "cannot_run", "reason": "CI accuracy failure of DP/EP NixlConnector PD tests on four MI300 GPUs"},
+ "https://github.com/vllm-project/vllm/issues/52591": {"decision": "not_output", "reason": "two logger calls with mismatched format arguments drop their log records; no model output involved"},
+ "https://github.com/sgl-project/sglang/issues/32968": {"decision": "cannot_run", "reason": "output error ([PAD] token storms from NaN-contaminated logits) but Kimi-K3 at TP8 on Blackwell with 90k-237k-token contexts"},
+ "https://github.com/huggingface/transformers/issues/47458": {"decision": "not_output", "reason": "the depth-scaled initialization of GPT-2's c_proj weights is never applied in an untrained model built from its config; initialization statistics, not a model output"},
+ "https://github.com/sgl-project/sglang/issues/21744": {"decision": "cannot_run", "reason": "CI accuracy drop of Qwen3-Next under prefill/decode disaggregation"},
+ "https://github.com/vllm-project/vllm/issues/50681": {"decision": "cannot_run", "reason": "output error (corrupted decode output) but Qwen3.6-35B-A3B with expert and sequence parallelism at DP2/TP2"},
+ "https://github.com/sgl-project/sglang/issues/27109": {"decision": "not_output", "reason": "crash: DeepSeek-V4-Pro at PP2/TP8 fails with an AssertionError (hidden size mismatch) in the Triton MoE"},
+ "https://github.com/sgl-project/sglang/issues/35257": {"decision": "cannot_run", "reason": "output error at the kernel level (the DSA top-k v2 kernel keeps an arbitrary 2048 of an overflowing threshold bin, so true top-k members are dropped; the report gives a model-less synthetic repro) but the kernel does not build for this GPU: its JIT compile for sm_89 fails here (checked with SGLang 0.5.20's topk_transform_paged_v2, the renamed entry point)"},
+ "https://github.com/vllm-project/vllm/issues/47365": {"decision": "cannot_run", "reason": "output error (empty or degenerate output) but the NVFP4 flashinfer_b12x MoE on SM120 with PP2 or TP2, Qwen3.6-35B-A3B-NVFP4"},
+ "https://github.com/vllm-project/vllm/issues/41623": {"decision": "cannot_run", "reason": "output drift under decode context parallelism, which needs several GPUs"},
+ "https://github.com/vllm-project/vllm/issues/40207": {"decision": "cannot_run", "reason": "CI accuracy failure of hybrid SSM NixlConnector PD tests on four MI250 GPUs"},
+ "https://github.com/vllm-project/vllm/issues/39221": {"decision": "not_output", "reason": "API consistency: without a tool parser configured, Chat Completions returns 400 while the Responses API returns the model's unparsed tool-call markup as text; the report asks the endpoints to agree (both error or both pass the raw text), and the fix makes Responses error"},
+ "https://github.com/vllm-project/vllm/issues/39545": {"decision": "cannot_run", "reason": "output error (gibberish with non-Triton backends) but gpt-oss-20b unquantized (bf16, about 40 GB)"},
+ "https://github.com/vllm-project/vllm/issues/40373": {"decision": "cannot_run", "reason": "accuracy drop of DeepSeek-R1 NVFP4 with the flash_infer_one_sided all-to-all in prefill under P/D on GB200"}
+}

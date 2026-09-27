@@ -1,0 +1,182 @@
+{
+ "name": "diffusers.rescale_noise_cfg",
+ "about": "rescale_noise_cfg (diffusers 0.40.0); diffusers#13425's operator",
+ "tol": 1e-05,
+ "forms": [
+  {
+   "guidance_rescale": 0.7
+  },
+  {
+   "guidance_rescale": 0.0
+  },
+  {
+   "guidance_rescale": 1.0
+  }
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 3.864152456032131e-08
+  },
+  "forms": {
+   "status": "pass",
+   "rows": [
+    {
+     "form": {
+      "guidance_rescale": 0.7
+     },
+     "status": "pass",
+     "rel": 3.864152456032131e-08
+    },
+    {
+     "form": {
+      "guidance_rescale": 0.0
+     },
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "form": {
+      "guidance_rescale": 1.0
+     },
+     "status": "pass",
+     "rel": 2.6511506552267663e-08
+    }
+   ]
+  },
+  "layout": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "noise_cfg",
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "input": "noise_pred_text",
+     "status": "pass",
+     "rel": 0.0
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "noise_cfg",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.22111580882954934,
+     "op_moved": 0.22111580005282427
+    },
+    {
+     "input": "noise_cfg",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.2211623841026765,
+     "op_moved": 0.22116236928828936
+    },
+    {
+     "input": "noise_pred_text",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.1901622716910742,
+     "op_moved": 0.1901623081254043
+    },
+    {
+     "input": "noise_pred_text",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.19381298656875162,
+     "op_moved": 0.19381300154046804
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "noise_cfg",
+    "noise_pred_text"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 3.881883209758573e-08
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 6.191937772310993e-08
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 3.836586348992005e-08
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 3.919282998488487e-08
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 3.8513150479835e-08
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "fail",
+   "rows": [
+    {
+     "input": "noise_cfg",
+     "fill": "zeros",
+     "status": "fail",
+     "op_nonfinite": 1.0
+    },
+    {
+     "input": "noise_cfg",
+     "fill": "constant",
+     "status": "fail",
+     "op_nonfinite": 1.0
+    },
+    {
+     "input": "noise_pred_text",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "noise_pred_text",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "noise_cfg",
+     "status": "pass",
+     "op_nonfinite": 1.0,
+     "definition_nonfinite": 1.0
+    },
+    {
+     "input": "noise_pred_text",
+     "status": "pass",
+     "op_nonfinite": 1.0,
+     "definition_nonfinite": 1.0
+    }
+   ]
+  }
+ },
+ "seconds": 0.0
+}

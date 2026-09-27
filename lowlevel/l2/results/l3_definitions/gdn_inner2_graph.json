@@ -1,0 +1,45 @@
+{
+ "case": "gdn_inner2_graph",
+ "target": "sglang.kernels.ops.attention.fla.fused_gdn_gating:fused_gdn_gating",
+ "wrapped": true,
+ "first_call_ms": 169.07082000000173,
+ "rel_err": {
+  "first": [
+   0.9370450125396269,
+   0.9067640204247256
+  ],
+  "later": [
+   0.9370450125396269,
+   0.9067640204247256
+  ],
+  "kernel": [
+   0.9370450125396269,
+   0.9067640204247256
+  ]
+ },
+ "later_equals_kernel": true,
+ "ms": {
+  "kernel": 0.05247950001319168,
+  "wrapped_after_decision": 0.03944399999511461
+ },
+ "decisions": [
+  {
+   "verdict": "broken",
+   "rule": "the kernel the op dispatches to computes other values than the op's own native definition on the same input",
+   "resolution": null,
+   "note": "fused_gdn_gating (sglang.kernels.ops.attention.fla.fused_gdn_gating:fused_gdn_gating) on 64 of 256 rows of its first real call, against entail's definition (g = -exp(A_log) * softplus(a + dt_bias), beta = sigmoid(b)): max |kernel - definition| 16.6 over 4096 values; the definition's own noise 0.138 (typical 0.013); scale 17.6; 3457 values beyond FACTOR 8 x noise + 4 ulp (float32, float32); worst ratio to the allowance 151; worst value at output 0 index 506: kernel -20.97, definition -4.406, reference -4.393, allowed 0.109; not repaired: the function was called inside a CUDA graph capture in this process, and the graph replays the kernel whatever the name says"
+  }
+ ],
+ "stats": {
+  "instrumented": 1,
+  "uniform_calls": 1,
+  "decided": 1,
+  "checks": 1,
+  "broken": 1,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {}
+ }
+}

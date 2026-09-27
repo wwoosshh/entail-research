@@ -1,0 +1,127 @@
+WARNING 09-26 17:32:43 [interface.py:757] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:339] 
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:339]        █     █     █▄   ▄█
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.23.0
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:339]   █▄█▀ █     █     █     █  model   Qwen/Qwen3.5-4B
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:339] 
+(APIServer pid=911) INFO 09-26 17:32:43 [api_utils.py:273] non-default args: {'model_tag': 'Qwen/Qwen3.5-4B', 'port': 8321, 'disable_uvicorn_access_log': True, 'model': 'Qwen/Qwen3.5-4B', 'max_model_len': 256, 'enforce_eager': True, 'gpu_memory_utilization': 0.89, 'max_num_batched_tokens': 256, 'max_num_seqs': 1, 'enable_chunked_prefill': False, 'speculative_config': {'method': 'extract_hidden_states', 'num_speculative_tokens': 1, 'draft_model_config': {'hf_config': {'eagle_aux_hidden_state_layer_ids': [32]}}}, 'kv_transfer_config': KVTransferConfig(kv_connector='ExampleHiddenStatesConnector', engine_id='b20ade4d-fdc1-4389-9fdf-cb7f2328e2dc', kv_buffer_device='cuda', kv_buffer_size=1000000000.0, kv_role='kv_producer', kv_rank=None, kv_parallel_size=1, kv_ip='127.0.0.1', kv_port=14579, kv_connector_extra_config={'shared_storage_path': '/tmp/tmpfbj3ia_a'}, kv_connector_module_path=None, enable_permute_local_kv=False, kv_load_failure_policy='fail')}
+(APIServer pid=911) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(APIServer pid=911) [entail] unknown at load:transformers.config: Qwen3_5Config config.json (every key it gives): keys taken by neither the config class nor a reader entail knows: text_config.attn_output_gate, text_config.full_attention_interval, text_config.mamba_ssm_dtype, text_config.mlp_only_layers, text_config.mtp_num_hidden_layers, text_config.mtp_use_dedicated_embeddings (the record holds the whole decision)
+(APIServer pid=911) INFO 09-26 17:32:45 [model.py:611] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=911) INFO 09-26 17:32:45 [model.py:1745] Using max model len 256
+(APIServer pid=911) WARNING 09-26 17:32:45 [arg_utils.py:2388] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(APIServer pid=911) INFO 09-26 17:32:45 [vllm.py:999] Asynchronous scheduling is enabled.
+(APIServer pid=911) WARNING 09-26 17:32:45 [vllm.py:1055] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=911) WARNING 09-26 17:32:45 [vllm.py:1097] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=911) INFO 09-26 17:32:45 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(APIServer pid=911) WARNING 09-26 17:32:45 [vllm.py:1597] max_num_scheduled_tokens is set to 256 based on the speculative decoding settings. This may lead to suboptimal performance. Consider increasing max_num_batched_tokens to accommodate the additional draft token slots, or decrease num_speculative_tokens or max_num_seqs.
+(APIServer pid=911) INFO 09-26 17:32:45 [vllm.py:1273] Cudagraph is disabled under eager mode
+(APIServer pid=911) INFO 09-26 17:32:45 [compilation.py:321] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=911) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(APIServer pid=911) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(EngineCore pid=983) INFO 09-26 17:33:07 [core.py:113] Initializing a V1 LLM engine (v0.23.0) with config: model='Qwen/Qwen3.5-4B', speculative_config=SpeculativeConfig(method='extract_hidden_states', model=None, num_spec_tokens=1), tokenizer='Qwen/Qwen3.5-4B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=256, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=Qwen/Qwen3.5-4B, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [256], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native']), enable_flashinfer_autotune=True, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=983) WARNING 09-26 17:33:07 [interface.py:757] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+(EngineCore pid=983) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=983) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(EngineCore pid=983) INFO 09-26 17:33:10 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.21.134.1:45607 backend=nccl
+(EngineCore pid=983) INFO 09-26 17:33:10 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=983) INFO 09-26 17:33:12 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=983) WARNING 09-26 17:33:12 [__init__.py:204] min_p and logit_bias parameters won't work with speculative decoding.
+(EngineCore pid=983) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(EngineCore pid=983) INFO 09-26 17:33:24 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-4B...
+(EngineCore pid=983) INFO 09-26 17:33:24 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=983) INFO 09-26 17:33:24 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=983) INFO 09-26 17:33:24 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=983) INFO 09-26 17:33:24 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=983) INFO 09-26 17:33:24 [flash_attn.py:636] Using FlashAttention version 2
+(EngineCore pid=983) INFO 09-26 17:33:26 [weight_utils.py:922] Filesystem type for checkpoints: EXT4. Checkpoint size: 8.68 GiB. Available RAM: 19.75 GiB.
+(EngineCore pid=983) INFO 09-26 17:33:26 [weight_utils.py:945] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=983) 
+Loading safetensors checkpoint shards:   0% Completed | 0/2 [00:00<?, ?it/s]
+(EngineCore pid=983) 
+Loading safetensors checkpoint shards:  50% Completed | 1/2 [00:00<00:00,  2.15it/s]
+(EngineCore pid=983) 
+Loading safetensors checkpoint shards: 100% Completed | 2/2 [00:00<00:00,  2.24it/s]
+(EngineCore pid=983) 
+Loading safetensors checkpoint shards: 100% Completed | 2/2 [00:00<00:00,  2.23it/s]
+(EngineCore pid=983) 
+(EngineCore pid=983) INFO 09-26 17:33:26 [default_loader.py:397] Loading weights took 0.92 seconds
+(EngineCore pid=983) [entail] unknown at load:vllm.quant_method.process_weights_after_loading: Layout nothing declared; what vllm.quant_method.UnquantizedLinearMethod uses is unknown; rule: this boundary could not be checked; note: 24 weight(s) (first: language_model.model.layers.0.linear_attn.conv1d): not a matrix (shape (8192, 1, 4))
+(EngineCore pid=983) INFO 09-26 17:33:27 [gpu_model_runner.py:5116] Loading drafter model...
+(EngineCore pid=983) INFO 09-26 17:33:27 [default_loader.py:397] Loading weights took 329.00 seconds
+(EngineCore pid=983) INFO 09-26 17:33:27 [gpu_model_runner.py:5277] Using auxiliary layers from speculative config: (32,)
+(EngineCore pid=983) INFO 09-26 17:33:27 [gpu_model_runner.py:5187] Model loading took 8.61 GiB memory and 2.873960 seconds
+(EngineCore pid=983) INFO 09-26 17:33:27 [interface.py:670] Setting attention block size to 528 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=983) INFO 09-26 17:33:27 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=983) INFO 09-26 17:33:34 [gpu_worker.py:480] Available KV cache memory: 0.3 GiB
+(EngineCore pid=983) INFO 09-26 17:33:34 [kv_cache_utils.py:1744] GPU KV cache size: 576 tokens
+(EngineCore pid=983) INFO 09-26 17:33:34 [kv_cache_utils.py:1745] Maximum concurrency for 256 tokens per request: 2.25x
+(EngineCore pid=983) INFO 09-26 17:33:34 [factory.py:62] Creating v1 connector with name: ExampleHiddenStatesConnector and engine_id: b20ade4d-fdc1-4389-9fdf-cb7f2328e2dc
+(EngineCore pid=983) WARNING 09-26 17:33:34 [base.py:190] Initializing KVConnectorBase_V1. This API is experimental and subject to change in the future as we iterate the design.
+(EngineCore pid=983) INFO 09-26 17:33:34 [example_hidden_states_connector.py:151] KVTransferConfig(kv_connector='ExampleHiddenStatesConnector', engine_id='b20ade4d-fdc1-4389-9fdf-cb7f2328e2dc', kv_buffer_device='cuda', kv_buffer_size=1000000000.0, kv_role='kv_producer', kv_rank=None, kv_parallel_size=1, kv_ip='127.0.0.1', kv_port=14579, kv_connector_extra_config={'shared_storage_path': '/tmp/tmpfbj3ia_a'}, kv_connector_module_path=None, enable_permute_local_kv=False, kv_load_failure_policy='fail')
+(EngineCore pid=983) INFO 09-26 17:33:34 [example_hidden_states_connector.py:152] Shared storage path is /tmp/tmpfbj3ia_a
+(EngineCore pid=983) INFO 09-26 17:33:35 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=983) INFO 09-26 17:33:35 [core.py:313] init engine (profile, create kv cache, warmup model) took 7.64 s
+(EngineCore pid=983) INFO 09-26 17:33:35 [factory.py:62] Creating v1 connector with name: ExampleHiddenStatesConnector and engine_id: b20ade4d-fdc1-4389-9fdf-cb7f2328e2dc
+(EngineCore pid=983) WARNING 09-26 17:33:35 [base.py:190] Initializing KVConnectorBase_V1. This API is experimental and subject to change in the future as we iterate the design.
+(EngineCore pid=983) INFO 09-26 17:33:35 [example_hidden_states_connector.py:151] KVTransferConfig(kv_connector='ExampleHiddenStatesConnector', engine_id='b20ade4d-fdc1-4389-9fdf-cb7f2328e2dc', kv_buffer_device='cuda', kv_buffer_size=1000000000.0, kv_role='kv_producer', kv_rank=None, kv_parallel_size=1, kv_ip='127.0.0.1', kv_port=14579, kv_connector_extra_config={'shared_storage_path': '/tmp/tmpfbj3ia_a'}, kv_connector_module_path=None, enable_permute_local_kv=False, kv_load_failure_policy='fail')
+(EngineCore pid=983) INFO 09-26 17:33:35 [example_hidden_states_connector.py:152] Shared storage path is /tmp/tmpfbj3ia_a
+(EngineCore pid=983) INFO 09-26 17:33:35 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=983) WARNING 09-26 17:33:35 [vllm.py:1055] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=983) WARNING 09-26 17:33:35 [vllm.py:1097] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=983) INFO 09-26 17:33:35 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(EngineCore pid=983) WARNING 09-26 17:33:35 [vllm.py:1597] max_num_scheduled_tokens is set to 256 based on the speculative decoding settings. This may lead to suboptimal performance. Consider increasing max_num_batched_tokens to accommodate the additional draft token slots, or decrease num_speculative_tokens or max_num_seqs.
+(EngineCore pid=983) INFO 09-26 17:33:35 [vllm.py:1273] Cudagraph is disabled under eager mode
+(EngineCore pid=983) INFO 09-26 17:33:35 [compilation.py:321] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=911) INFO 09-26 17:33:35 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=911) INFO 09-26 17:33:36 [core_client.py:652] [shutdown] MPClient: start timeout=0s
+(APIServer pid=911) INFO 09-26 17:33:36 [core_client.py:654] [shutdown] MPClient: stopping engine manager
+(APIServer pid=911) WARNING 09-26 17:33:36 [utils.py:607] [shutdown] Process manager: force killing remaining processes count=1
+(EngineCore pid=983) INFO 09-26 17:33:36 [core.py:1178] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=983) INFO 09-26 17:33:36 [core.py:1297] [shutdown] EngineCore: start mode=abort timeout=0s
+(APIServer pid=911) INFO 09-26 17:33:36 [core_client.py:656] [shutdown] MPClient: engine manager stopped
+(APIServer pid=911) INFO 09-26 17:33:36 [core_client.py:657] [shutdown] MPClient: cleaning up background resources
+(APIServer pid=911) INFO 09-26 17:33:36 [core_client.py:659] [shutdown] MPClient: complete
+(APIServer pid=911) Traceback (most recent call last):
+(APIServer pid=911)   File "<frozen runpy>", line 198, in _run_module_as_main
+(APIServer pid=911)   File "<frozen runpy>", line 88, in _run_code
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/cli/main.py", line 101, in <module>
+(APIServer pid=911)     main()
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/cli/main.py", line 95, in main
+(APIServer pid=911)     args.dispatch_function(args)
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/cli/serve.py", line 148, in cmd
+(APIServer pid=911)     uvloop.run(run_server(args))
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/uvloop/__init__.py", line 96, in run
+(APIServer pid=911)     return __asyncio.run(
+(APIServer pid=911)            ^^^^^^^^^^^^^^
+(APIServer pid=911)   File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+(APIServer pid=911)     return runner.run(main)
+(APIServer pid=911)            ^^^^^^^^^^^^^^^^
+(APIServer pid=911)   File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+(APIServer pid=911)     return self._loop.run_until_complete(task)
+(APIServer pid=911)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=911)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=911)     return await main
+(APIServer pid=911)            ^^^^^^^^^^
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/openai/api_server.py", line 665, in run_server
+(APIServer pid=911)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/openai/api_server.py", line 683, in run_server_worker
+(APIServer pid=911)     shutdown_task = await build_and_serve(
+(APIServer pid=911)                     ^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/openai/api_server.py", line 581, in build_and_serve
+(APIServer pid=911)     await init_app_state(engine_client, app.state, args, supported_tasks)
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/openai/api_server.py", line 400, in init_app_state
+(APIServer pid=911)     await init_generate_state(
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/generate/api_router.py", line 95, in init_generate_state
+(APIServer pid=911)     OpenAIServingResponses(
+(APIServer pid=911)   File "/home/<user>/venvs/vllm0230/lib/python3.12/site-packages/vllm/entrypoints/openai/responses/serving.py", line 188, in __init__
+(APIServer pid=911)     self.parser = ParserManager.get_parser(
+(APIServer pid=911)                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=911)   File "<workspace>/entail/entail/adapters/vllm_serve.py", line 282, in get_parser
+(APIServer pid=911)     parser_cls = orig.__func__(cls, tool_parser_name=name, reasoning_parser_name=reasoning_parser_name,
+(APIServer pid=911)                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=911) TypeError: ParserManager.get_parser() got an unexpected keyword argument 'is_harmony'
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

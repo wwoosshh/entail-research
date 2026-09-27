@@ -1,0 +1,49 @@
+{
+ "engine": "hf",
+ "model": "/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/",
+ "dtype": "bfloat16",
+ "device": "cuda",
+ "layers": "model.layers: 32 x ['Qwen3_5DecoderLayer']",
+ "probes": {
+  "story_a": {
+   "tokens": 207,
+   "layers": 32
+  },
+  "story_b": {
+   "tokens": 204,
+   "layers": 32
+  },
+  "code": {
+   "tokens": 107,
+   "layers": 32
+  },
+  "numbers": {
+   "tokens": 69,
+   "layers": 32
+  },
+  "repeat": {
+   "tokens": 53,
+   "layers": 32
+  },
+  "short": {
+   "tokens": 5,
+   "layers": 32
+  }
+ },
+ "reference": "dequantized",
+ "load": {
+  "dequantized": 248,
+  "filled": 426,
+  "unexpected": 312,
+  "unexpected_examples": [
+   "model.visual.blocks.0.attn.proj.bias",
+   "model.visual.blocks.0.attn.proj.weight",
+   "model.visual.blocks.0.attn.qkv.bias",
+   "model.visual.blocks.0.attn.qkv.weight",
+   "model.visual.blocks.0.mlp.linear_fc1.bias",
+   "model.visual.blocks.0.mlp.linear_fc1.weight",
+   "model.visual.blocks.0.mlp.linear_fc2.bias",
+   "model.visual.blocks.0.mlp.linear_fc2.weight"
+  ]
+ }
+}

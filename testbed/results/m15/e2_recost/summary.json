@@ -1,0 +1,566 @@
+{
+ "summary": {
+  "models": 3,
+  "runs": 9,
+  "valid_runs": 9,
+  "excluded": 0,
+  "entail_broke_a_run": 0,
+  "runs_with_broken_or_refused": 3,
+  "broken_or_refused_decisions": 11,
+  "alarms_by_boundary_fact": {
+   "load:transformers.config Coverage broken": 11
+  },
+  "resolved_decisions": 0,
+  "resolved_not_backed_by_a_measured_row (false alarms by protocol 2.3)": 0,
+  "false_alarm_runs (broken, refused or unbacked resolved)": 3,
+  "unknown_decisions": 30,
+  "same_output_without_resolution": "9/9",
+  "load_share_median": 0.0128,
+  "load_share_max": 0.0592,
+  "by_group": {
+   "top 20": {
+    "models": 0,
+    "valid_runs": 0,
+    "runs_with_broken_or_refused": 0
+   },
+   "per architecture": {
+    "models": 0,
+    "valid_runs": 0,
+    "runs_with_broken_or_refused": 0
+   },
+   "local": {
+    "models": 3,
+    "valid_runs": 9,
+    "runs_with_broken_or_refused": 3
+   }
+  }
+ },
+ "runs": [
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "broken": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    }
+   ],
+   "entail_ms": 41.8,
+   "load_s_on": 0.706,
+   "load_s_off": 0.998,
+   "share": 0.0592,
+   "group": "local"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 5,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    }
+   ],
+   "entail_ms": 199.0,
+   "load_s_on": 10.433,
+   "load_s_off": 9.431,
+   "share": 0.0191,
+   "group": "local"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "broken": 4,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "broken",
+     "rule": "the consumer differs from the declaration and no resolution is registered",
+     "target": null,
+     "note": "misspelt: rope_interleaved (nearest key the vocabulary maps: mrope_interleaved); not taken by the class and read by nothing entail knows: is_llama_config, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _c"
+    }
+   ],
+   "entail_ms": 97.9,
+   "load_s_on": 10.695,
+   "load_s_off": 10.972,
+   "share": 0.0092,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 37.2,
+   "load_s_on": 1.855,
+   "load_s_off": 4.154,
+   "share": 0.02,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 5,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 156.4,
+   "load_s_on": 13.917,
+   "load_s_off": 13.334,
+   "share": 0.0112,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 10,
+    "pass": 10
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 157.7,
+   "load_s_on": 14.691,
+   "load_s_off": 16.68,
+   "share": 0.0107,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 31.9,
+   "load_s_on": 1.829,
+   "load_s_off": 5.22,
+   "share": 0.0174,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 5,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 185.3,
+   "load_s_on": 14.46,
+   "load_s_off": 15.146,
+   "share": 0.0128,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 6,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 93.8,
+   "load_s_on": 13.669,
+   "load_s_off": 13.054,
+   "share": 0.0069,
+   "group": "local"
+  }
+ ]
+}

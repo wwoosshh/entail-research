@@ -1,0 +1,49 @@
+{
+ "rank": 186,
+ "id": "swiss-ai/Apertus-8B-Instruct-2509",
+ "model_type": "apertus",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 17115297,
+ "mistral_files": [],
+ "rows": {
+  "n": 131072,
+  "where": "model.embed_tokens.weight [131072, 4096] in model-00001-of-00004.safetensors (header only)",
+  "config_vocab_size": 131072
+ },
+ "sources": {
+  "candidates": [
+   [
+    131072,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 131072,
+  "rows_where": "model.embed_tokens.weight [131072, 4096] in model-00001-of-00004.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 131072,
+  "reach": 131072
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='llama3', theta=12000000, factor=8.0, original_max_position=8192, low_freq_factor=1.0, high_freq_factor=4.0, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 6.7
+}

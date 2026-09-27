@@ -1,0 +1,12 @@
+{
+ "https://github.com/vllm-project/vllm/issues/57136": {"decision": "cannot_install_version", "reason": "output error (NaN vision embeddings, wrong answers) on Qwen2.5-VL-3B with nine encoder CUDA-graph budgets sharing one graph pool; one GPU would do; but the symptom lived in the PR branch (#56922, source 873804d1e9 before its mitigation) and the merged PR carries the mitigation (a new pool handle per capture), so no released version carries it and there is no version to install"},
+ "https://github.com/sgl-project/sglang/issues/26745": {"decision": "cannot_run", "reason": "output error (silent NaN/garbage for every chat request) but the reported model is Qwen3.5-122B-A10B; the mechanism (visual encoder parameters left at torch.empty by a checkpoint without them, warmup image request writes NaN KV into the radix cache) would show on a small VLM, but the rule takes the reported model; noted for the vocabulary as an uninitialised-parameters coverage case (DEFERRED)"},
+ "https://github.com/sgl-project/sglang/issues/27124": {"decision": "not_output", "reason": "crash at start (ValueError buffer dtype mismatch e4m3fnuz vs e4m3fn) on AMD MI300X"},
+ "https://github.com/vllm-project/vllm/issues/43301": {"decision": "cannot_run", "reason": "an accuracy divergence (gsm8k threshold under NIXL PD disaggregation, TP=2) framed as an investigation; multi-GPU disaggregation is out of reach; the closing PR attributes the drop to bf16 lm_head ULP-tie noise on L4"},
+ "https://github.com/vllm-project/vllm/issues/46027": {"decision": "not_output", "reason": "an internal API contract inconsistency (on_request_finished guarantees across offloading layers), stated as not a runtime failure"},
+ "https://github.com/huggingface/transformers/issues/46016": {"decision": "not_output", "reason": "automated code-quality scan"},
+ "https://github.com/sgl-project/sglang/issues/40751": {"decision": "cannot_run", "reason": "output error (repetition, DeepSWE 68% -> 42%) but Kimi-K3 at EP32 on GB300"},
+ "https://github.com/sgl-project/sglang/issues/22800": {"decision": "not_output", "reason": "crash: FA3 decode CUDA graph capture fails with a scheduler_metadata shape mismatch"},
+ "https://github.com/vllm-project/vllm/issues/47397": {"decision": "not_output", "reason": "feature request: detect a CUDA toolchain/driver PTX mismatch at startup"},
+ "https://github.com/sgl-project/sglang/issues/33107": {"decision": "cannot_run", "reason": "output error (word-soup at greedy) but MiniMax-M3 NVFP4 at TP4 on 8x B300"}
+}

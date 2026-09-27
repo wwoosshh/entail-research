@@ -1,0 +1,50 @@
+{
+ "rank": 116,
+ "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+ "model_type": "qwen3",
+ "files": [
+  "tokenizer.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 7066098,
+ "mistral_files": [],
+ "rows": {
+  "n": 151936,
+  "where": "model.embed_tokens.weight [151936, 4096] in model-00001-of-000002.safetensors (header only)",
+  "config_vocab_size": 151936
+ },
+ "sources": {
+  "candidates": [
+   [
+    151643,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 151936,
+  "rows_where": "model.embed_tokens.weight [151936, 4096] in model-00001-of-000002.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "LlamaTokenizer",
+  "vocab_size": 151643,
+  "reach": 151671
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='yarn', theta=1000000, factor=4.0, original_max_position=32768, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": [
+   "<workspace>/testbed/results/m10/e1_llm/configs/deepseek-ai__DeepSeek-R1-0528-Qwen3-8B/config.json#rope_theta,rope_scaling: RoPE keys ['attn_factor'] are not in vocabulary v6; the Rotary fact does not carry them"
+  ]
+ },
+ "other_problems": [],
+ "seconds": 2.6
+}

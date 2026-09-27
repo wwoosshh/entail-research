@@ -1,0 +1,46 @@
+{
+ "rank": 172,
+ "id": "bigscience/bloom-560m",
+ "model_type": "bloom",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 14500523,
+ "mistral_files": [],
+ "rows": {
+  "n": 250880,
+  "where": "word_embeddings.weight [250880, 1024] in model.safetensors (header only)",
+  "config_vocab_size": 250880
+ },
+ "sources": {
+  "candidates": [
+   [
+    250680,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 250880,
+  "rows_where": "word_embeddings.weight [250880, 1024] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 250680,
+  "reach": 250680
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 7.6
+}

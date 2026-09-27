@@ -1,0 +1,1880 @@
+{
+ "count": 96,
+ "rated_by_both": 96,
+ "missing": [],
+ "kappa_7": {
+  "n": 96,
+  "observed": 0.8125,
+  "expected": 0.2936197916666667,
+  "kappa": 0.7345622119815668
+ },
+ "kappa_k1_vs_rest": {
+  "n": 96,
+  "observed": 0.8958333333333334,
+  "expected": 0.5358072916666666,
+  "kappa": 0.7755960729312764
+ },
+ "counts_A": {
+  "K1": 37,
+  "K7": 36,
+  "K4": 10,
+  "K3": 4,
+  "K2": 6,
+  "K6": 2,
+  "K5": 1
+ },
+ "counts_B": {
+  "K1": 33,
+  "K7": 35,
+  "K4": 18,
+  "K2": 4,
+  "K3": 5,
+  "K5": 1
+ },
+ "issues": {
+  "https://github.com/vllm-project/vllm/issues/49141": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Fix PR says the checkpoint stores the MTP layer's experts unquantized but vLLM still assigns a quantized MoE method, so the declared storage format is ignored and parameter shapes mismatch."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Checkpoint's MoE expert weights were unquantized but the assigned quant method treated them as quantized, so allocated params didn't match checkpoint tensors."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/43962": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Wrong answers appear only with TP>1 or Triton attention in 0.21.0, but no cause or fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No root cause is identified and no fix is linked; only a reproduction and observed wrong numeric answers are given."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The report shows wrong answers only with TP=2/4 or Triton attention in 0.21.0 but identifies no cause and describes no fix."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/39022": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "DeepEP HT hardcodes per_act_token_quant=False instead of passing quant_config.per_act_token_quant, so the declared per-token scale granularity is replaced by a default."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "DeepEP HT hardcoded per_act_token_quant=False instead of reading quant_config.per_act_token_quant, causing a per-tensor scale to be used where per-token was declared."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/51971": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The RDNA W4A16 kernel rejects the GPTQ qzeros layout (16x640 vs expected 5120x16), suggesting the checkpoint's zero-point layout is read under a different assumption, but no fix is described."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "GPTQ qzeros checkpoint layout shape ([16,640]) doesn't match what the ROCm RDNA kernel expects ((5120,16)), suggesting an un-normalized layout/orientation."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/46347": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The report only gives a reproduction showing accuracy changes with VLLM_CPU_KVCACHE_SPACE; no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report only gives a repro command and no diagnosis of why VLLM_CPU_KVCACHE_SPACE changes accuracy."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Only the title (changing the CPU KV cache space lowers accuracy) and a repro command are given, with no cause or fix; the only trigger is the KV cache memory size."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/21460": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "NaN appears with DP-attention and a tensor shape vs metadata mismatch ([1,35] vs [1,36]) was seen, but the root cause was not found and no fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Reporter found a shape mismatch ([1,35] vs [1,36]) before a NaN but could not identify the cause, and no fix is linked."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "NaNs in the prob tensor appear with DP attention and a tensor/metadata shape mismatch ([1, 35] vs [1, 36]) was seen, but patching it only delayed the NaNs and no root cause or fix is given."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/21802": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "When fusing w1 and w3 SGLang keeps only w1's weight_scale_2 and discards w3's checkpoint scale, introducing dequantization error (the IMA link is only suspected)."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "SGLang fuses w1/w3 into one MoE call but keeps only w1's weight_scale_2, discarding w3's distinct scale during dequantization."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/49865": {
+   "A": {
+    "k": "K4",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The merged fix makes the Inkling parser confirm reasoning end when a content block opens, because its phase machine never left reasoning when no thinking block was emitted."
+   },
+   "B": {
+    "k": "K4",
+    "level": "I",
+    "conf": 3,
+    "evidence": "The delegating parser never entered its tool phase because reasoning-end confirmation logic didn't fire when content opened with no thinking block."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "I"
+  },
+  "https://github.com/vllm-project/vllm/issues/57353": {
+   "A": {
+    "k": "K1",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The chat template puts the think-open marker in the prompt, but the non-streaming parser assumes it appears in the output and classifies marker-free truncated reasoning as content; the fix consults the thinking-enabled state."
+   },
+   "B": {
+    "k": "K4",
+    "level": "I",
+    "conf": 3,
+    "evidence": "The non-streaming fallback branch classifies output with no think markers as content while the streaming branch's separate logic classifies the same case as reasoning."
+   },
+   "C": {
+    "k": "K1",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The chat template puts the think-open marker in the prompt as a generation prefix, but the non-streaming parser assumes marker-free output has no think channel and returns truncated reasoning as content; the fix treats marker-free output as reasoning when thinking is enabled."
+   },
+   "consensus": "K1",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/23812": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Only an output sample and environment are given for the SGLang vs Transformers mismatch; no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "The reported body text is unrelated boilerplate about photo-critique criteria and gives no identifiable defect."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/sgl-project/sglang/issues/35257": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The top-k kernel silently drops candidates when the threshold bin exceeds the 2048-entry tie buffer; the fix adds exact radix rounds for the overflow case."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The top-k collect pass keeps only the first-arriving 2048 tie candidates and silently drops the rest instead of handling bins larger than the buffer."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/49066": {
+   "A": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "Qwen2Tokenizer replaces the pre_tokenizer declared in tokenizer.json with a module-level regex constant, producing wrong token ids."
+   },
+   "B": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "Qwen2Tokenizer.__init__ always builds the pre-tokenizer from a hardcoded PRETOKENIZE_REGEX constant, discarding the pretokenize_regex actually declared in tokenizer.json."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/24440": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The issue only states an accuracy loss without --disable-radix-cache; the linked open PR fixes a different issue (#31071, per-rank greedy verify) and its relation is unclear."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The greedy accept-token branch computed a per-rank local argmax and, unlike the sampling branch, never broadcast the result across TP ranks."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The issue only says accuracy drops with EAGLE and aiter unified attention unless the radix cache is disabled; the linked PR is open, targets a different issue (per-rank greedy verify decisions not broadcast across TP) and does not mention the radix cache."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/49122": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Fix PRs say the shared-expert MLP already all-reduces its output and FusedMoE reduces it again because the model did not follow the runner's reduce-once contract (reduce_results=False)."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "AriaTextMoELayer's shared-experts submodule already all-reduces internally but wasn't given reduce_results=False, so FusedMoE's runner reduces it again."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/27000": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Duplicate answers appear only when EPLB is enabled, but no cause or fix is described."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No root cause is given beyond enabling eplb with immediate rebalancing, and no fix is linked."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Only the symptom (duplicate answers when EPLB is enabled) and a launch command are given, with no cause or fix."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/30816": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The checkpoint names the shared expert shared_experts.* while the model uses shared_mlp, so the loader silently skips the weights; the fix remaps the names."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Checkpoint tensor names use \"shared_experts\" but the model module is registered as \"shared_mlp\" with no remap, so every shared-expert weight fails the params_dict lookup and is skipped."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/33106": {
+   "A": {
+    "k": "K3",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The reporter shows padding rows hold stale uninitialized memory that flashinfer turns into NaN, but the producing allocation was not found and the merged PR only narrows the GEMM dispatch."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The attention kernel writes only the real rows of a padded tile and never writes the last (padding) row, leaving uninitialized memory that reaches the GEMM."
+   },
+   "C": {
+    "k": "K3",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter shows a padding row is never written and holds stale memory (values jumping 22 orders of magnitude) that flashinfer turns into NaN, calls it an initialization bug that zeroing the rows fixes, and the merged PR only changes GEMM dispatch for performance."
+   },
+   "consensus": "K3",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/24866": {
+   "A": {
+    "k": "K2",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The FP8 combine used a direct cast without quantization scaling, losing precision; the fix adds FP8 blockwise quantization for the combine."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "AMD's MoRI-EP FP8 combine does a direct cast instead of a quantization-aware combine, omitting the scale correction the dispatch side applies."
+   },
+   "C": {
+    "k": "K2",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Accuracy falls because the MoRI FP8 combine does a direct cast without quantization scaling, and the merged fix adds an FP8 blockwise-quantized combine mode."
+   },
+   "consensus": "K2",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/22101": {
+   "A": {
+    "k": "K6",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The fix PR found no defect in the verify path and made the CI test use deterministic inference mode, since small numerical differences moved near-threshold runs."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Root cause is only speculative (\"may have nondeterminism...or eval too small\"); the merged fix just makes the test deterministic rather than identifying the defect."
+   },
+   "C": {
+    "k": "K6",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The fix PR checked masks, positions, KV slots and accepted tokens, found only small numerical differences in target verify, and fixed the flaky test by running it in the existing deterministic inference mode rather than changing engine code."
+   },
+   "consensus": "K6",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/45491": {
+   "A": {
+    "k": "K2",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Sliding windows that fall entirely on padding give a softmax over all -inf, producing NaN; the proposed fix adjusts the mask to avoid 0/0."
+   },
+   "B": {
+    "k": "K2",
+    "level": "D",
+    "conf": 3,
+    "evidence": "A sliding-window query position whose entire window falls on padding computes softmax over an all -inf row, giving 0/0 = NaN."
+   },
+   "C": null,
+   "consensus": "K2",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/34954": {
+   "A": {
+    "k": "K1",
+    "level": "I",
+    "conf": 1,
+    "evidence": "The quality gate checks server args but never observes that LoRA-merged weights are resident, so quality=high is reported for unvalidated weights; the fix makes the gate see substituted weights."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The quality-tier validation gate checks sixteen server args and the device but has no field for whether a LoRA adapter is merged onto the audited weights."
+   },
+   "C": {
+    "k": "K1",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The quality gate checks sixteen server args but not which DiT weights are resident, so a LoRA-merged server still labels responses quality high with the base-weight guarantee, and the fix makes the gate see the LoRA and weights-path args."
+   },
+   "consensus": "K1",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/28179": {
+   "A": {
+    "k": "K4",
+    "level": "I",
+    "conf": 1,
+    "evidence": "The reporter attributes the ignored repetition_penalty to a missing or unregistered BatchedRepetitionPenalizer, though the symptom is sporadic and no fix is linked."
+   },
+   "B": {
+    "k": "K4",
+    "level": "I",
+    "conf": 2,
+    "evidence": "repetition_penalty is accepted by the API but BatchedRepetitionPenalizer is never implemented/registered in the penalizer orchestrator, so it's never applied."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "I"
+  },
+  "https://github.com/vllm-project/vllm/issues/51094": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "In mamba_cache_mode=all the connector reports N-1 cached tokens while restoring the state stored at boundary N, so the state's position is misread and a token is applied twice; the fix aligns all-mode hits."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "resolve_mamba_align_size only special-cased mamba_cache_mode==\"align\" for boundary alignment, leaving \"all\" mode to restore a state that already includes the recomputed token."
+   },
+   "C": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "In all mode the connector reports N-1 cached tokens but restores the Mamba state stored at boundary N, which already includes token N, so that token is applied twice; the fix aligns all-mode hits to valid state boundaries as in align mode."
+   },
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/52413": {
+   "A": {
+    "k": "K3",
+    "level": "D",
+    "conf": 1,
+    "evidence": "Concurrent non-atomic writes to a shared Triton cache produced a mixed cache entry, so an aligned-assumption binary ran on unaligned pointers; the proposed fixes are unmerged."
+   },
+   "B": {
+    "k": "K3",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Concurrent compiles of aligned/unaligned kernel variants wrote non-atomic cache-group files to the same shared dir, so a reader could load a cubin paired with mismatched metadata."
+   },
+   "C": null,
+   "consensus": "K3",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/46531": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The diagnosis localizes the fault to the text-only forward path with well-formed inputs, but no specific cause or fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Diagnostics narrow the fault to the text-only forward path but the excerpted report does not state a concluded root cause."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter localizes the fault to the text-only forward path of Gemma4Unified (corrupted hidden states, same weights fine in llama.cpp) but names no root cause and no fix is shown."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/57493": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Decode logprobs vary with previous requests only on ROCM_ATTN, but no cause or fix is identified."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Output varies by prior request only on the ROCm backend, but no root cause or fix is given in the text."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Decode logprobs with ROCM_ATTN vary with the preceding requests while TRITON_ATTN is stable, and a near-tie turns this into different text, but no cause or fix is identified."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/47030": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "transformers ceil-rounds fp32 dequant scales to UE8M0 for the SM100 kernel without requantizing data quantized against the original scales; the linked PR is about compilability, not this."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "DeepGEMM's SM100 kernel requires UE8M0 (power-of-two) scales, and transformers ceil-rounds the fp32 scale to match but never requantizes the data the scale describes."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/55951": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The align postprocess uses an idx_mapping from the batch pp_size steps ago against the block table of batch T-1, copying state to wrong blocks; the fix indexes by request slot."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The mamba align postprocess indexes the current batch-ordered block table using an idx_mapping that belongs to the batch from pp_size steps ago."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/47328": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The rotary class builds half-split cos/sin while the rotate function and checkpoint expect the interleaved layout; the fix builds interleaved cos/sin."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The DiT rotary builds cos/sin in half-split layout (inherited from LlamaRotaryEmbedding) but the module's rotate function is interleaved, an incompatible pairing."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/43602": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The merged fix says warmup made the compiled decoder graph specialize to the no-deepstack path, which real multimodal requests then reused, skipping the deepstack additions."
+   },
+   "B": {
+    "k": "K3",
+    "level": "D",
+    "conf": 3,
+    "evidence": "During compile warmup the decoder graph specialized to the no-deepstack branch, and real multimodal requests then reused that compiled graph despite carrying real deepstack embeds."
+   },
+   "C": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The fix explains that returning None for empty deepstack embeddings let the compiled decoder graph specialize to the no-deepstack path at warmup, so later requests carrying real deepstack embeddings had them skipped; it now always passes the tensors."
+   },
+   "consensus": "split",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/25882": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "On CPU the TopK post-processing left routed ids as logical expert ids that were consumed as physical ids under EPLB; the fix maps logical to physical."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "EPLB's CUDA path remaps logical to physical expert ids during TopK post-processing, but the CPU path left routed ids as logical, undoing the remap."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/29998": {
+   "A": {
+    "k": "K3",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter suspects the Run:AI streamer's reused staging buffers overwrite tensor references held by the GLM-5.2 load paths (same signature as #22701); no fix."
+   },
+   "B": {
+    "k": "K3",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Matches a known pattern where the Run:AI streamer reuses staging buffers across iterator batches, silently overwriting tensor references the weight loader still held."
+   },
+   "C": null,
+   "consensus": "K3",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/39545": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Gibberish appears only with non-triton MoE backends (FlashInfer CUTLASS) for unquantized gpt-oss, but no cause or fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No root cause is identified in the text and no fix is linked; only the repro script comparing backends is given."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Gibberish appears only with non-triton MoE backends for unquantized gpt-oss-20b, but no cause or fix is given and the issue was closed as not planned."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/25218": {
+   "A": {
+    "k": "K7",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The tool-call format breaks from the second round and the reporter asks whether it is a context-format requirement or an inference bug; no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report only observes wrong tool_call formatting from round 2 onward with no identified cause and no linked fix."
+   },
+   "C": {
+    "k": "K7",
+    "level": "I",
+    "conf": 2,
+    "evidence": "Tool calls go wrong from the second round and the reporter asks whether it is a context-format requirement or an engine bug, with no cause or fix given."
+   },
+   "consensus": "K7",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/22291": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The merged fix is titled a trtllm_mla chunked-prefill zero-length bug, indicating a missing case for zero-length chunks in batched prefill; its details are truncated."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Title and partial root cause point to a \"zero-length\" chunk case mishandled in the chunked-prefill MLA latent-decompression path on Blackwell."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/30188": {
+   "A": {
+    "k": "K4",
+    "level": "I",
+    "conf": 2,
+    "evidence": "Streaming code always used top_logprobs[0], sliced incremental chunks by cumulative offsets and did not handle None token ids in prefill; the fix corrects this response-building logic."
+   },
+   "B": {
+    "k": "K4",
+    "level": "I",
+    "conf": 3,
+    "evidence": "Streaming top_logprobs always indexed top_logprobs[0] for every token in a multi-token chunk instead of the token's own index."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "I"
+  },
+  "https://github.com/vllm-project/vllm/issues/43094": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Suffix trimming assumes P's prompt is a strict prefix of D's sequence, so KV computed for different tokens is loaded when reasoning is stripped; the fix validates the continuation before reusing KV."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The block-alignment suffix-trim logic assumes P's prompt is a strict prefix of D's stored sequence, which breaks when thinking tokens are stripped from the middle."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/28851": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "One disaggregated run scores 0.0356 strict-match while flexible-extract passes; no cause is given and the linked PR only adds a benchmark."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "The one failing strict-match score is unexplained and all other repeated runs pass; the linked PR only adds a benchmark config, not a fix."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/49886": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter only suspects the sparse_mla_sm120 kernel from related open issues; no cause is confirmed and no fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report cross-references several other open issues without pinning a root cause for the garbled first-request output itself."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Garbled output on GB10 with the sparse MLA SM120 backend is tied to other open issues and a suspected kernel problem, but no root cause or fix is established."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/58406": {
+   "A": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "A shallow merge of engine and request, flat and scoped mm_processor_kwargs drops values and changes which declaration takes precedence."
+   },
+   "B": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "mm_processor_kwargs merge does a shallow top-level replace across two precedence dimensions (engine/request, flat/scoped), so a lower-precedence declared value like fps is dropped instead of merged."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/31699": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Attention output is already all-reduced (replicated) but dp_gather_partial treats it as partial and sums the copies, scaling by attn_tp_size; the fix uses dp_gather_replicate."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "dp_gather_partial is called on hidden_states that self_attn has already fully all-reduced (replicated, not partial), so the \"partial\" reduce-scatter sums replicas together."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/huggingface/diffusers/issues/14397": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Additive float masks are cast to bool and inverted as if they were keep masks, reversing their meaning; the fix routes float masks to SDPA."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The NPU mask helper assumes any non-None mask is a boolean keep-mask and inverts it, but PyTorch SDPA's floating-point masks are additive biases with different semantics."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/39223": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Only logs of a regression from 0.18.1 to 0.19.0 are given; the linked PR just pins the old version."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No code-level root cause is given; the fix is to pin the version rather than diagnose the regression."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/48590": {
+   "A": {
+    "k": "K5",
+    "level": "D",
+    "conf": 2,
+    "evidence": "lora_expand with block_n=128 produces NaN only on sm_90 (a Triton codegen bug per the PR) while the same code is correct on Blackwell; the fix uses block_n=32 on Hopper."
+   },
+   "B": {
+    "k": "K5",
+    "level": "D",
+    "conf": 3,
+    "evidence": "block_n=128 triggers OOB tile reads in the Triton lora_expand kernel's codegen specifically on sm_90, while the same code is correct on Blackwell."
+   },
+   "C": null,
+   "consensus": "K5",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/28979": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The report only notes about 1% degradation for MXFP4 with decode context parallel; the linked PR adds the DCP feature rather than a fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report gives only \"around 1% degradation, more information will be added later\" with no established mechanism."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The issue notes about 1% degradation for MXFP4 with decode context parallel and promises more information later; the linked merged PR adds DCP support and describes no fix for the accuracy."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/21744": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter guesses a data race under PD disaggregation; the linked PR only relaxes the CI threshold."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No root cause is stated; the linked fix only relaxes the CI accuracy threshold and records the issue for later investigation."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The accuracy drop under PD disaggregation is guessed to be a data race, and the linked PR only relaxes the CI threshold without finding a cause."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/55689": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Repetitive outputs occur in both disaggregated and single-node setups, with no analysis or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report describes symptoms only, with no root-cause analysis and no linked fix."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/38652": {
+   "A": {
+    "k": "K2",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The reporter hypothesizes that FP8 quantization of MLA latents without calibrated scaling compounds error over turns; no fix confirms it."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Reporter's analysis is that the FLASHMLA backend applies FP8 quantization to MLA's latent vectors without calibrated per-tensor scaling, letting error compound over turns."
+   },
+   "C": {
+    "k": "K2",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The reporter suggests, without confirmation or a fix, that FlashMLA quantizes the latent KV to FP8 without calibrated scaling so quantization error compounds over turns."
+   },
+   "consensus": "K2",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/58390": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The PR that says it fixes the issue finds the thinking-budget kernel never stops forcing end tokens after the forced walk completes, though a second PR blames top-p masking with huge logits."
+   },
+   "B": {
+    "k": "K4",
+    "level": "I",
+    "conf": 3,
+    "evidence": "The thinking-budget kernel forces the model past the reasoning boundary by writing a forced token, but never stops re-forcing once that forced walk has already completed."
+   },
+   "C": {
+    "k": "K2",
+    "level": "D",
+    "conf": 2,
+    "evidence": "One open fix traces the collapse to the split top-p kernel, which maps a probability pivot into logit space and masks every token when thinking-budget forcing writes a 1e9 logit (spec decode with top_p below 1, as in the repro), though another open PR blames the budget kernel re-forcing end tokens."
+   },
+   "consensus": "K4",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/38031": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "HiCache host load-back restores KV and recurrent state but not the DSA index buffers, so attention selects the wrong tokens; the fix carries the index state through the host tier."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "HiCache's host-tier restore brings back KV and recurrent state but not the DSA index buffers that determine which tokens attention actually selects."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/38351": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "The issue body is empty beyond the title."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "The report body is just \"··\" with no content describing any cause."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/sgl-project/sglang/issues/39830": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The host-tier restore does not carry registered Mamba slot side states (and QSA indexer state) that other slot movers carry, so restored prefixes run with stale state."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Linked PRs for the same defect class show host-tier restore omitting side-state (Mamba slot state, QSA indexer state) needed to interpret the restored KV correctly."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/29359": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Only a quality comparison on NPU is given, with no analysis or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No root cause is identified for the NPU-vs-official quality gap, and no fix is linked."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/40018": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The ROCm MLA sparse prefill ignores the skip_kv_gather flag set by the chunk splitter and re-gathers into a new view; the fix honours the flag as the CUDA path does."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The ROCm prefill path is missing the skip_kv_gather check the CUDA reference has, so it re-gathers into a freshly sliced buffer of the wrong size on later sub-chunks."
+   },
+   "C": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The chunk splitter marks later sub-chunks skip_kv_gather because their KV is already in the shared workspace, but the ROCm path ignores the flag and re-gathers into differently sized fresh views, producing garbage logits."
+   },
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/29038": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The quantizer flattens [T,G,D] and views the scales back so the SM100 einsum pairs a token's FP8 codes with another group's scale; the fix emits the scale layout DeepGEMM expects."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Flattening o:[T,G,D] into [T*G,D] for FP8 quantization and viewing scales back as [T,G,-1] can associate a token's codes with the wrong group's scale."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/30233": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Prefill aborts and sends 1 token of KV while decode, unaware of the abort, decodes from its full-length uninitialized KV; the fix propagates the abort to decode."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "An aborted prefill request (input too long) still enters the prefill queue and transfers only its 1-token placeholder, while decode allocates and reads from the full, uninitialized KV length."
+   },
+   "C": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The prefill side aborts the over-long request and sends only one token of KV, but the decode side is never told of the abort (FINISH_ABORT is even overwritten) and decodes from uninitialized KV slots; the fix propagates the abort to decode."
+   },
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40509": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "An auto-generated CI failure ticket with no details."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Auto-generated CI failure ticket with no diagnostic content, only pass/fail history."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/42718": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The expand kernel assumes each W13 slice is contiguous (offset numel/num_slices) but the all-gathered tensor's stride differs when the local rank is 1."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The fused MoE LoRA expand kernel assumes each all-gathered W13 slice is a contiguous block, but the actual stride interleaves slices across world ranks at small per-rank LoRA ranks."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/50681": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Whether hidden states are sequence-parallel is inferred from the first dimension, which is ambiguous at single-token decode; the fix imposes a fixed model-wide SP contract."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Sequence-parallel-vs-full layout is inferred from the hidden_states' first dimension, which is ambiguous (both equal 1) during TP=2 single-token decode."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/huggingface/diffusers/issues/14146": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "A garbled image on gfx1201 is reported without analysis or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No root cause is given beyond correlating the garbled image with the gfx1201 ROCm platform; no fix is linked."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/39722": {
+   "A": {
+    "k": "K3",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The linked merged PR fixes silent corruption in MNNVL Lamport buffers (stale or partially visible payloads, cleanup erasing an in-use epoch), but its tie to this backend is unclear."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "The gibberish backend is avoided rather than fixed in the linked PRs, so no confirmed root cause ties directly to this issue."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The issue was closed as not planned; one linked PR merely avoids the two-sided backend and the other fixes Lamport all-gather/reduce-scatter corruption without stating that it causes this gibberish."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/48349": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "modules_to_not_convert uses wrapper paths that never match the text-only module names, so layers declared bf16 are cast to fp8 without scale."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "modules_to_not_convert lists multimodal-wrapper-prefixed paths, but a text-only load names modules without that prefix, so none of the exclusions match and bf16-only modules get quantized."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/47087": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The merged fix says cached recurrent states past last_cache_position did not correspond to the token boundary encoded by their block hash, poisoning the prefix cache under MTP."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The block-aligned split didn't fully enforce the invariant that a cached block's hash corresponds to exactly (p+1)*block_size tokens, letting MTP/EAGLE poison the prefix cache."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/41579": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "A CI failure ticket with only an accuracy assertion and no cause."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Auto-generated CI failure ticket giving only an accuracy assertion value, no cause."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/sgl-project/sglang/issues/34629": {
+   "A": {
+    "k": "K2",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The newer FlashInfer tile-192 NVFP4 MoE BMM path produces non-finite output while tile-128 is fine; it is not root-caused beyond that tactic."
+   },
+   "B": {
+    "k": "K2",
+    "level": "D",
+    "conf": 2,
+    "evidence": "A newly-exposed tile-192 TRTLLM_GEN BMM tactic on Blackwell produces non-finite MoE output while the tile-128 tactic is correct."
+   },
+   "C": null,
+   "consensus": "K2",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/30176": {
+   "A": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "The checkpoint config uses oe_* keys while the config class reads ngram_*/emb_*, so the feature defaults to disabled and its weights are dropped."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The checkpoint's config uses oe_* key names for n-gram embedding settings while LongcatFlashConfig reads ngram_*/emb_* names, so the feature silently resolves to disabled and 32 weights are dropped."
+   },
+   "C": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "The checkpoint config names the n-gram settings oe_* while the config class reads ngram_*/emb_*, so the feature resolves to disabled and 32 weights are silently dropped; the fix accepts the aliases."
+   },
+   "consensus": "K1",
+   "level": "I"
+  },
+  "https://github.com/vllm-project/vllm/issues/44485": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 1,
+    "evidence": "With prefix caching the extracted hidden states cover only the newly scheduled tokens rather than all token_ids (per an AI explanation); no fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "The proposed explanation (hidden states extracted only from tokens scheduled this forward pass) is attributed to a third party (\"codex\") and not confirmed, with no fix linked."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Hidden-state length mismatches token_ids with prefix caching on, and the only explanation is an unverified Codex answer that hidden states cover only the tokens computed in this forward; no fix is given."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/46460": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The fast-path condition max_query_len == max_seq_len wrongly fires for batches with continuation requests; the fix adds a continuation guard to the dispatch."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The fast-path condition max_query_len==max_seq_len is meant to detect \"no continuation requests\" but can hold true even when continuation requests with cached prefixes are mixed into the batch."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/54114": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "The issue body is empty beyond the title."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Report body is only the submission-checklist boilerplate with no content."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/41236": {
+   "A": {
+    "k": "K2",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The Dynamic NTK formula simplifies to a constant independent of sequence length; the fix corrects the formula."
+   },
+   "B": {
+    "k": "K2",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Substituting max_len into the dynamic NTK formula algebraically cancels the sequence-length term, making the scaling factor a constant instead of length-dependent."
+   },
+   "C": null,
+   "consensus": "K2",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/26951": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "A slight GPQA drop with the Flashinfer SSU kernel and the extra_buffer strategy is reported, but no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report states an accuracy drop with the extra-buffer/Flashinfer SSU kernel but gives no root-cause mechanism and no fix."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "A GPQA drop with the Mamba extra_buffer strategy and the flashinfer SSU kernel is reported with no cause or fix."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/47405": {
+   "A": {
+    "k": "K6",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The user loaded a multimodal checkpoint through the wrong Auto class so no weights matched; the fix only raises an informative error."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Conversion mappings are resolved by the loading class's expected layout; loading a multimodal-layout checkpoint through AutoModelForCausalLM matches zero tensors and silently leaves weights randomly initialized."
+   },
+   "C": {
+    "k": "K6",
+    "level": "I",
+    "conf": 2,
+    "evidence": "The user loaded a multimodal converted checkpoint through the wrong Auto class, so no weights matched and the model was randomly initialized with only missing/unexpected-key warnings; the reporter asks for a louder error and the fix PR only adds one."
+   },
+   "consensus": "K6",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/23463": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Wrong results occur with attention DP and NCCL NVLS kernels at DP size 2, but no cause or fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Reporter connects a performance anomaly to a suspected accuracy issue but no root cause is confirmed and no fix is linked."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Wrong results with attention DP size 2 and NCCL NVLS kernels are measured, but no cause or fix is described."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40248": {
+   "A": {
+    "k": "K7",
+    "level": "I",
+    "conf": 3,
+    "evidence": "Function-call start or end identifiers are missing from responses with eagle3 and streaming; no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report is brief, noting missing function-call delimiter text in the response without identifying the underlying cause."
+   },
+   "C": {
+    "k": "K7",
+    "level": "I",
+    "conf": 3,
+    "evidence": "Function-call start or end markers are missing from the streamed response under eagle3 or high concurrency, with no cause or fix, and the issue was closed as not planned."
+   },
+   "consensus": "K7",
+   "level": "I"
+  },
+  "https://github.com/vllm-project/vllm/issues/49250": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The fix PR says the recompute's num_computed_tokens rollback was written only to the CPU mirror, leaving the GPU copy stale, so tokens and positions were gathered from the wrong offset."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "A recompute's num_computed_tokens truncation was written to the optimistic CPU mirror but not to the GPU tensor, so the recompute gathered tokens from the wrong offset."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40207": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "An auto-generated CI failure ticket with no details."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Auto-generated CI failure ticket with no diagnostic content."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/40252": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "quantization_config.ignore names the old split tensors while the shards use combined names, so layers meant to stay unquantized are treated as NVFP4 and skipped."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Community NVFP4 quant configs list the old split tensor names in quantization_config.ignore while checkpoints ship the new combined names, so the loader can't match them and silently skips loading."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40047": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 1,
+    "evidence": "Kernels meant to work per token let NaN in CUDA-graph padding rows leak into real rows through warp reductions for scales; the fixes zero the padding or correct scale offsets."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Multiple per-token kernels use warp-level reductions for group quantization scales that include CUDA-graph padding rows, letting padding NaNs contaminate real tokens' scales."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/47303": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Scale storage is padded to a multiple of 2 groups while the kernel reads 4-group tiles, so it reads past the valid scales into 0xff memory; the merged fix pads the layout."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "An unmasked tl.load of Hopper-swizzled MXFP4 scales reads past the valid K dimension on the last, non-even tile, pulling 0xff read as NaN."
+   },
+   "C": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The Hopper scale layout pads the scale K dimension only to a multiple of 2 while the kernel reads whole tiles, so it loads 0xff bytes past the scales as NaN; the merged fix pads the layout so the storage covers the kernel's reads."
+   },
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/47239": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "split_decodes_and_prefills assumes a decode-first batch order but Model Runner V2 sorted by token count, misclassifying spec decodes; the fix restores the ordering contract."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Model Runner V2 sorts the batch by scheduled-token count alone, so a spec-decode request scheduling fewer tokens can sort in front of uniform decodes, violating the decode/prefill split's ordering contract."
+   },
+   "C": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "split_decodes_and_prefills requires decode-first batch order (enforced by the V1 runner), but Model Runner V2 sorted by token count so spec decodes were misclassified as prefills; the merged fix orders uniform decodes first."
+   },
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/50435": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "An accuracy regression across 377 commits is reported with no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "No code-level cause is identified across the 377-commit bisection range; only a null-content warning is noted without diagnosis."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/sgl-project/sglang/issues/33656": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 1,
+    "evidence": "The canary shows SWA KV written at the wrong position (512 vs 8448), which the reporter attributes to translation bookkeeping in the hicache path; the open PR addresses a different restore flag."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "kv-canary shows the stored token_id and hash match expectations exactly but the position is wrong (512 instead of 8448), indicating a position-translation bookkeeping bug for SWA slots."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/huggingface/diffusers/issues/14213": {
+   "A": {
+    "k": "K2",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Float32 rounding makes sigma_to^2 - sigma_up^2 slightly negative and the square root yields NaN; the fix clamps the radicand."
+   },
+   "B": {
+    "k": "K2",
+    "level": "D",
+    "conf": 3,
+    "evidence": "With squaredcos_cap_v2's huge sigma range, float32 rounding makes sigma_up fractionally exceed sigma_to, making sigma_to**2-sigma_up**2 negative before the sqrt, producing NaN."
+   },
+   "C": null,
+   "consensus": "K2",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/41623": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The linked merged fix says the MLA prefill backend began slicing V inside the backend, changing the tensor shape contract seen by the merge path (another PR fixes a stale seq_lens order)."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 2,
+    "evidence": "One of three linked fixes moves computing seq_lens_np to after DCP's modification of seq_lens_cpu, since it was previously derived from a stale pre-DCP copy."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/huggingface/transformers/issues/48051": {
+   "A": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "convert_to_rgb indexes video[..., 3, :, :] instead of video[..., :3, :, :], using the alpha channel as RGB."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 3,
+    "evidence": "convert_to_rgb's blending line indexes video[...,3,:,:] (the alpha channel) as the RGB foreground instead of video[...,:3,:,:]."
+   },
+   "C": null,
+   "consensus": "K4",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40526": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "An auto-generated CI failure ticket with no details."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Auto-generated CI failure ticket with no diagnostic content."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/38634": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "NaN appears only with FP8 KV cache plus CUDA graphs, but no cause or fix is given."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report only lists which eager/graph/dtype combinations produce NaN, without identifying a mechanism, and no fix is linked."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Only a symptom matrix is given (NaN with FP8 KV cache plus CUDA graphs, correct otherwise), with no cause or fix."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/47365": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The regression is bisected to a 49-commit window; the only linked PR is a closed docs note blaming CUDA graph capture on SM120 without a code-level cause."
+   },
+   "B": {
+    "k": "K3",
+    "level": "D",
+    "conf": 2,
+    "evidence": "A follow-up comment finds CUDA graph capture itself computes wrong results on SM120 regardless of MoE kernel choice, including weight-only marlin, while enforce_eager is coherent."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "A regression window is bisected but no cause is found, and the linked closed docs PR blaming CUDA graph capture on SM120 conflicts with the report that a single GPU works."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/sgl-project/sglang/issues/29683": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter guesses a nondeterministic reduction or illegal access in the fused MoE chain on gfx950; no confirmed cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Root cause is explicitly speculative (\"most likely a nondeterministic-reduction/illegal-access issue\"), with no linked fix confirming it."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "Low and unstable accuracy plus memory faults on MI355X are guessed to come from a nondeterministic reduction or illegal access in the fused MoE chain, but nothing is confirmed and no fix is described."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40201": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "An auto-generated CI failure ticket with no details."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "Auto-generated CI failure ticket with no diagnostic content."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/sgl-project/sglang/issues/24321": {
+   "A": {
+    "k": "K1",
+    "level": "D",
+    "conf": 1,
+    "evidence": "An open PR found MiMo-V2 builds FusedMoE without routing_method_type, so in-kernel routing falls back to a default instead of the declared sigmoid/bias routing, though the issue says all backends fail."
+   },
+   "B": {
+    "k": "K1",
+    "level": "D",
+    "conf": 3,
+    "evidence": "MiMoV2MoE builds its FusedMoE without setting routing_method_type, so kernels that route inside the kernel (bypassing host-side TopK) receive None and skip the required sigmoid+bias routing."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/40373": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "The accuracy drop occurs only when flash_infer_one_sided is used on prefill, with no cause or fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Report only states the accuracy delta between prefill and decode use of flash_infer_one_sided, with no root cause and no fix linked."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 3,
+    "evidence": "Only the accuracy drop when flash_infer_one_sided is used on prefill in P/D is reported, with no cause or fix."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/51063": {
+   "A": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "vLLM resolves tie_word_embeddings from the top-level wrapper config default instead of the nested text_config, discarding the real lm_head."
+   },
+   "B": {
+    "k": "K1",
+    "level": "I",
+    "conf": 3,
+    "evidence": "Mistral3Config (top-level wrapper) hardcodes tie_word_embeddings=True independent of the nested text_config's own tie_word_embeddings=False default, and vLLM resolves tying from the top-level field."
+   },
+   "C": null,
+   "consensus": "K1",
+   "level": "I"
+  },
+  "https://github.com/sgl-project/sglang/issues/32968": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter attributes the PAD storms to transient NaN logits from a write-side bug fixed elsewhere (#32477) that is not described; the linked PRs only mitigate."
+   },
+   "B": {
+    "k": "K4",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The NaN-sanitize path replaces a fully-NaN logit row with a constant, making softmax uniform-random and letting the sampler write corrupted KV state instead of aborting the request."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter attributes the PAD storms to NaN-contaminated logits from a write-side bug fixed elsewhere (#32477) without saying what that bug is, and the linked PRs only add NaN guards."
+   },
+   "consensus": "K7",
+   "level": "D"
+  },
+  "https://github.com/vllm-project/vllm/issues/42801": {
+   "A": {
+    "k": "K7",
+    "level": "U",
+    "conf": 3,
+    "evidence": "The reporter cannot pinpoint the cause of the accuracy differences between versions; no fix."
+   },
+   "B": {
+    "k": "K7",
+    "level": "U",
+    "conf": 2,
+    "evidence": "Reporter cannot pinpoint the cause of the MMLU/HumanEval divergence between versions beyond noting some outputs don't follow the expected answer format."
+   },
+   "C": null,
+   "consensus": "K7",
+   "level": "U"
+  },
+  "https://github.com/vllm-project/vllm/issues/38718": {
+   "A": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The reporter only suspects a CPU offload and MoE interaction; the linked PRs are unrelated or do not apply (the repro already uses enforce_eager)."
+   },
+   "B": {
+    "k": "K3",
+    "level": "D",
+    "conf": 2,
+    "evidence": "The same \"CUDA graph capture computes wrong results on SM120\" finding recurs here too, implicating graph capture/replay rather than the FP4 kernels or CPU-offload path specifically."
+   },
+   "C": {
+    "k": "K7",
+    "level": "D",
+    "conf": 2,
+    "evidence": "CPU offload interacting with MoE is only suspected, the issue was closed as not planned, and the linked PRs fix an unrelated assertion, add a feature, or blame CUDA graphs although the repro uses enforce_eager."
+   },
+   "consensus": "K7",
+   "level": "D"
+  }
+ },
+ "kappa_level": {
+  "n": 96,
+  "observed": 0.75,
+  "expected": 0.4641927083333333,
+  "kappa": 0.5334143377885784
+ },
+ "disagreements": [],
+ "consensus_counts": {
+  "K1": 36,
+  "K7": 38,
+  "K4": 9,
+  "K3": 3,
+  "K2": 6,
+  "K6": 2,
+  "split": 1,
+  "K5": 1
+ },
+ "level_counts": {
+  "D": 69,
+  "I": 12,
+  "U": 15
+ }
+}

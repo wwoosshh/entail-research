@@ -1,0 +1,56 @@
+{
+ "rank": 150,
+ "id": "nm-testing/SmolLM-1.7B-Instruct-quantized.w4a16",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 3372363,
+ "mistral_files": [],
+ "rows": {
+  "n": 49152,
+  "where": "model.embed_tokens.weight [49152, 2048] in model.safetensors (header only)",
+  "config_vocab_size": 49152
+ },
+ "sources": {
+  "candidates": [
+   [
+    49152,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    49152,
+    "vocab.json"
+   ]
+  ],
+  "rows": 49152,
+  "rows_where": "model.embed_tokens.weight [49152, 2048] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GPT2Tokenizer",
+  "vocab_size": 49152,
+  "reach": 49152
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16/config.json#quantization_config: quantization method 'compressed-tensors' is not in vocabulary v6"
+ ],
+ "seconds": 4.8
+}

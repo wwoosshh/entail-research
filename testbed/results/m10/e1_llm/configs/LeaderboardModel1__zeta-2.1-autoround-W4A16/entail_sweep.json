@@ -1,0 +1,50 @@
+{
+ "rank": 179,
+ "id": "LeaderboardModel1/zeta-2.1-autoround-W4A16",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 11952296,
+ "mistral_files": [],
+ "rows": {
+  "n": 155136,
+  "where": "model.embed_tokens.weight [155136, 4096] in model-00005-of-00007.safetensors (header only)",
+  "config_vocab_size": 155136
+ },
+ "sources": {
+  "candidates": [
+   [
+    155121,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 155136,
+  "rows_where": "model.embed_tokens.weight [155136, 4096] in model-00005-of-00007.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 155121,
+  "reach": 155121
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=500000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/LeaderboardModel1__zeta-2.1-autoround-W4A16/config.json#quantization_config: quantization method 'auto-round' is not in vocabulary v6"
+ ],
+ "seconds": 7.0
+}

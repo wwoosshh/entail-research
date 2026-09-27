@@ -1,0 +1,31 @@
+{
+ "entail": "load",
+ "vllm": "0.30.0",
+ "shape": [
+  64,
+  256,
+  1024
+ ],
+ "block_shape": [
+  128,
+  128
+ ],
+ "by_block_size_k": {
+  "64": {
+   "max_relative_error": 0.00011553513468243182,
+   "tile_groups": 0
+  },
+  "128": {
+   "max_relative_error": 0.00022180679661687464,
+   "tile_groups": 1
+  },
+  "256": {
+   "max_relative_error": 0.7514108419418335,
+   "tile_groups": 2
+  },
+  "512": {
+   "error": "OutOfResources: out of resource: shared memory, Required: 131072, Hardware limit: 101376. Reducing block sizes or `num_stages` may help."
+  }
+ },
+ "reproduced": true
+}

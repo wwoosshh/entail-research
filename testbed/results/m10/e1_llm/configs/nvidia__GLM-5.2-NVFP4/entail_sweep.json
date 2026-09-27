@@ -1,0 +1,50 @@
+{
+ "rank": 129,
+ "id": "nvidia/GLM-5.2-NVFP4",
+ "model_type": "glm_moe_dsa",
+ "files": [
+  "tokenizer.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 42411934,
+ "mistral_files": [],
+ "rows": {
+  "n": 154880,
+  "where": "model.embed_tokens.weight [154880, 6144] in model-00001-of-00047.safetensors (header only)",
+  "config_vocab_size": 154880
+ },
+ "sources": {
+  "candidates": [
+   [
+    154820,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 154880,
+  "rows_where": "model.embed_tokens.weight [154880, 6144] in model-00001-of-00047.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 154820,
+  "reach": 154856
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=8000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/nvidia__GLM-5.2-NVFP4/config.json#quantization_config: quantization method 'modelopt' is not in vocabulary v6"
+ ],
+ "seconds": 8.7
+}

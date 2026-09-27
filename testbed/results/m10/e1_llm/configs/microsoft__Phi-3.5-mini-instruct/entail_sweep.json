@@ -1,0 +1,57 @@
+{
+ "rank": 241,
+ "id": "microsoft/Phi-3.5-mini-instruct",
+ "model_type": "phi3",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "added_tokens.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 2361433,
+ "mistral_files": [],
+ "rows": {
+  "n": 32064,
+  "where": "model.embed_tokens.weight [32064, 3072] in model-00001-of-00002.safetensors (header only)",
+  "config_vocab_size": 32064
+ },
+ "sources": {
+  "candidates": [
+   [
+    32000,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    32000,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 32064,
+  "rows_where": "model.embed_tokens.weight [32064, 3072] in model-00001-of-00002.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 32000,
+  "reach": 32011
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='longrope', theta=10000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256='393afe36ef6224da236549c4ff2ac0418fc5476e953c8efe08acf45265d3a186', short_factor_sha256='cbb4b06bb5f1139058279c35f4a3df8add1a08940dd3d44352c3db65ef0d4963', factor_terms=48, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/microsoft__Phi-3.5-mini-instruct/config.json#sliding_window: sliding_window 262144 is not below max_position_embeddings 131072, so it never binds; not read as a requirement"
+ ],
+ "seconds": 4.5
+}

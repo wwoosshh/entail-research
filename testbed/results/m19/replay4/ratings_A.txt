@@ -1,0 +1,91 @@
+https://github.com/sgl-project/sglang/issues/13011 | K7 | U | 3 | Only the symptom (gibberish on B200) and a launch command are given; no cause or fix.
+https://github.com/vllm-project/vllm/issues/34186 | K1 | D | 2 | Adapter weight keys use a different module prefix than the loaded model, validation checks only the last name component and the mapper does not translate it, so the weights sit under wrong keys and are never applied.
+https://github.com/huggingface/diffusers/issues/12699 | K7 | U | 3 | Video quality degrades over chained generations, but no cause or fix is identified.
+https://github.com/sgl-project/sglang/issues/20050 | K1 | D | 2 | The (unmerged) fix says MLP allreduce fusion was applied to MoE layers whose output is already all-reduced, so the tensor is reduced twice and scaled by tp_size.
+https://github.com/vllm-project/vllm/issues/31495 | K7 | U | 3 | Only logs of incomplete responses with odd trailing characters are given; no cause or fix.
+https://github.com/sgl-project/sglang/issues/18671 | K4 | D | 1 | The custom FlashAttention kernel spreads NaN from a single excluded padding token (max_seqlen_q=199) into valid outputs, pointing to faulty masking inside the kernel; no fix.
+https://github.com/sgl-project/sglang/issues/14382 | K7 | D | 3 | Accuracy drops only with the DeepEP a2a backend, but no cause or fix is given.
+https://github.com/sgl-project/sglang/issues/18663 | K4 | D | 1 | NaN from one padding token beyond max_seqlen_q spreads into valid outputs of the custom kernel, which also leaves out-of-range outputs unzeroed; no fix.
+https://github.com/vllm-project/vllm/issues/29645 | K7 | U | 3 | A one-line report that rotated image data is not extracted properly; no detail or fix.
+https://github.com/vllm-project/vllm/issues/27390 | K4 | I | 3 | The V1 stop check tests generation length before EOS unlike V0, giving a different finish_reason; the merged fix reorders the checks.
+https://github.com/sgl-project/sglang/issues/15388 | K7 | U | 2 | Output lengths vary across runs with deterministic inference while sampling at temperature 0.95; no cause or fix is stated.
+https://github.com/sgl-project/sglang/issues/20051 | K4 | D | 1 | The merged fix for NaN above 4096 tokens concerns the CPU attention kernels' block tiling and n-loop over a partially valid key block; its details are truncated.
+https://github.com/huggingface/transformers/issues/43697 | K1 | D | 1 | An open, untested PR changes the RTDetrV2 sine position embedding's meshgrid indexing and channel order back to what the checkpoint expects.
+https://github.com/sgl-project/sglang/issues/12567 | K7 | U | 2 | The merged fix is only titled as fixing a spec-v2 incompatibility with constrained decoding, without describing the defect.
+https://github.com/sgl-project/sglang/issues/18210 | K7 | U | 3 | Only a test prompt and launch command are given for the accuracy drop; no cause or fix.
+https://github.com/sgl-project/sglang/issues/16274 | K1 | D | 2 | num_tokens_for_logprob_per_batch=1 was passed while more tokens were in the batch, so the DP-attention metadata computed a wrong local token count; the fix passes the matching count.
+https://github.com/sgl-project/sglang/issues/20043 | K5 | D | 1 | Merged fixes say missing GDC compile flags made PDL synchronization barriers compile to no-ops on SM90/SM100, so CUTLASS FP4 GEMMs raced and produced NaN under concurrency.
+https://github.com/huggingface/transformers/issues/43082 | K1 | D | 2 | Chunked prefill sets position_ids from the chunk's cache_position, so the model receives wrong positions and applies wrong RoPE.
+https://github.com/vllm-project/vllm/issues/26584 | K7 | U | 3 | The reporter only suspects a bug from odd tokens, with no reproduction, cause or fix.
+https://github.com/vllm-project/vllm/issues/35412 | K1 | D | 2 | The (unmerged) fix says the mixin hardcoded a CLS pooling default, so the decoder reranker used the first token and bidirectional attention instead of its last-token, causal setup.
+https://github.com/vllm-project/vllm/issues/26121 | K7 | I | 2 | vLLM returns special tags as single tokens while HF retokenization splits them; nothing says whether this is a defect and no fix is given.
+https://github.com/sgl-project/sglang/issues/18674 | K4 | D | 1 | The custom FlashAttention kernel spreads NaN from a single excluded padding token into valid outputs, pointing to faulty masking inside the kernel; no fix.
+https://github.com/sgl-project/sglang/issues/15527 | K3 | D | 3 | pp_proxy_tensors loses its reference during run_batch and is freed by GC while kernels still use it; the fix keeps the allocations alive on the forward stream.
+https://github.com/sgl-project/sglang/issues/21132 | K7 | U | 2 | All backends give garbage and the reporter only suspects silently changed PyPI wheels; no cause or fix.
+https://github.com/vllm-project/vllm/issues/32069 | K6 | I | 2 | A usage-labelled accuracy question closed by a PR that only improves the multimodal pooling examples, whose outputs then match the reference.
+https://github.com/sgl-project/sglang/issues/16972 | K1 | D | 2 | The native MoE forward chosen for one-token batches ignores the model's gemm1_alpha and gemm1_clamp_limit and assumes a different weight layout, using plain SiLU instead.
+https://github.com/vllm-project/vllm/issues/32898 | K1 | D | 2 | The linked PR says raw-copy connectors did not enforce a common KV cache layout, so NHD vs HND could mismatch between prefiller and decoder.
+https://github.com/vllm-project/vllm/issues/37804 | K2 | D | 2 | DeepGemm's required E8M0 power-of-two scales lose about 0.4 to 0.5 bits per layer and the error compounds; the fix disables DeepGemm for this model on Blackwell.
+https://github.com/vllm-project/vllm/issues/34892 | K7 | D | 3 | Gibberish appears only with the FlashInfer CUTLASS MoE backend (Triton works), with no cause or fix.
+https://github.com/sgl-project/sglang/issues/21340 | K7 | U | 2 | A tracking issue for lowered AMD test thresholds with only suspected causes.
+https://github.com/vllm-project/vllm/issues/33560 | K1 | D | 1 | A PR explains that input_global_scale was computed but not passed on the Marlin NVFP4 path, so unscaled fp16 activations overflow to NaN; the merged fix adds input scaling.
+https://github.com/sgl-project/sglang/issues/13469 | K3 | D | 1 | The merged fix prevents piecewise CUDA graph recompiles that overwrote the compiled graph, suggesting replay of stale captured graphs; the defect is not spelled out.
+https://github.com/sgl-project/sglang/issues/18675 | K4 | D | 1 | The custom FlashAttention kernel spreads NaN from a single excluded padding token into valid outputs, pointing to faulty masking inside the kernel; no fix.
+https://github.com/vllm-project/vllm/issues/36337 | K4 | D | 1 | The (unmerged) fix says a boolean expression always evaluated False on MX-capable hardware, preventing the emulation fallback when AITER kernels are incompatible.
+https://github.com/vllm-project/vllm/issues/31394 | K7 | D | 3 | An accuracy issue with the FlashInfer FP8 MoE path is reported with only an error trace; no cause or fix.
+https://github.com/vllm-project/vllm/issues/31202 | K7 | U | 3 | An accuracy regression between versions with no analysis or fix.
+https://github.com/sgl-project/sglang/issues/11696 | K7 | U | 3 | Different prompts give identical embeddings on Ascend, with no cause or fix.
+https://github.com/vllm-project/vllm/issues/32545 | K7 | D | 2 | The custom linear Conv2d gives outputs that differ from transformers, but whether this is a defect is not established and the linked PR only changes which implementation is enabled.
+https://github.com/vllm-project/vllm/issues/25800 | K3 | D | 2 | Level-2 sleep discards all VRAM including the FP8 KV scales, and wake-up re-allocates the cache without re-initializing the scales, leaving garbage; the fix re-initializes them.
+https://github.com/sgl-project/sglang/issues/18680 | K4 | D | 1 | The custom FlashAttention kernel spreads NaN from a single excluded padding token into valid outputs, pointing to faulty masking inside the kernel; no fix.
+https://github.com/sgl-project/sglang/issues/18662 | K4 | D | 1 | With cu_seqlens and max_seqlen correctly excluding NaN padding, the custom kernel still outputs NaN in valid positions, which the reporter attributes to improper masking inside the kernel.
+https://github.com/vllm-project/vllm/issues/35407 | K7 | U | 3 | A CI accuracy failure for DBO with DP+EP with no cause or fix.
+https://github.com/vllm-project/vllm/issues/33123 | K2 | D | 2 | Linked PRs attribute the cache-miss vs cache-hit difference to batch-size-dependent GEMM tiling that changes the fp32 accumulation order on MI355X.
+https://github.com/vllm-project/vllm/issues/36872 | K7 | D | 2 | Linked PRs are a downstream workaround, a closed WIP for multi-layer MTP and a PP>1 feature that do not match this single-GPU setup; no cause is established.
+https://github.com/vllm-project/vllm/issues/33276 | K7 | I | 2 | A usage question about output format differences from llama.cpp with no cause or fix.
+https://github.com/vllm-project/vllm/issues/28604 | K1 | D | 2 | ChunkedLocalAttentionBuilder inherited FlashInfer's get_cudagraph_support, so its own declared _cudagraph_support was ignored and CUDA graphs were always used.
+https://github.com/vllm-project/vllm/issues/37032 | K1 | D | 3 | Cross-layer KV allocation makes per-layer views non-contiguous while some MLA kernels computed page addresses assuming packed blocks instead of reading the stride.
+https://github.com/sgl-project/sglang/issues/11889 | K7 | D | 3 | NaN probs occur only with bf16 plus cross-node DP attention on flashinfer, with no cause or fix.
+https://github.com/vllm-project/vllm/issues/35504 | K1 | D | 3 | MergedColumnParallelLinear split the interleaved in_proj_ba weight at the midpoint, scrambling b/a values across TP ranks; the fix preserves the layout.
+https://github.com/sgl-project/sglang/issues/18683 | K7 | U | 3 | Garbled output after a version change, with no cause or fix.
+https://github.com/vllm-project/vllm/issues/31625 | K1 | D | 3 | The ROCM_AITER_FA decode path hardcoded max_seqlen_q=1 instead of using the metadata's max_query_len, breaking multi-token speculative decode.
+https://github.com/vllm-project/vllm/issues/30445 | K1 | I | 2 | After get_rope switched to partial_rotary_factor, community checkpoints that only declare rotary_dim lost their rotary dimension setting.
+https://github.com/vllm-project/vllm/issues/37184 | K4 | I | 3 | The Kimi-K2 tool parser's fragile streaming state machine leaked markers and truncated arguments; the merged fix rewrites it to re-parse the text.
+https://github.com/sgl-project/sglang/issues/14083 | K7 | U | 3 | A one-line report that rotated image data is not extracted properly; no detail or fix.
+https://github.com/sgl-project/sglang/issues/18676 | K4 | D | 1 | The custom FlashAttention kernel spreads NaN from a single excluded padding token into valid outputs, pointing to faulty masking inside the kernel; no fix.
+https://github.com/huggingface/diffusers/issues/12633 | K1 | D | 2 | step() computes prev_timestep with a uniform-stride formula while set_timesteps with linspace spacing produces a different schedule; the fixes look up the actual schedule.
+https://github.com/sgl-project/sglang/issues/13044 | K7 | D | 3 | The flashinfer backend differs from SDPA on the last layer while fa3 and triton match, but no cause or fix is given.
+https://github.com/vllm-project/vllm/issues/37618 | K2 | D | 1 | The issue body is empty; the linked closed PR attributes the degradation to DeepGemm's lossy E8M0 scale format and disables it.
+https://github.com/vllm-project/vllm/issues/30939 | K7 | D | 3 | Output length varies within a batch at temperature 0, but no cause or fix is identified.
+https://github.com/sgl-project/sglang/issues/18660 | K4 | D | 1 | With cu_seqlens and max_seqlen correctly excluding NaN padding, the custom kernel still outputs NaN in valid positions, which the reporter attributes to improper masking inside the kernel.
+https://github.com/vllm-project/vllm/issues/35221 | K4 | I | 2 | The parser's branch for a missing end token returned everything as content; the merged fix returns it as reasoning like the base class.
+https://github.com/vllm-project/vllm/issues/30830 | K1 | D | 2 | Streaming FP8 quantization assumed weight_loader copies loaded_weight directly into param, which fails under TP sharding, so post-processing ran on wrongly tracked weights.
+https://github.com/vllm-project/vllm/issues/28637 | K1 | D | 2 | The SM120 dispatch reads n = b.size(1) as if b were [k,n], while b is laid out [n,k] elsewhere in the file, producing NaN.
+https://github.com/huggingface/transformers/issues/44945 | K7 | U | 2 | Poor output with a manual two-GPU layer mapping is reported as a help request, with no cause or fix.
+https://github.com/sgl-project/sglang/issues/21291 | K7 | D | 2 | The fixes are a workaround, a rollback and an undescribed FlashMLA kernel accuracy fix.
+https://github.com/vllm-project/vllm/issues/27491 | K2 | D | 2 | Query rows with no keys get an LSE of -inf and merge_attn_states turns them into NaN; clamping the LSE avoids it.
+https://github.com/sgl-project/sglang/issues/11298 | K4 | I | 2 | The LongBench-v2 eval utility mis-scored answers; the merged fix makes answer parsing and prompting more robust.
+https://github.com/vllm-project/vllm/issues/25994 | K7 | U | 3 | Garbage output in a 1P1D deployment, with no cause or fix.
+https://github.com/vllm-project/vllm/issues/33091 | K1 | D | 2 | CrossAttentionBuilder overrides max_seq_len with the encoder lengths, so CUDA graphs were captured with max_seq_len 0.
+https://github.com/sgl-project/sglang/issues/16691 | K7 | D | 2 | Gibberish with piecewise CUDA graph; the fix PR is titled only as fixing a PCG MoE error.
+https://github.com/sgl-project/sglang/issues/11650 | K7 | U | 2 | All documents get the same rerank score on Ascend; the linked PR does not describe the cause.
+https://github.com/vllm-project/vllm/issues/31864 | K4 | D | 2 | CpuCommunicator lacked the dispatch and combine implementations needed for DP+MoE; the merged fix adds them.
+https://github.com/huggingface/transformers/issues/43224 | K1 | D | 3 | The inherited eager expert code expects top_k_weights shaped (tokens, top_k) but DeepSeekV2 passes (tokens, num_experts), so wrong experts are selected.
+https://github.com/huggingface/transformers/issues/41494 | K1 | I | 1 | Loading gemma from GGUF builds a Unigram tokenizer while the original model's tokenizer is BPE, so tokenization differs; no cause or fix is given.
+https://github.com/vllm-project/vllm/issues/30453 | K7 | U | 3 | Repetitive decoding is reported with only a launch command.
+https://github.com/vllm-project/vllm/issues/34526 | K1 | D | 2 | The fix PR says the OffloadingConnector stored blocks that the NixlConnector had not loaded yet and later reloaded that garbage.
+https://github.com/vllm-project/vllm/issues/37856 | K1 | D | 2 | Under sequence-parallel MoE each TP rank holds different tokens, but the TP-sharded shared expert assumes identical tokens, scaling its output by 1/TP; the fix passes is_sequence_parallel to disable TP.
+https://github.com/sgl-project/sglang/issues/18690 | K4 | D | 1 | With cu_seqlens correctly excluding padded NaN tokens, the custom kernel still outputs NaN in valid positions, which the reporter attributes to improper masking inside the kernel.
+https://github.com/vllm-project/vllm/issues/33871 | K7 | I | 2 | The reporter asks whether server requests need the same image preprocessing as local runs; no cause or fix.
+https://github.com/huggingface/transformers/issues/43450 | K4 | D | 2 | make_batched_video did not handle an already batched 5D array and wrapped it as one video; the merged fix adds that case.
+https://github.com/huggingface/diffusers/issues/12905 | K1 | I | 1 | Z-Image's formula treats guidance_scale 0 as no guidance, but the CFG gate uses the standard convention (> 1), silently ignoring values between 0 and 1.
+https://github.com/vllm-project/vllm/issues/30313 | K7 | U | 3 | The HF variant of a model gives wrong results, with no cause or fix.
+https://github.com/vllm-project/vllm/issues/36295 | K7 | D | 2 | The merged fix for the TRTLLM block FP8 MoE path has no description of the defect.
+https://github.com/vllm-project/vllm/issues/31918 | K1 | D | 2 | The CuteDSL backend was missing from the global scale-factor list, so NVFP4 dispatch did not apply the global scale; the fix adds it.
+https://github.com/vllm-project/vllm/issues/35980 | K7 | D | 2 | Outputs vary under concurrent batching and the reporter only guesses at numerical or batching causes.
+https://github.com/sgl-project/sglang/issues/20078 | K1 | I | 3 | The diffusers backend substituted generic sampling defaults for the model-specific ones (for example guidance_scale 7.5 instead of 0.0).
+https://github.com/vllm-project/vllm/issues/37079 | K7 | I | 2 | Reasoning quality drops when tool schemas are injected, and the reporter asks the client to check request construction; no cause or fix.
+https://github.com/sgl-project/sglang/issues/18667 | K4 | D | 1 | The custom FlashAttention kernel spreads NaN from a single excluded padding token into valid outputs, pointing to faulty masking inside the kernel; no fix.
+https://github.com/vllm-project/vllm/issues/35779 | K4 | I | 1 | auto_drop_analysis_messages drops all prior-turn analysis messages, including client-supplied reasoning; the unmerged fix limits dropping to the current turn.
+https://github.com/vllm-project/vllm/issues/29408 | K7 | I | 3 | Reasoning output is reported wrong with the deepseek_r1 parser on a Qwen3 model, but no cause or fix is given.
+https://github.com/vllm-project/vllm/issues/31210 | K7 | D | 2 | The reporter suspects corrupted KV blocks restored from CPU offload under concurrency, but no cause or fix is confirmed.

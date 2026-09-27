@@ -1,0 +1,53 @@
+{
+ "rank": 224,
+ "id": "LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+ "model_type": "exaone",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 8135520,
+ "mistral_files": [],
+ "rows": {
+  "n": 102400,
+  "where": "transformer.wte.weight [102400, 4096] in model-00001-of-00007.safetensors (header only)",
+  "config_vocab_size": 102400
+ },
+ "sources": {
+  "candidates": [
+   [
+    102400,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    102400,
+    "vocab.json"
+   ]
+  ],
+  "rows": 102400,
+  "rows_where": "transformer.wte.weight [102400, 4096] in model-00001-of-00007.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "error": "AttributeError: 'PreTrainedConfig' object has no attribute 'max_position_embeddings'"
+ },
+ "vocab": [
+  {
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "note": "no tokenizer built: the tokenizer's size was not read"
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='llama3', theta=1000000.0, factor=8.0, original_max_position=8192, low_freq_factor=1.0, high_freq_factor=4.0, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 3.6
+}

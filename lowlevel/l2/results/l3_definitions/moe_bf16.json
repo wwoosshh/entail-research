@@ -1,0 +1,43 @@
+{
+ "case": "moe_bf16",
+ "target": "vllm.model_executor.layers.fused_moe.fused_moe:fused_experts",
+ "wrapped": true,
+ "first_call_ms": 1059.2073159999984,
+ "rel_err": {
+  "first": [
+   0.005274720045281952
+  ],
+  "later": [
+   0.005274720045281952
+  ],
+  "kernel": [
+   0.005274720045281952
+  ]
+ },
+ "later_equals_kernel": true,
+ "ms": {
+  "kernel": 0.9241595000020197,
+  "wrapped_after_decision": 0.8721479999991288
+ },
+ "decisions": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "note": "fused_experts (vllm.model_executor.layers.fused_moe.fused_moe:fused_experts) on 64 of 256 rows of its first real call, against entail's definition (per-expert gate/up, SiLU-and-mul, down, routing-weighted sum; INT8 W8A8 by the quant config): max |kernel - definition| 0.0312 over 32768 values; the definition's own noise 0.0312 (typical 0.00781); scale 5.03; 0 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 0.191; worst value at output 0 index 14547: kernel 0.0625, definition 0.07031, reference 0.07471, allowed 0.0648"
+  }
+ ],
+ "stats": {
+  "instrumented": 2,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ }
+}

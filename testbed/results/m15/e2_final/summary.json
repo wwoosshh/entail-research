@@ -1,0 +1,2989 @@
+{
+ "summary": {
+  "models": 38,
+  "runs": 110,
+  "valid_runs": 102,
+  "excluded": 8,
+  "entail_broke_a_run": 0,
+  "runs_with_broken_or_refused": 0,
+  "broken_or_refused_decisions": 0,
+  "alarms_by_boundary_fact": {},
+  "resolved_decisions": 2,
+  "resolved_not_backed_by_a_measured_row (false alarms by protocol 2.3)": 0,
+  "false_alarm_runs (broken, refused or unbacked resolved)": 0,
+  "unknown_decisions": 76,
+  "same_output_without_resolution": "99/100",
+  "load_share_median": 0.0116,
+  "load_share_max": 0.3703,
+  "by_group": {
+   "top 20": {
+    "models": 0,
+    "valid_runs": 0,
+    "runs_with_broken_or_refused": 0
+   },
+   "per architecture": {
+    "models": 0,
+    "valid_runs": 0,
+    "runs_with_broken_or_refused": 0
+   },
+   "local": {
+    "models": 37,
+    "valid_runs": 102,
+    "runs_with_broken_or_refused": 0
+   }
+  }
+ },
+ "runs": [
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    }
+   ],
+   "entail_ms": 65.6,
+   "load_s_on": 1.046,
+   "load_s_off": 0.998,
+   "share": 0.0627,
+   "group": "local"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    }
+   ],
+   "entail_ms": 184.5,
+   "load_s_on": 11.352,
+   "load_s_off": 9.431,
+   "share": 0.0163,
+   "group": "local"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: is_llama_config, rope_interleaved, transformers.js_config; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 "
+    }
+   ],
+   "entail_ms": 187.7,
+   "load_s_on": 11.445,
+   "load_s_off": 10.972,
+   "share": 0.0164,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 129.4,
+   "load_s_on": 3.988,
+   "load_s_off": 4.154,
+   "share": 0.0324,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 134.9,
+   "load_s_on": 13.476,
+   "load_s_off": 13.334,
+   "share": 0.01,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 111.9,
+   "load_s_on": 14.197,
+   "load_s_off": 16.68,
+   "share": 0.0079,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    }
+   ],
+   "entail_ms": 96.4,
+   "load_s_on": 5.186,
+   "load_s_off": 4.521,
+   "share": 0.0186,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    }
+   ],
+   "entail_ms": 149.1,
+   "load_s_on": 11.633,
+   "load_s_off": 11.481,
+   "share": 0.0128,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    }
+   ],
+   "entail_ms": 112.6,
+   "load_s_on": 11.436,
+   "load_s_off": 12.911,
+   "share": 0.0098,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 123.1,
+   "load_s_on": 3.855,
+   "load_s_off": 4.415,
+   "share": 0.0319,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 226.8,
+   "load_s_on": 19.224,
+   "load_s_off": 12.368,
+   "share": 0.0118,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 64.9,
+   "load_s_on": 12.423,
+   "load_s_off": 12.342,
+   "share": 0.0052,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: Loading an AWQ quantized model requires gptqmodel. Please install it with `pip install gptqmodel`",
+   "error_on": "ImportError: Loading an AWQ quantized model requires gptqmodel. Please install it with `pip install gptqmodel`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 3
+   },
+   "not_pass": [],
+   "entail_ms": 200.1,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 70.2,
+   "load_s_on": 14.542,
+   "load_s_off": 15.295,
+   "share": 0.0048,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 71.8,
+   "load_s_on": 12.917,
+   "load_s_off": 16.617,
+   "share": 0.0056,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 150.2,
+   "load_s_on": 4.09,
+   "load_s_off": 5.22,
+   "share": 0.0367,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 288.7,
+   "load_s_on": 14.802,
+   "load_s_off": 15.146,
+   "share": 0.0195,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 59.8,
+   "load_s_on": 12.239,
+   "load_s_off": 13.054,
+   "share": 0.0049,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 5,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 171.4,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 93.2,
+   "load_s_on": 17.973,
+   "load_s_off": 15.022,
+   "share": 0.0052,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 87.8,
+   "load_s_on": 11.443,
+   "load_s_off": 13.035,
+   "share": 0.0077,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 115.2,
+   "load_s_on": 1.342,
+   "load_s_off": 1.337,
+   "share": 0.0859,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 128.0,
+   "load_s_on": 11.43,
+   "load_s_off": 10.932,
+   "share": 0.0112,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 50.8,
+   "load_s_on": 11.075,
+   "load_s_off": 10.86,
+   "share": 0.0046,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 176.2,
+   "load_s_on": 3.347,
+   "load_s_off": 2.81,
+   "share": 0.0527,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 220.3,
+   "load_s_on": 13.469,
+   "load_s_off": 11.579,
+   "share": 0.0164,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 82.0,
+   "load_s_on": 13.268,
+   "load_s_off": 12.518,
+   "share": 0.0062,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 140.5,
+   "load_s_on": 1.128,
+   "load_s_off": 1.367,
+   "share": 0.1246,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 147.3,
+   "load_s_on": 11.047,
+   "load_s_off": 11.659,
+   "share": 0.0133,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 110.6,
+   "load_s_on": 11.035,
+   "load_s_off": 12.092,
+   "share": 0.01,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 149.3,
+   "load_s_on": 1.203,
+   "load_s_off": 1.419,
+   "share": 0.1241,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 156.2,
+   "load_s_on": 11.126,
+   "load_s_off": 13.376,
+   "share": 0.014,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 60.1,
+   "load_s_on": 11.194,
+   "load_s_off": 11.833,
+   "share": 0.0054,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 214.9,
+   "load_s_on": 2.217,
+   "load_s_off": 2.322,
+   "share": 0.0969,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 124.6,
+   "load_s_on": 11.164,
+   "load_s_off": 11.415,
+   "share": 0.0112,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 71.0,
+   "load_s_on": 11.764,
+   "load_s_off": 11.5,
+   "share": 0.006,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 136.6,
+   "load_s_on": 2.684,
+   "load_s_off": 2.489,
+   "share": 0.0509,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 138.9,
+   "load_s_on": 11.436,
+   "load_s_off": 12.425,
+   "share": 0.0121,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 81.6,
+   "load_s_on": 11.702,
+   "load_s_off": 13.568,
+   "share": 0.007,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 122.0,
+   "load_s_on": 2.41,
+   "load_s_off": 2.19,
+   "share": 0.0506,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 170.0,
+   "load_s_on": 11.198,
+   "load_s_off": 9.941,
+   "share": 0.0152,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 69.5,
+   "load_s_on": 11.181,
+   "load_s_off": 10.05,
+   "share": 0.0062,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 155.4,
+   "load_s_on": 12.35,
+   "load_s_off": 3.625,
+   "share": 0.0126,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 533.2,
+   "load_s_on": 20.963,
+   "load_s_off": 11.358,
+   "share": 0.0254,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 67.1,
+   "load_s_on": 15.41,
+   "load_s_off": 11.119,
+   "share": 0.0044,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 162.2,
+   "load_s_on": 1.26,
+   "load_s_off": 1.583,
+   "share": 0.1288,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 125.4,
+   "load_s_on": 11.455,
+   "load_s_off": 12.793,
+   "share": 0.0109,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 61.9,
+   "load_s_on": 11.381,
+   "load_s_off": 13.588,
+   "share": 0.0054,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 141.4,
+   "load_s_on": 1.235,
+   "load_s_off": 1.333,
+   "share": 0.1145,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 126.9,
+   "load_s_on": 11.308,
+   "load_s_off": 11.933,
+   "share": 0.0112,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 82.5,
+   "load_s_on": 10.801,
+   "load_s_off": 11.69,
+   "share": 0.0076,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 152.3,
+   "load_s_on": 2.693,
+   "load_s_off": 2.777,
+   "share": 0.0565,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 136.3,
+   "load_s_on": 13.16,
+   "load_s_off": 13.306,
+   "share": 0.0104,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 59.8,
+   "load_s_on": 11.468,
+   "load_s_off": 12.123,
+   "share": 0.0052,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 112.4,
+   "load_s_on": 2.356,
+   "load_s_off": 2.733,
+   "share": 0.0477,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 142.5,
+   "load_s_on": 11.573,
+   "load_s_off": 11.852,
+   "share": 0.0123,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 60.3,
+   "load_s_on": 11.213,
+   "load_s_off": 11.453,
+   "share": 0.0054,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 147.4,
+   "load_s_on": 4.503,
+   "load_s_off": 4.61,
+   "share": 0.0327,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 178.6,
+   "load_s_on": 17.173,
+   "load_s_off": 14.639,
+   "share": 0.0104,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 54.7,
+   "load_s_on": 11.721,
+   "load_s_off": 14.027,
+   "share": 0.0047,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 170.1,
+   "load_s_on": 4.404,
+   "load_s_off": 9.779,
+   "share": 0.0386,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 176.0,
+   "load_s_on": 15.955,
+   "load_s_off": 15.111,
+   "share": 0.011,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 139.0,
+   "load_s_on": 12.931,
+   "load_s_off": 13.142,
+   "share": 0.0107,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 5,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 171.7,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 177.1,
+   "load_s_on": 20.504,
+   "load_s_off": 14.194,
+   "share": 0.0086,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 110.8,
+   "load_s_on": 12.058,
+   "load_s_off": 12.688,
+   "share": 0.0092,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-8B-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 5,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 167.9,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-8B-FP8",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 140.2,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 106.6,
+   "load_s_on": 1.754,
+   "load_s_off": 1.949,
+   "share": 0.0608,
+   "group": "local"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 107.5,
+   "load_s_on": 10.154,
+   "load_s_off": 10.448,
+   "share": 0.0106,
+   "group": "local"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 112.8,
+   "load_s_on": 11.345,
+   "load_s_off": 11.288,
+   "share": 0.0099,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "eager",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "eager",
+     "note": "",
+     "backing": {
+      "consumer": "transformers.attention.sdpa",
+      "dropped": {
+       "softcap": "measured"
+      },
+      "backed_by_measured_row": true
+     }
+    }
+   ],
+   "entail_ms": 237.6,
+   "load_s_on": 3.063,
+   "load_s_off": 3.2,
+   "share": 0.0776,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 137.3,
+   "load_s_on": 16.792,
+   "load_s_off": 18.182,
+   "share": 0.0082,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": false,
+   "verdicts": {
+    "pass": 8,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "triton",
+     "note": "",
+     "backing": {
+      "consumer": "sglang.attention.flashinfer",
+      "dropped": {
+       "softcap": "measured",
+       "sliding_window": "code"
+      },
+      "backed_by_measured_row": true
+     }
+    }
+   ],
+   "entail_ms": 71.1,
+   "load_s_on": 13.273,
+   "load_s_off": 14.992,
+   "share": 0.0054,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 4
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    }
+   ],
+   "entail_ms": 512.7,
+   "load_s_on": 1.701,
+   "load_s_off": 1.856,
+   "share": 0.3014,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    }
+   ],
+   "entail_ms": 140.5,
+   "load_s_on": 14.565,
+   "load_s_off": 16.008,
+   "share": 0.0096,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 4,
+    "pass": 8
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern, unsloth_fixed; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig read"
+    },
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is inferred from its code, not measured; nothing is switched on it",
+     "target": null,
+     "note": "inferred, not measured: ModelProps.sliding_window (code)"
+    }
+   ],
+   "entail_ms": 116.9,
+   "load_s_on": 13.438,
+   "load_s_off": 14.983,
+   "share": 0.0087,
+   "group": "local"
+  },
+  {
+   "model": "hmellor__tiny-random-LlamaForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 31.0,
+   "load_s_on": 0.483,
+   "load_s_off": 0.425,
+   "share": 0.0642,
+   "group": "local"
+  },
+  {
+   "model": "hmellor__tiny-random-LlamaForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 166.9,
+   "load_s_on": 9.626,
+   "load_s_off": 8.674,
+   "share": 0.0173,
+   "group": "local"
+  },
+  {
+   "model": "hmellor__tiny-random-LlamaForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 56.2,
+   "load_s_on": 10.159,
+   "load_s_off": 9.124,
+   "share": 0.0055,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 115.3,
+   "load_s_on": 3.619,
+   "load_s_off": 3.566,
+   "share": 0.0319,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 145.6,
+   "load_s_on": 13.878,
+   "load_s_off": 11.632,
+   "share": 0.0105,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 84.5,
+   "load_s_on": 13.197,
+   "load_s_off": 12.696,
+   "share": 0.0064,
+   "group": "local"
+  },
+  {
+   "model": "llamafactory__tiny-random-Llama-3",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 38.1,
+   "load_s_on": 0.706,
+   "load_s_off": 0.562,
+   "share": 0.054,
+   "group": "local"
+  },
+  {
+   "model": "llamafactory__tiny-random-Llama-3",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 2
+   },
+   "not_pass": [],
+   "entail_ms": 20.3,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    }
+   ],
+   "entail_ms": 218.1,
+   "load_s_on": 3.828,
+   "load_s_off": 3.966,
+   "share": 0.057,
+   "group": "local"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    }
+   ],
+   "entail_ms": 177.3,
+   "load_s_on": 15.501,
+   "load_s_off": 13.909,
+   "share": 0.0114,
+   "group": "local"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    }
+   ],
+   "entail_ms": 220.7,
+   "load_s_on": 16.451,
+   "load_s_off": 16.067,
+   "share": 0.0134,
+   "group": "local"
+  },
+  {
+   "model": "nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: compressed-tensors>=0.15.0 is required for compressed-tensors quantization. Please install it with `pip install compressed-tensors>=0.15.0`.",
+   "error_on": "ImportError: compressed-tensors>=0.15.0 is required for compressed-tensors quantization. Please install it with `pip install compressed-tensors>=0.15.0`.",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 3
+   },
+   "not_pass": [],
+   "entail_ms": 72.5,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 6
+   },
+   "not_pass": [],
+   "entail_ms": 51.6,
+   "load_s_on": 12.889,
+   "load_s_off": 10.267,
+   "share": 0.004,
+   "group": "local"
+  },
+  {
+   "model": "nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 80.6,
+   "load_s_on": 10.593,
+   "load_s_off": 9.543,
+   "share": 0.0076,
+   "group": "local"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    }
+   ],
+   "entail_ms": 47.0,
+   "load_s_on": 3.526,
+   "load_s_off": 13.915,
+   "share": 0.0133,
+   "group": "local"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "21 weight(s) (first: model.layers.0.mixer.conv1d): not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    }
+   ],
+   "entail_ms": 471.7,
+   "load_s_on": 16.12,
+   "load_s_off": 62.701,
+   "share": 0.0293,
+   "group": "local"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 5,
+    "pass": 4
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, n_groups, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, n_groups, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_"
+    }
+   ],
+   "entail_ms": 145.6,
+   "load_s_on": 17.878,
+   "load_s_off": 21.821,
+   "share": 0.0081,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-1B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 48.5,
+   "load_s_on": 1.694,
+   "load_s_off": 1.606,
+   "share": 0.0286,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-1B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 134.8,
+   "load_s_on": 11.054,
+   "load_s_off": 11.093,
+   "share": 0.0122,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-1B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 91.9,
+   "load_s_on": 13.419,
+   "load_s_off": 12.383,
+   "share": 0.0068,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-2B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 43.0,
+   "load_s_on": 9.236,
+   "load_s_off": 4.127,
+   "share": 0.0047,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-2B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 220.8,
+   "load_s_on": 16.678,
+   "load_s_off": 11.542,
+   "share": 0.0132,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-2B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 101.7,
+   "load_s_on": 16.073,
+   "load_s_off": 13.128,
+   "share": 0.0063,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-GptOssForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "eager",
+   "backend_on": "eager",
+   "same_output": false,
+   "verdicts": {
+    "pass": 5
+   },
+   "not_pass": [],
+   "entail_ms": 31.8,
+   "load_s_on": 0.696,
+   "load_s_off": 0.638,
+   "share": 0.0458,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-GptOssForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "2 weight(s) (first: model.layers.0.mlp.router): the layer gives no in and out features, so the orientation was not read"
+    }
+   ],
+   "entail_ms": 135.9,
+   "load_s_on": 15.17,
+   "load_s_off": 16.71,
+   "share": 0.009,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen2ForCausalLM-2.5",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 176.5,
+   "load_s_on": 0.627,
+   "load_s_off": 0.511,
+   "share": 0.2814,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen2ForCausalLM-2.5",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 6
+   },
+   "not_pass": [],
+   "entail_ms": 87.0,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 285.2,
+   "load_s_on": 0.77,
+   "load_s_off": 0.525,
+   "share": 0.3703,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 271.0,
+   "load_s_on": 14.676,
+   "load_s_off": 11.361,
+   "share": 0.0185,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 62.5,
+   "load_s_on": 11.929,
+   "load_s_off": 11.709,
+   "share": 0.0052,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 1,
+    "pass": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    }
+   ],
+   "entail_ms": 176.7,
+   "load_s_on": 0.611,
+   "load_s_off": 0.53,
+   "share": 0.2892,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 6
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "2 weight(s) (first: model.layers.0.mlp.gate): the layer gives no in and out features, so the orientation was not read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    }
+   ],
+   "entail_ms": 113.3,
+   "load_s_on": 10.474,
+   "load_s_off": 11.832,
+   "share": 0.0108,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 5
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    }
+   ],
+   "entail_ms": 185.3,
+   "load_s_on": 10.765,
+   "load_s_off": 10.779,
+   "share": 0.0172,
+   "group": "local"
+  }
+ ]
+}

@@ -1,0 +1,294 @@
+{
+ "passes": 10,
+ "reproduced": 8,
+ "verdicts": {
+  "missed": 7,
+  "not_reproduced": 2,
+  "unknown_only": 1
+ },
+ "detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1": 5,
+  "rate": 0.0,
+  "per_rater": {
+   "rating_A": {
+    "denominator": 5,
+    "detected": 0
+   },
+   "rating_B": {
+    "denominator": 4,
+    "detected": 0
+   }
+  }
+ },
+ "low_level_detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1_level_D": 2
+ },
+ "located_outside_class": {
+  "cases": [],
+  "reproduced_K2_to_K5": 2
+ },
+ "caught_at_expected_boundary_all_reproduced": {
+  "numerator": 0,
+  "denominator": 8
+ },
+ "false_alarms": {
+  "cases_with_false": [],
+  "broken_or_refused_in_non_K1_reproduced": 0
+ },
+ "class_share_among_rated": {
+  "rated": 96,
+  "consensus_counts": {
+   "K1": 36,
+   "K7": 38,
+   "K4": 9,
+   "K3": 3,
+   "K2": 6,
+   "K6": 2,
+   "split": 1,
+   "K5": 1
+  },
+  "K1_share": 0.375,
+  "A_K1_share": 0.3854166666666667,
+  "B_K1_share": 0.34375
+ },
+ "kappa_7": {
+  "n": 96,
+  "observed": 0.8125,
+  "expected": 0.2936197916666667,
+  "kappa": 0.7345622119815668
+ },
+ "kappa_k1_vs_rest": {
+  "n": 96,
+  "observed": 0.8958333333333334,
+  "expected": 0.5358072916666666,
+  "kappa": 0.7755960729312764
+ },
+ "rows": [
+  {
+   "position": 301,
+   "issue": "vllm#58406",
+   "case": "vl58406",
+   "run": "vl58406",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Inconsistent merge/resolution semantics for flat and scoped `mm_processor_kwargs`",
+   "version": "0.30.0 (open)",
+   "expected_boundary": "request:vllm.mm_processor_kwargs (engine vs request, flat vs modality-scoped merge: configured fps and size dropped)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "I",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 with the report's snippet (merge_mm_processor_kwargs then overlay_modality_mm_kwargs: the effective video settings are fps None and size {'shortest_edge': 200} instead of fps 2 and {'shortest_edge': 200, 'longest_edge': 1800}); entail on: no decision (no site at the processor-kwargs merge; the snippet is config-level)"
+  },
+  {
+   "position": 321,
+   "issue": "vllm#43962",
+   "case": "vl43962",
+   "run": "vl43962_0210",
+   "engine_version": "0.21.0",
+   "title": "[Bug]: Qwen3-1.7B silent correctness regression in vLLM 0.21.0: TP=2/4 and Triton attention produce ",
+   "version": "0.30.0 first; reported 0.21.0 if the symptom is gone",
+   "expected_boundary": "kernel:vllm.attention (TRITON_ATTN backend at TP=1: wrong answer where FlashAttention is right)",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 40
+   },
+   "rating_A": "K7",
+   "rating_B": "K7",
+   "rating_C": "K7",
+   "consensus": "K7",
+   "level": "D",
+   "verdict": "not_reproduced",
+   "note": "not reproduced on vLLM 0.30.0 nor on the reported 0.21.0 (new venv vllm0210): on this card the default (FlashAttention) and the Triton-attention paths give the same answer, '512' (the report: 1024 default, 81 Triton on L40S); the backends do not diverge here. entail on 0.21.0: the scoring adapter could not install (circular import) - recorded, as the protocol asks"
+  },
+  {
+   "position": 344,
+   "issue": "diffusers#14213",
+   "case": "df14213",
+   "run": "df14213",
+   "engine_version": "0.40.0",
+   "title": "Ancestral schedulers (EulerAncestral, KDPM2Ancestral) produce all-NaN output with beta_schedule=\"squ",
+   "version": "0.40.0 (open)",
+   "expected_boundary": "load:diffusers.scheduler (squaredcos_cap_v2 sigma range: the ancestral step's sigma_down radicand in float32)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on diffusers 0.40.0 with the report's snippet (EulerAncestral step: 192 NaN; KDPM2Ancestral timesteps non-finite; the linear control finite); entail on: no decision (schedulers are not a site)"
+  },
+  {
+   "position": 346,
+   "issue": "vllm#43602",
+   "case": "vl43602",
+   "run": "vl43602_0220",
+   "engine_version": "0.22.0",
+   "title": "[Bug]: Qwen3-VL-2B-Instruct Geo3K accuracy score lower than SGLang with deterministic sampling",
+   "version": "reported 0.21.0 (fix #43617 merged 2026-05-27; 0.22.0 released 2026-05-29)",
+   "expected_boundary": "kernel:vllm.compile (the compiled decoder specialized on a warm-up without deepstack inputs; real requests' deepstack_input_embeds not consumed)",
+   "reproduced_off": true,
+   "reproduced_on": false,
+   "reproduced_by": "verdict",
+   "entail_decisions_on": {
+    "pass": 39,
+    "unknown": 26
+   },
+   "rating_A": "K4",
+   "rating_B": "K3",
+   "rating_C": "K1",
+   "consensus": "split",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.22.0 (the pre-fix _get_deepstack_input_embeds is there; the fix #43617 is not in the 0.22.0 tag) at the mechanism level, with the fixed 0.30.0 as the control: under the default compiled path the image prompts' first-token distributions move from the eager path's by 0.75-3.74 nats over the shared top-5 tokens (0.13-0.25 on 0.30.0, bf16 noise) and one description is wrong ('a blue square with a white border and a white rectangle inside it' against eager's and 0.30.0's 'a solid blue square centered on a white background'). The case's own first criterion (image answers differ, text-only answers equal) was not met: one text-only prompt flips between the paths on both versions (a near tie), so the control on the fixed version was used after the run - disclosed; without it the case would be not_reproduced. The report's Geo3K score was not rerun. entail on: 26 unknowns at kernel:vllm.custom_op ('custom ops enabled under torch.compile'), nothing at the compiled graph's deepstack inputs, the expected site. The first attempt at gpu_memory_utilization 0.6 did not start the compiled engine (KV cache short after the CUDA-graph reservation) on either side; the case was rerun at 0.8, same settings for both paths"
+  },
+  {
+   "position": 349,
+   "issue": "vllm#57353",
+   "case": "vl57353",
+   "run": "vl57353",
+   "engine_version": "0.30.0",
+   "title": "[Bug][Reasoning] kimi_k3: non-streaming path classifies truncated reasoning as content (inconsistent",
+   "version": "0.30.0 (open; the non-streaming branch is unchanged there)",
+   "expected_boundary": "request:vllm.reasoning_parser (kimi_k3: non-streaming vs streaming classification of the same truncated output)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "pass": 3,
+    "unknown": 1
+   },
+   "rating_A": "K1",
+   "rating_B": "K4",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "level": "I",
+   "verdict": "unknown_only",
+   "note": "reproduced on vLLM 0.30.0 through the server's route (ParserManager.get_parser for kimi_k3, a stand-in tokenizer with the K3 markers): streamed as reasoning (127 characters, no content), the whole-text parse returns it as content (reasoning None); entail on: unknown at request:vllm.parser, the expected site - the parse contract saw the difference ('streamed as reasoning what the whole parse calls content') but, by its rule, does not hold a difference against the parser when the output ended inside its reasoning block (vLLM documents that the two paths differ on unfinished output)"
+  },
+  {
+   "position": 382,
+   "issue": "transformers#48051",
+   "case": "tf48051",
+   "run": "tf48051_5121",
+   "engine_version": "5.12.1",
+   "title": "convert_to_rgb gives wrong output shape for RGBA numpy videos",
+   "version": "5.17.0 first; the reported main (2026-08-18) is pre-5.17 if fixed there",
+   "expected_boundary": "load:transformers.video_processor (convert_to_rgb on channels-last RGBA video: the alpha channel used as colour)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "level": "D",
+   "verdict": "missed",
+   "note": "not reproduced on transformers 5.17.0 (shape (2, 3, 1, 1): fixed there); reproduced on 5.12.1 (venv tf5121: shape (2, 2, 1, 1), alpha-blended wrong values); entail on (5.12.1): no decision (video_utils is not a site)"
+  },
+  {
+   "position": 394,
+   "issue": "transformers#47328",
+   "case": "tf47328",
+   "run": "tf47328_5121",
+   "engine_version": "5.12.1",
+   "title": "Qwen2.5-Omni Token2Wav DiT uses mismatched RoPE layout (half-split cos/sin with interleaved rotate) ",
+   "version": "5.12.1 (installed; the fix is in 5.15.0 and later)",
+   "expected_boundary": "load:transformers.rotary (Qwen2.5-Omni DiT: cos/sin laid out half-split, consumed by an interleaved rotate)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on transformers 5.12.1 with the library's own DiT rotary and the apply function DiTAttention calls (spread of <R_m q, R_m+5 k> over m: 9.9; 4.5e-6 on 5.17.0, the fixed control); entail on (5.12.1): no decision (the rotary pairing contract is a vLLM-side rule; nothing reads the DiT's rotate convention in transformers)"
+  },
+  {
+   "position": 408,
+   "issue": "transformers#45491",
+   "case": "tf45491",
+   "run": "tf45491",
+   "engine_version": "5.17.0",
+   "title": "[Gemma3] NaN embeddings on GPU when batching sequences of mixed length (sliding window attention + a",
+   "version": "5.17.0 first (closed 2026-04-21; the fix PR closed unmerged)",
+   "expected_boundary": "kernel:transformers.sdpa (a sliding-window mask whose rows are all masked for padding queries: NaN spreads into the real rows)",
+   "reproduced_off": null,
+   "reproduced_on": null,
+   "reproduced_by": "case",
+   "entail_decisions_on": {},
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "level": "D",
+   "verdict": "not_reproduced",
+   "note": "the reported model (google/embeddinggemma-300m) is gated on the Hub (manual license acceptance); the case's download returned 401, so nothing was run; the case script is ready for an account with access"
+  },
+  {
+   "position": 419,
+   "issue": "transformers#49066",
+   "case": "tf49066",
+   "run": "tf49066",
+   "engine_version": "5.17.0",
+   "title": "Qwen2Tokenizer overwrites pre_tokenizer from tokenizer.json. Wrong token IDs for all Qwen3.6 / Qwen3",
+   "version": "5.17.0 (open)",
+   "expected_boundary": "load:transformers.tokenizer (the built tokenizer's pre-tokenizer is not the one tokenizer.json declares: different ids)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "unknown": 1,
+    "pass": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "I",
+   "verdict": "missed",
+   "note": "reproduced on transformers 5.17.0 with the report's script (Hindi text: the published tokenizer.json gives 6 ids, the loaded Qwen2Tokenizer 10); entail on: the expected site was checked and passed - the tokenizer contract ran the declared tokenizer.json against the built tokenizer on its ten fixed probe texts ('10 probe texts encode alike; 33 declared added tokens match'), none of which holds a combining mark (\\p{M}), the characters whose pre-tokenization differs; plus an unknown for unread config keys"
+  },
+  {
+   "position": 436,
+   "issue": "vllm#49250",
+   "case": "vl49250",
+   "run": "vl49250",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: kv_load_failure_policy=\"recompute\" gives wrong output when a KV connector rejects a synchrono",
+   "version": "0.30.0 (open; reported on 0.25.1, 'byte-identical on main')",
+   "expected_boundary": "container:vllm.kv_connector (recompute after a rejected load: the rewound computed-token count reaches the CPU mirror, not the GPU state)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "reproduced_by": "case",
+   "entail_decisions_on": {
+    "unknown": 3,
+    "pass": 50
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "level": "D",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 with the report's connector and model (facebook/opt-125m, eager, no prefix caching): the baseline answers ' Rome.', reject-then-recompute gives ' capital of Spain is Madrid.' under sync scheduling and another continuation under async; entail on: unknowns at the config's unread keys, the tokenizer (no tokenizer.json to run) and the chat template, passes at kernel launches and the loader - nothing at the connector's recompute path, the expected site"
+  }
+ ]
+}

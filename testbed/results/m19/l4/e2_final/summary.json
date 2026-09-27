@@ -1,0 +1,3482 @@
+{
+ "summary": {
+  "models": 38,
+  "runs": 110,
+  "valid_runs": 102,
+  "excluded": 8,
+  "entail_broke_a_run": 0,
+  "runs_with_broken_or_refused": 6,
+  "broken_or_refused_decisions": 12,
+  "alarms_by_boundary_fact": {
+   "load:transformers.tokenizer.ids Tokenization broken": 12
+  },
+  "resolved_decisions": 4,
+  "resolved_not_backed_by_a_measured_row (false alarms by protocol 2.3)": 0,
+  "false_alarm_runs (broken, refused or unbacked resolved)": 6,
+  "unknown_decisions": 114,
+  "same_output_without_resolution": "97/98",
+  "load_share_median": 0.09885,
+  "load_share_max": 1.3434,
+  "by_group": {
+   "top 20": {
+    "models": 0,
+    "valid_runs": 0,
+    "runs_with_broken_or_refused": 0
+   },
+   "per architecture": {
+    "models": 0,
+    "valid_runs": 0,
+    "runs_with_broken_or_refused": 0
+   },
+   "local": {
+    "models": 37,
+    "valid_runs": 102,
+    "runs_with_broken_or_refused": 6
+   }
+  }
+ },
+ "runs": [
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    }
+   ],
+   "entail_ms": 180.2,
+   "load_s_on": 1.104,
+   "load_s_off": 0.998,
+   "share": 0.1632,
+   "group": "local"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 63
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    }
+   ],
+   "entail_ms": 1424.6,
+   "load_s_on": 12.636,
+   "load_s_off": 9.431,
+   "share": 0.1127,
+   "group": "local"
+  },
+  {
+   "model": "HuggingFaceTB__SmolLM2-135M-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 4,
+    "pass": 13
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: rope_interleaved; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: is_llama_config (a marker of the nanotron-to-transformers conversion (the SmolLM2 family); read by no engi"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 253.9,
+   "load_s_on": 13.852,
+   "load_s_off": 10.972,
+   "share": 0.0183,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 658.5,
+   "load_s_on": 2.246,
+   "load_s_off": 4.154,
+   "share": 0.2932,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 1876.9,
+   "load_s_on": 16.416,
+   "load_s_off": 13.334,
+   "share": 0.1143,
+   "group": "local"
+  },
+  {
+   "model": "Llama-3.2-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 782.6,
+   "load_s_on": 18.235,
+   "load_s_off": 16.68,
+   "share": 0.0429,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    }
+   ],
+   "entail_ms": 147.2,
+   "load_s_on": 4.396,
+   "load_s_off": 4.521,
+   "share": 0.0335,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 60
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    }
+   ],
+   "entail_ms": 7672.8,
+   "load_s_on": 31.279,
+   "load_s_off": 11.481,
+   "share": 0.2453,
+   "group": "local"
+  },
+  {
+   "model": "Phi-3.5-mini-instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 7,
+    "pass": 13
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/Phi-3.5-mini-instruct gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further differ only after"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/Phi-3.5-mini-instruct gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further differ only after"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read by PreTrainedConfig itself "
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/Phi-3.5-mini-instruct gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further differ only after"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 824.2,
+   "load_s_on": 15.959,
+   "load_s_off": 12.911,
+   "share": 0.0516,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 421.4,
+   "load_s_on": 4.768,
+   "load_s_off": 4.415,
+   "share": 0.0884,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 2099.9,
+   "load_s_on": 17.8,
+   "load_s_off": 12.368,
+   "share": 0.118,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 657.2,
+   "load_s_on": 16.716,
+   "load_s_off": 12.342,
+   "share": 0.0393,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: Loading an AWQ quantized model requires gptqmodel. Please install it with `pip install gptqmodel`",
+   "error_on": "ImportError: Loading an AWQ quantized model requires gptqmodel. Please install it with `pip install gptqmodel`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 424.1,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 63,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 1805.4,
+   "load_s_on": 18.231,
+   "load_s_off": 15.295,
+   "share": 0.099,
+   "group": "local"
+  },
+  {
+   "model": "Qwen2.5-3B-Instruct-AWQ",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 740.4,
+   "load_s_on": 14.332,
+   "load_s_off": 16.617,
+   "share": 0.0517,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 534.0,
+   "load_s_on": 5.176,
+   "load_s_off": 5.22,
+   "share": 0.1032,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 2241.3,
+   "load_s_on": 18.776,
+   "load_s_off": 15.146,
+   "share": 0.1194,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 848.3,
+   "load_s_on": 16.435,
+   "load_s_off": 13.054,
+   "share": 0.0516,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 617.2,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65,
+    "unknown": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "kernel:vllm.custom_op",
+     "fact": "KernelReference",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 custom op instances (quant_fp8 x144) dispatch to a kernel but are not reached from the model's modules (held by helpers that are not modules): not compared"
+    }
+   ],
+   "entail_ms": 2283.8,
+   "load_s_on": 18.766,
+   "load_s_off": 15.022,
+   "share": 0.1217,
+   "group": "local"
+  },
+  {
+   "model": "Qwen3-4B-FP8",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 17,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 807.6,
+   "load_s_on": 15.21,
+   "load_s_off": 13.035,
+   "share": 0.0531,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 403.1,
+   "load_s_on": 1.515,
+   "load_s_off": 1.337,
+   "share": 0.2661,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 1366.6,
+   "load_s_on": 14.025,
+   "load_s_off": 10.932,
+   "share": 0.0974,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-0.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 687.6,
+   "load_s_on": 13.329,
+   "load_s_off": 10.86,
+   "share": 0.0516,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 547.6,
+   "load_s_on": 7.035,
+   "load_s_off": 2.81,
+   "share": 0.0778,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 2157.6,
+   "load_s_on": 23.487,
+   "load_s_off": 11.579,
+   "share": 0.0919,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 705.2,
+   "load_s_on": 14.062,
+   "load_s_off": 12.518,
+   "share": 0.0501,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 413.8,
+   "load_s_on": 1.263,
+   "load_s_off": 1.367,
+   "share": 0.3276,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 63
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 1261.0,
+   "load_s_on": 13.651,
+   "load_s_off": 11.659,
+   "share": 0.0924,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 4,
+    "pass": 13
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 737.7,
+   "load_s_on": 13.744,
+   "load_s_off": 12.092,
+   "share": 0.0537,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 443.5,
+   "load_s_on": 1.249,
+   "load_s_off": 1.419,
+   "share": 0.355,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 1327.9,
+   "load_s_on": 13.264,
+   "load_s_off": 13.376,
+   "share": 0.1001,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-0.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 615.3,
+   "load_s_on": 13.428,
+   "load_s_off": 11.833,
+   "share": 0.0458,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 432.4,
+   "load_s_on": 2.672,
+   "load_s_off": 2.322,
+   "share": 0.1618,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 63
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    }
+   ],
+   "entail_ms": 1257.8,
+   "load_s_on": 14.068,
+   "load_s_off": 11.415,
+   "share": 0.0894,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 4,
+    "pass": 13
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 631.5,
+   "load_s_on": 14.166,
+   "load_s_off": 11.5,
+   "share": 0.0446,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 425.7,
+   "load_s_on": 2.558,
+   "load_s_off": 2.489,
+   "share": 0.1664,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 1308.8,
+   "load_s_on": 14.656,
+   "load_s_off": 12.425,
+   "share": 0.0893,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 677.6,
+   "load_s_on": 14.268,
+   "load_s_off": 13.568,
+   "share": 0.0475,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-1.5B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 461.5,
+   "load_s_on": 3.37,
+   "load_s_off": 2.19,
+   "share": 0.1369,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-1.5B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 1549.8,
+   "load_s_on": 15.699,
+   "load_s_off": 9.941,
+   "share": 0.0987,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-1.5B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 710.3,
+   "load_s_on": 14.621,
+   "load_s_off": 10.05,
+   "share": 0.0486,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-3B-Instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 498.4,
+   "load_s_on": 11.735,
+   "load_s_off": 3.625,
+   "share": 0.0425,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-3B-Instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 2959.0,
+   "load_s_on": 24.625,
+   "load_s_off": 11.358,
+   "share": 0.1202,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen2.5-Coder-3B-Instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 654.6,
+   "load_s_on": 32.22,
+   "load_s_off": 11.119,
+   "share": 0.0203,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 563.2,
+   "load_s_on": 1.466,
+   "load_s_off": 1.583,
+   "share": 0.3842,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 1399.5,
+   "load_s_on": 14.32,
+   "load_s_off": 12.793,
+   "share": 0.0977,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 954.4,
+   "load_s_on": 13.628,
+   "load_s_off": 13.588,
+   "share": 0.07,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 464.0,
+   "load_s_on": 1.339,
+   "load_s_off": 1.333,
+   "share": 0.3465,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 1505.5,
+   "load_s_on": 14.08,
+   "load_s_off": 11.933,
+   "share": 0.1069,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-0.6B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 649.0,
+   "load_s_on": 13.633,
+   "load_s_off": 11.69,
+   "share": 0.0476,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 728.5,
+   "load_s_on": 2.979,
+   "load_s_off": 2.777,
+   "share": 0.2446,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 2043.5,
+   "load_s_on": 18.278,
+   "load_s_off": 13.306,
+   "share": 0.1118,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 863.1,
+   "load_s_on": 14.738,
+   "load_s_off": 12.123,
+   "share": 0.0586,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 497.8,
+   "load_s_on": 2.957,
+   "load_s_off": 2.733,
+   "share": 0.1683,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 1654.9,
+   "load_s_on": 14.87,
+   "load_s_off": 11.852,
+   "share": 0.1113,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-1.7B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 640.1,
+   "load_s_on": 14.049,
+   "load_s_off": 11.453,
+   "share": 0.0456,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 440.2,
+   "load_s_on": 4.614,
+   "load_s_off": 4.61,
+   "share": 0.0954,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 2655.1,
+   "load_s_on": 20.37,
+   "load_s_off": 14.639,
+   "share": 0.1303,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Base",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 826.1,
+   "load_s_on": 16.189,
+   "load_s_off": 14.027,
+   "share": 0.051,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 569.5,
+   "load_s_on": 4.73,
+   "load_s_off": 9.779,
+   "share": 0.1204,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 2133.7,
+   "load_s_on": 17.472,
+   "load_s_off": 15.111,
+   "share": 0.1221,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 951.0,
+   "load_s_on": 15.849,
+   "load_s_off": 13.142,
+   "share": 0.06,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 551.1,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65,
+    "unknown": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "kernel:vllm.custom_op",
+     "fact": "KernelReference",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 custom op instances (quant_fp8 x144) dispatch to a kernel but are not reached from the model's modules (held by helpers that are not modules): not compared"
+    }
+   ],
+   "entail_ms": 1892.0,
+   "load_s_on": 17.949,
+   "load_s_off": 14.194,
+   "share": 0.1054,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-4B-Instruct-2507-FP8",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 17,
+    "unknown": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 1014.8,
+   "load_s_on": 15.947,
+   "load_s_off": 12.688,
+   "share": 0.0636,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-8B-FP8",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "error_on": "ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install kernels==0.16.0`",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 8,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    }
+   ],
+   "entail_ms": 570.0,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "Qwen__Qwen3-8B-FP8",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 14,
+    "unknown": 3
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 weight(s) (first: model.layers.0.self_attn.qkv_proj): vllm.quant_method.Fp8LinearMethod has no signature in data/signatures.json, so what its step wrote was not checked"
+    },
+    {
+     "boundary": "load:vllm.linear",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is unknown (not read, or not in the capability table)",
+     "target": null,
+     "note": ""
+    },
+    {
+     "boundary": "kernel:vllm.custom_op",
+     "fact": "KernelReference",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "144 custom op instances (quant_fp8 x144) dispatch to a kernel but are not reached from the model's modules (held by helpers that are not modules): not compared"
+    }
+   ],
+   "entail_ms": 346.1,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8,
+    "broken": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further"
+    }
+   ],
+   "entail_ms": 267.0,
+   "load_s_on": 2.012,
+   "load_s_off": 1.949,
+   "share": 0.1327,
+   "group": "local"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 63,
+    "broken": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further"
+    }
+   ],
+   "entail_ms": 1583.7,
+   "load_s_on": 12.67,
+   "load_s_off": 10.448,
+   "share": 0.125,
+   "group": "local"
+  },
+  {
+   "model": "TinyLlama__TinyLlama-1.1B-Chat-v1.0",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 13,
+    "broken": 3,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 671.4,
+   "load_s_on": 13.055,
+   "load_s_off": 11.288,
+   "share": 0.0514,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "eager",
+   "same_output": true,
+   "verdicts": {
+    "pass": 10,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "eager",
+     "note": "",
+     "backing": {
+      "consumer": "transformers.attention.sdpa",
+      "dropped": {
+       "softcap": "measured"
+      },
+      "backed_by_measured_row": true
+     }
+    }
+   ],
+   "entail_ms": 1155.1,
+   "load_s_on": 3.55,
+   "load_s_off": 3.2,
+   "share": 0.3254,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 3502.7,
+   "load_s_on": 23.623,
+   "load_s_off": 18.182,
+   "share": 0.1483,
+   "group": "local"
+  },
+  {
+   "model": "gemma-2-2b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": false,
+   "verdicts": {
+    "pass": 25,
+    "resolved": 1,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "resolved",
+     "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+     "target": "triton",
+     "note": "",
+     "backing": {
+      "consumer": "sglang.attention.flashinfer",
+      "dropped": {
+       "softcap": "measured",
+       "sliding_window": "code"
+      },
+      "backed_by_measured_row": true
+     }
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 1363.1,
+   "load_s_on": 16.63,
+   "load_s_off": 14.992,
+   "share": 0.082,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 8
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    }
+   ],
+   "entail_ms": 1637.8,
+   "load_s_on": 2.035,
+   "load_s_off": 1.856,
+   "share": 0.8048,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 68
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    }
+   ],
+   "entail_ms": 3136.6,
+   "load_s_on": 20.111,
+   "load_s_off": 16.008,
+   "share": 0.156,
+   "group": "local"
+  },
+  {
+   "model": "gemma-3-1b-it",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 5,
+    "pass": 19
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: sliding_window_pattern; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked o"
+    },
+    {
+     "boundary": "load:sglang.attention",
+     "fact": "ModelProps",
+     "verdict": "unknown",
+     "rule": "what the consumer uses is inferred from its code, not measured; nothing is switched on it",
+     "target": null,
+     "note": "inferred, not measured: ModelProps.sliding_window (code)"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 2024.8,
+   "load_s_on": 16.331,
+   "load_s_off": 14.983,
+   "share": 0.124,
+   "group": "local"
+  },
+  {
+   "model": "hmellor__tiny-random-LlamaForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 7,
+    "broken": 1,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]"
+    },
+    {
+     "boundary": "load:transformers.generation_config",
+     "fact": "Stops",
+     "verdict": "resolved",
+     "rule": "the consumer's stop set lacks an id the model's files declare as the end of a generation",
+     "target": "(2,)",
+     "note": "the consumer's stop set lacks 2 (declared by /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM/tokenizer_config.json#eos_token (id by added_tokens_decoder)); 1 is declared as eos by /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM/config.json#eos_token_id but it is a declared ",
+     "backing": {
+      "consumer": "transformers.generate",
+      "dropped": {
+       "Stops": "rule repair"
+      },
+      "backed_by_measured_row": true,
+      "rule_repair_evidence": "testbed/results/m15/stops_replay_on.json, stops_nemotron_on.json (the declared end added at load; generation stops at the end where it ran to 160 tokens without)"
+     }
+    }
+   ],
+   "entail_ms": 254.6,
+   "load_s_on": 0.554,
+   "load_s_off": 0.425,
+   "share": 0.4595,
+   "group": "local"
+  },
+  {
+   "model": "hmellor__tiny-random-LlamaForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 63,
+    "broken": 2
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]"
+    }
+   ],
+   "entail_ms": 892.0,
+   "load_s_on": 11.474,
+   "load_s_off": 8.674,
+   "share": 0.0777,
+   "group": "local"
+  },
+  {
+   "model": "hmellor__tiny-random-LlamaForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 13,
+    "broken": 3,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "broken",
+     "rule": "the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares",
+     "target": null,
+     "note": "2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 875.8,
+   "load_s_on": 12.572,
+   "load_s_off": 9.124,
+   "share": 0.0697,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 400.6,
+   "load_s_on": 4.69,
+   "load_s_off": 3.566,
+   "share": 0.0854,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 62
+   },
+   "not_pass": [],
+   "entail_ms": 2399.6,
+   "load_s_on": 23.54,
+   "load_s_off": 11.632,
+   "share": 0.1019,
+   "group": "local"
+  },
+  {
+   "model": "ibm-granite__granite-4.1-3b",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 4
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "4 of 10 probe texts encode differently; first: 'def fib(n):\\n    if n < 2:\\n        return n\\n    return fi: GPT2Tokenizer built from /home/<user>/models/m10/ibm-granite__granite-4.1-3b gives [755, 16178, 7, 77, 1680, 198, 262, 422, 308, 366, 220, 17, ...], tokenizer.json (tokenizers 0.22.2) gives [7"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "4 of 10 probe texts encode differently; first: 'def fib(n):\\n    if n < 2:\\n        return n\\n    return fi: GPT2Tokenizer built from /home/<user>/models/m10/ibm-granite__granite-4.1-3b gives [755, 16178, 7, 77, 1680, 198, 262, 422, 308, 366, 220, 17, ...], tokenizer.json (tokenizers 0.22.2) gives [7"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "4 of 10 probe texts encode differently; first: 'def fib(n):\\n    if n < 2:\\n        return n\\n    return fi: GPT2Tokenizer built from /home/<user>/models/m10/ibm-granite__granite-4.1-3b gives [755, 16178, 7, 77, 1680, 198, 262, 422, 308, 366, 220, 17, ...], tokenizer.json (tokenizers 0.22.2) gives [7"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 1230.0,
+   "load_s_on": 17.695,
+   "load_s_off": 12.696,
+   "share": 0.0695,
+   "group": "local"
+  },
+  {
+   "model": "llamafactory__tiny-random-Llama-3",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 486.8,
+   "load_s_on": 0.662,
+   "load_s_off": 0.562,
+   "share": 0.7354,
+   "group": "local"
+  },
+  {
+   "model": "llamafactory__tiny-random-Llama-3",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 111.0,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    }
+   ],
+   "entail_ms": 906.2,
+   "load_s_on": 4.12,
+   "load_s_off": 3.966,
+   "share": 0.2199,
+   "group": "local"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 60
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    }
+   ],
+   "entail_ms": 7080.8,
+   "load_s_on": 26.491,
+   "load_s_off": 13.909,
+   "share": 0.2673,
+   "group": "local"
+  },
+  {
+   "model": "microsoft__Phi-4-mini-instruct",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 7,
+    "pass": 13
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "4 of 10 probe texts encode differently; first: 'def fib(n):\\n    if n < 2:\\n        return n\\n    return fi: GPT2Tokenizer built from /home/<user>/models/m10/microsoft__Phi-4-mini-instruct gives [1314, 18795, 7, 77, 3127, 198, 271, 538, 297, 464, 220, 17, ...], tokenizer.json (tokenizers 0.22.2) give"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instr"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "4 of 10 probe texts encode differently; first: 'def fib(n):\\n    if n < 2:\\n        return n\\n    return fi: GPT2Tokenizer built from /home/<user>/models/m10/microsoft__Phi-4-mini-instruct gives [1314, 18795, 7, 77, 3127, 198, 271, 538, 297, 464, 220, 17, ...], tokenizer.json (tokenizers 0.22.2) give"
+    },
+    {
+     "boundary": "load:transformers.tokenizer.ids",
+     "fact": "Tokenization",
+     "verdict": "unknown",
+     "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+     "target": null,
+     "note": "4 of 10 probe texts encode differently; first: 'def fib(n):\\n    if n < 2:\\n        return n\\n    return fi: GPT2Tokenizer built from /home/<user>/models/m10/microsoft__Phi-4-mini-instruct gives [1314, 18795, 7, 77, 3127, 198, 271, 538, 297, 464, 220, 17, ...], tokenizer.json (tokenizers 0.22.2) give"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 2606.9,
+   "load_s_on": 21.318,
+   "load_s_off": 16.067,
+   "share": 0.1223,
+   "group": "local"
+  },
+  {
+   "model": "nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16",
+   "engine": "transformers",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "ImportError: compressed-tensors>=0.15.0 is required for compressed-tensors quantization. Please install it with `pip install compressed-tensors>=0.15.0`.",
+   "error_on": "ImportError: compressed-tensors>=0.15.0 is required for compressed-tensors quantization. Please install it with `pip install compressed-tensors>=0.15.0`.",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 4
+   },
+   "not_pass": [],
+   "entail_ms": 176.7,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 63
+   },
+   "not_pass": [],
+   "entail_ms": 1165.7,
+   "load_s_on": 14.28,
+   "load_s_off": 10.267,
+   "share": 0.0816,
+   "group": "local"
+  },
+  {
+   "model": "nm-testing__SmolLM-1.7B-Instruct-quantized.w4a16",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 314.3,
+   "load_s_on": 14.365,
+   "load_s_off": 9.543,
+   "share": 0.0219,
+   "group": "local"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 2,
+    "pass": 3,
+    "resolved": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.generation_config",
+     "fact": "Stops",
+     "verdict": "resolved",
+     "rule": "the consumer's stop set lacks an id the model's files declare as the end of a generation",
+     "target": "(11,)",
+     "note": "the consumer's stop set lacks 11 (declared by /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16/tokenizer_config.json#eos_token (id by added_tokens_decoder))",
+     "backing": {
+      "consumer": "transformers.generate",
+      "dropped": {
+       "Stops": "rule repair"
+      },
+      "backed_by_measured_row": true,
+      "rule_repair_evidence": "testbed/results/m15/stops_replay_on.json, stops_nemotron_on.json (the declared end added at load; generation stops at the end where it ran to 160 tokens without)"
+     }
+    }
+   ],
+   "entail_ms": 648.5,
+   "load_s_on": 4.27,
+   "load_s_off": 13.915,
+   "share": 0.1519,
+   "group": "local"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 87
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "21 weight(s) (first: model.layers.0.mixer.conv1d): not a matrix (shape (9728, 1, 4))"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    }
+   ],
+   "entail_ms": 2914.8,
+   "load_s_on": 27.613,
+   "load_s_off": 62.701,
+   "share": 0.1056,
+   "group": "local"
+  },
+  {
+   "model": "nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 6,
+    "pass": 23
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, n_groups, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_hash (read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: hybrid_override_pattern, n_groups, num_hidden_layers; read elsewhere: auto_map (read by transformers' Auto classes to find a model's own code (trust_remote_code), not a field of the config class (seen on Phi-3.5-mini-instruct, M3.5)); _commit_"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 995.5,
+   "load_s_on": 20.402,
+   "load_s_off": 21.821,
+   "share": 0.0488,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-1B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 499.9,
+   "load_s_on": 2.235,
+   "load_s_off": 1.606,
+   "share": 0.2237,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-1B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 1513.8,
+   "load_s_on": 14.952,
+   "load_s_off": 11.093,
+   "share": 0.1012,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-1B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 790.7,
+   "load_s_on": 18.418,
+   "load_s_off": 12.383,
+   "share": 0.0429,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-2B",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 472.9,
+   "load_s_on": 9.75,
+   "load_s_off": 4.127,
+   "share": 0.0485,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-2B",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 65
+   },
+   "not_pass": [],
+   "entail_ms": 2805.3,
+   "load_s_on": 24.659,
+   "load_s_off": 11.542,
+   "share": 0.1138,
+   "group": "local"
+  },
+  {
+   "model": "openbmb__MiniCPM5-2B",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 663.8,
+   "load_s_on": 32.431,
+   "load_s_off": 13.128,
+   "share": 0.0205,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-GptOssForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "eager",
+   "backend_on": "eager",
+   "same_output": false,
+   "verdicts": {
+    "pass": 9
+   },
+   "not_pass": [],
+   "entail_ms": 1074.7,
+   "load_s_on": 0.827,
+   "load_s_off": 0.638,
+   "share": 1.2995,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-GptOssForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 75,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "2 weight(s) (first: model.layers.0.mlp.router): the layer gives no in and out features, so the orientation was not read"
+    }
+   ],
+   "entail_ms": 1443.3,
+   "load_s_on": 17.481,
+   "load_s_off": 16.71,
+   "share": 0.0826,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen2ForCausalLM-2.5",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 738.9,
+   "load_s_on": 0.55,
+   "load_s_off": 0.511,
+   "share": 1.3434,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen2ForCausalLM-2.5",
+   "engine": "vllm",
+   "ok_off": false,
+   "ok_on": false,
+   "error_off": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "error_on": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "backend_off": null,
+   "backend_on": null,
+   "same_output": false,
+   "verdicts": {
+    "pass": 26
+   },
+   "not_pass": [],
+   "entail_ms": 263.7,
+   "load_s_on": null,
+   "load_s_off": null,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "pass": 8
+   },
+   "not_pass": [],
+   "entail_ms": 941.5,
+   "load_s_on": 0.879,
+   "load_s_off": 0.525,
+   "share": 1.0711,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 67
+   },
+   "not_pass": [],
+   "entail_ms": 898.1,
+   "load_s_on": 17.463,
+   "load_s_off": 11.361,
+   "share": 0.0514,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3ForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "pass": 16,
+    "unknown": 1
+   },
+   "not_pass": [
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 1069.5,
+   "load_s_on": 15.09,
+   "load_s_off": 11.709,
+   "share": 0.0709,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "transformers",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "sdpa",
+   "backend_on": "sdpa",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 1,
+    "pass": 7
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    }
+   ],
+   "entail_ms": 596.1,
+   "load_s_on": 0.594,
+   "load_s_off": 0.53,
+   "share": 1.0035,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "vllm",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 3,
+    "pass": 65
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "load:vllm.quant_method.process_weights_after_loading",
+     "fact": "Layout",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "2 weight(s) (first: model.layers.0.mlp.gate): the layer gives no in and out features, so the orientation was not read"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    }
+   ],
+   "entail_ms": 1266.7,
+   "load_s_on": 13.002,
+   "load_s_off": 11.832,
+   "share": 0.0974,
+   "group": "local"
+  },
+  {
+   "model": "trl-internal-testing__tiny-Qwen3MoeForCausalLM",
+   "engine": "sglang",
+   "ok_off": true,
+   "ok_on": true,
+   "error_off": "",
+   "error_on": "",
+   "backend_off": "default",
+   "backend_on": "default",
+   "same_output": true,
+   "verdicts": {
+    "unknown": 4,
+    "pass": 16
+   },
+   "not_pass": [
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "load:transformers.config",
+     "fact": "Coverage",
+     "verdict": "unknown",
+     "rule": "declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered",
+     "target": null,
+     "note": "not taken by the class and read by nothing entail knows: head_dim, max_window_layers; not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init"
+    },
+    {
+     "boundary": "start:sglang.paths",
+     "fact": "PathAgreement",
+     "verdict": "unknown",
+     "rule": "this boundary could not be checked",
+     "target": null,
+     "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths"
+    }
+   ],
+   "entail_ms": 800.6,
+   "load_s_on": 13.721,
+   "load_s_off": 10.779,
+   "share": 0.0583,
+   "group": "local"
+  }
+ ]
+}

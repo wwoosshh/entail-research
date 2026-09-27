@@ -1,0 +1,110 @@
+X001 | D | M R T | N | 2 | Mismatched SSM state dtype and stride in PD transfer; dtype check or colocated comparison shows it; PD needs separate prefill/decode GPUs.
+X002 | D | M R | Y | 2 | Router formula errors: logits replaced by top-1 probs, cumsum over wrong dim couples batch; reference or batch-alone comparison reveals.
+X003 | D | M R T | Y | 2 | Per-channel weight scales indexed with per-tensor activation flag; scale shape versus kernel expectation or reference dequant exposes it.
+X004 | D | M R F | N | 2 | Inductor-compiled CPU MoE path yields NaN while eager is correct; defect lives on the CPU backend, not the CUDA path.
+X005 | D | R T | N | 2 | Kernel given literal group size 128 while scales sized for 64; scale shape mismatch visible; cutlass W4A8 MoE likely Hopper-only.
+X006 | D | M R T | N | 3 | Decode kernel ignores packed KV per-block stride; stride check or other backend reveals; DSV4 sparse MLA kernels need datacenter GPUs.
+X007 | D | F R | Y | 2 | Hardcoded KV group index gives wrong block IDs, reading uninitialized cache as NaN; finite check or reference hidden states shows it.
+X008 | D | M R | Y | 2 | Wrong accuracy only under inductor piecewise compilation of MoE op; compiled versus uncompiled comparison shows it; small same-architecture model fits.
+X009 | I | M R | Y | 1 | Request's repetition_penalty silently ignored in DFlash verify path; spec-decode on/off comparison reveals; small target plus drafter fits.
+X010 | D | F | Y | 2 | Log-spectrum floor via max propagates one NaN to whole matrix; finite check catches it; reference uses same formula; CPU-level preprocessing.
+X011 | D | M R T | N | 3 | Non-contiguous transposed weight given to kernel requiring C-contiguous layout; contiguity check shows it; Intel XPU only.
+X012 | D | M R | N | 2 | Alignment bounds bug inside fp8_fp4 paged MQA logits kernel at certain lengths; another provider correct; DeepSeek-V4 kernels need datacenter GPUs.
+X013 | D | L R T | N | 2 | Quant scheme lookup misses fused names, int8 weights copied raw into bf16 without scales; checkpoint comparison reveals; Ascend NPU.
+X014 | D | M R T | N | 3 | Routing bias not converted to the bf16 dtype the trtllm MoE kernel requires; dtype check reveals; Blackwell B300 path.
+X015 | D | F | Y | 3 | Unguarded division by zero std gives NaN/inf; finite check shows it; reference formula identical so comparison would not.
+X016 | D | M R | N | 2 | Block table holds manager block IDs instead of physical page IDs due to ignored storage block size; reported on ROCm gfx942.
+X017 | D | L M R | Y | 2 | Streamer reuses buffers so retained weight tensors are overwritten; checkpoint comparison or default loader reveals; streamer runs on one GPU.
+X018 | D | M R T | N | 3 | Fused kernel chosen despite BF16 activation with FP32 norm weight; dtype check or unfused path reveals; fused allreduce requires multiple GPUs.
+X019 | I | N | Y | 2 | Reasoning parser in structured-output gate lacks request chat-template kwargs; no listed numeric check applies; frontend logic is hardware-independent.
+X020 | D | M R | N | 3 | FuseEP misrouted through normal MoE path adds extra all-reduce; single-device or other-backend comparison reveals; Ascend multi-device only.
+X021 | D | M R | N | 3 | Dense MLP producers all-reduce instead of reduce-scatter, double-reducing hidden states; DP8 versus DEP8 comparison shows it; needs eight GPUs.
+X022 | I | N | Y | 2 | Logprobs built from raw token stream ignoring reasoning/content split; response-field mismatch not covered by listed checks; frontend on one GPU.
+X023 | D | M R | N | 2 | Backend-choice flag disabling DeepGEMM never reaches FP8 MoE selector; alternative backend comparison reveals; Blackwell DeepGEMM path.
+X024 | D | R | N | 3 | Test supplied weights without required interleaved layout; reference comparison exposed it; layout not a recorded array property; SM90 kernel.
+X025 | D | M R | N | 2 | Trimming drops front block when surplus is back lookahead block; colocated or spec-off comparison reveals; PD needs several GPUs.
+X026 | D | R T | Y | 1 | Attributed to head-first versus time-first axis order via heuristic shape warning, unconfirmed; shape check or reference would show.
+X027 | D | M R T | N | 2 | ROCm kernel assumes standard contiguous KV layout, misreading this model's cache; stride check or other backend reveals; ROCm only.
+X028 | D | M R | Y | 2 | KV groups with different block sizes share one raw tensor and overwrite each other; spec-decode off comparison reveals.
+X029 | D | M R | N | 3 | Expert output all-reduced twice under DP attention; DP attention on/off comparison shows it; DP attention needs multiple GPUs.
+X030 | D | M R | Y | 2 | Int32 offset overflow in paged KV addressing; other backend or smaller cache reveals; one-layer small model can exceed bound on 12GB.
+X031 | I | M R | Y | 3 | Wrong tokenizer class selected, leaving byte-level markers; reference tokenizer or other backend comparison reveals; tokenizer is hardware-independent.
+X032 | D | M R | N | 3 | Virtual KV locations used untranslated against per-rank buffers under DCP; single-device comparison reveals; DCP needs several GPUs.
+X033 | D | L R | Y | 2 | Up-projection dequantized with gate's global scale instead of its own checkpoint scale; checkpoint comparison shows it; Marlin NVFP4 on sm89.
+X034 | D | M R | N | 3 | Compiler miscompiles CK bpreshuffle GEMM on gfx950 giving wrong numerics; reference or other backend reveals; AMD only.
+X035 | D | L F M R | Y | 2 | Unloaded visual-encoder parameters stay uninitialized giving cached NaN; checkpoint coverage or finite check reveals; small VLM fits.
+X036 | D | M R F | Y | 2 | Shared CUDA-graph pool leaves unwritten padding read as NaN; graphs off, separate pools, or finite check reveal it.
+X037 | I | N | Y | 2 | Tool slot found by raw-text equality, applying wrong schema to identical parallel calls; output-parsing issue outside listed checks.
+X038 | D | M R | Y | 3 | Single-step decode path taken for multi-token input with cache; use_cache on/off or reference comparison reveals; small Mamba2 fits.
+X039 | D | M R | Y | 3 | Pad tokens update recurrent state so cache holds post-pad state; alone versus padded batch comparison reveals; small Mamba model fits.
+X040 | I | M | Y | 2 | Streaming path skips schema type coercion applied in non-streaming; streaming versus non-streaming comparison shows it; parser hardware-independent.
+X041 | D | M R | Y | 2 | Wrong mask gates restore of cached recurrent initial state in long prefills; cache or chunking comparison reveals; small hybrid model possible.
+X042 | D | M R | N | 3 | Producer reports contiguous strides for transposed scale storage, so scales pair with wrong cells; stride check fooled; gfx950 multi-GPU.
+X043 | U | N | U | 2 | Described as model-level looping across platforms with no software defect identified; checks would match reference; small-model behavior unknown.
+X044 | D | M R | Y | 2 | Marlin adapter replaces declared swigluoai activation parameters with plain SiLU defaults; other MoE backend reveals; Marlin runs on sm89.
+X045 | D | M R | N | 3 | Sync scheduler reschedules before PP stages return sampled token; async versus sync comparison shows it; pipeline parallelism needs several GPUs.
+X046 | D | M | Y | 2 | Divergence between chunk-scan and state-update kernels from bf16 precision or ties; comparing kernel paths shows it; runs on one GPU.
+X047 | D | M R | N | 2 | FP8 query scale never computed or passed, kernel uses 1.0; other attention backend reveals; TRTLLM NVFP4 path is Blackwell.
+X048 | D | R | Y | 3 | Adapter's use_rslora ignored so LoRA scaled alpha/r instead of alpha/sqrt(r); PEFT reference comparison shows it; runs on one GPU.
+X049 | D | M R | Y | 2 | Fused GDN kernel assumed interleaved projection layout the checkpoint lacks; fused/unfused comparison reveals; Triton kernel also runs on sm89.
+X050 | D | M R | Y | 3 | mrope kernel hardcodes NeoX rotation, ignoring declared GPT-J style; native versus Triton path comparison reveals; small OCR model fits.
+X051 | I | M | Y | 3 | Streaming parser emits partial float then appends wrong suffix; streaming versus non-streaming comparison shows it; parser hardware-independent.
+X052 | I | N | Y | 2 | Request validation rejects legitimate message role; endpoint parsing issue not covered by listed checks; frontend hardware-independent.
+X053 | D | M R | Y | 3 | Inter-chunk recurrence sums over wrong axis causing causality leak; reference Mamba2 or different chunk size reveals; small Zamba2 fits.
+X054 | D | M R | N | 3 | GEMM launched on default stream, breaking ordering with caller's stream under overlap scheduling; overlap on/off reveals; ROCm only.
+X055 | I | N | Y | 2 | Template and reasoning parser read thinking toggle under different key names; request-kwarg mismatch outside listed checks; frontend only.
+X056 | D | R | N | 2 | Test reference uses raw weights while kernel gets converted layout; reference comparison exposes mismatch; ROCm gfx950 test.
+X057 | D | M R | N | 3 | Host page indices used for independently allocated device pages; colocated or HiSparse-off comparison reveals; PD DeepSeek-V4 needs datacenter GPUs.
+X058 | D | M R F | Y | 3 | Exp-based tanh overflows to inf/inf NaN; finite check, torch.tanh reference, or other backend reveals; Triton softcap runs on sm89.
+X059 | D | M | N | 3 | Decode and prefill FA3 FP8 paths use different KV tile widths; prefill versus decode comparison shows mismatch; Hopper-only kernel.
+X060 | D | M R | N | 2 | KV bytes reinterpreted as e4m3fn instead of platform e4m3fnuz; other platform or reference reveals; raw byte storage hides dtype; ROCm.
+X061 | I | M R | Y | 3 | Wrong SentencePiece tokenizer class loaded for ByteLevel-BPE tokenizer; reference tokenizer comparison reveals; tokenizer hardware-independent.
+X062 | D | M R | N | 3 | FA4 mask drops sliding-window term and uses relative query index; Triton backend comparison reveals; FA4 needs Hopper or newer.
+X063 | D | M R | U | 1 | FSDP fast path skips QKV row reorder, loading correctly shaped but misordered weights; FSDP off comparison reveals; single-rank FSDP unclear.
+X064 | I | N | Y | 2 | Pythonic tool parser does not recognize JSON tool-call form the model emits; output-format mismatch outside listed checks; frontend only.
+X065 | D | M R | Y | 3 | Unmasked final K-tile load and unclamped block size spanning two quant groups with one scale; reference or block-size change reveals.
+X066 | I | N | Y | 2 | Tool parser leaks delimiter token into JSON array strings; output-text parsing issue outside listed checks; parser hardware-independent.
+X067 | D | M R | Y | 2 | Intermediate SSM states indexed by per-request counts while kernel uses global chunk grid; cache strategy or batch comparison reveals.
+X068 | D | M R T | Y | 2 | Conv kernels ignore stride of non-contiguous state-index slice, reading wrong rows; contiguity check or batch comparison reveals.
+X069 | D | M R | N | 2 | Delayed KV-zeroing kernel races RDMA receive, erasing transferred KV; async off or colocated comparison reveals; disaggregation needs two GPUs.
+X070 | D | M R | N | 3 | NVFP4 kernel broken on SM120 with unaligned K under compile; eager or Marlin comparison reveals; needs SM120 and TP8.
+X071 | I | M R | Y | 3 | Granite routed to GPT2Tokenizer with hardcoded pre-tokenizer instead of checkpoint's; reference tokenizer comparison reveals wrong IDs.
+X072 | D | M R | Y | 2 | Accepted-token count missing on non-spec steps, so stale SSM state slot read; spec-decode on/off comparison reveals; small GDN model fits.
+X073 | D | M R T | Y | 3 | Non-contiguous a/b tensors indexed as flat contiguous by Triton kernel; contiguity check reveals; small config runs on sm89.
+X074 | D | M R T | N | 2 | Unconditional all-gather of replicated LoRA shrink output; shape check or single-device comparison reveals; requires tensor parallelism.
+X075 | D | M R | Y | 2 | Skip branch fails to advance logprob cursor, giving later requests shifted slices; alone versus batch comparison reveals.
+X076 | D | M R | Y | 2 | Position ids shaped [1, seq] misapply RoPE for batched prompts; alone versus batched comparison reveals; small pipeline fits.
+X077 | D | M R T | N | 2 | Backend still assumes full-batch request mapping and layout after split; shape check or other backend reveals; FlashMLA sparse needs Hopper+.
+X078 | I | N | Y | 2 | Reasoning parser strips newline at fixed index, wrong after prefix preserved; text-parsing issue outside listed checks; parser only.
+X079 | D | M R | Y | 3 | Beam reorder skipped for caches under other names, leaving rows mismatched to beams; cache on/off comparison reveals.
+X080 | D | M R | Y | 1 | Cache-peek lookahead applied to recurrent state groups; prefix-cache on/off comparison reveals; fix location doubtful for reporter's setup.
+X081 | D | L R | U | 2 | Packed quantized tensors dropped by name-based loader branch; checkpoint comparison reveals; unclear whether DeepSeek-V4 architecture loads on sm89.
+X082 | D | L R | Y | 2 | Name rewritten twice so FP8 scale parameters never loaded; checkpoint comparison reveals; small FP8 dense model feasible on sm89.
+X083 | D | M R | N | 2 | Accuracy drop only with FULL_DECODE_ONLY graphs on ROCm, no diagnosis; graph on/off comparison reveals; MI350 only.
+X084 | D | M R | Y | 3 | Prefix-cache key omits embedding-selection mask, reusing KV for different input; cache on/off comparison reveals.
+X085 | D | R | Y | 1 | Activation scales already absorbed into weights are applied again; only an independent reference would differ; FP8 block path exists on sm89.
+X086 | D | L M R | N | 2 | Reset DP rank selects wrong weight payload for transfer; comparing received weights or single-rank run reveals; needs data-parallel GPUs.
+X087 | I | M | Y | 3 | Streaming parser initializes to REASONING too broadly, unlike non-streaming; streaming versus non-streaming comparison reveals.
+X088 | D | M R T | N | 3 | Scale not sharded along K so kernel infers wrong group size; scale shape check or TP=1 comparison reveals; needs TP.
+X089 | I | M R | Y | 3 | Tokenizer backend override misassigns non-sequential added-token IDs; reference TikToken comparison reveals; tokenizer hardware-independent.
+X090 | U | M R | U | 1 | Two issues: references input silently dropped and tensors on wrong device in multi-GPU example; one is caller input, other placement.
+X091 | D | M R T F | N | 3 | FP32 correction bias passed where kernel requires bf16, yielding NaN; dtype and finite checks reveal; trtllm routing is Blackwell.
+X092 | D | M R F | Y | 3 | Padded graph rows with zero length compute 0/0 NaN; finite check or graphs off reveals; reported on sm89 GPU.
+X093 | I | M | Y | 3 | Streaming path lacks whitespace strip applied in non-streaming; streaming versus non-streaming comparison reveals.
+X094 | D | M R | Y | 2 | Uninitialized output accumulated by racing blocks; reference GEMM or other backend reveals; CUDA kernel runs on sm89.
+X095 | D | M R | N | 2 | Failed KV receive reported as success so decode uses missing KV; colocated comparison reveals; PD with DeepSeek-V4 needs datacenter GPUs.
+X096 | D | M R | N | 3 | Marlin W4A16 kernel as built for SM100/aarch64 misbehaves; H100 comparison reveals; GB200 only.
+X097 | D | M R F | Y | 2 | FP16 overflow in vision projection turned to NaN by LayerNorm; finite check reveals; FP16 can be forced on sm89.
+X098 | I | N | Y | 2 | Placeholder binding by token value lets user-typed special token take image; token provenance not covered by listed checks.
+X099 | D | M R | N | 3 | Kernel not recorded during XPU graph capture, replaying zeros; eager comparison reveals; Intel XPU only.
+X100 | D | M R | Y | 2 | Shape-only check misroutes prefill into decode CUDA graph, losing state; graphs or spec-decode off comparison reveals.
+X101 | D | M R | N | 3 | Rank-to-KV-head mapping truncates to head 0 and conv slice ignores layout; colocated comparison reveals; needs several GPUs.
+X102 | I | N | Y | 3 | Caller supplies non-monotone sigmas computed as written; reference would compute same; purely input validation.
+X103 | D | M R T | Y | 2 | Kernel type-puns topk weights as fp32 without checking dtype; dtype check reveals; Marlin MoE runs on sm89.
+X104 | D | F | N | 2 | Reused top-k buffer keeps stale indices after NaN row; finite check on logits flags trigger; DSA kernels likely need Hopper+.
+X105 | D | M R | N | 3 | oneCCL silently does SUM for integer MIN/MAX all-reduce; NCCL platform comparison reveals; Intel XPU multi-device.
+X106 | D | M R | Y | 2 | Fresh allocation and scatter inside graph capture corrupt index-K cache; eager comparison reveals; non-Hopper fallback plausibly used on sm89.
+X107 | D | M R | N | 3 | AITER fused norm corrupts graph replay for remote decode; graphs off or native kernel reveals; ROCm PD.
+X108 | D | M R | Y | 2 | Drafter overwrites reused graph output buffer before prompt logprobs computed; spec-decode off comparison reveals; small MTP model fits.
+X109 | D | M R F | N | 3 | MPS-specific arithmetic yields NaN while CPU correct; CPU/MPS comparison and finite check reveal; Apple MPS only.
+X110 | D | L M R | Y | 2 | Views over reused streamer staging buffers corrupt weights; checkpoint comparison reveals; streamer usable on one GPU.

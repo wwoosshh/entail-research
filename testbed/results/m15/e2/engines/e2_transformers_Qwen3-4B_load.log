@@ -1,0 +1,23 @@
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=28, taken=28, left=()) (config: Qwen3Config config.json (every key it gives), declared); transformers.config uses Coverage(total=28, taken=27, left=('rope_scaling',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=29, taken=29, left=()) (config: Qwen3Config config.json (every key it gives), declared); transformers.config uses Coverage(total=29, taken=28, left=('rope_scaling',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+W0925 23:49:32.149000 7166 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0925 23:49:32.182000 7166 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights:   5%|▌         | 20/398 [00:00<00:02, 182.20it/s]
+Loading weights:  10%|▉         | 39/398 [00:00<00:02, 168.52it/s]
+Loading weights:  14%|█▍        | 56/398 [00:00<00:02, 162.56it/s]
+Loading weights:  18%|█▊        | 73/398 [00:00<00:02, 135.56it/s]
+Loading weights:  23%|██▎       | 92/398 [00:00<00:02, 149.30it/s]
+Loading weights:  27%|██▋       | 108/398 [00:00<00:01, 146.19it/s]
+Loading weights:  32%|███▏      | 126/398 [00:00<00:01, 150.03it/s]
+Loading weights:  36%|███▌      | 142/398 [00:00<00:01, 150.31it/s]
+Loading weights:  40%|███▉      | 158/398 [00:01<00:01, 147.25it/s]
+Loading weights:  43%|████▎     | 173/398 [00:01<00:01, 138.62it/s]
+Loading weights:  49%|████▊     | 194/398 [00:01<00:01, 154.69it/s]
+Loading weights:  53%|█████▎    | 210/398 [00:01<00:01, 154.62it/s]
+Loading weights:  57%|█████▋    | 226/398 [00:01<00:01, 141.69it/s]
+Loading weights:  61%|██████    | 241/398 [00:01<00:01, 138.71it/s]
+Loading weights:  64%|██████▍   | 256/398 [00:01<00:01, 140.51it/s]
+Loading weights: 100%|██████████| 398/398 [00:01<00:00, 228.10it/s]
+RESULT transformers Qwen3-4B entail=load ok=True load=5.381 used=sdpa 

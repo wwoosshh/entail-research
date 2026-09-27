@@ -1,0 +1,12 @@
+{
+ "https://github.com/huggingface/diffusers/issues/12699": {"decision": "cannot_run", "reason": "Wan2.2-I2V-A14B (two 14B transformers, 4-bit) does not fit 12 GB"},
+ "https://github.com/vllm-project/vllm/issues/31625": {"decision": "cannot_run", "reason": "ROCm AITER attention, Llama-3.3-70B with TP4"},
+ "https://github.com/vllm-project/vllm/issues/33704": {"decision": "not_output", "reason": "code reading of LoRA buffer dtypes ('potential precision issues'); no wrong output observed"},
+ "https://github.com/sgl-project/sglang/issues/17933": {"decision": "not_output", "reason": "feature request (tool-call CI tests)"},
+ "https://github.com/vllm-project/vllm/issues/36337": {"decision": "cannot_run", "reason": "Kimi-K2.5-MXFP4 on 4 x MI350X (ROCm)"},
+ "https://github.com/vllm-project/vllm/issues/26584": {"decision": "cannot_run", "reason": "gpt-oss-20b (MXFP4 weights about 13 GB) on 2 x RTX 3090"},
+ "https://github.com/sgl-project/sglang/issues/18210": {"decision": "cannot_run", "reason": "Step-3.5 FP8 with DP2 on B200"},
+ "https://github.com/vllm-project/vllm/issues/27390": {"decision": "pass", "reason": "the V1 engine reports finish_reason 'length' where V0 reports 'stop' when the EOS token falls on the token limit; script (Qwen3-4B-Instruct-2507, max_tokens 15 and 16), expected and actual given",
+   "version": "vLLM with V0 and V1 (Oct 2025; fixed by #27555) -> 0.11.0 in a new venv (V1 before the fix)", "model": "Qwen/Qwen3-4B-Instruct-2507",
+   "expected_boundary": "request:vllm.stop (the stop reason: an EOS generated at the token limit reported as the limit)"}
+}

@@ -1,0 +1,110 @@
+X001 | D | M T | N | 2 | Dtype/stride mismatch corrupts KV transfer between separate prefill/decode instances; needs disaggregated PD setup with multiple GPUs.
+X002 | D | R | Y | 3 | Router used top-1 probabilities as logits and summed over the wrong dim for expert capacity/cumsum.
+X003 | D | R | Y | 3 | Kernel indexed per-channel weight scales via a per-tensor activation flag instead of the actual weight quant scheme.
+X004 | D | M F | N | 3 | Inductor-compiled CPU MoE kernel produces NaN vs correct eager output; this is the CPU backend path, not GPU.
+X005 | D | L R | Y | 3 | Kernel hardcodes chunk_size=128 ignoring the checkpoint's real group_size, so scales are applied with the wrong stride.
+X006 | D | T R | Y | 3 | Packed KV layout changed the per-block stride but sparse-MLA decode still assumes the old per-token stride.
+X007 | D | F R | Y | 3 | Hidden-states connector hardcodes KV-cache group index 0, so hybrid models read another group's block IDs (NaN).
+X008 | D | M | Y | 3 | MoE forward wasn't marked as a graph-split boundary for the inductor compiler, unlike other backends; wrong only when compiled.
+X009 | D | M | Y | 2 | DFlash's speculative verify path never accumulates committed tokens into repetition-penalty state, unlike normal decoding.
+X010 | D | F | Y | 3 | log_spec.max() returns NaN for one bad sample; np.maximum(x, NaN) spreads NaN across the whole feature matrix.
+X011 | D | T | N | 3 | XPU FP8 kernel needs C-contiguous [K,N] weights but the post-load transpose left a non-contiguous view; Intel XPU specific.
+X012 | D | R | U | 2 | seq_len alignment bug inside a paged MQA-logits kernel; text doesn't specify if the FP4 kernel needs Blackwell-class GPUs.
+X013 | D | L T | N | 3 | Fused in_proj_qkvz name unresolved in scheme lookup, loading raw int8 into bf16 unquantized; this is Ascend NPU, not NVIDIA.
+X014 | D | T | N | 2 | Routing-bias dtype conversion (to bf16) missing for the FP8 per-block trtllm MoE path; reported on B300 (Blackwell).
+X015 | D | F | Y | 3 | rescale_noise_cfg divides by std_cfg with no epsilon guard, causing NaN/inf when guided-prediction variance is zero.
+X016 | D | M R | N | 2 | Block-size convention mismatch between allocate_kv_cache and prepare_kernel_block_sizes puts logical IDs where physical page IDs are expected; ROCm gfx942.
+X017 | D | M R | Y | 3 | RunAI Model Streamer reuses internal buffers so a retained yielded tensor gets overwritten by the next weight.
+X018 | D | T | N | 2 | Fused allreduce+RMSNorm+quant kernel selected without checking BF16 activation vs FP32 norm-weight dtype; needs multi-GPU allreduce (TP>1).
+X019 | I | N | Y | 3 | Structured-output gate instantiates the reasoning parser without the request's chat-template kwargs; a request-plumbing gap, not a numeric check.
+X020 | D | M | N | 3 | MoE dispatch omits is_ascend_fuseep(), so FuseEP falls into forward_normal's extra TP all-reduce, double-combining output; Ascend-only path.
+X021 | D | M | N | 3 | In SUM_LEN mode the communicator doesn't tell dense-MLP producers to reduce-scatter, so hidden states get all-reduced twice; needs multi-GPU DEP.
+X022 | I | N | Y | 3 | Reasoning-vs-content split from the parser isn't carried to the logprobs builder, which reports logprobs over the whole raw token stream.
+X023 | D | M R | N | 2 | use_deep_gemm=False (a Blackwell accuracy exclusion) never reaches the FP8 MoE backend selector, which only checks an env var.
+X024 | D | T | N | 3 | Test supplies SM90 mixed-input GEMM weights without the interleaved layout the kernel requires; Hopper (sm90)-specific kernel test.
+X025 | D | M | N | 2 | Decode's prefix trimming assumes a surplus remote block is a front cached-prefix, but it's prefill's back lookahead block; needs PD (2+ GPUs).
+X026 | D | T | Y | 2 | FLA ops reportedly get head-first tensors when time-first expected (shape-warning heuristic); root cause unconfirmed, linked PR is for another model.
+X027 | D | T | N | 3 | ROCm paged-attention kernel bakes in the standard contiguous KV layout formula, which doesn't match LFM2's actual KV cache layout.
+X028 | D | M | Y | 3 | KV-cache groups with different block sizes can share the same raw KVCacheTensor buffer and corrupt each other's cached state.
+X029 | D | M | N | 3 | forward_normal all-reduces expert output that was already globally summed, double-counting it; only manifests with DP attention across multiple GPUs.
+X030 | D | R | Y | 2 | int32 paged K/V element offset overflows negative past a block-count threshold; reachable on one GPU with small enough head config.
+X031 | I | R | Y | 3 | Wrong tokenizer class/backend selected for this model leaves undecoded byte-level markers in output; a reference tokenizer would differ.
+X032 | D | R | N | 2 | Norope KV-write kernel lacks DCP rank-localization (unlike the rope variant), using global virtual locations against per-rank buffers; needs multi-GPU DCP.
+X033 | D | L R | U | 2 | Loader keeps only the gate's global scale when fusing w13, so up-proj is dequantized with the wrong scale; NVFP4 hardware need unclear.
+X034 | D | R M | N | 3 | aiter's CK bpreshuffle GEMM is miscompiled by hipcc on gfx950, giving wrong numerics; ROCm/AMD-specific defect.
+X035 | D | F L | Y | 3 | Checkpoint missing visual-encoder weights leaves params uninitialized (NaN); warmup caches this and prefix-slot reuse spreads it further.
+X036 | D | M F | Y | 2 | Nine encoder CUDA-graph budgets sharing one memory pool leave output padding unwritten; a larger capture later reads that memory as NaN.
+X037 | I | N | Y | 3 | Argument converter matches tool slot by raw-text equality instead of using the actual active slot; identical parallel args resolve wrong.
+X038 | D | R | Y | 3 | Mamba2Mixer always takes the seq_len==1 decode path whenever a cache exists, with no correct dispatch for seq_len>1.
+X039 | D | M R | Y | 3 | Pad tokens update Mamba's recurrent conv/SSM state like real tokens; right-padding corrupts the cache while left-padding doesn't.
+X040 | I | N | Y | 3 | The streaming parser's arg_converter-is-None branch returns before _fix_arg_types, skipping schema type coercion that kimi_k2 always needs.
+X041 | D | R | Y | 2 | Mamba2Metadata gates initial-state restore on a has_initial_states tracking mask, wrongly skipping restore for long prefills.
+X042 | D | T | N | 3 | AITER returns scale metadata claiming a contiguous [M,G] layout while actual storage is transposed; materializer trusts it. ROCm gfx950-specific.
+X043 | U | N | Y | 3 | Issue explicitly states this is model-level behavior seen on every platform, not a vLLM software defect; only loop-detection mitigation was added.
+X044 | D | R | Y | 2 | Marlin MoE adapter substitutes default SiLU activation params instead of the model's declared swigluoai alpha/beta/limit; Marlin FP4 likely runs on Ada too.
+X045 | D | M | N | 3 | next_decode_eligible_step is only updated by AsyncScheduler; sync Scheduler reads a stale 0 and reschedules before the PP-relayed token arrives.
+X046 | D | R | Y | 3 | Resolved as a bf16 lm_head near-tie logit causing an argmax flip (ULP-level precision), not a real SSM kernel divergence.
+X047 | D | R | Y | 2 | Dynamic per-tensor q_scale for FP8 Q attention was never computed or passed to the BMM scale, so the kernel used q_scale=1.0.
+X048 | D | R | Y | 2 | SGLang ignores the adapter config's use_rslora flag, always applying alpha/r scaling instead of the declared alpha/sqrt(r).
+X049 | D | T | Y | 2 | Fused GDN Triton kernel assumes an interleaved weight layout Qwen3.5's checkpoint doesn't use; Triton kernels are generally architecture-portable.
+X050 | D | R | Y | 3 | mrope Triton kernel hardcodes NeoX-style RoPE rotation, ignoring GLM-OCR's declared is_neox_style=False (GPT-J-style rotation expected).
+X051 | I | N | Y | 3 | Streaming parser emits partial float "108." as "108.0" before the final digit arrives, so the later diff appends the wrong suffix.
+X052 | I | N | Y | 2 | Reporter's unofficial workaround widens accepted message roles on the Anthropic-compatible endpoint; no maintainer fix confirms the root cause.
+X053 | D | R | Y | 3 | Inter-chunk state recurrence sums over the wrong axis after a permute, letting later chunks leak into (affect) earlier ones.
+X054 | D | M | N | 3 | ck-tile blockscale GEMM launches on the default HIP stream instead of the caller's active stream, breaking producer/consumer order; ROCm/HIP-specific.
+X055 | I | N | Y | 3 | Chat template reads "enable_thinking" while the Kimi K2 parser reads "thinking" (default True); the user's setting doesn't reach both.
+X056 | D | T | N | 2 | Test reference uses raw bf16 weights while the fused Triton kernel gets weights already converted to a different physical layout; ROCm gfx950.
+X057 | D | M | N | 2 | HiSparse's direct-to-host transfer uses host KV page indices for the device destination buffer despite independent host/device allocation; needs PD disaggregation.
+X058 | D | F | Y | 3 | Softcap's tanh is implemented via raw exponentials that overflow to inf for large logits, giving inf/inf = NaN.
+X059 | D | M | N | 3 | FA3's Hopper FP8 kernel uses different KV tile widths for decode vs prefill (96 vs 192), causing different logprobs; FA3 is Hopper-only.
+X060 | D | T | N | 3 | Sparse-attention backend hardcodes float8_e4m3fn instead of gfx942's real e4m3fnuz KV format; ROCm/AMD-specific byte-encoding mismatch.
+X061 | I | R | Y | 3 | tokenizer_class routes DeepSeek-Coder v1 to SentencePiece LlamaTokenizer, which can't run the ByteLevel-BPE pipeline tokenizer.json actually declares.
+X062 | D | R | N | 3 | FA4's mask builder implements "causal OR mm_prefix" instead of "(causal AND sliding_window) OR mm_prefix", dropping sliding-window; SM90-only kernel.
+X063 | D | L R | Y | 2 | Rank-local FSDP loading fast path reads safetensors slices directly, skipping the QKV row-reorder transform the ordinary loader applies.
+X064 | I | N | Y | 3 | Checkpoint emits JSON-formatted tool calls per its chat template, but the selected llama4_pythonic parser only recognizes the pythonic form.
+X065 | D | T R | Y | 3 | Triton MoE/GEMM kernels leave the final K-tile weight load unmasked and don't clamp BLOCK_SIZE_K to the quant group size, unlike a sibling kernel.
+X066 | I | N | Y | 3 | _parse_gemma4_args/_parse_gemma4_array mishandle array string values, leaking a STRING_DELIM token into the parsed JSON output.
+X067 | D | R | Y | 3 | _init_track_ssm_indices assumes per-request-local contiguous chunk offsets, but the kernel indexes states via a global chunk grid across the batch.
+X068 | D | T | Y | 2 | Fused PLE short-conv kernels don't honor the real stride of a non-contiguous state_indices slice, so rows after the first read the wrong state.
+X069 | D | M | N | 3 | A delayed KV-zeroing kernel can run after the NIXL RDMA transfer, erasing just-received KV under async scheduling; needs disaggregated P/D (multi-GPU).
+X070 | D | M | N | 3 | Merged fix disables the NVFP4 kernel specifically on SM120 (broken there per FlashInfer), not the title's torch.compile theory; needs TP8 + Blackwell.
+X071 | I | R | Y | 3 | AutoTokenizer routes Granite models to GPT2Tokenizer, which hardcodes a GPT-2 pre-tokenizer regex instead of the checkpoint's own tokenizer.json rule.
+X072 | D | M | Y | 3 | num_accepted_tokens isn't passed to SSM metadata builders on non-spec steps, so the next step reads stale state from the wrong slot.
+X073 | D | T | Y | 3 | After split/reshape the a/b tensors are non-contiguous, but the fused_gdn_gating Triton kernel indexes them as flat contiguous arrays.
+X074 | D | M | N | 3 | _mcp_apply() unconditionally all-gathers under TP even when fully_sharded_loras=False (lora_a already replicated); needs TP>1, i.e. multiple GPUs.
+X075 | D | M R | Y | 3 | The skip branch for retracted/finished requests doesn't advance the shared logprob cursor, so later batch members read a shifted slice.
+X076 | D | M | Y | 2 | Text encoder's position_ids default to shape [1,seq] regardless of actual batch size, misapplying RoPE token positions when batched.
+X077 | D | R | Y | 3 | After forward_mqa was changed to receive only decode tokens, downstream FlashMLA-sparse code still sized/assumed the full batch, causing an OOB write.
+X078 | I | N | Y | 3 | Step3p5ReasoningParser strips the newline at index 0, an assumption that breaks once the base parser starts preserving a discarded prefix.
+X079 | D | R | Y | 3 | Beam-search cache reordering checks only the past_key_values attribute, missing models whose cache lives under other declared names.
+X080 | D | M | Y | 2 | find_longest_cache_hit applies eagle lookahead-margin logic to recurrent/Mamba cache groups too, missing a not-isinstance(spec, MambaSpec) exclusion gate.
+X081 | D | L | Y | 3 | The fused wq_a+wkv loader only matches literal ".weight" suffixes, so packed GPTQ/AWQ qweight/qzeros/scales names never match and are dropped.
+X082 | D | L | Y | 3 | stacked_params_mapping loop rewrites the parameter name twice, producing the malformed key "gate_gate_up_proj", so weight_scale_inv lookup silently fails.
+X083 | U | M | N | 3 | No root-cause diagnosis is given; occurs only with FULL_DECODE_ONLY graphs on ROCm MI350/MI355, and the fix just disables that mode there.
+X084 | D | R | Y | 3 | Prefix-cache key hashes token IDs/tensor but omits the prompt_is_token_ids mask, so differently-meaning inputs can hash the same and reuse wrong KV.
+X085 | D | L R | Y | 3 | FP8_BLOCK checkpoint has activation scales already absorbed into weights, but the runtime can't detect this and re-applies quantization, double-scaling.
+X086 | D | M R | N | 3 | reconfigure_for_independent_dp_rank() resets data_parallel_rank to 0, so IPC payload selection uses the wrong identifier; needs multi-GPU data parallelism.
+X087 | I | M | Y | 3 | Streaming parser pre-initializes to REASONING state for any new model turn, broader than the one case it should cover; differs from non-streaming.
+X088 | D | T | N | 3 | weight_scale isn't re-sharded along K when the paired weight is TP-sharded, so the kernel derives group_size wrong from scale shape; needs TP>1.
+X089 | I | R | Y | 3 | Transformers overrides Kimi-K2.5's hub-declared TikToken tokenizer with a backend that can't reproduce its non-sequential added-token IDs (past 163588).
+X090 | D | M | N | 2 | Transformer forward assumes position_ids/encoder_hidden_states are already on its device, but the documented multi-GPU setup places the text encoder elsewhere.
+X091 | D | T | N | 2 | e_score_correction_bias is created fp32 and passed unconverted to flashinfer's routing kernel, which requires bfloat16; trtllm kernels are typically Hopper/Blackwell-only.
+X092 | D | F | Y | 3 | CUDA-graph padding rows get seq_len=0, but Triton MLA decode stage2 always computes acc/e_sum, giving 0/0=NaN; seen on RTX 4090 (Ada).
+X093 | I | M | Y | 3 | The streaming path's _events_to_delta has no whitespace-stripping step at tool-call boundaries that the non-streaming path applies.
+X094 | D | R | Y | 3 | gptq_gemm allocates output via torch::empty; only the z=0 block zeroes it while other blocks atomicAdd with no synchronization, racing on garbage.
+X095 | D | M | N | 3 | A failed NIXL/HMA KV receive is reported as a completion instead of reaching the scheduler as a failure; needs disaggregated P/D (multi-GPU).
+X096 | D | M | N | 3 | Reporter localizes the fault to the Marlin W4A16 kernel as built for cu130/aarch64/SM100 (GB200 Blackwell); the same code is correct on H100.
+X097 | D | F | Y | 3 | After a BF16-to-FP16 fallback, the vision patch_dense projection overflows to Inf in FP16, and LayerNorm expands that into all-NaN.
+X098 | I | N | Y | 3 | Placeholder-to-image binding matches on raw token value, not provenance, so user-typed text sharing that token id can consume a queued image.
+X099 | D | M | N | 3 | The ark.woqgemm kernel's work runs eagerly during XPU graph capture (m>1) and is never recorded, so replay outputs zeros; Intel XPU-specific.
+X100 | D | M | Y | 3 | _is_uniform_decode is a pure shape check, so a prefill of exactly 1+k tokens is misclassified as uniform-decode into the wrong CUDA graph.
+X101 | D | R T | N | 3 | num_kv_heads // tp_size truncates to 0 when tp_size exceeds num_kv_heads, mapping every decode rank to KV head 0; needs multi-GPU heterogeneous TP/PD.
+X102 | I | N | Y | 3 | Corruption comes from a caller-supplied non-monotone sigma schedule that the scheduler computes as written, with no validation; closed as not planned.
+X103 | D | T | Y | 2 | Kernel reinterprets topk_weights as fp32 via an untyped pointer without validating the actual dtype, type-punning the data; Marlin kernels are broadly portable.
+X104 | D | F | Y | 3 | On a NaN row DeepSelect writes only slot 0 and returns, but the caller treats every top-k slot of its reused buffer as valid.
+X105 | D | M | N | 3 | Intel XPU's oneCCL/xccl backend silently computes SUM instead of MIN/MAX for integer all_reduce; the same code is correct on NVIDIA/nccl.
+X106 | D | M | Y | 2 | _insert_kv allocates a fresh tensor and advanced-index-scatters into the index-K cache, which breaks under CUDA-graph capture/replay; a general CUDA-graph issue.
+X107 | D | M | N | 2 | AITER's fused_add_rms_norm reportedly corrupts CUDA-graph replay for remote DSA decode in PD-disaggregation; ROCm/AITER-specific, mechanism left unexplained.
+X108 | D | M | Y | 3 | The padded GPU drafter overwrites the reusable CUDA-graph hidden-states output buffer before prompt logprobs are computed from it.
+X109 | D | M | N | 3 | Both schedulers are correct on CPU but all-NaN on MPS, from MPS-specific tensor/lerp arithmetic divergence filed upstream; Apple MPS-specific.
+X110 | D | M | Y | 3 | The most severe symptom (all-zero logits) traces to stale tensor views over GPU staging buffers the RunAI streamer reuses across batches.

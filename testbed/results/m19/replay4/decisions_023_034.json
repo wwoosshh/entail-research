@@ -1,0 +1,14 @@
+{
+ "https://github.com/sgl-project/sglang/issues/18683": {"decision": "cannot_run", "reason": "GLM-4.5V (106B) with TP4 on H200, fa3"},
+ "https://github.com/sgl-project/sglang/issues/16972": {"decision": "cannot_run", "reason": "gpt-oss (20B/120B) native MoE forward under torch.compile; the reported model class does not fit"},
+ "https://github.com/sgl-project/sglang/issues/11298": {"decision": "cannot_run", "reason": "LongBench-v2 on DeepSeek-V3.2 (671B)"},
+ "https://github.com/vllm-project/vllm/issues/37856": {"decision": "cannot_run", "reason": "sequence-parallel MoE needs EP + TP>1 + DP>1 (8 x H100)"},
+ "https://github.com/sgl-project/sglang/issues/20050": {"decision": "cannot_run", "reason": "Qwen3.5-397B-A17B-NVFP4 with TP8"},
+ "https://github.com/vllm-project/vllm/issues/29014": {"decision": "not_output", "reason": "torch.compile fails with a stride assertion error (compile-time error)"},
+ "https://github.com/sgl-project/sglang/issues/11326": {"decision": "not_output", "reason": "server does not start (import error)"},
+ "https://github.com/vllm-project/vllm/issues/32069": {"decision": "no_repro_info", "reason": "'inconsistencies in accuracy' of Qwen3-VL-Embedding-2B against Qwen3VLEmbedder with no input, numbers or script"},
+ "https://github.com/vllm-project/vllm/issues/36994": {"decision": "not_output", "reason": "a valid block size rejected at backend selection on ROCm (the model does not run)"},
+ "https://github.com/vllm-project/vllm/issues/36251": {"decision": "not_output", "reason": "crash while loading weights (dimension mismatch) with TP4 + EP"},
+ "https://github.com/sgl-project/sglang/issues/13065": {"decision": "not_output", "reason": "memory-pool leak assertion on Ascend NPU"},
+ "https://github.com/vllm-project/vllm/issues/30830": {"decision": "cannot_run", "reason": "online FP8 streaming quantization defect only with TP>1 (fix: TP>1 weight_loader handling)"}
+}

@@ -1,0 +1,55 @@
+{
+ "rank": 226,
+ "id": "allenai/Olmo-3-7B-Instruct",
+ "model_type": "olmo3",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 9695087,
+ "mistral_files": [],
+ "rows": {
+  "n": 100278,
+  "where": "model.embed_tokens.weight [100278, 4096] in model-00001-of-00003.safetensors (header only)",
+  "config_vocab_size": 100278
+ },
+ "sources": {
+  "candidates": [
+   [
+    100278,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    100278,
+    "vocab.json"
+   ]
+  ],
+  "rows": 100278,
+  "rows_where": "model.embed_tokens.weight [100278, 4096] in model-00001-of-00003.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 100278,
+  "reach": 100278
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='yarn', theta=500000, factor=8.0, original_max_position=8192, low_freq_factor=None, high_freq_factor=None, beta_fast=32.0, beta_slow=1.0, attention_factor=1.2079441541679836, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 4.6
+}

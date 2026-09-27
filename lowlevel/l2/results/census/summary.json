@@ -1,0 +1,608 @@
+{
+ "configs": [
+  "vllm_Llama-3.2-3B-Instruct",
+  "vllm_NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "vllm_Phi-4-mini-instruct",
+  "vllm_Qwen2.5-3B-Instruct",
+  "vllm_Qwen2.5-3B-Instruct-AWQ",
+  "vllm_Qwen3-0.6B",
+  "vllm_Qwen3-4B",
+  "vllm_Qwen3-4B-FP8",
+  "vllm_Qwen3-VL-2B-Instruct",
+  "vllm_Qwen3.5-4B-NVFP4",
+  "vllm_gemma-2-2b-it",
+  "vllm_gemma-3-1b-it",
+  "vllm_granite-4.1-3b",
+  "vllm_tiny-Qwen3MoeForCausalLM"
+ ],
+ "kernels": [
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.logprob:_topk_log_softmax_kernel",
+   "configs": 14,
+   "launches": 2170,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.logprob:compute_token_logprobs"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.logprob:_ranks_kernel",
+   "configs": 14,
+   "launches": 2170,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.logprob:compute_topk_scores"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.input_batch:_get_num_sampled_and_rejected_kernel",
+   "configs": 14,
+   "launches": 2086,
+   "callers": [
+    "vllm.v1.worker.gpu.input_batch:get_num_sampled_and_rejected"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.input_batch:_prepare_pos_seq_lens_kernel",
+   "configs": 14,
+   "launches": 2072,
+   "callers": [
+    "vllm.v1.worker.gpu.input_batch:prepare_pos_seq_lens"
+   ],
+   "covered": true,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.input_batch:_combine_sampled_and_draft_tokens_kernel",
+   "configs": 14,
+   "launches": 2072,
+   "callers": [
+    "vllm.v1.worker.gpu.input_batch:combine_sampled_and_draft_tokens"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.block_table:_gather_block_tables_kernel",
+   "configs": 14,
+   "launches": 2072,
+   "callers": [
+    "vllm.v1.worker.gpu.block_table:gather_block_tables"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.block_table:_compute_slot_mappings_kernel",
+   "configs": 14,
+   "launches": 2072,
+   "callers": [
+    "vllm.v1.worker.gpu.block_table:compute_slot_mappings"
+   ],
+   "covered": true,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.input_batch:_post_update_kernel",
+   "configs": 14,
+   "launches": 2072,
+   "callers": [
+    "vllm.v1.worker.gpu.input_batch:post_update"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.gumbel:_gumbel_sample_kernel",
+   "configs": 14,
+   "launches": 2030,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.gumbel:gumbel_sample"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.buffer_utils:_apply_write_kernel",
+   "configs": 14,
+   "launches": 570,
+   "callers": [
+    "vllm.v1.worker.gpu.buffer_utils:apply_write"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.input_batch:_prepare_prefill_inputs_kernel",
+   "configs": 14,
+   "launches": 98,
+   "callers": [
+    "vllm.v1.worker.gpu.input_batch:prepare_prefill_inputs"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.prompt_logprob:_prompt_logprobs_token_ids_kernel",
+   "configs": 14,
+   "launches": 98,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.prompt_logprob:get_prompt_logprobs_token_ids"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.logit_bias:_bias_kernel",
+   "configs": 14,
+   "launches": 56,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.logit_bias:apply_logit_bias"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.penalties:_penalties_kernel",
+   "configs": 14,
+   "launches": 56,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.penalties:apply_penalties"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.bad_words:_bad_words_kernel",
+   "configs": 14,
+   "launches": 56,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.bad_words:apply_bad_words"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.gumbel:_temperature_kernel",
+   "configs": 14,
+   "launches": 56,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.gumbel:apply_temperature"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.min_p:_min_p_kernel",
+   "configs": 14,
+   "launches": 56,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.min_p:apply_min_p"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.sample.penalties:_bincount_kernel",
+   "configs": 14,
+   "launches": 14,
+   "callers": [
+    "vllm.v1.worker.gpu.sample.penalties:bincount"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.structured_outputs:_apply_grammar_bitmask_kernel",
+   "configs": 14,
+   "launches": 14,
+   "callers": [
+    "vllm.v1.worker.gpu.structured_outputs:apply_grammar_bitmask"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.causal_conv1d:_causal_conv1d_update_kernel",
+   "configs": 2,
+   "launches": 6345,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.causal_conv1d:causal_conv1d_update"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.rotary_embedding.mrope:_triton_mrope_forward",
+   "configs": 2,
+   "launches": 4178,
+   "callers": [
+    "vllm.model_executor.layers.rotary_embedding.mrope:triton_mrope"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.causal_conv1d:_causal_conv1d_fwd_kernel",
+   "configs": 2,
+   "launches": 316,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.causal_conv1d:causal_conv1d_fn"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.mm.rope:_prepare_rope_positions_kernel",
+   "configs": 2,
+   "launches": 298,
+   "callers": [
+    "vllm.v1.worker.gpu.mm.rope:prepare_positions"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.mamba_utils:preprocess_mamba_align_fused_kernel",
+   "configs": 2,
+   "launches": 296,
+   "callers": [
+    "vllm.v1.worker.gpu.model_states.mamba_hybrid:preprocess_state"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.mamba_utils:precopy_mamba_align_fused_kernel",
+   "configs": 2,
+   "launches": 296,
+   "callers": [
+    "vllm.v1.worker.mamba_utils:run_fused_precopy"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.gpu.model_states.mamba_hybrid:_scatter_num_accepted_kernel",
+   "configs": 2,
+   "launches": 296,
+   "callers": [
+    "vllm.v1.worker.gpu.model_states.mamba_hybrid:postprocess_state"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.mamba_utils:postprocess_mamba_fused_kernel",
+   "configs": 2,
+   "launches": 296,
+   "callers": [
+    "vllm.v1.worker.mamba_utils:run_fused_postprocess_align"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.vllm_flash_attn.ops.triton.rotary:rotary_kernel",
+   "configs": 2,
+   "launches": 56,
+   "callers": [
+    "vllm.vllm_flash_attn.ops.triton.rotary:apply_rotary"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.utils:_zero_kv_blocks_kernel",
+   "configs": 2,
+   "launches": 14,
+   "callers": [
+    "vllm.v1.worker.utils:zero_block_ids"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.models.qwen3_vl:_bilinear_pos_embed_kernel",
+   "configs": 2,
+   "launches": 10,
+   "callers": [
+    "vllm.model_executor.models.qwen3_vl:triton_pos_embed_interpolate"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.v1.worker.mamba_utils:batch_memcpy_kernel",
+   "configs": 2,
+   "launches": 2,
+   "callers": [
+    "vllm.v1.worker.mamba_utils:batch_memcpy"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.ssd_chunk_scan:_chunk_scan_fwd_kernel",
+   "configs": 1,
+   "launches": 6652,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.ssd_chunk_scan:_chunk_scan_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.layernorm_guard:layer_norm_fwd_kernel",
+   "configs": 1,
+   "launches": 3552,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.layernorm_guard:__call__"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.fused_recurrent:fused_recurrent_gated_delta_rule_packed_decode_kernel",
+   "configs": 1,
+   "launches": 3384,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.fused_recurrent:fused_recurrent_gated_delta_rule_packed_decode"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.ssd_chunk_state:_chunk_state_fwd_kernel",
+   "configs": 1,
+   "launches": 3042,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.ssd_chunk_state:_chunk_state_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.mamba_ssm:_selective_scan_update_kernel",
+   "configs": 1,
+   "launches": 2961,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.mamba_ssm:selective_state_update"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.ssd_state_passing:_state_passing_fwd_kernel",
+   "configs": 1,
+   "launches": 2491,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.ssd_state_passing:_state_passing_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.ssd_bmm:_bmm_chunk_fwd_kernel",
+   "configs": 1,
+   "launches": 2215,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.ssd_bmm:_bmm_chunk_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.mamba.ops.ssd_chunk_state:_chunk_cumsum_fwd_kernel",
+   "configs": 1,
+   "launches": 1551,
+   "callers": [
+    "vllm.model_executor.layers.mamba.ops.ssd_chunk_state:_chunk_cumsum_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.fused_qk_norm_rope:_fused_qk_rmsnorm_rope_gate_kernel",
+   "configs": 1,
+   "launches": 1192,
+   "callers": [
+    "vllm.model_executor.layers.fused_qk_norm_rope:fused_qk_rmsnorm_rope_gate"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.model_executor.layers.fused_moe.fused_moe:fused_moe_kernel",
+   "configs": 1,
+   "launches": 596,
+   "callers": [
+    "vllm.model_executor.layers.fused_moe.fused_moe:invoke_fused_moe_triton_kernel"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.fused_gdn_prefill_post_conv:_fused_post_conv_kernel",
+   "configs": 1,
+   "launches": 195,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.fused_gdn_prefill_post_conv:fused_post_conv_prep"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.cumsum:chunk_local_cumsum_scalar_kernel",
+   "configs": 1,
+   "launches": 192,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.cumsum:chunk_local_cumsum_scalar"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.chunk_scaled_dot_kkt:chunk_scaled_dot_kkt_fwd_kernel",
+   "configs": 1,
+   "launches": 192,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.chunk_scaled_dot_kkt:chunk_scaled_dot_kkt_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.solve_tril:merge_16x16_to_64x64_inverse_kernel",
+   "configs": 1,
+   "launches": 192,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.solve_tril:solve_tril"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.wy_fast:recompute_w_u_fwd_kernel",
+   "configs": 1,
+   "launches": 192,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.wy_fast:recompute_w_u_fwd"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.chunk_delta_h:chunk_gated_delta_rule_fwd_kernel_h_blockdim64",
+   "configs": 1,
+   "launches": 192,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.chunk_delta_h:chunk_gated_delta_rule_fwd_h"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.chunk_o:chunk_fwd_kernel_o",
+   "configs": 1,
+   "launches": 192,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.chunk_o:chunk_fwd_o"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  },
+  {
+   "kernel": "vllm.third_party.flash_linear_attention.ops.fused_sigmoid_gating:fused_sigmoid_gating_delta_rule_update_kernel",
+   "configs": 1,
+   "launches": 1,
+   "callers": [
+    "vllm.third_party.flash_linear_attention.ops.fused_sigmoid_gating:fused_sigmoid_gating_delta_rule_update"
+   ],
+   "covered": false,
+   "engines": [
+    "vllm"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+[entail] broken at load:transformers.tokenizer.ids: Tokenization declared Tokenization(digest='5350623b1c05a586', probes=10, added=3) (file: tokenizer.json (tokenizers 0.23.2), declared); transformers.tokenizer uses Tokenization(digest='78de19edb7007f4f', probes=10, added=3) (engine: LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0, verified); rule: the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares; note: 1 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0 gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.23.2) gives [1678, 8236, 8162, 322, 25053, 1678]; 1 further differ only after a declared token, as tokenizer_config.json's legacy=false would have it; reported, not stopped
+W0927 18:26:52.906000 68348 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0927 18:26:53.037000 68348 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:  15%|█▌        | 31/201 [00:00<00:00, 291.35it/s]
+Loading weights:  30%|███       | 61/201 [00:00<00:00, 222.63it/s]
+Loading weights:  43%|████▎     | 87/201 [00:00<00:00, 233.92it/s]
+Loading weights:  56%|█████▌    | 112/201 [00:00<00:00, 218.84it/s]
+Loading weights:  67%|██████▋   | 135/201 [00:00<00:00, 205.08it/s]
+Loading weights: 100%|██████████| 201/201 [00:00<00:00, 321.85it/s]
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=2048) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=2048) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=2048) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+RESULT transformers TinyLlama__TinyLlama-1.1B-Chat-v1.0 entail=load ok=True load=2.012 used=sdpa 

@@ -1,0 +1,61 @@
+INFO 09-26 16:56:43 [scheduler.py:216] Chunked prefill is enabled with max_num_batched_tokens=2048.
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:43 [api_server.py:1977] vLLM API server version 0.11.1
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:43 [utils.py:253] non-default args: {'port': 8377, 'model': '/home/<user>/models/Qwen3-0.6B', 'max_model_len': 2048, 'enforce_eager': True, 'served_model_name': ['m'], 'reasoning_parser': 'qwen3', 'gpu_memory_utilization': 0.6}
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:43 [model.py:631] Resolved architecture: Qwen3ForCausalLM
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:43 [model.py:1745] Using max model len 2048
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:43 [scheduler.py:216] Chunked prefill is enabled with max_num_batched_tokens=2048.
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:43 [vllm.py:500] Cudagraph is disabled under eager mode
+[1;36m(APIServer pid=5844)[0;0m WARNING 09-26 16:56:43 [interface.py:409] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:49 [core.py:93] Initializing a V1 LLM engine (v0.11.1) with config: model='/home/<user>/models/Qwen3-0.6B', speculative_config=None, tokenizer='/home/<user>/models/Qwen3-0.6B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=2048, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='qwen3', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=m, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': None, 'compile_mm_encoder': False, 'use_inductor': None, 'compile_sizes': [], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {}, 'max_cudagraph_capture_size': 0, 'local_cache_dir': None}
+[1;36m(EngineCore_DP0 pid=5906)[0;0m WARNING 09-26 16:56:49 [interface.py:409] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:50 [parallel_state.py:1208] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.21.134.1:43951 backend=nccl
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:50 [parallel_state.py:1394] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:50 [gpu_model_runner.py:3255] Starting to load model /home/<user>/models/Qwen3-0.6B...
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:50 [cuda.py:418] Valid backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION']
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:50 [cuda.py:427] Using FLASH_ATTN backend.
+[1;36m(EngineCore_DP0 pid=5906)[0;0m 
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+[1;36m(EngineCore_DP0 pid=5906)[0;0m 
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  8.23it/s]
+[1;36m(EngineCore_DP0 pid=5906)[0;0m 
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  8.19it/s]
+[1;36m(EngineCore_DP0 pid=5906)[0;0m 
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:50 [default_loader.py:314] Loading weights took 0.12 seconds
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:51 [gpu_model_runner.py:3334] Model loading took 1.1201 GiB memory and 0.589365 seconds
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:52 [gpu_worker.py:359] Available KV cache memory: 4.66 GiB
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:52 [kv_cache_utils.py:1229] GPU KV cache size: 43,600 tokens
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:52 [kv_cache_utils.py:1234] Maximum concurrency for 2,048 tokens per request: 21.29x
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:52 [core.py:250] init engine (profile, create kv cache, warmup model) took 0.93 seconds
+[1;36m(EngineCore_DP0 pid=5906)[0;0m [entail] could not install entail.adapters.vllm_identity: AttributeError: type object 'Scheduler' has no attribute '_update_request_as_session'
+[1;36m(EngineCore_DP0 pid=5906)[0;0m INFO 09-26 16:56:52 [vllm.py:500] Cudagraph is disabled under eager mode
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:52 [api_server.py:1725] Supported tasks: ['generate']
+[1;36m(APIServer pid=5844)[0;0m WARNING 09-26 16:56:52 [model.py:1568] Default sampling parameters have been overridden by the model's Hugging Face generation config recommended from the model creator. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:52 [serving_responses.py:154] Using default chat sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:52 [serving_chat.py:131] Using default chat sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [serving_completion.py:73] Using default completion sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [serving_chat.py:131] Using default chat sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [api_server.py:2052] Starting vLLM API server 0 on http://0.0.0.0:8377
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:38] Available routes are:
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:46] Route: /openapi.json, Methods: HEAD, GET
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:46] Route: /docs, Methods: HEAD, GET
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:46] Route: /redoc, Methods: HEAD, GET
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:46] Route: /metrics, Methods: GET
+[1;36m(APIServer pid=5844)[0;0m INFO:     Started server process [5844]
+[1;36m(APIServer pid=5844)[0;0m INFO:     Waiting for application startup.
+[1;36m(APIServer pid=5844)[0;0m INFO:     Application startup complete.
+[1;36m(APIServer pid=5844)[0;0m INFO:     127.0.0.1:35804 - "GET /health HTTP/1.1" 200 OK
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [chat_utils.py:557] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+[1;36m(APIServer pid=5844)[0;0m INFO:     127.0.0.1:35810 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[1;36m(APIServer pid=5844)[0;0m INFO:     127.0.0.1:35822 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[1;36m(APIServer pid=5844)[0;0m INFO 09-26 16:56:53 [launcher.py:110] Shutting down FastAPI HTTP server.
+[rank0]:[W926 16:56:53.809101173 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[1;36m(APIServer pid=5844)[0;0m INFO:     Shutting down
+[1;36m(APIServer pid=5844)[0;0m INFO:     Waiting for application shutdown.
+[1;36m(APIServer pid=5844)[0;0m INFO:     Application shutdown complete.

@@ -1,0 +1,54 @@
+{
+ "case": "moe_int8_channel_static_then_graph",
+ "target": "vllm.model_executor.layers.fused_moe.fused_moe:fused_experts",
+ "wrapped": true,
+ "first_call_ms": 891.6088140000085,
+ "rel_err": {
+  "first": [
+   0.002023470703541584
+  ],
+  "later": [
+   0.002023470703541584
+  ],
+  "kernel": [
+   0.9564234155481481
+  ]
+ },
+ "captured": {
+  "replayed_rel_err": [
+   0.9564234155481481
+  ]
+ },
+ "later_equals_kernel": false,
+ "ms": {
+  "kernel": 1.2506844999933264,
+  "wrapped_after_decision": 5.315886500000033
+ },
+ "decisions": [
+  {
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "fused_experts sent to entail's definition from this call on, for every later call in the process",
+   "note": "fused_experts (vllm.model_executor.layers.fused_moe.fused_moe:fused_experts) on 64 of 256 rows of its first real call, against entail's definition (per-expert gate/up, SiLU-and-mul, down, routing-weighted sum; INT8 W8A8 by the quant config): max |kernel - definition| 7.38 over 32768 values; the definition's own noise 0.156 (typical 0.0312); scale 7.72; 20777 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 15; worst value at output 0 index 1808: kernel 0.3359, definition 7.719, reference 7.719, allowed 0.491"
+  },
+  {
+   "verdict": "broken",
+   "rule": "the kernel the op dispatches to computes other values than the op's own native definition on the same input",
+   "resolution": null,
+   "note": "fused_experts (vllm.model_executor.layers.fused_moe.fused_moe:fused_experts) on 64 of 256 rows of its first real call, against entail's definition (per-expert gate/up, SiLU-and-mul, down, routing-weighted sum; INT8 W8A8 by the quant config): max |kernel - definition| 7.38 over 32768 values; the definition's own noise 0.156 (typical 0.0312); scale 7.72; 20777 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 15; worst value at output 0 index 1808: kernel 0.3359, definition 7.719, reference 7.719, allowed 0.491; not repaired inside a CUDA graph capture: the definition synchronises with the host and cannot be captured, so the graph holds the kernel"
+  }
+ ],
+ "stats": {
+  "instrumented": 2,
+  "sent_to_definition": 1,
+  "decided": 1,
+  "definition_calls": 23,
+  "checks": 2,
+  "broken": 1,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 1,
+  "passed": {}
+ }
+}

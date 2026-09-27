@@ -1,0 +1,23 @@
+W0927 16:44:11.602000 6069 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0927 16:44:11.643000 6069 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] You have loaded an FP8 model on CPU and have a CUDA or XPU device available, make sure to set your model on a GPU or XPU device in order to run your model. To remove this warning, pass device_map = 'cuda' or 'xpu'. 
+
+Loading weights:   0%|          | 0/651 [00:00<?, ?it/s]
+Loading weights:   6%|▋         | 41/651 [00:00<00:01, 406.89it/s]
+Loading weights:  13%|█▎        | 82/651 [00:00<00:01, 373.59it/s]
+Loading weights:  19%|█▉        | 123/651 [00:00<00:01, 382.61it/s]
+Loading weights:  25%|██▍       | 162/651 [00:00<00:01, 356.60it/s]
+Loading weights:  31%|███       | 203/651 [00:00<00:01, 364.27it/s]
+Loading weights:  37%|███▋      | 240/651 [00:00<00:01, 363.77it/s]
+Loading weights:  43%|████▎     | 281/651 [00:00<00:00, 374.83it/s]
+Loading weights:  50%|████▉     | 323/651 [00:00<00:00, 379.01it/s]
+Loading weights:  55%|█████▌    | 361/651 [00:00<00:00, 350.84it/s]
+Loading weights:  61%|██████    | 398/651 [00:01<00:00, 351.37it/s]
+Loading weights:  68%|██████▊   | 443/651 [00:01<00:00, 372.14it/s]
+Loading weights:  75%|███████▍  | 485/651 [00:01<00:00, 375.69it/s]
+Loading weights:  81%|████████  | 527/651 [00:01<00:00, 381.02it/s]
+Loading weights:  88%|████████▊ | 573/651 [00:01<00:00, 400.92it/s]
+Loading weights:  94%|█████████▍| 614/651 [00:01<00:00, 387.46it/s]
+Loading weights: 100%|██████████| 651/651 [00:01<00:00, 383.85it/s]
+[entail] unknown at load:transformers.linear: Layout declared Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16', orientation=None, scale_granularity=None) (config: /home/<user>/models/Qwen3-4B-FP8/config.json#quantization_config, verified); transformers.linear.unknown uses unknown (engine: transformers.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table); the data shows Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16', orientation=None, scale_granularity=None) (data: /home/<user>/models/Qwen3-4B-FP8: 252 scale tensors, all BF16, verified)
+RESULT transformers Qwen3-4B-FP8 entail=load ok=False load=None used=None ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install 

@@ -1,0 +1,54 @@
+INFO 09-27 08:23:54 [utils.py:233] non-default args: {'max_model_len': 2048, 'enable_prefix_caching': False, 'gpu_memory_utilization': 0.8, 'max_num_seqs': 4, 'disable_log_stats': True, 'enforce_eager': True, 'model': '/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/'}
+WARNING 09-27 08:23:54 [arg_utils.py:1390] The global random seed is set to 0. Since VLLM_ENABLE_V1_MULTIPROCESSING is set to False, this may affect the random state of the Python process that launched vLLM.
+INFO 09-27 08:24:01 [model.py:549] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 09-27 08:24:01 [model.py:1678] Using max model len 2048
+INFO 09-27 08:24:01 [scheduler.py:238] Chunked prefill is enabled with max_num_batched_tokens=8192.
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 09-27 08:24:01 [config.py:281] Setting attention block size to 528 tokens to ensure that attention page size is >= mamba page size.
+INFO 09-27 08:24:01 [config.py:312] Padding mamba page size by 0.76% to ensure that mamba page size and attention page size are exactly equal.
+WARNING 09-27 08:24:01 [modelopt.py:998] Detected ModelOpt NVFP4 checkpoint. Please note that the format is experimental and could change in future.
+INFO 09-27 08:24:01 [vllm.py:790] Asynchronous scheduling is enabled.
+WARNING 09-27 08:24:01 [vllm.py:848] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+WARNING 09-27 08:24:01 [vllm.py:859] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+INFO 09-27 08:24:01 [vllm.py:1025] Cudagraph is disabled under eager mode
+INFO 09-27 08:24:01 [compilation.py:290] Enabled custom fusions: norm_quant, act_quant
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+INFO 09-27 08:24:07 [core.py:105] Initializing a V1 LLM engine (v0.19.0) with config: model='/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/', speculative_config=None, tokenizer='/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=2048, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=modelopt_fp4, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_images_per_batch': 0, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+WARNING 09-27 08:24:07 [interface.py:525] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+INFO 09-27 08:24:07 [parallel_state.py:1400] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.21.134.1:39749 backend=nccl
+INFO 09-27 08:24:07 [parallel_state.py:1716] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+INFO 09-27 08:24:07 [gpu_model_runner.py:4735] Starting to load model /home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/...
+INFO 09-27 08:24:07 [cuda.py:390] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+INFO 09-27 08:24:07 [mm_encoder_attention.py:230] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+INFO 09-27 08:24:07 [nvfp4_utils.py:85] Using NvFp4LinearBackend.MARLIN for NVFP4 GEMM
+INFO 09-27 08:24:07 [gdn_linear_attn.py:147] Using Triton/FLA GDN prefill kernel
+INFO 09-27 08:24:08 [cuda.py:334] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+INFO 09-27 08:24:08 [flash_attn.py:596] Using FlashAttention version 2
+
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.47s/it]
+
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.47s/it]
+
+INFO 09-27 08:24:09 [default_loader.py:384] Loading weights took 1.50 seconds
+WARNING 09-27 08:24:10 [nvfp4_utils.py:144] Your GPU does not have native support for FP4 computation but FP4 quantization is being used. Weight-only FP4 compression will be used leveraging the Marlin kernel. This may degrade performance for compute-heavy workloads.
+INFO 09-27 08:24:10 [gpu_model_runner.py:4820] Model loading took 3.85 GiB memory and 2.454468 seconds
+INFO 09-27 08:24:10 [gpu_model_runner.py:5753] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+INFO 09-27 08:24:18 [marlin_utils.py:433] Marlin kernel can achieve better performance for small size_n with experimental use_atomic_add feature. You can consider set environment variable VLLM_MARLIN_USE_ATOMIC_ADD to 1 if possible.
+/home/<user>/venvs/vllm0190/lib/python3.12/site-packages/vllm/model_executor/layers/fla/ops/utils.py:113: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (16) < num_heads (32). This may indicate the inputs were passed in head-first format [B, H, T, ...] when head_first=False was specified. Please verify your input tensor format matches the expected shape [B, T, H, ...].
+  return fn(*contiguous_args, **contiguous_kwargs)
+/home/<user>/venvs/vllm0190/lib/python3.12/site-packages/vllm/model_executor/layers/fla/ops/utils.py:113: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (16) < num_heads (32). This may indicate the inputs were passed in head-first format [B, H, T, ...] when head_first=False was specified. Please verify your input tensor format matches the expected shape [B, T, H, ...].
+  return fn(*contiguous_args, **contiguous_kwargs)
+/home/<user>/venvs/vllm0190/lib/python3.12/site-packages/vllm/model_executor/layers/fla/ops/utils.py:113: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (16) < num_heads (32). This may indicate the inputs were passed in head-first format [B, H, T, ...] when head_first=False was specified. Please verify your input tensor format matches the expected shape [B, T, H, ...].
+  return fn(*contiguous_args, **contiguous_kwargs)
+INFO 09-27 08:25:23 [gpu_worker.py:436] Available KV cache memory: 3.98 GiB
+INFO 09-27 08:25:23 [kv_cache_utils.py:1319] GPU KV cache size: 32,208 tokens
+INFO 09-27 08:25:23 [kv_cache_utils.py:1324] Maximum concurrency for 2,048 tokens per request: 35.14x
+INFO 09-27 08:25:24 [core.py:283] init engine (profile, create kv cache, warmup model) took 73.82 seconds
+/home/<user>/venvs/vllm0190/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:1181: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (5) < num_heads (16). This may indicate the inputs were passed in head-first format [B, H, T, ...] Please verify your input tensor format matches the expected shape [B, T, H, ...].
+  return fn(*args, **kwargs)
+/home/<user>/venvs/vllm0190/lib/python3.12/site-packages/vllm/model_executor/layers/fla/ops/utils.py:113: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (5) < num_heads (32). This may indicate the inputs were passed in head-first format [B, H, T, ...] when head_first=False was specified. Please verify your input tensor format matches the expected shape [B, T, H, ...].
+  return fn(*contiguous_args, **contiguous_kwargs)
+RESULT {"engine": "vllm", "model": "/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/", "layers": ["language_model.model.layers: 32 x ['Qwen3_5DecoderLayer']"], "probes": {"story_a": {"tokens": 207, "layers": 32}, "story_b": {"tokens": 204, "layers": 32}, "code": {"tokens": 107, "layers": 32}, "numbers": {"tokens": 69, "layers": 32}, 
+[rank0]:[W927 08:25:27.626166406 ProcessGroupNCCL.cpp:1553] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())

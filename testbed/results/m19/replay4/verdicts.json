@@ -1,0 +1,54 @@
+{
+ "df12633": {
+  "issue": 12633,
+  "verdict": "missed",
+  "note": "reproduced on diffusers 0.40.0 (9 of 10 DDIM steps move to a timestep off the linspace schedule: step() uses t - 100 where the schedule's next is t - 111); entail on: no decision (no site at the scheduler's step)"
+ },
+ "tf43450": {
+  "issue": 43450,
+  "run": "tf43450_4576",
+  "verdict": "missed",
+  "note": "not reproduced on 5.17.0 (fixed); reproduced on the reported 4.57.6 (existing vllm0210 venv): a batched 4 x 5 x 3 x 100 x 100 tensor comes back 1 x 1 x 4 x 5 x 3 x 256 x 256; entail on: no decision (no adapter at the video processor)"
+ },
+ "tf43697": {
+  "issue": 43697,
+  "run": "tf43697_500",
+  "verdict": "missed",
+  "note": "reproduced on the reported 5.0.0 (new venv tf500) with the public stand-in PekingU/rtdetr_v2_r18vd: boxes differ from 4.57.6 by up to 0.148 on the same seeded input; 5.17.0 matches 4.57.6 (2e-6). entail on 5.0.0: Coverage pass/unknown and ModelProps unknown at load, nothing about the loaded weights against the checkpoint"
+ },
+ "tf41494": {
+  "issue": 41494,
+  "verdict": "unknown_only",
+  "note": "reproduced on transformers 5.17.0 (vllm0220 venv, which has gguf): the tokenizer built from gemma-3-4b-it-Q8_0.gguf is Unigram and splits 'What' into 'Wh','at' where the model's BPE tokenizer keeps 'What'. entail on: load:transformers.tokenizer Vocab unknown for the GGUF-built tokenizer ('no tokenizer file, config vocab_size or embedding to compare with'); the GGUF file's own tokenizer metadata was not used as the declaration. The reference tokenizer passed (Vocab, Tokenization)"
+ },
+ "vl34186": {
+  "issue": 34186,
+  "verdict": "missed",
+  "note": "reproduced on vLLM 0.30.0 off and on (unsloth/gemma-3-4b-it standing in for the gated google repository): the adapter's keys are base_model.model.model.layers.* with no language_model prefix, and the adapter's greedy output equals the base model's byte for byte. entail on: load:vllm.adapter_config Coverage pass (the adapter config's keys) - a decision at the adapter's load boundary, but nothing compares the adapter's module paths with the model's; the defect passes. The first off run failed for GPU memory (0.9, then no cache blocks at 0.88 while another process held memory); rerun off alone at 0.88 succeeded"
+ },
+ "vl33560": {
+  "issue": 33560,
+  "verdict": "missed",
+  "note": "reproduced on the reported vLLM 0.16.0 (new venv vllm0160) with dtype=float16: all 93 prompt log-probabilities are NaN and the outputs are '!!!!!!!!'; the fixed 0.30.0 (control, float16) is finite (perplexity 23.9) and coherent. entail on 0.16.0: no decision at the Marlin kernel (C++); load:vllm.quant_method Layout unknown (CompressedTensorsLinearMethod has no signature). The start path check PASSED all three pairs with margin 0 and move 0: NaN log-probabilities compare as agreement - a defect of the path contract (non-finite values are not treated as a disagreement), recorded in DEFERRED, not fixed (frozen)"
+ },
+ "vl35221": {
+  "issue": 35221,
+  "verdict": "adapter_not_installed",
+  "note": "reproduced on the reported vLLM 0.16.0 (vllm0160) off and on: max_completion_tokens 5 gives content 'Hmm, the user said', reasoning null, finish_reason length. entail on: the parser-reference adapter (vllm_parse) hooks 0.30's ParserManager.get_parser, which 0.16.0 does not have, so it never installed (protocol 8 (2): counted apart); at request:vllm.chat_template the template adapter failed on 0.16's HfRenderer (AttributeError model_config) and said so once (unknown), the request was served. On 0.30 the parse contract's unfinished-output rule would excuse this difference anyway (DEFERRED 32)"
+ },
+ "vl27390": {
+  "issue": 27390,
+  "verdict": "missed",
+  "note": "reproduced on vLLM 0.11.0 (new venv vllm0110; transformers pinned to the contemporary 4.57.1 because 0.11.0 fails with 5.17): with max_tokens 15 the output ends on <|im_end|> (151645) and finish_reason is 'length' (16: 'stop'); the fixed 0.30.0 (control) says 'stop'. entail on 0.11.0: load decisions pass, the start path check passes (its probes run with ignore_eos, so an EOS on the limit never occurs), vllm_identity could not install on 0.11 (said); no adapter reads the stop reason in any version"
+ },
+ "vl25800": {
+  "issue": 25800,
+  "verdict": "not_reproduced",
+  "note": "not reproducible on this GPU: vLLM 0.10.2 (new venv vllm0102, transformers pinned to the contemporary 4.56.2) says '--kv-cache-dtype is not supported by the V1 Engine. Falling back to V0' on sm_89 (FlashAttention cannot hold an FP8 KV cache here; the reporter ran V1 on H100), and the V0 worker has no reload_weights, so the report's script stops at collective_rpc('reload_weights') (NotImplementedError) before the second generate; forcing V1 with FlashInfer is refused (FlashInfer not in that venv, config validation). The deep-sleep path of the report is never reached"
+ },
+ "vl33091": {
+  "issue": 33091,
+  "verdict": "false",
+  "note": "reproduced on the reported vLLM 0.14.0 (new venv vllm0140, vllm[audio] extras added): with FA2 and CUDA graphs the transcription is ' The end of the day, the end of the day, ...'; the eager control on 0.14.0 and the fixed 0.30.0 transcribe 'Mary had a little lamb'. entail on: no decision at the cross-attention metadata (the defect is missed), and container:vllm.allocate_slots KvExtent BROKEN x9 ('kv cache group 1 holds 0 KV slots for 216 tokens') - unrelated to the defect: the same 9 broken appear in the 0.14.0 eager control and on 0.30.0, where the output is right. A false alarm of the frozen KV extent rule on an encoder-decoder model's cross-attention cache group (its slots follow the encoder length, not the decoder tokens); E2 has no encoder-decoder model. DEFERRED"
+ }
+}

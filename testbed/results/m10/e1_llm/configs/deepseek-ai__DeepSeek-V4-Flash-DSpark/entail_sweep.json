@@ -1,0 +1,48 @@
+{
+ "rank": 89,
+ "id": "deepseek-ai/DeepSeek-V4-Flash-DSpark",
+ "model_type": "deepseek_v4",
+ "files": [
+  "tokenizer.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 11970017,
+ "mistral_files": [],
+ "rows": {
+  "n": 129280,
+  "where": "embed.weight [129280, 4096] in model-00001-of-00048.safetensors (header only)",
+  "config_vocab_size": 129280
+ },
+ "sources": {
+  "candidates": [
+   [
+    128000,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 129280,
+  "rows_where": "embed.weight [129280, 4096] in model-00001-of-00048.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 128000,
+  "reach": 129280
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='yarn', theta=10000, factor=16, original_max_position=65536, low_freq_factor=None, high_freq_factor=None, beta_fast=32.0, beta_slow=1.0, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 3.7
+}

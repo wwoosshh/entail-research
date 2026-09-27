@@ -1,0 +1,47 @@
+{
+ "rank": 74,
+ "id": "farbodtavakkoli/OTel-LLM-E4B-IT",
+ "model_type": "gemma4",
+ "files": [
+  "tokenizer.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 0,
+ "mistral_files": [],
+ "rows": {
+  "n": null,
+  "where": "no embedding tensor found in the headers",
+  "config_vocab_size": 262144
+ },
+ "sources": {
+  "candidates": [
+   [
+    262144,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 262144,
+  "rows_where": "config.json vocab_size",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GemmaTokenizer",
+  "vocab_size": 262144,
+  "reach": 262144
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": [
+   "<workspace>/testbed/results/m10/e1_llm/configs/farbodtavakkoli__OTel-LLM-E4B-IT/config.json#text_config.rope_parameters: rope type 'proportional' is not in vocabulary v6"
+  ]
+ },
+ "other_problems": [],
+ "seconds": 2.4
+}

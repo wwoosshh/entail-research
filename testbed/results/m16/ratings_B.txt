@@ -1,0 +1,87 @@
+https://github.com/sgl-project/sglang/issues/25704 | K7 | 2 | No linked PR or fix; the report only catalogs several unresolved NaN/garbage crash sites without a determined defect.
+https://github.com/vllm-project/vllm/issues/57017 | K2 | 3 | Fix shows the decode kernel always computes acc/e_sum, and padded empty rows have e_sum=0, producing 0/0 NaN.
+https://github.com/vllm-project/vllm/issues/56655 | K1 | 3 | The prefix-cache key hash omits the prompt_is_token_ids embedding-selection mask, so a request can incorrectly reuse another request's cached KV.
+https://github.com/sgl-project/sglang/issues/31482 | K1 | 3 | The direct-to-host transfer path used host KV page indices for the device destination buffer even though host and device page IDs are allocated independently.
+https://github.com/sgl-project/sglang/issues/25863 | K7 | 2 | The only linked fix is a Docker image version bump with no described code change, so no defect is identified.
+https://github.com/vllm-project/vllm/issues/52568 | K7 | 2 | No linked PR; the reporter only guesses the bug is "likely" in the LoRA Triton kernels without confirming a mechanism.
+https://github.com/huggingface/transformers/issues/47396 | K7 | 2 | Reporter explicitly leaves two competing hypotheses open (MPS numerical guard vs. underlying torch MPS behavior) with no fix.
+https://github.com/vllm-project/vllm/issues/39468 | K4 | 3 | Fix targets _parse_gemma4_args/_parse_gemma4_array, which read array string values incorrectly and leaked a delimiter into the JSON output.
+https://github.com/vllm-project/vllm/issues/39273 | K1 | 3 | Fix states num_accepted_tokens was not passed to SSM metadata builders on non-spec steps, so the wrong state slot was read.
+https://github.com/vllm-project/vllm/issues/51039 | K4 | 2 | Root-cause fix: the KDA metadata builder classified any one-token row as decode, routing a stateless first chunk down the wrong path.
+https://github.com/vllm-project/vllm/issues/44148 | K7 | 3 | No linked PR and no root-cause analysis, only a description of the corrupted output.
+https://github.com/sgl-project/sglang/issues/40835 | K1 | 3 | LoRAAdapter never read the adapter config's use_rslora flag, always applying alpha/r scaling instead of the declared alpha/sqrt(r).
+https://github.com/vllm-project/vllm/issues/54035 | K2 | 3 | Root cause: decode and prefill FlashAttention-3 pick different KV tile widths, giving a different summation and hence different logprobs.
+https://github.com/sgl-project/sglang/issues/21843 | K1 | 3 | After reshape the a/b tensors are non-contiguous, but the Triton kernel indexes them as flat contiguous arrays.
+https://github.com/vllm-project/vllm/issues/43559 | K4 | 2 | Fix adds a missing not isinstance(spec, MambaSpec) gate; the cache-hit search previously applied ordinary lookahead logic to recurrent/Mamba state groups too.
+https://github.com/vllm-project/vllm/issues/50881 | K3 | 3 | _insert_kv allocates a fresh tensor and scatter-writes it under CUDA graph capture, corrupting the index-K cache on replay.
+https://github.com/vllm-project/vllm/issues/43728 | K1 | 3 | Chat templates and reasoning parsers read the same thinking-mode toggle under two different key names, thinking vs enable_thinking.
+https://github.com/vllm-project/vllm/issues/50332 | K1 | 3 | quant_config.use_deep_gemm=False is set by config verification but the MoE backend selector never consults it, checking only an env var.
+https://github.com/vllm-project/vllm/issues/51326 | K7 | 3 | No linked PR; only an A/B version comparison with no diagnosis of the cause.
+https://github.com/sgl-project/sglang/issues/40921 | K7 | 2 | No linked PR; despite extensive isolation, no defect is identified in the text.
+https://github.com/sgl-project/sglang/issues/29330 | K1 | 2 | Fix ties the bug to a has_initial_states tracking mask that incorrectly gates whether a long prefill restores its cached recurrent state.
+https://github.com/vllm-project/vllm/issues/53051 | K4 | 3 | Root cause is an explicit "pure shape check" that misclassifies a prefill as uniform-decode and dispatches it into the wrong CUDA graph.
+https://github.com/sgl-project/sglang/issues/28502 | K1 | 2 | Fix cites text-encoder position_ids shaped [1, seq] regardless of actual batch size, misapplying RoPE's token layout under batching.
+https://github.com/vllm-project/vllm/issues/57064 | K3 | 2 | Fix states AITER's fused_add_rms_norm "corrupts CUDA-graph replay" for remote DSA decode, addressed by forcing the native kernel instead.
+https://github.com/vllm-project/vllm/issues/42182 | K3 | 3 | Fix describes a KV-zeroing kernel racing an NIXL RDMA transfer, erasing newly-received KV blocks under async scheduling.
+https://github.com/vllm-project/vllm/issues/45888 | K7 | 3 | No linked PR and no root-cause analysis beyond noting other backends avoid the bug.
+https://github.com/sgl-project/sglang/issues/36390 | K2 | 2 | Reporter's isolation rules out indexing/component swaps and concludes this "looks like a compounding numerical error."
+https://github.com/sgl-project/sglang/issues/22477 | K7 | 3 | Issue body is placeholder text with no actual content.
+https://github.com/sgl-project/sglang/issues/30989 | K1 | 3 | e_score_correction_bias is created fp32 and passed unconverted where flashinfer's kernel contract requires bfloat16.
+https://github.com/sgl-project/sglang/issues/23687 | K4 | 3 | Root cause is a string-substitution loop bug producing the malformed key gate_gate_up_proj, so the scale-parameter lookup fails.
+https://github.com/vllm-project/vllm/issues/40080 | K6 | 2 | Issue states this is model-level behavior seen across multiple platforms, not a vLLM defect, and the fix only adds loop-detection mitigation.
+https://github.com/huggingface/transformers/issues/46710 | K4 | 2 | Fix routes affected models to TokenizersBackend, implying the wrong tokenizer backend/class was previously selected for decoding.
+https://github.com/sgl-project/sglang/issues/21675 | K7 | 3 | No linked PR and no root-cause detail beyond a repro command.
+https://github.com/sgl-project/sglang/issues/38573 | K1 | 3 | cutlass_w4a8_moe always passes a literal chunk_size=128 regardless of the checkpoint's actual group_size, so the kernel never learns the real value.
+https://github.com/vllm-project/vllm/issues/41472 | K1 | 3 | The ROCm paged-attention kernel bakes in a standard contiguous KV layout formula that does not match this model's actual KV cache layout.
+https://github.com/vllm-project/vllm/issues/48231 | K2 | 3 | Fix states the vision patch_dense projection overflows in FP16 and LayerNorm expands the resulting Inf into all-NaN embeddings.
+https://github.com/huggingface/transformers/issues/47885 | K2 | 3 | log_spec.max() returns NaN for one bad sample and np.maximum(x, NaN) propagates NaN to the entire feature matrix.
+https://github.com/vllm-project/vllm/issues/40510 | K7 | 3 | Auto-generated CI dashboard ticket with no failure detail at all.
+https://github.com/vllm-project/vllm/issues/56949 | K1 | 3 | reconfigure_for_independent_dp_rank() resets data_parallel_rank to 0, so payload selection uses the wrong identifier instead of data_parallel_index.
+https://github.com/vllm-project/vllm/issues/51164 | K1 | 2 | The strip logic assumes the target newline is always at index 0, an assumption that breaks once the base parser's contract changes to preserve a prefix.
+https://github.com/vllm-project/vllm/issues/41262 | K3 | 3 | Fix states KV cache groups with different block sizes could share the same raw KVCacheTensor.
+https://github.com/sgl-project/sglang/issues/32038 | K7 | 3 | No linked PR; the text ends before any root-cause analysis is given.
+https://github.com/sgl-project/sglang/issues/21696 | K1 | 2 | Linked fixes describe Qwen3.5's checkpoint using a different, non-interleaved weight layout than the GDN fusion kernel assumed.
+https://github.com/vllm-project/vllm/issues/49316 | K4 | 3 | _compute_arg_delta/_flush_arg_converter return early and skip _fix_arg_types whenever arg_converter is None, the only branch kimi_k2 uses.
+https://github.com/sgl-project/sglang/issues/25187 | K7 | 3 | No linked PR; text cuts off before any diagnosis is given.
+https://github.com/vllm-project/vllm/issues/38994 | K7 | 2 | Closed not_planned with no confirmed cause or fix.
+https://github.com/sgl-project/sglang/issues/22701 | K3 | 2 | The most severe symptom, all-zero logits, is traced to stale tensor views over GPU staging buffers reused by the RunAI streamer across batches.
+https://github.com/vllm-project/vllm/issues/55560 | K5 | 2 | Reporter isolates the defect to a torch.compile/inductor miscompilation of the CPU MoE path, since eager mode is unaffected.
+https://github.com/vllm-project/vllm/issues/42898 | K7 | 3 | Closed not_planned; only rules out transport failure with no identified cause.
+https://github.com/vllm-project/vllm/issues/49412 | K4 | 3 | The streaming path's _events_to_delta has no equivalent whitespace-stripping step that the non-streaming path applies.
+https://github.com/vllm-project/vllm/issues/55357 | K1 | 3 | Fix states prefill state indices are sliced into a non-contiguous 1-D tensor and the PLE conv kernels don't honor its actual stride.
+https://github.com/vllm-project/vllm/issues/50018 | K7 | 3 | Flaky CI test report with no reproduction or cause identified.
+https://github.com/huggingface/transformers/issues/46032 | K4 | 3 | Mamba2Mixer only implements the seq_len==1 decode case; use_cache with seq_len>1 has no correct dispatch path.
+https://github.com/vllm-project/vllm/issues/48058 | K1 | 3 | The post-load transpose leaves weights in a non-contiguous view while the XPU kernel requires a C-contiguous layout.
+https://github.com/huggingface/transformers/issues/46612 | K1 | 2 | Beam-search reordering checks only the past_key_values key, ignoring the other cache-name declarations in ALL_CACHE_NAMES.
+https://github.com/vllm-project/vllm/issues/45904 | K7 | 3 | No code fix is shown for this issue; the linked PR only corrects an unrelated documentation claim.
+https://github.com/vllm-project/vllm/issues/46088 | K7 | 2 | Closed not_planned with a well-isolated trigger but no confirmed root-cause mechanism or fix.
+https://github.com/huggingface/transformers/issues/47942 | K7 | 2 | Closed not_planned, no PR; three bundled defects rest only on the reporter's own unconfirmed hypotheses.
+https://github.com/sgl-project/sglang/issues/29748 | K3 | 2 | gptq_gemm allocates its output with uninitialized torch::empty and multiple blocks race to zero/accumulate it with no synchronization.
+https://github.com/vllm-project/vllm/issues/42016 | K1 | 3 | The mrope kernel hardcodes NeoX-style rotation regardless of the model's declared is_neox_style=False (GPT-J rotation).
+https://github.com/vllm-project/vllm/issues/53211 | K3 | 3 | The captured ark.woqgemm graph replays all zeros because the kernel's work ran eagerly during capture and was never recorded into the graph.
+https://github.com/vllm-project/vllm/issues/53488 | K3 | 3 | The padded GPU drafter overwrites the CUDA-graph hidden-states output buffer before prompt logprobs are computed from it.
+https://github.com/vllm-project/vllm/issues/49070 | K1 | 2 | Root cause states the Marlin MoE adapter substitutes plain-SiLU defaults instead of forwarding the model's swigluoai activation parameters.
+https://github.com/huggingface/transformers/issues/48293 | K2 | 2 | Fix corrects the router formula: router_logits held selected top-1 probabilities instead of raw classifier logits, plus a wrong-dim cumsum.
+https://github.com/sgl-project/sglang/issues/23554 | K1 | 2 | Fix describes a reduce-scatter "producer contract" that dense MLP producers must follow but didn't in SUM_LEN mode, double-reducing hidden states.
+https://github.com/vllm-project/vllm/issues/49063 | K7 | 2 | The only linked item is a non-fix regression test; the original defect's actual mechanism is not described in the text.
+https://github.com/huggingface/diffusers/issues/14379 | K1 | 2 | The transformer forward assumed position_ids/encoder_hidden_states were already on its own device, but the documented multi-GPU setup places the text encoder elsewhere.
+https://github.com/sgl-project/sglang/issues/28685 | K5 | 3 | Source comment and fixes explicitly attribute the wrong numerics to hipcc miscompiling the bpreshuffle CK kernel on gfx950.
+https://github.com/vllm-project/vllm/issues/40243 | K7 | 3 | Auto-generated CI dashboard ticket with no failure detail.
+https://github.com/sgl-project/sglang/issues/23084 | K7 | 2 | Reporter only vaguely suspects "it can be aiter fused_moe kernel issue" with no confirmed mechanism or fix.
+https://github.com/huggingface/diffusers/issues/13411 | K4 | 2 | set_timesteps is missing validation to reject non-monotone sigma schedules before they reach the stepping formula.
+https://github.com/sgl-project/sglang/issues/33223 | K7 | 3 | No analysis at all; the reporter only asks "What could be the problem?"
+https://github.com/sgl-project/sglang/issues/41192 | K7 | 3 | No linked PR; extensive isolation but no identified cause in the given text.
+https://github.com/vllm-project/vllm/issues/46585 | K1 | 3 | Fix states the test interleaved the scales but never interleaved the packed weights, so the kernel's required storage layout wasn't met.
+https://github.com/sgl-project/sglang/issues/26518 | K1 | 3 | Fix states the dynamic q_scale for FP8 Q was never computed or passed into the attention BMM scale, so the kernel used q_scale=1.0.
+https://github.com/vllm-project/vllm/issues/55927 | K2 | 1 | Fix rounds seq_lens to a multiple of 4 to avoid an internal memory-alignment bounds computation in the kernel; the mechanism is stated only briefly.
+https://github.com/vllm-project/vllm/issues/39049 | K7 | 3 | Issue text has no analysis, and the linked PR states it fixes a different issue number.
+https://github.com/sgl-project/sglang/issues/22110 | K7 | 3 | Tracking/planning issue with no specific technical defect described.
+https://github.com/vllm-project/vllm/issues/41132 | K1 | 3 | Fix states the engine-side structured-output gate must instantiate the reasoning parser with the same chat-template kwargs the frontend used, which it previously did not receive.
+https://github.com/vllm-project/vllm/issues/42265 | K7 | 3 | No linked PR and no analysis beyond a one-line symptom description.
+https://github.com/vllm-project/vllm/issues/48895 | K1 | 3 | The kernel takes topk_weights as an untyped pointer reinterpreted as fp32 without validating the tensor's actual dtype, type-punning the data.
+https://github.com/vllm-project/vllm/issues/56380 | K1 | 3 | allocate_kv_cache honors storage_block_size but prepare_kernel_block_sizes does not, so manager block IDs are used where physical page IDs are required.
+https://github.com/sgl-project/sglang/issues/21545 | K7 | 3 | Reporter lists only unconfirmed "possible causes" with no linked PR or fix.
+https://github.com/sgl-project/sglang/issues/22671 | K7 | 3 | No root-cause analysis beyond benchmark numbers; no linked PR.
+https://github.com/vllm-project/vllm/issues/39179 | K1 | 3 | Fix states flashinfer requires bf16 routing-bias dtype for trtllm MoE, which had not been applied for the fp8 per-block path.
+https://github.com/vllm-project/vllm/issues/48611 | K1 | 3 | After #47327 changed forward_mqa to receive only decode tokens, downstream code still sized/assumed the full batch, causing an out-of-bounds write.
+https://github.com/sgl-project/sglang/issues/31641 | K7 | 2 | Root cause is only a stated "suspicion" (non-contiguous views or scale-layout mismatch); no confirmed fix for the actual corruption is shown.

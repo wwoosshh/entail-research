@@ -1,0 +1,22 @@
+{
+ "vocab_version": 6,
+ "configs": 230,
+ "distinct_keys": 558,
+ "rule": "misspelt(): within three edits and less than half the name away from a top-level vocabulary key (data/aliases.json hf_config minus nested_only), carrying a value the field takes",
+ "top_level_vocabulary_keys": [
+  "attn_logit_softcapping",
+  "original_max_position_embeddings",
+  "partial_rotary_factor",
+  "rope_local_base_freq",
+  "rope_parameters",
+  "rope_scaling",
+  "rope_theta",
+  "rotary_emb_base",
+  "rotary_pct",
+  "sliding_window",
+  "tie_word_embeddings",
+  "use_sliding_window"
+ ],
+ "hits": [],
+ "note": "before nested_only (same code otherwise): model_type -> rope_type 230 (never left unread: the class takes it), text_config.model_type 32, rope_interleaved -> mrope_interleaved 4 (SmolLM2 family), rope_interleave -> mrope_interleaved 4 + 1 in text_config; the last nine would have been broken Coverage decisions on healthy runs (seen on SmolLM2-135M-Instruct x 3 engines, results/m15/e2_recost)"
+}

@@ -1,0 +1,46 @@
+{
+ "rank": 69,
+ "id": "EleutherAI/pythia-70m-deduped",
+ "model_type": "gpt_neox",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 0,
+ "mistral_files": [],
+ "rows": {
+  "n": 50304,
+  "where": "gpt_neox.embed_in.weight [50304, 512] in model.safetensors (header only)",
+  "config_vocab_size": 50304
+ },
+ "sources": {
+  "candidates": [
+   [
+    50254,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 50304,
+  "rows_where": "gpt_neox.embed_in.weight [50304, 512] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GPTNeoXTokenizer",
+  "vocab_size": 50254,
+  "reach": 50277
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 1.3
+}

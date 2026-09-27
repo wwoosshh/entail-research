@@ -1,0 +1,9 @@
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got -1. This may result in unexpected behavior.
+[entail] broken at load:transformers.tokenizer.ids: Tokenization declared Tokenization(digest='5350623b1c05a586', probes=10, added=3) (file: tokenizer.json (tokenizers 0.22.2), declared); transformers.tokenizer uses Tokenization(digest='78de19edb7007f4f', probes=10, added=3) (engine: LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM, verified); rule: the engine's tokenizer encodes a probe text to other ids than the tokenizer the folder declares; note: 2 of 10 probe texts encode differently; first: '   leading spaces and trailing   ': LlamaTokenizer built from /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM gives [259, 8236, 8162, 322, 25053, 1678], tokenizer.json (tokenizers 0.22.2) gives [1678, 8236, 8162, 322, 25053, 1678]; reported, not stopped
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got -1. This may result in unexpected behavior.
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got -1. This may result in unexpected behavior.
+
+Multi-thread loading shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00, 844.09it/s]
+[entail] unknown at start:sglang.paths: PathAgreement nothing declared; what sglang.engine uses is unknown; rule: this boundary could not be checked; note: SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths
+RESULT sglang hmellor__tiny-random-LlamaForCausalLM entail=load ok=True load=12.572 used=default 

@@ -1,0 +1,18 @@
+{
+ "https://github.com/vllm-project/vllm/issues/34186": {"decision": "pass", "reason": "a LoRA adapter whose weight keys lack the language_model prefix loads without error and gives output identical to the base model; server command, adapter, request, expected (adapter output) and actual (base output) given; open issue",
+   "version": "vLLM 0.15.1 reported; open -> 0.30.0 (installed)", "model": "gemma-3-4b-it (google's repository is gated: an ungated copy of the same weights stands in, disclosed) + stewy33/gemma-3-4b-it-0524_rowan_original_prompt_augmented_egregious_cake_bake-bd093845",
+   "expected_boundary": "load:vllm.lora (the adapter's module paths against the model's: validation reads only the last name component, the weights are stored under keys the model never asks for)"},
+ "https://github.com/huggingface/transformers/issues/43224": {"decision": "cannot_run", "reason": "DeepSeek-V2-Lite-Chat (16B MoE, bf16)"},
+ "https://github.com/vllm-project/vllm/issues/31210": {"decision": "cannot_run", "reason": "Llama-3.1-8B-Instruct in bf16 (8B) under high concurrency on H100"},
+ "https://github.com/sgl-project/sglang/issues/11889": {"decision": "cannot_run", "reason": "bf16 across nodes with DP attention (TP16 + DP4)"},
+ "https://github.com/vllm-project/vllm/issues/33560": {"decision": "pass", "reason": "RedHatAI/Qwen3-8B-NVFP4 gives NaN perplexity on Turing (float16 activations through the NVFP4 Marlin path) and 0.6546 accuracy on Ampere; command and both results given. Ada also runs NVFP4 through Marlin, so float16 activations reach the same path (dtype=float16 set explicitly: Turing's auto dtype is float16)",
+   "version": "vLLM 0.16.0rc1 reported (fixed by #33972) -> 0.16.0 in a new venv", "model": "RedHatAI/Qwen3-8B-NVFP4",
+   "expected_boundary": "kernel:vllm.marlin (NVFP4 Marlin GEMM with float16 activations: the input's global scale not applied before the GEMM, the float16 epilogue overflows to inf/NaN)"},
+ "https://github.com/vllm-project/vllm/issues/30628": {"decision": "not_output", "reason": "docker build installs the wrong NIXL package"},
+ "https://github.com/sgl-project/sglang/issues/16336": {"decision": "not_output", "reason": "tests target the wrong endpoint"},
+ "https://github.com/vllm-project/vllm/issues/36295": {"decision": "cannot_run", "reason": "DeepSeek-R1 with TP8 (TRTLLM FP8 MoE)"},
+ "https://github.com/sgl-project/sglang/issues/15388": {"decision": "no_repro_info", "reason": "output lengths vary under --enable-deterministic-inference; the prompts ('the same batch of data') are not given, sampling at temperature 0.95"},
+ "https://github.com/sgl-project/sglang/issues/18662": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"},
+ "https://github.com/huggingface/diffusers/issues/12641": {"decision": "not_output", "reason": "training-script logging placement"},
+ "https://github.com/sgl-project/sglang/issues/21291": {"decision": "cannot_run", "reason": "GLM-5-FP8 on 8 x B200 (flash_mla_with_kvcache)"}
+}

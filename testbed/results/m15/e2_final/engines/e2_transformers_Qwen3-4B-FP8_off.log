@@ -1,0 +1,18 @@
+W0924 21:33:25.800000 8704 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 21:33:25.874000 8704 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] You have loaded an FP8 model on CPU and have a CUDA or XPU device available, make sure to set your model on a GPU or XPU device in order to run your model. To remove this warning, pass device_map = 'cuda' or 'xpu'. 
+
+Loading weights:   0%|          | 0/651 [00:00<?, ?it/s]
+Loading weights:   8%|▊         | 53/651 [00:00<00:01, 529.31it/s]
+Loading weights:  16%|█▋        | 107/651 [00:00<00:01, 527.71it/s]
+Loading weights:  25%|██▍       | 161/651 [00:00<00:00, 520.90it/s]
+Loading weights:  35%|███▌      | 228/651 [00:00<00:00, 572.46it/s]
+Loading weights:  44%|████▍     | 286/651 [00:00<00:00, 559.90it/s]
+Loading weights:  53%|█████▎    | 343/651 [00:00<00:00, 557.29it/s]
+Loading weights:  61%|██████▏   | 399/651 [00:00<00:00, 550.11it/s]
+Loading weights:  70%|██████▉   | 455/651 [00:00<00:00, 548.57it/s]
+Loading weights:  79%|███████▉  | 515/651 [00:00<00:00, 549.57it/s]
+Loading weights:  88%|████████▊ | 573/651 [00:01<00:00, 552.49it/s]
+Loading weights:  97%|█████████▋| 629/651 [00:01<00:00, 519.40it/s]
+Loading weights: 100%|██████████| 651/651 [00:01<00:00, 551.46it/s]
+RESULT transformers Qwen3-4B-FP8 entail=off ok=False load=None used=None ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install 

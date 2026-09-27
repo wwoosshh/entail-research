@@ -1,0 +1,612 @@
+{
+ "model": "/home/<user>/.cache/huggingface/hub/models--state-spaces--mamba-130m-hf/snapshots/1e76775f628fbf1350fbe4dbb3d971ba64af25a1/",
+ "errors": {
+  "sdpa": "ValueError: MambaForCausalLM does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue",
+  "chunked": "ValueError: Cannot use prefill chunking without a cache"
+ },
+ "comparisons": {
+  "beam_cache_self": {
+   "verdict": {
+    "differs": false,
+    "probe": null
+   },
+   "internal_vs_recomputed_max": 0.031040747960408455,
+   "gaps": {
+    "story_a": 0.015778859456380134,
+    "story_b": 0.0014955997467041016,
+    "code": 0.001986374457677187,
+    "numbers": 0.031040747960408455,
+    "repeat": 0.00228968759377797,
+    "short": 0.020778179168701172
+   }
+  },
+  "beam_nocache_self": {
+   "verdict": {
+    "differs": false,
+    "probe": null
+   },
+   "internal_vs_recomputed_max": 0.02181190252304077,
+   "gaps": {
+    "story_a": 0.02181190252304077,
+    "story_b": 0.012878855069478279,
+    "code": 0.005209316809972109,
+    "numbers": 0.004234949747721428,
+    "repeat": 0.0027669022480646815,
+    "short": 0.010241270065307617
+   }
+  },
+  "sdpa_vs_eager": {
+   "verdict": "mode failed",
+   "error": "ValueError: MambaForCausalLM does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue"
+  },
+  "nocache_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.24999988079071045,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0710274413564066,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.15679490566253662,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": 6,
+    "story_b": 4,
+    "code": null,
+    "numbers": 3,
+    "repeat": null,
+    "short": 8
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.15679490566253662,
+      "pdrift": 0.0270586049709165,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 214
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 4,
+      "base_margin_at_diff": 0.24999988079071045,
+      "drift": 0.0397181510925293,
+      "pdrift": 0.007060645093745266,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 209
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.09965705871582031,
+      "pdrift": 0.0710274413564066,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 115
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 3,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.008961677551269531,
+      "pdrift": 0.0059280491105505595,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 53
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.058894336223602295,
+      "pdrift": 0.03752795998719527,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": 8,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.14936470985412598,
+      "pdrift": 0.04978340101616413,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "static_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.05254599338143062,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.19976913928985596,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": 6,
+    "story_b": 19,
+    "code": null,
+    "numbers": 3,
+    "repeat": null,
+    "short": 8
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.13425779342651367,
+      "pdrift": 0.0507320473311107,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 214
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 19,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.1372014284133911,
+      "pdrift": 0.04629511463115832,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 209
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.19976913928985596,
+      "pdrift": 0.030758138965414683,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 115
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 3,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.1622767448425293,
+      "pdrift": 0.002490221920631197,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 53
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.08107152581214905,
+      "pdrift": 0.05254599338143062,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": 8,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.14763176441192627,
+      "pdrift": 0.04916213771024963,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "chunked_vs_eager": {
+   "verdict": "mode failed",
+   "error": "ValueError: Cannot use prefill chunking without a cache"
+  },
+  "batch_left_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.5,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.09873104930524323,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.19155025482177734,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": null,
+    "story_b": 9,
+    "code": 6,
+    "numbers": 12,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.09084963798522949,
+      "pdrift": 0.049807689180825676,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 9,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.06504201889038086,
+      "pdrift": 0.014594820318689722,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "code": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.25,
+      "drift": 0.02672719955444336,
+      "pdrift": 0.01778943061948368,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 12,
+      "base_margin_at_diff": 0.5,
+      "drift": 0.0651974081993103,
+      "pdrift": 0.03469443249951798,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.14727628231048584,
+      "pdrift": 0.09873104930524323,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.19155025482177734,
+      "pdrift": 0.055457992706766435,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "pad_right_vs_eager": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.5000000596046448,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.11581308471036855,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.48567843437194824,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 36,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 63,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 109,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 164,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.3957340717315674,
+      "pdrift": 0.08475407271295865,
+      "positions": 214
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 16,
+        "base_margin": 0.015625
+       },
+       {
+        "pos": 34,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 36,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 48,
+        "base_margin": 0.0625
+       },
+       {
+        "pos": 58,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 63,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 64,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 74,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 89,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 198,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 206,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.35939455032348633,
+      "pdrift": 0.06389222291492752,
+      "positions": 209
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 8,
+        "base_margin": 0.5000000596046448
+       },
+       {
+        "pos": 21,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 24,
+        "base_margin": 0.375
+       },
+       {
+        "pos": 28,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 37,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 69,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.5000000596046448,
+      "drift": 0.48567843437194824,
+      "pdrift": 0.11035914832491439,
+      "positions": 115
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 4,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 13,
+        "base_margin": 0.5
+       },
+       {
+        "pos": 16,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 30,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 43,
+        "base_margin": 0.5
+       }
+      ],
+      "max_flip_margin": 0.5,
+      "drift": 0.3020648956298828,
+      "pdrift": 0.11581308471036855,
+      "positions": 53
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 6,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 8,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 9,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 17,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.3376188278198242,
+      "pdrift": 0.05746265551551033,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 0
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.18073344230651855,
+      "pdrift": 0.019141742611982593,
+      "positions": 4
+     }
+    }
+   }
+  }
+ }
+}

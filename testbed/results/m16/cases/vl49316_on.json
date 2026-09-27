@@ -1,0 +1,56 @@
+{
+ "entail": "load",
+ "vllm": "0.30.0",
+ "cases": [
+  {
+   "tool": "set_count",
+   "schema_type": "integer",
+   "model_args": "{\"count\":\"3\"}",
+   "non_streaming": "{\"count\": 3}",
+   "streaming": "{\"count\":\"3\"}",
+   "value_types": {
+    "non_streaming": "int",
+    "streaming": "str"
+   },
+   "diverged": true
+  },
+  {
+   "tool": "set_flag",
+   "schema_type": "boolean",
+   "model_args": "{\"flag\":\"true\"}",
+   "non_streaming": "{\"flag\": true}",
+   "streaming": "{\"flag\":\"true\"}",
+   "value_types": {
+    "non_streaming": "bool",
+    "streaming": "str"
+   },
+   "diverged": true
+  },
+  {
+   "tool": "set_ratio",
+   "schema_type": "number",
+   "model_args": "{\"ratio\":\"1.5\"}",
+   "non_streaming": "{\"ratio\": 1.5}",
+   "streaming": "{\"ratio\":\"1.5\"}",
+   "value_types": {
+    "non_streaming": "float",
+    "streaming": "str"
+   },
+   "diverged": true
+  },
+  {
+   "tool": "set_id",
+   "schema_type": "string",
+   "model_args": "{\"id\":42}",
+   "non_streaming": "{\"id\": \"42\"}",
+   "streaming": "{\"id\":42}",
+   "value_types": {
+    "non_streaming": "str",
+    "streaming": "int"
+   },
+   "diverged": true
+  }
+ ],
+ "diverged_cases": 4,
+ "reproduced": true
+}

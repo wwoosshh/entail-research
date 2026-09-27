@@ -1,0 +1,81 @@
+{
+ "passes": 10,
+ "reproduced": 9,
+ "verdicts": {
+  "missed": 6,
+  "unknown_only": 1,
+  "false": 1,
+  "adapter_not_installed": 1,
+  "not_reproduced": 1
+ },
+ "detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1": 6,
+  "rate": 0.0,
+  "per_rater": {
+   "rating_A": {
+    "denominator": 6,
+    "detected": 0
+   },
+   "rating_B": {
+    "denominator": 5,
+    "detected": 0
+   }
+  }
+ },
+ "low_level_detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1_level_D": 5
+ },
+ "located_outside_class": {
+  "cases": [],
+  "reproduced_K2_to_K5": 3
+ },
+ "caught_at_expected_boundary_all_reproduced": {
+  "numerator": 0,
+  "denominator": 9
+ },
+ "false_alarms": {
+  "cases_with_false": [
+   "vl33091"
+  ],
+  "broken_or_refused_in_non_K1_reproduced": 0
+ },
+ "class_share_among_rated": {
+  "rated": 91,
+  "consensus_counts": {
+   "K7": 45,
+   "K1": 25,
+   "K4": 12,
+   "K5": 1,
+   "K3": 3,
+   "K6": 1,
+   "K2": 4
+  },
+  "K1_share": 0.27472527472527475,
+  "A_K1_share": 0.27472527472527475,
+  "B_K1_share": 0.26373626373626374
+ },
+ "kappa_7": {
+  "n": 91,
+  "observed": 0.8791208791208791,
+  "expected": 0.3056394155295254,
+  "kappa": 0.8259130434782609
+ },
+ "kappa_k1_vs_rest": {
+  "n": 91,
+  "observed": 0.967032967032967,
+  "expected": 0.6064484965583866,
+  "kappa": 0.9162319729978521
+ }
+}
+diffusers#12633        df12633    repro=True  K=K1    L=D     missed         on={}
+transformers#43697     tf43697    repro=True  K=K1    L=D     missed         on={'pass': 1, 'unknown': 2}
+vllm#34186             vl34186    repro=True  K=K1    L=D     missed         on={'unknown': 3, 'pass': 68}
+vllm#33560             vl33560    repro=True  K=K1    L=D     missed         on={'pass': 12, 'unknown': 1}
+transformers#41494     tf41494    repro=True  K=K1    L=I     unknown_only   on={'unknown': 2, 'pass': 2}
+transformers#43450     tf43450    repro=True  K=K4    L=D     missed         on={}
+vllm#33091             vl33091    repro=True  K=K1    L=D     false          on={'pass': 12, 'unknown': 1, 'broken': 9}
+vllm#35221             vl35221    repro=True  K=K4    L=I     adapter_not_installed on={'pass': 11, 'unknown': 1}
+vllm#25800             vl25800    repro=None  K=K3    L=D     not_reproduced on={'pass': 10, 'unknown': 5}
+vllm#27390             vl27390    repro=True  K=K4    L=I     missed         on={'pass': 11}

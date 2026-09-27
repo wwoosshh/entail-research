@@ -1,0 +1,18 @@
+{
+ "https://github.com/huggingface/transformers/issues/41494": {"decision": "pass", "reason": "the tokenizer built from a gemma-3 GGUF file (Unigram) tokenizes differently from the model's own (BPE); script, input, expected and actual tokens given",
+   "version": "transformers 4.57.0 reported (closed 2025-11-29) -> 5.17.0 first; the reported version if gone", "model": "unsloth/gemma-3-4b-it-GGUF gemma-3-4b-it-Q8_0.gguf; the reference tokenizer from an ungated copy of google/gemma-3-4b-it (gated), disclosed",
+   "expected_boundary": "load:transformers.tokenizer (GGUF: the tokenizer model type the checkpoint declares, built as another one)"},
+ "https://github.com/sgl-project/sglang/issues/18663": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"},
+ "https://github.com/vllm-project/vllm/issues/35504": {"decision": "cannot_run", "reason": "Qwen3-Coder-Next (80B) with TP > 1"},
+ "https://github.com/sgl-project/sglang/issues/20499": {"decision": "not_output", "reason": "a test's /flush_cache times out"},
+ "https://github.com/huggingface/transformers/issues/41856": {"decision": "not_output", "reason": "training throughput regression"},
+ "https://github.com/vllm-project/vllm/issues/32222": {"decision": "not_output", "reason": "CI failure: NIXL not available, confusing shutdown error"},
+ "https://github.com/huggingface/transformers/issues/43066": {"decision": "not_output", "reason": "the tokenizer's decoder object has another type in v5; no wrong decoded text shown (a question whether the change is expected)"},
+ "https://github.com/vllm-project/vllm/issues/37184": {"decision": "cannot_run", "reason": "Kimi-K2.5 tool parser on 8 x H200 (1T model); no model-free reproduction"},
+ "https://github.com/sgl-project/sglang/issues/21340": {"decision": "cannot_run", "reason": "AMD MI325, 4-GPU tests"},
+ "https://github.com/sgl-project/sglang/issues/14382": {"decision": "cannot_run", "reason": "GLM-4.6-FP8 with DeepEP, TP8/EP8"},
+ "https://github.com/huggingface/transformers/issues/43450": {"decision": "pass", "reason": "AutoVideoProcessor returns 1 x 1 x B x T x C x H x W for a batched B x T x C x H x W tensor; script, input, expected and actual shapes given",
+   "version": "transformers 4.57.6 reported (fixed by #43486) -> 5.17.0 first; 4.57.6 in the existing vllm0210 venv", "model": "qubvel-hf/vjepa2-vitl-fpc16-256-ssv2 (processor only)",
+   "expected_boundary": "load:transformers.video_processor (a batched 5-D input taken as one video: the batch axis read as frames)"},
+ "https://github.com/sgl-project/sglang/issues/18671": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"}
+}

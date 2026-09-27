@@ -1,0 +1,47 @@
+{
+ "rank": 166,
+ "id": "shibing624/macbert4csc-base-chinese",
+ "model_type": "bert",
+ "files": [
+  "vocab.txt",
+  "special_tokens_map.json",
+  "added_tokens.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 109654,
+ "mistral_files": [],
+ "rows": {
+  "n": 21128,
+  "where": "bert.embeddings.word_embeddings.weight [21128, 768] in model.safetensors (header only)",
+  "config_vocab_size": 21128
+ },
+ "sources": {
+  "candidates": [
+   [
+    21128,
+    "vocab.txt"
+   ]
+  ],
+  "rows": 21128,
+  "rows_where": "bert.embeddings.word_embeddings.weight [21128, 768] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "BertTokenizer",
+  "vocab_size": 21128,
+  "reach": 21128
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 3.6
+}

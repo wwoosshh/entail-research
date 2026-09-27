@@ -1,0 +1,21 @@
+W0924 23:14:46.024000 49037 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0924 23:14:46.044000 49037 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] You have loaded an FP8 model on CPU and have a CUDA or XPU device available, make sure to set your model on a GPU or XPU device in order to run your model. To remove this warning, pass device_map = 'cuda' or 'xpu'. 
+
+Loading weights:   0%|          | 0/651 [00:00<?, ?it/s]
+Loading weights:   8%|▊         | 51/651 [00:00<00:01, 468.86it/s]
+Loading weights:  16%|█▌        | 101/651 [00:00<00:01, 483.86it/s]
+Loading weights:  23%|██▎       | 150/651 [00:00<00:01, 455.46it/s]
+Loading weights:  30%|███       | 196/651 [00:00<00:01, 415.82it/s]
+Loading weights:  37%|███▋      | 239/651 [00:00<00:00, 412.49it/s]
+Loading weights:  43%|████▎     | 281/651 [00:00<00:00, 411.82it/s]
+Loading weights:  50%|████▉     | 323/651 [00:00<00:00, 404.96it/s]
+Loading weights:  56%|█████▌    | 364/651 [00:00<00:00, 389.63it/s]
+Loading weights:  62%|██████▏   | 404/651 [00:01<00:00, 361.87it/s]
+Loading weights:  68%|██████▊   | 441/651 [00:01<00:00, 338.06it/s]
+Loading weights:  74%|███████▍  | 481/651 [00:01<00:00, 347.31it/s]
+Loading weights:  79%|███████▉  | 517/651 [00:01<00:00, 339.18it/s]
+Loading weights:  86%|████████▌ | 557/651 [00:01<00:00, 355.47it/s]
+Loading weights:  92%|█████████▏| 601/651 [00:01<00:00, 374.82it/s]
+Loading weights: 100%|██████████| 651/651 [00:01<00:00, 392.11it/s]
+RESULT transformers Qwen__Qwen3-8B-FP8 entail=off ok=False load=None used=None ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.16.0 <= version < 0.17.0), e.g. `pip install 

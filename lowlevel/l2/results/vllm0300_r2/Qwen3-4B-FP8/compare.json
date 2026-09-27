@@ -1,0 +1,1707 @@
+{
+ "model": "C:/Program Files/Git/home/<user>/models/Qwen3-4B-FP8",
+ "margin": 1.0,
+ "pdrift": 0.25,
+ "load_s": {
+  "base": 15.13,
+  "chunk": 12.98,
+  "graph": 16.67,
+  "native": 13.82,
+  "spec": 13.98,
+  "triton_attn": 13.61
+ },
+ "failed_modes": [],
+ "comparisons": {
+  "decode_vs_prefill": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.125,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.10074770189549515,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.18779981136322021,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.07824987173080444,
+      "pdrift": 0.050524556504804585,
+      "positions": 24
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 7,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.18779981136322021,
+      "pdrift": 0.10074770189549515,
+      "positions": 24
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.05024278163909912,
+      "pdrift": 0.020943860017461402,
+      "positions": 24
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0654299259185791,
+      "pdrift": 0.031169262259580277,
+      "positions": 24
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.002262994647026062,
+      "pdrift": 0.0022123434393022112,
+      "positions": 24
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0457688570022583,
+      "pdrift": 0.029004648547426015,
+      "positions": 24
+     }
+    }
+   }
+  },
+  "batched_vs_alone": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.3750000596046448,
+   "prompt_flip_margin": 0.125,
+   "gen_pdrift": 0.08398804005442201,
+   "prompt_pdrift": 0.08084548811914394,
+   "gen_drift": 0.1599494218826294,
+   "prompt_drift": 0.3819321393966675,
+   "first_diff": {
+    "story_a": 16,
+    "story_b": 18,
+    "code": null,
+    "numbers": 2,
+    "repeat": null,
+    "short": 5
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 16,
+      "base_margin_at_diff": 0.3750000596046448,
+      "drift": 0.10429275035858154,
+      "pdrift": 0.057294846949280887,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 206
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 18,
+      "base_margin_at_diff": 0.375,
+      "drift": 0.1599494218826294,
+      "pdrift": 0.08398804005442201,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 7,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 68,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 109,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 161,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 167,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 168,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.3819321393966675,
+      "pdrift": 0.08084548811914394,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0488855242729187,
+      "pdrift": 0.020364144440747745,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.1249990463256836,
+      "pdrift": 0.023516863970168056,
+      "positions": 94
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 2,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.01596355438232422,
+      "pdrift": 0.004705993794660024,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 25,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 36,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.11544156074523926,
+      "pdrift": 0.030183944883527825,
+      "positions": 68
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.004782766103744507,
+      "pdrift": 0.0035124528484488104,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.17017078399658203,
+      "pdrift": 0.01826267436842688,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": 5,
+      "base_margin_at_diff": 0.25,
+      "drift": 0.026653438806533813,
+      "pdrift": 0.020400700334609057,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.05306538939476013,
+      "pdrift": 0.03194876903852539,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "cache_partial_vs_cold": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.053853436452929504,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.08098548650741577,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_b": 6
+   },
+   "detail": {
+    "story_b": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.08098548650741577,
+      "pdrift": 0.053853436452929504,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "cache_full_vs_cold": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.053813908298423696,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.08092838525772095,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_b": 6
+   },
+   "detail": {
+    "story_b": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.08092838525772095,
+      "pdrift": 0.053813908298423696,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "graph_vs_base": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.625,
+   "gen_pdrift": 0.06679764209718075,
+   "prompt_pdrift": 0.0862635507611822,
+   "gen_drift": 0.13838237524032593,
+   "prompt_drift": 0.3750143051147461,
+   "first_diff": {
+    "story_a": null,
+    "story_b": 6,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.13838237524032593,
+      "pdrift": 0.06679764209718075,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 5,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 26,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 68,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 80,
+        "base_margin": 0.625
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 161,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 168,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.625,
+      "drift": 0.3750143051147461,
+      "pdrift": 0.0862635507611822,
+      "positions": 206
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.03892749547958374,
+      "pdrift": 0.025341869882941626,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 5,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 26,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 68,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 80,
+        "base_margin": 0.625
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 161,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 168,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.625,
+      "drift": 0.3750143051147461,
+      "pdrift": 0.08071833838624598,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.05820727348327637,
+      "pdrift": 0.014232925950013742,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.1249990463256836,
+      "pdrift": 0.026333780094950687,
+      "positions": 94
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0654224157333374,
+      "pdrift": 0.031165566279899526,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 3,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 36,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 38,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.11702942848205566,
+      "pdrift": 0.030091092252412743,
+      "positions": 68
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.029453247785568237,
+      "pdrift": 0.021365974615265126,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.28259754180908203,
+      "pdrift": 0.016555807457034444,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.026501327753067017,
+      "pdrift": 0.01975514305569459,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.22457027435302734,
+      "pdrift": 0.0029856001815515842,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "graph_decode_vs_prefill": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.09657685163575291,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.19259893894195557,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.19259893894195557,
+      "pdrift": 0.09657685163575291,
+      "positions": 24
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.05555075407028198,
+      "pdrift": 0.0300282149531238,
+      "positions": 7
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.04803156852722168,
+      "pdrift": 0.015099901988841369,
+      "positions": 24
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.053153932094573975,
+      "pdrift": 0.028917065871660874,
+      "positions": 24
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.028976142406463623,
+      "pdrift": 0.021014834679120353,
+      "positions": 24
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.059631794691085815,
+      "pdrift": 0.04372681778151899,
+      "positions": 24
+     }
+    }
+   }
+  },
+  "chunk_vs_base": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.25,
+   "gen_pdrift": 0.034390117062428116,
+   "prompt_pdrift": 0.09179597366370429,
+   "gen_drift": 0.0756826400756836,
+   "prompt_drift": 0.4989767074584961,
+   "first_diff": {
+    "story_a": null,
+    "story_b": 6,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.06842440366744995,
+      "pdrift": 0.034390117062428116,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 5,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 68,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 92,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 190,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.4989767074584961,
+      "pdrift": 0.09179597366370429,
+      "positions": 206
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.0756826400756836,
+      "pdrift": 0.02586454292910345,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 5,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 68,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 92,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.4989767074584961,
+      "pdrift": 0.08107477682426484,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 94
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 68
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "chunk_decode_vs_prefill": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.06828116070537593,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.09902787208557129,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.09902787208557129,
+      "pdrift": 0.06828116070537593,
+      "positions": 24
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.05533313751220703,
+      "pdrift": 0.021975504957575165,
+      "positions": 7
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.05024278163909912,
+      "pdrift": 0.020943860017461402,
+      "positions": 24
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0654299259185791,
+      "pdrift": 0.031169262259580277,
+      "positions": 24
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.002262994647026062,
+      "pdrift": 0.0022123434393022112,
+      "positions": 24
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0457688570022583,
+      "pdrift": 0.029004648547426015,
+      "positions": 24
+     }
+    }
+   }
+  },
+  "spec_vs_base": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.08262013873743901,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.24863040447235107,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.1386244297027588,
+      "pdrift": 0.0669065714853248,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.24863040447235107,
+      "pdrift": 0.08262013873743901,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.054360151290893555,
+      "pdrift": 0.027006036015805313,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.07381653785705566,
+      "pdrift": 0.03116753159897251,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.01799371838569641,
+      "pdrift": 0.01312771085412412,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 1.786800567060709e-06,
+      "pdrift": 1.7854614615675501e-06,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "spec_decode_vs_prefill": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.125,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.09570318302603525,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.19284099340438843,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.19284099340438843,
+      "pdrift": 0.09570318302603525,
+      "positions": 24
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 7,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.12768375873565674,
+      "pdrift": 0.058708065090004036,
+      "positions": 24
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.025203227996826172,
+      "pdrift": 0.014753154990644668,
+      "positions": 24
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.10574781894683838,
+      "pdrift": 0.03140931114144391,
+      "positions": 24
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.017516613006591797,
+      "pdrift": 0.012776570917979346,
+      "positions": 24
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.04576921463012695,
+      "pdrift": 0.029004870036511865,
+      "positions": 24
+     }
+    }
+   }
+  },
+  "native_vs_base": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.125,
+   "gen_pdrift": 0.09502298208660409,
+   "prompt_pdrift": 0.11852765721364639,
+   "gen_drift": 0.13983511924743652,
+   "prompt_drift": 0.5747928619384766,
+   "first_diff": {
+    "story_a": null,
+    "story_b": 6,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.13983511924743652,
+      "pdrift": 0.09502298208660409,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 79,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 109,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 161,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 167,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 168,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.5747928619384766,
+      "pdrift": 0.11852765721364639,
+      "positions": 206
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.03744542598724365,
+      "pdrift": 0.019941304667085546,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 79,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 109,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 161,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 167,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 168,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.5747928619384766,
+      "pdrift": 0.10454876178215955,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.04305809736251831,
+      "pdrift": 0.02681071823449621,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.24999713897705078,
+      "pdrift": 0.027726438162914424,
+      "positions": 94
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.09434521198272705,
+      "pdrift": 0.03346393004948078,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 45,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.0,
+      "drift": 0.10550796985626221,
+      "pdrift": 0.026991579634311147,
+      "positions": 68
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.033790022134780884,
+      "pdrift": 0.024459143089080704,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.12405586242675781,
+      "pdrift": 0.01617344078620178,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0928112268447876,
+      "pdrift": 0.050923749982631716,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.035228729248046875,
+      "pdrift": 0.0032213293265774823,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "native_decode_vs_prefill": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.14554753859140868,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.20040082931518555,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.20040082931518555,
+      "pdrift": 0.14554753859140868,
+      "positions": 24
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.07718515396118164,
+      "pdrift": 0.034231341021651485,
+      "positions": 7
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.05277669429779053,
+      "pdrift": 0.01501134205114285,
+      "positions": 24
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.07302653789520264,
+      "pdrift": 0.031077906184723503,
+      "positions": 24
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.03331291675567627,
+      "pdrift": 0.02410800315293593,
+      "positions": 24
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.09078311920166016,
+      "pdrift": 0.04986072915651385,
+      "positions": 24
+     }
+    }
+   }
+  },
+  "triton_attn_vs_base": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.125,
+   "prompt_flip_margin": 0.25,
+   "gen_pdrift": 0.08681246463189896,
+   "prompt_pdrift": 0.09923617761819836,
+   "gen_drift": 0.14441514015197754,
+   "prompt_drift": 0.3780679702758789,
+   "first_diff": {
+    "story_a": null,
+    "story_b": 6,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.14441514015197754,
+      "pdrift": 0.08681246463189896,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 5,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 167,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.3780679702758789,
+      "pdrift": 0.09923617761819836,
+      "positions": 206
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 6,
+      "base_margin_at_diff": 0.125,
+      "drift": 0.10873007774353027,
+      "pdrift": 0.035311393521428536,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 5,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 154,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 167,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.3780679702758789,
+      "pdrift": 0.0635079422570789,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.03857600688934326,
+      "pdrift": 0.01853770562202328,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.1249990463256836,
+      "pdrift": 0.030953879520556615,
+      "positions": 94
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0989311933517456,
+      "pdrift": 0.031163894298210315,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 50,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.0,
+      "drift": 0.11703181266784668,
+      "pdrift": 0.030536785192389893,
+      "positions": 68
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.029999732971191406,
+      "pdrift": 0.021756489739994556,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.06226825714111328,
+      "pdrift": 0.018638173330069008,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.043237268924713135,
+      "pdrift": 0.022157131121731344,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.03193330764770508,
+      "pdrift": 0.018435402146498414,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "triton_attn_decode_vs_prefill": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.09830127444033954,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.19863170385360718,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.19863170385360718,
+      "pdrift": 0.09830127444033954,
+      "positions": 24
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.08838057518005371,
+      "pdrift": 0.022825085997647765,
+      "positions": 7
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.03158223628997803,
+      "pdrift": 0.0216970354381828,
+      "positions": 24
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0651475191116333,
+      "pdrift": 0.030533549470902144,
+      "positions": 24
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.029522627592086792,
+      "pdrift": 0.021405349803849782,
+      "positions": 24
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.04602590203285217,
+      "pdrift": 0.029163823397888144,
+      "positions": 24
+     }
+    }
+   }
+  }
+ }
+}

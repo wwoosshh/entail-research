@@ -1,0 +1,77 @@
+{
+ "name": "tf.whisper_features",
+ "about": "WhisperFeatureExtractor (transformers 5.17.0); transformers#47885's operator",
+ "tol": 0.0001,
+ "forms": [
+  {}
+ ],
+ "checks": {
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "audio"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "audio",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "audio",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "fail",
+   "rows": [
+    {
+     "input": "audio",
+     "status": "fail",
+     "op_nonfinite": 1.0,
+     "definition_nonfinite": null
+    }
+   ]
+  }
+ },
+ "seconds": 0.0
+}

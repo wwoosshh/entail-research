@@ -1,0 +1,48 @@
+{
+ "rank": 141,
+ "id": "trl-internal-testing/tiny-GptOssForCausalLM",
+ "model_type": "gpt_oss",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 27868614,
+ "mistral_files": [],
+ "rows": {
+  "n": 201088,
+  "where": "model.embed_tokens.weight [201088, 8] in model.safetensors (header only)",
+  "config_vocab_size": 201088
+ },
+ "sources": {
+  "candidates": [
+   [
+    199998,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 201088,
+  "rows_where": "model.embed_tokens.weight [201088, 8] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 199998,
+  "reach": 200019
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='yarn', theta=150000.0, factor=32.0, original_max_position=4096, low_freq_factor=None, high_freq_factor=None, beta_fast=32.0, beta_slow=1.0, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=False, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 6.4
+}

@@ -1,0 +1,14 @@
+{
+ "https://github.com/huggingface/transformers/issues/44945": {"decision": "cannot_run", "reason": "Molmo2-8B split by hand across 2 x T4 (pipeline parallel over two GPUs, 8B fp16)"},
+ "https://github.com/sgl-project/sglang/issues/20043": {"decision": "cannot_run", "reason": "GLM-5-NVFP4 on 8 x RTX PRO 6000 Blackwell (SM120)"},
+ "https://github.com/sgl-project/sglang/issues/18676": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"},
+ "https://github.com/sgl-project/sglang/issues/13469": {"decision": "cannot_run", "reason": "Grok-2 / Mixtral with TP8 and piecewise CUDA graphs"},
+ "https://github.com/vllm-project/vllm/issues/31005": {"decision": "not_output", "reason": "a misleading warning message in the Ray executor"},
+ "https://github.com/vllm-project/vllm/issues/29408": {"decision": "cannot_run", "reason": "Qwen3-VL-30B-A3B-Thinking-FP8 with pipeline parallel 3"},
+ "https://github.com/vllm-project/vllm/issues/34526": {"decision": "cannot_run", "reason": "prefill/decode disaggregation over NIXL between two instances (A100/H200)"},
+ "https://github.com/vllm-project/vllm/issues/35639": {"decision": "not_output", "reason": "RFC for a benchmark command"},
+ "https://github.com/sgl-project/sglang/issues/21171": {"decision": "not_output", "reason": "code reading of grammar-error handling; no wrong output observed"},
+ "https://github.com/vllm-project/vllm/issues/26976": {"decision": "not_output", "reason": "AssertionError in lora_shrink_op during the profile run (crash)"},
+ "https://github.com/sgl-project/sglang/issues/12567": {"decision": "cannot_run", "reason": "gpt-oss-120b with speculative decoding"},
+ "https://github.com/vllm-project/vllm/issues/29645": {"decision": "no_repro_info", "reason": "one line ('rotated image data not extracted properly for qwen3-vl'), no input or output"}
+}

@@ -1,0 +1,51 @@
+{
+ "rank": 113,
+ "id": "trl-internal-testing/tiny-random-LlamaForCausalLM",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 2343067,
+ "mistral_files": [],
+ "rows": {
+  "n": 32000,
+  "where": "model.embed_tokens.weight [32000, 16] in model.safetensors (header only)",
+  "config_vocab_size": 32000
+ },
+ "sources": {
+  "candidates": [
+   [
+    32000,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    32000,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 32000,
+  "rows_where": "model.embed_tokens.weight [32000, 16] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "LlamaTokenizer",
+  "vocab_size": 32000,
+  "reach": 32000
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 4.8
+}

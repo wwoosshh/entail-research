@@ -1,0 +1,15 @@
+[transformers] This model config has set a `rope_parameters['original_max_position_embeddings']` field, to be used together with `max_position_embeddings` to determine a scaling factor. Please set the `factor` field of `rope_parameters`with this ratio instead -- we recommend the use of this field over `original_max_position_embeddings`, as it is compatible with most model architectures.
+[entail] unknown at load:transformers.config: Phi3Config config.json (the file names itself Phi-4-mini-instruct) (every key it gives): keys taken by neither the config class nor a reader entail knows: attention_bias, full_attn_mod, interpolate_factor, lm_head_bias, mlp_bias (the record holds the whole decision)
+W0926 04:51:36.108000 17201 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 04:51:36.208000 17201 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/194 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 14/194 [00:00<00:01, 129.63it/s]
+Loading weights:  26%|██▋       | 51/194 [00:00<00:00, 262.04it/s]
+Loading weights:  40%|████      | 78/194 [00:00<00:00, 180.04it/s]
+Loading weights:  51%|█████     | 99/194 [00:00<00:00, 144.92it/s]
+Loading weights:  60%|█████▉    | 116/194 [00:00<00:00, 145.72it/s]
+Loading weights:  68%|██████▊   | 132/194 [00:00<00:00, 136.61it/s]
+Loading weights:  76%|███████▌  | 147/194 [00:01<00:00, 128.27it/s]
+Loading weights: 100%|██████████| 194/194 [00:01<00:00, 192.36it/s]
+RESULT transformers microsoft__Phi-4-mini-instruct entail=load ok=True load=4.058 used=sdpa 

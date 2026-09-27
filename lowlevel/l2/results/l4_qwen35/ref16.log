@@ -1,0 +1,18 @@
+W0927 08:27:05.351000 233103 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0927 08:27:05.385000 233103 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 29/426 [00:00<00:01, 254.56it/s]
+Loading weights:  14%|█▎        | 58/426 [00:00<00:01, 257.47it/s]
+Loading weights:  20%|██        | 87/426 [00:00<00:01, 252.70it/s]
+Loading weights:  28%|██▊       | 118/426 [00:00<00:01, 259.11it/s]
+Loading weights:  36%|███▌      | 153/426 [00:00<00:00, 285.45it/s]
+Loading weights:  49%|████▊     | 207/426 [00:00<00:00, 362.01it/s]
+Loading weights:  57%|█████▋    | 244/426 [00:00<00:00, 326.93it/s]
+Loading weights:  65%|██████▌   | 278/426 [00:00<00:00, 280.82it/s]
+Loading weights:  73%|███████▎  | 310/426 [00:01<00:00, 276.26it/s]
+Loading weights:  82%|████████▏ | 351/426 [00:01<00:00, 302.90it/s]
+Loading weights: 100%|██████████| 426/426 [00:01<00:00, 335.37it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+RESULT {"engine": "hf", "model": "/home/<user>/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/", "dtype": "bfloat16", "device": "cuda", "layers": "model.layers: 32 x ['Qwen3_5DecoderLayer']", "probes": {"story_a": {"tokens": 207, "layers": 32}, "story_b": {"tokens": 204, "layers": 32}, "code": {"tokens": 107, "layers": 32}, "numbers": {"tokens": 69, "lay

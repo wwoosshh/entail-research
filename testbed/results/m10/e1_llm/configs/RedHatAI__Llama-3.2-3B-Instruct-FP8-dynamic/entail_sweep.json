@@ -1,0 +1,50 @@
+{
+ "rank": 248,
+ "id": "RedHatAI/Llama-3.2-3B-Instruct-FP8-dynamic",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 17210216,
+ "mistral_files": [],
+ "rows": {
+  "n": 128256,
+  "where": "model.embed_tokens.weight [128256, 3072] in model.safetensors (header only)",
+  "config_vocab_size": 128256
+ },
+ "sources": {
+  "candidates": [
+   [
+    128000,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 128256,
+  "rows_where": "model.embed_tokens.weight [128256, 3072] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 128000,
+  "reach": 128256
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='llama3', theta=500000.0, factor=32.0, original_max_position=8192, low_freq_factor=1.0, high_freq_factor=4.0, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/RedHatAI__Llama-3.2-3B-Instruct-FP8-dynamic/config.json#quantization_config: quantization method 'compressed-tensors' is not in vocabulary v6"
+ ],
+ "seconds": 6.4
+}

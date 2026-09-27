@@ -1,0 +1,110 @@
+{
+ "name": "vllm.silu_and_mul",
+ "about": "control: SiLU-and-mul custom op (vLLM 0.30.0)",
+ "tol": 0.02,
+ "forms": [
+  {}
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 0.0024071922836709316
+  },
+  "layout": {
+   "status": "fail",
+   "rows": [
+    {
+     "input": "x",
+     "status": "fail",
+     "rel": Infinity
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 1.0140781391435683,
+     "op_moved": 1.0143490374126705
+    },
+    {
+     "input": "x",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.9841493161135657,
+     "op_moved": 0.9844479591971891
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "x"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0017211700650554755
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016434927875070692
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016244846306074292
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016595798456393313
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0016346269607007424
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "x",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "x",
+     "status": "pass",
+     "op_nonfinite": 1.52587890625e-05,
+     "definition_nonfinite": 1.52587890625e-05
+    }
+   ]
+  }
+ },
+ "seconds": 0.0
+}

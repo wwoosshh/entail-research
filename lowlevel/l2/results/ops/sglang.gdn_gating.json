@@ -1,0 +1,224 @@
+{
+ "name": "sglang.gdn_gating",
+ "about": "fused_gdn_gating (SGLang 0.5.20); sglang#21843's operator",
+ "tol": 0.0001,
+ "forms": [
+  {}
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 6.747866554046226e-08
+  },
+  "layout": {
+   "status": "fail",
+   "rows": [
+    {
+     "input": "A_log",
+     "status": "fail",
+     "rel": 1.1965500869348413
+    },
+    {
+     "input": "a",
+     "status": "fail",
+     "rel": 0.4734777755370504
+    },
+    {
+     "input": "b",
+     "status": "fail",
+     "rel": 0.4595383465699543
+    },
+    {
+     "input": "dt_bias",
+     "status": "fail",
+     "rel": 0.39673829720724635
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "A_log",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 1.955140279778185,
+     "op_moved": 1.955140230848977
+    },
+    {
+     "input": "A_log",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.16097285180531043,
+     "op_moved": 0.16097281348006398
+    },
+    {
+     "input": "a",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.23505616438557886,
+     "op_moved": 0.2350561695607773
+    },
+    {
+     "input": "a",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.09057374444660833,
+     "op_moved": 0.09057374579395563
+    },
+    {
+     "input": "b",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.08560939042008084,
+     "op_moved": 0.08560938853965222
+    },
+    {
+     "input": "b",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.08267437245243818,
+     "op_moved": 0.08267436973589276
+    },
+    {
+     "input": "dt_bias",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.16238975329962585,
+     "op_moved": 0.16238973285076508
+    },
+    {
+     "input": "dt_bias",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.0435071844169118,
+     "op_moved": 0.04350718977928309
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "A_log",
+    "a",
+    "b",
+    "dt_bias"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 2.185414591475106e-07
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.09375,
+     "rel": null
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.15625,
+     "rel": null
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.15625,
+     "rel": null
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.15625,
+     "rel": null
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "A_log",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "A_log",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "a",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "a",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "b",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "b",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "dt_bias",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "dt_bias",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "A_log",
+     "status": "pass",
+     "op_nonfinite": 0.03125,
+     "definition_nonfinite": 0.03125
+    },
+    {
+     "input": "a",
+     "status": "pass",
+     "op_nonfinite": 0.00048828125,
+     "definition_nonfinite": 0.00048828125
+    },
+    {
+     "input": "b",
+     "status": "pass",
+     "op_nonfinite": 0.00048828125,
+     "definition_nonfinite": 0.00048828125
+    },
+    {
+     "input": "dt_bias",
+     "status": "pass",
+     "op_nonfinite": 0.03125,
+     "definition_nonfinite": 0.03125
+    }
+   ]
+  }
+ },
+ "seconds": 0.5
+}

@@ -1,0 +1,172 @@
+{
+ "name": "vllm.moe_marlin_nvfp4",
+ "about": "moe_wna16_marlin_gemm, NVFP4 weights (vLLM 0.30.0); vllm#48895's operator",
+ "tol": 0.02,
+ "forms": [
+  {
+   "mul_topk_weights": true
+  },
+  {
+   "mul_topk_weights": false
+  }
+ ],
+ "checks": {
+  "definition": {
+   "status": "fail",
+   "rel": 0.8131119080929688
+  },
+  "forms": {
+   "status": "fail",
+   "rows": [
+    {
+     "form": {
+      "mul_topk_weights": true
+     },
+     "status": "fail",
+     "rel": 0.8131119080929688
+    },
+    {
+     "form": {
+      "mul_topk_weights": false
+     },
+     "status": "pass",
+     "rel": 0.0028920149158375317
+    }
+   ]
+  },
+  "layout": {
+   "status": "fail",
+   "rows": [
+    {
+     "input": "act",
+     "status": "refused",
+     "error": "RuntimeError: moe_wna16_marlin_gemm, /workspace/csrc/libtorch_stable/moe/marlin_moe_wna16/ops.cu:511, A is not contiguous"
+    },
+    {
+     "input": "topk_w",
+     "status": "fail",
+     "rel": Infinity
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "act",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.35595891560361714,
+     "op_moved": 0.35480832871431317
+    },
+    {
+     "input": "act",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.3515237601967265,
+     "op_moved": 0.35273522584214295
+    },
+    {
+     "input": "topk_w",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.28551021501443874,
+     "op_moved": 0.49995441893557413
+    },
+    {
+     "input": "topk_w",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.4106881149576578,
+     "op_moved": 12.732510778987455
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "act",
+    "topk_w"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "act",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "act",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "topk_w",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "topk_w",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "act",
+     "status": "pass",
+     "op_nonfinite": 0.0078125,
+     "definition_nonfinite": 0.0078125
+    },
+    {
+     "input": "topk_w",
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "definition_nonfinite": 0.0078125
+    }
+   ]
+  }
+ },
+ "seconds": 0.9
+}

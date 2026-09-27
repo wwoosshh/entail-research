@@ -1,0 +1,13 @@
+X005 | D | R T | N | 2 | Hardcoded quantization group size 128 vs checkpoint group size: wrong dequant stride. Reference or scale-shape check exposes it; CUTLASS W4A8 MoE kernel likely Hopper-only.
+X006 | D | M R T | N | 2 | Packed KV layout changed per-block strides; FlashInfer sparse-MLA decode assumes flat per-token stride. Stride check, backend comparison expose it; kernel likely Hopper/Blackwell-only.
+X009 | I | M R | Y | 2 | Repetition_penalty request parameter ignored in DFlash speculative verify path; speculative on/off or reference generation would differ. Generic sampling logic, small models run.
+X012 | D | M R | N | 2 | Indexer kernel mishandles sequence lengths not multiple of 4 (alignment bounds); reference or cross-platform comparison shows wrong token. DeepGEMM-style kernel needs Hopper/Blackwell.
+X033 | D | R L | Y | 2 | Loader keeps gate's global scale for fused w13, discarding differing up-projection scale; checkpoint comparison or reference reveals. Loader logic, Marlin FP4 fallback runs on Ada.
+X043 | U | N | U | 2 | No software defect identified; loops attributed to model behavior across all platforms, fixes only add loop detection. No comparison would reveal a discrepancy.
+X047 | D | M R | N | 2 | FP8 query scale never computed or passed to TRTLLM MHA kernel, defaulting to 1.0. Backend or reference comparison reveals; trtllm-gen kernels are Blackwell-only.
+X063 | D | M R | U | 2 | FSDP fast path skips the loader's QKV row reorder, giving wrongly laid-out weights. FSDP on/off or reference comparison reveals; single-rank FSDP feasibility unclear.
+X077 | D | M R T | N | 3 | After decode-only split, FlashMLA sparse still used full-batch request mapping and misread fp8_ds_mla layout. Mixed-batch, reference, shape checks reveal; FlashMLA needs Hopper/Blackwell.
+X081 | D | M R L | U | 2 | Loader matches only '.weight' names, so packed GPTQ/AWQ tensors are dropped. Checkpoint comparison, unfused path or reference reveals; DeepSeek-V4 runtime hardware needs unclear.
+X083 | U | M R | N | 3 | Undiagnosed accuracy drop only with full decode graph capture on AMD MI350/MI355; graph on/off comparison reveals it. Requires AMD ROCm hardware.
+X090 | D | M T | N | 1 | Two defects: references input dropped (caller input); fixed one is device placement mismatch across GPUs. Rated the device mismatch; single/multi-device comparison reveals.
+X104 | D | M R F | U | 2 | Top-k kernel writes only first slot on NaN rows; reused buffer keeps stale indices treated as valid. Finiteness, reference top-k, batch comparison reveal.

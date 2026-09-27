@@ -1,0 +1,411 @@
+{
+ "passes": 17,
+ "reproduced": 15,
+ "verdicts": {
+  "missed": 15,
+  "not_reproduced": 2
+ },
+ "detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1": 7,
+  "rate": 0.0,
+  "per_rater": {
+   "rating_A": {
+    "denominator": 6,
+    "detected": 0
+   },
+   "rating_B": {
+    "denominator": 7,
+    "detected": 0
+   }
+  }
+ },
+ "false_alarms": {
+  "cases_with_false": [],
+  "broken_or_refused_in_non_K1_reproduced": 0
+ },
+ "class_share_among_rated": {
+  "rated": 87,
+  "consensus_counts": {
+   "K7": 32,
+   "K2": 5,
+   "K1": 29,
+   "K4": 9,
+   "K3": 6,
+   "K5": 4,
+   "K6": 2
+  },
+  "K1_share": 0.3333333333333333,
+  "A_K1_share": 0.3103448275862069,
+  "B_K1_share": 0.3333333333333333
+ },
+ "kappa_7": {
+  "n": 87,
+  "observed": 0.896551724137931,
+  "expected": 0.2609327520147972,
+  "kappa": 0.8600286020736504
+ },
+ "kappa_k1_vs_rest": {
+  "n": 87,
+  "observed": 0.9770114942528736,
+  "expected": 0.5632183908045977,
+  "kappa": 0.9473684210526316
+ },
+ "rows": [
+  {
+   "position": 1,
+   "issue": "vllm#56655",
+   "case": "vl56655",
+   "run": "vl56655",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Mixed prompt embedding masks are omitted from prefix cache keys, causing incorrect outputs",
+   "version": "0.30.0",
+   "expected_boundary": "vLLM prefix cache: the block hash (Request.block_hashes) omits the prompt-embedding mask, so the key does not identify the KV it serves (container:vllm.request.block_hashes / Identity)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 9
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on 0.30.0 (B after A: 32 cached tokens and A's output [753]*16 instead of B's [9,0]*8); entail on: nine pass decisions at the load boundaries (Coverage, Vocab, Rotary, Stops, ModelProps, Layout), nothing at the prefix-cache key"
+  },
+  {
+   "position": 6,
+   "issue": "transformers#47885",
+   "case": "tf47885",
+   "run": "tf47885",
+   "engine_version": null,
+   "title": "WhisperFeatureExtractor: one non-finite input sample makes the entire feature matrix NaN, and the pi",
+   "version": "5.17.0",
+   "expected_boundary": "transformers WhisperFeatureExtractor -> the ASR pipeline: the feature matrix's validity (all NaN) is not checked by the consumer (load/request: transformers.pipeline, Valid)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 3,
+    "pass": 3
+   },
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "missed",
+   "note": "reproduced (all-NaN features, transcription '0'); entail on: 3 unknown, all Coverage at load:transformers.config (forced_decoder_ids declared-unread), nothing at the feature-extractor -> pipeline boundary; no broken/refused"
+  },
+  {
+   "position": 14,
+   "issue": "vllm#49316",
+   "case": "vl49316",
+   "run": "vl49316",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: [Parser] kimi_k2 streaming tool-call args skip schema type coercion applied in non-streaming ",
+   "version": "0.30.0",
+   "expected_boundary": "vLLM streaming parser engine, kimi_k2 backend: the tool schema's argument types (declared by the request's tools) are applied on one path and not the other (request:vllm.tool_parser / Template.tool_call_format or Coverage)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on 0.30.0 (4/4 cases: streaming keeps the model's string, non-streaming coerces to the schema type); entail on: no decision at the parser boundary"
+  },
+  {
+   "position": 19,
+   "issue": "vllm#48231",
+   "case": "vl48231",
+   "run": "vl48231",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Gemma4 Unified image requests produce all-NaN logits after BF16-to-FP16 fallback",
+   "version": "0.30.0",
+   "expected_boundary": "vLLM loader: the checkpoint's dtype (bf16) replaced by fp16 for the platform; the vision projection overflows fp16 before LayerNorm - the value's dtype/range at the encoder boundary (load:vllm.loader Quantized/dtype)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 3,
+    "pass": 8
+   },
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "missed",
+   "note": "reproduced on 0.30.0 with dtype=float16 forced (the fallback a 2080 Ti takes on its own): one token (1023, ' our') repeated to the length limit for the red-image request, while the bf16 control answers 'The image is a solid color ... deep red'; the report saw token 0 (all-NaN logits), here a constant token - the same degenerate form. Out of class (consensus K2). entail on: Coverage unknown (Gemma4 MoE keys) and a Layout cannot-check on the vision embedding projection; no broken/refused, nothing about the dtype at the vision projection"
+  },
+  {
+   "position": 40,
+   "issue": "sglang#38573",
+   "case": "sg38573",
+   "run": "sg38573",
+   "engine_version": "0.5.20",
+   "title": "[Bug] compressed-tensors W4AFP8 MoE: cutlass_w4a8_moe passes a literal chunk_size=128, so a group_si",
+   "version": "0.5.20",
+   "expected_boundary": "SGLang compressed-tensors W4AFP8 MoE: the checkpoint's quantization group (Layout.scale_granularity per_group, 64) against the kernel's chunk (128) - the tile-vs-block shape of KernelConfig, at a kernel entail 1.1.0 does not hook (load:sglang.fused_moe / KernelConfig)",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "not_reproduced",
+   "note": "the W4AFP8 compressed-tensors MoE scheme declares minimum capability 90 and the CUTLASS W4A8 grouped GEMM is Hopper-only; this card is sm89"
+  },
+  {
+   "position": 42,
+   "issue": "vllm#43728",
+   "case": "vl43728",
+   "run": "vl43728_0220",
+   "engine_version": "0.22.0",
+   "title": "[Bug] Inconsistent parameter names (`thinking` vs `enable_thinking`) between reasoning parsers and c",
+   "version": "0.30.0",
+   "expected_boundary": "vLLM request boundary: a chat_template_kwargs setting read by the template under one name and by the reasoning parser under another - the same declaration reaching one consumer and not the other (request:vllm.chat_template / request settings Coverage)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 1
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "not reproduced on 0.30.0 (the Kimi K2 parser there reads thinking and enable_thinking alike) and on 0.19.0 (the parser predates the kwargs); reproduced on the reported version 0.22.0 with the request's kwargs handed to the parser as the server does: {enable_thinking: false} -> content null, the answer under reasoning; {thinking: false} -> content = the answer; entail on: only a tokenizer Vocab pass, nothing at the request/parser boundary"
+  },
+  {
+   "position": 44,
+   "issue": "sglang#40835",
+   "case": "sg40835",
+   "run": "sg40835",
+   "engine_version": "0.5.20",
+   "title": "[Bug] LoRA adapters with use_rslora=True are served with the wrong scale",
+   "version": "0.5.20",
+   "expected_boundary": "SGLang LoRA loader: adapter_config.json declares use_rslora (a scaling rule) and the loader does not read it (load:sglang.lora / the LoRA's declared scale)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on 0.5.20 (PEFT scaling 16.0 vs SGLang 2.0 with use_rslora); entail on: only transformers-side pass decisions (ModelProps, Rotary), nothing at load:sglang.lora"
+  },
+  {
+   "position": 54,
+   "issue": "vllm#49412",
+   "case": "vl49412",
+   "run": "vl49412",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Streaming vs non-streaming content whitespace mismatch at tool-call boundaries (ParserEngine:",
+   "version": "0.30.0",
+   "expected_boundary": "vLLM parser engine: the same tool-associated content stripped on one path and not on the other (request:vllm.tool_parser)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on 0.30.0 (after/before/between cases: streaming keeps the boundary whitespace); entail on: no decision at the parser boundary"
+  },
+  {
+   "position": 64,
+   "issue": "transformers#46032",
+   "case": "tf46032",
+   "run": "tf46032",
+   "engine_version": "5.12.1",
+   "title": "Mamba2Mixer: use_cache with seq_len > 1 silently produces incorrect results (both CPU and GPU paths)",
+   "version": "5.12.1 (reported version unstated, 2026-05-18; fixed in 5.13.0)",
+   "expected_boundary": "transformers Mamba2Mixer.forward: the cached state (cache_params conv/ssm state, and its position: which tokens it already covers) handed to the mixer; the mixer assumes one token per call (request:transformers.mamba2 cache_params)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 1
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on 5.12.1 (chunk vs token-by-token max abs err 2.9); entail on: only ModelProps pass, nothing at the Mamba2 cache boundary"
+  },
+  {
+   "position": 67,
+   "issue": "transformers#46612",
+   "case": "tf46612",
+   "run": "tf46612",
+   "engine_version": "5.12.1",
+   "title": "Beam search cache reorder silently skipped for Mamba, XLNet, RWKV, and Reformer models (wrong genera",
+   "version": "5.12.1 (reported main at 2026-06-12; fixed in 5.13.0)",
+   "expected_boundary": "transformers generation _beam_search: the beam-to-cache-row correspondence (which beam each cache row stands for) after reordering, for the cache under cache_params (request:transformers.generate beam reorder)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 1,
+    "pass": 3
+   },
+   "rating_A": "K4",
+   "rating_B": "K1",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on 5.12.1 (beam search with cache differs from beam search without cache); entail on: 1 unknown, Coverage at load:transformers.config (Mamba keys), nothing at the beam reorder boundary"
+  },
+  {
+   "position": 76,
+   "issue": "vllm#48895",
+   "case": "vl48895",
+   "run": "vl48895",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: moe_wna16_marlin_gemm applies wrong per-row topk weights (mul_topk_weights=True) at gpt-oss N",
+   "version": "0.30.0 (reported 0.25.1; kernel source unchanged per the report)",
+   "expected_boundary": "vLLM Marlin MoE kernel epilogue: which row a topk_weights entry stands for (sorted-slot index vs output-row index) (kernel:vllm.moe_wna16_marlin_gemm topk_weights)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on 0.30.0 / sm89 with the report's script under 0.30.0's op signatures (mul_topk_weights=True: 119/128 rows off by more than 5%, maxrel 1.1; external multiply: 0/128, maxrel 4e-3); entail on: no record (a bare kernel call, no adapter fires)"
+  },
+  {
+   "position": 81,
+   "issue": "transformers#48293",
+   "case": "tf48293",
+   "run": "tf48293",
+   "engine_version": "5.17.0",
+   "title": "Wrong dim for torch.cumsum(token_priority) & Identical router_probs / router_logits Output",
+   "version": "5.17.0 (bug present; fixed after 5.17.0)",
+   "expected_boundary": "transformers SwitchTransformersTop1Router.forward: which quantity the third return value stands for (raw logits vs max probability) and which axis token_priority accumulates over (request:transformers.switch_transformers router)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 1,
+    "pass": 2
+   },
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "missed",
+   "note": "reproduced (third return = max probability, no token dropped at capacity 1 with 3 experts over capacity); entail on: 1 unknown, Coverage at load:transformers.config (router keys declared-unread), nothing at the router boundary"
+  },
+  {
+   "position": 92,
+   "issue": "vllm#39468",
+   "case": "vl39468",
+   "run": "vl39468",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: vllm 0.19.0, gemma4, The format of the tool call returned by vllm is incorrect.",
+   "version": "0.30.0 first (reported 0.19.0)",
+   "expected_boundary": "vLLM Gemma4 tool parser: the delimiter token <|\"|> read as content instead of as a string boundary (which characters are markup vs value) (request:vllm.tool_parser gemma4)",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "entail_decisions_on": {
+    "unknown": 1,
+    "pass": 1
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "not_reproduced",
+   "note": "the report's two call texts and the closed fix PR's own regression string parse cleanly (no delimiter fragment in the arguments) on 0.30.0 (vllm.parser.gemma4) and on the reported 0.19.0 (vllm.tool_parsers.gemma4_tool_parser, both the parser and _parse_gemma4_args directly); the leak shown in the report is not produced at the parser level here (the model, gemma-4-31B-it on 4 GPUs, is out of reach)"
+  },
+  {
+   "position": 102,
+   "issue": "transformers#46710",
+   "case": "tf46710",
+   "run": "tf46710",
+   "engine_version": "5.12.1",
+   "title": "Accuracy regression in DeepSeek-R1-Distill-Llama-8B after upgrading Transformers from 4.55 to 5.9",
+   "version": "5.12.1 (reported 5.9.0; fixed after 5.12.1)",
+   "expected_boundary": "transformers AutoTokenizer.from_pretrained: which tokenizer class the checkpoint's tokenizer_class declaration stands for; a substitute class with different byte-level decoding was taken (request:transformers.tokenizer class)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on 5.12.1 (AutoTokenizer gives LlamaTokenizer, prompt ids differ from tokenizer.json, decode differs); entail on: Vocab PASS at load:transformers.tokenizer while the class was substituted - a pass at the boundary"
+  },
+  {
+   "position": 105,
+   "issue": "diffusers#13411",
+   "case": "df13411",
+   "run": "df13411",
+   "engine_version": "0.40.0",
+   "title": "`LTXEulerAncestralRFScheduler.set_timesteps(sigmas=...)` does not validate monotonicity, causing sil",
+   "version": "0.40.0 (not_planned; behaviour unchanged)",
+   "expected_boundary": "diffusers LTXEulerAncestralRFScheduler.set_timesteps(sigmas=...): the required ordering (valid range) of a caller-supplied schedule handed to step() (request:diffusers.scheduler sigmas)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K6",
+   "rating_B": "K4",
+   "rating_C": "K6",
+   "consensus": "K6",
+   "verdict": "missed",
+   "note": "reproduced on the sign criterion (cosine(output, sample) = -0.17 on the non-monotone schedule, positive on the valid control; the report's 1.45x norm ratio does not hold, ratio 0.875); entail on: no decision at the scheduler boundary"
+  },
+  {
+   "position": 115,
+   "issue": "sglang#21843",
+   "case": "sg21843",
+   "run": "sg21843",
+   "engine_version": "0.5.20",
+   "title": "[Bug] Qwen3 GDN produces wrong results when num_v_heads == num_k_heads (ratio=1)",
+   "version": "0.5.20 first (reported around 0.5.9; fixed before 2026-06-01)",
+   "expected_boundary": "SGLang Qwen3GatedDeltaNet fix_query_key_value_ordering -> fused_gdn_gating: the memory layout (strides) of a and b assumed contiguous by the kernel (kernel:sglang.fused_gdn_gating a/b layout)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on 0.5.20 (non-contiguous a/b: g differs by 4.7, beta by 0.78 from the contiguous call; the contiguous call matches the formula); entail on: no record at all - no adapter fires for a bare kernel call"
+  },
+  {
+   "position": 125,
+   "issue": "vllm#42016",
+   "case": "vl42016",
+   "run": "vl42016_0220",
+   "engine_version": "0.22.0",
+   "title": "[Bug]: vLLM producing incorrect output for GLM-OCR",
+   "version": "0.30.0 first (reported on main 2026-05-08; fix PR open)",
+   "expected_boundary": "vLLM _triton_mrope_forward: the rotation pairing declared by the model (is_neox_style=False, GPT-J interleaved pairs) not received by the kernel, which pairs (i, i+rd/2) (kernel:vllm.mrope is_neox_style)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 14,
+    "pass": 6
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "not reproduced on 0.30.0 (the Triton mrope kernel has an is_neox_style branch since #49906, 2026-07-28; both inputs match the HF reference for 22 and 30 tokens); reproduced on 0.22.0, the release before the fix, with the native GlmOcrForConditionalGeneration and vLLM's two test images: vLLM answers 'STOP' where the HF reference gives the full description (matched tokens 0, the report's own H100 output was 'STOP'); the rendered-text input differs only by a newline. entail on: 14 unknown (cannot-check without a local folder; Coverage keys), nothing about the rotation pairing at the kernel"
+  }
+ ]
+}

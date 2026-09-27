@@ -1,0 +1,256 @@
+{
+ "name": "vllm.w8a8_block_mm",
+ "about": "w8a8_triton_block_scaled_mm (vLLM 0.30.0); vllm#52576's operator",
+ "tol": 0.001,
+ "forms": [
+  {},
+  {
+   "block_k": 16
+  },
+  {
+   "block_k": 32
+  },
+  {
+   "block_k": 64
+  },
+  {
+   "block_k": 128
+  },
+  {
+   "block_k": 256
+  },
+  {
+   "block_k": 512
+  }
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 0.0001344870302992889
+  },
+  "forms": {
+   "status": "fail",
+   "rows": [
+    {
+     "form": {},
+     "status": "pass",
+     "rel": 0.0001344870302992889
+    },
+    {
+     "form": {
+      "block_k": 16
+     },
+     "status": "refused",
+     "error": "CompilationError: at 67:23:\n\n    accumulator = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)\n    for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):\n        a = tl.load(a_ptrs, mask=offs_k[None, :] < K - k * BLOCK_SIZE_K, other=0.0)\n        b = tl.load(b_ptrs, mask=offs_k[:, None] < K - k * BLOC"
+    },
+    {
+     "form": {
+      "block_k": 32
+     },
+     "status": "pass",
+     "rel": 5.216064088766496e-05
+    },
+    {
+     "form": {
+      "block_k": 64
+     },
+     "status": "pass",
+     "rel": 8.352440033094916e-05
+    },
+    {
+     "form": {
+      "block_k": 128
+     },
+     "status": "pass",
+     "rel": 0.0001344870302992889
+    },
+    {
+     "form": {
+      "block_k": 256
+     },
+     "status": "fail",
+     "rel": 0.5922500867381973
+    },
+    {
+     "form": {
+      "block_k": 512
+     },
+     "status": "refused",
+     "error": "OutOfResources: out of resource: shared memory, Required: 131072, Hardware limit: 101376. Reducing block sizes or `num_stages` may help."
+    }
+   ]
+  },
+  "layout": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "A",
+     "status": "refused",
+     "error": "AssertionError: "
+    },
+    {
+     "input": "B",
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "input": "As",
+     "status": "pass",
+     "rel": 0.0
+    },
+    {
+     "input": "Bs",
+     "status": "pass",
+     "rel": 0.0
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "A",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.3534511297697204,
+     "op_moved": 0.35344931056563506
+    },
+    {
+     "input": "A",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.3526041624336218,
+     "op_moved": 0.35260509643999727
+    },
+    {
+     "input": "B",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.3535702151763233,
+     "op_moved": 0.35356936625352264
+    },
+    {
+     "input": "B",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.35344164046721804,
+     "op_moved": 0.35344372053209155
+    },
+    {
+     "input": "As",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.3568547764490231,
+     "op_moved": 0.35685450047625933
+    },
+    {
+     "input": "As",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.353723738879129,
+     "op_moved": 0.3537238438665478
+    },
+    {
+     "input": "Bs",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.35685477666327703,
+     "op_moved": 0.35685450080344044
+    },
+    {
+     "input": "Bs",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.35372373641047067,
+     "op_moved": 0.35372384086302233
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "As",
+    "Bs"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.00013448714893804641
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0001344865656274539
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.00013448556678412652
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.0001344853170281459
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 0.00013448585187238017
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "As",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "As",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "Bs",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "Bs",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "As",
+     "status": "pass",
+     "op_nonfinite": 0.015625,
+     "definition_nonfinite": 0.015625
+    },
+    {
+     "input": "Bs",
+     "status": "pass",
+     "op_nonfinite": 0.5,
+     "definition_nonfinite": 0.5
+    }
+   ]
+  }
+ },
+ "seconds": 0.1
+}

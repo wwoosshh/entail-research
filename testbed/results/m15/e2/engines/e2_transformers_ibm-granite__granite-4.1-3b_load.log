@@ -1,0 +1,19 @@
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=30, taken=30, left=()) (config: GraniteConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=30, taken=29, left=('rope_scaling',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=31, taken=31, left=()) (config: GraniteConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=31, taken=30, left=('rope_scaling',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+W0926 00:07:27.299000 24502 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 00:07:27.322000 24502 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/362 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 25/362 [00:00<00:01, 199.91it/s]
+Loading weights:  12%|█▏        | 45/362 [00:00<00:01, 171.55it/s]
+Loading weights:  18%|█▊        | 65/362 [00:00<00:01, 180.72it/s]
+Loading weights:  24%|██▍       | 86/362 [00:00<00:01, 185.46it/s]
+Loading weights:  29%|██▉       | 106/362 [00:00<00:01, 183.95it/s]
+Loading weights:  35%|███▌      | 127/362 [00:00<00:01, 186.19it/s]
+Loading weights:  40%|████      | 146/362 [00:00<00:01, 176.58it/s]
+Loading weights:  46%|████▌     | 166/362 [00:00<00:01, 180.64it/s]
+Loading weights:  51%|█████     | 185/362 [00:01<00:01, 166.70it/s]
+Loading weights:  56%|█████▌    | 202/362 [00:01<00:01, 136.54it/s]
+Loading weights:  60%|█████▉    | 217/362 [00:01<00:01, 132.51it/s]
+Loading weights: 100%|██████████| 362/362 [00:01<00:00, 254.09it/s]
+RESULT transformers ibm-granite__granite-4.1-3b entail=load ok=True load=4.357 used=sdpa 

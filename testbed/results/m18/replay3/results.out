@@ -1,0 +1,78 @@
+{
+ "passes": 10,
+ "reproduced": 8,
+ "verdicts": {
+  "missed": 7,
+  "not_reproduced": 2,
+  "unknown_only": 1
+ },
+ "detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1": 5,
+  "rate": 0.0,
+  "per_rater": {
+   "rating_A": {
+    "denominator": 5,
+    "detected": 0
+   },
+   "rating_B": {
+    "denominator": 4,
+    "detected": 0
+   }
+  }
+ },
+ "low_level_detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1_level_D": 2
+ },
+ "located_outside_class": {
+  "cases": [],
+  "reproduced_K2_to_K5": 2
+ },
+ "caught_at_expected_boundary_all_reproduced": {
+  "numerator": 0,
+  "denominator": 8
+ },
+ "false_alarms": {
+  "cases_with_false": [],
+  "broken_or_refused_in_non_K1_reproduced": 0
+ },
+ "class_share_among_rated": {
+  "rated": 96,
+  "consensus_counts": {
+   "K1": 36,
+   "K7": 38,
+   "K4": 9,
+   "K3": 3,
+   "K2": 6,
+   "K6": 2,
+   "split": 1,
+   "K5": 1
+  },
+  "K1_share": 0.375,
+  "A_K1_share": 0.3854166666666667,
+  "B_K1_share": 0.34375
+ },
+ "kappa_7": {
+  "n": 96,
+  "observed": 0.8125,
+  "expected": 0.2936197916666667,
+  "kappa": 0.7345622119815668
+ },
+ "kappa_k1_vs_rest": {
+  "n": 96,
+  "observed": 0.8958333333333334,
+  "expected": 0.5358072916666666,
+  "kappa": 0.7755960729312764
+ }
+}
+vllm#58406             vl58406    repro=True  K=K1    L=I     missed         on={}
+vllm#43962             vl43962    repro=False K=K7    L=D     not_reproduced on={'pass': 40}
+diffusers#14213        df14213    repro=True  K=K2    L=D     missed         on={}
+vllm#43602             vl43602    repro=True  K=split L=D     missed         on={'pass': 39, 'unknown': 26}
+vllm#57353             vl57353    repro=True  K=K1    L=I     unknown_only   on={'pass': 3, 'unknown': 1}
+transformers#48051     tf48051    repro=True  K=K4    L=D     missed         on={}
+transformers#47328     tf47328    repro=True  K=K1    L=D     missed         on={}
+transformers#45491     tf45491    repro=None  K=K2    L=D     not_reproduced on={}
+transformers#49066     tf49066    repro=True  K=K1    L=I     missed         on={'unknown': 1, 'pass': 2}
+vllm#49250             vl49250    repro=True  K=K1    L=D     missed         on={'unknown': 3, 'pass': 50}

@@ -1,0 +1,34 @@
+
+Multi-thread loading shards:   0% Completed | 0/2 [00:00<?, ?it/s]
+Multi-thread loading shards:  50% Completed | 1/2 [00:00<00:00,  1.24it/s]
+Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.32it/s]
+Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.31it/s]
+[entail] unknown at load:sglang.linear: Layout declared Layout(kind='fp8_block', dtype='float8_e4m3fn', block=(128, 128), packing=None, scale_format='bf16', orientation=None, scale_granularity=None) (config: /home/<user>/models/m10/Qwen__Qwen3-8B-FP8/config.json#quantization_config, verified); sglang.linear.unknown uses unknown (engine: sglang.linear.unknown [not in the capability table], unknown); rule: what the consumer uses is unknown (not read, or not in the capability table); the data shows Layout(kind='fp8_block', dtype=None, block=None, packing=None, scale_format='bf16', orientation=None, scale_granularity=None) (data: /home/<user>/models/m10/Qwen__Qwen3-8B-FP8: 252 scale tensors, all BF16, verified)
+[2026-09-27 00:05:25] Scheduler hit an exception: Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5841, in run_scheduler_process
+    scheduler = Scheduler(
+                ^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 576, in __init__
+    self.init_model_worker()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1107, in init_model_worker
+    self.init_memory_pools()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1073, in init_memory_pools
+    self.init_target_memory_pool()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1069, in init_target_memory_pool
+    self.tp_worker.alloc_memory_pool()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/tp_worker.py", line 420, in alloc_memory_pool
+    self.model_runner.alloc_memory_pool(memory_pool_config)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/model_executor/model_runner.py", line 898, in alloc_memory_pool
+    result = self.kv_cache_configurator.configure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/mem_cache/kv_cache_configurator.py", line 330, in configure
+    config = self._resolve_memory_pool_config(pre_model_load_memory)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/mem_cache/kv_cache_configurator.py", line 2326, in _resolve_memory_pool_config
+    available_bytes = self._profile_available_bytes(pre_model_load_memory)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/mem_cache/kv_cache_configurator.py", line 2191, in _profile_available_bytes
+    raise ValueError(
+ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.8. Raise --mem-fraction-static above 0.822 (minimum viable = 1 - available/pre = 0.8213). If using speculative decoding, draft weights are now counted.
+
+[2026-09-27 00:05:25] Received sigquit from a child process. It usually means the child failed.

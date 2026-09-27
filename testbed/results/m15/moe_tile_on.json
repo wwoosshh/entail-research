@@ -1,0 +1,23 @@
+{
+ "entail": "load",
+ "shape": "M=64,K=256,N=128,E=4,top_k=2,block=128",
+ "expected_right": 512.0,
+ "expected_wrong": 256.0,
+ "tile_128": {
+  "tile_k_asked": 128,
+  "tile_k_used": 128,
+  "values": [
+   512.0
+  ],
+  "correct": true
+ },
+ "tile_256": {
+  "tile_k_asked": 256,
+  "tile_k_used": 128,
+  "values": [
+   512.0
+  ],
+  "correct": true
+ },
+ "reproduced": false
+}

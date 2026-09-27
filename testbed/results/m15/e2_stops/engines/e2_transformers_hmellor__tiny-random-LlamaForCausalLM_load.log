@@ -1,0 +1,9 @@
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got -1. This may result in unexpected behavior.
+W0926 03:03:43.788000 31420 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 03:03:43.814000 31420 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] The following generation flags are not valid and may be ignored: ['pad_token_id']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+
+Loading weights:   0%|          | 0/21 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 21/21 [00:00<00:00, 8215.69it/s]
+[entail] unknown at load:transformers.generation_config: Stops nothing declared; what transformers.generate uses is unknown; rule: this boundary could not be checked; note: entail failed here: ValueError: Stops: at least one of eos, bos or pad is required
+RESULT transformers hmellor__tiny-random-LlamaForCausalLM entail=load ok=True load=0.523 used=sdpa 

@@ -1,0 +1,807 @@
+{
+ "model": "/home/<user>/models/m10/microsoft__Phi-4-mini-instruct",
+ "margin": 1.0,
+ "pdrift": 0.1,
+ "load_s": {
+  "base": 17.97,
+  "graph": null,
+  "chunk": 15.76,
+  "spec": 82.26,
+  "native": 14.32,
+  "triton_attn": 14.78
+ },
+ "failed_modes": [
+  "graph"
+ ],
+ "comparisons": {
+  "batched_vs_alone": {
+   "verdict": {
+    "differs": true,
+    "probe": "story_a",
+    "why": [
+     "a kept generated token's probability moved by 0.120"
+    ]
+   },
+   "gen_flip_margin": 0.25,
+   "prompt_flip_margin": 0.25,
+   "gen_pdrift": 0.11974510098432722,
+   "prompt_pdrift": 0.11003892681364069,
+   "gen_drift": 0.2980837821960449,
+   "prompt_drift": 0.5359592437744141,
+   "first_diff": {
+    "story_a": 21,
+    "story_b": 16,
+    "code": 13,
+    "numbers": 3,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 21,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.2980837821960449,
+      "pdrift": 0.11974510098432722,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 205
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 16,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.22771883010864258,
+      "pdrift": 0.09627731601964412,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 4,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 18,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 23,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 102,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 119,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 125,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 184,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 189,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.37007665634155273,
+      "pdrift": 0.11003892681364069,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": 13,
+      "base_margin_at_diff": 0.25,
+      "drift": 0.01296134665608406,
+      "pdrift": 0.012157847580047898,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 1,
+        "base_margin": 0.125
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.5359592437744141,
+      "pdrift": 0.0636487763308704,
+      "positions": 96
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 3,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.14623212814331055,
+      "pdrift": 0.03146941610172638,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 2,
+        "base_margin": 0.125
+       },
+       {
+        "pos": 5,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.125,
+      "drift": 0.4742274284362793,
+      "pdrift": 0.05240279860665402,
+      "positions": 56
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.012686699628829956,
+      "pdrift": 0.01069385199813222,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 4,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.18007230758666992,
+      "pdrift": 0.04420747250726556,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.11278325319290161,
+      "pdrift": 0.06222448329673047,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.09025859832763672,
+      "pdrift": 0.020825930378961854,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "cache_partial_vs_cold": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.06194177535595058,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.13418889045715332,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_b": 12
+   },
+   "detail": {
+    "story_b": {
+     "generated": {
+      "first_diff": 12,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.13418889045715332,
+      "pdrift": 0.06194177535595058,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "cache_full_vs_cold": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.06194177535595058,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.13418889045715332,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_b": 12
+   },
+   "detail": {
+    "story_b": {
+     "generated": {
+      "first_diff": 12,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.13418889045715332,
+      "pdrift": 0.06194177535595058,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "graph_vs_base": {
+   "verdict": "mode failed to run"
+  },
+  "chunk_vs_base": {
+   "verdict": {
+    "differs": true,
+    "probe": "story_a",
+    "why": [
+     "a kept generated token's probability moved by 0.115",
+     "a prompt token's probability moved by 0.116"
+    ]
+   },
+   "gen_flip_margin": 0.25,
+   "prompt_flip_margin": 0.5,
+   "gen_pdrift": 0.11464486381998523,
+   "prompt_pdrift": 0.11634764692339039,
+   "gen_drift": 0.34263181686401367,
+   "prompt_drift": 0.45154380798339844,
+   "first_diff": {
+    "story_a": 22,
+    "story_b": 23,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 22,
+      "base_margin_at_diff": 0.25,
+      "drift": 0.34263181686401367,
+      "pdrift": 0.11464486381998523,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 13,
+        "base_margin": 0.5
+       },
+       {
+        "pos": 18,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 23,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 119,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 125,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 184,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.5,
+      "drift": 0.4013606309890747,
+      "pdrift": 0.11634764692339039,
+      "positions": 205
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 23,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.06137347221374512,
+      "pdrift": 0.03737860756284561,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 13,
+        "base_margin": 0.5
+       },
+       {
+        "pos": 18,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 23,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 119,
+        "base_margin": 0.25
+       },
+       {
+        "pos": 125,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 184,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 189,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.5,
+      "drift": 0.37957966327667236,
+      "pdrift": 0.11634764692339039,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.03198634088039398,
+      "pdrift": 0.026275090871788476,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.45154380798339844,
+      "pdrift": 0.03702702589389861,
+      "positions": 96
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 56
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "spec_vs_base": {
+   "verdict": {
+    "differs": true,
+    "probe": "story_a",
+    "why": [
+     "a kept generated token's probability moved by 0.132"
+    ]
+   },
+   "gen_flip_margin": 0.25,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.1322569368516513,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.30218714475631714,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": 22,
+    "story_b": null,
+    "code": null,
+    "numbers": 3,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 22,
+      "base_margin_at_diff": 0.25,
+      "drift": 0.30218714475631714,
+      "pdrift": 0.1322569368516513,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.16142964363098145,
+      "pdrift": 0.05679728697293707,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.1171342134475708,
+      "pdrift": 0.025785495683298437,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 3,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.07815241813659668,
+      "pdrift": 0.003585989014959254,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.006616247817873955,
+      "pdrift": 0.006433936211527547,
+      "steps": 24
+     },
+     "prompt": null
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.15268564224243164,
+      "pdrift": 0.058763358884868,
+      "steps": 24
+     },
+     "prompt": null
+    }
+   }
+  },
+  "native_vs_base": {
+   "verdict": {
+    "differs": false,
+    "probe": null,
+    "why": null
+   },
+   "gen_flip_margin": 0.0,
+   "prompt_flip_margin": 0.0,
+   "gen_pdrift": 0.0,
+   "prompt_pdrift": 0.0,
+   "gen_drift": 0.0,
+   "prompt_drift": 0.0,
+   "first_diff": {
+    "story_a": null,
+    "story_b": null,
+    "code": null,
+    "numbers": null,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 205
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 96
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 56
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  },
+  "triton_attn_vs_base": {
+   "verdict": {
+    "differs": true,
+    "probe": "story_a",
+    "why": [
+     "a prompt token's probability moved by 0.118"
+    ]
+   },
+   "gen_flip_margin": 0.5,
+   "prompt_flip_margin": 0.5,
+   "gen_pdrift": 0.11271141317799621,
+   "prompt_pdrift": 0.11835458065362875,
+   "gen_drift": 0.27235257625579834,
+   "prompt_drift": 0.43619728088378906,
+   "first_diff": {
+    "story_a": 2,
+    "story_b": 12,
+    "code": 13,
+    "numbers": 3,
+    "repeat": null,
+    "short": null
+   },
+   "detail": {
+    "story_a": {
+     "generated": {
+      "first_diff": 2,
+      "base_margin_at_diff": 0.5,
+      "drift": 0.054763197898864746,
+      "pdrift": 0.02939754635612568,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 13,
+        "base_margin": 0.5
+       },
+       {
+        "pos": 18,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 33,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 83,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 184,
+        "base_margin": 0.0
+       }
+      ],
+      "max_flip_margin": 0.5,
+      "drift": 0.43619728088378906,
+      "pdrift": 0.11835458065362875,
+      "positions": 205
+     }
+    },
+    "story_b": {
+     "generated": {
+      "first_diff": 12,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.27235257625579834,
+      "pdrift": 0.11271141317799621,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 13,
+        "base_margin": 0.5
+       },
+       {
+        "pos": 18,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 33,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 83,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 184,
+        "base_margin": 0.0
+       },
+       {
+        "pos": 189,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.5,
+      "drift": 0.43619728088378906,
+      "pdrift": 0.11835458065362875,
+      "positions": 203
+     }
+    },
+    "code": {
+     "generated": {
+      "first_diff": 13,
+      "base_margin_at_diff": 0.25,
+      "drift": 0.0032384423539042473,
+      "pdrift": 0.0031899525018147523,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.2260723114013672,
+      "pdrift": 0.03763765519897999,
+      "positions": 96
+     }
+    },
+    "numbers": {
+     "generated": {
+      "first_diff": 3,
+      "base_margin_at_diff": 0.0,
+      "drift": 0.13382577896118164,
+      "pdrift": 0.023503318064988954,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 11,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.2064990997314453,
+      "pdrift": 0.045090743224298735,
+      "positions": 56
+     }
+    },
+    "repeat": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.037369370460510254,
+      "pdrift": 0.02626636803161364,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [
+       {
+        "pos": 4,
+        "base_margin": 0.25
+       }
+      ],
+      "max_flip_margin": 0.25,
+      "drift": 0.19727706909179688,
+      "pdrift": 0.04478725057074681,
+      "positions": 52
+     }
+    },
+    "short": {
+     "generated": {
+      "first_diff": null,
+      "base_margin_at_diff": null,
+      "drift": 0.14479732513427734,
+      "pdrift": 0.06010184185866707,
+      "steps": 24
+     },
+     "prompt": {
+      "flips": [],
+      "max_flip_margin": 0.0,
+      "drift": 0.0,
+      "pdrift": 0.0,
+      "positions": 4
+     }
+    }
+   }
+  }
+ }
+}

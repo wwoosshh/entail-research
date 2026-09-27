@@ -1,0 +1,16 @@
+{
+ "https://github.com/huggingface/transformers/issues/48310": {"decision": "not_output", "reason": "borderline: a naming inconsistency (past_key_values vs past_key_value) inside AfMoE's modular file - the shape of a cache handed under a name nothing reads - but the report lists code lines and no model output"},
+ "https://github.com/vllm-project/vllm/issues/53717": {"decision": "cannot_run", "reason": "output error (newline loop) but MedGemma 27B"},
+ "https://github.com/huggingface/diffusers/issues/14012": {"decision": "not_output", "reason": "AttributeError resolving hub flash-attn kernel names; a crash"},
+ "https://github.com/vllm-project/vllm/issues/50046": {"decision": "not_output", "reason": "crash at warmup (torch.compile stride mismatch) for GDN attention"},
+ "https://github.com/vllm-project/vllm/issues/40513": {"decision": "not_output", "reason": "automated CI-failure ticket (AMD nightly)"},
+ "https://github.com/huggingface/transformers/issues/46655": {"decision": "not_output", "reason": "error from a padding calculation in SmolVLM's video processor; a crash, not a wrong output"},
+ "https://github.com/vllm-project/vllm/issues/38520": {"decision": "not_output", "reason": "LoRA loading fails with a ValueError (expert module names); a load failure"},
+ "https://github.com/vllm-project/vllm/issues/45691": {"decision": "cannot_run", "reason": "MergedColumnParallelLinearWithLoRA under tensor parallelism (an all_gather in apply); needs TP > 1"},
+ "https://github.com/vllm-project/vllm/issues/46261": {"decision": "cannot_run", "reason": "ROCm gfx950 MXFP4 MoE test accuracy"},
+ "https://github.com/sgl-project/sglang/issues/37579": {"decision": "not_output", "reason": "HTTP 500 (placeholder count exceeds the image data) when a literal placeholder string sits in message text; an error, not a wrong output"},
+ "https://github.com/vllm-project/vllm/issues/48324": {"decision": "cannot_run", "reason": "output error (corrupted) but a fused allreduce + RMSNorm + quant path: tensor parallel across GPUs"},
+ "https://github.com/vllm-project/vllm/issues/52276": {"decision": "cannot_run", "reason": "corrupted reasoning after a NIXL failure in DeepSeek-V4 PD disaggregation at TP8"},
+ "https://github.com/vllm-project/vllm/issues/38754": {"decision": "cannot_run", "reason": "NaNs from the router GEMM on gpt-oss-120b on 1x B200 (and the script cannot be shared)"},
+ "https://github.com/sgl-project/sglang/issues/30760": {"decision": "not_output", "reason": "deadlock (all_reduce call-count mismatch) in HiCache prefetch at TP=4"}
+}

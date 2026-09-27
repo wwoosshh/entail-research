@@ -1,0 +1,17 @@
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=24, taken=24, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=24, taken=23, left=('rope_scaling',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=25, taken=25, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=25, taken=24, left=('rope_scaling',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class; compared where a consumer of the fact reads it: rope_scaling (Rotary.scaling); read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+W0926 00:04:22.015000 21561 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 00:04:22.044000 21561 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:  12%|█▏        | 25/201 [00:00<00:00, 241.04it/s]
+Loading weights:  25%|██▍       | 50/201 [00:00<00:00, 227.23it/s]
+Loading weights:  36%|███▋      | 73/201 [00:00<00:00, 197.78it/s]
+Loading weights:  47%|████▋     | 94/201 [00:00<00:00, 199.09it/s]
+Loading weights:  57%|█████▋    | 115/201 [00:00<00:00, 177.37it/s]
+Loading weights:  67%|██████▋   | 134/201 [00:00<00:00, 176.72it/s]
+Loading weights: 100%|██████████| 201/201 [00:00<00:00, 267.48it/s]
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=2048) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=2048) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=2048) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+RESULT transformers TinyLlama__TinyLlama-1.1B-Chat-v1.0 entail=load ok=True load=2.006 used=sdpa 

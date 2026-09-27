@@ -1,0 +1,52 @@
+INFO 09-27 23:08:24 [__init__.py:216] Automatically detected platform cuda.
+INFO 09-27 23:08:26 [utils.py:233] non-default args: {'seed': 0, 'max_model_len': 1024, 'enable_prefix_caching': True, 'gpu_memory_utilization': 0.85, 'max_num_seqs': 16, 'disable_log_stats': True, 'enforce_eager': True, 'model': '/home/<user>/models/m10/Qwen__Qwen3-4B-Instruct-2507'}
+INFO 09-27 23:08:34 [model.py:547] Resolved architecture: Qwen3ForCausalLM
+`torch_dtype` is deprecated! Use `dtype` instead!
+INFO 09-27 23:08:34 [model.py:1510] Using max model len 1024
+INFO 09-27 23:08:34 [scheduler.py:205] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 09-27 23:08:34 [__init__.py:381] Cudagraph is disabled under eager mode
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:34 [core.py:644] Waiting for init message from front-end.
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:34 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='/home/<user>/models/m10/Qwen__Qwen3-4B-Instruct-2507', speculative_config=None, tokenizer='/home/<user>/models/m10/Qwen__Qwen3-4B-Instruct-2507', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=1024, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=/home/<user>/models/m10/Qwen__Qwen3-4B-Instruct-2507, enable_prefix_caching=True, chunked_prefill_enabled=True, pooler_config=None, compilation_config={"level":0,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":null,"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":0,"use_cudagraph":true,"cudagraph_num_of_warmups":0,"cudagraph_capture_sizes":[],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":0,"local_cache_dir":null}
+[1;36m(EngineCore_DP0 pid=12299)[0;0m WARNING 09-27 23:08:35 [interface.py:381] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:35 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=12299)[0;0m WARNING 09-27 23:08:36 [topk_topp_sampler.py:66] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:36 [gpu_model_runner.py:2602] Starting to load model /home/<user>/models/m10/Qwen__Qwen3-4B-Instruct-2507...
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:36 [gpu_model_runner.py:2634] Loading model from scratch...
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:36 [cuda.py:366] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_DP0 pid=12299)[0;0m 
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+[1;36m(EngineCore_DP0 pid=12299)[0;0m 
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:09<00:18,  9.08s/it]
+[1;36m(EngineCore_DP0 pid=12299)[0;0m 
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:09<00:03,  3.88s/it]
+[1;36m(EngineCore_DP0 pid=12299)[0;0m 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:14<00:00,  4.61s/it]
+[1;36m(EngineCore_DP0 pid=12299)[0;0m 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:14<00:00,  4.93s/it]
+[1;36m(EngineCore_DP0 pid=12299)[0;0m 
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:51 [default_loader.py:267] Loading weights took 14.83 seconds
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:51 [gpu_model_runner.py:2653] Model loading took 7.6065 GiB and 15.169120 seconds
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:53 [gpu_worker.py:298] Available KV cache memory: 1.95 GiB
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:53 [kv_cache_utils.py:1087] GPU KV cache size: 14,208 tokens
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:53 [kv_cache_utils.py:1091] Maximum concurrency for 1,024 tokens per request: 13.88x
+[1;36m(EngineCore_DP0 pid=12299)[0;0m WARNING 09-27 23:08:53 [cudagraph_dispatcher.py:106] cudagraph dispatching keys are not initialized. No cudagraph will be used.
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:53 [core.py:210] init engine (profile, create kv cache, warmup model) took 2.03 seconds
+[1;36m(EngineCore_DP0 pid=12299)[0;0m INFO 09-27 23:08:54 [__init__.py:381] Cudagraph is disabled under eager mode
+INFO 09-27 23:08:54 [llm.py:306] Supported_tasks: ['generate']
+Traceback (most recent call last):
+  File "<workspace>/lowlevel/l5/frozen_l2/vllm_worker.py", line 159, in <module>
+    main()
+  File "<workspace>/lowlevel/l5/frozen_l2/vllm_worker.py", line 92, in main
+    res["plans"]["alone"] = {p["id"]: record(llm.generate([p["text"]], sp(plp, True), use_tqdm=False)[0])
+                                                                       ^^^^^^^^^^^^^
+  File "<workspace>/lowlevel/l5/frozen_l2/vllm_worker.py", line 84, in sp
+    return SamplingParams(temperature=0.0, max_tokens=n, ignore_eos=True, logprobs=5,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Unexpected keyword argument 'skip_reading_prefix_cache'
+ERROR 09-27 23:08:54 [core_client.py:564] Engine core proc EngineCore_DP0 died unexpectedly, shutting down client.

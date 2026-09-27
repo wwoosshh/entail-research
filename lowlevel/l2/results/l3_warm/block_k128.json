@@ -1,0 +1,43 @@
+{
+ "case": "block_k128",
+ "target": "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm",
+ "wrapped": true,
+ "first_call_ms": 558.5895250000021,
+ "rel_err": {
+  "first": [
+   0.0026479344590336833
+  ],
+  "later": [
+   0.0026479344590336833
+  ],
+  "kernel": [
+   0.0026479344590336833
+  ]
+ },
+ "later_equals_kernel": true,
+ "ms": {
+  "kernel": 0.12473000001023138,
+  "wrapped_after_decision": 0.1368784999726813
+ },
+ "decisions": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "note": "w8a8_triton_block_scaled_mm (vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm) on 64 of 256 rows of its first real call, against entail's definition (the product of the block-dequantized FP8 operands): max |kernel - definition| 0.0625 over 32768 values; the definition's own noise 0.0625 (typical 0.0156); scale 14.2; 0 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 0.158; worst value at output 0 index 28516: kernel 0.007874, definition 0.002792, reference 0.009399, allowed 0.125"
+  }
+ ],
+ "stats": {
+  "instrumented": 1,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ }
+}

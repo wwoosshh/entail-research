@@ -1,0 +1,187 @@
+{
+ "vllm": "0.30.0",
+ "entail": "1.2.0",
+ "rows": [
+  {
+   "case": "vl49316 kimi_k2 set_count",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the parser's streamed message differs from its parse of the same complete text",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 15 tokens (6 deltas): tool call 0 (set_count): arguments differ as values: streamed '{\"count\": \"3\"}', whole '{\"count\": 3}'"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "vl49316 kimi_k2 set_flag",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the parser's streamed message differs from its parse of the same complete text",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 15 tokens (6 deltas): tool call 0 (set_flag): arguments differ as values: streamed '{\"flag\": \"true\"}', whole '{\"flag\": true}'"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "vl49316 kimi_k2 set_ratio",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the parser's streamed message differs from its parse of the same complete text",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 17 tokens (8 deltas): tool call 0 (set_ratio): arguments differ as values: streamed '{\"ratio\": \"1.5\"}', whole '{\"ratio\": 1.5}'"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "vl49316 kimi_k2 set_id",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the parser's streamed message differs from its parse of the same complete text",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 16 tokens (6 deltas): tool call 0 (set_id): arguments differ as values: streamed '{\"id\": 42}', whole '{\"id\": \"42\"}'"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "healthy kimi_k2 typed call",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  },
+  {
+   "case": "healthy kimi_k2 plain answer",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  },
+  {
+   "case": "vl49412 qwen3 after_tool",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the parser's streamed message differs from its parse of the same complete text",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 22 tokens (6 deltas): content differs from character 0: streamed ' done.', whole '' (6 against 0 characters)"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "vl49412 qwen3 before_tool",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "pass",
+     "rule": "the consumer uses the declared value",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 23 tokens (7 deltas): the streamed message and the whole-text message agree; content differs in surrounding whitespace only: streamed 'Sure! ', whole 'Sure!'"
+    }
+   ],
+   "verdicts": [
+    "pass"
+   ],
+   "error": null
+  },
+  {
+   "case": "vl49412 qwen3 between_parallel",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "the parser's streamed message differs from its parse of the same complete text",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser on a streamed response of 42 tokens (10 deltas): content differs from character 0: streamed ' mid ', whole '' (5 against 0 characters)"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "healthy qwen3 one call",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  },
+  {
+   "case": "healthy qwen3 plain answer",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  },
+  {
+   "case": "healthy qwen3 two calls",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  },
+  {
+   "case": "vl47986 deepseek_v4 whole text",
+   "expected": "broken",
+   "decisions": [
+    {
+     "verdict": "broken",
+     "rule": "a tool call carries arguments the declared tool's parameters do not have, or names a tool the request did not declare",
+     "consumer": "vllm.parser._Parser",
+     "note": "_Parser's tool calls (whole text): tool call 1 (tool_b) lacks its required ['arguments'] (it carries ['city']); tool call 1 (tool_b) carries ['city'], which its declared parameters (arguments) do not have and the tool forbids (the model's text carries it: the model's call does not fit the declared tool, or the parser reshaped it)"
+    }
+   ],
+   "verdicts": [
+    "broken"
+   ],
+   "error": null
+  },
+  {
+   "case": "control deepseek_v4 fixed slot lookup (schema rule)",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  },
+  {
+   "case": "healthy deepseek_v4 one call",
+   "expected": "pass",
+   "decisions": [],
+   "verdicts": [],
+   "error": null
+  }
+ ],
+ "expected_broken_caught": 7,
+ "expected_broken": 8,
+ "healthy_with_broken": 0,
+ "healthy": 7
+}

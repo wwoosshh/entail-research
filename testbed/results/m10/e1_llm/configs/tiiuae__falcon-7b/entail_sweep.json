@@ -1,0 +1,47 @@
+{
+ "rank": 223,
+ "id": "tiiuae/falcon-7b",
+ "model_type": "falcon",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 2752130,
+ "mistral_files": [],
+ "rows": {
+  "n": 65024,
+  "where": "transformer.word_embeddings.weight [65024, 4544] in model-00001-of-00002.safetensors (header only)",
+  "config_vocab_size": 65024
+ },
+ "sources": {
+  "candidates": [
+   [
+    65024,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 65024,
+  "rows_where": "transformer.word_embeddings.weight [65024, 4544] in model-00001-of-00002.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 65024,
+  "reach": 65024
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 2.6
+}

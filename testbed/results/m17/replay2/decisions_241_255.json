@@ -1,0 +1,16 @@
+{
+ "https://github.com/sgl-project/sglang/issues/26906": {"decision": "cannot_run", "reason": "Ascend NPU, Qwen3.6-35B-A3B with MTP; closed as a duplicate"},
+ "https://github.com/huggingface/transformers/issues/45412": {"decision": "not_output", "reason": "GPU memory not released after deleting RT-DETR models; a leak, not a wrong output"},
+ "https://github.com/vllm-project/vllm/issues/49725": {"decision": "cannot_run", "reason": "embedding quality degrades under concurrent traffic (output error) but Qwen3-Embedding-8B bf16 on RTX 6000 Blackwell, over the bf16 4.5B bound and hardware-specific"},
+ "https://github.com/sgl-project/sglang/issues/26305": {"decision": "not_output", "reason": "TPOT performance with the hierarchical cache"},
+ "https://github.com/vllm-project/vllm/issues/52644": {"decision": "cannot_run", "reason": "ROCm MI350/MI355, DeepSeek V4"},
+ "https://github.com/sgl-project/sglang/issues/24650": {"decision": "not_output", "reason": "server crash (tensor shape mismatch in the fused RoPE path) under load; DeepSeek-V4-Flash on 4x H200 too"},
+ "https://github.com/sgl-project/sglang/issues/28414": {"decision": "cannot_run", "reason": "output error (missing or reordered tokens) but DeepSeek-V4"},
+ "https://github.com/vllm-project/vllm/issues/48831": {"decision": "pass", "reason": "output error: the V1 engine returns wrong scores for Qwen3-Reranker-0.6B on sequences over 8K tokens (chunked prefill under torch.compile on the pooling path); 0.6B fits one card; fixed by #48901 (2026-07-17) before 0.30.0, so the reported version is installed", "expected_boundary": "request:vllm.scoring (pooling under chunked prefill; the vllm_scoring adapter's site)", "version": "reported (July 2026, pre-#48901; read from the env dump at reproduction)", "model": "Qwen/Qwen3-Reranker-0.6B"},
+ "https://github.com/sgl-project/sglang/issues/36371": {"decision": "cannot_run", "reason": "silent corruption of the recurrent state (output error) but Mooncake PD disaggregation of Kimi-K3 across instances"},
+ "https://github.com/sgl-project/sglang/issues/23020": {"decision": "cannot_run", "reason": "gibberish after ~100 requests (output error) but GLM-5.1 744B in PD disaggregation across 5 nodes"},
+ "https://github.com/vllm-project/vllm/issues/40966": {"decision": "not_output", "reason": "crash (Triton MLA decode kernel shape mismatch) on ROCm with TP > 1"},
+ "https://github.com/sgl-project/sglang/issues/37475": {"decision": "not_output", "reason": "a fallback that guesses DFlash tap layers is dead code for every published checkpoint and no wrong output is shown; the count collision is described, not demonstrated"},
+ "https://github.com/vllm-project/vllm/issues/52071": {"decision": "cannot_run", "reason": "wrong output (or a CUDA fault) with speculative decoding under pipeline parallelism (PP 2-8): several GPUs"},
+ "https://github.com/sgl-project/sglang/issues/40735": {"decision": "cannot_run", "reason": "Ascend NPU FuseEP routing for MiniMax-M3"}
+}

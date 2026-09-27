@@ -1,0 +1,55 @@
+{
+ "rank": 162,
+ "id": "ibm-granite/granite-4.1-30b",
+ "model_type": "granite",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 9731055,
+ "mistral_files": [],
+ "rows": {
+  "n": 100352,
+  "where": "model.embed_tokens.weight [100352, 4096] in model-00001-of-00012.safetensors (header only)",
+  "config_vocab_size": 100352
+ },
+ "sources": {
+  "candidates": [
+   [
+    100352,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    100352,
+    "vocab.json"
+   ]
+  ],
+  "rows": 100352,
+  "rows_where": "model.embed_tokens.weight [100352, 4096] in model-00001-of-00012.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 100352,
+  "reach": 100352
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=50000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 5.6
+}

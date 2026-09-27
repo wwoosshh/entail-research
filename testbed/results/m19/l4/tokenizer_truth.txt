@@ -1,0 +1,64 @@
+# M19 L4: the E2 Tokenization alarms against the model's own sentencepiece file (testbed/m19/tok_truth.py, 2026-09-27 16:36:15)
+# tf = transformers AutoTokenizer, json = tokenizers on the folder's tokenizer.json, sp = sentencepiece on tokenizer.model
+######## venv vllm
+===== /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0
+files: ['config.json', 'eval_results.json', 'generation_config.json', 'model.safetensors', 'special_tokens_map.json', 'tokenizer.json', 'tokenizer.model', 'tokenizer_config.json']
+tokenizer_config: {'tokenizer_class': 'LlamaTokenizer', 'legacy': False, 'add_prefix_space': None, 'add_bos_token': None, 'use_default_system_prompt': False}
+tokenizer.json normalizer: {"type": "Sequence", "normalizers": [{"type": "Prepend", "prepend": "\u2581"}, {"type": "Replace", "pattern": {"String": " "}, "content": "\u2581"}]}
+tokenizer.json pre_tokenizer: null
+transformers class: LlamaTokenizer | backend pre_tokenizer: Metaspace(replacement="▁", prepend_scheme=first, split=False) | normalizer: None
+'   leading spaces and trailing   '      tf=[259, 8236, 8162, 322, 25053, 1678] json=[1678, 8236, 8162, 322, 25053, 1678] sp=[1678, 8236, 8162, 322, 25053, 1678]   <-- differs
+'Hello world'                            tf=[15043, 3186] json=[15043, 3186] sp=[15043, 3186]
+' one leading space'                     tf=[697, 8236, 2913] json=[29871, 697, 8236, 2913] sp=[29871, 697, 8236, 2913]   <-- differs
+'\tTab start'                            tf=[29871, 12, 8863, 1369] json=[29871, 12, 8863, 1369] sp=[29871, 12, 8863, 1369]
+'\n\nnewlines first'                     tf=[29871, 13, 13, 1482, 9012, 937] json=[29871, 13, 13, 1482, 9012, 937] sp=[29871, 13, 13, 1482, 9012, 937]
+'  two leading'                          tf=[29871, 1023, 8236] json=[259, 1023, 8236] sp=[259, 1023, 8236]   <-- differs
+'Numbers 12345 and symbols !?'           tf=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] json=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] sp=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945]
+'<s> after a declared token'             tf=[1, 1156, 263, 8052, 5993] json=[1, 29871, 1156, 263, 8052, 5993] sp=[529, 29879, 29958, 1156, 263, 8052, 5993]   <-- differs
+'under_score and ▁ marker'               tf=[1090, 29918, 13628, 322, 259, 17456] json=[1090, 29918, 13628, 322, 259, 17456] sp=[1090, 29918, 13628, 322, 259, 17456]
+===== /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM
+files: ['config.json', 'generation_config.json', 'model.safetensors', 'special_tokens_map.json', 'tokenizer.json', 'tokenizer_config.json']
+tokenizer_config: {'tokenizer_class': 'LlamaTokenizer', 'legacy': True, 'add_prefix_space': None, 'add_bos_token': True, 'use_default_system_prompt': True}
+tokenizer.json normalizer: {"type": "Sequence", "normalizers": [{"type": "Prepend", "prepend": "\u2581"}, {"type": "Replace", "pattern": {"String": " "}, "content": "\u2581"}]}
+tokenizer.json pre_tokenizer: null
+transformers class: LlamaTokenizer | backend pre_tokenizer: Metaspace(replacement="▁", prepend_scheme=always, split=False) | normalizer: None
+'   leading spaces and trailing   '      tf=[259, 8236, 8162, 322, 25053, 1678] json=[1678, 8236, 8162, 322, 25053, 1678] sp=None   <-- differs
+'Hello world'                            tf=[15043, 3186] json=[15043, 3186] sp=None
+' one leading space'                     tf=[697, 8236, 2913] json=[29871, 697, 8236, 2913] sp=None   <-- differs
+'\tTab start'                            tf=[29871, 12, 8863, 1369] json=[29871, 12, 8863, 1369] sp=None
+'\n\nnewlines first'                     tf=[29871, 13, 13, 1482, 9012, 937] json=[29871, 13, 13, 1482, 9012, 937] sp=None
+'  two leading'                          tf=[29871, 1023, 8236] json=[259, 1023, 8236] sp=None   <-- differs
+'Numbers 12345 and symbols !?'           tf=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] json=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] sp=None
+'<s> after a declared token'             tf=[1, 1156, 263, 8052, 5993] json=[1, 29871, 1156, 263, 8052, 5993] sp=None   <-- differs
+'under_score and ▁ marker'               tf=[1090, 29918, 13628, 322, 259, 17456] json=[1090, 29918, 13628, 322, 259, 17456] sp=None
+######## venv vllm0210
+===== /home/<user>/models/m10/TinyLlama__TinyLlama-1.1B-Chat-v1.0
+files: ['config.json', 'eval_results.json', 'generation_config.json', 'model.safetensors', 'special_tokens_map.json', 'tokenizer.json', 'tokenizer.model', 'tokenizer_config.json']
+tokenizer_config: {'tokenizer_class': 'LlamaTokenizer', 'legacy': False, 'add_prefix_space': None, 'add_bos_token': None, 'use_default_system_prompt': False}
+tokenizer.json normalizer: {"type": "Sequence", "normalizers": [{"type": "Prepend", "prepend": "\u2581"}, {"type": "Replace", "pattern": {"String": " "}, "content": "\u2581"}]}
+tokenizer.json pre_tokenizer: null
+transformers class: LlamaTokenizerFast | backend pre_tokenizer: None | normalizer: Sequence(normalizers=[Prepend(prepend="▁"), Replace(pattern=String(" "), content="▁")])
+'   leading spaces and trailing   '      tf=[1678, 8236, 8162, 322, 25053, 1678] json=[1678, 8236, 8162, 322, 25053, 1678] sp=[1678, 8236, 8162, 322, 25053, 1678]
+'Hello world'                            tf=[15043, 3186] json=[15043, 3186] sp=[15043, 3186]
+' one leading space'                     tf=[29871, 697, 8236, 2913] json=[29871, 697, 8236, 2913] sp=[29871, 697, 8236, 2913]
+'\tTab start'                            tf=[29871, 12, 8863, 1369] json=[29871, 12, 8863, 1369] sp=[29871, 12, 8863, 1369]
+'\n\nnewlines first'                     tf=[29871, 13, 13, 1482, 9012, 937] json=[29871, 13, 13, 1482, 9012, 937] sp=[29871, 13, 13, 1482, 9012, 937]
+'  two leading'                          tf=[259, 1023, 8236] json=[259, 1023, 8236] sp=[259, 1023, 8236]
+'Numbers 12345 and symbols !?'           tf=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] json=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] sp=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945]
+'<s> after a declared token'             tf=[1, 29871, 1156, 263, 8052, 5993] json=[1, 29871, 1156, 263, 8052, 5993] sp=[529, 29879, 29958, 1156, 263, 8052, 5993]   <-- differs
+'under_score and ▁ marker'               tf=[1090, 29918, 13628, 322, 259, 17456] json=[1090, 29918, 13628, 322, 259, 17456] sp=[1090, 29918, 13628, 322, 259, 17456]
+===== /home/<user>/models/m10/hmellor__tiny-random-LlamaForCausalLM
+files: ['config.json', 'generation_config.json', 'model.safetensors', 'special_tokens_map.json', 'tokenizer.json', 'tokenizer_config.json']
+tokenizer_config: {'tokenizer_class': 'LlamaTokenizer', 'legacy': True, 'add_prefix_space': None, 'add_bos_token': True, 'use_default_system_prompt': True}
+tokenizer.json normalizer: {"type": "Sequence", "normalizers": [{"type": "Prepend", "prepend": "\u2581"}, {"type": "Replace", "pattern": {"String": " "}, "content": "\u2581"}]}
+tokenizer.json pre_tokenizer: null
+transformers class: LlamaTokenizerFast | backend pre_tokenizer: None | normalizer: Sequence(normalizers=[Prepend(prepend="▁"), Replace(pattern=String(" "), content="▁")])
+'   leading spaces and trailing   '      tf=[1678, 8236, 8162, 322, 25053, 1678] json=[1678, 8236, 8162, 322, 25053, 1678] sp=None
+'Hello world'                            tf=[15043, 3186] json=[15043, 3186] sp=None
+' one leading space'                     tf=[29871, 697, 8236, 2913] json=[29871, 697, 8236, 2913] sp=None
+'\tTab start'                            tf=[29871, 12, 8863, 1369] json=[29871, 12, 8863, 1369] sp=None
+'\n\nnewlines first'                     tf=[29871, 13, 13, 1482, 9012, 937] json=[29871, 13, 13, 1482, 9012, 937] sp=None
+'  two leading'                          tf=[259, 1023, 8236] json=[259, 1023, 8236] sp=None
+'Numbers 12345 and symbols !?'           tf=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] json=[11848, 2596, 29871, 29896, 29906, 29941, 29946, 29945] sp=None
+'<s> after a declared token'             tf=[1, 29871, 1156, 263, 8052, 5993] json=[1, 29871, 1156, 263, 8052, 5993] sp=None
+'under_score and ▁ marker'               tf=[1090, 29918, 13628, 322, 259, 17456] json=[1090, 29918, 13628, 322, 259, 17456] sp=None

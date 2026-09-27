@@ -1,0 +1,57 @@
+{
+ "rank": 231,
+ "id": "unsloth/mistral-7b-v0.3-bnb-4bit",
+ "model_type": "mistral",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 2549398,
+ "mistral_files": [
+  "tokenizer.model.v3"
+ ],
+ "rows": {
+  "n": 32768,
+  "where": "model.embed_tokens.weight [32768, 4096] in model.safetensors (header only)",
+  "config_vocab_size": 32768
+ },
+ "sources": {
+  "candidates": [
+   [
+    32768,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    32768,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 32768,
+  "rows_where": "model.embed_tokens.weight [32768, 4096] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 32768,
+  "reach": 32768
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=1000000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/unsloth__mistral-7b-v0.3-bnb-4bit/config.json#quantization_config: quantization method 'bitsandbytes' is not in vocabulary v6"
+ ],
+ "seconds": 7.6
+}

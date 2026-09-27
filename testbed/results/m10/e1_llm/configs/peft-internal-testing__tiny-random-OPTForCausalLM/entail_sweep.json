@@ -1,0 +1,52 @@
+{
+ "rank": 83,
+ "id": "peft-internal-testing/tiny-random-OPTForCausalLM",
+ "model_type": "opt",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 4813971,
+ "mistral_files": [],
+ "rows": {
+  "n": 50265,
+  "where": "model.decoder.embed_tokens.weight [50265, 16] in model.safetensors (header only)",
+  "config_vocab_size": 50265
+ },
+ "sources": {
+  "candidates": [
+   [
+    50265,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    50265,
+    "vocab.json"
+   ]
+  ],
+  "rows": 50265,
+  "rows_where": "model.decoder.embed_tokens.weight [50265, 16] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GPT2Tokenizer",
+  "vocab_size": 50265,
+  "reach": 50265
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 4.3
+}

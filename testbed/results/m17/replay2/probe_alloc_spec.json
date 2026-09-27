@@ -1,0 +1,28 @@
+{
+ "entail": "load",
+ "vllm": "0.30.0",
+ "texts": [
+  " Explain neural networks. Explain neural networks. Explain neural networks. Expl",
+  " Paris. The capital of France is also the capital of the Republic of France. The"
+ ],
+ "allocate_slots": {
+  "pass": 0,
+  "broken": 1,
+  "unknown": 0,
+  "resolved": 0
+ },
+ "allocate_slots_notes": [
+  "vllm kv cache group 0, request 1-b76864f6: holds 48 KV slots for 32 tokens, which is not one allocation unit (16) of the right size. The slots a sequence holds and the tokens it has are two numbers nobody compares."
+ ],
+ "boundary_stats": {
+  "checks": 32,
+  "broken": 1,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kv_needed": 31
+  }
+ }
+}

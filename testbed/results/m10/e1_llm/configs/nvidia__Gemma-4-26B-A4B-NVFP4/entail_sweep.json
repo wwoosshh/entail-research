@@ -1,0 +1,50 @@
+{
+ "rank": 54,
+ "id": "nvidia/Gemma-4-26B-A4B-NVFP4",
+ "model_type": "gemma4",
+ "files": [
+  "tokenizer.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 37146672,
+ "mistral_files": [],
+ "rows": {
+  "n": 262144,
+  "where": "model.language_model.embed_tokens.weight [262144, 2816] in model-00001-of-00002.safetensors (header only)",
+  "config_vocab_size": 262144
+ },
+ "sources": {
+  "candidates": [
+   [
+    262144,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 262144,
+  "rows_where": "model.language_model.embed_tokens.weight [262144, 2816] in model-00001-of-00002.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GemmaTokenizer",
+  "vocab_size": 262144,
+  "reach": 262144
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": [
+   "<workspace>/testbed/results/m10/e1_llm/configs/nvidia__Gemma-4-26B-A4B-NVFP4/config.json#text_config.rope_parameters: rope type 'proportional' is not in vocabulary v6"
+  ]
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/nvidia__Gemma-4-26B-A4B-NVFP4/config.json#quantization_config: quantization method 'modelopt' is not in vocabulary v6"
+ ],
+ "seconds": 7.6
+}

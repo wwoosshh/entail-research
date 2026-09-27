@@ -1,0 +1,56 @@
+{
+ "rank": 149,
+ "id": "cyankiwi/MiniCPM-SALA-AWQ-8bit",
+ "model_type": "minicpm_sala",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 4940489,
+ "mistral_files": [],
+ "rows": {
+  "n": 73448,
+  "where": "model.embed_tokens.weight [73448, 4096] in model-00001-of-00003.safetensors (header only)",
+  "config_vocab_size": 73448
+ },
+ "sources": {
+  "candidates": [
+   [
+    73440,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    73440,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 73448,
+  "rows_where": "model.embed_tokens.weight [73448, 4096] in model-00001-of-00003.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "LlamaTokenizer",
+  "vocab_size": 73440,
+  "reach": 73448
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/cyankiwi__MiniCPM-SALA-AWQ-8bit/config.json#quantization_config: quantization method 'compressed-tensors' is not in vocabulary v6"
+ ],
+ "seconds": 7.9
+}

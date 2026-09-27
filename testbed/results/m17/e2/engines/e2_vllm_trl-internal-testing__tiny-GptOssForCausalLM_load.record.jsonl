@@ -1,0 +1,449 @@
+{"pid": 19871, "boundary": "load:transformers.config", "consumer": "transformers.config", "name": "Coverage", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)", "lost_by": null, "declared": {"name": "Coverage", "kind": "MAPPING", "value": "Coverage(total=31, taken=31, left=())", "source": {"kind": "config", "where": "GptOssConfig config.json (every key it gives)"}, "certainty": "declared"}, "chosen": {"name": "Coverage", "kind": "MAPPING", "value": "Coverage(total=31, taken=31, left=())", "source": {"kind": "engine", "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19871, "timing": "load:transformers.config", "ms": 4.417}
+{"pid": 19871, "timing": "load:transformers.config", "ms": 0.792}
+{"pid": 19871, "boundary": "load:transformers.tokenizer", "consumer": "transformers.tokenizer", "name": "Vocab", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": {"name": "Vocab", "kind": "MAPPING", "value": "Vocab(size=199998, added=None)", "source": {"kind": "file", "where": "tokenizer.json (the only tokenizer source; the engine's own count stands)"}, "certainty": "declared"}, "chosen": {"name": "Vocab", "kind": "MAPPING", "value": "Vocab(size=199998, added=21)", "source": {"kind": "engine", "where": "TokenizersBackend built from /home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM: the tokenizer the engine holds"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19871, "boundaries": {"load:transformers.tokenizer": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"vocab": 1}}}}
+{"pid": 19871, "timing": "load:transformers.tokenizer", "ms": 4.779}
+{"pid": 19871, "boundary": "load:vllm.input_processor", "consumer": "vllm.input_processor.stop_set", "name": "Stops", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "eos id(s) 200012 are not special tokens of the tokenizer (a stop still matches by id; encoding text may split them)", "lost_by": null, "declared": {"name": "Stops", "kind": "MAPPING", "value": "Stops(eos=(199999, 200002, 200012), bos=None, pad=None)", "source": {"kind": "config", "where": "the union of /home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/config.json#eos_token_id; /home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/generation_config.json#eos_token_id; /home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/tokenizer_config.json#eos_token (id by added_tokens_decoder); the tokenizer's eos_token (id 200002, tokenizer_config.json#eos_token)"}, "certainty": "declared"}, "chosen": {"name": "Stops", "kind": "MAPPING", "value": "Stops(eos=(199999, 200002, 200012), bos=None, pad=None)", "source": {"kind": "engine", "where": "InputProcessor.generation_config_fields eos plus the tokenizer's eos (model /home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM)"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19871, "boundaries": {"load:vllm.input_processor": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"stop_dropped": 1, "stop_id_out_of_range": 1}}}}
+{"pid": 19871, "timing": "load:vllm.input_processor", "ms": 6.422}
+{"pid": 19937, "boundary": "load:vllm.attention", "consumer": "vllm.attention.TRITON_ATTN", "name": "ModelProps", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": {"name": "ModelProps", "kind": "PROPERTY", "value": "ModelProps(softcap=None, sliding_window=128, tie_word_embeddings=None)", "source": {"kind": "config", "where": "/home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/config.json#sliding_window,tie_word_embeddings"}, "certainty": "declared"}, "chosen": {"name": "ModelProps", "kind": "PROPERTY", "value": "ModelProps(softcap=None, sliding_window=128, tie_word_embeddings=None)", "source": {"kind": "engine", "where": "vllm.attention.TRITON_ATTN [sliding_window: honours (measured)]"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "load:vllm.attention", "ms": 19.724}
+{"pid": 19937, "timing": "load:vllm.quant_method.process_weights_after_loading", "ms": 272.805}
+{"pid": 19937, "boundary": "load:vllm.quant_method.process_weights_after_loading", "consumer": "vllm.quant_method.UnquantizedLinearMethod", "name": "Coverage", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "6 weight(s): the values sampled before process_weights_after_loading are where 'identity' puts them", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundary": "load:vllm.quant_method.process_weights_after_loading", "consumer": "vllm.quant_method.UnquantizedLinearMethod", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "6 weight(s), each checked against its data", "lost_by": null, "declared": {"name": "Layout", "kind": "LAYOUT", "value": "Layout(kind='dense', dtype=None, block=None, packing=None, scale_format=None, orientation='out_in', scale_granularity=None)", "source": {"kind": "boundary", "where": "vllm.quant_method.UnquantizedLinearMethod.process_weights_after_loading.writes.weight"}, "certainty": "declared"}, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundary": "load:vllm.quant_method.process_weights_after_loading", "consumer": "vllm.quant_method.UnquantizedLinearMethod", "name": "Layout", "verdict": "unknown", "blocking": false, "rule": "this boundary could not be checked", "resolution": null, "handle": null, "target": null, "note": "2 weight(s) (first: model.layers.0.mlp.router): the layer gives no in and out features, so the orientation was not read", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "load:vllm.quant_method.process_weights_after_loading", "ms": 9.665}
+{"pid": 19937, "boundary": "load:vllm.loader", "consumer": "vllm.loader", "name": "ModelProps", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": {"name": "ModelProps", "kind": "PROPERTY", "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)", "source": {"kind": "config", "where": "/home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/config.json#sliding_window,tie_word_embeddings"}, "certainty": "verified"}, "chosen": {"name": "ModelProps", "kind": "PROPERTY", "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)", "source": {"kind": "engine", "where": "vllm.loader left the checkpoint's own lm_head.weight as the head (read from the model)"}, "certainty": "verified"}, "observed": {"name": "ModelProps", "kind": "PROPERTY", "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=False)", "source": {"kind": "data", "where": "/home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM: 37 tensors, lm_head.weight row 0 holds other bytes than the embedding"}, "certainty": "verified"}, "conflict": []}
+{"pid": 19937, "boundary": "load:vllm.config.rope_parameters", "consumer": "vllm.rotary_embedding", "name": "Rotary", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": {"name": "Rotary", "kind": "FRAME", "value": "Rotary(rope_type='yarn', theta=150000.0, factor=32.0, original_max_position=4096, low_freq_factor=None, high_freq_factor=None, beta_fast=32.0, beta_slow=1.0, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=False, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None, partial_rotary_factor=None, local_factor=None, mrope_section=None, mrope_interleaved=None, pairing=None)", "source": {"kind": "config", "where": "/home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM/config.json#rope_theta,rope_scaling"}, "certainty": "declared"}, "chosen": {"name": "Rotary", "kind": "FRAME", "value": "Rotary(rope_type='yarn', theta=150000.0, factor=32.0, original_max_position=4096, low_freq_factor=None, high_freq_factor=None, beta_fast=32.0, beta_slow=1.0, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=False, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None, partial_rotary_factor=None, local_factor=None, mrope_section=None, mrope_interleaved=None, pairing=None)", "source": {"kind": "engine", "where": "GptOssConfig held by vllm#rope_parameters"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "load:vllm.loader", "ms": 1.483}
+{"pid": 19937, "timing": "load:vllm.rotary_pairing", "ms": 2.183}
+{"pid": 19937, "boundary": "kernel:vllm.fused_moe_kernel", "consumer": "vllm.fused_moe_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.fused_moe_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 1.043}
+{"pid": 19937, "boundary": "kernel:vllm.fused_moe_kernel", "consumer": "vllm.fused_moe_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.fused_moe_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.994}
+{"pid": 19937, "boundary": "kernel:vllm._gumbel_sample_kernel", "consumer": "vllm._gumbel_sample_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._gumbel_sample_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.789}
+{"pid": 19937, "boundary": "kernel:vllm._get_num_sampled_and_rejected_kernel", "consumer": "vllm._get_num_sampled_and_rejected_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._get_num_sampled_and_rejected_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 1.02}
+{"pid": 19937, "boundary": "container:vllm.request.block_hashes", "consumer": "vllm.block_hashes", "name": "Coverage", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": {"name": "Coverage", "kind": "MAPPING", "value": "Coverage(total=1, taken=1, left=())", "source": {"kind": "user", "where": "vllm Request _warmup_0_"}, "certainty": "declared"}, "chosen": {"name": "Coverage", "kind": "MAPPING", "value": "Coverage(total=1, taken=1, left=())", "source": {"kind": "user", "where": "vllm Request _warmup_0_"}, "certainty": "declared"}, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 1}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 2.216}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 2}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.371}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.054}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 4, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 4}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.285}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.061}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 8, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 8}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.223}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.057}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.053}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 16, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 16}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.212}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.061}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.054}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.053}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 32, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 32}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.244}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.072}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.055}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.094}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.058}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 64, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 64}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.239}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.036}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.054}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.035}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.036}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.037}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.037}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.06}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.06}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.033}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.055}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.036}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 128, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 128}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.241}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.056}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.035}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.036}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.065}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.034}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.035}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.034}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.055}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.061}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.037}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.034}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.086}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.079}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.054}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.079}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.053}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.046}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.054}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.047}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.037}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.038}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.039}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.052}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.04}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.098}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.044}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.076}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.05}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.049}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.048}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.041}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.043}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.06}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.045}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.042}
+{"pid": 19937, "boundaries": {"container:vllm.request.block_hashes": {"checks": 256, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 256}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.266}
+{"pid": 19937, "boundary": "kernel:vllm._apply_write_kernel", "consumer": "vllm._apply_write_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._apply_write_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.536}
+{"pid": 19937, "boundary": "kernel:vllm._apply_write_kernel", "consumer": "vllm._apply_write_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._apply_write_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.558}
+{"pid": 19937, "boundary": "kernel:vllm._bincount_kernel", "consumer": "vllm._bincount_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._bincount_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.53}
+{"pid": 19937, "boundary": "kernel:vllm._apply_write_kernel", "consumer": "vllm._apply_write_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.38}
+{"pid": 19937, "boundary": "kernel:vllm._prepare_prefill_inputs_kernel", "consumer": "vllm._prepare_prefill_inputs_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._prepare_prefill_inputs_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.603}
+{"pid": 19937, "boundary": "kernel:vllm._prepare_pos_seq_lens_kernel", "consumer": "vllm._prepare_pos_seq_lens_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._prepare_pos_seq_lens_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.504}
+{"pid": 19937, "boundary": "kernel:vllm._combine_sampled_and_draft_tokens_kernel", "consumer": "vllm._combine_sampled_and_draft_tokens_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._combine_sampled_and_draft_tokens_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.53}
+{"pid": 19937, "boundary": "kernel:vllm._gather_block_tables_kernel", "consumer": "vllm._gather_block_tables_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._gather_block_tables_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.612}
+{"pid": 19937, "boundary": "kernel:vllm._compute_slot_mappings_kernel", "consumer": "vllm._compute_slot_mappings_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._compute_slot_mappings_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.533}
+{"pid": 19937, "boundary": "kernel:vllm.reshape_and_cache_kernel_flash", "consumer": "vllm.reshape_and_cache_kernel_flash", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.reshape_and_cache_kernel_flash": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.616}
+{"pid": 19937, "boundary": "kernel:vllm.kernel_unified_attention", "consumer": "vllm.kernel_unified_attention", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.kernel_unified_attention": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.558}
+{"pid": 19937, "boundary": "kernel:vllm._apply_grammar_bitmask_kernel", "consumer": "vllm._apply_grammar_bitmask_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._apply_grammar_bitmask_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.799}
+{"pid": 19937, "boundary": "kernel:vllm._bias_kernel", "consumer": "vllm._bias_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._bias_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.588}
+{"pid": 19937, "boundary": "kernel:vllm._penalties_kernel", "consumer": "vllm._penalties_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._penalties_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.589}
+{"pid": 19937, "boundary": "kernel:vllm._bad_words_kernel", "consumer": "vllm._bad_words_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._bad_words_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.544}
+{"pid": 19937, "boundary": "kernel:vllm._temperature_kernel", "consumer": "vllm._temperature_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._temperature_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.553}
+{"pid": 19937, "boundary": "kernel:vllm._min_p_kernel", "consumer": "vllm._min_p_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._min_p_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.453}
+{"pid": 19937, "boundary": "kernel:vllm._topk_log_softmax_kernel", "consumer": "vllm._topk_log_softmax_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._topk_log_softmax_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.961}
+{"pid": 19937, "boundary": "kernel:vllm._ranks_kernel", "consumer": "vllm._ranks_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._ranks_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.547}
+{"pid": 19937, "boundary": "kernel:vllm._prompt_logprobs_token_ids_kernel", "consumer": "vllm._prompt_logprobs_token_ids_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._prompt_logprobs_token_ids_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.494}
+{"pid": 19937, "boundary": "kernel:vllm._post_update_kernel", "consumer": "vllm._post_update_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._post_update_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.776}
+{"pid": 19937, "boundary": "kernel:vllm.kernel_unified_attention", "consumer": "vllm.kernel_unified_attention", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.kernel_unified_attention": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.763}
+{"pid": 19937, "boundary": "kernel:vllm.reduce_segments", "consumer": "vllm.reduce_segments", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.reduce_segments": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.585}
+{"pid": 19937, "boundary": "kernel:vllm._prepare_pos_seq_lens_kernel", "consumer": "vllm._prepare_pos_seq_lens_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._prepare_pos_seq_lens_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.733}
+{"pid": 19937, "boundary": "kernel:vllm._combine_sampled_and_draft_tokens_kernel", "consumer": "vllm._combine_sampled_and_draft_tokens_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._combine_sampled_and_draft_tokens_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.544}
+{"pid": 19937, "boundary": "kernel:vllm._gather_block_tables_kernel", "consumer": "vllm._gather_block_tables_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._gather_block_tables_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.614}
+{"pid": 19937, "boundary": "kernel:vllm._compute_slot_mappings_kernel", "consumer": "vllm._compute_slot_mappings_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._compute_slot_mappings_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.526}
+{"pid": 19937, "boundary": "kernel:vllm.reshape_and_cache_kernel_flash", "consumer": "vllm.reshape_and_cache_kernel_flash", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.reshape_and_cache_kernel_flash": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.818}
+{"pid": 19937, "boundary": "kernel:vllm.kernel_unified_attention", "consumer": "vllm.kernel_unified_attention", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.373}
+{"pid": 19937, "boundary": "kernel:vllm.reduce_segments", "consumer": "vllm.reduce_segments", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.reduce_segments": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.67}
+{"pid": 19937, "boundary": "kernel:vllm._bias_kernel", "consumer": "vllm._bias_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._bias_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.607}
+{"pid": 19937, "boundary": "kernel:vllm._penalties_kernel", "consumer": "vllm._penalties_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._penalties_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.524}
+{"pid": 19937, "boundary": "kernel:vllm._bad_words_kernel", "consumer": "vllm._bad_words_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._bad_words_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.51}
+{"pid": 19937, "boundary": "kernel:vllm._temperature_kernel", "consumer": "vllm._temperature_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._temperature_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.443}
+{"pid": 19937, "boundary": "kernel:vllm._min_p_kernel", "consumer": "vllm._min_p_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._min_p_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.516}
+{"pid": 19937, "boundary": "kernel:vllm._ranks_kernel", "consumer": "vllm._ranks_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._ranks_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.84}
+{"pid": 19937, "boundary": "kernel:vllm._get_num_sampled_and_rejected_kernel", "consumer": "vllm._get_num_sampled_and_rejected_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._get_num_sampled_and_rejected_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.588}
+{"pid": 19937, "boundary": "kernel:vllm._post_update_kernel", "consumer": "vllm._post_update_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._post_update_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.596}
+{"pid": 19937, "boundary": "load:transformers.config", "consumer": "transformers.config", "name": "Coverage", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)", "lost_by": null, "declared": {"name": "Coverage", "kind": "MAPPING", "value": "Coverage(total=31, taken=31, left=())", "source": {"kind": "config", "where": "GptOssConfig config.json (every key it gives)"}, "certainty": "declared"}, "chosen": {"name": "Coverage", "kind": "MAPPING", "value": "Coverage(total=31, taken=31, left=())", "source": {"kind": "engine", "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "load:transformers.config", "ms": 1.734}
+{"pid": 19937, "boundary": "load:transformers.tokenizer", "consumer": "transformers.tokenizer", "name": "Vocab", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": {"name": "Vocab", "kind": "MAPPING", "value": "Vocab(size=199998, added=None)", "source": {"kind": "file", "where": "tokenizer.json (the only tokenizer source; the engine's own count stands)"}, "certainty": "declared"}, "chosen": {"name": "Vocab", "kind": "MAPPING", "value": "Vocab(size=199998, added=21)", "source": {"kind": "engine", "where": "TokenizersBackend built from /home/<user>/models/m10/trl-internal-testing__tiny-GptOssForCausalLM: the tokenizer the engine holds"}, "certainty": "verified"}, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"load:transformers.tokenizer": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"vocab": 1}}}}
+{"pid": 19937, "timing": "load:transformers.tokenizer", "ms": 4.167}
+{"pid": 19871, "boundaries": {"request:vllm.reasoning_history": {"checks": 0, "broken": 0, "refused": 0, "skipped": 1, "deferred": 0, "resolved": 0, "passed": {}}}}
+{"pid": 19871, "timing": "load:transformers.config", "ms": 0.784}
+{"pid": 19871, "timing": "load:transformers.config", "ms": 0.772}
+{"pid": 19871, "boundaries": {"load:transformers.tokenizer": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"vocab": 2}}}}
+{"pid": 19871, "timing": "load:transformers.tokenizer", "ms": 1.455}
+{"pid": 19871, "boundaries": {"request:vllm.chat_template": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"template": 1}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.11}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 0, "broken": 0, "refused": 0, "skipped": 1, "deferred": 0, "resolved": 0, "passed": {}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.051}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 1, "broken": 0, "refused": 0, "skipped": 1, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 1}}}}
+{"pid": 19937, "timing": "container:vllm.request.block_hashes", "ms": 0.087}
+{"pid": 19937, "boundary": "kernel:vllm._apply_write_kernel", "consumer": "vllm._apply_write_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._apply_write_kernel": {"checks": 4, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 4}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.576}
+{"pid": 19937, "boundary": "kernel:vllm._apply_write_kernel", "consumer": "vllm._apply_write_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.321}
+{"pid": 19937, "boundary": "kernel:vllm._prepare_prefill_inputs_kernel", "consumer": "vllm._prepare_prefill_inputs_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._prepare_prefill_inputs_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.523}
+{"pid": 19937, "boundary": "kernel:vllm._compute_slot_mappings_kernel", "consumer": "vllm._compute_slot_mappings_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.307}
+{"pid": 19937, "boundary": "kernel:vllm.kernel_unified_attention", "consumer": "vllm.kernel_unified_attention", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm.kernel_unified_attention": {"checks": 4, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 4}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.646}
+{"pid": 19937, "boundary": "kernel:vllm._gumbel_sample_kernel", "consumer": "vllm._gumbel_sample_kernel", "name": "Layout", "verdict": "pass", "blocking": false, "rule": "the consumer uses the declared value", "resolution": null, "handle": null, "target": null, "note": "", "lost_by": null, "declared": null, "chosen": null, "observed": null, "conflict": []}
+{"pid": 19937, "boundaries": {"kernel:vllm._gumbel_sample_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}}}
+{"pid": 19937, "timing": "kernel:triton", "ms": 0.6}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 2, "broken": 0, "refused": 0, "skipped": 2, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 2}}}}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 4, "broken": 0, "refused": 0, "skipped": 4, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 4}}}}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 8, "broken": 0, "refused": 0, "skipped": 8, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 8}}}}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 16, "broken": 0, "refused": 0, "skipped": 16, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 16}}}}
+{"pid": 19937, "boundaries": {"container:vllm.allocate_slots": {"checks": 32, "broken": 0, "refused": 0, "skipped": 32, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 32}}}}
+{"pid": 19937, "boundaries": {"kernel:vllm.fused_moe_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._gumbel_sample_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._get_num_sampled_and_rejected_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "container:vllm.request.block_hashes": {"checks": 259, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"cache_key_incomplete": 259}}, "kernel:vllm._apply_write_kernel": {"checks": 5, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 5}}, "kernel:vllm._bincount_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}, "kernel:vllm._prepare_prefill_inputs_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._prepare_pos_seq_lens_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._combine_sampled_and_draft_tokens_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._gather_block_tables_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._compute_slot_mappings_kernel": {"checks": 3, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 3}}, "kernel:vllm.reshape_and_cache_kernel_flash": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm.kernel_unified_attention": {"checks": 4, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 4}}, "kernel:vllm._apply_grammar_bitmask_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}, "kernel:vllm._bias_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._penalties_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._bad_words_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._temperature_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._min_p_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._topk_log_softmax_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}, "kernel:vllm._ranks_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm._prompt_logprobs_token_ids_kernel": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 1}}, "kernel:vllm._post_update_kernel": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "kernel:vllm.reduce_segments": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"kernel_stride_assumed": 2}}, "load:transformers.tokenizer": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"vocab": 1}}, "container:vllm.allocate_slots": {"checks": 48, "broken": 0, "refused": 0, "skipped": 48, "deferred": 0, "resolved": 0, "passed": {"kv_needed": 48}}}}
+{"pid": 19871, "boundaries": {"load:transformers.tokenizer": {"checks": 2, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"vocab": 2}}, "load:vllm.input_processor": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"stop_dropped": 1, "stop_id_out_of_range": 1}}, "request:vllm.reasoning_history": {"checks": 0, "broken": 0, "refused": 0, "skipped": 1, "deferred": 0, "resolved": 0, "passed": {}}, "request:vllm.chat_template": {"checks": 1, "broken": 0, "refused": 0, "skipped": 0, "deferred": 0, "resolved": 0, "passed": {"template": 1}}}}

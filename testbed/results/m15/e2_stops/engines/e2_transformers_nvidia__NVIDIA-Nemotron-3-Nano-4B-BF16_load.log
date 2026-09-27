@@ -1,0 +1,19 @@
+[entail] unknown at load:transformers.config: NemotronHConfig config.json (every key it gives): keys taken by neither the config class nor a reader entail knows: hybrid_override_pattern, num_hidden_layers (the record holds the whole decision)
+[entail] unknown at load:transformers.config: NemotronHConfig config.json (every key it gives): keys taken by neither the config class nor a reader entail knows: hybrid_override_pattern, num_hidden_layers (the record holds the whole decision)
+W0926 02:50:55.888000 22957 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 02:50:55.921000 22957 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/263 [00:00<?, ?it/s]
+Loading weights:  10%|█         | 27/263 [00:00<00:00, 264.80it/s]
+Loading weights:  24%|██▎       | 62/263 [00:00<00:00, 304.85it/s]
+Loading weights:  35%|███▌      | 93/263 [00:00<00:00, 276.40it/s]
+Loading weights:  46%|████▌     | 121/263 [00:00<00:00, 259.12it/s]
+Loading weights:  57%|█████▋    | 151/263 [00:00<00:00, 267.31it/s]
+Loading weights:  70%|███████   | 185/263 [00:00<00:00, 288.67it/s]
+Loading weights: 100%|██████████| 263/263 [00:00<00:00, 369.68it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `mamba_chunk_scan_combined` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `selective_state_update` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+RESULT transformers nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16 entail=load ok=True load=4.045 used=sdpa 

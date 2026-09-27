@@ -1,0 +1,54 @@
+{
+ "rank": 257,
+ "id": "codellama/CodeLlama-7b-hf",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 2369021,
+ "mistral_files": [],
+ "rows": {
+  "n": 32016,
+  "where": "model.embed_tokens.weight [32016, 4096] in model-00001-of-00002.safetensors (header only)",
+  "config_vocab_size": 32016
+ },
+ "sources": {
+  "candidates": [
+   [
+    32016,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    32016,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 32016,
+  "rows_where": "model.embed_tokens.weight [32016, 4096] in model-00001-of-00002.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "CodeLlamaTokenizer",
+  "vocab_size": 32016,
+  "reach": 32017
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": "added tokens reach id 32016, past the model's 32016 rows (model.embed_tokens.weight [32016, 4096] in model-00001-of-00002.safetensors (header only)); such an id is not produced by text (gemma-3-1b-it's <image_soft_token>), so this is noted, not broken"
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=1000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 4.9
+}

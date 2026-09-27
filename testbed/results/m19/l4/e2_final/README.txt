@@ -1,0 +1,1 @@
+Assembled for the freeze commit: transformers and vLLM load runs from e2/ (d53ff10; 2aa975b changed only sglang_paths.py), SGLang load runs from e2_sglang_2aa975b/ (2aa975b); off runs as copied by testbed/m15_e2_run.sh.

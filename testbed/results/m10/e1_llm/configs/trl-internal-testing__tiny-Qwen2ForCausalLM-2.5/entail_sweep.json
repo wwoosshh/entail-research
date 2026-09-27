@@ -1,0 +1,55 @@
+{
+ "rank": 4,
+ "id": "trl-internal-testing/tiny-Qwen2ForCausalLM-2.5",
+ "model_type": "qwen2",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "added_tokens.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 15871800,
+ "mistral_files": [],
+ "rows": {
+  "n": 152064,
+  "where": "model.embed_tokens.weight [152064, 8] in model.safetensors (header only)",
+  "config_vocab_size": 152064
+ },
+ "sources": {
+  "candidates": [
+   [
+    151643,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    151643,
+    "vocab.json"
+   ]
+  ],
+  "rows": 152064,
+  "rows_where": "model.embed_tokens.weight [152064, 8] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "Qwen2Tokenizer",
+  "vocab_size": 151643,
+  "reach": 151665
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=1000000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 9.1
+}

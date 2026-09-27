@@ -1,0 +1,138 @@
+{
+ "name": "vllm.softcap",
+ "about": "apply_softcap Triton helper (vLLM 0.30.0); vllm#56578's operator",
+ "tol": 1e-05,
+ "forms": [
+  {
+   "cap": 50.0
+  },
+  {
+   "cap": 30.0
+  },
+  {
+   "cap": 5.0
+  }
+ ],
+ "checks": {
+  "definition": {
+   "status": "pass",
+   "rel": 5.739683620726236e-07
+  },
+  "forms": {
+   "status": "pass",
+   "rows": [
+    {
+     "form": {
+      "cap": 50.0
+     },
+     "status": "pass",
+     "rel": 5.739683620726236e-07
+    },
+    {
+     "form": {
+      "cap": 30.0
+     },
+     "status": "pass",
+     "rel": 3.582053419920247e-07
+    },
+    {
+     "form": {
+      "cap": 5.0
+     },
+     "status": "pass",
+     "rel": 9.325342839353272e-08
+    }
+   ]
+  },
+  "layout": {
+   "status": "skipped",
+   "rows": []
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "s",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.34775626690859224,
+     "op_moved": 0.3477562074421464
+    },
+    {
+     "input": "s",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.35049074383513423,
+     "op_moved": 0.3504906707616577
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "fail",
+   "inputs": [
+    "s"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 8.653818187259655e-08
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": 6.6189762687934e-08
+    },
+    {
+     "scale": 1000,
+     "status": "fail",
+     "op_nonfinite": 0.157470703125,
+     "rel": null
+    },
+    {
+     "scale": 10000,
+     "status": "fail",
+     "op_nonfinite": 0.876708984375,
+     "rel": null
+    },
+    {
+     "scale": 100000,
+     "status": "fail",
+     "op_nonfinite": 0.98583984375,
+     "rel": null
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "s",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "s",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "s",
+     "status": "pass",
+     "op_nonfinite": 0.000244140625,
+     "definition_nonfinite": 0.000244140625
+    }
+   ]
+  }
+ },
+ "seconds": 0.5
+}

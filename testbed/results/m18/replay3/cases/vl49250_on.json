@@ -1,0 +1,46 @@
+{
+ "entail": "load",
+ "vllm": "0.30.0",
+ "baseline": {
+  "text": " Rome. The capital of the United Kingdom",
+  "tokens": [
+   8947,
+   4,
+   20,
+   812,
+   9,
+   5,
+   315,
+   5752
+  ]
+ },
+ "reject_sync": {
+  "text": " capital of Spain is Madrid.\n\n",
+  "tokens": [
+   812,
+   9,
+   2809,
+   16,
+   3622,
+   4,
+   50118,
+   50118
+  ]
+ },
+ "reject_async": {
+  "text": " capital of Spain. The capital of Spain",
+  "tokens": [
+   812,
+   9,
+   2809,
+   4,
+   20,
+   812,
+   9,
+   2809
+  ]
+ },
+ "sync_differs": true,
+ "async_differs": true,
+ "reproduced": true
+}

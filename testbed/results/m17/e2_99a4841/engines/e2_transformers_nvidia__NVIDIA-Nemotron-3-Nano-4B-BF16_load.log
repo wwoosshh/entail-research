@@ -1,0 +1,19 @@
+[entail] unknown at load:transformers.config: NemotronHConfig config.json (every key it gives): keys taken by neither the config class nor a reader entail knows: hybrid_override_pattern, num_hidden_layers (the record holds the whole decision)
+W0926 14:55:43.064000 19247 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 14:55:43.098000 19247 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/263 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 19/263 [00:00<00:01, 187.66it/s]
+Loading weights:  17%|█▋        | 44/263 [00:00<00:00, 221.39it/s]
+Loading weights:  25%|██▌       | 67/263 [00:00<00:00, 208.91it/s]
+Loading weights:  33%|███▎      | 88/263 [00:00<00:00, 197.11it/s]
+Loading weights:  41%|████▏     | 109/263 [00:00<00:00, 198.64it/s]
+Loading weights:  55%|█████▍    | 144/263 [00:00<00:00, 243.08it/s]
+Loading weights: 100%|██████████| 263/263 [00:00<00:00, 364.31it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[entail] resolved at load:transformers.generation_config: Stops declared Stops(eos=(2, 11), bos=None, pad=None) (config: the union of /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16/config.json#eos_token_id; /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16/generation_config.json#eos_token_id; /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16/tokenizer_config.json#eos_token (id by added_tokens_decoder), declared); transformers.generate uses Stops(eos=(2,), bos=None, pad=None) (engine: NemotronHForCausalLM.generation_config.eos_token_id (built from /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16), verified); rule: the consumer's stop set lacks an id the model's files declare as the end of a generation; changed: add the declared ids to the consumer's stop set (to (11,)); note: the consumer's stop set lacks 11 (declared by /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16/tokenizer_config.json#eos_token (id by added_tokens_decoder))
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `mamba_chunk_scan_combined` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `selective_state_update` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+RESULT transformers nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16 entail=load ok=True load=3.82 used=sdpa 

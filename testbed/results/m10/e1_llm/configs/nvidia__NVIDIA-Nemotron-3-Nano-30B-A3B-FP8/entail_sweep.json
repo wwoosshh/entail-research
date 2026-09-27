@@ -1,0 +1,49 @@
+{
+ "rank": 245,
+ "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+ "model_type": "nemotron_h",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 18937634,
+ "mistral_files": [],
+ "rows": {
+  "n": null,
+  "where": "no embedding tensor found in the headers",
+  "config_vocab_size": 131072
+ },
+ "sources": {
+  "candidates": [
+   [
+    131072,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 131072,
+  "rows_where": "config.json vocab_size",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 131072,
+  "reach": 131072
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=10000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 5.5
+}

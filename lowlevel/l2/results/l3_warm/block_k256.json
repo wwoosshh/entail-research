@@ -1,0 +1,43 @@
+{
+ "case": "block_k256",
+ "target": "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm",
+ "wrapped": true,
+ "first_call_ms": 631.9658470000036,
+ "rel_err": {
+  "first": [
+   0.0026479344590336833
+  ],
+  "later": [
+   0.0026479344590336833
+  ],
+  "kernel": [
+   0.6119364429380265
+  ]
+ },
+ "later_equals_kernel": false,
+ "ms": {
+  "kernel": 0.12158049997879061,
+  "wrapped_after_decision": 0.22006250000572436
+ },
+ "decisions": [
+  {
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "w8a8_triton_block_scaled_mm sent to entail's definition from this call on, for every later call in the process",
+   "note": "w8a8_triton_block_scaled_mm (vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm) on 64 of 256 rows of its first real call, against entail's definition (the product of the block-dequantized FP8 operands): max |kernel - definition| 9.91 over 32768 values; the definition's own noise 0.0625 (typical 0.0156); scale 14.2; 29112 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 29.7; worst value at output 0 index 13556: kernel 0.4102, definition -9.5, reference -9.5, allowed 0.422"
+  }
+ ],
+ "stats": {
+  "instrumented": 1,
+  "sent_to_definition": 1,
+  "decided": 1,
+  "definition_calls": 22,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 1,
+  "passed": {}
+ }
+}

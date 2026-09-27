@@ -1,0 +1,18 @@
+{
+ "https://github.com/vllm-project/vllm/issues/31056": {"decision": "not_output", "reason": "AssertionError on a router-logits dtype check (crash), GLM4-MoE with pplx all2all on 8 x H100"},
+ "https://github.com/vllm-project/vllm/issues/30828": {"decision": "not_output", "reason": "a tokenizer regex warning in the logs; no wrong output shown (the linked PR is an unrelated ROCm fusion change)"},
+ "https://github.com/vllm-project/vllm/issues/33871": {"decision": "no_repro_info", "reason": "a question whether vllm serve applies Qwen3-VL image preprocessing; '30% higher accuracy' without images, prompts or numbers"},
+ "https://github.com/vllm-project/vllm/issues/37032": {"decision": "cannot_run", "reason": "GLM-4.7-Flash (30B MoE, MLA) with KV offloading on 2 x A100"},
+ "https://github.com/huggingface/transformers/issues/44060": {"decision": "not_output", "reason": "a tied-weights warning while loading Qwen3-Next-80B under DeepSpeed ZeRO-3; no wrong output"},
+ "https://github.com/sgl-project/sglang/issues/18674": {"decision": "cannot_run", "reason": "NaN in sgl_kernel flash_attn_varlen_func (FA3, Hopper-only) under TP4/DP2 padding"},
+ "https://github.com/vllm-project/vllm/issues/36872": {"decision": "cannot_run", "reason": "Qwen3.5-35B-A3B-FP8 with MTP speculative decoding (35B)"},
+ "https://github.com/huggingface/diffusers/issues/12633": {"decision": "pass", "reason": "DDIMScheduler.step computes prev_timestep with a uniform stride that does not match set_timesteps under timestep_spacing='linspace'; scheduler-only reproduction with expected (the schedule's next timestep) and actual (t - 1000 // steps); open issue",
+   "version": "diffusers 0.35.2 reported; open -> 0.40.0 (installed)", "model": "none (DDIMScheduler constructed with timestep_spacing='linspace')",
+   "expected_boundary": "load:diffusers.scheduler (the declared timestep_spacing is not what step() uses: prev_timestep from a uniform stride instead of the schedule it set)"},
+ "https://github.com/vllm-project/vllm/issues/33418": {"decision": "not_output", "reason": "wrong error message text when prompt + max_tokens exceeds the context"},
+ "https://github.com/vllm-project/vllm/issues/28637": {"decision": "cannot_run", "reason": "blockwise FP8 CUTLASS kernel for SM120 (Blackwell) only"},
+ "https://github.com/huggingface/transformers/issues/43697": {"decision": "pass", "reason": "RTDetrV2ForObjectDetection gives different logits and boxes on 5.0.0 than on 4.57.6 for the same input; script, input and both outputs given; closed as fixed in 5.1.0 (maintainer: the v5.0.0 tied-weights mapping direction kept v4-style decoder head weights from loading, with zero missing/unexpected keys). The reporter's checkpoint is private: a public RT-DETRv2 checkpoint saved before v5 stands in (disclosed)",
+   "version": "transformers 5.0.0 (reported; fixed in 5.1.0) -> new venv", "model": "PekingU/rtdetr_v2_r18vd (public stand-in for the reporter's fine-tuned checkpoint)",
+   "expected_boundary": "load:transformers.weights (checkpoint head weights under model.decoder.* not loaded because the tied-weights mapping points the other way; the load report shows nothing missing)"},
+ "https://github.com/sgl-project/sglang/issues/18680": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"}
+}

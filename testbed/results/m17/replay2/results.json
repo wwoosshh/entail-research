@@ -1,0 +1,493 @@
+{
+ "passes": 20,
+ "reproduced": 15,
+ "verdicts": {
+  "missed": 14,
+  "not_reproduced": 5,
+  "unknown_only": 1
+ },
+ "detection": {
+  "numerator": 0,
+  "denominator_reproduced_consensus_K1": 8,
+  "rate": 0.0,
+  "per_rater": {
+   "rating_A": {
+    "denominator": 8,
+    "detected": 0
+   },
+   "rating_B": {
+    "denominator": 4,
+    "detected": 0
+   }
+  }
+ },
+ "false_alarms": {
+  "cases_with_false": [],
+  "broken_or_refused_in_non_K1_reproduced": 0
+ },
+ "class_share_among_rated": {
+  "rated": 86,
+  "consensus_counts": {
+   "K7": 31,
+   "K1": 31,
+   "K2": 5,
+   "K5": 5,
+   "K4": 10,
+   "split": 2,
+   "K3": 2
+  },
+  "K1_share": 0.36046511627906974,
+  "A_K1_share": 0.36046511627906974,
+  "B_K1_share": 0.26744186046511625
+ },
+ "kappa_7": {
+  "n": 86,
+  "observed": 0.7906976744186046,
+  "expected": 0.256625202812331,
+  "kappa": 0.7184430702073482
+ },
+ "kappa_k1_vs_rest": {
+  "n": 86,
+  "observed": 0.8604651162790697,
+  "expected": 0.5648999459167118,
+  "kappa": 0.6793039154754505
+ },
+ "rows": [
+  {
+   "position": 151,
+   "issue": "vllm#58532",
+   "case": "vl58532",
+   "run": "vl58532",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Triton fused MoE incorrectly indexes per-channel weight scales with per-tensor activations",
+   "version": "0.30.0 (open; fix PR #58570 open)",
+   "expected_boundary": "kernel:vllm.fused_moe (INT8 weight-scale layout per-channel vs per-tensor)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 1
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 with the fix PR's probe through the public fused_experts (static INT8 activations + per-channel weight scales: multiplying the routed expert's W13 channel scales by 4 leaves the output unchanged, max abs change 0.0, while the unrouted expert's perturbation is visible - the config has no per_out_ch_quant yet); entail on: the Triton launches pass (strides are passed); the scale layout the kernel is told is not a fact entail reads"
+  },
+  {
+   "position": 154,
+   "issue": "vllm#45734",
+   "case": "vl45734",
+   "run": "vl45734_skipserve",
+   "engine_version": {
+    "keys": {
+     "token_ids": [
+      205
+     ],
+     "hidden_states": [
+      205,
+      1,
+      2560
+     ]
+    },
+    "key": "hidden_states",
+    "shape": [
+     205,
+     2560
+    ],
+    "nan": false,
+    "nan_fraction": 0.0,
+    "max_abs_diff_vs_reference": 32.25
+   },
+   "title": "[Bug]: ExampleHiddenStatesConnector returns nan for hybrid attention model",
+   "version": "reported (June 2026, pre-#45849; read from the env dump at reproduction)",
+   "expected_boundary": "container:vllm.kv_connector (hidden-states group of a hybrid model's KV cache)",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "entail_decisions_on": {
+    "unknown": 3,
+    "pass": 29,
+    "broken": 3
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "not_reproduced",
+   "note": "not reproduced on the reported vLLM 0.23.0 (venv vllm0230 with transformers 5.12.1; Qwen3.5-4B, extract_hidden_states + ExampleHiddenStatesConnector, the reporter's script adapted to one card): the saved hidden states hold no NaN (205 x 2560, finite; cosine to the CPU transformers reference median 0.97, min 0.73; magnitudes differ, absmax 26.5 vs 58.75 - a layer or norm difference, not garbage). Two things entail did on this run: (1) with every adapter on, the vllm_serve adapter's get_parser wrapper raised TypeError (0.23.0's ParserManager.get_parser takes is_harmony) and the API server died - entail broke the run (principle 12; DEFERRED 21), so the entail-on result comes from a run with ENTAIL_SKIP=vllm_serve; (2) in that run entail said broken at container:vllm.allocate_slots for KV groups 0, 1 and 2 ('holds 512 KV slots for 205 tokens, not one allocation unit (256)') - not the expected boundary; real over-allocation on 0.23.0's hybrid block alignment or a rule mismatch, to be analysed after the replay (DEFERRED 22)"
+  },
+  {
+   "position": 157,
+   "issue": "vllm#48217",
+   "case": "vl48217",
+   "run": "vl48217",
+   "engine_version": "0.24.0",
+   "title": "[Bug]: Gemma4 parser classifies plain output without channel markers differently in streaming and no",
+   "version": "reported (July 2026, pre-#48262; read from the env dump at reproduction)",
+   "expected_boundary": "request:vllm.reasoning_parser (gemma4, streaming vs non-streaming state)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on the reported vLLM 0.24.0 (venv vllm0240; the report's Gemma4Parser drive: non-streaming returns the plain answer as content, streaming returns every chunk as reasoning and no content); entail on: no decision (the parser's state machine is not a site; the request-settings rule covers names, not classification)"
+  },
+  {
+   "position": 160,
+   "issue": "diffusers#13425",
+   "case": "df13425",
+   "run": "df13425",
+   "engine_version": "0.40.0",
+   "title": "Division by zero in rescale_noise_cfg can produce NaNs during inference",
+   "version": "0.40.0 (open)",
+   "expected_boundary": "load:diffusers.guidance (rescale_noise_cfg with zero-variance noise_cfg)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "missed",
+   "note": "reproduced on diffusers 0.40.0 (rescale_noise_cfg on a zero-variance noise_cfg: 16384 NaN); entail on: no decision (a division inside the guidance helper; no boundary)"
+  },
+  {
+   "position": 162,
+   "issue": "vllm#38643",
+   "case": "vl38643",
+   "run": "vl38643_0190",
+   "engine_version": "0.19.0",
+   "title": "[Bug]: Qwen3.5 (Qwen3_5ForConditionalGeneration) FLA linear attention tensor format mismatch causes ",
+   "version": "reported nightly 2026-03-31 (open); 0.30.0 first, then the reported version if the symptom is gone",
+   "expected_boundary": "kernel:vllm.fla (linear attention input layout [B, T, H] vs [B, H, T])",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 4,
+    "pass": 28
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "the report's checkpoint is an unnamed local NVFP4 export; the most-downloaded public NVFP4 export of the same model (AxionML/Qwen3.5-4B-NVFP4) was used. Not reproduced on vLLM 0.30.0 (coherent answers: Paris, 4); reproduced on 0.19.0 (venv vllm0190, the release nearest the reported nightly of 2026-03-31): multilingual token soup on both prompts, as reported. entail on (0.19.0): unknown at the config's unread keys and at the repack step (ModelOptNvFp4LinearMethod has no signature; conv1d not a matrix) - nothing at the linear-attention kernel's input layout, the expected site"
+  },
+  {
+   "position": 183,
+   "issue": "vllm#56578",
+   "case": "vl56578",
+   "run": "vl56578",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Triton attention softcap returns NaN for large attention logits",
+   "version": "0.30.0 if the helper still has the naive form; else cannot_install_version (main commit c191787a68)",
+   "expected_boundary": "kernel:vllm.triton_attention apply_softcap (numeric overflow of the softcap helper)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 1
+   },
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 (the report's Triton probe: apply_softcap gives [50, 50, nan, nan, nan, inf] where tanh gives finite values); entail on: no decision at any boundary (a numeric overflow inside a kernel helper; no launch through JITFunction.run with a strided tensor, no declaration involved)"
+  },
+  {
+   "position": 189,
+   "issue": "sglang#36938",
+   "case": "sg36938",
+   "run": "sg36938",
+   "engine_version": "0.5.20",
+   "title": "[Bug] Prefill input logprobs are served from the wrong request when a batch member is retracted or f",
+   "version": "0.5.20 (open)",
+   "expected_boundary": "request:sglang.logprobs (input-logprob offset per batch member)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on SGLang 0.5.20 (the fix PR's own CPU drive of process_batch_result_prefill: the active request gets [None, -1.0, -2.0], the retracted request's block, instead of [None, -30.0, -31.0]); entail on: no decision (no boundary at the scheduler's result processing)"
+  },
+  {
+   "position": 197,
+   "issue": "vllm#52576",
+   "case": "vl52576",
+   "run": "vl52576",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: Triton MoE and block-FP8 GEMMs mishandle the K tile — an out-of-bounds weight read, and wrong",
+   "version": "0.30.0 (open)",
+   "expected_boundary": "kernel:vllm.w8a8_block_fp8 (K tile vs quantization group; the KernelConfig tile rule's class) and kernel:vllm.fused_moe_gptq_awq (K mask)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 1
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 (w8a8_triton_block_scaled_mm with a tuned BLOCK_SIZE_K of 256 over a 128 group: max relative error 0.75; 64 and 128: 1e-4); entail on: the Triton launch boundary decided pass (strides are passed); the K-tile-vs-quantization-group relation (the KernelConfig tile rule of M15, adapters on SGLang only) is not checked on vLLM"
+  },
+  {
+   "position": 199,
+   "issue": "vllm#47986",
+   "case": "vl47986",
+   "run": "vl47986",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: DeepSeek V4/V32 parser can unwrap arguments using the wrong tool's schema when parallel tool ",
+   "version": "0.30.0 (open)",
+   "expected_boundary": "request:vllm.tool_parser deepseek_v4 (tool slot name vs schema)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K1",
+   "rating_B": "K4",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 (the report's drive: tool_b's arguments come back unwrapped as {\"city\": \"Tokyo\"} like tool_a's, though tool_b's schema has no city); entail on: no decision (no site at the DSML tool-call parser)"
+  },
+  {
+   "position": 206,
+   "issue": "transformers#45356",
+   "case": "tf45356",
+   "run": "tf45356_540",
+   "engine_version": "5.4.0",
+   "title": "Regression in Kimi-K2.5 tokenizer from 5.3.0 to 5.4.0: incorrect codec handling and misleading fix_m",
+   "version": "reported 5.4.0 (fixed 2026-04-13)",
+   "expected_boundary": "load:transformers.tokenizer (Vocab / special-token handling across the codec change)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K4",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "verdict": "unknown_only",
+   "note": "not reproduced on 5.17.0 (TikTokenTokenizer decodes 163607 to </think>); reproduced on the reported 5.4.0 (venv tf540: TokenizersBackend decodes 163607 to '' and encodes </think> to 163604); entail on (5.4.0): unknown at load:transformers.tokenizer - 'the engine's tokenizer holds 163584 base tokens and the model's vocabulary is 163840: not the model's tokenizer, and nothing here says whose it is' (the folder has no tokenizer file entail reads: tiktoken), plus the config's unread keys"
+  },
+  {
+   "position": 220,
+   "issue": "vllm#57740",
+   "case": "vl57740",
+   "run": "vl57740",
+   "engine_version": "0.30.0",
+   "title": "[Bug]: User-authored <|image_pad|> in text is misrecognized as image placeholder, causing image bind",
+   "version": "0.30.0 (open)",
+   "expected_boundary": "request:vllm.multimodal placeholders (template-generated placeholder provenance vs token-value matching)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "unknown": 2,
+    "pass": 35
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on vLLM 0.30.0 at the token level, exactly as reported (control: the 256-token image span at 15 after <|vision_start|>, the raw pad at 278; attack: the span at 20 inside the user text, not preceded by <|vision_start|>, the raw pad at 308); the answer did not flip here (YES in both orders with the drawn knife); entail on: only the config's unread keys (unknown) - no boundary at the multimodal placeholder binding"
+  },
+  {
+   "position": 228,
+   "issue": "transformers#46489",
+   "case": "tf46489",
+   "run": "tf46489_5102",
+   "engine_version": "5.10.2",
+   "title": "DeepSeek-Coder v1 tokenizer produces incorrect output on transformers v5+ (gap in PR #44801's fix)",
+   "version": "5.17.0 if the symptom is still there, else reported 5.10.2",
+   "expected_boundary": "load:transformers.tokenizer (the built tokenizer class against the files' declaration; Vocab)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K4",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "not reproduced on transformers 5.17.0 (TokenizersBackend, ids equal to tokenizer.json); reproduced on the reported 5.10.2 (venv tf5102: LlamaTokenizer, 4 of 4 strings differ from tokenizer.json); entail on (5.10.2): pass at the tokenizer boundary, no broken - the Vocab check compares sizes, not the ids the class produces"
+  },
+  {
+   "position": 232,
+   "issue": "transformers#47475",
+   "case": "tf47475",
+   "run": "tf47475",
+   "engine_version": "5.17.0",
+   "title": "[Zamba2] Causality violation in torch_forward: inter-chunk state recurrence reduces over the wrong a",
+   "version": "5.17.0 first; reported 5.6.0.dev0 -> 5.6.0 if the symptom is gone",
+   "expected_boundary": "inside the layer (Zamba2 inter-chunk recurrence axis): likely outside the class, screened in by the mechanical rules",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "entail_decisions_on": {
+    "unknown": 1,
+    "pass": 3
+   },
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "not_reproduced",
+   "note": "not reproduced on transformers 5.17.0 (Zamba2-1.2B float32 on CPU, torch path: max abs diff before position 400 is 0.0); the reported 5.6.0 is not installed - the six reported-version environments of this replay were used up (tf540, tf580, tf5102, vllm0240, vllm0230, vllm0111), so the reported version counts as cannot_install_version"
+  },
+  {
+   "position": 248,
+   "issue": "vllm#48831",
+   "case": "vl48831",
+   "run": "vl48831",
+   "engine_version": "0.24.0",
+   "title": "[Bug]: V1 Engine Produces Incorrect Scores for Qwen3-Reranker-0.6B on Long Sequences (>8K tokens)",
+   "version": "reported (July 2026, pre-#48901; read from the env dump at reproduction)",
+   "expected_boundary": "request:vllm.scoring (pooling under chunked prefill; the vllm_scoring adapter's site)",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "entail_decisions_on": {
+    "pass": 24,
+    "unknown": 2
+   },
+   "rating_A": "K7",
+   "rating_B": "K1",
+   "rating_C": "K7",
+   "consensus": "K7",
+   "verdict": "not_reproduced",
+   "note": "not reproduced on the reported vLLM 0.24.0 (venv vllm0240; Qwen3-Reranker-0.6B, a matching 8,674-token pair: offline LLM.score 0.825, the server's /score 0.830, 0.827, 0.827 over three requests) - the asynchronous copy the report blames did not race here (one 4070 Ti, eager); entail on: only the config's unread keys"
+  },
+  {
+   "position": 263,
+   "issue": "transformers#45812",
+   "case": "tf45812",
+   "run": "tf45812_580",
+   "engine_version": "5.8.0",
+   "title": "`AutoTokenizer` produces wrong token IDs for all Granite models (silent v4→v5 regression)",
+   "version": "reported 5.8.0 (fixed 2026-05-18)",
+   "expected_boundary": "load:transformers.tokenizer (the built tokenizer against the files' declaration; Vocab)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K1",
+   "rating_B": "K4",
+   "rating_C": "K1",
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "not reproduced on 5.17.0; reproduced on the reported 5.8.0 (venv tf580: GPT2Tokenizer, 2 of 5 strings differ from tokenizer.json); entail on (5.8.0): no non-pass decision - the Vocab check compares sizes, not the pre-tokenizer"
+  },
+  {
+   "position": 266,
+   "issue": "vllm#40466",
+   "case": "vl40466",
+   "run": "vl40466_0111",
+   "engine_version": "0.11.1",
+   "title": "[Bug]: Streaming output incorrectly mapped to `reasoning` field instead of `content` when `enable_th",
+   "version": "0.30.0 first; reported 0.11.1 (PR #40579 closed unmerged; issue closed completed 2026-05-07)",
+   "expected_boundary": "request:vllm.reasoning_parser (streaming state with enable_thinking=False; the request-settings site)",
+   "reproduced_off": false,
+   "reproduced_on": false,
+   "entail_decisions_on": {
+    "pass": 8
+   },
+   "rating_A": "K7",
+   "rating_B": "K7",
+   "rating_C": null,
+   "consensus": "K7",
+   "verdict": "not_reproduced",
+   "note": "not reproduced on vLLM 0.30.0 nor on the reported 0.11.1 (venv vllm0111): a Qwen3-0.6B server with the qwen3 reasoning parser and enable_thinking=False streams the answer in content, as the non-streaming path does; the report's version string (0.11.1rc6.dev157) is a vendor build"
+  },
+  {
+   "position": 270,
+   "issue": "vllm#41207",
+   "case": "vl41207",
+   "run": "vl41207_0190",
+   "engine_version": "0.19.0",
+   "title": "[Bug]: MM accuracy issue caused by transformers upgrade",
+   "version": "0.30.0 first; reported 0.19.2 dev + transformers 5.6.2 (issue closed stale 2026-07-31)",
+   "expected_boundary": "load:transformers.tokenizer / detokeniser (Vocab; the tokenizer class built against the files)",
+   "reproduced_off": null,
+   "reproduced_on": null,
+   "entail_decisions_on": {
+    "unknown": 1,
+    "pass": 2
+   },
+   "rating_A": "K7",
+   "rating_B": "K7",
+   "rating_C": null,
+   "consensus": "K7",
+   "verdict": "not_reproduced",
+   "note": "could not be run: on vLLM 0.30.0 DeepSeek-OCR's remote code fails to compile its Triton kernel under Triton 3.7 (a global LOG2E inside a jitted function); on 0.19.0 with the reported transformers 5.6.2 (venv vllm0190 re-pinned; addict, matplotlib, easydict added) the remote code imports LlamaFlashAttention2, which transformers 5 no longer has - the reporter's 0.19.2 dev build carried an in-tree path the 0.19.0 release does not; the reported combination is not an installable release"
+  },
+  {
+   "position": 273,
+   "issue": "vllm#42047",
+   "case": "vl42047",
+   "run": "vl42047",
+   "engine_version": "0.19.0",
+   "title": "[Bug] Gemma4ToolParser streams incorrect float values (e.g., 108.2 → 108.02)",
+   "version": "reported 0.19.0 (installed venv vllm0190)",
+   "expected_boundary": "request:vllm.tool_parser gemma4 (streaming argument reassembly)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 2
+   },
+   "rating_A": "K4",
+   "rating_B": "K4",
+   "rating_C": null,
+   "consensus": "K4",
+   "verdict": "missed",
+   "note": "reproduced on the reported vLLM 0.19.0 (venv vllm0190; parser-level with the stand-in tokenizer: non-streaming {\"left\": 108.2, \"right\": 22.8}, streaming {\"left\": 108.02, \"right\": 22.08}); entail on: no decision (no site at the tool parser's streaming reassembly)"
+  },
+  {
+   "position": 274,
+   "issue": "sglang#25055",
+   "case": "sg25055",
+   "run": "sg25055",
+   "engine_version": "0.5.20",
+   "title": "[Bug] OpenAI /v1/chat/completions: logprobs.content includes reasoning tokens, mismatches message.co",
+   "version": "0.5.20 first; reported (May 2026) if the symptom is gone",
+   "expected_boundary": "request:sglang.chat_completions (logprobs aligned with the parsed content)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {
+    "pass": 15
+   },
+   "rating_A": "K1",
+   "rating_B": "K1",
+   "rating_C": null,
+   "consensus": "K1",
+   "verdict": "missed",
+   "note": "reproduced on SGLang 0.5.20 (server, Qwen3-0.6B, qwen3 reasoning parser, logprobs=true + separate_reasoning=true: logprobs.content holds 155 tokens starting with <think> and the whole reasoning, while message.content is the parsed answer); entail on: no decision (no site at the chat-completion response assembly)"
+  },
+  {
+   "position": 284,
+   "issue": "vllm#50427",
+   "case": "vl50427",
+   "run": "vl50427",
+   "engine_version": null,
+   "title": "[Bug]: FlexAttention paged K/V offsets overflow int32 once `num_gpu_blocks ≥ 2**31 / (block_size · 2",
+   "version": "0.30.0 for the vLLM exposure check; the standalone trigger is torch-level and version-independent",
+   "expected_boundary": "kernel:torch.flex_attention paged offsets (index dtype vs the KV pool size)",
+   "reproduced_off": true,
+   "reproduced_on": true,
+   "entail_decisions_on": {},
+   "rating_A": "K2",
+   "rating_B": "K2",
+   "rating_C": null,
+   "consensus": "K2",
+   "verdict": "missed",
+   "note": "reproduced with the report's standalone trigger on torch 2.13 (block 65535 gives 0.75, block 65536 with 5 GiB mapped below gives -8.0: silent wrong attention); entail on: no decision - the compiled FlexAttention kernel is launched by Inductor, not through JITFunction.run"
+  }
+ ]
+}

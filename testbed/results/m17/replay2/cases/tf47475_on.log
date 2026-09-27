@@ -1,0 +1,11 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[entail] unknown at load:transformers.config: Zamba2Config config.json (every key it gives): keys taken by neither the config class nor a reader entail knows: time_step_limit, use_shared_mlp_adapter (the record holds the whole decision)
+W0926 16:16:21.737000 1978 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 16:16:21.778000 1978 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/406 [00:00<?, ?it/s]
+Loading weights:  80%|████████  | 325/406 [00:00<00:00, 3244.06it/s]
+Loading weights: 100%|██████████| 406/406 [00:00<00:00, 3898.02it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `mamba_chunk_scan_combined` is falling back to its reference PyTorch implementation because `mamba_ssm` is not installed. This is correct but much slower; install `mamba_ssm` for the optimized kernel.
+RESULT {"entail": "load", "transformers": "5.17.0", "model": "Zyphra/Zamba2-1.2B", "mamba_kernels": true, "max_abs_diff_before_P": 0.0, "per_position": {"0": 0.0, "100": 0.0, "200": 0.0, "255": 0.0, "256": 0.0, "300": 0.0, "399": 0.0}, "first_contaminated_position": null, "reproduced": false}

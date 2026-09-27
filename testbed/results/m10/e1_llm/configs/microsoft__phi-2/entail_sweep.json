@@ -1,0 +1,56 @@
+{
+ "rank": 153,
+ "id": "microsoft/phi-2",
+ "model_type": "phi",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "special_tokens_map.json",
+  "added_tokens.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 3406293,
+ "mistral_files": [],
+ "rows": {
+  "n": 51200,
+  "where": "model.embed_tokens.weight [51200, 2560] in model-00001-of-00002.safetensors (header only)",
+  "config_vocab_size": 51200
+ },
+ "sources": {
+  "candidates": [
+   [
+    50257,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    50257,
+    "vocab.json"
+   ]
+  ],
+  "rows": 51200,
+  "rows_where": "model.embed_tokens.weight [51200, 2560] in model-00001-of-00002.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "CodeGenTokenizer",
+  "vocab_size": 50257,
+  "reach": 50295
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 5.8
+}

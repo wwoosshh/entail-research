@@ -1,0 +1,49 @@
+{
+ "rank": 214,
+ "id": "IlyaGusev/saiga_llama3_8b",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 9110094,
+ "mistral_files": [],
+ "rows": {
+  "n": 128256,
+  "where": "model.embed_tokens.weight [128256, 4096] in model-00001-of-00004.safetensors (header only)",
+  "config_vocab_size": 128256
+ },
+ "sources": {
+  "candidates": [
+   [
+    128000,
+    "tokenizer.json (model.vocab)"
+   ]
+  ],
+  "rows": 128256,
+  "rows_where": "model.embed_tokens.weight [128256, 4096] in model-00001-of-00004.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "TokenizersBackend",
+  "vocab_size": 128000,
+  "reach": 128256
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=500000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 5.7
+}

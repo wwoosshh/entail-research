@@ -1,0 +1,18 @@
+{
+ "https://github.com/vllm-project/vllm/issues/50427": {"decision": "pass", "reason": "output error at the kernel level with a deterministic standalone trigger (no vLLM, no weights): FlexAttention's paged K/V offset is computed in int32, and past 65,536 blocks (num_kv_heads 8, head_size 128, block 16) the address wraps and the kernel reads the neighbouring allocation - an illegal memory access or silently wrong attention output (repro.py 65535 -> 0.75 correct, 65536 with 5 GiB mapped below -> -8.0); the trigger allocates ~9.5 GB, within one 12 GB card; open (PRs #50483 open); reported vLLM 0.23.1 dev on H800", "expected_boundary": "kernel:torch.flex_attention paged offsets (index dtype vs the KV pool size)", "version": "0.30.0 for the vLLM exposure check; the standalone trigger is torch-level and version-independent", "model": "none (standalone trigger)"},
+ "https://github.com/vllm-project/vllm/issues/40481": {"decision": "not_output", "reason": "automated CI-failure ticket (AMD nightly)"},
+ "https://github.com/sgl-project/sglang/issues/36886": {"decision": "cannot_run", "reason": "decode context parallel (dcp-size 8) on GLM-5.3-Flash"},
+ "https://github.com/huggingface/transformers/issues/48687": {"decision": "not_output", "reason": "a wrong router gradient under expert parallelism in training (the loss is correct); not an inference output"},
+ "https://github.com/huggingface/transformers/issues/45910": {"decision": "not_output", "reason": "borderline: a potential RoPE theta mismatch between DeepSeek V4's reference implementation and transformers' (the base declared for the compressed-KV branches) - an in-class-looking declaration question, but no output error is reported; closed the same day; noted in DEFERRED"},
+ "https://github.com/vllm-project/vllm/issues/44096": {"decision": "not_output", "reason": "LMCache lookup-lock leak (wrong cache_salt passed to free_lookup_locks)"},
+ "https://github.com/vllm-project/vllm/issues/46863": {"decision": "cannot_run", "reason": "tool calls left in content (output error at the parser) but the reported model is Llama-4-Scout-17B-16E FP8 on 4x A100"},
+ "https://github.com/vllm-project/vllm/issues/54252": {"decision": "cannot_run", "reason": "garbage from a compressed-tensors config on Qwen3.8-Flash-Next, AMD Strix (gfx1151)"},
+ "https://github.com/vllm-project/vllm/issues/44841": {"decision": "cannot_run", "reason": "garbled output (usage-labelled) but DeepSeek-R1-0528-Qwen3-8B bf16, over the bf16 4.5B bound"},
+ "https://github.com/sgl-project/sglang/issues/34392": {"decision": "not_output", "reason": "weight-loading AssertionError (wrong input dim for the audio embedder)"},
+ "https://github.com/huggingface/transformers/issues/47375": {"decision": "not_output", "reason": "training example scripts: checkpoint resume and eval-loss accounting"},
+ "https://github.com/sgl-project/sglang/issues/37187": {"decision": "cannot_run", "reason": "garbage with DP attention (output error) but GPT-OSS-120B MXFP4 at TP4/DP4/EP4"},
+ "https://github.com/vllm-project/vllm/issues/42621": {"decision": "cannot_run", "reason": "turboquant accuracy on a ~45B MoE model on H200"},
+ "https://github.com/vllm-project/vllm/issues/40485": {"decision": "not_output", "reason": "automated CI-failure ticket (AMD nightly)"},
+ "https://github.com/sgl-project/sglang/issues/36597": {"decision": "not_output", "reason": "crash (shape mismatch computing GEMM alphas) for NVFP4 MoE with EP > 1"},
+ "https://github.com/vllm-project/vllm/issues/40508": {"decision": "not_output", "reason": "automated CI-failure ticket (AMD nightly)"}
+}

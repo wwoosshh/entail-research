@@ -1,0 +1,16 @@
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=26, taken=26, left=()) (config: Qwen2Config config.json (every key it gives), declared); transformers.config uses Coverage(total=26, taken=25, left=('use_mrope',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=27, taken=27, left=()) (config: Qwen2Config config.json (every key it gives), declared); transformers.config uses Coverage(total=27, taken=26, left=('use_mrope',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class and read by nothing entail knows: use_mrope; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+W0925 23:54:25.910000 12192 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0925 23:54:25.939000 12192 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 24/338 [00:00<00:01, 239.98it/s]
+Loading weights:  14%|█▍        | 48/338 [00:00<00:01, 227.45it/s]
+Loading weights:  23%|██▎       | 77/338 [00:00<00:01, 252.67it/s]
+Loading weights:  30%|███       | 103/338 [00:00<00:00, 241.89it/s]
+Loading weights:  38%|███▊      | 128/338 [00:00<00:00, 237.15it/s]
+Loading weights:  48%|████▊     | 161/338 [00:00<00:00, 262.37it/s]
+Loading weights:  58%|█████▊    | 195/338 [00:00<00:00, 286.34it/s]
+Loading weights:  66%|██████▋   | 224/338 [00:00<00:00, 282.90it/s]
+Loading weights: 100%|██████████| 338/338 [00:00<00:00, 387.88it/s]
+RESULT transformers Qwen__Qwen2.5-1.5B entail=load ok=True load=2.691 used=sdpa 

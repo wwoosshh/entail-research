@@ -1,0 +1,132 @@
+INFO 09-27 08:21:04 [api_utils.py:286] non-default args: {'max_model_len': 2048, 'enable_prefix_caching': True, 'gpu_memory_utilization': 0.8, 'max_num_seqs': 16, 'disable_log_stats': True, 'model': '/home/<user>/.cache/huggingface/hub/models--zai-org--GLM-OCR/snapshots/2e85a62840ccac27daa451df36c736c4636b8628/'}
+INFO 09-27 08:21:04 [model.py:692] Resolved architecture: GlmOcrForConditionalGeneration
+INFO 09-27 08:21:04 [model.py:2030] Using max model len 2048
+WARNING 09-27 08:21:04 [model.py:994] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 09-27 08:21:05 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 09-27 08:21:05 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+WARNING 09-27 08:21:05 [system_utils.py:157] We must use the `spawn` multiprocessing start method. Overriding VLLM_WORKER_MULTIPROC_METHOD to 'spawn'. See https://docs.vllm.ai/en/latest/usage/troubleshooting.html#python-multiprocessing for more information. Reasons: WSL is detected and NVML is not compatible with fork
+INFO 09-27 08:21:08 [base.py:261] Multi-modal warmup completed in 3.156s
+INFO 09-27 08:21:09 [base.py:261] Readonly multi-modal warmup completed in 0.328s
+(EngineCore pid=231421) INFO 09-27 08:21:10 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='/home/<user>/.cache/huggingface/hub/models--zai-org--GLM-OCR/snapshots/2e85a62840ccac27daa451df36c736c4636b8628/', speculative_config=None, tokenizer='/home/<user>/.cache/huggingface/hub/models--zai-org--GLM-OCR/snapshots/2e85a62840ccac27daa451df36c736c4636b8628/', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=2048, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/home/<user>/.cache/huggingface/hub/models--zai-org--GLM-OCR/snapshots/2e85a62840ccac27daa451df36c736c4636b8628/, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 32, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=231421) INFO 09-27 08:21:11 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_2b1c430d184c48888c566ae65803c697 backend=nccl
+(EngineCore pid=231421) INFO 09-27 08:21:11 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=231421) INFO 09-27 08:21:11 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=231421) WARNING 09-27 08:21:11 [buffer_utils.py:47] Pinned memory is not available on this platform; falling back to device memory for UVA buffers.
+(EngineCore pid=231421) INFO 09-27 08:21:11 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=231421) INFO 09-27 08:21:11 [cuda.py:597] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=231421) INFO 09-27 08:21:11 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=231421) INFO 09-27 08:21:11 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=231421) INFO 09-27 08:21:12 [cuda.py:538] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=231421) INFO 09-27 08:21:12 [flash_attn.py:1116] Using FlashAttention version 2
+(EngineCore pid=231421) INFO 09-27 08:21:12 [weight_utils.py:895] Filesystem type for checkpoints: EXT4. Checkpoint size: 2.47 GiB. Available RAM: 20.47 GiB.
+(EngineCore pid=231421) INFO 09-27 08:21:12 [weight_utils.py:918] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=231421) 
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(EngineCore pid=231421) 
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  3.67it/s]
+(EngineCore pid=231421) 
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  3.66it/s]
+(EngineCore pid=231421) 
+(EngineCore pid=231421) INFO 09-27 08:21:13 [default_loader.py:430] Loading weights took 0.29 seconds
+(EngineCore pid=231421) INFO 09-27 08:21:13 [model_runner.py:428] Model loading took 2.21 GiB memory and 1.862422 seconds
+(EngineCore pid=231421) INFO 09-27 08:21:13 [topk_topp_sampler.py:78] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=231421) INFO 09-27 08:21:13 [utils.py:320] Using LBNHC KV cache layout.
+(EngineCore pid=231421) INFO 09-27 08:21:14 [encoder_runner.py:131] Encoder cache will be initialized with a budget of 8706 tokens, and profiled with 1 video items of the maximum feature size.
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.087000 231421 torch/_inductor/triton_bundler.py:418] Directory /home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/tmp.b8063513-1759-48b7-8872-fbfd55525293 is not empty - skipping!
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.089000 231421 torch/_inductor/triton_bundler.py:418] Directory /home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/tmp.96aacf9f-0361-4916-aca7-a4b787069d0b is not empty - skipping!
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_red_fused_fused_add_rms_norm_rms_norm_0
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.091000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/VC62ITZCWICVZKWVTUJ7P3UF73FOYF55SRMCQ4OSZK5D7TQ5GZ5A/triton_red_fused_fused_add_rms_norm_rms_norm_0.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_red_fused_fused_add_rms_norm_rms_norm_2
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.097000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/TZQ65FJHRZBDC2OM2WBIH6F3BSZ4IQVHNYJHGOJBWT7ZTW6K3UZA/triton_red_fused_fused_add_rms_norm_rms_norm_2.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:418] Directory /home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/tmp.435cb22e-19ee-40b1-a162-804e41b1201c is not empty - skipping!
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_red_fused_fused_add_rms_norm_rms_norm_0
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.098000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/VC62ITZCWICVZKWVTUJ7P3UF73FOYF55SRMCQ4OSZK5D7TQ5GZ5A/triton_red_fused_fused_add_rms_norm_rms_norm_0.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_poi_fused_0
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.099000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/6JLC3IXEBVPEFZNHNFVQTZ6H64M75VUSPGINK6QIGUBBUBCBTXCQ/triton_poi_fused_0.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_poi_fused_mul_silu_slice_1
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.100000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/UMSZYNNQ4EYIHGMOTGPEJVDLCNRFM5YNTURWD5JMN64TNGATC42A/triton_poi_fused_mul_silu_slice_1.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_poi_fused_2
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.138000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/ZS3MMFKBIVMQX6XW6YGPGYANRZLY37NI6OVKWSGEPMWRRPG5WD3A/triton_poi_fused_2.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_poi_fused_cat_index_select_split_split_with_sizes_3
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.141000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/YJBHWFDER7XOCZBV5GPBIUWSKBIGGSBLU2BBB2R4V6HXIKXMQ42A/triton_poi_fused_cat_index_select_split_split_with_sizes_3.cubin')
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242] Failed to reload cubin file statically launchable autotuner triton_poi_fused_4
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242] Traceback (most recent call last):
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/triton_bundler.py", line 240, in load_autotuners
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242]     compile_result.reload_cubin_path()
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242]   File "/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 2592, in reload_cubin_path
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242]     raise RuntimeError(
+(EngineCore pid=231421) [rank0]:W0927 08:21:17.148000 231421 torch/_inductor/triton_bundler.py:242] RuntimeError: ('Cubin file saved by TritonBundler not found at %s', '/home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/inductor_cache/triton/0/QU7ET25XIPL75ZLLUSCUH3RGCON2OTSFL6M4SS43IK7F5C64JTTA/triton_poi_fused_4.cubin')
+(EngineCore pid=231421) INFO 09-27 08:21:17 [caching.py:343] reconstructed serializable fn from standalone compile artifacts. num_artifacts=4 num_submods=17
+(EngineCore pid=231421) INFO 09-27 08:21:17 [decorators.py:313] Directly load AOT compilation from path /home/<user>/.cache/vllm/torch_compile_cache/torch_aot_compile/e355f38c54fe66d97519d45386f80ebb2808bb55ad5fd80249ec495e5f63ce81/rank_0_0/model
+(EngineCore pid=231421) INFO 09-27 08:21:17 [monitor.py:53] torch.compile took 0.34 s in total
+(EngineCore pid=231421) INFO 09-27 08:21:17 [monitor.py:81] Initial profiling/warmup run took 0.55 s
+(EngineCore pid=231421) 
+Capturing CUDA graphs (PIECEWISE):   0%|          | 0/7 [00:00<?, ?it/s]
+Capturing CUDA graphs (PIECEWISE):  86%|████████▌ | 6/7 [00:00<00:00, 58.27it/s]
+Capturing CUDA graphs (PIECEWISE): 100%|██████████| 7/7 [00:00<00:00, 56.14it/s]
+(EngineCore pid=231421) 
+Capturing CUDA graphs (FULL):   0%|          | 0/2 [00:00<?, ?it/s]
+Capturing CUDA graphs (FULL): 100%|██████████| 2/2 [00:00<00:00, 71.03it/s]
+(EngineCore pid=231421) INFO 09-27 08:21:19 [model_runner.py:1066] Graph capturing finished in 1 secs, took 0.04 GiB
+(EngineCore pid=231421) INFO 09-27 08:21:19 [gpu_worker.py:640] Available KV cache memory: 6.24 GiB
+(EngineCore pid=231421) INFO 09-27 08:21:19 [gpu_worker.py:655] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8000 is equivalent to --gpu-memory-utilization=0.7961 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8039. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=231421) INFO 09-27 08:21:19 [kv_cache_utils.py:2395] GPU KV cache size: 102,288 tokens, Maximum concurrency for 2,048 tokens per request: 49.95x
+(EngineCore pid=231421) INFO 09-27 08:21:19 [kernel_warmup.py:172] JIT kernel warmup starting.
+(EngineCore pid=231421) INFO 09-27 08:21:19 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+(EngineCore pid=231421) INFO 09-27 08:21:19 [qwen_vl_triton_warmup.py:98] Warmed M-RoPE Triton kernels.
+(EngineCore pid=231421) 
+Capturing CUDA graphs (PIECEWISE):   0%|          | 0/7 [00:00<?, ?it/s]
+Capturing CUDA graphs (PIECEWISE): 100%|██████████| 7/7 [00:00<00:00, 68.64it/s]
+Capturing CUDA graphs (PIECEWISE): 100%|██████████| 7/7 [00:00<00:00, 68.30it/s]
+(EngineCore pid=231421) 
+Capturing CUDA graphs (FULL):   0%|          | 0/5 [00:00<?, ?it/s]
+Capturing CUDA graphs (FULL): 100%|██████████| 5/5 [00:00<00:00, 91.79it/s]
+(EngineCore pid=231421) INFO 09-27 08:21:21 [model_runner.py:1066] Graph capturing finished in 1 secs, took 0.03 GiB
+(EngineCore pid=231421) INFO 09-27 08:21:21 [gpu_worker.py:825] CUDA graph pool memory: 0.03 GiB (actual), 0.05 GiB (estimated), difference: 0.01 GiB (41.2%).
+(EngineCore pid=231421) INFO 09-27 08:21:21 [gpu_worker.py:888] Free memory on device (10.78/11.99 GiB) on startup. Desired GPU memory utilization is (0.8, 9.59 GiB). Actual usage is 2.5 GiB for consumed memory (weights + non-torch), 0.85 GiB for peak activation, and 0.03 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=6511515956` (6.06 GiB) to fit into requested memory, or `--kv-cache-memory=7779034624` (7.24 GiB) to fully utilize gpu memory. Current kv cache memory in use is 6.24 GiB.
+(EngineCore pid=231421) INFO 09-27 08:21:22 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=231421) INFO 09-27 08:21:22 [torch_utils.py:287] Reducing Torch threads from 14 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=231421) INFO 09-27 08:21:22 [core.py:372] init engine (profile, create kv cache, warmup model) took 9.15 s (compilation: 0.34 s)
+(EngineCore pid=231421) INFO 09-27 08:21:22 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 09-27 08:21:22 [hf.py:642] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+RESULT {"model": "/home/<user>/.cache/huggingface/hub/models--zai-org--GLM-OCR/snapshots/2e85a62840ccac27daa451df36c736c4636b8628/", "load_s": 18.3, "plans": ["alone"]}
+INFO 09-27 08:21:23 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=231421) INFO 09-27 08:21:23 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=231421) INFO 09-27 08:21:23 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=231421) INFO 09-27 08:21:23 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=231421) INFO 09-27 08:21:23 [core.py:1355] [shutdown] EngineCore: exiting busy loop

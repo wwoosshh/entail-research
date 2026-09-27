@@ -1,0 +1,35 @@
+W0927 08:26:18.504000 232970 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0927 08:26:18.528000 232970 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/426 [00:00<03:03,  2.32it/s]
+Loading weights:   6%|▋         | 27/426 [00:00<00:06, 65.03it/s]
+Loading weights:  10%|▉         | 42/426 [00:00<00:04, 86.93it/s]
+Loading weights:  14%|█▍        | 59/426 [00:00<00:03, 105.61it/s]
+Loading weights:  17%|█▋        | 74/426 [00:00<00:03, 106.70it/s]
+Loading weights:  21%|██        | 90/426 [00:01<00:02, 115.81it/s]
+Loading weights:  24%|██▍       | 104/426 [00:01<00:02, 117.76it/s]
+Loading weights:  28%|██▊       | 118/426 [00:01<00:02, 107.96it/s]
+Loading weights:  31%|███       | 133/426 [00:01<00:02, 109.18it/s]
+Loading weights:  35%|███▌      | 151/426 [00:01<00:02, 116.43it/s]
+Loading weights:  39%|███▉      | 168/426 [00:01<00:02, 125.11it/s]
+Loading weights:  43%|████▎     | 185/426 [00:01<00:01, 130.87it/s]
+Loading weights:  47%|████▋     | 199/426 [00:01<00:01, 126.71it/s]
+Loading weights:  52%|█████▏    | 220/426 [00:02<00:01, 136.61it/s]
+Loading weights:  55%|█████▍    | 234/426 [00:03<00:07, 26.97it/s] 
+Loading weights:  57%|█████▋    | 244/426 [00:04<00:06, 27.18it/s]
+Loading weights:  60%|█████▉    | 254/426 [00:04<00:05, 32.27it/s]
+Loading weights:  63%|██████▎   | 267/426 [00:04<00:03, 41.04it/s]
+Loading weights:  65%|██████▌   | 277/426 [00:04<00:03, 40.10it/s]
+Loading weights:  67%|██████▋   | 285/426 [00:04<00:03, 42.65it/s]
+Loading weights:  69%|██████▊   | 292/426 [00:04<00:02, 44.97it/s]
+Loading weights:  72%|███████▏  | 307/426 [00:04<00:01, 61.24it/s]
+Loading weights:  76%|███████▌  | 322/426 [00:05<00:01, 77.52it/s]
+Loading weights:  79%|███████▉  | 337/426 [00:05<00:00, 90.65it/s]
+Loading weights:  82%|████████▏ | 351/426 [00:05<00:00, 98.69it/s]
+Loading weights:  87%|████████▋ | 370/426 [00:05<00:00, 115.89it/s]
+Loading weights:  90%|████████▉ | 383/426 [00:05<00:00, 109.34it/s]
+Loading weights: 100%|██████████| 426/426 [00:05<00:00, 75.47it/s] 
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+RESULT {"engine": "hf", "model": "/home/<user>/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/", "dtype": "float32", "device": "cpu", "layers": "model.layers: 32 x ['Qwen3_5DecoderLayer']", "probes": {"story_a": {"tokens": 207, "layers": 32}, "story_b": {"tokens": 204, "layers": 32}, "code": {"tokens": 107, "layers": 32}, "numbers": {"tokens": 69, "layer

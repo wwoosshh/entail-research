@@ -1,0 +1,51 @@
+{
+ "rank": 67,
+ "id": "openai-community/gpt2-large",
+ "model_type": "gpt2",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "tokenizer_config.json"
+ ],
+ "bytes": 2853875,
+ "mistral_files": [],
+ "rows": {
+  "n": 50257,
+  "where": "wte.weight [50257, 1280] in model.safetensors (header only)",
+  "config_vocab_size": 50257
+ },
+ "sources": {
+  "candidates": [
+   [
+    50257,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    50257,
+    "vocab.json"
+   ]
+  ],
+  "rows": 50257,
+  "rows_where": "wte.weight [50257, 1280] in model.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "GPT2Tokenizer",
+  "vocab_size": 50257,
+  "reach": 50257
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 4.5
+}

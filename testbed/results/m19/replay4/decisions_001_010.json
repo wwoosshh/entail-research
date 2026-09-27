@@ -1,0 +1,12 @@
+{
+ "https://github.com/vllm-project/vllm/issues/31394": {"decision": "cannot_run", "reason": "Qwen3-Coder-480B FP8 MoE on B200/GB300 (Blackwell, 480B)"},
+ "https://github.com/huggingface/diffusers/issues/12529": {"decision": "not_output", "reason": "tiled VAE raises a tensor size mismatch (crash)"},
+ "https://github.com/sgl-project/sglang/issues/21049": {"decision": "not_output", "reason": "test refactoring (shared GSM8K helpers)"},
+ "https://github.com/vllm-project/vllm/issues/37804": {"decision": "cannot_run", "reason": "DeepGemm E8M0 on Blackwell (SM100+) only, Qwen3.5-35B-A3B-FP8 with TP4"},
+ "https://github.com/vllm-project/vllm/issues/32545": {"decision": "no_repro_info", "reason": "vision embedding differs from transformers' Conv2d; no input and no expected/actual values given (a question whether the custom Conv2d is expected)"},
+ "https://github.com/vllm-project/vllm/issues/37836": {"decision": "not_output", "reason": "code reading of RunAI object-storage tokenizer pull; no wrong output observed"},
+ "https://github.com/vllm-project/vllm/issues/33276": {"decision": "no_repro_info", "reason": "gemma-3 GGUF not following a JSON instruction vs llama.cpp; the prompt is elided ('xxxx'), sampling at temperature 0.7"},
+ "https://github.com/vllm-project/vllm/issues/28028": {"decision": "not_output", "reason": "CUDA illegal memory access (crash)"},
+ "https://github.com/sgl-project/sglang/issues/11650": {"decision": "cannot_run", "reason": "Ascend NPU attention backend"},
+ "https://github.com/vllm-project/vllm/issues/35980": {"decision": "cannot_run", "reason": "Qwen3-32B-AWQ on 4 x L40 (32B, several GPUs)"}
+}

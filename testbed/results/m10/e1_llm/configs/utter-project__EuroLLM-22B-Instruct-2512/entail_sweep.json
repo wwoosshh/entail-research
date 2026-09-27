@@ -1,0 +1,54 @@
+{
+ "rank": 276,
+ "id": "utter-project/EuroLLM-22B-Instruct-2512",
+ "model_type": "llama",
+ "files": [
+  "tokenizer.json",
+  "tokenizer.model",
+  "special_tokens_map.json",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 18233121,
+ "mistral_files": [],
+ "rows": {
+  "n": 128000,
+  "where": "model.embed_tokens.weight [128000, 6144] in model-00001-of-00010.safetensors (header only)",
+  "config_vocab_size": 128000
+ },
+ "sources": {
+  "candidates": [
+   [
+    128000,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    128000,
+    "tokenizer.model (sentencepiece pieces)"
+   ]
+  ],
+  "rows": 128000,
+  "rows_where": "model.embed_tokens.weight [128000, 6144] in model-00001-of-00010.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "LlamaTokenizer",
+  "vocab_size": 128000,
+  "reach": 128000
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=1000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": []
+ },
+ "other_problems": [],
+ "seconds": 8.6
+}

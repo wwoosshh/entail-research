@@ -1,0 +1,23 @@
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=29, taken=29, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=29, taken=28, left=('unsloth_fixed',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+[entail] unknown at load:transformers.config: Coverage declared Coverage(total=30, taken=30, left=()) (config: LlamaConfig config.json (every key it gives), declared); transformers.config uses Coverage(total=30, taken=29, left=('unsloth_fixed',)) (engine: transformers config class: a key is taken if the class knows it or its value landed in a field it knows, verified); rule: declared, but taken by nothing entail knows: the config class does not take it and no reader of it is registered; note: not taken by the class and read by nothing entail knows: unsloth_fixed; read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)
+W0926 00:52:31.059000 1098 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0926 00:52:31.088000 1098 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]
+Loading weights:   6%|▋         | 16/254 [00:00<00:01, 137.13it/s]
+Loading weights:  12%|█▏        | 30/254 [00:00<00:01, 135.78it/s]
+Loading weights:  17%|█▋        | 44/254 [00:00<00:01, 127.82it/s]
+Loading weights:  24%|██▍       | 62/254 [00:00<00:01, 145.27it/s]
+Loading weights:  30%|███       | 77/254 [00:00<00:01, 141.33it/s]
+Loading weights:  36%|███▌      | 92/254 [00:00<00:01, 135.16it/s]
+Loading weights:  42%|████▏     | 106/254 [00:00<00:01, 130.80it/s]
+Loading weights:  47%|████▋     | 120/254 [00:00<00:01, 121.81it/s]
+Loading weights:  52%|█████▏    | 133/254 [00:01<00:01, 114.40it/s]
+Loading weights:  58%|█████▊    | 147/254 [00:01<00:00, 113.26it/s]
+Loading weights:  63%|██████▎   | 159/254 [00:01<00:00, 111.26it/s]
+Loading weights: 100%|██████████| 254/254 [00:01<00:00, 193.04it/s]
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=131072) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=131072) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Both `max_new_tokens` (=16) and `max_length`(=131072) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+RESULT transformers Llama-3.2-3B-Instruct entail=load ok=True load=3.988 used=sdpa 

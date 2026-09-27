@@ -1,0 +1,11 @@
+[2026-09-26 12:22:11] --enable-lora is set to True because --lora-paths is provided.
+
+Multi-thread loading shards:   0% Completed | 0/2 [00:00<?, ?it/s]
+Multi-thread loading shards:  50% Completed | 1/2 [00:00<00:00,  2.73it/s]
+Multi-thread loading shards: 100% Completed | 2/2 [00:00<00:00,  3.83it/s]
+Multi-thread loading shards: 100% Completed | 2/2 [00:00<00:00,  3.61it/s]
+[entail] resolved at load:sglang.adapter_config: Coverage declared Coverage(total=1, taken=1, left=()) (file: /home/<user>/models/m17/lora/rslora/adapter_config.json#use_rslora, declared); sglang uses Coverage(total=1, taken=0, left=('use_rslora',)) (engine: sglang reads r, lora_alpha, target_modules, use_dora, verified); rule: the adapter's config declares a setting that changes how its weights apply and this consumer does not read it; changed: carry the declared use_rslora into the consumer (to 8.0); note: use_rslora=true is declared and sglang does not read it: the adapter is scaled by lora_alpha / r instead of lora_alpha / sqrt(r): sqrt(r) times too weak (4x at r=16, 8x at r=64)
+
+Multi-thread loading shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00, 2343.19it/s]
+RESULT {"entail": "load", "sglang": "0.5.20", "adapter": "/home/<user>/models/m17/lora/rslora", "use_rslora": true, "base_text": " Paris. The capital of Germany is Berlin. The capital of", "lora_text": " Paris. The capital of Germany is Berlin. The capital of", "same_as_base": true}

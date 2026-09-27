@@ -1,0 +1,51 @@
+{
+ "case": "block_k256_warm",
+ "target": "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm",
+ "wrapped": true,
+ "first_call_ms": 0.3376710000111416,
+ "rel_err": {
+  "first": [
+   0.0026479344590336833
+  ],
+  "later": [
+   0.0026479344590336833
+  ],
+  "kernel": [
+   0.6119364429380265
+  ]
+ },
+ "later_equals_kernel": false,
+ "ms": {
+  "kernel": 0.12476000003402987,
+  "wrapped_after_decision": 0.3466029999970033
+ },
+ "decisions": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "note": "w8a8_triton_block_scaled_mm (vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm) on a probe of 16 rows made from the engine's warm-up call of 16 rows (its shapes, dtypes and strides; the token values made up, seed 20260927), before any graph of that size is captured, against entail's definition (the product of the block-dequantized FP8 operands): max |kernel - definition| 0.125 over 8192 values; the definition's own noise 0.25 (typical 0.0625); scale 40.2; 0 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 0.123; worst value at output 0 index 6702: kernel 0.01251, definition -0.03174, reference 0.01379, allowed 0.5"
+  },
+  {
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "w8a8_triton_block_scaled_mm sent to entail's definition from this call on, for every later call in the process",
+   "note": "w8a8_triton_block_scaled_mm (vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm) on a probe of 256 rows made from the engine's warm-up call of 256 rows (its shapes, dtypes and strides; the token values made up, seed 20260927), before any graph of that size is captured, against entail's definition (the product of the block-dequantized FP8 operands): max |kernel - definition| 29.2 over 131072 values; the definition's own noise 0.25 (typical 0.0625); scale 52.8; 114124 values beyond FACTOR 8 x noise + 4 ulp (bfloat16); worst ratio to the allowance 26.5; worst value at output 0 index 86254: kernel 5.5, definition 34.5, reference 34.5, allowed 1.58"
+  }
+ ],
+ "stats": {
+  "instrumented": 1,
+  "warm_decided": 2,
+  "sent_to_definition": 1,
+  "definition_calls": 23,
+  "checks": 2,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 1,
+  "passed": {
+   "kernel_reference": 1
+  }
+ }
+}

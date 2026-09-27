@@ -1,0 +1,14 @@
+{
+ "https://github.com/vllm-project/vllm/issues/26636": {"decision": "not_output", "reason": "the async HTTP client decodes signed URLs (403 from S3); a request failure, not a model output"},
+ "https://github.com/sgl-project/sglang/issues/18675": {"decision": "cannot_run", "reason": "duplicate of sglang#18674: FA3 (Hopper-only) under TP/DP padding"},
+ "https://github.com/vllm-project/vllm/issues/33123": {"decision": "cannot_run", "reason": "ROCm (gfx950): bf16 GEMM tiling differs between cache miss and hit"},
+ "https://github.com/vllm-project/vllm/issues/26121": {"decision": "cannot_run", "reason": "Qwen2.5-VL-7B-Instruct in bf16 with TP4"},
+ "https://github.com/vllm-project/vllm/issues/30445": {"decision": "cannot_run", "reason": "MiniMax-M2-AWQ (230B) on GB10"},
+ "https://github.com/vllm-project/vllm/issues/30996": {"decision": "not_output", "reason": "LMCache PrometheusLogger error message"},
+ "https://github.com/vllm-project/vllm/issues/34642": {"decision": "not_output", "reason": "an incorrect warning when both Mistral and HF formats are present"},
+ "https://github.com/sgl-project/sglang/issues/13011": {"decision": "cannot_run", "reason": "Kimi-K2-Thinking with TP8 on B200"},
+ "https://github.com/sgl-project/sglang/issues/15527": {"decision": "cannot_run", "reason": "pipeline parallel (several GPUs) with pp_async_batch_depth > 1"},
+ "https://github.com/vllm-project/vllm/issues/37618": {"decision": "cannot_run", "reason": "Qwen3.5 with FP8 KV cache on B200 (CI run only)"},
+ "https://github.com/huggingface/diffusers/issues/12905": {"decision": "cannot_run", "reason": "Z-Image (6B DiT with a 4B text encoder, bf16) does not fit 12 GB; the report gives no reproduction either"},
+ "https://github.com/sgl-project/sglang/issues/21132": {"decision": "cannot_run", "reason": "Qwen3.5-397B with EP8 on RTX PRO 6000 Blackwell"}
+}

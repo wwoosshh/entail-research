@@ -1,0 +1,150 @@
+{
+ "name": "tf.switch_router",
+ "about": "SwitchTransformersTop1Router (transformers 5.17.0); transformers#48293's operator",
+ "tol": 0.0001,
+ "forms": [
+  {},
+  {
+   "capacity": 1
+  },
+  {
+   "capacity": 2
+  },
+  {
+   "capacity": 4
+  }
+ ],
+ "checks": {
+  "definition": {
+   "status": "fail",
+   "rel": Infinity
+  },
+  "forms": {
+   "status": "fail",
+   "rows": [
+    {
+     "form": {},
+     "status": "fail",
+     "rel": Infinity
+    },
+    {
+     "form": {
+      "capacity": 1
+     },
+     "status": "fail",
+     "rel": Infinity
+    },
+    {
+     "form": {
+      "capacity": 2
+     },
+     "status": "fail",
+     "rel": Infinity
+    },
+    {
+     "form": {
+      "capacity": 4
+     },
+     "status": "fail",
+     "rel": Infinity
+    }
+   ]
+  },
+  "layout": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "hidden",
+     "status": "pass",
+     "rel": 0.0
+    }
+   ]
+  },
+  "reads": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "hidden",
+     "parity": 1,
+     "status": "pass",
+     "definition_moved": 0.7071067811865476,
+     "op_moved": 0.7071067811865476
+    },
+    {
+     "input": "hidden",
+     "parity": 0,
+     "status": "pass",
+     "definition_moved": 0.7071067811865476,
+     "op_moved": 0.7071067811865476
+    }
+   ]
+  },
+  "magnitude": {
+   "status": "pass",
+   "inputs": [
+    "hidden"
+   ],
+   "rows": [
+    {
+     "scale": 10,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 1000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 10000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    },
+    {
+     "scale": 100000,
+     "status": "pass",
+     "op_nonfinite": 0.0,
+     "rel": null
+    }
+   ]
+  },
+  "degenerate": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "hidden",
+     "fill": "zeros",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    },
+    {
+     "input": "hidden",
+     "fill": "constant",
+     "status": "pass",
+     "op_nonfinite": 0.0
+    }
+   ]
+  },
+  "poison": {
+   "status": "pass",
+   "rows": [
+    {
+     "input": "hidden",
+     "status": "pass",
+     "op_nonfinite": 0.0125,
+     "definition_nonfinite": 0.03308823529411765
+    }
+   ]
+  }
+ },
+ "seconds": 0.1
+}

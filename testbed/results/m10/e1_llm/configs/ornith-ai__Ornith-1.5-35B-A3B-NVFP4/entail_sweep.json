@@ -1,0 +1,59 @@
+{
+ "rank": 87,
+ "id": "ornith-ai/Ornith-1.5-35B-A3B-NVFP4",
+ "model_type": "qwen3_5_moe",
+ "files": [
+  "tokenizer.json",
+  "vocab.json",
+  "merges.txt",
+  "model.safetensors.index.json",
+  "tokenizer_config.json"
+ ],
+ "bytes": 33264665,
+ "mistral_files": [],
+ "rows": {
+  "n": 248320,
+  "where": "model.language_model.embed_tokens.weight [248320, 2048] in model-00001-of-00003.safetensors (header only)",
+  "config_vocab_size": 248320
+ },
+ "sources": {
+  "candidates": [
+   [
+    248044,
+    "tokenizer.json (model.vocab)"
+   ],
+   [
+    248044,
+    "vocab.json"
+   ]
+  ],
+  "rows": 248320,
+  "rows_where": "model.language_model.embed_tokens.weight [248320, 2048] in model-00001-of-00003.safetensors (header only)",
+  "problems": []
+ },
+ "tokenizer": {
+  "class": "Qwen2Tokenizer",
+  "vocab_size": 248044,
+  "reach": 248077
+ },
+ "vocab": [
+  {
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "note": ""
+  }
+ ],
+ "rotary": {
+  "facts": [
+   "Rotary(rope_type='default', theta=10000000, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None)"
+  ],
+  "problems": [
+   "<workspace>/testbed/results/m10/e1_llm/configs/ornith-ai__Ornith-1.5-35B-A3B-NVFP4/config.json#text_config.rope_parameters: RoPE keys ['mrope_interleaved', 'mrope_section', 'partial_rotary_factor'] are not in vocabulary v6; the Rotary fact does not carry them"
+  ]
+ },
+ "other_problems": [
+  "<workspace>/testbed/results/m10/e1_llm/configs/ornith-ai__Ornith-1.5-35B-A3B-NVFP4/config.json#quantization_config: quantization method 'modelopt' is not in vocabulary v6",
+  "<workspace>/testbed/results/m10/e1_llm/configs/ornith-ai__Ornith-1.5-35B-A3B-NVFP4/tokenizer_config.json#chat_template differs from <workspace>/testbed/results/m10/e1_llm/configs/ornith-ai__Ornith-1.5-35B-A3B-NVFP4/chat_template.jinja, which transformers reads first; the entry is not what runs"
+ ],
+ "seconds": 10.7
+}
