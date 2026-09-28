@@ -1,0 +1,137 @@
+{
+ "default_num_ctx": 2048,
+ "keep": 5,
+ "scenarios": {
+  "default_context_model_has_room": {
+   "prompt_tokens": 10983,
+   "model_context": 32768,
+   "off": {
+    "answer_right": false,
+    "tokens_seen": 2048,
+    "stopped": false,
+    "decisions": []
+   },
+   "on": {
+    "answer_right": true,
+    "tokens_seen": 10983,
+    "stopped": false,
+    "decisions": [
+     {
+      "verdict": "resolved",
+      "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+      "resolution": "give the prompt the context it needs, within what the model declares (to 10983)",
+      "target": 10983
+     }
+    ]
+   },
+   "strict": {
+    "answer_right": true,
+    "tokens_seen": 10983,
+    "stopped": false,
+    "decisions": [
+     {
+      "verdict": "resolved",
+      "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+      "resolution": "give the prompt the context it needs, within what the model declares (to 10983)",
+      "target": 10983
+     }
+    ]
+   }
+  },
+  "user_set_num_ctx": {
+   "prompt_tokens": 10983,
+   "model_context": 32768,
+   "num_ctx": 2048,
+   "off": {
+    "answer_right": false,
+    "tokens_seen": 2048,
+    "stopped": false,
+    "decisions": []
+   },
+   "on": {
+    "answer_right": false,
+    "tokens_seen": 2048,
+    "stopped": false,
+    "decisions": [
+     {
+      "verdict": "broken",
+      "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+      "resolution": null,
+      "target": null
+     }
+    ]
+   },
+   "strict": {
+    "answer_right": null,
+    "tokens_seen": null,
+    "stopped": true,
+    "decisions": [
+     {
+      "verdict": "refused",
+      "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+      "resolution": null,
+      "target": null
+     }
+    ]
+   }
+  },
+  "model_without_room": {
+   "prompt_tokens": 10983,
+   "model_context": 8192,
+   "off": {
+    "answer_right": false,
+    "tokens_seen": 2048,
+    "stopped": false,
+    "decisions": []
+   },
+   "on": {
+    "answer_right": false,
+    "tokens_seen": 2048,
+    "stopped": false,
+    "decisions": [
+     {
+      "verdict": "broken",
+      "rule": "the consumer differs from the declaration and no resolution is registered",
+      "resolution": null,
+      "target": null
+     }
+    ]
+   },
+   "strict": {
+    "answer_right": null,
+    "tokens_seen": null,
+    "stopped": true,
+    "decisions": [
+     {
+      "verdict": "refused",
+      "rule": "the consumer differs from the declaration and no resolution is registered",
+      "resolution": null,
+      "target": null
+     }
+    ]
+   }
+  },
+  "prompt_fits": {
+   "prompt_tokens": 1000,
+   "model_context": 32768,
+   "off": {
+    "answer_right": true,
+    "tokens_seen": 1000,
+    "stopped": false,
+    "decisions": []
+   },
+   "on": {
+    "answer_right": true,
+    "tokens_seen": 1000,
+    "stopped": false,
+    "decisions": []
+   },
+   "strict": {
+    "answer_right": true,
+    "tokens_seen": 1000,
+    "stopped": false,
+    "decisions": []
+   }
+  }
+ }
+}

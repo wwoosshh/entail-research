@@ -1,0 +1,14 @@
+--- vllm off (ENTAIL=off, seed=-) exit=0
+RESULT {"engine": "vllm", "tag": "off", "entail": "off", "seed": null, "when": "2026-09-28 04:40:40", "texts": ["Paris. The capital of Germany is Berlin. The capital of Ital", "Gravity is the force that attracts two objects toward each o", "1, 2, 3, 5, 7, 11, 
+--- vllm on (ENTAIL=load, seed=-) exit=0
+RESULT {"engine": "vllm", "tag": "on", "entail": "load", "seed": null, "when": "2026-09-28 04:41:51", "texts": ["Paris. The capital of Germany is Berlin. The capital of Ital", "Gravity is the force that attracts two objects toward each o", "1, 2, 3, 5, 7, 11, 
+--- vllm seeded (ENTAIL=load, seed=short_blocks) exit=0
+(EngineCore pid=9780) [entail-seed] short_blocks: the block table now reports one block fewer
+RESULT {"engine": "vllm", "tag": "seeded", "entail": "load", "seed": "short_blocks", "when": "2026-09-28 04:42:19", "texts": ["Paris. The capital of Germany is Berlin. The capital of Ital", "Gravity is the force that attracts two objects toward each o", "1, 2,
+--- sglang off (ENTAIL=off, seed=-) exit=0
+RESULT {"engine": "sglang", "tag": "off", "entail": "off", "seed": null, "when": "2026-09-28 04:42:45", "texts": ["Paris. The capital of Germany is Berlin. The capital of Ital", "Gravity is the force that attracts two objects toward each o", "1, 2, 3, 5, 7, 11
+--- sglang on (ENTAIL=load, seed=-) exit=0
+RESULT {"engine": "sglang", "tag": "on", "entail": "load", "seed": null, "when": "2026-09-28 04:43:32", "texts": ["Paris. The capital of Germany is Berlin. The capital of Ital", "Gravity is the force that attracts two objects toward each o", "1, 2, 3, 5, 7, 11
+testbed/m51_engines.sh: line 12: 10860 Killed                  ENTAIL=$4 ENTAIL_RECORD=$OUT/$2_$3.jsonl python testbed/m51_engine_run.py $2 $3 > $OUT/$2_$3.log 2>&1
+--- sglang seeded (ENTAIL=load, seed=kv_short) exit=137
+[entail-seed] kv_short: took one slot off request 0 at batch 4

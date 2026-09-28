@@ -1,0 +1,74 @@
+== healthy on: started=True (24.0s)
+  plain              pass     200 Paris. | tools=[] | reasoning=0 | entail=None
+  multi_turn         pass     200 6 | tools=[] | reasoning=0 | entail=None
+  tool_call          pass     200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0 | entail=None
+  thinking           pass     200   Paris. | tools=[] | reasoning=685 | entail=None
+  effort_none        pass     200 Paris. | tools=[] | reasoning=0 | entail=None
+  request_template   planted  200 <think> Okay, the user is asking for the | tools=[] | reasoning=0 | entail=None
+  unknown_field      planted  200 Paris. | tools=[] | reasoning=0 | entail=None
+  misspelt_setting   planted  200  | tools=[] | reasoning=272 | entail=None
+  effort_level       planted  200  | tools=[] | reasoning=272 | entail=None
+  stream: 200 65 data lines, 0 comment line(s) []
+  decision: request:vllm.chat_template broken the user's explicit choice contradicts the declaration; it i 
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.request_fields broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+== healthy note: started=True (22.0s)
+  plain              pass     200 Paris. | tools=[] | reasoning=0 | entail=None
+  multi_turn         pass     200 6 | tools=[] | reasoning=0 | entail=None
+  tool_call          pass     200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0 | entail=None
+  thinking           pass     200   Paris. | tools=[] | reasoning=685 | entail=None
+  effort_none        pass     200 Paris. | tools=[] | reasoning=0 | entail=None
+  request_template   planted  200 <think> Okay, the user is asking for the | tools=[] | reasoning=0 | entail=2
+  unknown_field      planted  200 Paris. | tools=[] | reasoning=0 | entail=1
+  misspelt_setting   planted  200  | tools=[] | reasoning=272 | entail=1
+  effort_level       planted  200  | tools=[] | reasoning=272 | entail=1
+  stream: 200 65 data lines, 1 comment line(s) [": entail: [entail] broken at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: enable_thinkng, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('enable_thinkng',)) (engine: vllm chat template: a settin"]
+  decision: request:vllm.chat_template broken the user's explicit choice contradicts the declaration; it i 
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.request_fields broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+== healthy strict: started=True (24.0s)
+  plain              pass     200 Paris. | tools=[] | reasoning=0 | entail=None
+  multi_turn         pass     200 6 | tools=[] | reasoning=0 | entail=None
+  tool_call          pass     200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0 | entail=None
+  thinking           pass     200   Paris. | tools=[] | reasoning=685 | entail=None
+  effort_none        pass     200 Paris. | tools=[] | reasoning=0 | entail=None
+  request_template   planted  400 {'message': "[entail] refused at request:vllm.chat_template: Template declared Template(chat_template_sha256='a55ee1b166
+  unknown_field      planted  400 {'message': "[entail] refused at request:vllm.request_fields: Coverage declared Coverage(total=6, taken=6, left=()) (use
+  misspelt_setting   planted  400 {'message': "[entail] refused at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (
+  effort_level       planted  400 {'message': "[entail] refused at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (
+  stream: 400 0 data lines, 0 comment line(s) []
+  decision: request:vllm.chat_template refused the user's explicit choice contradicts the declaration; it i 
+  decision: request:vllm.request_fields refused the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings refused the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings refused the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings refused the consumer differs from the declaration and no resolution  
+== keep on: started=True (22.0s)
+  kept_reasoning     pass     200 6 | tools=[] | reasoning=0 | entail=None
+  dropped_reasoning  planted  200 6 | tools=[] | reasoning=0 | entail=None
+  stream: 200 4 data lines, 0 comment line(s) []
+  decision: request:vllm.reasoning_history broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.reasoning_history broken the consumer differs from the declaration and no resolution  
+== tool on: started=True (24.9s)
+  tool_call          planted at start 200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0 | entail=None
+  decision: load:vllm.tool_parser resolved the consumer differs from the declaration; a registered reso switch to a tool parser measured to read the declared format (to hermes)
+== tool observe: started=True (22.9s)
+  tool_call          planted at start 200 <tool_call> {"name": "get_weather", "arg | tools=[] | reasoning=0 | entail=None
+  decision: load:vllm.tool_parser broken the consumer differs from the declaration and the policy rep 
+== tool observe_strict: started=False (24.0s)
+  decision: load:vllm.tool_parser refused the consumer differs from the declaration and the policy rep 
+  log: (APIServer pid=21612) [entail] refused at load:vllm.tool_parser: Template declared Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='hermes') (manifest: <workspace>/testbed/results/p6/m91/rerun/m53/manifests/tool/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1
+  log: (APIServer pid=21612)     raise RoleError("\n".join(_record.line(d) for d in stops))
+  log: (APIServer pid=21612) entail.core.RoleError: [entail] refused at load:vllm.tool_parser: Template declared Template(chat_template_sha256=None, reasoning_history=None, tool_call_format='hermes') (manifest: <workspace>/testbed/results/p6/m91/rerun/m53/manifests/tool/8ba006f74fecfaaeb392872a
+--- vllm seeded_report exit=0
+(EngineCore pid=22102) [entail-seed] short_blocks: the block table now reports one block fewer
+(EngineCore pid=22102) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=207, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 0-8aa1fafb: the slots its tokens need
+(EngineCore pid=22102) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=204, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 1-99f8f25a: the slots its tokens need
+(EngineCore pid=22102) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=95, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 2-a30ba881: the slots its tokens need,
+(EngineCore pid=22102) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=219, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 3-9fee1d06: the slots its tokens need
+(EngineCore pid=22102) [entail] broken at container:vllm.allocate_slots: KvExtent declared KvExtent(held=216, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 4-a940b80e: the slots its tokens need

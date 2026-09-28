@@ -1,0 +1,233 @@
+{
+ "llm_app": {
+  "normal": {
+   "rc": 0,
+   "stdout": [
+    "volcanoes -> {\"title\": \"Volcanoes\", \"body\": \"An answer about volcanoes.\"}",
+    "tides -> {\"title\": \"Tides\", \"body\": \"An answer about tides.\"}",
+    "comets -> {\"title\": \"Comets\", \"body\": \"An answer about comets.\"}"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {
+    "node:app.answer/json_object": {
+     "checks": 3,
+     "broken": 0,
+     "passed": {
+      "node_check": 3
+     }
+    },
+    "node:app.summary/max_chars": {
+     "checks": 3,
+     "broken": 0,
+     "passed": {
+      "node_check": 3
+     }
+    }
+   }
+  },
+  "fault": {
+   "rc": 0,
+   "stdout": [
+    "volcanoes -> {\"title\": \"Volcanoes\", \"body\": \"An answer about volcanoes.\"}",
+    "[entail] broken at node:app.answer/json_object: Check declared Check(check='json_object', holds=True, detail=None) (user: app.answer: json_object, declared); app.answer uses Check(check='json_object', holds=False, detail='not JSON (Unterminated string starting at: line 1 column 28 (char 27))') (probe: json_object on the value at app.answer, verified); rule: a custom node's validator: the value at this point of the program does not have the property the developer declared for it (the validator's words are in the note); note: app.answer: json_object: not JSON (Unterminated string starting at: line 1 column 28 (char 27)); reported, not stopped",
+    "tides -> {\"title\": \"Tides\", \"body\": \"An answer ab",
+    "comets -> {\"title\": \"Comets\", \"body\": \"An answer about comets.\"}"
+   ],
+   "stderr": "",
+   "decisions": [
+    [
+     "node:app.answer/json_object",
+     "broken",
+     "app.answer: json_object: not JSON (Unterminated string starting at: line 1 column 28 (char 27))"
+    ]
+   ],
+   "counted": {
+    "node:app.answer/json_object": {
+     "checks": 3,
+     "broken": 1,
+     "passed": {
+      "node_check": 2
+     }
+    },
+    "node:app.summary/max_chars": {
+     "checks": 3,
+     "broken": 0,
+     "passed": {
+      "node_check": 3
+     }
+    }
+   }
+  },
+  "nodes_off": {
+   "rc": 0,
+   "stdout": [
+    "volcanoes -> {\"title\": \"Volcanoes\", \"body\": \"An answer about volcanoes.\"}",
+    "tides -> {\"title\": \"Tides\", \"body\": \"An answer ab",
+    "comets -> {\"title\": \"Comets\", \"body\": \"An answer about comets.\"}"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {}
+  },
+  "switched_off": {
+   "rc": 0,
+   "stdout": [
+    "volcanoes -> {\"title\": \"Volcanoes\", \"body\": \"An answer about volcanoes.\"}",
+    "tides -> {\"title\": \"Tides\", \"body\": \"An answer ab",
+    "comets -> {\"title\": \"Comets\", \"body\": \"An answer about comets.\"}"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {
+    "node:app.summary/max_chars": {
+     "checks": 3,
+     "broken": 0,
+     "passed": {
+      "node_check": 3
+     }
+    }
+   }
+  },
+  "node": "app.answer"
+ },
+ "rag_budget": {
+  "normal": {
+   "rc": 0,
+   "stdout": [
+    "79 prompt tokens for a 256 token window"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {
+    "node:rag.prompt/within_context": {
+     "checks": 1,
+     "broken": 0,
+     "passed": {
+      "node_check": 1
+     }
+    }
+   }
+  },
+  "fault": {
+   "rc": 0,
+   "stdout": [
+    "[entail] broken at node:rag.prompt/within_context: Check declared Check(check='within_context', holds=True, detail=None) (user: rag.prompt: within_context, declared); rag.prompt uses Check(check='within_context', holds=False, detail='304 prompt tokens + 64 for the answer > the context of 256') (probe: within_context on the value at rag.prompt, verified); rule: a custom node's validator: the value at this point of the program does not have the property the developer declared for it (the validator's words are in the note); note: rag.prompt: within_context: 304 prompt tokens + 64 for the answer > the context of 256; reported, not stopped",
+    "304 prompt tokens for a 256 token window"
+   ],
+   "stderr": "",
+   "decisions": [
+    [
+     "node:rag.prompt/within_context",
+     "broken",
+     "rag.prompt: within_context: 304 prompt tokens + 64 for the answer > the context of 256"
+    ]
+   ],
+   "counted": {
+    "node:rag.prompt/within_context": {
+     "checks": 1,
+     "broken": 1,
+     "passed": {}
+    }
+   }
+  },
+  "nodes_off": {
+   "rc": 0,
+   "stdout": [
+    "304 prompt tokens for a 256 token window"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {}
+  },
+  "switched_off": {
+   "rc": 0,
+   "stdout": [
+    "304 prompt tokens for a 256 token window"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {}
+  },
+  "node": "rag.prompt"
+ },
+ "image_app": {
+  "normal": {
+   "rc": 0,
+   "stdout": [
+    "asked 832x1216 -> 832x1216",
+    "asked 1000x750 -> 1000x750"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {
+    "node:image.output/same_size": {
+     "checks": 2,
+     "broken": 0,
+     "passed": {
+      "node_check": 2
+     }
+    }
+   }
+  },
+  "fault": {
+   "rc": 0,
+   "stdout": [
+    "asked 832x1216 -> 832x1216",
+    "[entail] broken at node:image.output/same_size: Check declared Check(check='same_size', holds=True, detail=None) (user: image.output: same_size, declared); image.output uses Check(check='same_size', holds=False, detail='960x704, asked for 1000x750') (probe: same_size on the value at image.output, verified); rule: a custom node's validator: the value at this point of the program does not have the property the developer declared for it (the validator's words are in the note); note: image.output: same_size: 960x704, asked for 1000x750; reported, not stopped",
+    "asked 1000x750 -> 960x704"
+   ],
+   "stderr": "",
+   "decisions": [
+    [
+     "node:image.output/same_size",
+     "broken",
+     "image.output: same_size: 960x704, asked for 1000x750"
+    ]
+   ],
+   "counted": {
+    "node:image.output/same_size": {
+     "checks": 2,
+     "broken": 1,
+     "passed": {
+      "node_check": 1
+     }
+    }
+   }
+  },
+  "nodes_off": {
+   "rc": 0,
+   "stdout": [
+    "the workshop package entail-nodes-basics is not attached: pip install ./workshop/basics (and run with ENTAIL=load)",
+    "asked 832x1216 -> 832x1216",
+    "asked 1000x750 -> 960x704"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {}
+  },
+  "switched_off": {
+   "rc": 0,
+   "stdout": [
+    "asked 832x1216 -> 832x1216",
+    "asked 1000x750 -> 960x704"
+   ],
+   "stderr": "",
+   "decisions": [],
+   "counted": {}
+  },
+  "node": "image.output"
+ },
+ "cost_us": {
+  "tiny": {
+   "off": 0.39,
+   "load": 4.35,
+   "validator_alone": 0.03
+  },
+  "json_like": {
+   "off": 0.4,
+   "load": 5.4,
+   "validator_alone": 0.81
+  }
+ }
+}

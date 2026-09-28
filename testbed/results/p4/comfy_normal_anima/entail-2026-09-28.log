@@ -1,0 +1,36 @@
+2026-09-28 02:34:46 pid 19440 [entail] claimed comfy.model_patcher in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:46 pid 19440 [entail] claimed comfy.model_base in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:50 pid 19440 [entail] claimed transformers.tokenization_utils_base in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:50 pid 19440 [entail] installed entail.adapters.transformers_template in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] installed entail.adapters.transformers_tokenizer in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] claimed comfy.model_sampling in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:50 pid 19440 [entail] installed entail_dlc_comfyui.repair:install_schedule_record (DLC comfyui) in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] installed entail_dlc_comfyui.repair:install_schedule_check (DLC comfyui) in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] installed entail_dlc_comfyui.repair:install_buffer_guard (DLC comfyui) in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] claimed comfy.sd in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:50 pid 19440 [entail] installed entail.adapters.comfyui in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] claimed nodes in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:50 pid 19440 [entail] claimed comfy.sample in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:50 pid 19440 [entail] installed entail.adapters.comfyui:install_sampling in pid 19440
+2026-09-28 02:34:50 pid 19440 [entail] installed entail.adapters.comfyui:install_nodes in pid 19440
+2026-09-28 02:34:54 pid 19440 [entail] claimed transformers.configuration_utils in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:54 pid 19440 [entail] installed entail.adapters.rope_alias in pid 19440
+2026-09-28 02:34:54 pid 19440 [entail] installed entail.adapters.transformers_config in pid 19440
+2026-09-28 02:34:54 pid 19440 [entail] claimed transformers.generation.utils in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:54 pid 19440 [entail] installed entail.adapters.transformers_beam in pid 19440
+2026-09-28 02:34:54 pid 19440 [entail] claimed transformers.modeling_utils in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:54 pid 19440 [entail] installed entail.adapters.transformers_adapter in pid 19440
+2026-09-28 02:34:54 pid 19440 [entail] installed entail.adapters.transformers_stops in pid 19440
+2026-09-28 02:34:55 pid 19440 [entail] claimed diffusers.loaders.lora_pipeline in pid 19440 (loaded already: False; spec: True)
+2026-09-28 02:34:55 pid 19440 [entail] installed entail.adapters.diffusers_adapter:install_lora in pid 19440
+2026-09-28 02:34:58 pid 19440 [entail] pass at load:transformers.tokenizer: Vocab declared Vocab(size=151643, added=None) (file: vocab.json, declared); transformers.tokenizer uses Vocab(size=151643, added=26) (engine: Qwen2Tokenizer built from E:\ComfyUI\ComfyUI-new\comfy\text_encoders\qwen25_tokenizer: the tokenizer the engine holds, verified); rule: the consumer uses the declared value
+2026-09-28 02:34:58 pid 19440 [entail] boundaries in pid 19440: {'load:transformers.tokenizer': {'checks': 1, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {'vocab': 1}}}
+2026-09-28 02:34:58 pid 19440 [entail] boundaries in pid 19440: {'load:transformers.tokenizer.ids': {'checks': 1, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {}}}
+2026-09-28 02:34:58 pid 19440 [entail] unknown at load:transformers.tokenizer.ids: Tokenization nothing declared; what transformers.tokenizer uses is unknown; rule: this boundary could not be checked; note: Qwen2Tokenizer built from E:\ComfyUI\ComfyUI-new\comfy\text_encoders\qwen25_tokenizer: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model) (26 declared added tokens compared: all match)
+2026-09-28 02:34:58 pid 19440 [entail] pass at load:transformers.tokenizer: Vocab declared Vocab(size=32100, added=None) (file: tokenizer.json (the only tokenizer source; the engine's own count stands), declared); transformers.tokenizer uses Vocab(size=32100, added=0) (engine: T5Tokenizer built from E:\ComfyUI\ComfyUI-new\comfy\text_encoders\t5_tokenizer: the tokenizer the engine holds, verified); rule: the consumer uses the declared value
+2026-09-28 02:34:58 pid 19440 [entail] boundaries in pid 19440: {'load:transformers.tokenizer': {'checks': 2, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {'vocab': 2}}}
+2026-09-28 02:34:58 pid 19440 [entail] boundaries in pid 19440: {'load:transformers.tokenizer.ids': {'checks': 2, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {'tokenization': 1}}}
+2026-09-28 02:34:58 pid 19440 [entail] pass at load:transformers.tokenizer.ids: Tokenization declared Tokenization(digest='497230f0b7a8ada9', probes=10, added=103) (file: tokenizer.json (tokenizers 0.23.1), declared); transformers.tokenizer uses Tokenization(digest='497230f0b7a8ada9', probes=10, added=103) (engine: T5Tokenizer built from E:\ComfyUI\ComfyUI-new\comfy\text_encoders\t5_tokenizer, verified); rule: the consumer uses the declared value; note: 10 probe texts encode alike; 103 declared added tokens match
+2026-09-28 02:34:59 pid 19440 [entail] pass at load:comfyui.lora: Coverage declared Coverage(total=280, taken=280, left=()) (file: nagito\nagito_anima_e10.safetensors on the Anima model (every module the LoRA carries weights for), declared); comfyui.lora_loader uses Coverage(total=280, taken=280, left=()) (engine: comfyui LoRA key mapping: the modules it finds in the loaded model, verified); rule: the consumer uses the declared value
+2026-09-28 02:34:59 pid 19440 [entail] unknown at load:comfyui.prediction: Prediction nothing declared; comfyui.model_sampling uses flow (engine: comfyui.model_sampling (Anima), as the engine set it up, verified); rule: nothing declares it; note: it is not ComfyUI's discrete eps/v schedule, which is what entail switches
+2026-09-28 02:34:59 pid 19440 [entail] unknown at load:comfyui.latent_scale: LatentScale nothing declared; comfyui.latent_format uses unknown (engine: comfyui.latent_format (Anima) [could not be read], unknown); rule: nothing declares it

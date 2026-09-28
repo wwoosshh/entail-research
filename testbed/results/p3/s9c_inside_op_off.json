@@ -1,0 +1,76 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.5
+ },
+ "plant": "inside_op",
+ "scale": 1.5,
+ "planted_calls": 1820,
+ "mode": "off",
+ "run": "944-1790526348",
+ "load_s": 10.01,
+ "turned_off": [],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": true,
+   "margin": 3.25,
+   "pdrift": 0.8112,
+   "probe": "story_a",
+   "why": [
+    "2 positions changed a confident prediction (margin up to 1.44)",
+    "a token's probability moved by 0.362"
+   ]
+  },
+  {
+   "paths": "alone_batched",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0744,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.023,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens disagree on probe 'story_a': 2 positions changed a confident prediction (margin up to 1.44); a token's probability moved by 0.362 (3 probes; largest co"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch agree (3 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.0744 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.023 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "f03c555cdb0e5bd8",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": false,
+   "custom_kernels": true
+  },
+  "off": [],
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "mode": "off"
+ },
+ "answer": " Paris. Is that true? Also,",
+ "engine_spec": false,
+ "engine_prefix_cache": true,
+ "engine_eager": true
+}

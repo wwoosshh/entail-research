@@ -1,0 +1,45 @@
+
+Multi-thread loading shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Multi-thread loading shards:  33% Completed | 1/3 [00:00<00:00,  2.53it/s]
+Multi-thread loading shards:  67% Completed | 2/3 [00:00<00:00,  2.46it/s]
+Multi-thread loading shards: 100% Completed | 3/3 [00:00<00:00,  3.54it/s]
+[entail] unknown at start:sglang.paths: PathAgreement nothing declared; what sglang.engine uses is unknown; rule: this boundary could not be checked; note: SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths
+[entail-seed] kv_short: took one slot off request 0 at batch 4
+[entail] broken at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (387a6b4429c84bc19cc6d27d8a5d53cf): the slots written, verified); sglang.kv_cache uses KvExtent(held=8, needed=9, written=9, window=None, previous=None, granularity=None) (engine: sglang request 0 (387a6b4429c84bc19cc6d27d8a5d53cf): the slots reserved, verified); rule: the slots reserved and the slots written disagree; note: sglang request 0 (387a6b4429c84bc19cc6d27d8a5d53cf): 8 KV slots reserved but 9 written. Two numbers about the same sequence, and nothing compares them.; reported, not stopped
+[entail] broken at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (387a6b4429c84bc19cc6d27d8a5d53cf): the slots its tokens need, verified); sglang.kv_cache uses KvExtent(held=8, needed=9, written=9, window=None, previous=None, granularity=None) (engine: sglang request 0 (387a6b4429c84bc19cc6d27d8a5d53cf): the slots it holds, verified); rule: the slots held are not the slots the tokens need; note: sglang request 0 (387a6b4429c84bc19cc6d27d8a5d53cf): holds 8 KV slots but the sequence has 9 tokens. The length nobody compared is the one that drifts.; reported, not stopped
+[2026-09-28 04:44:14] Scheduler hit an exception: Traceback (most recent call last):
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5857, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1893, in run_event_loop
+    dispatch_event_loop(self)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 5703, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 2002, in event_loop_overlap
+    pop_and_process()
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 1953, in pop_and_process
+    self.process_batch_result(tmp_batch, tmp_result)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/observability/scheduler_stage_metrics.py", line 155, in wrapper
+    return profiled_func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler.py", line 4612, in process_batch_result
+    self.batch_result_processor.process_batch_result_decode(batch, result)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler_components/batch_result_processor.py", line 1023, in process_batch_result_decode
+    self._handle_finish_state_updated_req(req, batch, result, i, logits_output)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/managers/scheduler_components/batch_result_processor.py", line 1342, in _handle_finish_state_updated_req
+    release_kv_cache(req, self.tree_cache, is_insert=is_insert)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/mem_cache/common.py", line 305, in release_kv_cache
+    _release_overallocated_kv_indices(req, start_p, end_p, tree_cache)
+  File "/home/<user>/venvs/sglang/lib/python3.12/site-packages/sglang/srt/mem_cache/common.py", line 331, in _release_overallocated_kv_indices
+    assert start_p == end_p, (
+           ^^^^^^^^^^^^^^^^
+AssertionError: Unexpected overallocated KV cache, req.kv.kv_committed_len=37, req.kv.kv_allocated_len=36
+
+[2026-09-28 04:44:14] SIGQUIT received. signum=None, frame=None. It usually means one child failed.
+[rank0]:[W928 04:44:14.291889167 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[2026-09-28 04:44:19] No live scheduler processes found; skipping py-spy and CUDA coredump.

@@ -1,0 +1,7 @@
+
+Multi-thread loading shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00,  1.46it/s]
+Multi-thread loading shards: 100% Completed | 1/1 [00:00<00:00,  1.46it/s]
+[entail] resolved at load:sglang.attention: ModelProps declared ModelProps(softcap=50.0, sliding_window=4096, tie_word_embeddings=None) (config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, declared); sglang.attention.flashinfer uses ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=None) (engine: sglang.attention.flashinfer [softcap: drops (measured); sliding_window: drops (code)], inferred); rule: the consumer differs from the declaration; a registered resolution repairs it; changed: route to a backend measured to honour it (to triton)
+[entail] unknown at start:sglang.paths: PathAgreement nothing declared; what sglang.engine uses is unknown; rule: this boundary could not be checked; note: SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths
+RESULT sglang gemma-2-2b-it entail=load ok=True load=14.535 used=default 

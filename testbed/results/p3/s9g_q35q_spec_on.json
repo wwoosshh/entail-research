@@ -1,0 +1,86 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/",
+  "enforce_eager": true,
+  "max_model_len": 1024,
+  "gpu_memory_utilization": 0.85,
+  "max_num_seqs": 4,
+  "speculative_config": {
+   "method": "ngram",
+   "num_speculative_tokens": 4,
+   "prompt_lookup_max": 4,
+   "prompt_lookup_min": 2
+  }
+ },
+ "plant": "",
+ "scale": null,
+ "planted_calls": 0,
+ "mode": "off",
+ "run": "416-1790528456",
+ "load_s": 45.68,
+ "paths_s": [
+  7.658
+ ],
+ "turned_off": [],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": true,
+   "margin": 1.375,
+   "pdrift": 0.7099,
+   "probe": "story_b",
+   "why": [
+    "1 positions changed a confident prediction (margin up to 1.38)",
+    "a token's probability moved by 0.710"
+   ]
+  },
+  {
+   "paths": "alone_batched",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0343,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens disagree on probe 'story_b': 1 positions changed a confident"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch agree (3 probes; largest confident-flip margin 0 (threshold 1), lar"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0 (threshold 1), lar"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "e9e70cc3eadcc23f",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": true,
+   "custom_kernels": true
+  },
+  "off": [],
+  "model": "/home/<user>/.cache/huggingface/hub/models--AxionML--Qwen3.5-4B-NVFP4/snapshots/4521f321dc8c46d255929203ae6d3062e51d52fa/",
+  "mode": "off"
+ },
+ "answer": " Paris.\nA. True\nB",
+ "engine_spec": true,
+ "engine_prefix_cache": true,
+ "engine_eager": true
+}

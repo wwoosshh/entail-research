@@ -1,0 +1,198 @@
+{
+ "tag": "vae_on",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "policy": "resolve",
+ "load_seconds": 20.95,
+ "vae_scaling_factor_as_loaded": 0.18215,
+ "vae_scaling_factor": 0.13025,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "epsilon",
+  "rescale_betas_zero_snr": false
+ },
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 13.85,
+   "image": "/home/<user>/m63_out_rerun/vae_on_seed11.png",
+   "stats": {
+    "mean": 168.66,
+    "std": 58.2,
+    "saturation": 51.32
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 10.24,
+   "image": "/home/<user>/m63_out_rerun/vae_on_seed22.png",
+   "stats": {
+    "mean": 161.07,
+    "std": 60.71,
+    "saturation": 54.06
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 14.03,
+   "image": "/home/<user>/m63_out_rerun/vae_on_seed33.png",
+   "stats": {
+    "mean": 163.07,
+    "std": 63.81,
+    "saturation": 52.65
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "CLIPTextConfig config.json (the file names itself openai/clip-vit-large-patch14) (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 1.254
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 8.732
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.96
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.112
+  },
+  {
+   "boundary": "load:transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Vocab(size=49408, added=None)",
+   "declared_from": "vocab.json",
+   "chosen": "Vocab(size=49408, added=0)"
+  },
+  {
+   "boundary": "load:transformers.tokenizer.ids",
+   "name": "Tokenization",
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "target": null,
+   "note": "CLIPTokenizer built from /home/<user>/sdxl_local_config: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)",
+   "declared": null,
+   "declared_from": null,
+   "chosen": null
+  },
+  {
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 7.018
+  },
+  {
+   "timing": "load:transformers.tokenizer",
+   "ms": 10.371
+  },
+  {
+   "boundary": "load:transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Vocab(size=49408, added=None)",
+   "declared_from": "vocab.json",
+   "chosen": "Vocab(size=49408, added=0)"
+  },
+  {
+   "boundary": "load:transformers.tokenizer.ids",
+   "name": "Tokenization",
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "target": null,
+   "note": "CLIPTokenizer built from /home/<user>/sdxl_local_config: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)",
+   "declared": null,
+   "declared_from": null,
+   "chosen": null
+  },
+  {
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 3.123
+  },
+  {
+   "timing": "load:transformers.tokenizer",
+   "ms": 3.466
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "LatentScale(scale=0.13025, shift=None)",
+   "declared_from": "<workspace>/testbed/results/m63/manifests/a5f58eb1c33616c4f06bca55af39876a7b817913cd829caa8acb111b770c85cc.json#LatentScale",
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 18611.08
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "apply the declared latent scale at the encoder and decoder (to LatentScale(scale=0.13025, shift=None))",
+   "target": "LatentScale(scale=0.13025, shift=None)",
+   "note": "",
+   "declared": "LatentScale(scale=0.13025, shift=None)",
+   "declared_from": "<workspace>/testbed/results/m63/manifests/a5f58eb1c33616c4f06bca55af39876a7b817913cd829caa8acb111b770c85cc.json#LatentScale",
+   "chosen": "LatentScale(scale=0.18215, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.latent_scale",
+   "ms": 8.703
+  }
+ ],
+ "when": "2026-09-28 05:21:13"
+}

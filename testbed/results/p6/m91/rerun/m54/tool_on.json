@@ -1,0 +1,445 @@
+{
+ "server": "tool",
+ "tag": "on",
+ "env": {},
+ "args": [
+  "--tool-call-parser",
+  "pythonic"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-28 04:58:42",
+ "started": true,
+ "start_seconds": 24.9,
+ "requests": {
+  "tool_call": {
+   "what": "planted at start",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 0,
+   "tool_calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Paris\"}"
+    }
+   ],
+   "finish_reason": "tool_calls",
+   "entail_field": null
+  }
+ },
+ "decisions": [
+  {
+   "boundary": "load:vllm.tool_parser",
+   "verdict": "resolved",
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "switch to a tool parser measured to read the declared format (to hermes)",
+   "target": "hermes",
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "20871 load:transformers.tokenizer": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "vocab": 2
+   }
+  },
+  "20871 load:transformers.tokenizer.ids": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "tokenization": 2
+   }
+  },
+  "20871 load:vllm.input_processor": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "stop_dropped": 1,
+    "stop_id_out_of_range": 1
+   }
+  },
+  "20993 load:vllm.rotary_pairing": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "rotary_pairing_mismatch": 1,
+    "rotary_pairing_ignored": 1
+   }
+  },
+  "20993 kernel:vllm.custom_op": {
+   "checks": 8,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_reference": 8
+   }
+  },
+  "20993 kernel:vllm._gumbel_sample_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._get_num_sampled_and_rejected_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 container:vllm.request.block_hashes": {
+   "checks": 256,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "cache_key_incomplete": 256
+   }
+  },
+  "20993 kernel:vllm._apply_write_kernel": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 4,
+    "kernel_layout_variant": 4
+   }
+  },
+  "20993 kernel:vllm._bincount_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "20993 kernel:vllm._prepare_prefill_inputs_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._prepare_pos_seq_lens_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:definition": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_reference": 2
+   }
+  },
+  "20993 kernel:vllm._combine_sampled_and_draft_tokens_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._gather_block_tables_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._compute_slot_mappings_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._apply_grammar_bitmask_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "20993 kernel:vllm._bias_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._penalties_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._bad_words_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._temperature_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._min_p_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._topk_log_softmax_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "20993 kernel:vllm._ranks_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 kernel:vllm._prompt_logprobs_token_ids_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "20993 kernel:vllm._post_update_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "20993 load:transformers.tokenizer": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "vocab": 1
+   }
+  },
+  "20993 load:transformers.tokenizer.ids": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "tokenization": 1
+   }
+  },
+  "20871 request:vllm.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 2,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "20871 request:vllm.chat_template": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 2
+   }
+  },
+  "20871 request:vllm.request_fields": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 1
+   }
+  },
+  "20871 request:vllm.parser_settings": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "setting_names": 2
+   }
+  },
+  "20871 request:vllm.template_settings": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 1
+   }
+  },
+  "20993 container:vllm.allocate_slots": {
+   "checks": 16,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 16
+   }
+  },
+  "20871 request:vllm.parser": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "schema": 1
+   }
+  }
+ }
+}

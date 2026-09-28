@@ -1,0 +1,152 @@
+{
+ "rules": "PREREG_S9b2.md",
+ "right": "3/3",
+ "not_applicable": [
+  "outside_kvwrite"
+ ],
+ "rows": [
+  {
+   "fault": "inside_rope",
+   "expected": "inside",
+   "seen": true,
+   "off_disagree": [
+    "decode_prefill"
+   ],
+   "off_pairs": {
+    "decode_prefill": [
+     3.625,
+     0.8334
+    ],
+    "alone_batched": [
+     0.0,
+     0.1114
+    ],
+    "cold_cache": [
+     0.0,
+     0.0035
+    ]
+   },
+   "planted_calls": {
+    "off": 1820,
+    "all": 0
+   },
+   "all_disagree": [],
+   "said": [
+    "with every optimization vllm declares does not change results off (prefix_cache, custom_kernels), the paths agree; at this configuration's last start with them on they disagreed (decode_prefill): the cause is inside them"
+   ],
+   "told": "inside",
+   "result": "right",
+   "answers": {
+    "off": " not a good place to be for a",
+    "all": " Paris. The capital of Italy is Rome"
+   }
+  },
+  {
+   "fault": "outside_kvwrite",
+   "expected": "outside",
+   "seen": false,
+   "off_disagree": [],
+   "off_pairs": {
+    "decode_prefill": [
+     0.0,
+     0.1715
+    ],
+    "alone_batched": [
+     0.0,
+     0.0423
+    ],
+    "cold_cache": [
+     0.0,
+     0.0208
+    ]
+   },
+   "planted_calls": {
+    "off": 1820,
+    "all": 1512
+   },
+   "all_disagree": [],
+   "said": [],
+   "told": null,
+   "result": "not applicable",
+   "answers": {
+    "off": " Paris. The capital of Italy is Rome",
+    "all": " Paris. The capital of Italy is Rome"
+   }
+  },
+  {
+   "fault": "inside_kernel",
+   "expected": "inside",
+   "seen": true,
+   "off_disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "off_pairs": {
+    "decode_prefill": [
+     8.75,
+     0.9589
+    ],
+    "alone_batched": [
+     1.125,
+     0.1759
+    ],
+    "cold_cache": [
+     0.125,
+     0.0102
+    ]
+   },
+   "planted_calls": {
+    "off": 3705,
+    "all": 0
+   },
+   "all_disagree": [],
+   "said": [
+    "with every optimization vllm declares does not change results off (prefix_cache, custom_kernels), the paths agree; at this configuration's last start with them on they disagreed (decode_prefill, alone_batched): the cause is inside them"
+   ],
+   "told": "inside",
+   "result": "right",
+   "answers": {
+    "off": " a country with a rich showpiece of",
+    "all": " Paris. The capital of Italy is Rome"
+   }
+  },
+  {
+   "fault": "outside",
+   "expected": "outside",
+   "seen": true,
+   "off_disagree": [
+    "decode_prefill"
+   ],
+   "off_pairs": {
+    "decode_prefill": [
+     1.875,
+     0.8073
+    ],
+    "alone_batched": [
+     0.0,
+     0.0423
+    ],
+    "cold_cache": [
+     0.0,
+     0.0156
+    ]
+   },
+   "planted_calls": {
+    "off": 1820,
+    "all": 1512
+   },
+   "all_disagree": [
+    "decode_prefill"
+   ],
+   "said": [
+    "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill): the cause is outside them"
+   ],
+   "told": "outside",
+   "result": "right",
+   "answers": {
+    "off": " Paris. The capital of Italy is Rome",
+    "all": " Paris. The capital of Italy is Rome"
+   }
+  }
+ ]
+}

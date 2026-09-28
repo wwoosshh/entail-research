@@ -1,0 +1,565 @@
+{
+ "server": "healthy",
+ "tag": "on",
+ "env": {},
+ "args": [
+  "--tool-call-parser",
+  "hermes",
+  "--trust-request-chat-template"
+ ],
+ "declared": "Template(chat_template_sha256='a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8', reasoning_history='drop', tool_call_format='hermes')",
+ "when": "2026-09-28 04:56:42",
+ "started": true,
+ "start_seconds": 24.0,
+ "requests": {
+  "plain": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "multi_turn": {
+   "what": "pass",
+   "status": 200,
+   "content": "6",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "tool_call": {
+   "what": "pass",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 0,
+   "tool_calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Paris\"}"
+    }
+   ],
+   "finish_reason": "tool_calls",
+   "entail_field": null
+  },
+  "thinking": {
+   "what": "pass",
+   "status": 200,
+   "content": "\n\nParis.",
+   "reasoning_chars": 685,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "effort_none": {
+   "what": "pass",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "request_template": {
+   "what": "planted",
+   "status": 200,
+   "content": "<think>\nOkay, the user is asking for the capital of France in one word. Let me think. I know that France is a country in Europe. The capital is a city that serves as the political, economic, and cultu",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": null
+  },
+  "unknown_field": {
+   "what": "planted",
+   "status": 200,
+   "content": "Paris.",
+   "reasoning_chars": 0,
+   "tool_calls": [],
+   "finish_reason": "stop",
+   "entail_field": null
+  },
+  "misspelt_setting": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": null
+  },
+  "effort_level": {
+   "what": "planted",
+   "status": 200,
+   "content": "",
+   "reasoning_chars": 272,
+   "tool_calls": [],
+   "finish_reason": "length",
+   "entail_field": null
+  }
+ },
+ "stream": {
+  "request": "misspelt_setting",
+  "status": 200,
+  "comments": [],
+  "data_lines": 65
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.chat_template",
+   "verdict": "broken",
+   "rule": "the user's explicit choice contradicts the declaration; it is not overridden",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.request_fields",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "broken",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "19391 load:transformers.tokenizer": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "vocab": 2
+   }
+  },
+  "19391 load:transformers.tokenizer.ids": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "tokenization": 2
+   }
+  },
+  "19391 load:vllm.input_processor": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "stop_dropped": 1,
+    "stop_id_out_of_range": 1
+   }
+  },
+  "19513 load:vllm.rotary_pairing": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "rotary_pairing_mismatch": 1,
+    "rotary_pairing_ignored": 1
+   }
+  },
+  "19513 kernel:vllm.custom_op": {
+   "checks": 8,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_reference": 8
+   }
+  },
+  "19513 kernel:vllm._gumbel_sample_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._get_num_sampled_and_rejected_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 container:vllm.request.block_hashes": {
+   "checks": 256,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "cache_key_incomplete": 256
+   }
+  },
+  "19513 kernel:vllm._apply_write_kernel": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 4,
+    "kernel_layout_variant": 4
+   }
+  },
+  "19513 kernel:vllm._bincount_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19513 kernel:vllm._prepare_prefill_inputs_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._prepare_pos_seq_lens_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:definition": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_reference": 2
+   }
+  },
+  "19513 kernel:vllm._combine_sampled_and_draft_tokens_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._gather_block_tables_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._compute_slot_mappings_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._apply_grammar_bitmask_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19513 kernel:vllm._bias_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._penalties_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._bad_words_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._temperature_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._min_p_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._topk_log_softmax_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19513 kernel:vllm._ranks_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 kernel:vllm._prompt_logprobs_token_ids_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19513 kernel:vllm._post_update_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19513 load:transformers.tokenizer": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "vocab": 1
+   }
+  },
+  "19513 load:transformers.tokenizer.ids": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "tokenization": 1
+   }
+  },
+  "19391 request:vllm.reasoning_history": {
+   "checks": 0,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 11,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {}
+  },
+  "19391 request:vllm.chat_template": {
+   "checks": 11,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 10
+   }
+  },
+  "19391 request:vllm.request_fields": {
+   "checks": 10,
+   "broken": 1,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 9
+   }
+  },
+  "19391 request:vllm.parser_settings": {
+   "checks": 14,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 8,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "setting_names": 14
+   }
+  },
+  "19391 request:vllm.template_settings": {
+   "checks": 9,
+   "broken": 4,
+   "refused": 0,
+   "skipped": 1,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 5
+   }
+  },
+  "19513 container:vllm.allocate_slots": {
+   "checks": 256,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 256
+   }
+  },
+  "19391 request:vllm.parser": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "schema": 1,
+    "parse": 1
+   }
+  }
+ }
+}

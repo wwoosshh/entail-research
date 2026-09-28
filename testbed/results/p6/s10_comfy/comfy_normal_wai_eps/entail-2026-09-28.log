@@ -1,0 +1,33 @@
+2026-09-28 06:02:20 pid 29300 [entail] claimed comfy.model_patcher in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:20 pid 29300 [entail] claimed comfy.model_base in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:23 pid 29300 [entail] claimed transformers.tokenization_utils_base in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:23 pid 29300 [entail] installed entail.adapters.transformers_template in pid 29300
+2026-09-28 06:02:23 pid 29300 [entail] installed entail.adapters.transformers_tokenizer in pid 29300
+2026-09-28 06:02:23 pid 29300 [entail] claimed comfy.model_sampling in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:23 pid 29300 [entail] installed entail_dlc_comfyui.repair:install_schedule_record (DLC comfyui) in pid 29300
+2026-09-28 06:02:23 pid 29300 [entail] installed entail_dlc_comfyui.repair:install_schedule_check (DLC comfyui) in pid 29300
+2026-09-28 06:02:23 pid 29300 [entail] installed entail_dlc_comfyui.repair:install_buffer_guard (DLC comfyui) in pid 29300
+2026-09-28 06:02:23 pid 29300 [entail] claimed comfy.sd in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:23 pid 29300 [entail] installed entail.adapters.comfyui in pid 29300
+2026-09-28 06:02:23 pid 29300 [entail] claimed nodes in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:24 pid 29300 [entail] claimed comfy.sample in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:24 pid 29300 [entail] installed entail.adapters.comfyui:install_sampling in pid 29300
+2026-09-28 06:02:24 pid 29300 [entail] installed entail.adapters.comfyui:install_nodes in pid 29300
+2026-09-28 06:02:27 pid 29300 [entail] claimed transformers.configuration_utils in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:27 pid 29300 [entail] installed entail.adapters.rope_alias in pid 29300
+2026-09-28 06:02:27 pid 29300 [entail] installed entail.adapters.transformers_config in pid 29300
+2026-09-28 06:02:27 pid 29300 [entail] claimed transformers.generation.utils in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:28 pid 29300 [entail] installed entail.adapters.transformers_beam in pid 29300
+2026-09-28 06:02:28 pid 29300 [entail] claimed transformers.modeling_utils in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:28 pid 29300 [entail] installed entail.adapters.transformers_adapter in pid 29300
+2026-09-28 06:02:28 pid 29300 [entail] installed entail.adapters.transformers_stops in pid 29300
+2026-09-28 06:02:28 pid 29300 [entail] claimed diffusers.loaders.lora_pipeline in pid 29300 (loaded already: False; spec: True)
+2026-09-28 06:02:28 pid 29300 [entail] installed entail.adapters.diffusers_adapter:install_lora in pid 29300
+2026-09-28 06:02:31 pid 29300 [entail] pass at load:transformers.tokenizer: Vocab declared Vocab(size=49408, added=None) (file: vocab.json, declared); transformers.tokenizer uses Vocab(size=49408, added=0) (engine: CLIPTokenizer built from E:\ComfyUI\ComfyUI-new\comfy\sd1_tokenizer: the tokenizer the engine holds, verified); rule: the consumer uses the declared value
+2026-09-28 06:02:31 pid 29300 [entail] boundaries in pid 29300: {'load:transformers.tokenizer': {'checks': 1, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {'vocab': 1}}}
+2026-09-28 06:02:31 pid 29300 [entail] boundaries in pid 29300: {'load:transformers.tokenizer.ids': {'checks': 1, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {}}}
+2026-09-28 06:02:31 pid 29300 [entail] unknown at load:transformers.tokenizer.ids: Tokenization nothing declared; what transformers.tokenizer uses is unknown; rule: this boundary could not be checked; note: CLIPTokenizer built from E:\ComfyUI\ComfyUI-new\comfy\sd1_tokenizer: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)
+2026-09-28 06:02:31 pid 29300 [entail] boundaries in pid 29300: {'load:transformers.tokenizer': {'checks': 2, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {'vocab': 2}}}
+2026-09-28 06:02:31 pid 29300 [entail] boundaries in pid 29300: {'load:transformers.tokenizer.ids': {'checks': 2, 'broken': 0, 'refused': 0, 'skipped': 0, 'deferred': 0, 'resolved': 0, 'passed': {}}}
+2026-09-28 06:02:32 pid 29300 [entail] unknown at load:comfyui.prediction: Prediction nothing declared; comfyui.model_sampling uses eps without zero terminal SNR (engine: comfyui.model_sampling (SDXL), as the engine set it up, verified); rule: nothing declares it
+2026-09-28 06:02:32 pid 29300 [entail] unknown at load:comfyui.latent_scale: LatentScale nothing declared; comfyui.latent_format uses LatentScale(scale=0.13025, shift=None) (engine: comfyui.latent_format (SDXL), as the engine set it up, verified); rule: nothing declares it

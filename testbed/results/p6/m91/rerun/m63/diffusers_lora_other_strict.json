@@ -1,0 +1,152 @@
+{
+ "tag": "lora_other_strict",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "lora": "nagito/nagito_anima_e10.safetensors",
+ "condition": "strict",
+ "entail": "load",
+ "on_broken": "stop",
+ "outcome": "NoMatchingPeftModuleError: Target modules {'k.proj', 'v.proj', 'q.proj', 'layer1', 'output.proj', 'layer2'} not found in the base model. Please check the target modules and try again.",
+ "adapters": {},
+ "modules_with_the_adapter": 0,
+ "log": [
+  "WARNING diffusers.quantizers.torchao.torchao_quantizer: Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+  "WARNING diffusers.models.modeling_utils: There are modules in UNet2DConditionModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "WARNING diffusers.models.modeling_utils: There are modules in AutoencoderKL that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.",
+  "ERROR diffusers.loaders.peft: Loading t was unsuccessful with the following error: \nTarget modules {'k.proj', 'v.proj', 'q.proj', 'layer1', 'output.proj', 'layer2'} not found in the base model. Please check the target modules and try again."
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "CLIPTextConfig config.json (the file names itself openai/clip-vit-large-patch14) (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 1.271
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 9.229
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.962
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.106
+  },
+  {
+   "boundary": "load:transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Vocab(size=49408, added=None)",
+   "declared_from": "vocab.json",
+   "chosen": "Vocab(size=49408, added=0)"
+  },
+  {
+   "boundary": "load:transformers.tokenizer.ids",
+   "name": "Tokenization",
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "target": null,
+   "note": "CLIPTokenizer built from /home/<user>/sdxl_local_config: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)",
+   "declared": null,
+   "declared_from": null,
+   "chosen": null
+  },
+  {
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 10.803
+  },
+  {
+   "timing": "load:transformers.tokenizer",
+   "ms": 15.07
+  },
+  {
+   "boundary": "load:transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Vocab(size=49408, added=None)",
+   "declared_from": "vocab.json",
+   "chosen": "Vocab(size=49408, added=0)"
+  },
+  {
+   "boundary": "load:transformers.tokenizer.ids",
+   "name": "Tokenization",
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "target": null,
+   "note": "CLIPTokenizer built from /home/<user>/sdxl_local_config: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)",
+   "declared": null,
+   "declared_from": null,
+   "chosen": null
+  },
+  {
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 2.619
+  },
+  {
+   "timing": "load:transformers.tokenizer",
+   "ms": 2.956
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 19.705
+  }
+ ],
+ "when": "2026-09-28 05:17:33"
+}

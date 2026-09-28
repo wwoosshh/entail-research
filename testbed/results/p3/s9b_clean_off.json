@@ -1,0 +1,73 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.5
+ },
+ "plant": "",
+ "scale": null,
+ "planted_calls": 0,
+ "mode": "off",
+ "run": "2421-1790526133",
+ "load_s": 9.46,
+ "turned_off": [],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": false,
+   "margin": 0.125,
+   "pdrift": 0.0329,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "alone_batched",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0296,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0354,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens agree (3 probes; largest confident-flip margin 0.125 (threshold 1), largest probability move 0.0329 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch agree (3 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.0296 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.0354 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "f03c555cdb0e5bd8",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": false,
+   "custom_kernels": true
+  },
+  "off": [],
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "mode": "off"
+ },
+ "answer": " Paris. The capital of Italy is Rome",
+ "engine_spec": false,
+ "engine_prefix_cache": true,
+ "engine_eager": true
+}

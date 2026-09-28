@@ -1,0 +1,156 @@
+{
+ "located": 12,
+ "of": 12,
+ "rows": [
+  {
+   "scenario": "rope_observe",
+   "expected": "load:transformers.config.rope_scaling",
+   "platform": [
+    "broken",
+    "load:transformers.config.rope_scaling"
+   ],
+   "node": "rotary",
+   "why": [
+    "the consumer differs from the declaration and the policy repairs nothing",
+    ""
+   ],
+   "located": true
+  },
+  {
+   "scenario": "rope_debug",
+   "expected": "load:transformers.config.rope_scaling",
+   "platform": [
+    "broken",
+    "load:transformers.config.rope_scaling"
+   ],
+   "node": "rotary",
+   "why": [
+    "the consumer differs from the declaration and the policy repairs nothing",
+    ""
+   ],
+   "located": true
+  },
+  {
+   "scenario": "config_typo",
+   "expected": "load:transformers.config",
+   "platform": [
+    "broken",
+    "load:transformers.config"
+   ],
+   "node": "config",
+   "why": [
+    "the consumer differs from the declaration and no resolution is registered",
+    ""
+   ],
+   "located": true
+  },
+  {
+   "scenario": "kv_seeded",
+   "expected": "container:transformers.cache_update",
+   "platform": [
+    "broken",
+    "container:transformers.cache_update"
+   ],
+   "node": "cache",
+   "why": [
+    "the slots held shrank since the last check, and nothing said so",
+    "transformers DynamicCache layer 0: was 59 slots when last checked, 58 now. Something dropped 1 token(s) in between and said nothing."
+   ],
+   "located": true
+  },
+  {
+   "scenario": "code_rb01",
+   "expected": "boundary:second-path dequantize",
+   "platform": [
+    "broken",
+    "boundary:second-path dequantize"
+   ],
+   "node": "user",
+   "why": [
+    "the consumer differs from the declaration and no resolution is registered",
+    "argument buf"
+   ],
+   "located": true
+  },
+  {
+   "scenario": "code_rb04",
+   "expected": "boundary:dp_gather_partial (reduces its input)",
+   "platform": [
+    "broken",
+    "boundary:dp_gather_partial (reduces its input)"
+   ],
+   "node": "user",
+   "why": [
+    "the consumer differs from the declaration and no resolution is registered",
+    "argument y"
+   ],
+   "located": true
+  },
+  {
+   "scenario": "op_transpose",
+   "expected": "operation t on the way to boundary:second-path dequantize",
+   "platform": [
+    "lost",
+    "operation t on the way to boundary:second-path dequantize"
+   ],
+   "node": null,
+   "why": null,
+   "located": true
+  },
+  {
+   "scenario": "inside_attention",
+   "expected": "inside attention",
+   "platform": [
+    "located",
+    "inside attention"
+   ],
+   "node": null,
+   "why": null,
+   "located": true
+  },
+  {
+   "scenario": "inside_mlp",
+   "expected": "inside mlp",
+   "platform": [
+    "located",
+    "inside mlp"
+   ],
+   "node": null,
+   "why": null,
+   "located": true
+  },
+  {
+   "scenario": "healthy",
+   "expected": null,
+   "platform": [
+    "intact",
+    null
+   ],
+   "node": null,
+   "why": null,
+   "located": true
+  },
+  {
+   "scenario": "unchecked",
+   "expected": "boundary load:transformers.attention and beside it config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted",
+   "platform": [
+    "located",
+    "boundary load:transformers.attention and beside it config: /home/<user>/models/gemma-2-2b-it/config.json#attn_logit_softcapping,sliding_window, transformers.attention.planted"
+   ],
+   "node": null,
+   "why": null,
+   "located": true
+  },
+  {
+   "scenario": "cost",
+   "expected": null,
+   "platform": [
+    "intact",
+    null
+   ],
+   "node": null,
+   "why": null,
+   "located": true
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+W0928 04:36:59.068000 6185 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:36:59.095000 6185 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+off         defect refused=False within=False max=1.3553315103054047 decisions=[]
+off         fixed  refused=False within=True max=5.960464477539062e-07 decisions=[]
+on_resolve  defect refused=False within=True max=5.960464477539062e-07 decisions=['resolved:a reader that reads later was handed a b']
+on_resolve  fixed  refused=False within=True max=5.960464477539062e-07 decisions=[]
+on_refuse   defect refused=False within=False max=1.3553315103054047 decisions=['broken:the value reads a buffer that was writte']
+on_refuse   fixed  refused=False within=True max=5.960464477539062e-07 decisions=[]
+healthy: {"static_flex_vs_sdpa": {"max_abs": 2.980232238769531e-07, "mean_abs": 6.408981789718382e-08, "ref_max_abs": 1.048154592514038, "top1_agree": 1.0, "within": true}, "same_generate_tokens": true} {'flex_attention': (False, ['resolved: a reader that reads later was handed a buffer that is written in place']), 'sdpa': (False, [])}
+wrote <workspace>/testbed/results/p6/m91/rerun/m52/rb10.json

@@ -48,7 +48,7 @@ OUT = os.path.join(RESULTS, "m63")
 # a re-run under TESTBED_RESULTS keeps its images apart from the milestone's (M9.1)
 IMAGES = os.path.expanduser("~/m63_out" + ("_rerun" if os.environ.get("TESTBED_RESULTS") else ""))
 CONFIG = os.path.expanduser("~/sdxl_local_config")
-MODELS = "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models"
+MODELS = os.environ.get("COMFY_MODELS", "/mnt/c/Users/<user>/Desktop/ComfyUI/ComfyUI-new/models")   # moved to E: (P6)
 PROMPT = "masterpiece, best quality, 1girl, solo, smile, school uniform, cherry blossoms, outdoors, sunlight"
 NEG = "lowres, bad anatomy, worst quality, low quality"
 SEEDS = [11, 22, 33]

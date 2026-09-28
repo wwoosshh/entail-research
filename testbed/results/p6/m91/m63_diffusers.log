@@ -1,0 +1,705 @@
+W0928 04:50:01.463000 14134 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:01.488000 14134 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:06.574000 14195 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:06.592000 14195 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:12.324000 14256 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:12.348000 14256 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:18.186000 14317 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:18.210000 14317 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:23.119000 14378 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:23.139000 14378 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:27.914000 14439 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:27.935000 14439 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:35.231000 14500 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:35.260000 14500 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:40.330000 14561 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:40.351000 14561 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:46.133000 14622 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:46.159000 14622 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 100, in gen
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:51.188000 14683 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:51.208000 14683 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:50:56.911000 14744 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:50:56.936000 14744 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:01.945000 14805 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:01.966000 14805 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:08.506000 14866 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:08.532000 14866 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:14.368000 14927 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:14.396000 14927 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:18.591000 14988 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:18.614000 14988 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 144, in vae
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:23.461000 15049 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:23.485000 15049 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 144, in vae
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:29.004000 15110 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:29.033000 15110 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 144, in vae
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:34.920000 15171 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:34.951000 15171 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in <lambda>
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 144, in vae
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:41.859000 15232 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:41.879000 15232 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:47.506000 15293 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:47.532000 15293 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.
+W0928 04:51:53.326000 15354 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0928 04:51:53.352000 15354 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Traceback (most recent call last):
+  File "<workspace>/testbed/m63_diffusers.py", line 214, in <module>
+    main()
+  File "<workspace>/testbed/m63_diffusers.py", line 196, in main
+    res = {"gen": lambda: gen(tag, *sys.argv[3:5]), "vae": lambda: vae(tag, *sys.argv[3:5]),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 197, in <lambda>
+    "lora": lambda: lora(tag, *sys.argv[3:6])}[kind]()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 171, in lora
+    pipe, load_s = pipeline(ckpt)
+                   ^^^^^^^^^^^^^^
+  File "<workspace>/testbed/m63_diffusers.py", line 84, in pipeline
+    pipe = StableDiffusionXLPipeline.from_single_file(os.path.join(MODELS, "checkpoints", ckpt), config=CONFIG,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/entail/adapters/diffusers_adapter.py", line 164, in from_single_file
+    pipe = raw(klass, pretrained_model_link_or_path, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file.py", line 393, in from_single_file
+    checkpoint = load_single_file_checkpoint(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 479, in load_single_file_checkpoint
+    repo_id, weights_name = _extract_repo_id_and_weights_name(pretrained_model_link_or_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/<user>/venvs/gpu/lib/python3.12/site-packages/diffusers/loaders/single_file_utils.py", line 429, in _extract_repo_id_and_weights_name
+    raise ValueError("Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.")
+ValueError: Invalid `pretrained_model_name_or_path` provided. Please set it to a valid URL.

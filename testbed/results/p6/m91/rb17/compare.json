@@ -1,0 +1,1757 @@
+{
+ "defect_vs_triton": {
+  "mean_abs": 0.7156812169175122,
+  "max_abs": 5.974820613861084,
+  "n": 255
+ },
+ "entail_torch_native_vs_triton": {
+  "mean_abs": 0.0,
+  "max_abs": 0.0,
+  "n": 255
+ },
+ "record": [
+  {
+   "v": 2,
+   "t": 1790537886.069,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "start:sglang.safe_mode",
+   "ms": 3.747
+  },
+  {
+   "v": 2,
+   "t": 1790537886.093,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundary": "load:transformers.config",
+   "consumer": "transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (the unsloth version that wrote the checkpoint; read by no engine); _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "lost_by": null,
+   "declared": {
+    "name": "Coverage",
+    "kind": "MAPPING",
+    "value": "Coverage(total=32, taken=32, left=())",
+    "source": {
+     "kind": "config",
+     "where": "Gemma2Config config.json (the file names itself unsloth/gemma-2-2b-it) (every key it gives)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Coverage",
+    "kind": "MAPPING",
+    "value": "Coverage(total=32, taken=32, left=())",
+    "source": {
+     "kind": "engine",
+     "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537886.094,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "load:transformers.config",
+   "ms": 3.476
+  },
+  {
+   "v": 2,
+   "t": 1790537886.117,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundary": "load:sglang.model_config",
+   "consumer": "sglang.scheduler.stop_set",
+   "name": "Stops",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "Stops",
+    "kind": "MAPPING",
+    "value": "Stops(eos=(1, 107), bos=None, pad=None)",
+    "source": {
+     "kind": "config",
+     "where": "the union of <workspace>/testbed/results/p6/m91/rb17/model/config.json#eos_token_id; <workspace>/testbed/results/p6/m91/rb17/model/generation_config.json#eos_token_id; <workspace>/testbed/results/p6/m91/rb17/model/tokenizer_config.json#eos_token (id by added_tokens_decoder)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Stops",
+    "kind": "MAPPING",
+    "value": "Stops(eos=(1, 107), bos=None, pad=None)",
+    "source": {
+     "kind": "engine",
+     "where": "ModelConfig.hf_eos_token_id plus the tokenizer's eos the scheduler matches (model <workspace>/testbed/results/p6/m91/rb17/model)"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537886.117,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundaries": {
+    "load:sglang.model_config": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "stop_dropped": 1,
+      "stop_id_out_of_range": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537886.117,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "load:sglang.model_config",
+   "ms": 18.867
+  },
+  {
+   "v": 2,
+   "t": 1790537886.171,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundaries": {
+    "load:sglang.model_config": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "stop_dropped": 2,
+      "stop_id_out_of_range": 2
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537886.171,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "load:sglang.model_config",
+   "ms": 11.842
+  },
+  {
+   "v": 2,
+   "t": 1790537886.182,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "load:transformers.config",
+   "ms": 2.096
+  },
+  {
+   "v": 2,
+   "t": 1790537887.122,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundary": "load:transformers.tokenizer",
+   "consumer": "transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "Vocab",
+    "kind": "MAPPING",
+    "value": "Vocab(size=256000, added=None)",
+    "source": {
+     "kind": "file",
+     "where": "tokenizer.json (model.vocab)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Vocab",
+    "kind": "MAPPING",
+    "value": "Vocab(size=256000, added=0)",
+    "source": {
+     "kind": "engine",
+     "where": "GemmaTokenizer built from <workspace>/testbed/results/p6/m91/rb17/model: the tokenizer the engine holds"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537887.123,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundaries": {
+    "load:transformers.tokenizer": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "vocab": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537887.628,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundaries": {
+    "load:transformers.tokenizer.ids": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "tokenization": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537887.629,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundary": "load:transformers.tokenizer.ids",
+   "consumer": "transformers.tokenizer",
+   "name": "Tokenization",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "10 probe texts encode alike; 249 declared added tokens match",
+   "lost_by": null,
+   "declared": {
+    "name": "Tokenization",
+    "kind": "MAPPING",
+    "value": "Tokenization(digest='b4c4f567f0e85591', probes=10, added=249)",
+    "source": {
+     "kind": "file",
+     "where": "tokenizer.json (tokenizers 0.22.2)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Tokenization",
+    "kind": "MAPPING",
+    "value": "Tokenization(digest='b4c4f567f0e85591', probes=10, added=249)",
+    "source": {
+     "kind": "engine",
+     "where": "GemmaTokenizer built from <workspace>/testbed/results/p6/m91/rb17/model"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537887.629,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 505.35
+  },
+  {
+   "v": 2,
+   "t": 1790537887.629,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "timing": "load:transformers.tokenizer",
+   "ms": 759.623
+  },
+  {
+   "v": 2,
+   "t": 1790537892.564,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "boundary": "load:transformers.config",
+   "consumer": "transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (the unsloth version that wrote the checkpoint; read by no engine); _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "lost_by": null,
+   "declared": {
+    "name": "Coverage",
+    "kind": "MAPPING",
+    "value": "Coverage(total=32, taken=32, left=())",
+    "source": {
+     "kind": "config",
+     "where": "Gemma2Config config.json (the file names itself unsloth/gemma-2-2b-it) (every key it gives)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Coverage",
+    "kind": "MAPPING",
+    "value": "Coverage(total=32, taken=32, left=())",
+    "source": {
+     "kind": "engine",
+     "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537892.569,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "timing": "load:transformers.config",
+   "ms": 8.09
+  },
+  {
+   "v": 2,
+   "t": 1790537893.133,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:transformers.config",
+   "consumer": "transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "read elsewhere: cache_implementation (generation_config.json holds this one and GenerationConfig reads it (checked on a gemma-2-2b-it checkpoint)); unsloth_version (the unsloth version that wrote the checkpoint; read by no engine); _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "lost_by": null,
+   "declared": {
+    "name": "Coverage",
+    "kind": "MAPPING",
+    "value": "Coverage(total=32, taken=32, left=())",
+    "source": {
+     "kind": "config",
+     "where": "Gemma2Config config.json (the file names itself unsloth/gemma-2-2b-it) (every key it gives)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Coverage",
+    "kind": "MAPPING",
+    "value": "Coverage(total=32, taken=32, left=())",
+    "source": {
+     "kind": "engine",
+     "where": "transformers config class: a key is taken if the class knows it or its value landed in a field it knows"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537893.139,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.config",
+   "ms": 8.08
+  },
+  {
+   "v": 2,
+   "t": 1790537893.164,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:sglang.model_config",
+   "consumer": "sglang.scheduler.stop_set",
+   "name": "Stops",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "Stops",
+    "kind": "MAPPING",
+    "value": "Stops(eos=(1, 107), bos=None, pad=None)",
+    "source": {
+     "kind": "config",
+     "where": "the union of <workspace>/testbed/results/p6/m91/rb17/model/config.json#eos_token_id; <workspace>/testbed/results/p6/m91/rb17/model/generation_config.json#eos_token_id; <workspace>/testbed/results/p6/m91/rb17/model/tokenizer_config.json#eos_token (id by added_tokens_decoder)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Stops",
+    "kind": "MAPPING",
+    "value": "Stops(eos=(1, 107), bos=None, pad=None)",
+    "source": {
+     "kind": "engine",
+     "where": "ModelConfig.hf_eos_token_id plus the tokenizer's eos the scheduler matches (model <workspace>/testbed/results/p6/m91/rb17/model)"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537893.164,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "load:sglang.model_config": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "stop_dropped": 1,
+      "stop_id_out_of_range": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537893.165,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:sglang.model_config",
+   "ms": 21.819
+  },
+  {
+   "v": 2,
+   "t": 1790537893.172,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.config",
+   "ms": 2.196
+  },
+  {
+   "v": 2,
+   "t": 1790537893.175,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "boundary": "load:transformers.tokenizer",
+   "consumer": "transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "Vocab",
+    "kind": "MAPPING",
+    "value": "Vocab(size=256000, added=None)",
+    "source": {
+     "kind": "file",
+     "where": "tokenizer.json (model.vocab)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Vocab",
+    "kind": "MAPPING",
+    "value": "Vocab(size=256000, added=0)",
+    "source": {
+     "kind": "engine",
+     "where": "GemmaTokenizer built from <workspace>/testbed/results/p6/m91/rb17/model: the tokenizer the engine holds"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537893.175,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "boundaries": {
+    "load:transformers.tokenizer": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "vocab": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537893.182,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "boundaries": {
+    "load:transformers.tokenizer.ids": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "tokenization": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537893.183,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "boundary": "load:transformers.tokenizer.ids",
+   "consumer": "transformers.tokenizer",
+   "name": "Tokenization",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "10 probe texts encode alike; 249 declared added tokens match",
+   "lost_by": null,
+   "declared": {
+    "name": "Tokenization",
+    "kind": "MAPPING",
+    "value": "Tokenization(digest='b4c4f567f0e85591', probes=10, added=249)",
+    "source": {
+     "kind": "file",
+     "where": "tokenizer.json (tokenizers 0.22.2)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Tokenization",
+    "kind": "MAPPING",
+    "value": "Tokenization(digest='b4c4f567f0e85591', probes=10, added=249)",
+    "source": {
+     "kind": "engine",
+     "where": "GemmaTokenizer built from <workspace>/testbed/results/p6/m91/rb17/model"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537893.183,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 6.604
+  },
+  {
+   "v": 2,
+   "t": 1790537893.183,
+   "run": "7010-1790537879",
+   "pid": 7076,
+   "timing": "load:transformers.tokenizer",
+   "ms": 13.408
+  },
+  {
+   "v": 2,
+   "t": 1790537893.796,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:transformers.tokenizer",
+   "consumer": "transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "Vocab",
+    "kind": "MAPPING",
+    "value": "Vocab(size=256000, added=None)",
+    "source": {
+     "kind": "file",
+     "where": "tokenizer.json (model.vocab)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Vocab",
+    "kind": "MAPPING",
+    "value": "Vocab(size=256000, added=0)",
+    "source": {
+     "kind": "engine",
+     "where": "GemmaTokenizer built from <workspace>/testbed/results/p6/m91/rb17/model: the tokenizer the engine holds"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537893.796,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "load:transformers.tokenizer": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "vocab": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537893.804,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "load:transformers.tokenizer.ids": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "tokenization": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537893.804,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:transformers.tokenizer.ids",
+   "consumer": "transformers.tokenizer",
+   "name": "Tokenization",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "10 probe texts encode alike; 249 declared added tokens match",
+   "lost_by": null,
+   "declared": {
+    "name": "Tokenization",
+    "kind": "MAPPING",
+    "value": "Tokenization(digest='b4c4f567f0e85591', probes=10, added=249)",
+    "source": {
+     "kind": "file",
+     "where": "tokenizer.json (tokenizers 0.22.2)"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Tokenization",
+    "kind": "MAPPING",
+    "value": "Tokenization(digest='b4c4f567f0e85591', probes=10, added=249)",
+    "source": {
+     "kind": "engine",
+     "where": "GemmaTokenizer built from <workspace>/testbed/results/p6/m91/rb17/model"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537893.805,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 6.671
+  },
+  {
+   "v": 2,
+   "t": 1790537893.806,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.tokenizer",
+   "ms": 15.138
+  },
+  {
+   "v": 2,
+   "t": 1790537894.287,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "load:sglang.model_config": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "stop_dropped": 2,
+      "stop_id_out_of_range": 2
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537894.287,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:sglang.model_config",
+   "ms": 6.303
+  },
+  {
+   "v": 2,
+   "t": 1790537896.586,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:sglang.loader",
+   "consumer": "sglang.loader",
+   "name": "ModelProps",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "ModelProps",
+    "kind": "PROPERTY",
+    "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+    "source": {
+     "kind": "data",
+     "where": "<workspace>/testbed/results/p6/m91/rb17/model: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+    },
+    "certainty": "verified"
+   },
+   "chosen": {
+    "name": "ModelProps",
+    "kind": "PROPERTY",
+    "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+    "source": {
+     "kind": "engine",
+     "where": "sglang.loader ties the head to the embedding: the config it holds says tie_word_embeddings"
+    },
+    "certainty": "verified"
+   },
+   "observed": {
+    "name": "ModelProps",
+    "kind": "PROPERTY",
+    "value": "ModelProps(softcap=None, sliding_window=None, tie_word_embeddings=True)",
+    "source": {
+     "kind": "data",
+     "where": "<workspace>/testbed/results/p6/m91/rb17/model: 288 tensors, no lm_head.weight (the head can only be the embedding)"
+    },
+    "certainty": "verified"
+   },
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537896.587,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:sglang.config.rope_parameters",
+   "consumer": "sglang.rotary_embedding",
+   "name": "Rotary",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "Rotary",
+    "kind": "FRAME",
+    "value": "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None, partial_rotary_factor=None, local_factor=None, mrope_section=None, mrope_interleaved=None, pairing=None)",
+    "source": {
+     "kind": "config",
+     "where": "<workspace>/testbed/results/p6/m91/rb17/model/config.json#rope_theta"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "Rotary",
+    "kind": "FRAME",
+    "value": "Rotary(rope_type='default', theta=10000.0, factor=None, original_max_position=None, low_freq_factor=None, high_freq_factor=None, beta_fast=None, beta_slow=None, attention_factor=None, mscale=None, mscale_all_dim=None, truncate=None, long_factor_sha256=None, short_factor_sha256=None, factor_terms=None, local_theta=None, partial_rotary_factor=None, local_factor=None, mrope_section=None, mrope_interleaved=None, pairing=None)",
+    "source": {
+     "kind": "engine",
+     "where": "Gemma2Config held by sglang#rope_parameters"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537896.587,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:sglang.loader",
+   "ms": 11.442
+  },
+  {
+   "v": 2,
+   "t": 1790537896.595,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.config",
+   "ms": 2.136
+  },
+  {
+   "v": 2,
+   "t": 1790537897.173,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "load:transformers.tokenizer": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "vocab": 2
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537897.177,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "load:transformers.tokenizer.ids": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "tokenization": 2
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537897.177,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 3.201
+  },
+  {
+   "v": 2,
+   "t": 1790537897.178,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:transformers.tokenizer",
+   "ms": 7.622
+  },
+  {
+   "v": 2,
+   "t": 1790537897.915,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "load:sglang.attention",
+   "consumer": "sglang.attention.torch_native",
+   "name": "ModelProps",
+   "verdict": "resolved",
+   "blocking": false,
+   "rule": "the consumer differs from the declaration; a registered resolution repairs it",
+   "resolution": "route to a backend measured to honour it (to triton)",
+   "handle": "switch_attention_backend",
+   "target": "triton",
+   "note": "",
+   "lost_by": null,
+   "declared": {
+    "name": "ModelProps",
+    "kind": "PROPERTY",
+    "value": "ModelProps(softcap=5.0, sliding_window=4096, tie_word_embeddings=None)",
+    "source": {
+     "kind": "config",
+     "where": "<workspace>/testbed/results/p6/m91/rb17/model/config.json#attn_logit_softcapping,sliding_window"
+    },
+    "certainty": "declared"
+   },
+   "chosen": {
+    "name": "ModelProps",
+    "kind": "PROPERTY",
+    "value": "ModelProps(softcap=None, sliding_window=4096, tie_word_embeddings=None)",
+    "source": {
+     "kind": "engine",
+     "where": "sglang.attention.torch_native [softcap: drops (measured); sliding_window: honours (measured)]"
+    },
+    "certainty": "verified"
+   },
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537897.923,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "load:sglang.attention",
+   "ms": 19.202
+  },
+  {
+   "v": 2,
+   "t": 1790537898.628,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundary": "start:sglang.paths",
+   "consumer": "sglang.engine",
+   "name": "PathAgreement",
+   "verdict": "unknown",
+   "blocking": false,
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "SGLang has run no prefill yet: the probe requests would be the engine's first, and a defect on that path would stop it before your first request; set ENTAIL_PATHS=1 to compare its paths",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537898.639,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.compute_position_kernel",
+   "consumer": "sglang.compute_position_kernel",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537898.64,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang.compute_position_kernel": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537898.64,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.741
+  },
+  {
+   "v": 2,
+   "t": 1790537898.863,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "consumer": "sglang.create_flashinfer_kv_indices_triton",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537898.863,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang.create_flashinfer_kv_indices_triton": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537898.864,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.962
+  },
+  {
+   "v": 2,
+   "t": 1790537898.871,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "consumer": "sglang.create_flashinfer_kv_indices_triton",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537898.871,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang.create_flashinfer_kv_indices_triton": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 2,
+      "kernel_layout_variant": 2
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537898.871,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.741
+  },
+  {
+   "v": 2,
+   "t": 1790537899.197,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang._fwd_kernel",
+   "consumer": "sglang._fwd_kernel",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.197,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang._fwd_kernel": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.198,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.887
+  },
+  {
+   "v": 2,
+   "t": 1790537899.379,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang._fwd_kernel",
+   "consumer": "sglang._fwd_kernel",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.379,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang._fwd_kernel": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 2,
+      "kernel_layout_variant": 2
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.38,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.846
+  },
+  {
+   "v": 2,
+   "t": 1790537899.429,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.softcap_inplace_logits_kernel",
+   "consumer": "sglang.softcap_inplace_logits_kernel",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.431,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang.softcap_inplace_logits_kernel": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.431,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 1.685
+  },
+  {
+   "v": 2,
+   "t": 1790537899.439,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang._row_logsumexp_kernel",
+   "consumer": "sglang._row_logsumexp_kernel",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.439,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang._row_logsumexp_kernel": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.439,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.761
+  },
+  {
+   "v": 2,
+   "t": 1790537899.473,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "container:sglang.prepare_for_decode": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kv_written": 1,
+      "kv_needed": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.477,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "consumer": "sglang.create_flashinfer_kv_indices_triton",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.478,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.544
+  },
+  {
+   "v": 2,
+   "t": 1790537899.479,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "consumer": "sglang.create_flashinfer_kv_indices_triton",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.48,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang.create_flashinfer_kv_indices_triton": {
+     "checks": 4,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 4,
+      "kernel_layout_variant": 4
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.48,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.67
+  },
+  {
+   "v": 2,
+   "t": 1790537899.481,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang.get_num_kv_splits_triton",
+   "consumer": "sglang.get_num_kv_splits_triton",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.482,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang.get_num_kv_splits_triton": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.482,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.59
+  },
+  {
+   "v": 2,
+   "t": 1790537899.534,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang._fwd_grouped_kernel_stage1",
+   "consumer": "sglang._fwd_grouped_kernel_stage1",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.535,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang._fwd_grouped_kernel_stage1": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.535,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.905
+  },
+  {
+   "v": 2,
+   "t": 1790537899.54,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundary": "kernel:sglang._fwd_kernel_stage2",
+   "consumer": "sglang._fwd_kernel_stage2",
+   "name": "Layout",
+   "verdict": "pass",
+   "blocking": false,
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "handle": null,
+   "target": null,
+   "note": "",
+   "lost_by": null,
+   "declared": null,
+   "chosen": null,
+   "observed": null,
+   "conflict": []
+  },
+  {
+   "v": 2,
+   "t": 1790537899.54,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "boundaries": {
+    "kernel:sglang._fwd_kernel_stage2": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "kernel_stride_assumed": 1,
+      "kernel_layout_variant": 1
+     }
+    }
+   }
+  },
+  {
+   "v": 2,
+   "t": 1790537899.54,
+   "run": "7010-1790537879",
+   "pid": 7075,
+   "timing": "kernel:triton",
+   "ms": 0.636
+  },
+  {
+   "v": 2,
+   "t": 1790537899.685,
+   "run": "7010-1790537879",
+   "pid": 7010,
+   "boundaries": {
+    "load:sglang.model_config": {
+     "checks": 2,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "stop_dropped": 2,
+      "stop_id_out_of_range": 2
+     }
+    },
+    "load:transformers.tokenizer": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "vocab": 1
+     }
+    },
+    "load:transformers.tokenizer.ids": {
+     "checks": 1,
+     "broken": 0,
+     "refused": 0,
+     "skipped": 0,
+     "deferred": 0,
+     "resolved": 0,
+     "passed": {
+      "tokenization": 1
+     }
+    }
+   }
+  }
+ ],
+ "decisions": [
+  [
+   "load:transformers.config",
+   "pass",
+   null
+  ],
+  [
+   "load:sglang.model_config",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.tokenizer",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.tokenizer.ids",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.config",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.config",
+   "pass",
+   null
+  ],
+  [
+   "load:sglang.model_config",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.tokenizer",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.tokenizer.ids",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.tokenizer",
+   "pass",
+   null
+  ],
+  [
+   "load:transformers.tokenizer.ids",
+   "pass",
+   null
+  ],
+  [
+   "load:sglang.loader",
+   "pass",
+   null
+  ],
+  [
+   "load:sglang.config.rope_parameters",
+   "pass",
+   null
+  ],
+  [
+   "load:sglang.attention",
+   "resolved",
+   "triton"
+  ],
+  [
+   "start:sglang.paths",
+   "unknown",
+   null
+  ],
+  [
+   "kernel:sglang.compute_position_kernel",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang._fwd_kernel",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang._fwd_kernel",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang.softcap_inplace_logits_kernel",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang._row_logsumexp_kernel",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang.create_flashinfer_kv_indices_triton",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang.get_num_kv_splits_triton",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang._fwd_grouped_kernel_stage1",
+   "pass",
+   null
+  ],
+  [
+   "kernel:sglang._fwd_kernel_stage2",
+   "pass",
+   null
+  ]
+ ]
+}

@@ -1,0 +1,1858 @@
+{
+ "about": "S9 on vLLM 0.30.0 (ROADMAP product track P3, LIBRARY_DESIGN.md 8 and 13.6). Table before the fix: entail product b6f1c7f^ (73b44a9); after: b6f1c7f; part f (the inside statement): bb5e80d.",
+ "a_selective_safe_path": {
+  "q35q": {
+   "start1_disagree": [
+    "decode_prefill"
+   ],
+   "start1_said": [
+    "the paths disagree (decode_prefill): the next start turns speculative_decoding off to find the cause (1 of 1 candidates)"
+   ],
+   "start2_off": [
+    "speculative_config = None"
+   ],
+   "start2_disagree": [],
+   "start2_said": [
+    "the paths agree with speculative_decoding off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "start3_off": [
+    "speculative_config = None"
+   ],
+   "start3_disagree": [],
+   "recovered": true
+  },
+  "nemotron": {
+   "start1_disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "start1_said": [
+    "the paths disagree (decode_prefill, alone_batched): the next start turns speculative_decoding off to find the cause (1 of 2 candidates)"
+   ],
+   "start2_off": [
+    "speculative_config = None"
+   ],
+   "start2_disagree": [],
+   "start2_said": [
+    "the paths agree with speculative_decoding off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "start3_off": [
+    "speculative_config = None"
+   ],
+   "start3_disagree": [],
+   "recovered": true
+  }
+ },
+ "a_cost": {
+  "q35q": {
+   "spec_on_tok_s": 80.7,
+   "safe_path_tok_s": 106.4,
+   "ratio": 1.318,
+   "load_s": {
+    "spec_on": 46.15,
+    "safe_path": 38.91
+   },
+   "spec_on_disagree": [
+    "decode_prefill"
+   ],
+   "safe_path_disagree": []
+  },
+  "nemotron": {
+   "spec_on_tok_s": 239.6,
+   "safe_path_tok_s": 185.8,
+   "ratio": 0.775,
+   "load_s": {
+    "spec_on": 18.58,
+    "safe_path": 13.39
+   },
+   "spec_on_disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "safe_path_disagree": []
+  }
+ },
+ "b_explicit_before_fix": [
+  {
+   "off": "s9b_inside_off",
+   "all": "s9b_inside_all",
+   "fault": "inside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 7345,
+    "all": 0
+   },
+   "all_disagree": [],
+   "told": "inside",
+   "right": true
+  },
+  {
+   "off": "s9b_outside_off",
+   "all": "s9b_outside_all",
+   "fault": "outside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 1820,
+    "all": 1512
+   },
+   "all_disagree": [
+    "decode_prefill"
+   ],
+   "told": "outside",
+   "right": true
+  },
+  {
+   "off": "s9c_inside_kernel_off",
+   "all": "s9c_inside_kernel_all",
+   "fault": "inside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 7345,
+    "all": 6102
+   },
+   "all_disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "told": "outside",
+   "right": false
+  },
+  {
+   "off": "s9c_inside_op_off",
+   "all": "s9c_inside_op_all",
+   "fault": "inside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 1820,
+    "all": 0
+   },
+   "all_disagree": [],
+   "told": "inside",
+   "right": true
+  }
+ ],
+ "b_explicit_after_fix": [
+  {
+   "off": "s9c_inside_kernel_off",
+   "all": "s9d_inside_kernel_all",
+   "fault": "inside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 7345,
+    "all": 0
+   },
+   "all_disagree": [],
+   "told": "inside",
+   "right": true
+  },
+  {
+   "off": "s9c_inside_op_off",
+   "all": "s9d_inside_op_all",
+   "fault": "inside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 1820,
+    "all": 0
+   },
+   "all_disagree": [],
+   "told": "inside",
+   "right": true
+  },
+  {
+   "off": "s9b_outside_off",
+   "all": "s9d_outside_all",
+   "fault": "outside",
+   "seen_with_nothing_off": true,
+   "planted_calls": {
+    "off": 1820,
+    "all": 1512
+   },
+   "all_disagree": [
+    "decode_prefill"
+   ],
+   "told": "outside",
+   "right": true
+  }
+ ],
+ "b_right_after_fix": "3/3",
+ "b_as_a_user_meets_it": {
+  "inside_kernel": {
+   "on": {
+    "disagree": [
+     "decode_prefill",
+     "alone_batched"
+    ],
+    "answer": "departmentaller: {A-w, and"
+   },
+   "all": {
+    "disagree": [],
+    "said": [
+     "with every optimization vllm declares does not change results off (prefix_cache, custom_kernels), the paths agree; at this configuration's last start with them on they disagreed (decode_prefill, alone_batched): the cause is inside them"
+    ],
+    "answer": " Paris. The capital of France is also"
+   }
+  },
+  "outside": {
+   "on": {
+    "disagree": [
+     "decode_prefill"
+    ],
+    "answer": " Paris, and the capital of the United"
+   },
+   "all": {
+    "disagree": [
+     "decode_prefill"
+    ],
+    "said": [
+     "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill): the cause is outside them"
+    ],
+    "answer": " Paris, and the capital of the United"
+   }
+  }
+ },
+ "clean_starts": {
+  "s9b_clean_off": {
+   "disagree": [],
+   "turned_off": []
+  },
+  "s9b_clean_all": {
+   "disagree": [],
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']"
+   ]
+  },
+  "s9d_clean_all": {
+   "disagree": [],
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ]
+  }
+ },
+ "g_self_check_cost": {
+  "q35q": {
+   "spec_on": {
+    "paths_s": [
+     7.658
+    ],
+    "load_s": 45.68
+   },
+   "safe_path": {
+    "paths_s": [
+     3.447
+    ],
+    "load_s": 38.83
+   },
+   "no_check": {
+    "paths_s": [],
+    "load_s": 35.98
+   }
+  },
+  "nemotron": {
+   "spec_on": {
+    "paths_s": [
+     4.802
+    ],
+    "load_s": 18.68
+   },
+   "safe_path": {
+    "paths_s": [
+     1.853
+    ],
+    "load_s": 13.43
+   },
+   "no_check": {
+    "paths_s": [],
+    "load_s": 10.69
+   }
+  }
+ },
+ "h_preregistered": {
+  "right": "3/3",
+  "not_applicable": [
+   "outside_kvwrite"
+  ]
+ },
+ "live_checks": {
+  "live_graphs_off": {
+   "turned_off": [],
+   "ran_with": {
+    "eager": false,
+    "prefix_cache": true
+   },
+   "answer": " Paris. The capital of France is also",
+   "load_s": 42.01
+  },
+  "live_graphs_all": {
+   "turned_off": [
+    "enforce_eager = True",
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "ran_with": {
+    "eager": true,
+    "prefix_cache": false
+   },
+   "answer": " Paris. The capital of France is also",
+   "load_s": 10.37
+  },
+  "live_sglang_off": {
+   "turned_off": [],
+   "ran_with": {
+    "disable_cuda_graph": false,
+    "disable_radix_cache": false,
+    "speculative_algorithm": null
+   },
+   "answer": " Paris. The capital of France is also",
+   "load_s": 20.7
+  },
+  "live_sglang_all": {
+   "turned_off": [
+    "disable_cuda_graph = True",
+    "disable_radix_cache = True"
+   ],
+   "ran_with": {
+    "disable_cuda_graph": true,
+    "disable_radix_cache": true,
+    "speculative_algorithm": null
+   },
+   "answer": " Paris. The capital of France is also",
+   "load_s": 15.79
+  }
+ },
+ "auto_with_planted_fault": {
+  "s9b_inside_auto": {
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "turned_off": [],
+   "said": [
+    "the paths disagree (decode_prefill, alone_batched): the next start turns custom_kernels off to find the cause (1 of 1 candidates)"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "searching"
+   },
+   "answer": "departmentaller: {A-w, and"
+  },
+  "s9b_inside_auto2": {
+   "disagree": [],
+   "turned_off": [
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "said": [
+    "the paths agree with custom_kernels off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "found"
+   },
+   "answer": " Paris. The capital of France is also"
+  },
+  "s9d_inside_kernel_auto1": {
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "turned_off": [],
+   "said": [
+    "the paths disagree (decode_prefill, alone_batched): the next start turns custom_kernels off to find the cause (1 of 1 candidates)"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "searching"
+   },
+   "answer": "departmentaller: {A-w, and"
+  },
+  "s9d_inside_kernel_auto2": {
+   "disagree": [],
+   "turned_off": [
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "said": [
+    "the paths agree with custom_kernels off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "found"
+   },
+   "answer": " Paris. The capital of France is also"
+  }
+ },
+ "runs": [
+  {
+   "run": "s9a_nemotron.start1",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 19.46,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.3434
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.3434
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [
+    "the paths disagree (decode_prefill, alone_batched): the next start turns speculative_decoding off to find the cause (1 of 2 candidates)"
+   ],
+   "store": {
+    "80a9e9cd31cb7904": "searching"
+   },
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": null
+  },
+  {
+   "run": "s9a_nemotron.start2",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 12.52,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0288
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0305
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [
+    "the paths agree with speculative_decoding off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "store": {
+    "80a9e9cd31cb7904": "found"
+   },
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": null
+  },
+  {
+   "run": "s9a_nemotron.start3",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 12.68,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0288
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0305
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {
+    "80a9e9cd31cb7904": "found"
+   },
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": null
+  },
+  {
+   "run": "s9a_q35q.start1",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 44.57,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.375,
+     "pdrift": 0.7099
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0343
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [
+    "the paths disagree (decode_prefill): the next start turns speculative_decoding off to find the cause (1 of 1 candidates)"
+   ],
+   "store": {
+    "e9e70cc3eadcc23f": "searching"
+   },
+   "answer": " Paris.\nA. True\nB",
+   "bench": null
+  },
+  {
+   "run": "s9a_q35q.start2",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 38.42,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0261
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0254
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [
+    "the paths agree with speculative_decoding off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "store": {
+    "e9e70cc3eadcc23f": "found"
+   },
+   "answer": " Paris.\nA. True\nB",
+   "bench": null
+  },
+  {
+   "run": "s9a_q35q.start3",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 38.03,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0261
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0254
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {
+    "e9e70cc3eadcc23f": "found"
+   },
+   "answer": " Paris.\nA. True\nB",
+   "bench": null
+  },
+  {
+   "run": "s9b_clean_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 9.48,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0295
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0304
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9b_clean_off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 9.46,
+   "turned_off": [],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.125,
+     "pdrift": 0.0329
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0296
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0354
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  },
+  {
+   "run": "s9b_inside_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "inside",
+   "planted_calls": 0,
+   "load_s": 9.74,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0295
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0304
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9b_inside_auto",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": "inside",
+   "planted_calls": 7345,
+   "load_s": 8.72,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9933
+    },
+    "alone_batched": {
+     "margin": 2.0,
+     "pdrift": 0.0173
+    },
+    "cold_cache": {
+     "margin": 0.5,
+     "pdrift": 0.0093
+    }
+   },
+   "said": [
+    "the paths disagree (decode_prefill, alone_batched): the next start turns custom_kernels off to find the cause (1 of 1 candidates)"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "searching"
+   },
+   "answer": "departmentaller: {A-w, and",
+   "bench": null
+  },
+  {
+   "run": "s9b_inside_auto2",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": "inside",
+   "planted_calls": 0,
+   "load_s": 10.08,
+   "turned_off": [
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0295
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0304
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0247
+    }
+   },
+   "said": [
+    "the paths agree with custom_kernels off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "found"
+   },
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9b_inside_off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "inside",
+   "planted_calls": 7345,
+   "load_s": 9.69,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9933
+    },
+    "alone_batched": {
+     "margin": 2.0,
+     "pdrift": 0.0173
+    },
+    "cold_cache": {
+     "margin": 0.5,
+     "pdrift": 0.0093
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": "departmentaller: {A-w, and",
+   "bench": null
+  },
+  {
+   "run": "s9b_inside_off_full",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "inside",
+   "planted_calls": 7345,
+   "load_s": 9.28,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9933
+    },
+    "alone_batched": {
+     "margin": 2.0,
+     "pdrift": 0.0173
+    },
+    "cold_cache": {
+     "margin": 0.5,
+     "pdrift": 0.0093
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": "departmentaller: {A-w, and",
+   "bench": null
+  },
+  {
+   "run": "s9b_outside_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "outside",
+   "planted_calls": 1512,
+   "load_s": 8.49,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.25,
+     "pdrift": 0.2744
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0294
+    }
+   },
+   "said": [
+    "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill): the cause is outside them"
+   ],
+   "store": {},
+   "answer": " Paris, and the capital of the United",
+   "bench": null
+  },
+  {
+   "run": "s9b_outside_off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "outside",
+   "planted_calls": 1820,
+   "load_s": 9.04,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.25,
+     "pdrift": 0.3413
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0349
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0391
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris, and the capital of the United",
+   "bench": null
+  },
+  {
+   "run": "s9c_inside_kernel_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 6102,
+   "load_s": 10.34,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9445
+    },
+    "alone_batched": {
+     "margin": 1.625,
+     "pdrift": 0.0292
+    }
+   },
+   "said": [
+    "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill, alone_batched): the cause is outside them"
+   ],
+   "store": {},
+   "answer": " for Q-style Q这个的你为",
+   "bench": null
+  },
+  {
+   "run": "s9c_inside_kernel_off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 7345,
+   "load_s": 12.14,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9933
+    },
+    "alone_batched": {
+     "margin": 2.0,
+     "pdrift": 0.0173
+    },
+    "cold_cache": {
+     "margin": 0.5,
+     "pdrift": 0.0093
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": "departmentaller: {A-w, and",
+   "bench": null
+  },
+  {
+   "run": "s9c_inside_op_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "inside_op",
+   "planted_calls": 0,
+   "load_s": 10.16,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0295
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0304
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9c_inside_op_off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "inside_op",
+   "planted_calls": 1820,
+   "load_s": 10.01,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 3.25,
+     "pdrift": 0.8112
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0744
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.023
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. Is that true? Also,",
+   "bench": null
+  },
+  {
+   "run": "s9d_clean_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 11.92,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0257
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0289
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9d_inside_kernel_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 0,
+   "load_s": 10.57,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0257
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0289
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9d_inside_kernel_auto1",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 7345,
+   "load_s": 9.61,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9933
+    },
+    "alone_batched": {
+     "margin": 2.0,
+     "pdrift": 0.0173
+    },
+    "cold_cache": {
+     "margin": 0.5,
+     "pdrift": 0.0093
+    }
+   },
+   "said": [
+    "the paths disagree (decode_prefill, alone_batched): the next start turns custom_kernels off to find the cause (1 of 1 candidates)"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "searching"
+   },
+   "answer": "departmentaller: {A-w, and",
+   "bench": null
+  },
+  {
+   "run": "s9d_inside_kernel_auto2",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 0,
+   "load_s": 10.52,
+   "turned_off": [
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0257
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0289
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0256
+    }
+   },
+   "said": [
+    "the paths agree with custom_kernels off: that is the cause in this configuration, which starts without it from now on"
+   ],
+   "store": {
+    "f03c555cdb0e5bd8": "found"
+   },
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9d_inside_op_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "inside_op",
+   "planted_calls": 0,
+   "load_s": 10.41,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0257
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0289
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9d_outside_all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "outside",
+   "planted_calls": 1512,
+   "load_s": 9.73,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.25,
+     "pdrift": 0.2878
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0201
+    }
+   },
+   "said": [
+    "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill): the cause is outside them"
+   ],
+   "store": {},
+   "answer": " Paris, and the capital of the United",
+   "bench": null
+  },
+  {
+   "run": "s9e_nemotron_safe_path",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 13.39,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0288
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0305
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {
+    "80a9e9cd31cb7904": "found"
+   },
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": {
+    "prompts": 4,
+    "tokens": 512,
+    "runs_s": [
+     2.759,
+     2.738,
+     2.756
+    ],
+    "median_s": 2.756,
+    "tok_s": 185.8
+   }
+  },
+  {
+   "run": "s9e_nemotron_spec_on",
+   "mode": "off",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 18.58,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.3434
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.3434
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": {
+    "prompts": 4,
+    "tokens": 512,
+    "runs_s": [
+     2.052,
+     2.137,
+     2.162
+    ],
+    "median_s": 2.137,
+    "tok_s": 239.6
+   }
+  },
+  {
+   "run": "s9e_q35q_safe_path",
+   "mode": "auto",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 38.91,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0261
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0254
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {
+    "e9e70cc3eadcc23f": "found"
+   },
+   "answer": " Paris.\nA. True\nB",
+   "bench": {
+    "prompts": 4,
+    "tokens": 512,
+    "runs_s": [
+     4.81,
+     4.96,
+     4.799
+    ],
+    "median_s": 4.81,
+    "tok_s": 106.4
+   }
+  },
+  {
+   "run": "s9e_q35q_spec_on",
+   "mode": "off",
+   "paths_s": null,
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 46.15,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.375,
+     "pdrift": 0.7099
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0343
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris.\nA. True\nB",
+   "bench": {
+    "prompts": 4,
+    "tokens": 512,
+    "runs_s": [
+     6.346,
+     6.324,
+     6.432
+    ],
+    "median_s": 6.346,
+    "tok_s": 80.7
+   }
+  },
+  {
+   "run": "s9f_inside_kernel_1off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 7345,
+   "load_s": 11.78,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 7.25,
+     "pdrift": 0.9933
+    },
+    "alone_batched": {
+     "margin": 2.0,
+     "pdrift": 0.0173
+    },
+    "cold_cache": {
+     "margin": 0.5,
+     "pdrift": 0.0093
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": "departmentaller: {A-w, and",
+   "bench": null
+  },
+  {
+   "run": "s9f_inside_kernel_2all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "inside_kernel",
+   "planted_calls": 0,
+   "load_s": 10.24,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0257
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.0289
+    }
+   },
+   "said": [
+    "with every optimization vllm declares does not change results off (prefix_cache, custom_kernels), the paths agree; at this configuration's last start with them on they disagreed (decode_prefill, alone_batched): the cause is inside them"
+   ],
+   "store": {},
+   "answer": " Paris. The capital of France is also",
+   "bench": null
+  },
+  {
+   "run": "s9f_outside_1off",
+   "mode": "off",
+   "paths_s": null,
+   "plant": "outside",
+   "planted_calls": 1820,
+   "load_s": 8.93,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.25,
+     "pdrift": 0.3413
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0349
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0391
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris, and the capital of the United",
+   "bench": null
+  },
+  {
+   "run": "s9f_outside_2all",
+   "mode": "all",
+   "paths_s": null,
+   "plant": "outside",
+   "planted_calls": 1512,
+   "load_s": 9.65,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.25,
+     "pdrift": 0.2878
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0201
+    }
+   },
+   "said": [
+    "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill): the cause is outside them"
+   ],
+   "store": {},
+   "answer": " Paris, and the capital of the United",
+   "bench": null
+  },
+  {
+   "run": "s9g_nemotron_no_check",
+   "mode": "off",
+   "paths_s": [],
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 10.69,
+   "turned_off": [],
+   "disagree": [],
+   "pairs": {},
+   "said": [],
+   "store": {},
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": null
+  },
+  {
+   "run": "s9g_nemotron_safe_path",
+   "mode": "auto",
+   "paths_s": [
+    1.853
+   ],
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 13.43,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0288
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0305
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {
+    "80a9e9cd31cb7904": "found"
+   },
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": null
+  },
+  {
+   "run": "s9g_nemotron_spec_on",
+   "mode": "off",
+   "paths_s": [
+    4.802
+   ],
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 18.68,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.3434
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.3434
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris.\" That's true.\n\nBut is",
+   "bench": null
+  },
+  {
+   "run": "s9g_q35q_no_check",
+   "mode": "off",
+   "paths_s": [],
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 35.98,
+   "turned_off": [],
+   "disagree": [],
+   "pairs": {},
+   "said": [],
+   "store": {},
+   "answer": " Paris.\nA. True\nB",
+   "bench": null
+  },
+  {
+   "run": "s9g_q35q_safe_path",
+   "mode": "auto",
+   "paths_s": [
+    3.447
+   ],
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 38.83,
+   "turned_off": [
+    "speculative_config = None"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0261
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0254
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {
+    "e9e70cc3eadcc23f": "found"
+   },
+   "answer": " Paris.\nA. True\nB",
+   "bench": null
+  },
+  {
+   "run": "s9g_q35q_spec_on",
+   "mode": "off",
+   "paths_s": [
+    7.658
+   ],
+   "plant": null,
+   "planted_calls": 0,
+   "load_s": 45.68,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.375,
+     "pdrift": 0.7099
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0343
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris.\nA. True\nB",
+   "bench": null
+  },
+  {
+   "run": "s9h_inside_kernel_1off",
+   "mode": "off",
+   "paths_s": [
+    1.553
+   ],
+   "plant": "inside_kernel",
+   "planted_calls": 3705,
+   "load_s": 11.04,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 8.75,
+     "pdrift": 0.9589
+    },
+    "alone_batched": {
+     "margin": 1.125,
+     "pdrift": 0.1759
+    },
+    "cold_cache": {
+     "margin": 0.125,
+     "pdrift": 0.0102
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " a country with a rich showpiece of",
+   "bench": null
+  },
+  {
+   "run": "s9h_inside_kernel_2all",
+   "mode": "all",
+   "paths_s": [
+    1.898
+   ],
+   "plant": "inside_kernel",
+   "planted_calls": 0,
+   "load_s": 11.09,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0334
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0284
+    }
+   },
+   "said": [
+    "with every optimization vllm declares does not change results off (prefix_cache, custom_kernels), the paths agree; at this configuration's last start with them on they disagreed (decode_prefill, alone_batched): the cause is inside them"
+   ],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  },
+  {
+   "run": "s9h_inside_rope_1off",
+   "mode": "off",
+   "paths_s": [
+    1.625
+   ],
+   "plant": "inside_rope",
+   "planted_calls": 1820,
+   "load_s": 15.31,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 3.625,
+     "pdrift": 0.8334
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.1114
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0035
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " not a good place to be for a",
+   "bench": null
+  },
+  {
+   "run": "s9h_inside_rope_2all",
+   "mode": "all",
+   "paths_s": [
+    1.846
+   ],
+   "plant": "inside_rope",
+   "planted_calls": 0,
+   "load_s": 12.06,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.0334
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0284
+    }
+   },
+   "said": [
+    "with every optimization vllm declares does not change results off (prefix_cache, custom_kernels), the paths agree; at this configuration's last start with them on they disagreed (decode_prefill): the cause is inside them"
+   ],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  },
+  {
+   "run": "s9h_outside_1off",
+   "mode": "off",
+   "paths_s": [
+    1.572
+   ],
+   "plant": "outside",
+   "planted_calls": 1820,
+   "load_s": 10.43,
+   "turned_off": [],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.875,
+     "pdrift": 0.8073
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0423
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0156
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  },
+  {
+   "run": "s9h_outside_2all",
+   "mode": "all",
+   "paths_s": [
+    2.017
+   ],
+   "plant": "outside",
+   "planted_calls": 1512,
+   "load_s": 11.04,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [
+    "decode_prefill"
+   ],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 1.75,
+     "pdrift": 0.8089
+    },
+    "alone_batched": {
+     "margin": 0.125,
+     "pdrift": 0.032
+    }
+   },
+   "said": [
+    "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill): the cause is outside them"
+   ],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  },
+  {
+   "run": "s9h_outside_kvwrite_1off",
+   "mode": "off",
+   "paths_s": [
+    1.538
+   ],
+   "plant": "outside_kvwrite",
+   "planted_calls": 1820,
+   "load_s": 10.86,
+   "turned_off": [],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.1715
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0423
+    },
+    "cold_cache": {
+     "margin": 0.0,
+     "pdrift": 0.0208
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  },
+  {
+   "run": "s9h_outside_kvwrite_2all",
+   "mode": "all",
+   "paths_s": [
+    1.871
+   ],
+   "plant": "outside_kvwrite",
+   "planted_calls": 1512,
+   "load_s": 11.26,
+   "turned_off": [
+    "enable_prefix_caching = False",
+    "compilation_config.custom_ops = ['none']; ir_op_priority.rms_norm = ['native']; ir_op_priority.fused_add_rms_norm = ['native']; ir_op_priority.gelu_and_mul_sparse = ['native']"
+   ],
+   "disagree": [],
+   "pairs": {
+    "decode_prefill": {
+     "margin": 0.0,
+     "pdrift": 0.1559
+    },
+    "alone_batched": {
+     "margin": 0.0,
+     "pdrift": 0.0364
+    }
+   },
+   "said": [],
+   "store": {},
+   "answer": " Paris. The capital of Italy is Rome",
+   "bench": null
+  }
+ ]
+}

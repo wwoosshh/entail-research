@@ -1,0 +1,34 @@
+[entail-seed] drop_effort: reasoning_effort no longer reaches the chat template
+(APIServer pid=19010) WARNING 09-28 04:56:24 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=19010) WARNING 09-28 04:56:24 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+[entail-seed] drop_effort: reasoning_effort no longer reaches the chat template
+(EngineCore pid=19132) WARNING 09-28 04:56:32 [buffer_utils.py:47] Pinned memory is not available on this platform; falling back to device memory for UVA buffers.
+(EngineCore pid=19132) 
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+(EngineCore pid=19132) 
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:00<00:00,  2.19it/s]
+(EngineCore pid=19132) 
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:00<00:00,  2.10it/s]
+(EngineCore pid=19132) 
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:00<00:00,  3.03it/s]
+(EngineCore pid=19132) 
+(EngineCore pid=19132) WARNING 09-28 04:56:39 [vllm.py:1547] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=19132) WARNING 09-28 04:56:39 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=19010) WARNING 09-28 04:56:39 [model.py:1772] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=19010) INFO:     Started server process [19010]
+(APIServer pid=19010) INFO:     Waiting for application startup.
+(APIServer pid=19010) INFO:     Application startup complete.
+(APIServer pid=19010) INFO:     127.0.0.1:44236 - "GET /health HTTP/1.1" 200 OK
+(APIServer pid=19010) INFO:     127.0.0.1:44248 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=19010) [entail] refused at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: reasoning_effort, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('reasoning_effort',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+(APIServer pid=19010) INFO:     127.0.0.1:44264 - "POST /v1/chat/completions HTTP/1.1" 400 Bad Request
+(APIServer pid=19010) INFO:     127.0.0.1:44274 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=19010) [entail] refused at request:vllm.reasoning_history: Template declared Template(chat_template_sha256=None, reasoning_history='keep', tool_call_format=None) (manifest: <workspace>/testbed/results/p6/m91/rerun/m55/market/manifests/8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a.json#Template, declared); vllm.chat_template uses Template(chat_template_sha256=None, reasoning_history='drop', tool_call_format=None) (data: vllm request messages (reasoning parser: qwen3): 1 of 1 earlier assistant turns reach the template without their reasoning, verified); rule: the consumer differs from the declaration and no resolution is registered; stops here
+(APIServer pid=19010) INFO:     127.0.0.1:44278 - "POST /v1/chat/completions HTTP/1.1" 400 Bad Request
+(APIServer pid=19010) WARNING 09-28 04:56:41 [utils.py:652] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=19010) WARNING 09-28 04:56:41 [utils.py:657] [shutdown] Process manager: force killing remaining process EngineCore pid 19132
+(APIServer pid=19010) INFO:     Shutting down
+(APIServer pid=19010) INFO:     Waiting for application shutdown.
+(APIServer pid=19010) INFO:     Application shutdown complete.
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

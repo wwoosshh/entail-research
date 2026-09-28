@@ -1,0 +1,17 @@
+== default_context_model_has_room (prompt 10983)
+  off    answer_right=False seen=2048   stopped=False []
+  on     answer_right=True  seen=10983  stopped=False ['resolved:the consumer differs from the declaratio']
+  strict answer_right=True  seen=10983  stopped=False ['resolved:the consumer differs from the declaratio']
+== user_set_num_ctx (prompt 10983)
+  off    answer_right=False seen=2048   stopped=False []
+  on     answer_right=False seen=2048   stopped=False ["broken:the user's explicit choice contradicts t"]
+  strict answer_right=None  seen=None   stopped=True  ["refused:the user's explicit choice contradicts t"]
+== model_without_room (prompt 10983)
+  off    answer_right=False seen=2048   stopped=False []
+  on     answer_right=False seen=2048   stopped=False ['broken:the consumer differs from the declaratio']
+  strict answer_right=None  seen=None   stopped=True  ['refused:the consumer differs from the declaratio']
+== prompt_fits (prompt 1000)
+  off    answer_right=True  seen=1000   stopped=False []
+  on     answer_right=True  seen=1000   stopped=False []
+  strict answer_right=True  seen=1000   stopped=False []
+wrote <workspace>/testbed/results/p6/m91/rerun/m55/l05.json

@@ -21,7 +21,7 @@ import time
 import urllib.error
 import urllib.request
 
-ROOT = r"C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new"
+ROOT = os.environ.get("COMFY_ROOT", r"C:\Users\<user>\Desktop\ComfyUI\ComfyUI-new")   # moved to E: later (P4)
 PY = os.path.join(ROOT, ".venv", "Scripts", "python.exe")
 URL = "http://127.0.0.1:8189"
 HERE = os.path.dirname(os.path.abspath(__file__))

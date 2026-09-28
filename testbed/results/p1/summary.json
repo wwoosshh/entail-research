@@ -1,0 +1,119 @@
+{
+ "overlaps": {},
+ "boundaries": {
+  "files": 2094,
+  "names": 171,
+  "per_node": {
+   "config": 3,
+   "tokenizer": 3,
+   "request": 10,
+   "rotary": 10,
+   "weights": 8,
+   "kernel": 118,
+   "cache": 5,
+   "self_check": 2,
+   "checkpoint": 2,
+   "response": 3,
+   "adapter": 2,
+   "image_lora": 1,
+   "prediction": 1,
+   "vae": 1,
+   "user": 2
+  },
+  "other": []
+ },
+ "e2_makeup": {
+  "engines": {
+   "sglang,transformers": 37,
+   "sglang,torch,transformers": 1,
+   "torch,transformers": 35,
+   "transformers": 3,
+   "transformers,vllm": 38
+  },
+  "flows": {
+   "llm": 114
+  },
+  "unknown_unchecked_nodes": {
+   "request/unchecked": 73,
+   "self_check/unknown": 36,
+   "config/unknown": 24,
+   "weights/unknown": 14,
+   "tokenizer/unknown": 3,
+   "kernel/unknown": 3,
+   "cache/unchecked": 2,
+   "rotary/unknown": 1
+  }
+ },
+ "e2": {
+  "runs": 114,
+  "states": {
+   "unknown": 59,
+   "broken": 6,
+   "pass": 3,
+   "unchecked": 46
+  },
+  "flagged": [
+   {
+    "run": "e2_sglang_TinyLlama__TinyLlama-1.1B-Chat-v1.0_load",
+    "nodes": [
+     [
+      "tokenizer",
+      "broken"
+     ]
+    ],
+    "confirmed_real": true
+   },
+   {
+    "run": "e2_sglang_hmellor__tiny-random-LlamaForCausalLM_load",
+    "nodes": [
+     [
+      "tokenizer",
+      "broken"
+     ]
+    ],
+    "confirmed_real": true
+   },
+   {
+    "run": "e2_transformers_TinyLlama__TinyLlama-1.1B-Chat-v1.0_load",
+    "nodes": [
+     [
+      "tokenizer",
+      "broken"
+     ]
+    ],
+    "confirmed_real": true
+   },
+   {
+    "run": "e2_transformers_hmellor__tiny-random-LlamaForCausalLM_load",
+    "nodes": [
+     [
+      "tokenizer",
+      "broken"
+     ]
+    ],
+    "confirmed_real": true
+   },
+   {
+    "run": "e2_vllm_TinyLlama__TinyLlama-1.1B-Chat-v1.0_load",
+    "nodes": [
+     [
+      "tokenizer",
+      "broken"
+     ]
+    ],
+    "confirmed_real": true
+   },
+   {
+    "run": "e2_vllm_hmellor__tiny-random-LlamaForCausalLM_load",
+    "nodes": [
+     [
+      "tokenizer",
+      "broken"
+     ]
+    ],
+    "confirmed_real": true
+   }
+  ],
+  "wrong_nodes_runs": 0
+ }
+}

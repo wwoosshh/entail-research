@@ -1,0 +1,11 @@
+--- vllm seeded (ENTAIL=load, seed=short_blocks) exit=0
+(EngineCore pid=24480) [entail-seed] short_blocks: the block table now reports one block fewer
+(EngineCore pid=24480) [entail] refused at container:vllm.allocate_slots: KvExtent declared KvExtent(held=207, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv cache group 0, request 0-9dc88a68: the slots its tokens nee
+(EngineCore pid=24480) ERROR 09-28 05:02:45 [core.py:1368] entail.core.RoleError: [entail] refused at container:vllm.allocate_slots: KvExtent declared KvExtent(held=207, needed=None, written=None, window=None, previous=None, granularity=None) (engine: vllm kv 
+RESULT {"engine": "vllm", "tag": "seeded", "entail": "load", "seed": "short_blocks", "when": "2026-09-28 05:02:23", "texts": null, "error": "EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.", "seconds": 22.4}
+testbed/m51_engines.sh: line 12: 24729 Killed                  ENTAIL=$4 ENTAIL_RECORD=$OUT/$2_$3.jsonl python testbed/m51_engine_run.py $2 $3 > $OUT/$2_$3.log 2>&1
+--- sglang seeded (ENTAIL=load, seed=kv_short) exit=137
+[entail-seed] kv_short: took one slot off request 0 at batch 4
+[entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (98d0ef75e08145c3af4069437d3ff622): the slots written, verified); sgl
+[entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (98d0ef75e08145c3af4069437d3ff622): the slots its tokens need, verifi
+entail.core.RoleError: [entail] refused at container:sglang.prepare_for_decode: KvExtent declared KvExtent(held=9, needed=None, written=None, window=None, previous=None, granularity=None) (engine: sglang request 0 (98d0ef75e08145c3af4069437d3ff622): the slots 

@@ -1,0 +1,48 @@
+== healthy off: started=True (22.9s)
+  plain              pass     200 Paris. | tools=[] | reasoning=0
+  multi_turn         pass     200 6 | tools=[] | reasoning=0
+  tool_call          pass     200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0
+  thinking           pass     200 
+
+Paris. | tools=[] | reasoning=685
+  effort_none        pass     200 Paris. | tools=[] | reasoning=0
+  request_template   planted  200 <think>
+Okay, the user is asking for the capital of France i | tools=[] | reasoning=0
+  unknown_field      planted  200 Paris. | tools=[] | reasoning=0
+  misspelt_setting   planted  200  | tools=[] | reasoning=272
+  effort_level       planted  200  | tools=[] | reasoning=272
+== healthy on: started=True (24.9s)
+  plain              pass     200 Paris. | tools=[] | reasoning=0
+  multi_turn         pass     200 6 | tools=[] | reasoning=0
+  tool_call          pass     200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0
+  thinking           pass     200 
+
+Paris. | tools=[] | reasoning=685
+  effort_none        pass     200 Paris. | tools=[] | reasoning=0
+  request_template   planted  200 <think>
+Okay, the user is asking for the capital of France i | tools=[] | reasoning=0
+  unknown_field      planted  200 Paris. | tools=[] | reasoning=0
+  misspelt_setting   planted  200  | tools=[] | reasoning=272
+  effort_level       planted  200  | tools=[] | reasoning=272
+  decision: request:vllm.chat_template broken the user's explicit choice contradicts the declaration; it i 
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.request_fields broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+  decision: request:vllm.template_settings broken the consumer differs from the declaration and no resolution  
+== keep off: started=True (23.0s)
+  kept_reasoning     pass     200 6 | tools=[] | reasoning=0
+  dropped_reasoning  planted  200 6 | tools=[] | reasoning=0
+== keep on: started=True (22.0s)
+  kept_reasoning     pass     200 6 | tools=[] | reasoning=0
+  dropped_reasoning  planted  200 6 | tools=[] | reasoning=0
+  decision: request:vllm.reasoning_history broken the consumer differs from the declaration and no resolution  
+== tool off: started=True (23.0s)
+  tool_call          planted at start 200 <tool_call>
+{"name": "get_weather", "arguments": {"city": "P | tools=[] | reasoning=0
+== tool on: started=True (25.0s)
+  tool_call          planted at start 200  | tools=[{'name': 'get_weather', 'arguments': '{"city": "Paris"}'}] | reasoning=0
+  decision: load:vllm.tool_parser resolved the consumer differs from the declaration; a registered reso switch to a tool parser measured to read the declared format (to hermes)
+== tool refuse: started=True (25.0s)
+  tool_call          planted at start 200 <tool_call>
+{"name": "get_weather", "arguments": {"city": "P | tools=[] | reasoning=0
+  decision: load:vllm.tool_parser broken the consumer differs from the declaration and the policy rep 

@@ -1,0 +1,78 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/Llama-3.2-3B-Instruct",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.8
+ },
+ "plant": "inside_rope",
+ "scale": 1.5,
+ "planted_calls": 1820,
+ "mode": "off",
+ "run": "413-1790528715",
+ "load_s": 15.31,
+ "paths_s": [
+  1.625
+ ],
+ "turned_off": [],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": true,
+   "margin": 3.625,
+   "pdrift": 0.8334,
+   "probe": "story_a",
+   "why": [
+    "1 positions changed a confident prediction (margin up to 1.25)"
+   ]
+  },
+  {
+   "paths": "alone_batched",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.1114,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0035,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/Llama-3.2-3B-Instruct, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens disagree on probe 'story_a': 1 positions changed a confident prediction (margin up to 1.25) (3 probes; largest confident-flip margin 3.63 (t"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Llama-3.2-3B-Instruct, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch agree (3 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.111 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Llama-3.2-3B-Instruct, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.00345 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "ae3bbea9b399bdc5",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": false,
+   "custom_kernels": true
+  },
+  "off": [],
+  "model": "/home/<user>/models/Llama-3.2-3B-Instruct",
+  "mode": "off"
+ },
+ "answer": " not a good place to be for a",
+ "engine_spec": false,
+ "engine_prefix_cache": true,
+ "engine_eager": true
+}

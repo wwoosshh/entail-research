@@ -1,0 +1,118 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.85,
+  "max_num_seqs": 4,
+  "speculative_config": {
+   "method": "ngram",
+   "num_speculative_tokens": 4,
+   "prompt_lookup_max": 4,
+   "prompt_lookup_min": 2
+  }
+ },
+ "plant": "",
+ "scale": null,
+ "planted_calls": 0,
+ "mode": "auto",
+ "run": "1226-1790526915",
+ "load_s": 13.39,
+ "turned_off": [
+  {
+   "rule": "the engine's own paths disagreed with this optimization on, so this configuration starts without it (the selective safe path, ENTAIL_SAFE=auto; one candidate per start until the paths agree)",
+   "resolution": "speculative_config = None",
+   "verdict": "resolved"
+  }
+ ],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0288,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "alone_batched",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0305,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens agree (3 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.0288 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch agree (3 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.0305 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {
+  "80a9e9cd31cb7904": {
+   "engine": "vllm",
+   "model": "/home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "pairs": [
+    "decode_prefill",
+    "alone_batched"
+   ],
+   "candidates": [
+    "speculative_decoding",
+    "custom_kernels"
+   ],
+   "tried": [],
+   "off": [
+    "speculative_decoding"
+   ],
+   "status": "found",
+   "updated": 1790526112.8521783
+  }
+ },
+ "last": {
+  "key": "80a9e9cd31cb7904",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": true,
+   "custom_kernels": true
+  },
+  "off": [
+   "speculative_decoding"
+  ],
+  "model": "/home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "mode": "auto"
+ },
+ "answer": " Paris.\" That's true.\n\nBut is",
+ "engine_spec": false,
+ "engine_prefix_cache": true,
+ "engine_eager": true,
+ "bench": {
+  "prompts": 4,
+  "tokens": 512,
+  "runs_s": [
+   2.759,
+   2.738,
+   2.756
+  ],
+  "median_s": 2.756,
+  "tok_s": 185.8
+ }
+}

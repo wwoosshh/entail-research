@@ -1,0 +1,82 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.5
+ },
+ "plant": "inside_kernel",
+ "scale": 1.5,
+ "planted_calls": 6102,
+ "mode": "all",
+ "run": "683-1790526330",
+ "load_s": 10.34,
+ "turned_off": [
+  {
+   "rule": "the explicit safe mode (ENTAIL_SAFE=all) turns off an optimization the engine declares does not change results, so a fault that stays is outside the optimizations and one that goes is inside them",
+   "resolution": "enable_prefix_caching = False",
+   "verdict": "resolved"
+  },
+  {
+   "rule": "the explicit safe mode (ENTAIL_SAFE=all) turns off an optimization the engine declares does not change results, so a fault that stays is outside the optimizations and one that goes is inside them",
+   "resolution": "compilation_config.custom_ops = ['none']",
+   "verdict": "resolved"
+  }
+ ],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": true,
+   "margin": 7.25,
+   "pdrift": 0.9445,
+   "probe": "story_a",
+   "why": [
+    "8 positions changed a confident prediction (margin up to 3.50)",
+    "a token's probability moved by 0.945"
+   ]
+  },
+  {
+   "paths": "alone_batched",
+   "differs": true,
+   "margin": 1.625,
+   "pdrift": 0.0292,
+   "probe": "story_a",
+   "why": [
+    "generated token 1 changed where the first path was confident (margin 1.37)"
+   ]
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens disagree on probe 'story_a': 8 positions changed a confident prediction (margin up to 3.50); a token's probability moved by 0.945 (3 probes; largest co"
+  },
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch disagree on probe 'story_a': generated token 1 changed where the first path was confident (margin 1.37) (3 probes; largest confident-flip margin 1.62 (thresho"
+  }
+ ],
+ "said": [
+  "every optimization vllm declares does not change results is off, and its paths still disagree (decode_prefill, alone_batched): the cause is outside them"
+ ],
+ "store": {},
+ "last": {
+  "key": "f03c555cdb0e5bd8",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": false,
+   "custom_kernels": true
+  },
+  "off": [
+   "prefix_cache",
+   "custom_kernels"
+  ],
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "mode": "all"
+ },
+ "answer": " for Q-style Q这个的你为",
+ "engine_spec": false,
+ "engine_prefix_cache": false,
+ "engine_eager": true
+}

@@ -1,0 +1,181 @@
+{
+ "tag": "s3_on",
+ "checkpoint": "waiIllustriousSDXL_v160.safetensors",
+ "condition": "on",
+ "entail": "load",
+ "policy": "resolve",
+ "load_seconds": 1.48,
+ "scheduler": {
+  "class": "EulerDiscreteScheduler",
+  "prediction_type": "epsilon",
+  "rescale_betas_zero_snr": false
+ },
+ "vae_scaling_factor": 0.13025,
+ "runs": [
+  {
+   "seed": 11,
+   "seconds": 12.48,
+   "image": "/home/<user>/m63_out_rerun/s3_on_seed11.png",
+   "stats": {
+    "mean": 168.66,
+    "std": 58.2,
+    "saturation": 51.32
+   }
+  },
+  {
+   "seed": 22,
+   "seconds": 11.13,
+   "image": "/home/<user>/m63_out_rerun/s3_on_seed22.png",
+   "stats": {
+    "mean": 161.07,
+    "std": 60.71,
+    "saturation": 54.06
+   }
+  },
+  {
+   "seed": 33,
+   "seconds": 13.06,
+   "image": "/home/<user>/m63_out_rerun/s3_on_seed33.png",
+   "stats": {
+    "mean": 163.07,
+    "std": 63.81,
+    "saturation": 52.65
+   }
+  }
+ ],
+ "decisions": [
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "declared": "Coverage(total=22, taken=22, left=())",
+   "declared_from": "CLIPTextConfig config.json (the file names itself openai/clip-vit-large-patch14) (every key it gives)",
+   "chosen": "Coverage(total=22, taken=22, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 1.429
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 7.943
+  },
+  {
+   "boundary": "load:transformers.config",
+   "name": "Coverage",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "read elsewhere: _commit_hash (read by PreTrainedConfig itself (transformers 5.17 configuration_utils.py, __init__ and from_dict): the hub revision the files came from)",
+   "declared": "Coverage(total=20, taken=20, left=())",
+   "declared_from": "CLIPTextConfig config.json (every key it gives)",
+   "chosen": "Coverage(total=20, taken=20, left=())"
+  },
+  {
+   "timing": "load:transformers.config",
+   "ms": 0.979
+  },
+  {
+   "timing": "load:transformers.attention",
+   "ms": 0.116
+  },
+  {
+   "boundary": "load:transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Vocab(size=49408, added=None)",
+   "declared_from": "vocab.json",
+   "chosen": "Vocab(size=49408, added=0)"
+  },
+  {
+   "boundary": "load:transformers.tokenizer.ids",
+   "name": "Tokenization",
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "target": null,
+   "note": "CLIPTokenizer built from /home/<user>/sdxl_local_config: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)",
+   "declared": null,
+   "declared_from": null,
+   "chosen": null
+  },
+  {
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 23.233
+  },
+  {
+   "timing": "load:transformers.tokenizer",
+   "ms": 26.476
+  },
+  {
+   "boundary": "load:transformers.tokenizer",
+   "name": "Vocab",
+   "verdict": "pass",
+   "rule": "the consumer uses the declared value",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": "Vocab(size=49408, added=None)",
+   "declared_from": "vocab.json",
+   "chosen": "Vocab(size=49408, added=0)"
+  },
+  {
+   "boundary": "load:transformers.tokenizer.ids",
+   "name": "Tokenization",
+   "verdict": "unknown",
+   "rule": "this boundary could not be checked",
+   "resolution": null,
+   "target": null,
+   "note": "CLIPTokenizer built from /home/<user>/sdxl_local_config: no tokenizer file the declaration can be run from (tokenizer.json, a sentencepiece model)",
+   "declared": null,
+   "declared_from": null,
+   "chosen": null
+  },
+  {
+   "timing": "load:transformers.tokenizer.ids",
+   "ms": 2.907
+  },
+  {
+   "timing": "load:transformers.tokenizer",
+   "ms": 3.253
+  },
+  {
+   "boundary": "load:diffusers.prediction",
+   "name": "Prediction",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "eps without zero terminal SNR"
+  },
+  {
+   "boundary": "load:diffusers.latent_scale",
+   "name": "LatentScale",
+   "verdict": "unknown",
+   "rule": "nothing declares it",
+   "resolution": null,
+   "target": null,
+   "note": "",
+   "declared": null,
+   "declared_from": null,
+   "chosen": "LatentScale(scale=0.13025, shift=None)"
+  },
+  {
+   "timing": "load:diffusers.single_file",
+   "ms": 18.646
+  }
+ ],
+ "when": "2026-09-28 05:14:49"
+}

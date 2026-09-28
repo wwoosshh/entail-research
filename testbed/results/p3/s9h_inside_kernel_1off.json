@@ -1,0 +1,81 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/Llama-3.2-3B-Instruct",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.8
+ },
+ "plant": "inside_kernel",
+ "scale": 1.5,
+ "planted_calls": 3705,
+ "mode": "off",
+ "run": "1407-1790528801",
+ "load_s": 11.04,
+ "paths_s": [
+  1.553
+ ],
+ "turned_off": [],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": true,
+   "margin": 8.75,
+   "pdrift": 0.9589,
+   "probe": "story_a",
+   "why": [
+    "3 positions changed a confident prediction (margin up to 8.75)",
+    "a token's probability moved by 0.746"
+   ]
+  },
+  {
+   "paths": "alone_batched",
+   "differs": true,
+   "margin": 1.125,
+   "pdrift": 0.1759,
+   "probe": "story_a",
+   "why": [
+    "generated token 2 changed where the first path was confident (margin 1.13)"
+   ]
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.125,
+   "pdrift": 0.0102,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/Llama-3.2-3B-Instruct, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens disagree on probe 'story_a': 3 positions changed a confident prediction (margin up to 8.75); a token's probability moved by 0.746 (3 probes;"
+  },
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/Llama-3.2-3B-Instruct, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch disagree on probe 'story_a': generated token 2 changed where the first path was confident (margin 1.13) (3 probes; largest confident-flip margin 1."
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Llama-3.2-3B-Instruct, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0.125 (threshold 1), largest probability move 0.0102 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "ae3bbea9b399bdc5",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": false,
+   "custom_kernels": true
+  },
+  "off": [],
+  "model": "/home/<user>/models/Llama-3.2-3B-Instruct",
+  "mode": "off"
+ },
+ "answer": " a country with a rich showpiece of",
+ "engine_spec": false,
+ "engine_prefix_cache": true,
+ "engine_eager": true
+}

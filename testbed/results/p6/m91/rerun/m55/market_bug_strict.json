@@ -1,0 +1,450 @@
+{
+ "tag": "bug_strict",
+ "env": {
+  "ENTAIL": "load",
+  "ENTAIL_SEED": "drop_effort",
+  "ENTAIL_ON_BROKEN": "stop"
+ },
+ "declared": "Template(chat_template_sha256='09498b1e816c1e6eade7528b7db37d2ac798e6fdd2b40bae68305424b2224647', reasoning_history='keep', tool_call_format='hermes')",
+ "when": "2026-09-28 04:56:16",
+ "started": true,
+ "requests": {
+  "plain": {
+   "case": "no effort set",
+   "status": 200,
+   "prompt_tokens": 21,
+   "content": "Paris."
+  },
+  "effort_high": {
+   "case": "L07",
+   "status": 400,
+   "error": "{'message': \"[entail] refused at request:vllm.template_settings: Coverage declared Coverage(total=1, taken=1, left=()) (user: the request's own template settings: reasoning_effort, declared); vllm.chat_template uses Coverage(total=1, taken=0, left=('reasoning_effort',)) (engine: vllm chat template: a setting arrives when the template reads it or apply_chat_template acts on it; vLLM drops the rest,"
+  },
+  "history_kept": {
+   "case": "L13 reference",
+   "status": 200,
+   "prompt_tokens": 67,
+   "content": "6"
+  },
+  "history_dropped": {
+   "case": "L13",
+   "status": 400,
+   "error": "{'message': \"[entail] refused at request:vllm.reasoning_history: Template declared Template(chat_template_sha256=None, reasoning_history='keep', tool_call_format=None) (manifest: <path>#Template, declared); vllm.chat_template uses Template(chat_template_sha256=None, reasoning_history='drop', tool_call_format=None) (data: vllm request messages (reasoning parser: qwen3): 1 of 1 earlier assistant tur"
+  }
+ },
+ "decisions": [
+  {
+   "boundary": "request:vllm.template_settings",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  },
+  {
+   "boundary": "request:vllm.reasoning_history",
+   "verdict": "refused",
+   "rule": "the consumer differs from the declaration and no resolution is registered",
+   "resolution": null,
+   "target": null,
+   "chosen": ""
+  }
+ ],
+ "summaries": {
+  "19010 load:transformers.tokenizer": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "vocab": 1
+   }
+  },
+  "19010 load:transformers.tokenizer.ids": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "tokenization": 1
+   }
+  },
+  "19010 load:vllm.input_processor": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "stop_dropped": 1,
+    "stop_id_out_of_range": 1
+   }
+  },
+  "19132 load:vllm.rotary_pairing": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "rotary_pairing_mismatch": 1,
+    "rotary_pairing_ignored": 1
+   }
+  },
+  "19132 kernel:vllm.custom_op": {
+   "checks": 8,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_reference": 8
+   }
+  },
+  "19132 kernel:vllm._gumbel_sample_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._get_num_sampled_and_rejected_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 container:vllm.request.block_hashes": {
+   "checks": 256,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "cache_key_incomplete": 256
+   }
+  },
+  "19132 kernel:vllm._apply_write_kernel": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 4,
+    "kernel_layout_variant": 4
+   }
+  },
+  "19132 kernel:vllm._bincount_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19132 kernel:vllm._prepare_prefill_inputs_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._prepare_pos_seq_lens_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:definition": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_reference": 2
+   }
+  },
+  "19132 kernel:vllm._combine_sampled_and_draft_tokens_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._gather_block_tables_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._compute_slot_mappings_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._apply_grammar_bitmask_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19132 kernel:vllm._bias_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._penalties_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._bad_words_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._temperature_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._min_p_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._topk_log_softmax_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19132 kernel:vllm._ranks_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 kernel:vllm._prompt_logprobs_token_ids_kernel": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 1,
+    "kernel_layout_variant": 1
+   }
+  },
+  "19132 kernel:vllm._post_update_kernel": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kernel_stride_assumed": 2,
+    "kernel_layout_variant": 2
+   }
+  },
+  "19132 load:transformers.tokenizer": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "vocab": 1
+   }
+  },
+  "19132 load:transformers.tokenizer.ids": {
+   "checks": 1,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "tokenization": 1
+   }
+  },
+  "19010 request:vllm.reasoning_history": {
+   "checks": 2,
+   "broken": 0,
+   "refused": 1,
+   "skipped": 3,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "reasoning_history": 1
+   }
+  },
+  "19010 request:vllm.chat_template": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "template": 4
+   }
+  },
+  "19010 request:vllm.request_fields": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 4
+   }
+  },
+  "19010 request:vllm.parser_settings": {
+   "checks": 6,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "setting_names": 6
+   }
+  },
+  "19010 request:vllm.template_settings": {
+   "checks": 3,
+   "broken": 0,
+   "refused": 1,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "settings": 2
+   }
+  },
+  "19132 container:vllm.allocate_slots": {
+   "checks": 4,
+   "broken": 0,
+   "refused": 0,
+   "skipped": 0,
+   "deferred": 0,
+   "resolved": 0,
+   "passed": {
+    "kv_needed": 4
+   }
+  }
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.5
+ },
+ "plant": "inside",
+ "scale": 1.5,
+ "planted_calls": 0,
+ "mode": "all",
+ "run": "3218-1790526184",
+ "load_s": 9.74,
+ "turned_off": [
+  {
+   "rule": "the explicit safe mode (ENTAIL_SAFE=all) turns off an optimization the engine declares does not change results, so a fault that stays is outside the optimizations and one that goes is inside them",
+   "resolution": "enable_prefix_caching = False",
+   "verdict": "resolved"
+  },
+  {
+   "rule": "the explicit safe mode (ENTAIL_SAFE=all) turns off an optimization the engine declares does not change results, so a fault that stays is outside the optimizations and one that goes is inside them",
+   "resolution": "compilation_config.custom_ops = ['none']",
+   "verdict": "resolved"
+  }
+ ],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0295,
+   "probe": null,
+   "why": null
+  },
+  {
+   "paths": "alone_batched",
+   "differs": false,
+   "margin": 0.125,
+   "pdrift": 0.0304,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens agree (3 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0.0295 (threshold 0.25))"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/Qwen3-0.6B, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch agree (3 probes; largest confident-flip margin 0.125 (threshold 1), largest probability move 0.0304 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "f03c555cdb0e5bd8",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": false,
+   "custom_kernels": true
+  },
+  "off": [
+   "prefix_cache",
+   "custom_kernels"
+  ],
+  "model": "/home/<user>/models/Qwen3-0.6B",
+  "mode": "all"
+ },
+ "answer": " Paris. The capital of France is also",
+ "engine_spec": false,
+ "engine_prefix_cache": false,
+ "engine_eager": true
+}

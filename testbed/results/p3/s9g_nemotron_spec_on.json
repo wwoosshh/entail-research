@@ -1,0 +1,87 @@
+{
+ "kwargs": {
+  "model": "/home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "enforce_eager": true,
+  "max_model_len": 2048,
+  "gpu_memory_utilization": 0.85,
+  "max_num_seqs": 4,
+  "speculative_config": {
+   "method": "ngram",
+   "num_speculative_tokens": 4,
+   "prompt_lookup_max": 4,
+   "prompt_lookup_min": 2
+  }
+ },
+ "plant": "",
+ "scale": null,
+ "planted_calls": 0,
+ "mode": "off",
+ "run": "1236-1790528606",
+ "load_s": 18.68,
+ "paths_s": [
+  4.802
+ ],
+ "turned_off": [],
+ "pairs": [
+  {
+   "paths": "decode_prefill",
+   "differs": true,
+   "margin": 0.0,
+   "pdrift": 0.3434,
+   "probe": "code",
+   "why": [
+    "a token's probability moved by 0.343"
+   ]
+  },
+  {
+   "paths": "alone_batched",
+   "differs": true,
+   "margin": 0.0,
+   "pdrift": 0.3434,
+   "probe": "code",
+   "why": [
+    "a kept generated token's probability moved by 0.343"
+   ]
+  },
+  {
+   "paths": "cold_cache",
+   "differs": false,
+   "margin": 0.0,
+   "pdrift": 0.0,
+   "probe": null,
+   "why": null
+  }
+ ],
+ "path_verdicts": [
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16, 3 probe requests of 12 greedy tokens at start-up: the decode steps against a fresh prefill of the same tokens disagree on probe 'code': a token's probability moved by 0.343 (3 probes; largest confident-flip margin 0 (threshold 1)"
+  },
+  {
+   "verdict": "broken",
+   "note": "vLLM on /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16, 3 probe requests of 12 greedy tokens at start-up: each request alone against the requests in one batch disagree on probe 'code': a kept generated token's probability moved by 0.343 (3 probes; largest confident-flip margin 0 (thre"
+  },
+  {
+   "verdict": "pass",
+   "note": "vLLM on /home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16, 3 probe requests of 12 greedy tokens at start-up: a cold run against a run that reads the prefix cache agree (1 probes; largest confident-flip margin 0 (threshold 1), largest probability move 0 (threshold 0.25))"
+  }
+ ],
+ "said": [],
+ "store": {},
+ "last": {
+  "key": "80a9e9cd31cb7904",
+  "enabled": {
+   "cuda_graphs": false,
+   "prefix_cache": true,
+   "speculative_decoding": true,
+   "custom_kernels": true
+  },
+  "off": [],
+  "model": "/home/<user>/models/m10/nvidia__NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "mode": "off"
+ },
+ "answer": " Paris.\" That's true.\n\nBut is",
+ "engine_spec": true,
+ "engine_prefix_cache": true,
+ "engine_eager": true
+}
