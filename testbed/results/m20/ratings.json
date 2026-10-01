@@ -1,0 +1,1696 @@
+{
+ "count": 86,
+ "rated_by_both": 86,
+ "missing_A": [],
+ "missing_B": [],
+ "kappa_K7": {
+  "n": 86,
+  "observed": 0.605,
+  "expected": 0.27,
+  "kappa": 0.459
+ },
+ "kappa_K1_vs_rest": {
+  "n": 86,
+  "observed": 0.895,
+  "expected": 0.75,
+  "kappa": 0.582
+ },
+ "kappa_V4": {
+  "n": 86,
+  "observed": 0.884,
+  "expected": 0.572,
+  "kappa": 0.728
+ },
+ "counts_A": {
+  "K": {
+   "K1": 15,
+   "K2": 3,
+   "K3": 1,
+   "K4": 7,
+   "K5": 6,
+   "K6": 1,
+   "K7": 53
+  },
+  "V": {
+   "V1": 62,
+   "V2": 21,
+   "V3": 1,
+   "V4": 2
+  }
+ },
+ "counts_B": {
+  "K": {
+   "K1": 10,
+   "K2": 6,
+   "K3": 3,
+   "K4": 17,
+   "K5": 19,
+   "K6": 1,
+   "K7": 30
+  },
+  "V": {
+   "V1": 62,
+   "V2": 18,
+   "V3": 4,
+   "V4": 2
+  }
+ },
+ "third_rater_items": 0,
+ "issues": {
+  "https://github.com/ollama/ollama/issues/17895": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "Wrong answers appear only with ROCm on gfx1151 past about 4k tokens while Vulkan and CPU on the same machine are correct, but no cause or fix is identified, and the fluent wrong answers were exposed by comparing backends."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "Vulkan and CPU are correct on the same machine, model and prompts while only ROCm is wrong past ~4k tokens, and the bug was found by comparing backends, not from any single response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V2"
+  },
+  "https://github.com/ollama/ollama/issues/17586": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The reporter only suspects the tokenizer is not loaded correctly on CPU and no cause or fix is confirmed, while the response itself is a run of '!!!!' or '@@@@' visible from one request."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The reporter only offers a \"consistent with tokenizer not loaded correctly\" hypothesis with no confirmed cause or fix, but the anomaly (prompt_eval_count 30 for the 5-character input \"Hello\") is visible directly in that single response's fields."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26921": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "All-NaN logits occur only with Vulkan on the Mali GPU while CPU devices work, but no cause or fix is identified, and the output is a visible run of '!' tokens."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The identical model, image and prompt are deterministically all-NaN on Vulkan (Mali) but correct on CPU devices with graph splits ruling out scheduler thrashing, and the collapse into repeated \"!\" tokens is visible directly in the output text."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/22565": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "The claim that conversion alters F32 norm weights rests on the reporter's own engine, the issue was closed as not planned, and no cause is confirmed or fix described, while the claimed degradation is silent and would need a reference comparison."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V3",
+    "Vc": 3,
+    "evidence": "No maintainer-confirmed cause or fix is given (closed not_planned, no linked PR), and the only way to detect the claimed corruption is a byte-level comparison against the original SafeTensors file, which is outside anything the runtime's API exposes."
+   },
+   "C": null,
+   "K": "K7",
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23717": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Gibberish appears only when K and V use the same quantized type on a Blackwell card, but no cause or fix is identified, and the token soup is visible in the response."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "\"First Bad Commit\" is explicitly \"No response\" and no fix is linked, so no root defect is identified; the coherent-to-gibberish degradation happens partway through one generation and is shown verbatim in that single response's text."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25866": {
+   "A": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter traces the corruption to Metal concurrent-dispatch dependency tracking that races only on GCN/Vega hardware (the stock path also fails there) and works around it by forcing serial dispatch on that device class, and the corrupted text and decode failures are visible."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Bisection shows the same Metal concurrent-dispatch scheduler code is fine elsewhere and only races on GCN/Vega wave64 hardware, and one confirmed failure mode is an explicit decode error (ret=-3) that would appear in a single request's outcome."
+   },
+   "C": null,
+   "K": "K5",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27387": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "Wrong-alphabet characters appear only when two long generations run concurrently, with no cause or fix identified, and the sparse corruption was established by comparing with a solo run."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "No cause beyond \"possibly related\" speculation is given and no fix is linked; the defect was established purely by comparing an identical solo run (zero corruption) against a concurrent two-slot run (corrupted), a same-runtime different-path comparison."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ollama/ollama/issues/15908": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "It repeats the unconfirmed upstream claim that conversion corrupts norm weights and was closed as not planned without a cause or fix, while the claimed degradation is silent and would need a reference comparison."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V3",
+    "Vc": 3,
+    "evidence": "This restates the unconfirmed llama.cpp#22565 claim with no fix and closed not_planned, and the reporter's own method required comparing GGUF tensor bytes to the original SafeTensors file rather than anything visible through the runtime's API."
+   },
+   "C": null,
+   "K": "K7",
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/22842": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "A fork's feature table gives only hedged guesses (SWA shader rotation or attention math, unsupported SET_ROWS, MTP path) with no confirmed cause or fix, and the garbage output and crashes are visible."
+   },
+   "B": {
+    "K": "K2",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The status table attributes turbo3 KV garbage to \"incorrect WHT rotation or attention computation,\" a computation claim, but it is only a summary table with no linked fix; the garbage output itself is described as directly visible."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26197": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Gibberish with two AMD GPUs on Vulkan is attributed only to a guessed data-passing issue between the GPUs with no confirmed cause or fix, and the gibberish is visible."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter's own analysis, \"it must be some data passing issue between the GPUs,\" describes a hand-over defect between two devices, though no fix confirms it; the gibberish is described as directly visible in the output once both GPUs are enabled."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27386": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "This duplicate of the concurrent-generation report identifies no cause or fix, and the sparse wrong-alphabet characters were established by comparing with a solo run."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "Duplicate of #27387 with identical text: no confirmed cause and no linked fix, and the corruption was established only by comparing a clean solo run against a corrupted concurrent run."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23400": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "The fix makes the saved session token list agree with the KV state, which is saved before the last token is decoded, because the loader replayed the last token at the wrong position, and the effect was found by comparing tensor dumps of the writer and reader runs."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V3",
+    "Vc": 3,
+    "evidence": "A merged fix confirms session_tokens and the KV cache disagreed on how many tokens had been saved (n-1 vs n), so the reader replayed the last token at the wrong position; this was only found via internal tensor/position dumps, not through any request, response, or model-info surface."
+   },
+   "C": null,
+   "K": "K1",
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27237": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter only guesses that the non-chunked Gated DeltaNet path on Vulkan is at fault at batch 512, with no confirmed cause or fix, and the garbage or one-to-two-token output is visible."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter explicitly attributes the failure to wrong kernel-path selection (\"the autoregressive non-chunked path corrupts the logits\" at small batch), though no fix confirms it; the garbage or premature-EOS output is visible directly within a single response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/15609": {
+   "A": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The strip_accents preprocessing declared in the HF tokenizer config is dropped in GGUF conversion and the fix reads it and carries it through, while the wrong embeddings were exposed by comparing with HF transformers."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "A linked open PR confirms the strip_accents setting declared in the HF tokenizer config was never read by the GGUF converter, a declared property dropped in hand-over; detecting the wrongness required comparing embeddings across multiple different text inputs rather than reading one response."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V2"
+  },
+  "https://github.com/ollama/ollama/issues/15879": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The report only says a bf16 model gives gibberish on an AMD Ryzen AI Max, with no logs, cause or fix, and the gibberish is visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No logs, cause, or fix are given beyond the bare report; the quoted gibberish string (\"X82g&\\\"62834DA...\") is directly visible in the reported output."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21610": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "A quality regression with a missing opening think token between builds has candidate causes ruled out but none identified and no fix, and the degradation was noticed by comparing builds."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter ruled out several specific hypotheses and lists \"First Bad Commit: No response\" with no fix identified; a missing opening think-token is a structural anomaly that would be visible in a single response's reasoning field."
+   },
+   "C": null,
+   "K": "K7",
+   "V": null
+  },
+  "https://github.com/ollama/ollama/issues/17968": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The report only shows endless garbage from one model on an MI210 with ROCm, with no cause, logs or fix, and the punctuation stream is plainly visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Every diagnostic field (OS, GPU, CPU, version) is \"No response\" and no cause or fix is given; the pasted transcript shows unmistakable symbol-soup garbage directly in that response."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23044": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Quantized KV on CPU with KleidiAI gives gibberish or empty output with only a hedged guess of numerical blowup and no fix, and the gibberish, empty responses and very slow generation are visible."
+   },
+   "B": {
+    "K": "K2",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter hypothesizes \"a numerical blowup that cascades through the sampler\" for matching KV-quant types, but this is unconfirmed by any fix; gibberish or empty output is shown as directly visible per single-configuration response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21675": {
+   "A": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "The stated root cause is llama.cpp's own pre-tokenizer regex using Latin-only [^a-z] and [^A-Z] classes, which splits Cyrillic case boundaries into raw bytes, and the mismatch was found by comparing with the HF tokenizer."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The issue body pinpoints the exact regex line where \"[^a-z]/[^A-Z]\" fails to detect case boundaries outside Latin script, a pre-tokenizer parsing bug confirmed by the reporter's own token-level trace; the resulting garbage (\"outputs garbage like defendant\") is visible directly in generated text."
+   },
+   "C": null,
+   "K": "K4",
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25518": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The report only says output is garbage with any Metal offload on an Intel Iris GPU, with no cause or fix, and the garbage is visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No cause, first-bad-commit, or fix is given beyond the bare repro steps; the report directly states garbage output is produced whenever any layer is offloaded."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21715": {
+   "A": {
+    "K": "K1",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The second-prompt failure is tied to the SYCL Q8_0 reorder commit, which the reporter suspects changes the weights' memory layout, but no fix is described, and the hang or gibberish on the second request is visible."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter bisects to the Q8_0-reorder commit and hypothesizes a memory-layout change as the cause, an unconfirmed hand-over/format claim within this item; the second-interaction gibberish or hang is visible directly in that response."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27784": {
+   "A": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The fix replaces the Metal Tensor API slice, which yields addresses off by -4 GB for offsets of 2 GB or more, with explicit address computation while CPU runs are clean, and the embeddings come back as vectors of null."
+   },
+   "B": {
+    "K": "K2",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "A merged fix pinpoints a Metal tensor-slice addressing bug that is off by exactly -4GB once the offset reaches 2GB, a classic overflow signature; the report itself notes the all-NaN vector serializes as visible nulls in that single response's JSON with no error or status change."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21721": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The report only gives a build range after which output turns to gibberish on CUDA (and perhaps CPU), with no cause or fix, and the gibberish is visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "Bisection only narrows to a range (b8730 good, b8740 bad) with no exact commit or fix identified; gibberish is claimed but no concrete example text is shown in this report."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/18069": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "A cloud model's thinking loops on 'lock' with only a guess that Ollama Cloud's marker handling or sampling is at fault, and the endless repetition and timeout are visible from one request."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The cause is only speculative (\"this suggests the issue is on the Ollama Cloud side\"), with no fix given; the infinite \"lock\" repetition and the eventual timeout/502 are directly evident from that single request's own logged duration and status code."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23509": {
+   "A": {
+    "K": "K4",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The embeddings endpoint has no case for a non-embedding causal model and returns an all-zero vector with HTTP 200 instead of an error, with no deeper cause or fix given, and the all-zero vector is checkable in one response."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The report argues the server should validate model capability before serving embeddings instead of silently returning zeros, a missing-case dispatch gap, though it is closed not_planned with no fix shown; an all-zero embedding vector is trivially visible in a single response's data field, as the report itself demonstrates with the exact JSON."
+   },
+   "C": null,
+   "K": "K4",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/17604": {
+   "A": {
+    "K": "K5",
+    "Kc": 1,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The same Vulkan backend is correct on an RTX 5090 but wrong on the Radeon 8060S, which is also wrong with ROCm, pointing to the hardware though no cause or fix is given, and the fluent wrong output was found by comparing backends."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "A full hardware/backend matrix shows the identical prompt is correct on CPU and on an RTX 5090 (Vulkan or CUDA) but semantically wrong on the Radeon 8060S under both Vulkan and ROCm; the fluent-but-wrong translations were only caught by comparing backends side by side."
+   },
+   "C": null,
+   "K": "K5",
+   "V": "V2"
+  },
+  "https://github.com/ollama/ollama/issues/15830": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The report only shows a cloud model emitting endless [PAD] tokens with no cause or fix, and the [PAD] run is visible in the response."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "No cause or fix is given; the transcript shows literal \"[PAD]\" repeated indefinitely, an unmistakable degenerate pattern directly in the response text."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23800": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The OpenCL flash-attention kernel inferred causal masking from tensor shapes instead of honoring the caller's NULL mask for full attention, and the fix stops that inference, while the hallucinated vision output was exposed by comparing with the CPU path."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "A merged fix confirms an is_causal heuristic wrongly infers causal masking for ViT's bidirectional attention purely from tensor shape, a wrong-branch dispatch bug; detection required comparing CPU-vs-OpenCL token probabilities on the identical image."
+   },
+   "C": null,
+   "K": null,
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25593": {
+   "A": {
+    "K": "K2",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "Score and accumulator math meant to be FP32 is done in FP16 on sm_60, and the fixes either route sm_60 off that path or bound the FP16 accumulation error, while the loss was measured by KL divergence against an FP32 reference run."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "The proposed and discussed fixes scope the correction to sm_60 specifically, alongside the sm_61 carve-out already in place, meaning the same fast-path code is correct on other architectures; the quality loss was measured via KL-divergence between a patched fp32 baseline run and the stock run, not from any single output."
+   },
+   "C": null,
+   "K": null,
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/22281": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The report only describes repetition and corrupted output on an old GCN2 GPU with Vulkan, with no cause or fix, and the loop of '/' is visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No first-bad-commit or fix is given beyond attached logs; the reported behavior, entering \"a loop of /\", is a directly visible repetition pattern in the generated text."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21893": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Nonsense output on Xe2 unless SYCL optimizations are disabled comes with only a guess of reordering or DPAS synchronization and no fix, and the nonsense output is visible."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter's own hypothesis (\"likely reordering or DPAS synchronization\") ties the corruption to the new Xe2-specific optimized kernels still present after an earlier related fix, but no PR confirms it; the looping \"11111\" and off-topic hallucination are described as directly visible in the output."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/22577": {
+   "A": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The auto-parser mishandles a closing think tag emitted at the very start and puts everything after it into reasoning_content, which is visible in one response as misplaced content and a missing tool call."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The issue body precisely describes the auto-parser misclassifying all following content as reasoning when the closing think-tag appears first, a parsing edge case; the reported consequence, that the tool call is never invoked and everything shows as thinking, is directly visible in a single response's structure."
+   },
+   "C": null,
+   "K": "K4",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/15866": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The fix keeps in_proj_qkv and in_proj_z in BF16 as the upstream source does, because Ollama's create step quantized them to NVFP4 and zeroed the small K rows, and the incoherent output is visible."
+   },
+   "B": {
+    "K": "K2",
+    "Kc": 3,
+    "V": "V3",
+    "Vc": 1,
+    "evidence": "A closed PR confirms small early-layer K-projection weights fall below the smallest representable FP4 codepoint and are zeroed during quantization, a precision/underflow bug; confirming it required reading raw tensor bytes out of the model file, not anything a normal API response, model-info endpoint, or standard file metadata would surface."
+   },
+   "C": null,
+   "K": null,
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23827": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Wrong output with -nkvo on Vulkan is only loosely bisected to an offloading commit with intermittent fixes and no identified cause or fix, and the wrong continuation is visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "The reporter's own bisection is non-monotonic (breaks, then works at b8210/b8248, then breaks again at b8323) with no settled cause or fix; the report's own with/without -nkvo side-by-side run is exactly the kind of same-runtime comparison that exposed it."
+   },
+   "C": null,
+   "K": "K7",
+   "V": null
+  },
+  "https://github.com/ollama/ollama/issues/15975": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The report only says output is nonsense on Blackwell cards, and the linked PR is a general engine replacement rather than a stated fix, while the nonsense is visible."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V4",
+    "Vc": 3,
+    "evidence": "Only a server startup config log and the bare word \"nonsense\" are given, with no example output, cause, or fix, so neither the kind of defect nor whether the wrongness would look obviously broken can be decided from this text."
+   },
+   "C": null,
+   "K": "K7",
+   "V": null
+  },
+  "https://github.com/ollama/ollama/issues/17498": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "Corruption from about 1,200 tokens occurs only for Gemma 4 on ROCm gfx1151 (Vulkan and Qwen are fine) with no cause or fix, and the collapse, repetition and malformed output are visible though the onset is gradual."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "A cross-model/cross-backend matrix shows Gemma 4 fails specifically with ROCm (not Vulkan) while Qwen 2.5 succeeds on the identical ROCm setup on the same machine; the malformed, repetitive output past ~1200 tokens is described as visible directly in that response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25620": {
+   "A": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Host and device compute nwarps from different lookups that disagree for a gfx11-generic code object on RDNA3.5, and the fix reads nwarps back from the compiled kernel, while the NaN outputs show as '?????' tokens."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "A merged fix confirms the host and device sides compute nwarps from two different, disagreeing assumptions (arch macros vs. runtime cc) on gfx11-generic, causing a read of unwritten shared memory; the result is literal \"?????\" garbage directly visible in llama-cli's output."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21589": {
+   "A": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The fix adds a reorder-aware Q8_0 dequantizer because prompt processing read weights that generation had reordered as if they had the standard layout, and the garbage on the second prompt is visible."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "A merged fix confirms weights reordered by the token-generation path were read by prompt-processing's dequantizer under the old, unreordered assumption; the bug is simply that the second response comes back as garbage, directly visible in that response's text."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26142": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Embd-batch outputs beyond slot 1 are NaN or zeros for Qwen3-VL only, with no cause or fix identified, and NaN or zero vectors are checkable from one call."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "A precise behavior matrix shows only embd-batches (not token-batches) fail, and only past output slot 2 regardless of n_seq_max, pointing to an indexing/loop bug though no fix is linked; NaN or all-zero embeddings for a given slot are directly readable from that single decode call's own output."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/18649": {
+   "A": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The gemma4 tool-call parser has no repair case for trailing characters after a complete object and discards the call, and the fix uses the JSON decoder's boundary, while the caller visibly receives no tool call."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The issue and its linked PR both pinpoint that the parser rejects an otherwise-complete tool call because of trailing noise after the final brace, discarding it entirely rather than truncating at the balanced boundary; the caller-visible effect is that the client \"never receives the tool call at all\" in that response."
+   },
+   "C": null,
+   "K": "K4",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/17562": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "It bundles three independent defects of different kinds (a mis-firing repetition guard whose abort is reported as success, a truncated tool call passed on as complete, a parser missing a recovery case), each of which shows in one response as a missing done, a length stop or an empty message."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "All three bundled bugs are dispatch/validation gaps: a repetition detector misfiring on legitimate output plus its abort misreported as success, a truncated tool call handed over as complete, and a nearly-complete call dropped for one missing brace; each is caller-visible within a single request (no done message, or an empty response)."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/22011": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 1,
+    "evidence": "Wrong logits for Gemma 3 only on a Raspberry Pi ARM64 CPU build (Mac CPU and Qwen are fine) come with only hedged guesses about the ISWA kernel path or fp16 accumulation and no fix, and the wrong distribution was found by comparing platforms."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "Isolated across platforms and models, the same GGUF is correct on Mac CPU and Qwen is correct on the same Pi ARM64 binary, but Gemma 3 alone is wrong on ARM64 CPU; this was found only by comparing top-token logprobs between the Mac and Pi runs."
+   },
+   "C": null,
+   "K": null,
+   "V": "V2"
+  },
+  "https://github.com/ollama/ollama/issues/17614": {
+   "A": {
+    "K": "K6",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The analysis attributes the 'AI AI AI' collapse to the user's q4_0 KV-cache setting being too lossy and resolves it by changing the setting, and the degenerate output is visible."
+   },
+   "B": {
+    "K": "K6",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter's own isolation (varying only OLLAMA_KV_CACHE_TYPE) and conclusion, \"No code changes to the repo are needed,\" identify this as an expected quality tradeoff of q4_0 KV quantization rather than a defect; the degenerate \"AI AI AI\" repetition is directly visible in the response text."
+   },
+   "C": null,
+   "K": "K6",
+   "V": "V1"
+  },
+  "https://github.com/lmstudio-ai/lmstudio-bug-tracker/issues/1856": {
+   "A": {
+    "K": "K1",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter's logs show the selected even two-GPU split resolved to Tensor Split [0], a setting lost between selection and backend config, though no fix confirms it caused the gibberish, which shows in a single reply to a trivial prompt."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Dual-GPU \"evenly\" split strategy was selected but the resolved runtime config still showed Main GPU 0 / Tensor Split [0], and the response was gibberish/control-token output or an explicit crash."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26282": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "No cause or fix is given (the reporter only guesses cache pollution), and the small L2 drift of about 0.02 shows only when embeddings of the same text are compared across requests."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "Reporter only speculates (\"I think\") that cache pollution causes drift after repeated requests, with no maintainer diagnosis or fix (closed not_planned/stale); noticing requires comparing an embedding response to an earlier response for the same text."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26363": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Quantized T5 gives garbage only on the Vulkan backend while CPU is correct, but no cause or fix is identified; the repeating garbage token is obvious in one response."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Identical quantized GGUF is correct on CPU and wrong (repeating garbage token) on Vulkan across three quant levels, isolating the defect to the Vulkan backend; the repeating garbage token is visible directly in the response text."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26314": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Vulkan offload on an Adreno phone GPU yields gibberish while CPU-only is correct, with no cause, log or fix; the gibberish is visible in a single reply."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "-ngl 0 (CPU) is correct and any GPU offload via Vulkan on this Adreno device produces gibberish across multiple models, isolating the defect to the Vulkan/GPU backend; gibberish is visible directly in the output."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25102": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Garbage appears only on the multi-device HTP split path, but no root cause is identified and the linked session-creation PR does not describe fixing it; the garbage completion is visible in one response."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Only the multi-HTP-device split path is corrupted (single device and CPU are correct) but no mechanism is confirmed, and the linked merged PR's description (lazy session creation for efficiency) does not explicitly explain the garbage output; the garbled text (\"is-3111111\") is directly visible in the response."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/24764": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The regression is bisected to the Metal rope_back commit but the reporter cannot explain the mechanism and no fix is given; the stochastic quality drop was seen only by comparing benchmark success rates across builds."
+   },
+   "B": {
+    "K": "K3",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "Bisected exactly to the rope_back Metal kernel commit, with the reporter hypothesizing it shares state/buffers with the forward rope kernel causing interference; the stochastic success-rate drop (100%->66.7%) was found by comparing benchmark runs across builds, not from a single response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25582": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "Degradation grows with the number of MoE expert layers on CUDA but no cause is identified, and the linked PR fixes a different issue (#25382, quantized K-cache) that this command does not use; wrong-language or incoherent replies are visible in a single response."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The linked fix disables a Hadamard-rotation attention path that misroutes DeepSeek-V4 layers into the wrong attention builder when it is active; the response text itself shows a clear wrong-language/incoherent answer."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25477": {
+   "A": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The same OpenCL Q6_K MUL_MAT fails test-backend-ops on Adreno 740 but passes on Adreno 840, pointing to a hardware or driver specific defect; the model's GPU output is garbage."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "test-backend-ops shows Q6_K MUL_MAT fails only on Adreno 740 OpenCL (passes on Adreno 840 and for every other quant type on the same 740), and the reporter also saw real garbage generation on-device that CPU did not produce."
+   },
+   "C": null,
+   "K": "K5",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/28827": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No cause is identified for the growing trailing garbage beyond an unparsed-output log line, and the garbage and occasional HTTP 500 are visible from single requests."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Server log shows \"unparsed peg-gemma4 output,\" pointing to the gemma4 chat/reasoning parser failing to consume its own output and letting a growing garbage tail through; the growing garbage tail and occasional 500 error are directly visible in the API response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21228": {
+   "A": {
+    "K": "K4",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The grammar parser rejects the $ref-expanded schema at a repetition threshold and the server silently falls back to unconstrained output (the linked PRs address a different MLX template problem); the returned JSON can be validated against the schema sent in the request."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Server log explicitly states the grammar parser silently fails (\"number of rules...exceeds sane defaults\") and falls back to unconstrained JSON without informing the client; a caller checking the 200-OK response's JSON against the schema it sent would directly see it does not conform."
+   },
+   "C": null,
+   "K": "K4",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27579": {
+   "A": {
+    "K": "K3",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The linked PRs trace HIP corruption on this APU to the scheduler placing compute inputs in pinned host memory, where an input write can race a graph that is still running; word salad, invented tool names and empty length-stopped replies are visible in single responses."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Same weights, same build, byte-identical flags on the same machine are correct on Vulkan and wrong on HIP/ROCm for two dense architectures, isolating the defect to the HIP backend; the degenerate \"word salad\" output and empty-content/length finish_reason are both visible directly in the response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21888": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter only suggests an unspecified kernel correctness failure or fallback on the Vulkan iGPU and no fix is given; the repeating-punctuation output and the prompt-eval slowdown in timings are visible from one request."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Same model/quant/prompt is correct on CPU and produces deterministic repeating-punctuation garbage on the Vulkan iGPU backend for specific prompts; the repeating garbage and the anomalous prompt-eval slowdown are both visible in a single response's text/timings."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/29392": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Only a first bad commit is named, with no description of the defect or a fix; repeated tokens or garbage are visible in a single reply."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Report gives only a bisected \"first bad commit\" hash with no analysis of mechanism and no fix; the repeated-token/garbage output is directly visible in the response."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23252": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V3",
+    "Vc": 2,
+    "evidence": "The fixed pre-tokenization behavior declared in the HF tokenizer files is not carried into the converted GGUF, so llama.cpp splits \" Café\" differently; the difference shows only against the Transformers tokenizer, not in the runtime's responses or the GGUF metadata."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The GGUF tokenizer's pre-tokenizer regex splits an accented-character sequence differently than the fixed Transformers tokenizer, a tokenization/parsing discrepancy with no fix confirming the exact regex defect; noticing requires comparing llama.cpp's token IDs against a separate reference tokenizer's output."
+   },
+   "C": null,
+   "K": null,
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26044": {
+   "A": {
+    "K": "K2",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The linked fix PR localizes the first non-finite value to the FFN down projection in the cuBLAS F16 path on Volta and proposes F16 activation scaling, an overflow problem; the embedding comes back all null with HTTP 200, checkable in one response."
+   },
+   "B": {
+    "K": "K2",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "An open fix PR traces the failure to the CUDA F16 cuBLAS path taken once batch size crosses the MMQ/cuBLAS dispatch boundary, where finite F32 activations become non-finite after the F16 matmul (\"f16-activation-scaling\"); the response for the triggering (and every subsequent) request is an all-null/NaN vector, directly visible in the response body."
+   },
+   "C": null,
+   "K": "K2",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/15328": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Gibberish appears only with Vulkan on an Intel Arc 770 and no cause or fix is given; the gibberish is visible in a single reply."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Disabling OLLAMA_VULKAN (falling back to CPU) makes the same model correct, isolating the defect to the Vulkan backend on this Intel Arc GPU; gibberish output is stated as the direct symptom."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21915": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter only suspects KV-cache management under quantized KV and no fix is described; the gibberish second reply is visible from one request."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No maintainer diagnosis or fix is given; the reporter can only describe trigger conditions (KV quantization plus a large generated cache followed by a new message) without identifying whether the defect is numeric, indexing, or state-management in nature; gibberish/stuck output is directly visible in the response."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/16197": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "No cause is identified (the linked PR is unrelated), and the first-call divergence at temperature 0 shows only when repeated identical requests are compared."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "The reporter is asking whether this is a bug rather than diagnosing one, and the only linked PR is unrelated (a different app's toast-notification fix); the divergence is defined entirely by comparing the first call's response to later, stable, byte-identical repeats of the same call."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/24365": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The failure is bisected to the HMX matmul rework commit, but the text does not say whether the error lies in the kernel arithmetic, a mode unsuited to HTP v81, or elsewhere; repeated garbage tokens are visible in one response."
+   },
+   "B": {
+    "K": "K2",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Bisected to a specific HMX matmul rewrite (spatial mode to activation-depth mode plus a rewritten dequant routine) that is not quantization- or model-specific, pointing to a computational error introduced by the rewrite; the repeated garbage tokens are directly visible in the output."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25382": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "A quantized K-cache turns on a Hadamard rotation of the cached K/V, and the DeepSeek-V4 attention path it diverts to does not honor the rotated values (it never un-rotates the V view), so the fix disables the rotation for this arch; the confident gibberish is visible in one reply."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Root-caused and fixed: a non-null self_k_rot from quantized-cache rotation diverts DeepSeek-V4 layers into build_raw_attention instead of its designed sparse-attention branch, and that path also omits a required un-rotation step; the \"confident gibberish\" example text is directly visible in the response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23535": {
+   "A": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "The chat PEG parser unconditionally trims a leading and trailing whitespace from tool-call parameters and the fix changes that trimming logic; the program can notice only that the returned oldstring no longer matches the file text it supplied."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Root-caused to one line in chat-peg-parser.cpp that unconditionally trims a leading/trailing whitespace character from tool-call parameters, fixed by replacing it with a newline-only trim; the exact expected-vs-actual JSON diff (three vs four leading spaces) is directly visible by comparing the response to the request."
+   },
+   "C": null,
+   "K": "K4",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21726": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The fix makes the CUDA graph-reuse check also store the sources' ne/nb, because with -nkvo the KV shapes change while the data pointer stays the same and the captured graph was reused under the old shapes; the garbled output after about 230 tokens is visible in one response."
+   },
+   "B": {
+    "K": "K3",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Root-caused and fixed: the CUDA graph-reuse equality check omitted node->src ne/nb, so a captured graph was treated as still valid after those shapes/strides changed under -nkvo, i.e. a stale cached graph structure; garbled output after roughly 230 tokens is stated as directly observed in the response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/22785": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The reporter offers two unconfirmed hypotheses about the server's new image preprocessor (patch order or mRoPE positions) and the linked PR is unrelated; the plausible-looking OCR errors were found only by comparing with llama-cli and older builds."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The reporter's own bisect-based hypothesis (wrong patch order or distorted mRoPE 2D position IDs in the new image preprocessor) is not confirmed by any matching merged fix; the regression is defined by comparing llama-server's output against llama-cli's output for the same build/image."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/28211": {
+   "A": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The linked fixes say gfx1151 reports as an integrated GPU and host-memory reads on this chip hand back wrong data, so the patch disables that path for the chip; the report stresses the logits look plausible with no error and were found by comparing n_ubatch settings or the Vulkan backend."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "Root-caused and fixed: gfx1151 (and later gfx1150) reports as an integrated GPU, so ggml let tensors live in host memory for direct GPU reads, which \"hands back wrong data\" on that chip specifically while Vulkan/CPU are correct; the issue's own repro explicitly decodes the same prompt twice under two settings and compares distributions because the wrong logits \"look plausible\" otherwise."
+   },
+   "C": null,
+   "K": "K5",
+   "V": "V2"
+  },
+  "https://github.com/ollama/ollama/issues/15891": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V4",
+    "Vc": 2,
+    "evidence": "The report gives no logs, versions, cause or fix, only that Qwen tool calls fail to trigger or are malformed."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The report gives no logs, versions, or hardware and no fix, and was closed as a duplicate with no diagnosis; malformed tool-call responses would be structurally visible in the API response itself."
+   },
+   "C": null,
+   "K": "K7",
+   "V": null
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/28167": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "The source of the roughly 207 extra prompt tokens in the Linux web UI is not identified, but a prompt token count of 229 for a 22-token query is visible in a single response."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No root cause is identified for why the Linux webui reports ~229 prompt tokens versus 22 on Windows/Python for the identical query, and no fix is given; the prompt-token count is a response field the caller can check directly against the request it sent."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/28527": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "No cause is identified for the quantized-K prefix-cache divergence, which shows only when repeated deterministic requests are compared."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "No mechanism or fix is given for why a quantized K-cache plus prefix-cache reuse makes a deterministic (temp=0, seed=0) repeated request diverge on its first occurrence only; the bug's signature is explicitly defined by comparing three repeated identical requests."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27899": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "NaN logits appear on CUDA for certain k-quant mixes with no identified cause (unit tests pass and no fix is given); NaN logits are detectable from a single evaluation."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Extensive isolation (quant-mix-, content-, and rounding-dependent; CPU clean; synthetic MUL_MAT_ID tests pass) never reaches a diagnosed mechanism and no fix is linked; NaN logits would surface directly in returned log-probability fields if requested."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/16111": {
+   "A": {
+    "K": "K1",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "The requested name kimi-k2.6 was resolved by the cloud backend to the K2.5 model, per the unmerged PR's analysis of the name-to-model mapping; one response self-identifies as K2.5 while its model field says kimi-k2.6, though self-identification is weak evidence."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The requested model identifier \"kimi-k2.6\" is mapped, in the cloud backend's routing table, to the K2.5 model instead of K2.6 -- a wrong which-model-this-name-stands-for declaration; the model's own self-identification text in the response (\"I am Kimi version K2.5\") directly contradicts the model requested."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26027": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter lists several possible causes in the dense-MLA CUDA path (mask, RoPE, KV indexing) without confirmation or a fix; the garbled output is visible in a single reply."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The reporter offers multiple unconfirmed candidate mechanisms (attention mask, RoPE application, or KV-cache indexing) without concluding, and no fix is linked (closed not_planned/stale); the garbled output with an embedded coherent fragment is directly visible in the response."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21441": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The RoPE-scaling explanation is labeled a hypothesis and no fix is given; the accuracy loss was measured only by comparing two ctx-size settings on a benchmark."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "Reporter's hypothesis is that RoPE frequency scaling, tied to the configured --ctx-size rather than the model's native context, distorts positional encoding at long distances even though the actual prompt fits both windows -- a scale/reference-point property applied under a different assumption than intended; the collapse was found by comparing accuracy across two ctx-size settings on identical prompts."
+   },
+   "C": null,
+   "K": null,
+   "V": "V2"
+  },
+  "https://github.com/lmstudio-ai/lmstudio-bug-tracker/issues/2177": {
+   "A": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "The GGUF declares MEAN pooling, non-causal attention and embedding_length 2048, but LM Studio's classifier ignores that metadata and treats the model as an llm, so /v1/embeddings returns 1024-dim vectors, a mismatch checkable against the file metadata in one call."
+   },
+   "B": {
+    "K": "K1",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The GGUF's own metadata explicitly declares it as a mean-pooled, non-causal embedding model (pooling_type=MEAN, attention.causal=false, embedding_length=2048), but LM Studio's classifier ignores that declaration in favor of a hardcoded architecture allowlist and defaults to \"llm,\" so /v1/embeddings returns 1024-dim vectors instead of the true 2048; the wrong dimension is checkable directly from the response together with the model's own declared embedding length."
+   },
+   "C": null,
+   "K": "K1",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/21734": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Gibberish on the second turn occurs only with SYCL and Q8_0, with no cause or fix described; the gibberish reply is visible in one response."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Narrowed to the SYCL backend specifically at Q8_0 (same model at Q6_K, or the same Q8_0 model on Vulkan, does not reproduce), isolating the defect to this backend/quant combination; complete gibberish on the second turn is directly visible in that response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/29235": {
+   "A": {
+    "K": "K1",
+    "Kc": 2,
+    "V": "V4",
+    "Vc": 2,
+    "evidence": "OpenVINO names devices GPU.0 and GPU.1 but the backend compares against the exact string \"GPU\", so ops are routed under the wrong device assumption, and the fix matches devices by family; the text does not describe what the wrong results look like to an API caller."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V4",
+    "Vc": 2,
+    "evidence": "Root-caused: roughly twenty places compare an OpenVINO device name against the exact string \"GPU,\" which never matches \"GPU.0\"/\"GPU.1\" on multi-GPU machines, so those branches silently take the wrong path; the text mixes a silent-CPU-fallback case (not obviously wrong output) with a vague \"incorrect results\" claim for the GPU.N case without a concrete example."
+   },
+   "C": null,
+   "K": null,
+   "V": "V4"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/26565": {
+   "A": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The server's slot loop has no branch for encoder-decoder models and never calls llama_encode(), a missing case in one component; the server returns degenerate repeated control tokens (and the CLI asserts), visible in one request."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Root-caused: server-context.cpp's slot state machine has no branch at all for llama_model_has_encoder()==true and always calls only llama_decode(), confirmed by a grep showing zero encoder-related calls; the resulting degenerate repeated-token output through the server API is directly visible in the response, contrasted with the same model working correctly through the example that does call llama_encode()."
+   },
+   "C": null,
+   "K": "K4",
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/17218": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 2,
+    "evidence": "The report lists what changed in the runner migration (compat layer, chatml template) but does not identify which change causes the yes-bias; the accuracy drop was found by comparing two versions on a benchmark."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V2",
+    "Vc": 3,
+    "evidence": "The issue documents that 0.31.1 replaced Ollama's own engine with llama-server plus a GGUF compatibility-translation layer (quoted \"compat tensor transform\" log lines) alongside the regression, but does not pin down which part of the new runner or translation causes the accuracy drop, and no fix is linked; the drop was found by running the identical VQA benchmark on both versions and comparing accuracy/latency."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V2"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25376": {
+   "A": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Flash attention gives gibberish only when built with Clang on ppc64le while other builds are correct, and the linked PR advises Clang/POWER9 users to disable flash attention; the gibberish is visible in one reply."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Same source built with GCC (or run on Vulkan with either compiler) is correct, while Clang-built flash attention on ppc64le is wrong, isolating the defect to the Clang compiler backend for this CPU architecture; the quoted bad output is plainly incoherent text."
+   },
+   "C": null,
+   "K": "K5",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/28113": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The failure is bisected to the dispatch condition that enables the multi-token MMVQ MoE path on gfx1151, but the reporter has no theory whether the kernel math or the hardware is at fault and the linked TOP_K PR is unrelated; the repeated-slash output is visible in one response."
+   },
+   "B": {
+    "K": "K4",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Bisected to one boolean fusion-eligibility condition in ggml_cuda_should_fuse_mul_mat_vec_q(); reverting just that condition restores correct output, and the reporter confirms it is \"a numerical fault, not a crash and not a scheduling failure\" tied to that dispatch decision; the repeated-punctuation garbage is directly visible in the output."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/23022": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "Some images produce garbage on an SM70 system but no cause or fix is given; the endless slashes or question marks are visible in one reply."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "No cause is identified beyond a hardware-limitation guess the reporter admits they cannot test, and no fix is linked; the garbage output (endless repeated characters) is directly visible in the response."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/28648": {
+   "A": {
+    "K": "K7",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "NaN and garbage with GPU layers on an Intel Arc 140V under Vulkan depend on batch settings, but no cause or fix is identified; the NaN or nonsense output is visible in one run."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "-ngl 0 (CPU) is always correct while Vulkan GPU offload on this Intel iGPU produces NaN/garbage depending on batch/ubatch settings, isolating the defect to the Vulkan backend on this hardware without a confirmed deeper mechanism; the report states llama-completion directly \"writes nonsense\" in addition to the NaN perplexity signal."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/25761": {
+   "A": {
+    "K": "K1",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "The linked closed PR says the oneDNN SDPA stream and the ggml SYCL queue had no ordering, so each could read a buffer before the other finished producing it (stale pool memory decoding as NaN); the multi-script gibberish in thinking blocks is visible in a reply, though the reporter calls it statistically plausible."
+   },
+   "B": {
+    "K": "K3",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "A closed (not confirmed merged) fix PR describes a missing synchronization between the oneDNN SDPA stream and the ggml SYCL queue, so a later stage can read a staging buffer before it is written, decoding stale/uninitialized pool memory as FP16; the multilingual garbled reasoning text is directly visible in the response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  },
+  "https://github.com/ollama/ollama/issues/15442": {
+   "A": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 1,
+    "evidence": "The report holds only sample output (wrong-language or garbled replies under Vulkan) with no logs, cause or fix; the language mismatch is visible in one reply."
+   },
+   "B": {
+    "K": "K7",
+    "Kc": 3,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "No diagnostic information or fix is present beyond the raw garbled transcript itself; the replies are visibly unrelated/incoherent relative to the questions asked, directly in the response text."
+   },
+   "C": null,
+   "K": "K7",
+   "V": "V1"
+  },
+  "https://github.com/ggml-org/llama.cpp/issues/27022": {
+   "A": {
+    "K": "K2",
+    "Kc": 1,
+    "V": "V1",
+    "Vc": 2,
+    "evidence": "The reporter attributes the all-zero logits to a numerical fault in the Vulkan IQ1_M dequant/matmul path (moving the IQ1_M router and SSM tensors to CPU fixes it), but no fix confirms it; the all-zero output is visible in one response."
+   },
+   "B": {
+    "K": "K5",
+    "Kc": 2,
+    "V": "V1",
+    "Vc": 3,
+    "evidence": "Full CPU offload is correct while the Vulkan backend's IQ1_M router-weight dequant/matmul path produces all-zero/garbage output for multi-line prompts specifically (overriding just those tensors to CPU restores quality), isolating the defect to the Vulkan backend's handling of this quant type without a confirmed formula-level mechanism; the all-zero/garbage output is directly visible in the response."
+   },
+   "C": null,
+   "K": null,
+   "V": "V1"
+  }
+ },
+ "disagreements": 42
+}
