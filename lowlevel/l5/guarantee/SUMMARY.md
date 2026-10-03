@@ -391,7 +391,7 @@ v3에서 바꾼 엔진 설정은 결과를 보기 전에 동결했다.
 | graphs(compile 없음 + FULL_DECODE_ONLY) | 3 | 0.39~0.42 s | 7.84~7.99 s | 19.2 / 19.6 / 19.6, 중앙값 **19.6** | 0.44~0.48 s | 1.146 / 1.089 / 1.095, 중앙값 **1.095** (예산 1.10 안) |
 | default(torch.compile + 그래프) | 1 | 0.38~0.40 s | 시작 때 `declaration` 거부 | — | 시작 때 `declaration` 거부 | — |
 
-- **출력 보존:** 모든 회전과 설정에서 off와 greedy 콜드·웜, seeded, unseeded가 6/6으로 토큰이 같았다. top-5 log-probability 차이 0, RNG 다이제스트(생성 전·후) 같음, 웜 prefix cache 결과 = 콜드. off A와 off B도 모든 설정에서 6/6 같았다(v3에서 default의 seeded·unseeded가 5/6이던 것은 이번에 나타나지 않았다).
+- **출력 보존:** eager와 graphs의 모든 회전에서 off와 greedy 콜드·웜, seeded, unseeded가 6/6으로 토큰이 같았다. top-5 log-probability 차이 0, RNG 다이제스트(생성 전·후) 같음, 웜 prefix cache 결과 = 콜드. off A와 off B도 모든 설정에서 6/6 같았다(v3에서 default의 seeded·unseeded가 5/6이던 것은 이번에 나타나지 않았다).
 - **graphs, 보증:** 동결 설정 0.80에서 세 회전 모두 시작했다(v3 동결 실행 0.55에서는 시작 실패).
   - 그래프 캡처 40~48 s, 풀 3.32 GiB(vLLM 추정 1.22 GiB), KV 캐시 가용 2.57 GiB. off는 2~3 s, 0.27 GiB, 4.39 GiB다. 엔진 시작 58.8~69.7 s(off 11.0~13.1 s).
   - 회전마다 그래프 안 gate 5,328개를 캡처했다. 디코드 replay 92번의 gate 13,248번과 eager 쪽(prefill) 6,624번이 모두 정상 전달이었다(교정·차단·오류 0). 가중치 발급 144, 활성값 발급 11,952(캡처 포함).
