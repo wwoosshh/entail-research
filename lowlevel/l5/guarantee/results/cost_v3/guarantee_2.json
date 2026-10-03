@@ -1,0 +1,106 @@
+{
+ "mode": "guarantee",
+ "shapes": {
+  "6144x2560": {
+   "first_ms": 524.3313830001171,
+   "repeat_M1": {
+    "median_ms": 2.9882105000069714,
+    "min_ms": 2.332535999812535,
+    "max_ms": 4.492197000217857,
+    "transient_bytes": 126362624
+   },
+   "repeat_M16": {
+    "median_ms": 2.7697340001395787,
+    "min_ms": 2.2439529998337093,
+    "max_ms": 3.630844999861438,
+    "transient_bytes": 126925312
+   },
+   "repeat_M256": {
+    "median_ms": 2.9873659998429503,
+    "min_ms": 2.716686999974627,
+    "max_ms": 5.3918359999443055,
+    "transient_bytes": 135933440
+   },
+   "bypass_M1": {
+    "median_ms": 2.8924499999902764,
+    "min_ms": 2.323338999758562,
+    "max_ms": 4.260801999862451,
+    "transient_bytes": 126362624
+   },
+   "bypass_M16": {
+    "median_ms": 2.6279610001438414,
+    "min_ms": 2.14499200001228,
+    "max_ms": 3.8488720001623733,
+    "transient_bytes": 126925312
+   },
+   "bypass_M256": {
+    "median_ms": 2.8814620000048308,
+    "min_ms": 2.623377999952936,
+    "max_ms": 3.4948829998029396,
+    "transient_bytes": 135933440
+   }
+  },
+  "2560x9728": {
+   "first_ms": 11.888586000168289,
+   "repeat_M1": {
+    "median_ms": 3.6262840001199947,
+    "min_ms": 3.0776859998695727,
+    "max_ms": 5.2391770000213,
+    "transient_bytes": 130592768
+   },
+   "repeat_M16": {
+    "median_ms": 3.5085689999050373,
+    "min_ms": 2.974941000047693,
+    "max_ms": 5.155337000360305,
+    "transient_bytes": 131485184
+   },
+   "repeat_M256": {
+    "median_ms": 3.9398095000251487,
+    "min_ms": 3.6562469999807945,
+    "max_ms": 7.309829999940121,
+    "transient_bytes": 146548224
+   },
+   "bypass_M1": {
+    "median_ms": 4.109893999839187,
+    "min_ms": 3.0897380001988495,
+    "max_ms": 5.802141999993182,
+    "transient_bytes": 130592768
+   },
+   "bypass_M16": {
+    "median_ms": 3.88986949997161,
+    "min_ms": 3.0828399999336398,
+    "max_ms": 7.532395999987784,
+    "transient_bytes": 131485184
+   },
+   "bypass_M256": {
+    "median_ms": 3.7275204999787093,
+    "min_ms": 3.4626719998414046,
+    "max_ms": 6.3826430000517576,
+    "transient_bytes": 146548224
+   }
+  }
+ },
+ "start_s": 7.895415186000264,
+ "peak_bytes": 201840128,
+ "launches": 422,
+ "entail": {
+  "weight_issued": 2,
+  "activation_issued": 422,
+  "consumer_calls": 422,
+  "weight_issues": 2,
+  "activation_issues": 422,
+  "calls": 422,
+  "normal_delivered": 212,
+  "repaired_delivered": 210,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 2,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 422
+  }
+ }
+}

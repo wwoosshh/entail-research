@@ -1,0 +1,151 @@
+{
+ "case": {
+  "id": "D-interval-T1",
+  "group": "defect",
+  "mutant": "interval",
+  "timing": "T1",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   45177084,
+   16038410
+  ],
+  "rows_from": 128,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 144,
+    "seed": 678095099,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "first call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 144,
+    "seed": 2006381385,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "second call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 144,
+    "seed": 147901067,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "third call"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 7640,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 678095099,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "first call",
+   "ms": 319.069,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 216087,
+    "elements": 221184,
+    "worst_ratio": 266.91756539973534,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.5871546791250862
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 2006381385,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call",
+   "ms": 4.147,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 216097,
+    "elements": 221184,
+    "worst_ratio": 251.09417924758287,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.6679120168396055
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 147901067,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call",
+   "ms": 2.682,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 216199,
+    "elements": 221184,
+    "worst_ratio": 290.1755572369014,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.6214479014874824
+   }
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "mutant_source_sha256": "967903effd4908a675ec8d8ce90c02983d7d97abcf35315552d9172edfd722b7",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 8.256,
+ "device_stopped": null,
+ "peak_mem": 19298304
+}

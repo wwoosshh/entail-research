@@ -1,0 +1,119 @@
+{
+ "case": {
+  "group": "admission",
+  "N": 1536,
+  "K": 2560,
+  "out": "float32",
+  "layers": 1,
+  "wseed": [
+   1290096944
+  ],
+  "id": "A3-unsupported-output-dtype",
+  "expect": "unsupported",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 197791284,
+    "dist": "normal"
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "guarantee",
+ "pid": 3166,
+ "env_ENTAIL": "guarantee",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 197791284,
+   "dist": "normal",
+   "ms": 237.465,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "blocked": 1,
+    "blocked_unsupported": 1
+   },
+   "delivered": false,
+   "exception": {
+    "type": "Refused",
+    "kind": "unsupported",
+    "message": "[entail guarantee] refused (unsupported): output dtype float32 is outside the plan (bfloat16, float16)",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 163, in main\n    y = kernel.apply_weights(layers[li], x)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/BlockScaledMMLinearKernel.py\", line 132, in apply_weights\n    output = self.apply_block_scaled_mm(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/triton.py\", line 173, in apply_block_scaled_mm\n    return torch.ops.vllm.w8a8_triton_block_scaled_mm_func(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_ops.py\", line 1279, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/triton.py\", line 198, in _w8a8_triton_block_scaled_mm_func\n    return w8a8_triton_block_scaled_mm(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/adapters/vllm_block_fp8_guarantee.py\", line 134, in run\n    return guarantee.gate(orig, a[\"A\"], a[\"B\"], a[\"As\"], a[\"Bs\"], a[\"block_size\"], a[\"output_dtype\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 646, in gate\n    A, B, As, Bs, block, issues = _admit(A, B, As, Bs, block_size, output_dtype, rec, t0)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 515, in _admit\n    _refuse(rec, \"unsupported\", f\"output dtype {out} is outside the plan ({', '.join(p.out_dtypes)})\", t0)\n  File \"<workspace>/entail/entail/guarantee.py\", line 444, in _refuse\n    raise Refused(kind, why, rec)\nentail.guarantee.Refused: [entail guarantee] refused (unsupported): output dtype float32 is outside the plan (bfloat16, float16)\n"
+   },
+   "truth_key": "s0"
+  }
+ ],
+ "freeze_sha256": null,
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 1073741824,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "19b1ba9b2ff9510f67190c291ad6dd5d66f36ed05cffa4afb9c465fb7676900f",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 1,
+  "activation_issued": 1,
+  "consumer_calls": 1,
+  "weight_issues": 1,
+  "activation_issues": 1,
+  "calls": 1,
+  "blocked": 1,
+  "blocked_unsupported": 1,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 1,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 1
+  }
+ },
+ "launcher_total": 0,
+ "seconds": 8.894,
+ "peak_mem": 19678208
+}

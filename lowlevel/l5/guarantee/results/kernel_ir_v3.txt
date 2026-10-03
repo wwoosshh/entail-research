@@ -1,0 +1,21 @@
+ok parse: 15 arguments
+ok vLLM's kernel at tiles 64x128x128 and 16x128x128: proven, 20 terms
+ok BLOCK_SIZE_K 256 over 128-wide groups: violation before any launch: {'program_chunk_index': 0, 'groups_in_tile': [0, 1]}
+ok the four consumer mutations: not proven (the scale read depends on data)
+ok a store to another layout than the output's: violation
+ok an operand without an issue: unproven
+ok no store: violation (the kernel never stores to its output)
+ok the loop runs over the first of 20 K groups: violation (the value stored is not the whole product: 2432 of the K=2560 contraction indices are never added (the first k)
+ok each iteration overwrites the sum (the last group remains): violation (the value stored is not the whole product: 2432 of the K=2560 contraction indices are never added (the first k)
+ok rows from 32 on are not stored: violation (49152 of the 98304 output elements are never stored (the first block: rows 32..63, columns 0..127))
+ok each term is added twice: violation (the value stored is not the whole product: 2560 are added more than once (40 terms))
+ok each term is also multiplied by 2: violation (the scaled dot term is also multiplied by the constant 2.0)
+ok the kernel also writes the activation scales back: violation (the kernel writes to As, which is not its output)
+ok the sum is stored negated: unproven (the op arith.subf is not modelled)
+ok the sum is stored doubled: unproven (the value stored to the output is not a sum of scaled dot terms (mul))
+ok the dot accumulates into the running sum, which the scales then multiply: unproven (a dot that accumulates into something other than an exact zero)
+ok masked-out activation lanes load 1.0: unproven (masked-out lanes of A in the dot are not loaded as zero)
+ok the activation is masked one k short of the weight: unproven (the two operands are masked differently along k)
+ok one more iteration than K needs (fully masked): harmless: proven (every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation)
+ok a partial row tile: proven; i32 overflow and two outputs: unproven
+ok fast and dense evaluation agree on 22 launches; orig: fast 0.0088 s, dense 0.1873 s

@@ -1,0 +1,26 @@
+{
+ "eager": {
+  "runs": [
+   "00_eager_off",
+   "01_eager_guarantee",
+   "02_eager_off"
+  ],
+  "guarantee_start_error": {
+   "type": "RuntimeError",
+   "kind": null,
+   "message": "Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist"
+  }
+ },
+ "default": {
+  "runs": [
+   "03_default_off",
+   "04_default_guarantee",
+   "05_default_off"
+  ],
+  "guarantee_start_error": {
+   "type": "Refused",
+   "kind": "declaration",
+   "message": "[entail guarantee] refused (declaration): the activation operand ((8192, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)"
+  }
+ }
+}

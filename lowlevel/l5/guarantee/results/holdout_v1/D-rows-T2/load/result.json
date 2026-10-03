@@ -1,0 +1,203 @@
+{
+ "case": {
+  "id": "D-rows-T2",
+  "group": "defect",
+  "mutant": "rows",
+  "timing": "T2",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   1702408233,
+   1066717318
+  ],
+  "rows_from": 64,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 16,
+    "seed": 780006672,
+    "dist": "normal",
+    "mut": 0,
+    "cache": 0,
+    "role": "normal first call (16 rows)"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 256,
+    "seed": 1284836075,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "new batch and input"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 256,
+    "seed": 1656013500,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "second call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 512,
+    "seed": 356647905,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "third call"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "load",
+ "pid": 13621,
+ "env_ENTAIL": "load",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 780006672,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 0,
+   "role": "normal first call (16 rows)",
+   "ms": 793.254,
+   "rng_same": true,
+   "kernel_launches": 2,
+   "cache_hits": 0,
+   "entail": {
+    "decided": 1,
+    "checks": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 24576,
+    "worst_ratio": 0.2006993224332302,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.5312152763867085e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 1284836075,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "new batch and input",
+   "ms": 11.92,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 227299,
+    "elements": 393216,
+    "worst_ratio": 50.44317665052169,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.1392538703060211
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 1656013500,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call",
+   "ms": 8.472,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 226864,
+    "elements": 393216,
+    "worst_ratio": 55.940225801723834,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.17258737515035164
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 512,
+   "seed": 356647905,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call",
+   "ms": 11.399,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 536201,
+    "elements": 786432,
+    "worst_ratio": 64.29939990331202,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.20094388238583144
+   }
+  }
+ ],
+ "freeze_sha256": "9da6c1e1a5d7b0898d84419ddf1f0e36c5241777d2a48556ce00b260a510324d",
+ "mutant_source_sha256": "0efe13f4df7ebc32fa5f04f7f27424e20e7ca803ce2319bb523ecbbc137e80c0",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "instrumented": 2,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ },
+ "launcher_total": 5,
+ "seconds": 10.616,
+ "peak_mem": 66534400
+}

@@ -1,0 +1,189 @@
+{
+ "case": {
+  "id": "D-neighbor-T2",
+  "group": "defect",
+  "mutant": "neighbor",
+  "timing": "T2",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   637194804,
+   1798071135
+  ],
+  "rows_from": 64,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 16,
+    "seed": 1606043614,
+    "dist": "normal",
+    "mut": 0,
+    "cache": 0,
+    "role": "normal first call (16 rows)"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 300,
+    "seed": 419951683,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "new batch and input"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 300,
+    "seed": 1487156506,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "second call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 512,
+    "seed": 1480904925,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "third call"
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "off",
+ "pid": 10312,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 1606043614,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 0,
+   "role": "normal first call (16 rows)",
+   "ms": 289.342,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 24576,
+    "worst_ratio": 0.21111668471867195,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.1095640483595925e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 419951683,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "new batch and input",
+   "ms": 19.845,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 410692,
+    "elements": 460800,
+    "worst_ratio": 313.3818677008815,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.6647192595889186
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 1487156506,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call",
+   "ms": 7.248,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 410838,
+    "elements": 460800,
+    "worst_ratio": 272.07812776511247,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.5417591590555572
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 512,
+   "seed": 1480904925,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call",
+   "ms": 9.206,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 701112,
+    "elements": 786432,
+    "worst_ratio": 294.07904166304166,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.6127651821535265
+   }
+  }
+ ],
+ "freeze_sha256": "a6bbdc86e7d3cff937ba8fa7563dda18b8b78e56d6ec02bac8ba3150885db5cf",
+ "mutant_source_sha256": "bd540bf2f1c63a30be4ab73f66ac6432f39bb1acf0383bd387e2e013911215d3",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 4,
+ "seconds": 7.487,
+ "device_stopped": null,
+ "peak_mem": 25679360
+}

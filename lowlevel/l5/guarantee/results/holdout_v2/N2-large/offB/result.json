@@ -1,0 +1,63 @@
+{
+ "case": {
+  "id": "N2-large",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 640,
+    "seed": 1424503625,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   492332024
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 1273,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 640,
+   "seed": 1424503625,
+   "dist": "normal",
+   "ms": 315.337,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 983040,
+    "worst_ratio": 0.27762716748917526,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.807880360340478e-05
+   }
+  }
+ ],
+ "freeze_sha256": "13bc9f3a09f1feb73ca7aa6956562503e20921e4cb069062f4de42e34e794515",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 1,
+ "seconds": 7.284,
+ "peak_mem": 23875072
+}

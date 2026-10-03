@@ -1,0 +1,215 @@
+{
+ "eager": {
+  "runs": [
+   "00_eager_off",
+   "01_eager_guarantee",
+   "02_eager_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 14544,
+   "consumer_calls": 14544,
+   "weight_issues": 144,
+   "activation_issues": 14544,
+   "calls": 14544,
+   "ir_proven": 32,
+   "normal_delivered": 14544,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+   }
+  }
+ },
+ "graphs": {
+  "runs": [
+   "03_graphs_off",
+   "04_graphs_guarantee",
+   "05_graphs_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 11952,
+   "consumer_calls": 11952,
+   "weight_issues": 144,
+   "activation_issues": 11952,
+   "calls": 11952,
+   "ir_proven": 156,
+   "normal_delivered": 11952,
+   "replays": 92,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+   }
+  }
+ }
+}

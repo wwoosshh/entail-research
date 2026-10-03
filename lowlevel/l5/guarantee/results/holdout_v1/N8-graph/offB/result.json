@@ -1,0 +1,134 @@
+{
+ "case": {
+  "id": "N8-graph",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 256,
+    "seed": 978530511
+   },
+   {
+    "op": "replay",
+    "seed": 841528776,
+    "mut": 0
+   },
+   {
+    "op": "replay",
+    "seed": 573706932,
+    "mut": 0
+   },
+   {
+    "op": "replay",
+    "seed": 1638856945,
+    "mut": 0
+   }
+  ],
+  "wseed": [
+   1172623113
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 5896,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 256,
+   "seed": 978530511,
+   "ms": 352.441,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": false,
+   "exception": null
+  },
+  {
+   "op": "replay",
+   "seed": 841528776,
+   "mut": 0,
+   "ms": 9.383,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.25716487646061476,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.065325290762865e-05
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 573706932,
+   "mut": 0,
+   "ms": 22.055,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.2896208927902781,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.8237350187964155e-05
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1638856945,
+   "mut": 0,
+   "ms": 22.561,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.2919569780084635,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.026141624331024e-05
+   }
+  }
+ ],
+ "freeze_sha256": "9da6c1e1a5d7b0898d84419ddf1f0e36c5241777d2a48556ce00b260a510324d",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 8.936,
+ "peak_mem": 36592128
+}

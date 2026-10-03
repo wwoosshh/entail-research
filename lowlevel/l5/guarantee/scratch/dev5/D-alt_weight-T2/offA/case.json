@@ -1,0 +1,69 @@
+{
+ "id": "D-alt_weight-T2",
+ "group": "defect",
+ "mutant": "alt_weight",
+ "timing": "T2",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  792301194,
+  250182202
+ ],
+ "rows_from": 200,
+ "mechanism": "consumer-side scale cache at the call site (Python)",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 1871952339,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 0,
+   "role": "normal first call (16 rows)"
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 16,
+   "seed": 762367305,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 1,
+   "role": "another weight of the same shape fills the cache"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 384,
+   "seed": 1113247820,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "new batch and input"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 384,
+   "seed": 2075228421,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 512,
+   "seed": 250488910,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call"
+  }
+ ],
+ "split": "dev"
+}

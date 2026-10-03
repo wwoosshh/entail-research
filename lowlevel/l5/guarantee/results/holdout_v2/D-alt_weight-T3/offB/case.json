@@ -1,0 +1,50 @@
+{
+ "id": "D-alt_weight-T3",
+ "group": "defect",
+ "mutant": "alt_weight",
+ "timing": "T3",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  1880122315,
+  1293471662
+ ],
+ "rows_from": 80,
+ "mechanism": "the consumer kernel's own read, switched by a device flag",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 128,
+   "seed": 825683964,
+   "role": "normal warm-up + capture"
+  },
+  {
+   "op": "replay",
+   "seed": 1169647801,
+   "mut": 0,
+   "role": "normal replay"
+  },
+  {
+   "op": "replay",
+   "seed": 1172989249,
+   "mut": 1,
+   "role": "defect comes on at replay"
+  },
+  {
+   "op": "replay",
+   "seed": 903437355,
+   "mut": 1,
+   "role": "second defective replay"
+  },
+  {
+   "op": "replay",
+   "seed": 297823723,
+   "mut": 1,
+   "role": "third defective replay"
+  }
+ ],
+ "split": "holdout"
+}

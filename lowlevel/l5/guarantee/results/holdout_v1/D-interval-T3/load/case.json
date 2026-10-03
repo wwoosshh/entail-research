@@ -1,0 +1,50 @@
+{
+ "id": "D-interval-T3",
+ "group": "defect",
+ "mutant": "interval",
+ "timing": "T3",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  513933827,
+  1414231371
+ ],
+ "rows_from": 64,
+ "mechanism": "the consumer kernel's own read, switched by a device flag",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 128,
+   "seed": 702069332,
+   "role": "normal warm-up + capture"
+  },
+  {
+   "op": "replay",
+   "seed": 337016389,
+   "mut": 0,
+   "role": "normal replay"
+  },
+  {
+   "op": "replay",
+   "seed": 1732398484,
+   "mut": 1,
+   "role": "defect comes on at replay"
+  },
+  {
+   "op": "replay",
+   "seed": 2109492645,
+   "mut": 1,
+   "role": "second defective replay"
+  },
+  {
+   "op": "replay",
+   "seed": 113880496,
+   "mut": 1,
+   "role": "third defective replay"
+  }
+ ],
+ "split": "holdout"
+}

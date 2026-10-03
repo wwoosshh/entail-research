@@ -1,0 +1,241 @@
+{
+ "case": {
+  "id": "D-alt_weight-T2",
+  "group": "defect",
+  "mutant": "alt_weight",
+  "timing": "T2",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   1519015146,
+   190332543
+  ],
+  "rows_from": 200,
+  "mechanism": "consumer-side scale cache at the call site (Python)",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 16,
+    "seed": 114009906,
+    "dist": "normal",
+    "mut": 0,
+    "cache": 0,
+    "role": "normal first call (16 rows)"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 16,
+    "seed": 1672209885,
+    "dist": "normal",
+    "mut": 0,
+    "cache": 1,
+    "role": "another weight of the same shape fills the cache"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 300,
+    "seed": 1288531424,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "new batch and input"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 300,
+    "seed": 897844496,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "second call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 300,
+    "seed": 1595208314,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "third call"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "load",
+ "pid": 11560,
+ "env_ENTAIL": "load",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 114009906,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 0,
+   "role": "normal first call (16 rows)",
+   "ms": 715.697,
+   "rng_same": true,
+   "kernel_launches": 2,
+   "cache_hits": 0,
+   "entail": {
+    "decided": 1,
+    "checks": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 24576,
+    "worst_ratio": 0.1951600618822869,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.53409797361199e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 16,
+   "seed": 1672209885,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 1,
+   "role": "another weight of the same shape fills the cache",
+   "ms": 7.363,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 24576,
+    "worst_ratio": 0.19480272582664862,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.01152830405709e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 1288531424,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "new batch and input",
+   "ms": 31.705,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 1,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 450095,
+    "elements": 460800,
+    "worst_ratio": 378.59280654468444,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.7678602552595578
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 897844496,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call",
+   "ms": 17.798,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 1,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 449724,
+    "elements": 460800,
+    "worst_ratio": 361.85537984826504,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.7641785682813382
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 1595208314,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call",
+   "ms": 29.831,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 1,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 449600,
+    "elements": 460800,
+    "worst_ratio": 304.05791788375467,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.6421808390625637
+   }
+  }
+ ],
+ "freeze_sha256": "9da6c1e1a5d7b0898d84419ddf1f0e36c5241777d2a48556ce00b260a510324d",
+ "mutant_source_sha256": "29645115546352727acdf039d5281e7081580a07d95fbe60e4b49f28199da385",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "instrumented": 2,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ },
+ "launcher_total": 6,
+ "seconds": 9.95,
+ "peak_mem": 66534400
+}

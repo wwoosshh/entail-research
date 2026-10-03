@@ -1,0 +1,154 @@
+{
+ "case": {
+  "id": "dev-tile-k256",
+  "group": "defect",
+  "mutant": "tile_k256",
+  "timing": "T2",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "wseed": [
+   11
+  ],
+  "tile_k256": true,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 16,
+    "seed": 21,
+    "dist": "normal",
+    "mut": 0
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 256,
+    "seed": 22,
+    "dist": "normal",
+    "mut": 0
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 300,
+    "seed": 23,
+    "dist": "normal",
+    "mut": 0
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "off",
+ "pid": 21171,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 21,
+   "dist": "normal",
+   "mut": 0,
+   "ms": 693.394,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 24576,
+    "worst_ratio": 0.42997921149082896,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 4.0349914358548575e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 22,
+   "dist": "normal",
+   "mut": 0,
+   "ms": 376.855,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 390364,
+    "elements": 393216,
+    "worst_ratio": 1496.0187996178165,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 0.4068363060822247
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 23,
+   "dist": "normal",
+   "mut": 0,
+   "ms": 390.645,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 457388,
+    "elements": 460800,
+    "worst_ratio": 1494.0723558343318,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 0.44037837404158886
+   }
+  }
+ ],
+ "freeze_sha256": null,
+ "tile_table": {
+  "1": {
+   "BLOCK_SIZE_M": 16,
+   "BLOCK_SIZE_N": 128,
+   "BLOCK_SIZE_K": 128,
+   "GROUP_SIZE_M": 1,
+   "num_warps": 4,
+   "num_stages": 2
+  },
+  "256": {
+   "BLOCK_SIZE_M": 64,
+   "BLOCK_SIZE_N": 128,
+   "BLOCK_SIZE_K": 256,
+   "GROUP_SIZE_M": 8,
+   "num_warps": 4,
+   "num_stages": 2
+  }
+ },
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 10.123,
+ "peak_mem": 18081792
+}

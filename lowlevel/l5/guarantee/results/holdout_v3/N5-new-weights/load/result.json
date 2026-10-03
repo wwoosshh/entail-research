@@ -1,0 +1,157 @@
+{
+ "case": {
+  "id": "N5-new-weights",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 95713123,
+    "dist": "normal"
+   },
+   {
+    "op": "reload",
+    "layer": 0,
+    "seed": 493924615
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 1952621141,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 96,
+    "seed": 1871188270,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   1705978513,
+   1826964742
+  ],
+  "split": "holdout"
+ },
+ "mode": "load",
+ "pid": 4217,
+ "env_ENTAIL": "load",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 95713123,
+   "dist": "normal",
+   "ms": 649.645,
+   "rng_same": true,
+   "kernel_launches": 2,
+   "cache_hits": 0,
+   "entail": {
+    "decided": 1,
+    "checks": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.22988079120563443,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.02901920230082e-05
+   }
+  },
+  {
+   "op": "reload",
+   "layer": 0,
+   "seed": 493924615,
+   "rng_same": true,
+   "delivered": null,
+   "exception": null
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 1952621141,
+   "dist": "normal",
+   "ms": 7.423,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.24940766954350807,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.563687532588661e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 96,
+   "seed": 1871188270,
+   "dist": "normal",
+   "ms": 6.174,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 147456,
+    "worst_ratio": 0.25064497044374545,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.702699539435718e-05
+   }
+  }
+ ],
+ "freeze_sha256": "7dd41678cf4e8d5df4768e75460bbd68e37d52e2eac30670ef0abdf13072c3c5",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "instrumented": 2,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ },
+ "launcher_total": 4,
+ "seconds": 8.676,
+ "device_stopped": null,
+ "peak_mem": 67945984
+}

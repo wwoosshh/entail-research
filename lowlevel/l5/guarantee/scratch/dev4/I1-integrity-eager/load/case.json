@@ -1,0 +1,43 @@
+{
+ "id": "I1-integrity-eager",
+ "group": "integrity",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 1,
+ "wseed": [
+  997160121
+ ],
+ "expect": "integrity",
+ "corrupt_bytes": 16,
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 1422026754,
+   "dist": "normal",
+   "corrupt": 0,
+   "role": "normal call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 110607739,
+   "dist": "normal",
+   "corrupt": 1,
+   "role": "bytes changed after the issue"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 1675960532,
+   "dist": "normal",
+   "corrupt": 1,
+   "role": "second changed call"
+  }
+ ],
+ "split": "dev"
+}

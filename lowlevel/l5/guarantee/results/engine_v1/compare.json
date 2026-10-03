@@ -1,0 +1,161 @@
+{
+ "eager": {
+  "runs": [
+   "00_eager_off",
+   "01_eager_guarantee",
+   "02_eager_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 14544,
+   "consumer_calls": 14544,
+   "weight_issues": 144,
+   "activation_issues": 14544,
+   "calls": 14544,
+   "normal_delivered": 14544,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+   }
+  }
+ },
+ "default": {
+  "runs": [
+   "03_default_off",
+   "04_default_guarantee",
+   "05_default_off"
+  ],
+  "guarantee_start_error": {
+   "type": "Refused",
+   "kind": "declaration",
+   "message": "[entail guarantee] refused (declaration): the activation operand ((8192, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)"
+  },
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  }
+ }
+}

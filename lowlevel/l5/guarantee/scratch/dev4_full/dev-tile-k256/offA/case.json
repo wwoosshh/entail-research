@@ -1,0 +1,41 @@
+{
+ "id": "dev-tile-k256",
+ "group": "defect",
+ "mutant": "tile_k256",
+ "timing": "T2",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 1,
+ "wseed": [
+  11
+ ],
+ "tile_k256": true,
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 21,
+   "dist": "normal",
+   "mut": 0
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 22,
+   "dist": "normal",
+   "mut": 0
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 300,
+   "seed": 23,
+   "dist": "normal",
+   "mut": 0
+  }
+ ],
+ "split": "dev"
+}

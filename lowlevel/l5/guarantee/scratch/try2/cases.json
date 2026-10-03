@@ -1,0 +1,163 @@
+{
+ "split": "dev",
+ "key": "",
+ "cases": [
+  {
+   "id": "N8-graph",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1757222855
+    },
+    {
+     "op": "replay",
+     "seed": 496690019,
+     "mut": 0
+    },
+    {
+     "op": "replay",
+     "seed": 2133967589,
+     "mut": 0
+    },
+    {
+     "op": "replay",
+     "seed": 162900405,
+     "mut": 0
+    }
+   ],
+   "wseed": [
+    1334945664
+   ],
+   "split": "dev"
+  },
+  {
+   "id": "D-neighbor-T3",
+   "group": "defect",
+   "mutant": "neighbor",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    319379849,
+    450596700
+   ],
+   "rows_from": 80,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1037629633,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 898994777,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2064285943,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 569068873,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 165319812,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "dev"
+  },
+  {
+   "id": "D-rows-T3",
+   "group": "defect",
+   "mutant": "rows",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    131061969,
+    101607160
+   ],
+   "rows_from": 64,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1163972992,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 1194034885,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 933693295,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1279721382,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1487469845,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "dev"
+  },
+  {
+   "group": "admission",
+   "N": 1536,
+   "K": 2560,
+   "out": "float32",
+   "layers": 1,
+   "wseed": [
+    1290096944
+   ],
+   "id": "A3-unsupported-output-dtype",
+   "expect": "unsupported",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 197791284,
+     "dist": "normal"
+    }
+   ],
+   "split": "dev"
+  }
+ ]
+}

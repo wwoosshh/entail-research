@@ -1,0 +1,41 @@
+{
+ "id": "N5-new-weights",
+ "group": "normal",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 1093503664,
+   "dist": "normal"
+  },
+  {
+   "op": "reload",
+   "layer": 0,
+   "seed": 803615224
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 902306173,
+   "dist": "normal"
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 96,
+   "seed": 1114782613,
+   "dist": "normal"
+  }
+ ],
+ "wseed": [
+  284518308,
+  1411335412
+ ],
+ "split": "holdout"
+}

@@ -1,0 +1,59 @@
+{
+ "id": "D-interval-T2",
+ "group": "defect",
+ "mutant": "interval",
+ "timing": "T2",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  252161499,
+  1630632603
+ ],
+ "rows_from": 200,
+ "mechanism": "the consumer kernel's own read, switched by a device flag",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 16,
+   "seed": 598387518,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 0,
+   "role": "normal first call (16 rows)"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 1810490967,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "new batch and input"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 151048165,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 256,
+   "seed": 1857272330,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call"
+  }
+ ],
+ "split": "holdout"
+}

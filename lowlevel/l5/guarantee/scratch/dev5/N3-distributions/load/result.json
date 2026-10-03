@@ -1,0 +1,143 @@
+{
+ "case": {
+  "id": "N3-distributions",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 96,
+    "seed": 647411364,
+    "dist": "heavy"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 96,
+    "seed": 1400884831,
+    "dist": "small"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 200,
+    "seed": 1525918169,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   1780534253
+  ],
+  "split": "dev"
+ },
+ "mode": "load",
+ "pid": 3126,
+ "env_ENTAIL": "load",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 96,
+   "seed": 647411364,
+   "dist": "heavy",
+   "ms": 833.978,
+   "rng_same": true,
+   "kernel_launches": 2,
+   "cache_hits": 0,
+   "entail": {
+    "decided": 1,
+    "checks": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 147456,
+    "worst_ratio": 0.4401336418307526,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.0002151901058007489
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 96,
+   "seed": 1400884831,
+   "dist": "small",
+   "ms": 4.695,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 147456,
+    "worst_ratio": 0.301476741544804,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.488045190848006e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 200,
+   "seed": 1525918169,
+   "dist": "normal",
+   "ms": 6.039,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 307200,
+    "worst_ratio": 0.2980056888120291,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 6.977841393665747e-05
+   }
+  }
+ ],
+ "freeze_sha256": "0e0b2456ffe553831ccd0c712e196e0a316bf53dbbbe48b32926a3cadbb97cde",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "instrumented": 2,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ },
+ "launcher_total": 4,
+ "seconds": 9.913,
+ "device_stopped": null,
+ "peak_mem": 64261120
+}

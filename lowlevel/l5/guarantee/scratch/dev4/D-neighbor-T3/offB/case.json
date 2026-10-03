@@ -1,0 +1,50 @@
+{
+ "id": "D-neighbor-T3",
+ "group": "defect",
+ "mutant": "neighbor",
+ "timing": "T3",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  319379849,
+  450596700
+ ],
+ "rows_from": 80,
+ "mechanism": "the consumer kernel's own read, switched by a device flag",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 128,
+   "seed": 1037629633,
+   "role": "normal warm-up + capture"
+  },
+  {
+   "op": "replay",
+   "seed": 898994777,
+   "mut": 0,
+   "role": "normal replay"
+  },
+  {
+   "op": "replay",
+   "seed": 2064285943,
+   "mut": 1,
+   "role": "defect comes on at replay"
+  },
+  {
+   "op": "replay",
+   "seed": 569068873,
+   "mut": 1,
+   "role": "second defective replay"
+  },
+  {
+   "op": "replay",
+   "seed": 165319812,
+   "mut": 1,
+   "role": "third defective replay"
+  }
+ ],
+ "split": "dev"
+}

@@ -1,0 +1,7 @@
+kernel_ir from the working tree
+orig                         verdict=proven    terms=20 why="every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation and weight values times their producers' scales (20 scaled dot terms over 12 programs)"
+no store                     verdict=violation terms=20 why='the kernel never stores to its output'
+loop over first K group only verdict=violation terms=0 why='the value stored is not the whole product: 2432 of the K=2560 contraction indices are never added (the first k=128) (1 terms)'
+acc overwritten (last group) verdict=violation terms=0 why='the value stored is not the whole product: 2432 of the K=2560 contraction indices are never added (the first k=0) (1 terms)'
+store only rows < 32         verdict=violation terms=20 why='49152 of the 98304 output elements are never stored (the first block: rows 32..63, columns 0..127)'
+store -acc                   verdict=unproven  terms=0 why='the op arith.subf is not modelled'

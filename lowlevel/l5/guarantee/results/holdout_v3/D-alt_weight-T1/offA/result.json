@@ -1,0 +1,189 @@
+{
+ "case": {
+  "id": "D-alt_weight-T1",
+  "group": "defect",
+  "mutant": "alt_weight",
+  "timing": "T1",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   1834813696,
+   268473901
+  ],
+  "rows_from": 128,
+  "mechanism": "consumer-side scale cache at the call site (Python)",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 16,
+    "seed": 1657099515,
+    "dist": "normal",
+    "mut": 0,
+    "cache": 1,
+    "role": "fills the cache"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 144,
+    "seed": 846149016,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "first call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 144,
+    "seed": 1502007119,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "second call"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 144,
+    "seed": 958898691,
+    "dist": "normal",
+    "mut": 1,
+    "cache": 1,
+    "role": "third call"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 12427,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 16,
+   "seed": 1657099515,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 1,
+   "role": "fills the cache",
+   "ms": 307.131,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 24576,
+    "worst_ratio": 0.22030627822562068,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.7919166390103382e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 846149016,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "first call",
+   "ms": 20.83,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 1,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 215586,
+    "elements": 221184,
+    "worst_ratio": 272.79183472990144,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.5823750050456064
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 1502007119,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call",
+   "ms": 9.029,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 1,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 215407,
+    "elements": 221184,
+    "worst_ratio": 269.8806007686721,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.552184432665737
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 958898691,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call",
+   "ms": 10.147,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 1,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 215436,
+    "elements": 221184,
+    "worst_ratio": 244.65400071140428,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.5272084348362589
+   }
+  }
+ ],
+ "freeze_sha256": "7dd41678cf4e8d5df4768e75460bbd68e37d52e2eac30670ef0abdf13072c3c5",
+ "mutant_source_sha256": "29645115546352727acdf039d5281e7081580a07d95fbe60e4b49f28199da385",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 4,
+ "seconds": 8.994,
+ "device_stopped": null,
+ "peak_mem": 19298304
+}

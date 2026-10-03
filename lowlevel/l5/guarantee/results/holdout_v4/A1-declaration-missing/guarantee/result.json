@@ -1,0 +1,123 @@
+{
+ "case": {
+  "group": "admission",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "wseed": [
+   2097544502
+  ],
+  "id": "A1-declaration-missing",
+  "expect": "declaration",
+  "steps": [
+   {
+    "op": "direct",
+    "layer": 0,
+    "M": 64,
+    "seed": 2097985379,
+    "quant": "native"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "guarantee",
+ "pid": 18414,
+ "env_ENTAIL": "guarantee",
+ "steps": [
+  {
+   "op": "direct",
+   "layer": 0,
+   "M": 64,
+   "seed": 2097985379,
+   "quant": "native",
+   "scale_stride": [
+    20,
+    1
+   ],
+   "ms": 62.643,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "consumer_calls": 1,
+    "calls": 1,
+    "blocked": 1,
+    "blocked_declaration": 1
+   },
+   "delivered": false,
+   "exception": {
+    "type": "Refused",
+    "kind": "declaration",
+    "message": "[entail guarantee] refused (declaration): the activation operand ((64, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 206, in main\n    y = fp8_utils.w8a8_triton_block_scaled_mm(A, layers[li].weight, As, layers[li].weight_scale_inv,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/adapters/vllm_block_fp8_guarantee.py\", line 140, in run\n    return guarantee.gate(orig, a[\"A\"], a[\"B\"], a[\"As\"], a[\"Bs\"], a[\"block_size\"], a[\"output_dtype\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 778, in gate\n    A, B, As, Bs, block, issues = _admit(A, B, As, Bs, block_size, output_dtype, rec, t0)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 561, in _admit\n    _refuse(rec, \"declaration\", f\"the {role} operand ({tuple(t.shape)}, {_dt(t)}) has no producer issue: it \"\n  File \"<workspace>/entail/entail/guarantee.py\", line 535, in _refuse\n    raise Refused(kind, why, rec)\nentail.guarantee.Refused: [entail guarantee] refused (declaration): the activation operand ((64, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)\n"
+   },
+   "truth_key": "s0"
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 2147483648,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "check": "output",
+  "integrity": "checksum",
+  "records": "all",
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "9b0f5e6d48f51cd65b58a3628a07cc19cbc1af8b3e7723d306b2c394068dbb26",
+ "profile": "block_fp8",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 1,
+  "consumer_calls": 1,
+  "weight_issues": 1,
+  "calls": 1,
+  "blocked": 1,
+  "blocked_declaration": 1,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 1
+  }
+ },
+ "launcher_total": 0,
+ "seconds": 7.446,
+ "device_stopped": null,
+ "peak_mem": 19678208
+}

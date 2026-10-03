@@ -1,0 +1,49 @@
+{
+ "id": "D-neighbor-T1",
+ "group": "defect",
+ "mutant": "neighbor",
+ "timing": "T1",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  1565638784,
+  785276437
+ ],
+ "rows_from": 128,
+ "mechanism": "the consumer kernel's own read, switched by a device flag",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 1322174002,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "first call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 229790848,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 144,
+   "seed": 4182249,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call"
+  }
+ ],
+ "split": "dev"
+}

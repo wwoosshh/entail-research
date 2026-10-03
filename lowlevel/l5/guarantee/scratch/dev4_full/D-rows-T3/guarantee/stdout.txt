@@ -1,0 +1,7 @@
+INFO 10-03 02:01:50 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=2048.
+WARNING 10-03 02:01:50 [vllm.py:1570] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+INFO 10-03 02:01:50 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-03 02:01:50 [vllm.py:1020] Cudagraph mode FULL_AND_PIECEWISE is not compatible with compilation mode 0. Overriding to FULL_DECODE_ONLY.
+INFO 10-03 02:01:50 [compilation.py:336] Enabled custom fusions: norm_quant, act_quant
+WARNING 10-03 02:01:51 [fp8_utils.py:872] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/layers/quantization/utils/configs/N=1536,K=2560,device_name=NVIDIA_GeForce_RTX_4070_Ti,dtype=fp8_w8a8,block_shape=[128,128].json
+{"case": "D-rows-T3", "mode": "guarantee", "steps": 5, "delivered": [false, true, true, true, true], "oracle_ok": [null, true, true, true, true], "device_stopped": false}

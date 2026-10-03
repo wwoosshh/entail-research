@@ -1,0 +1,70 @@
+{
+ "case": {
+  "id": "N8-graph",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 128,
+    "seed": 1757222855
+   },
+   {
+    "op": "replay",
+    "seed": 496690019,
+    "mut": 0
+   },
+   {
+    "op": "replay",
+    "seed": 2133967589,
+    "mut": 0
+   },
+   {
+    "op": "replay",
+    "seed": 162900405,
+    "mut": 0
+   }
+  ],
+  "wseed": [
+   1334945664
+  ],
+  "split": "dev"
+ },
+ "mode": "off",
+ "pid": 9484,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 128,
+   "seed": 1757222855,
+   "ms": 276.497,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": false,
+   "exception": {
+    "type": "AcceleratorError",
+    "kind": null,
+    "message": "CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\n",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 188, in main\n    graph[\"z\"] = graph[\"obs\"].float() @ W2\n                 ~~~~~~~~~~~~~~~~~~~~~^~~~\nRuntimeError: CUDA error: CUBLAS_STATUS_NOT_INITIALIZED when calling `cublasCreate(handle)`\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 184, in main\n    with torch.cuda.graph(graph[\"g\"]):\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/cuda/graphs.py\", line 477, in __exit__\n    self.cuda_graph.capture_end()\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/cuda/graphs.py\", line 169, in capture_end\n    super().capture_end()\ntorch.AcceleratorError: CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\n\n"
+   }
+  }
+ ],
+ "freeze_sha256": null,
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 7.935,
+ "peak_mem": 7582208
+}

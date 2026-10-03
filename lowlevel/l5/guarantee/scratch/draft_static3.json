@@ -1,0 +1,168 @@
+{
+ "frozen": true,
+ "created": "2026-10-02T16:35:45+0900",
+ "what": "draft",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 2147483648,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "check": "static",
+  "integrity": "epoch",
+  "records": "changes",
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "oracle": {
+  "c": 0.001953125,
+  "form": "|out - truth| <= ulp(out dtype, |truth|) + c * (|a| @ |b|^T), float64 on the CPU, bit-field fp8 decode",
+  "calibration_observed_max": 0.00025554393880477356
+ },
+ "calibration": {
+  "entail_c_acc_observed_max": 6.900318227668594e-05,
+  "rule": "4 x observed max, up to a power of two",
+  "exact_case": {
+   "equal": true,
+   "max_abs_diff": 0.0,
+   "elements": 8192
+  }
+ },
+ "supported": {
+  "dtypes": "float8_e4m3fn values, float32 scales",
+  "block": [
+   128,
+   128
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "K": "a multiple of 128",
+  "A": "contiguous",
+  "scales": "positive, finite; activation scales row- or column-major as the quantizer issued",
+  "nan_inf": "a non-finite reference value or scale refuses the call (eager) or poisons and refuses the replay (graph)",
+  "graphs": "CUDA graphs captured from eager code (torch.cuda.graph); torch.compile refused",
+  "not": [
+   "UE8M0 scales",
+   "expert parallel",
+   "multi-GPU",
+   "fnuz fp8"
+  ]
+ },
+ "cases": {
+  "file_sha256": "2a654d00e9fecd99d00363e01482a4d03d1d742c01333eca03c8fcf9419ad5e1",
+  "normal": 8,
+  "defect": 12,
+  "admission": 4,
+  "holdout_rule": "seeds and free parameters = sha256(f'{sha256 of this manifest file}:{case id}')"
+ },
+ "cost_budget": {
+  "normal_repeat_ratio_max": null,
+  "engine_graphs_steady_ratio_max": null,
+  "note": "the conservation verdict and the cost verdict are separate; the check is never narrowed to meet this"
+ },
+ "env": {
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "cudnn": 92000,
+  "gpu": "NVIDIA GeForce RTX 4070 Ti",
+  "cc": "8.9",
+  "vram": 12878086144,
+  "sm_count": 60,
+  "driver": "616.56, NVIDIA GeForce RTX 4070 Ti, 12282 MiB",
+  "dist_vllm": {
+   "version": "0.30.0",
+   "record_sha256": "6d202af6714a80f36fa4f99e156878c615a89b35312e33c706cd70bb0a93ba7d",
+   "direct_url": null
+  },
+  "dist_triton": {
+   "version": "3.7.1",
+   "record_sha256": "0efa1fc5f7e23ee29b9508527dff0a7fd14cc004d46416130f0e619b1e6a352a",
+   "direct_url": null
+  },
+  "dist_torch": {
+   "version": "2.13.0",
+   "record_sha256": "ce3ec8b8ea648a45d2c839bbecde97e0c0a395534d87a3cea008ea0e105cad1a",
+   "direct_url": null
+  },
+  "dist_numpy": {
+   "version": "2.3.5",
+   "record_sha256": "019254afeccad4c0944b81b590dc14233279777783225234a3eb5fad463c32ec",
+   "direct_url": null
+  },
+  "dist_transformers": {
+   "version": "5.17.0",
+   "record_sha256": "442f98e564708ab4e1b2a8c5329a31b0914214f2b93bc6c9e2d6c1fad6ac849a",
+   "direct_url": null
+  },
+  "dist_entail-ai": {
+   "version": "2.0.1",
+   "record_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "direct_url": null
+  },
+  "precision": {
+   "allow_tf32_matmul": false,
+   "float32_matmul_precision": "highest",
+   "allow_bf16_reduced": true
+  },
+  "entail_git": {
+   "head": "05b9950417364b491457fbbc19638e6b491a144b",
+   "dirty": false
+  },
+  "VLLM_DISABLED_KERNELS": null,
+  "block_fp8_kernel_choice": {
+   "unforced": "MarlinFP8ScaledMMLinearKernel",
+   "marlin_humming_disabled": "TritonFp8BlockScaledMMKernel"
+  }
+ },
+ "code": {
+  "entail/guarantee.py": "acde21b3666ed2ce10751feafcebe1cf21ce2ac658285cd3760132f903008f4c",
+  "entail/kernel_ir.py": "b6b329da51f52ee1335821b1580b85041e422460cab1e1da4d64448074487e70",
+  "entail/adapters/vllm_block_fp8_guarantee.py": "5ecee209027806b4eaf960b33ea910b8f59ec4f51e431ad1a48bff106540ff0b",
+  "entail/adapters/autoinstall/sitecustomize.py": "254e377f217095e0c90010b69c9ed3ce60b802ebfbb5d4b37c8afd1797b5fec4",
+  "entail/core.py": "57002f64f29b995b9c53a08307e3954e65ba00e62f71b2995cd7089bfac802e8",
+  "entail/policies.py": "b7aca2a6c9fe7e032daeb7c1d5f199c17e3dd8140d8400f0289a74dfba22893b",
+  "entail/record.py": "7024f3b08a8124992bb4a243b8b8ad1ba10fa1e167396e32eea0fa17c9ef9175",
+  "eval/block_fp8_guarantee/aggregate.py": "de2eb9ffa60d739a8c33274c07719039eb8eed8888783629eff7c152ddba9d5f",
+  "eval/block_fp8_guarantee/calibrate.py": "c3b3099bfb799f7eb25197d71b36c1e435abe6da052afeeb0a6d2c4799c4d212",
+  "eval/block_fp8_guarantee/cases.py": "2a654d00e9fecd99d00363e01482a4d03d1d742c01333eca03c8fcf9419ad5e1",
+  "eval/block_fp8_guarantee/common.py": "0fb7a823a6dc49d8d8c94b358baa7d8d0139ac043296abe864f27393534d9c1a",
+  "eval/block_fp8_guarantee/cost.py": "33a46b1d5b635b0ad2ba6e86940ac50ce6c07f05f65882855c8c2ea1c25bc09f",
+  "eval/block_fp8_guarantee/engine_smoke.py": "a7ea5410b974b18c8748bdbff86db1f6a0932aa4d19fb0bcbbf1ee299f903555",
+  "eval/block_fp8_guarantee/env_record.py": "acd01ef65613207d92273ec1c03b3b33ddf36b17d8b501f54f05eb4d0d08071a",
+  "eval/block_fp8_guarantee/freeze.py": "bb54522a1ca6feb046d58a20cc2957528b362ca3db3d3f7c8531b1f20fa10248",
+  "eval/block_fp8_guarantee/run_case.py": "7e61ae74346b487323c596dd5a6902c9b314a0c0590d3fbad9cad36a1b0c834c",
+  "eval/block_fp8_guarantee/run_suite.py": "0e612aea72bf12ac37439091cd4f81926aa6d89ad1fc38f900e712d1db30624d"
+ },
+ "entail_git": {
+  "head": "59081d846d72db58b11eb38bc04276f28fef9f5e",
+  "dirty": true
+ }
+}

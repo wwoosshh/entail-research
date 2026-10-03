@@ -1,0 +1,151 @@
+{
+ "graphs": {
+  "runs": [
+   "00_graphs_off",
+   "01_graphs_guarantee",
+   "02_graphs_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "timing": {
+   "start_s": {
+    "off": [
+     12.364072772999975,
+     10.99168493999997
+    ],
+    "guarantee": 19.465457764999996
+   },
+   "greedy_cold": {
+    "off": [
+     0.5719697389999965,
+     0.6139820380000174
+    ],
+    "guarantee": 0.7741424939999888,
+    "ratio": 1.3055210321591006
+   },
+   "greedy_warm": {
+    "off": [
+     0.3881484579999892,
+     0.3950531259999934
+    ],
+    "guarantee": 0.5013366340000402,
+    "ratio": 1.2802237488836625
+   },
+   "seeded": {
+    "off": [
+     0.40207373399999824,
+     0.4130408839999973
+    ],
+    "guarantee": 0.44624443899999733,
+    "ratio": 1.0949243925840126
+   },
+   "unseeded": {
+    "off": [
+     0.3922285930000271,
+     0.39692496300000357
+    ],
+    "guarantee": 0.4368345139999974,
+    "ratio": 1.1070963583163032
+   },
+   "steady_ratio": 1.101010375450158
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 11952,
+   "consumer_calls": 11952,
+   "weight_issues": 144,
+   "activation_issues": 11952,
+   "calls": 11952,
+   "ir_proven": 156,
+   "normal_delivered": 25200,
+   "replays": 92,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+   }
+  }
+ }
+}

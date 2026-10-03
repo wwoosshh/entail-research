@@ -1,0 +1,50 @@
+{
+ "id": "D-rows-T3",
+ "group": "defect",
+ "mutant": "rows",
+ "timing": "T3",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  1554264910,
+  1663915313
+ ],
+ "rows_from": 200,
+ "mechanism": "the consumer kernel's own read, switched by a device flag",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 232,
+   "seed": 322491111,
+   "role": "normal warm-up + capture"
+  },
+  {
+   "op": "replay",
+   "seed": 392772107,
+   "mut": 0,
+   "role": "normal replay"
+  },
+  {
+   "op": "replay",
+   "seed": 1256660657,
+   "mut": 1,
+   "role": "defect comes on at replay"
+  },
+  {
+   "op": "replay",
+   "seed": 1631863781,
+   "mut": 1,
+   "role": "second defective replay"
+  },
+  {
+   "op": "replay",
+   "seed": 46573845,
+   "mut": 1,
+   "role": "third defective replay"
+  }
+ ],
+ "split": "holdout"
+}

@@ -1,0 +1,191 @@
+{
+ "case": {
+  "id": "I2-integrity-graph",
+  "group": "integrity",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "wseed": [
+   1993254859
+  ],
+  "expect": "integrity",
+  "corrupt_bytes": 16,
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 64,
+    "seed": 40131269,
+    "role": "normal warm-up + capture"
+   },
+   {
+    "op": "replay",
+    "seed": 877535,
+    "corrupt": 0,
+    "role": "normal replay"
+   },
+   {
+    "op": "replay",
+    "seed": 2814829,
+    "corrupt": 1,
+    "role": "bytes changed at replay"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "guarantee",
+ "pid": 22657,
+ "env_ENTAIL": "guarantee",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 64,
+   "seed": 40131269,
+   "role": "normal warm-up + capture",
+   "ms": 606.705,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 3,
+    "consumer_calls": 3,
+    "activation_issues": 3,
+    "calls": 3,
+    "normal_delivered": 2,
+    "captured_sites": 1
+   },
+   "delivered": false,
+   "exception": null
+  },
+  {
+   "op": "replay",
+   "seed": 877535,
+   "corrupt": 0,
+   "role": "normal replay",
+   "ms": 6.002,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "normal_delivered": 1,
+    "replays": 1
+   },
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.22234606735077317,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.35530614771389e-05
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 2814829,
+   "corrupt": 1,
+   "role": "bytes changed at replay",
+   "ms": 54.264,
+   "rng_same": null,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "replays": 1,
+    "blocked": 1,
+    "blocked_integrity": 1
+   },
+   "next_op_ran": false,
+   "device_stopped": true,
+   "delivered": false,
+   "exception": {
+    "type": "Refused",
+    "kind": "integrity",
+    "message": "[entail guarantee] refused (integrity): a gate in the replayed graph failed its check and stopped the device there (the graph's next operation did not run; 1 of 1 gates reached); the replay is refused",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/entail/guarantee.py\", line 978, in after_replay\n    torch.cuda.current_stream().synchronize()\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/cuda/streams.py\", line 108, in synchronize\n    super().synchronize()\ntorch.AcceleratorError: CUDA error: device-side assert triggered\nSearch for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\n\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 240, in main\n    graph[\"g\"].replay()                            # entail's replay hook decides after it\n    ^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/adapters/vllm_block_fp8_guarantee.py\", line 210, in run_replay\n    guarantee.after_replay(self)\n  File \"<workspace>/entail/entail/guarantee.py\", line 1033, in after_replay\n    raise Refused(blocked[0], f\"a gate in the replayed graph failed its check and stopped the device there (the \"\nentail.guarantee.Refused: [entail guarantee] refused (integrity): a gate in the replayed graph failed its check and stopped the device there (the graph's next operation did not run; 1 of 1 gates reached); the replay is refused\n"
+   }
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 2147483648,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "check": "output",
+  "integrity": "checksum",
+  "records": "all",
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "9b0f5e6d48f51cd65b58a3628a07cc19cbc1af8b3e7723d306b2c394068dbb26",
+ "profile": "block_fp8",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 1,
+  "activation_issued": 3,
+  "consumer_calls": 3,
+  "weight_issues": 1,
+  "activation_issues": 3,
+  "calls": 3,
+  "normal_delivered": 3,
+  "captured_sites": 1,
+  "replays": 2,
+  "blocked": 1,
+  "blocked_integrity": 1,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 1,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 3
+  }
+ },
+ "launcher_total": 3,
+ "seconds": 8.1,
+ "device_stopped": {
+  "step": 2,
+  "exception": "Refused",
+  "kind": "integrity"
+ },
+ "peak_mem": null
+}

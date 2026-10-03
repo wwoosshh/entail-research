@@ -1,0 +1,151 @@
+{
+ "graphs": {
+  "runs": [
+   "00_graphs_off",
+   "01_graphs_structure",
+   "02_graphs_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "off_vs_structure": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "structure_timing": {
+   "start_s": {
+    "off": [
+     11.341457306000052,
+     10.954908825000018
+    ],
+    "structure": 21.306810987000006
+   },
+   "greedy_cold": {
+    "off": [
+     0.6581438719999824,
+     0.6404259279999565
+    ],
+    "structure": 0.8237780530000123,
+    "ratio": 1.268746667295129
+   },
+   "greedy_warm": {
+    "off": [
+     0.3939832000000365,
+     0.38960557699999754
+    ],
+    "structure": 0.5136075760000267,
+    "ratio": 1.3109110060671643
+   },
+   "seeded": {
+    "off": [
+     0.4080859819999887,
+     0.40109874700004866
+    ],
+    "structure": 0.44228517300001613,
+    "ratio": 1.0931624316404907
+   },
+   "unseeded": {
+    "off": [
+     0.3950813490000087,
+     0.39518124099998886
+    ],
+    "structure": 0.43677491099998633,
+    "ratio": 1.1053918445006683
+   },
+   "steady_ratio": 1.0992771380705795
+  },
+  "structure_warm_equals_cold": true,
+  "structure_entail": {
+   "weight_issued": 144,
+   "activation_issued": 11952,
+   "consumer_calls": 11952,
+   "weight_issues": 144,
+   "activation_issues": 11952,
+   "calls": 11952,
+   "ir_proven": 156,
+   "kernel_delivered": 25200,
+   "replays": 92,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+   }
+  }
+ }
+}

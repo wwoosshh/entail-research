@@ -1,0 +1,432 @@
+{
+ "case": {
+  "id": "N7-repeated",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 759331252,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 17,
+    "seed": 1786792487,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 300,
+    "seed": 2023663532,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 65,
+    "seed": 1693098831,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 65,
+    "seed": 2019971371,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 3,
+    "seed": 1659282956,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 128,
+    "seed": 1347861668,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 1,
+    "seed": 914541265,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 3,
+    "seed": 805438903,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 1,
+    "seed": 984004607,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 65,
+    "seed": 917482265,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 17,
+    "seed": 771142948,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   845206024,
+   915594787
+  ],
+  "split": "holdout"
+ },
+ "mode": "load",
+ "pid": 6272,
+ "env_ENTAIL": "load",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 759331252,
+   "dist": "normal",
+   "ms": 679.934,
+   "rng_same": true,
+   "kernel_launches": 2,
+   "cache_hits": 0,
+   "entail": {
+    "decided": 1,
+    "checks": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.2581554954431114,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 6.123265651564455e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 17,
+   "seed": 1786792487,
+   "dist": "normal",
+   "ms": 7.635,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 26112,
+    "worst_ratio": 0.2211457183045363,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.607918914890031e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 300,
+   "seed": 2023663532,
+   "dist": "normal",
+   "ms": 7.011,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 460800,
+    "worst_ratio": 0.29414285203909696,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.722947625483207e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 65,
+   "seed": 1693098831,
+   "dist": "normal",
+   "ms": 4.646,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.23449727931687622,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.6636397101244e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 65,
+   "seed": 2019971371,
+   "dist": "normal",
+   "ms": 10.224,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.24426294771391288,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.9231449946737155e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 3,
+   "seed": 1659282956,
+   "dist": "normal",
+   "ms": 3.076,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s5",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.20970590064626402,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.784127057157774e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 128,
+   "seed": 1347861668,
+   "dist": "normal",
+   "ms": 11.664,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s6",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.24961858930185532,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.284847227892458e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 1,
+   "seed": 914541265,
+   "dist": "normal",
+   "ms": 5.621,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s7",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 1536,
+    "worst_ratio": 0.17506886476209202,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.9735609251498244e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 3,
+   "seed": 805438903,
+   "dist": "normal",
+   "ms": 0.866,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s8",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.2074137283097621,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.077109463798456e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 1,
+   "seed": 984004607,
+   "dist": "normal",
+   "ms": 2.481,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s9",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 1536,
+    "worst_ratio": 0.16883468176958003,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.2338946094605424e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 65,
+   "seed": 917482265,
+   "dist": "normal",
+   "ms": 12.934,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s10",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.25221124091424174,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.292910055252948e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 17,
+   "seed": 771142948,
+   "dist": "normal",
+   "ms": 10.315,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s11",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 26112,
+    "worst_ratio": 0.21566266224273034,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.8593987593158422e-05
+   }
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "instrumented": 2,
+  "decided": 1,
+  "checks": 1,
+  "broken": 0,
+  "refused": 0,
+  "skipped": 0,
+  "deferred": 0,
+  "resolved": 0,
+  "passed": {
+   "kernel_reference": 1
+  }
+ },
+ "launcher_total": 13,
+ "seconds": 10.538,
+ "device_stopped": null,
+ "peak_mem": 67945984
+}

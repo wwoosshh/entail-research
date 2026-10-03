@@ -1,0 +1,65 @@
+{
+ "case": {
+  "group": "admission",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "wseed": [
+   2122665232
+  ],
+  "id": "A2-hook-missing",
+  "expect": "hook",
+  "skip_hook": "weights",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 167151517,
+    "dist": "normal"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 14779,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 167151517,
+   "dist": "normal",
+   "ms": 307.291,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.29249749748633314,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.179379682871505e-05
+   }
+  }
+ ],
+ "freeze_sha256": "13bc9f3a09f1feb73ca7aa6956562503e20921e4cb069062f4de42e34e794515",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 1,
+ "seconds": 6.759,
+ "peak_mem": 13949440
+}

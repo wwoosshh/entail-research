@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<workspace>/entail/eval/block_fp8_guarantee/run_case.py", line 235, in <module>
+    main(*sys.argv[1:4])
+  File "<workspace>/entail/eval/block_fp8_guarantee/run_case.py", line 220, in main
+    record_step(step, y_obs, delivered, exc, A, As, li, extra)
+  File "<workspace>/entail/eval/block_fp8_guarantee/run_case.py", line 114, in record_step
+    ok, viol, ratio, nonfin = common.judge(arr, truth, bound, case["out"],
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/eval/block_fp8_guarantee/common.py", line 83, in judge
+    tol = ulp_out(truth, dtype) + c * bound
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>/entail/eval/block_fp8_guarantee/common.py", line 60, in ulp_out
+    p, tiny = {"bfloat16": (8, 2.0 ** -133), "float16": (11, 2.0 ** -24)}[dtype]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'float32'

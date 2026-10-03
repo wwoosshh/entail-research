@@ -1,0 +1,464 @@
+{
+ "eager": {
+  "runs": [
+   "00_eager_off",
+   "01_eager_guarantee",
+   "02_eager_structure",
+   "03_eager_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_timing": {
+   "start_s": {
+    "off": [
+     12.72524866599997,
+     8.425047352999627
+    ],
+    "guarantee": 19.565191237999898
+   },
+   "greedy_cold": {
+    "off": [
+     0.9397694019999108,
+     0.8931559659999948
+    ],
+    "guarantee": 14.448837284000092,
+    "ratio": 15.76587627216564
+   },
+   "greedy_warm": {
+    "off": [
+     0.8034867940000368,
+     0.7868899909999527
+    ],
+    "guarantee": 12.947130632000153,
+    "ratio": 16.281840572767464
+   },
+   "seeded": {
+    "off": [
+     0.8678152630000113,
+     0.7897972099999606
+    ],
+    "guarantee": 12.770212564999838,
+    "ratio": 15.407959065230868
+   },
+   "unseeded": {
+    "off": [
+     0.832276014999934,
+     0.7669247810003981
+    ],
+    "guarantee": 12.98527922700032,
+    "ratio": 16.23971080989585
+   },
+   "steady_ratio": 15.823834937563358
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 14544,
+   "consumer_calls": 14544,
+   "weight_issues": 144,
+   "activation_issues": 14544,
+   "calls": 14544,
+   "normal_delivered": 14544,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+   }
+  },
+  "off_vs_structure": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "structure_timing": {
+   "start_s": {
+    "off": [
+     12.72524866599997,
+     8.425047352999627
+    ],
+    "structure": 13.287680552999973
+   },
+   "greedy_cold": {
+    "off": [
+     0.9397694019999108,
+     0.8931559659999948
+    ],
+    "structure": 2.0701999570001135,
+    "ratio": 2.2589026188874484
+   },
+   "greedy_warm": {
+    "off": [
+     0.8034867940000368,
+     0.7868899909999527
+    ],
+    "structure": 1.8180449040000894,
+    "ratio": 2.2863071457624446
+   },
+   "seeded": {
+    "off": [
+     0.8678152630000113,
+     0.7897972099999606
+    ],
+    "structure": 1.6984152810000523,
+    "ratio": 2.0492308168099567
+   },
+   "unseeded": {
+    "off": [
+     0.832276014999934,
+     0.7669247810003981
+    ],
+    "structure": 1.7393333580002945,
+    "ratio": 2.175253241932395
+   },
+   "steady_ratio": 2.112242029371176
+  },
+  "structure_warm_equals_cold": true,
+  "structure_entail": {
+   "weight_issued": 144,
+   "activation_issued": 14544,
+   "consumer_calls": 14544,
+   "weight_issues": 144,
+   "activation_issues": 14544,
+   "calls": 14544,
+   "ir_proven": 32,
+   "kernel_delivered": 14544,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+   }
+  }
+ },
+ "graphs": {
+  "runs": [
+   "04_graphs_off",
+   "05_graphs_guarantee",
+   "06_graphs_structure",
+   "07_graphs_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_start_error": {
+   "type": "ValueError",
+   "kind": null,
+   "message": "No available memory for the cache blocks. Try increasing `gpu_memory_utilization` when initializing the engine (this flag also controls CPU memory reservation on the CPU backend, despite its name). See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details."
+  },
+  "off_vs_structure": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "structure_timing": {
+   "start_s": {
+    "off": [
+     11.814333809000345,
+     13.845066160999977
+    ],
+    "structure": 25.074551488999987
+   },
+   "greedy_cold": {
+    "off": [
+     0.6113180389997979,
+     0.7002002889998948
+    ],
+    "structure": 0.8165920469996308,
+    "ratio": 1.2452621203473142
+   },
+   "greedy_warm": {
+    "off": [
+     0.40404089699995893,
+     0.4043259019999823
+    ],
+    "structure": 0.5616527639999731,
+    "ratio": 1.3895987927629223
+   },
+   "seeded": {
+    "off": [
+     0.4055478300001596,
+     0.416915949000213
+    ],
+    "structure": 0.47741450100011207,
+    "ratio": 1.160937449623288
+   },
+   "unseeded": {
+    "off": [
+     0.3906665879999309,
+     0.41238631299984263
+    ],
+    "structure": 0.46736776899979304,
+    "ratio": 1.163977537265443
+   },
+   "steady_ratio": 1.1624574934443657
+  },
+  "structure_warm_equals_cold": true,
+  "structure_entail": {
+   "weight_issued": 144,
+   "activation_issued": 11952,
+   "consumer_calls": 11952,
+   "weight_issues": 144,
+   "activation_issues": 11952,
+   "calls": 11952,
+   "ir_proven": 156,
+   "kernel_delivered": 25200,
+   "replays": 92,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+   }
+  }
+ },
+ "default": {
+  "runs": [
+   "08_default_off",
+   "09_default_guarantee",
+   "10_default_structure",
+   "11_default_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "5/6",
+    "max_logprob_diff": 7.18419885635376,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "5/6",
+    "max_logprob_diff": 2.0972533226013184,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_start_error": {
+   "type": "Refused",
+   "kind": "declaration",
+   "message": "[entail guarantee] refused (declaration): the activation operand ((8192, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)"
+  },
+  "structure_start_error": {
+   "type": "Refused",
+   "kind": "declaration",
+   "message": "[entail guarantee] refused (declaration): the activation operand ((8192, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)"
+  }
+ }
+}

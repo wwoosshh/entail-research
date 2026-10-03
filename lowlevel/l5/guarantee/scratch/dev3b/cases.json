@@ -1,0 +1,241 @@
+{
+ "split": "dev",
+ "key": "ee10f389b08262211d451de02933ce21e22d9eb3de665918e1c2d36aa84c0aeb",
+ "cases": [
+  {
+   "id": "N8-graph",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1757222855
+    },
+    {
+     "op": "replay",
+     "seed": 496690019,
+     "mut": 0
+    },
+    {
+     "op": "replay",
+     "seed": 2133967589,
+     "mut": 0
+    },
+    {
+     "op": "replay",
+     "seed": 162900405,
+     "mut": 0
+    }
+   ],
+   "wseed": [
+    1334945664
+   ],
+   "split": "dev"
+  },
+  {
+   "id": "D-interval-T3",
+   "group": "defect",
+   "mutant": "interval",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1014641043,
+    1345019099
+   ],
+   "rows_from": 80,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 256,
+     "seed": 1527007457,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 1165045557,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 303717763,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1874346888,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1739883599,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "dev"
+  },
+  {
+   "id": "D-neighbor-T3",
+   "group": "defect",
+   "mutant": "neighbor",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    319379849,
+    450596700
+   ],
+   "rows_from": 80,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1037629633,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 898994777,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2064285943,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 569068873,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 165319812,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "dev"
+  },
+  {
+   "id": "D-alt_weight-T3",
+   "group": "defect",
+   "mutant": "alt_weight",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1990228157,
+    1690574976
+   ],
+   "rows_from": 64,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 378457165,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 620155778,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1592953911,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1293609414,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1732896926,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "dev"
+  },
+  {
+   "id": "D-rows-T3",
+   "group": "defect",
+   "mutant": "rows",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    131061969,
+    101607160
+   ],
+   "rows_from": 64,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1163972992,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 1194034885,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 933693295,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1279721382,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1487469845,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "dev"
+  }
+ ]
+}

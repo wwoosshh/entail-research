@@ -1,0 +1,251 @@
+{
+ "case": {
+  "id": "D-interval-T3",
+  "group": "defect",
+  "mutant": "interval",
+  "timing": "T3",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   1014641043,
+   1345019099
+  ],
+  "rows_from": 80,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 256,
+    "seed": 1527007457,
+    "role": "normal warm-up + capture"
+   },
+   {
+    "op": "replay",
+    "seed": 1165045557,
+    "mut": 0,
+    "role": "normal replay"
+   },
+   {
+    "op": "replay",
+    "seed": 303717763,
+    "mut": 1,
+    "role": "defect comes on at replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1874346888,
+    "mut": 1,
+    "role": "second defective replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1739883599,
+    "mut": 1,
+    "role": "third defective replay"
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "guarantee",
+ "pid": 536,
+ "env_ENTAIL": "guarantee",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 256,
+   "seed": 1527007457,
+   "role": "normal warm-up + capture",
+   "ms": 4360.665,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 3,
+    "consumer_calls": 3,
+    "activation_issues": 3,
+    "calls": 3,
+    "normal_delivered": 2,
+    "captured_sites": 1
+   },
+   "delivered": false,
+   "exception": null
+  },
+  {
+   "op": "replay",
+   "seed": 1165045557,
+   "mut": 0,
+   "role": "normal replay",
+   "ms": 20.007,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "normal_delivered": 1,
+    "replays": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.4540726894276347,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 3.8301469378365756e-05
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 303717763,
+   "mut": 1,
+   "role": "defect comes on at replay",
+   "ms": 19.294,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "replays": 1,
+    "repaired_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.4337955893672431,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 1.939576766417201e-08
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1874346888,
+   "mut": 1,
+   "role": "second defective replay",
+   "ms": 16.034,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "replays": 1,
+    "repaired_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.43822710764204204,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 3.404521155856626e-08
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1739883599,
+   "mut": 1,
+   "role": "third defective replay",
+   "ms": 20.585,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "replays": 1,
+    "repaired_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 393216,
+    "worst_ratio": 0.4358127399908903,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 7.183870306920722e-08
+   }
+  }
+ ],
+ "freeze_sha256": null,
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 1073741824,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "19b1ba9b2ff9510f67190c291ad6dd5d66f36ed05cffa4afb9c465fb7676900f",
+ "mutant_source_sha256": "967903effd4908a675ec8d8ce90c02983d7d97abcf35315552d9172edfd722b7",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 2,
+  "activation_issued": 3,
+  "consumer_calls": 3,
+  "weight_issues": 2,
+  "activation_issues": 3,
+  "calls": 3,
+  "normal_delivered": 3,
+  "captured_sites": 1,
+  "replays": 4,
+  "repaired_delivered": 3,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 2,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 3
+  }
+ },
+ "launcher_total": 3,
+ "seconds": 69.358,
+ "peak_mem": 62009856
+}

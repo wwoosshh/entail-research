@@ -1,0 +1,59 @@
+{
+ "id": "D-alt_weight-T1",
+ "group": "defect",
+ "mutant": "alt_weight",
+ "timing": "T1",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 2,
+ "wseed": [
+  1551870779,
+  1237494964
+ ],
+ "rows_from": 200,
+ "mechanism": "consumer-side scale cache at the call site (Python)",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 16,
+   "seed": 822577758,
+   "dist": "normal",
+   "mut": 0,
+   "cache": 1,
+   "role": "fills the cache"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 216,
+   "seed": 340649380,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "first call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 216,
+   "seed": 292634990,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "second call"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 216,
+   "seed": 1735129641,
+   "dist": "normal",
+   "mut": 1,
+   "cache": 1,
+   "role": "third call"
+  }
+ ],
+ "split": "dev"
+}

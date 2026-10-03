@@ -1,0 +1,416 @@
+{
+ "case": {
+  "id": "N7-repeated",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 3,
+    "seed": 1832746631,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 3,
+    "seed": 1703260806,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 128,
+    "seed": 1768488195,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 300,
+    "seed": 1042813144,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 128,
+    "seed": 1997733053,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 64,
+    "seed": 2073523028,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 3,
+    "seed": 683170337,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 128,
+    "seed": 1241187039,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 1,
+    "seed": 1970941924,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 65,
+    "seed": 852989159,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 3,
+    "seed": 309439087,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 128,
+    "seed": 1007047790,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   1236720391,
+   1759929728
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 4693,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 3,
+   "seed": 1832746631,
+   "dist": "normal",
+   "ms": 307.007,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.19945239042585297,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.7798768011907107e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 3,
+   "seed": 1703260806,
+   "dist": "normal",
+   "ms": 0.691,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.21765967120165416,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.4190709705249274e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 128,
+   "seed": 1768488195,
+   "dist": "normal",
+   "ms": 8.026,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.22587754927738912,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.57053341017047e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 300,
+   "seed": 1042813144,
+   "dist": "normal",
+   "ms": 6.624,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 460800,
+    "worst_ratio": 0.27608178037751935,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.576185615211611e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 128,
+   "seed": 1997733053,
+   "dist": "normal",
+   "ms": 6.025,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.26625987960436875,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.3094522165658245e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 64,
+   "seed": 2073523028,
+   "dist": "normal",
+   "ms": 2.907,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s5",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.23583933780157088,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.309637291029556e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 3,
+   "seed": 683170337,
+   "dist": "normal",
+   "ms": 0.843,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s6",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.18399966972662865,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.667620142204343e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 128,
+   "seed": 1241187039,
+   "dist": "normal",
+   "ms": 4.875,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s7",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.25096945940787485,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.7573954746139963e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 1,
+   "seed": 1970941924,
+   "dist": "normal",
+   "ms": 4.263,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s8",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 1536,
+    "worst_ratio": 0.15938158376416026,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 7.65299369591344e-06
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 65,
+   "seed": 852989159,
+   "dist": "normal",
+   "ms": 4.982,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s9",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.2389015974499514,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.822469016344655e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 3,
+   "seed": 309439087,
+   "dist": "normal",
+   "ms": 0.545,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s10",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.2112362924239531,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.4944550549977888e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 128,
+   "seed": 1007047790,
+   "dist": "normal",
+   "ms": 4.173,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s11",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.26080033804114444,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.274490617630934e-05
+   }
+  }
+ ],
+ "freeze_sha256": "13bc9f3a09f1feb73ca7aa6956562503e20921e4cb069062f4de42e34e794515",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 12,
+ "seconds": 9.629,
+ "peak_mem": 21982208
+}

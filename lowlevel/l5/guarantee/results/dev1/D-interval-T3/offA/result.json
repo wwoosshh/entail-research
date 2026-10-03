@@ -1,0 +1,86 @@
+{
+ "case": {
+  "id": "D-interval-T3",
+  "group": "defect",
+  "mutant": "interval",
+  "timing": "T3",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   1014641043,
+   1345019099
+  ],
+  "rows_from": 80,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 256,
+    "seed": 1527007457,
+    "role": "normal warm-up + capture"
+   },
+   {
+    "op": "replay",
+    "seed": 1165045557,
+    "mut": 0,
+    "role": "normal replay"
+   },
+   {
+    "op": "replay",
+    "seed": 303717763,
+    "mut": 1,
+    "role": "defect comes on at replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1874346888,
+    "mut": 1,
+    "role": "second defective replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1739883599,
+    "mut": 1,
+    "role": "third defective replay"
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "off",
+ "pid": 11417,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 256,
+   "seed": 1527007457,
+   "role": "normal warm-up + capture",
+   "ms": 289.228,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": false,
+   "exception": {
+    "type": "AcceleratorError",
+    "kind": null,
+    "message": "CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\n",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 188, in main\n    graph[\"z\"] = graph[\"obs\"].float() @ W2\n                 ~~~~~~~~~~~~~~~~~~~~~^~~~\nRuntimeError: CUDA error: CUBLAS_STATUS_NOT_INITIALIZED when calling `cublasCreate(handle)`\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 184, in main\n    with torch.cuda.graph(graph[\"g\"]):\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/cuda/graphs.py\", line 477, in __exit__\n    self.cuda_graph.capture_end()\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/cuda/graphs.py\", line 169, in capture_end\n    super().capture_end()\ntorch.AcceleratorError: CUDA error: operation failed due to a previous error during capture\nSearch for `cudaErrorStreamCaptureInvalidated' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\n\n"
+   }
+  }
+ ],
+ "freeze_sha256": null,
+ "mutant_source_sha256": "967903effd4908a675ec8d8ce90c02983d7d97abcf35315552d9172edfd722b7",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 8.123,
+ "peak_mem": 14769664
+}

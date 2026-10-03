@@ -1,0 +1,35 @@
+{
+ "id": "N3-distributions",
+ "group": "normal",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 1,
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 1801380368,
+   "dist": "heavy"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 200,
+   "seed": 1919900518,
+   "dist": "small"
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 200,
+   "seed": 697674306,
+   "dist": "normal"
+  }
+ ],
+ "wseed": [
+  1676615724
+ ],
+ "split": "holdout"
+}

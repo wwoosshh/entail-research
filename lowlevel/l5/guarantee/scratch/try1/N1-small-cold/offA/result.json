@@ -1,0 +1,63 @@
+{
+ "case": {
+  "id": "N1-small-cold",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 1,
+    "seed": 1690735537,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   1536080960
+  ],
+  "split": "dev"
+ },
+ "mode": "off",
+ "pid": 3547,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 1,
+   "seed": 1690735537,
+   "dist": "normal",
+   "ms": 3930.123,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 1536,
+    "worst_ratio": 0.4068972327352343,
+    "nonfinite": 0,
+    "c_used": 0.000244140625,
+    "calibration_max": 1.1785463010682976e-05
+   }
+  }
+ ],
+ "freeze_sha256": null,
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 1,
+ "seconds": 54.399,
+ "peak_mem": 12864512
+}

@@ -1,0 +1,117 @@
+{
+ "case": {
+  "group": "admission",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "wseed": [
+   1290096944
+  ],
+  "id": "A2-hook-missing",
+  "expect": "hook",
+  "skip_hook": "weights",
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 197791284,
+    "dist": "normal"
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "guarantee",
+ "pid": 15542,
+ "env_ENTAIL": "guarantee",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 197791284,
+   "dist": "normal",
+   "ms": 451.199,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "blocked": 1,
+    "blocked_hook": 1
+   },
+   "delivered": false,
+   "exception": {
+    "type": "Refused",
+    "kind": "hook",
+    "message": "[entail guarantee] refused (hook): required hook(s) not installed: vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 163, in main\n    y = kernel.apply_weights(layers[li], x)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/BlockScaledMMLinearKernel.py\", line 132, in apply_weights\n    output = self.apply_block_scaled_mm(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/triton.py\", line 173, in apply_block_scaled_mm\n    return torch.ops.vllm.w8a8_triton_block_scaled_mm_func(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_ops.py\", line 1279, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/triton.py\", line 198, in _w8a8_triton_block_scaled_mm_func\n    return w8a8_triton_block_scaled_mm(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/adapters/vllm_block_fp8_guarantee.py\", line 134, in run\n    return guarantee.gate(orig, a[\"A\"], a[\"B\"], a[\"As\"], a[\"Bs\"], a[\"block_size\"], a[\"output_dtype\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 677, in gate\n    A, B, As, Bs, block, issues = _admit(A, B, As, Bs, block_size, output_dtype, rec, t0)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 460, in _admit\n    _refuse(rec, \"hook\", f\"required hook(s) not installed: {', '.join(missing)}\", t0)\n  File \"<workspace>/entail/entail/guarantee.py\", line 444, in _refuse\n    raise Refused(kind, why, rec)\nentail.guarantee.Refused: [entail guarantee] refused (hook): required hook(s) not installed: vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading\n"
+   },
+   "truth_key": "s0"
+  }
+ ],
+ "freeze_sha256": "d1bc2547754d63b8cb3a6d94c969d5a3cf1917a503b8bb3650cbc5f1bdd8f047",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 2147483648,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "131f7a7ab30fff27b6f0de5b9576c54d5835b97080f9afc431879856de3ac718",
+ "mutant_source_sha256": null,
+ "skipped_hook": "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "activation_issued": 1,
+  "consumer_calls": 1,
+  "activation_issues": 1,
+  "calls": 1,
+  "blocked": 1,
+  "blocked_hook": 1,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 1
+  }
+ },
+ "launcher_total": 0,
+ "seconds": 9.085,
+ "peak_mem": 5487616
+}

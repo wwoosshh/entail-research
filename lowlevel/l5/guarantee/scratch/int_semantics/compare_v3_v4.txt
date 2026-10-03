@@ -1,0 +1,12 @@
+== v3 2a51daf
+  vLLM's kernel as compiled                                              proven    every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation and weigh
+  k masks compared unsigned after a shift by 64: half of every K tile is proven    every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation and weigh
+  A's pointers moved by extui(-1) + 1: 2^32 elements, not 0              proven    every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation and weigh
+  one more iteration than K needs: its scales are read outside As and Bs proven    every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation and weigh
+  largest launch 8192x19456x2560: proven, 19456 programs, 4.21 s
+== v4 working tree
+  vLLM's kernel as compiled                                              proven    every element of the 64x1536 output is stored once, as the whole product: the sum over all K of its activation and weigh
+  k masks compared unsigned after a shift by 64: half of every K tile is violation the value stored is not the whole product: 1280 of the K=2560 contraction indices are never added (the first k=0) (20 te
+  A's pointers moved by extui(-1) + 1: 2^32 elements, not 0              violation the dot reads A outside its (64, 2560) elements
+  one more iteration than K needs: its scales are read outside As and Bs violation 12 lanes read a scale of As outside its (64, 20) elements (an offset of 1280 of 1280)
+  largest launch 8192x19456x2560: proven, 19456 programs, 6.57 s

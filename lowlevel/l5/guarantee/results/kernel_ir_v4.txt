@@ -1,0 +1,24 @@
+ok parse: 15 arguments
+ok vLLM's kernel at tiles 64x128x128 and 16x128x128: proven, 20 terms
+ok BLOCK_SIZE_K 256 over 128-wide groups: violation before any launch: {'program_chunk_index': 0, 'groups_in_tile': [0, 1]}
+ok the four consumer mutations: not proven (the scale read depends on data)
+ok a store to another layout than the output's: violation
+ok an operand without an issue: unproven
+ok no store: violation (the kernel never stores to its output)
+ok the loop runs over the first of 20 K groups: violation (the value stored is not the whole product: 2432 of the K=2560 contraction indices are never added (the first k)
+ok each iteration overwrites the sum (the last group remains): violation (the value stored is not the whole product: 2432 of the K=2560 contraction indices are never added (the first k)
+ok rows from 32 on are not stored: violation (49152 of the 98304 output elements are never stored (the first block: rows 32..63, columns 0..127))
+ok each term is added twice: violation (the value stored is not the whole product: 2560 are added more than once (40 terms))
+ok each term is also multiplied by 2: violation (the scaled dot term is also multiplied by the constant 2.0)
+ok the kernel also writes the activation scales back: violation (the kernel writes to As, which is not its output)
+ok the sum is stored negated: unproven (the op arith.subf is not modelled)
+ok the sum is stored doubled: unproven (the value stored to the output is not a sum of scaled dot terms (mul))
+ok the dot accumulates into the running sum, which the scales then multiply: unproven (a dot that accumulates into something other than an exact zero)
+ok masked-out activation lanes load 1.0: unproven (masked-out lanes of A in the dot are not loaded as zero)
+ok the activation is masked one k short of the weight: unproven (the two operands are masked differently along k)
+ok one more iteration than K needs: its scales are read outside As and Bs: violation (12 lanes read a scale of As outside its (64, 20) elements (an offset of 1280 of 1280))
+ok a partial row tile: proven; wrapped i32 offsets: violation; two outputs: unproven
+ok 36 integer operations: widths, two's complement wrap, signed and unsigned readings, poison and undefined behaviour not modelled
+ok k masks compared unsigned after a shift by 64: half of every K tile is masked out: violation (the value stored is not the whole product: 1280 of the K=2560 contraction indices are never added (the first k)
+ok A's pointers moved by extui(-1) + 1: 2^32 elements, not 0: violation (the dot reads A outside its (64, 2560) elements)
+ok fast and dense evaluation agree on 24 launches; orig: fast 0.0114 s, dense 0.1874 s

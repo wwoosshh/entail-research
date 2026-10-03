@@ -1,0 +1,128 @@
+{
+ "case": {
+  "id": "N3-distributions",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 1801380368,
+    "dist": "heavy"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 200,
+    "seed": 1919900518,
+    "dist": "small"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 200,
+    "seed": 697674306,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   1676615724
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 2680,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 1801380368,
+   "dist": "heavy",
+   "ms": 316.414,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.3938722823832509,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.0002047076860816573
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 200,
+   "seed": 1919900518,
+   "dist": "small",
+   "ms": 22.759,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 307200,
+    "worst_ratio": 0.23100633664279804,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.5154266099276005e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 200,
+   "seed": 697674306,
+   "dist": "normal",
+   "ms": 3.921,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 307200,
+    "worst_ratio": 0.24214386822191394,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.023979169676949e-05
+   }
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 9.331,
+ "device_stopped": null,
+ "peak_mem": 16344576
+}

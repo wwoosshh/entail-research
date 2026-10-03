@@ -1,0 +1,126 @@
+{
+ "case": {
+  "group": "admission",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 1,
+  "wseed": [
+   2122665232
+  ],
+  "id": "A4-budget",
+  "expect": "budget",
+  "plan": {
+   "budget_bytes": 1048576
+  },
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 167151517,
+    "dist": "normal"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "guarantee",
+ "pid": 16654,
+ "env_ENTAIL": "guarantee",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 167151517,
+   "dist": "normal",
+   "ms": 29.859,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "blocked": 1,
+    "blocked_budget": 1
+   },
+   "delivered": false,
+   "exception": {
+    "type": "Refused",
+    "kind": "budget",
+    "message": "[entail guarantee] refused (budget): the check needs about 152109056 transient bytes, the plan allows 1048576",
+    "trace": "Traceback (most recent call last):\n  File \"<workspace>/entail/eval/block_fp8_guarantee/run_case.py\", line 163, in main\n    y = kernel.apply_weights(layers[li], x)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/BlockScaledMMLinearKernel.py\", line 132, in apply_weights\n    output = self.apply_block_scaled_mm(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/triton.py\", line 173, in apply_block_scaled_mm\n    return torch.ops.vllm.w8a8_triton_block_scaled_mm_func(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/_ops.py\", line 1279, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/<user>/venvs/vllm/lib/python3.12/site-packages/vllm/model_executor/kernels/linear/scaled_mm/triton.py\", line 198, in _w8a8_triton_block_scaled_mm_func\n    return w8a8_triton_block_scaled_mm(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/adapters/vllm_block_fp8_guarantee.py\", line 139, in run\n    return guarantee.gate(orig, a[\"A\"], a[\"B\"], a[\"As\"], a[\"Bs\"], a[\"block_size\"], a[\"output_dtype\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 713, in gate\n    A, B, As, Bs, block, issues = _admit(A, B, As, Bs, block_size, output_dtype, rec, t0)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<workspace>/entail/entail/guarantee.py\", line 574, in _admit\n    _refuse(rec, \"budget\", f\"the check needs about {need} transient bytes, the plan allows {p.budget_bytes}\", t0)\n  File \"<workspace>/entail/entail/guarantee.py\", line 478, in _refuse\n    raise Refused(kind, why, rec)\nentail.guarantee.Refused: [entail guarantee] refused (budget): the check needs about 152109056 transient bytes, the plan allows 1048576\n"
+   },
+   "truth_key": "s0"
+  }
+ ],
+ "freeze_sha256": "13bc9f3a09f1feb73ca7aa6956562503e20921e4cb069062f4de42e34e794515",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 1048576,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "check": "static",
+  "integrity": "epoch",
+  "records": "changes",
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "944c03de63f42f76fb4da7e05c551f998b7e92a3c28f022bb7c6ea83188787e8",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 1,
+  "activation_issued": 1,
+  "consumer_calls": 1,
+  "weight_issues": 1,
+  "activation_issues": 1,
+  "calls": 1,
+  "blocked": 1,
+  "blocked_budget": 1,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "triton.runtime.jit:JITFunction.run",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 1,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 1
+  }
+ },
+ "launcher_total": 0,
+ "seconds": 6.597,
+ "peak_mem": 4823552
+}

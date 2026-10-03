@@ -1,0 +1,554 @@
+{
+ "case": {
+  "id": "N7-repeated",
+  "group": "normal",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "steps": [
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 64,
+    "seed": 759331252,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 17,
+    "seed": 1786792487,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 300,
+    "seed": 2023663532,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 65,
+    "seed": 1693098831,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 65,
+    "seed": 2019971371,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 3,
+    "seed": 1659282956,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 128,
+    "seed": 1347861668,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 1,
+    "seed": 914541265,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 3,
+    "seed": 805438903,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 1,
+    "seed": 984004607,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 0,
+    "M": 65,
+    "seed": 917482265,
+    "dist": "normal"
+   },
+   {
+    "op": "call",
+    "layer": 1,
+    "M": 17,
+    "seed": 771142948,
+    "dist": "normal"
+   }
+  ],
+  "wseed": [
+   845206024,
+   915594787
+  ],
+  "split": "holdout"
+ },
+ "mode": "structure",
+ "pid": 6614,
+ "env_ENTAIL": "structure",
+ "steps": [
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 64,
+   "seed": 759331252,
+   "dist": "normal",
+   "ms": 375.539,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s0",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 98304,
+    "worst_ratio": 0.2581554954431114,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 6.123265651564455e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 17,
+   "seed": 1786792487,
+   "dist": "normal",
+   "ms": 40.845,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 26112,
+    "worst_ratio": 0.2211457183045363,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.607918914890031e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 300,
+   "seed": 2023663532,
+   "dist": "normal",
+   "ms": 64.604,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 460800,
+    "worst_ratio": 0.29414285203909696,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 5.722947625483207e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 65,
+   "seed": 1693098831,
+   "dist": "normal",
+   "ms": 55.166,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.23449727931687622,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.6636397101244e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 65,
+   "seed": 2019971371,
+   "dist": "normal",
+   "ms": 11.581,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.24426294771391288,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.9231449946737155e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 3,
+   "seed": 1659282956,
+   "dist": "normal",
+   "ms": 21.59,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s5",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.20970590064626402,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.784127057157774e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 128,
+   "seed": 1347861668,
+   "dist": "normal",
+   "ms": 49.171,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s6",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.24961858930185532,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.284847227892458e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 1,
+   "seed": 914541265,
+   "dist": "normal",
+   "ms": 24.212,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "ir_proven": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s7",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 1536,
+    "worst_ratio": 0.17506886476209202,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.9735609251498244e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 3,
+   "seed": 805438903,
+   "dist": "normal",
+   "ms": 0.986,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s8",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 4608,
+    "worst_ratio": 0.2074137283097621,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.077109463798456e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 1,
+   "seed": 984004607,
+   "dist": "normal",
+   "ms": 0.957,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s9",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 1536,
+    "worst_ratio": 0.16883468176958003,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.2338946094605424e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 0,
+   "M": 65,
+   "seed": 917482265,
+   "dist": "normal",
+   "ms": 9.848,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s10",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 99840,
+    "worst_ratio": 0.25221124091424174,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 4.292910055252948e-05
+   }
+  },
+  {
+   "op": "call",
+   "layer": 1,
+   "M": 17,
+   "seed": 771142948,
+   "dist": "normal",
+   "ms": 18.787,
+   "rng_same": true,
+   "kernel_launches": 1,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 1,
+    "consumer_calls": 1,
+    "activation_issues": 1,
+    "calls": 1,
+    "kernel_delivered": 1
+   },
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s11",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 26112,
+    "worst_ratio": 0.21566266224273034,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 2.8593987593158422e-05
+   }
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8-structure",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 2147483648,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "check": "static",
+  "integrity": "epoch",
+  "records": "changes",
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "9019396b8aed60798e36c6cc9af76d38246caa14253d98bdacb8feea1fe4f6fe",
+ "profile": "block_fp8_structure",
+ "mutant_source_sha256": null,
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 2,
+  "activation_issued": 12,
+  "consumer_calls": 12,
+  "weight_issues": 2,
+  "activation_issues": 12,
+  "calls": 12,
+  "ir_proven": 7,
+  "kernel_delivered": 12,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "triton.runtime.jit:JITFunction.run",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 2,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 12
+  }
+ },
+ "launcher_total": 12,
+ "seconds": 10.488,
+ "device_stopped": null,
+ "peak_mem": 21954048
+}

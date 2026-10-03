@@ -1,0 +1,1412 @@
+{
+ "eager": {
+  "runs": [
+   "00_eager_off",
+   "01_eager_guarantee",
+   "02_eager_structure",
+   "03_eager_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_rounds": [
+   {
+    "round": 0,
+    "start_s": {
+     "off": [
+      11.12633753199998,
+      8.898051068999848
+     ],
+     "guarantee": 17.61345660400002
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      1.0174330089998875,
+      0.9378715719999491
+     ],
+     "guarantee": 15.540381446000083,
+     "ratio": 15.895611964508952
+    },
+    "greedy_warm": {
+     "off": [
+      0.8666185889996996,
+      0.7949037759999555
+     ],
+     "guarantee": 15.501450867999665,
+     "ratio": 18.659334589219185
+    },
+    "seeded": {
+     "off": [
+      0.8378661440001451,
+      0.8237567240003045
+     ],
+     "guarantee": 15.194783860999905,
+     "ratio": 18.289088521374147
+    },
+    "unseeded": {
+     "off": [
+      0.7978247529999862,
+      0.7912902289999693
+     ],
+     "guarantee": 14.910568149000028,
+     "ratio": 18.765877004361972
+    },
+    "steady_ratio": 18.52748276286806,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 14544,
+     "consumer_calls": 14544,
+     "weight_issues": 144,
+     "activation_issues": 14544,
+     "calls": 14544,
+     "normal_delivered": 14544,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+     }
+    }
+   }
+  ],
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_timing": {
+   "round": 0,
+   "start_s": {
+    "off": [
+     11.12633753199998,
+     8.898051068999848
+    ],
+    "guarantee": 17.61345660400002
+   },
+   "warm_equals_cold": true,
+   "greedy_cold": {
+    "off": [
+     1.0174330089998875,
+     0.9378715719999491
+    ],
+    "guarantee": 15.540381446000083,
+    "ratio": 15.895611964508952
+   },
+   "greedy_warm": {
+    "off": [
+     0.8666185889996996,
+     0.7949037759999555
+    ],
+    "guarantee": 15.501450867999665,
+    "ratio": 18.659334589219185
+   },
+   "seeded": {
+    "off": [
+     0.8378661440001451,
+     0.8237567240003045
+    ],
+    "guarantee": 15.194783860999905,
+    "ratio": 18.289088521374147
+   },
+   "unseeded": {
+    "off": [
+     0.7978247529999862,
+     0.7912902289999693
+    ],
+    "guarantee": 14.910568149000028,
+    "ratio": 18.765877004361972
+   },
+   "steady_ratio": 18.52748276286806
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 14544,
+   "consumer_calls": 14544,
+   "weight_issues": 144,
+   "activation_issues": 14544,
+   "calls": 14544,
+   "normal_delivered": 14544,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+   }
+  },
+  "guarantee_steady_ratio_rounds": [
+   18.52748276286806
+  ],
+  "guarantee_steady_ratio_median": 18.52748276286806,
+  "guarantee_outputs_equal_all_rounds": true,
+  "structure_rounds": [
+   {
+    "round": 0,
+    "start_s": {
+     "off": [
+      11.12633753199998,
+      8.898051068999848
+     ],
+     "structure": 14.946151926999846
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      1.0174330089998875,
+      0.9378715719999491
+     ],
+     "structure": 2.1726244139999835,
+     "ratio": 2.222287448320733
+    },
+    "greedy_warm": {
+     "off": [
+      0.8666185889996996,
+      0.7949037759999555
+     ],
+     "structure": 1.8487678279998363,
+     "ratio": 2.2253902408352113
+    },
+    "seeded": {
+     "off": [
+      0.8378661440001451,
+      0.8237567240003045
+     ],
+     "structure": 1.7906358870000076,
+     "ratio": 2.1552855602605043
+    },
+    "unseeded": {
+     "off": [
+      0.7978247529999862,
+      0.7912902289999693
+     ],
+     "structure": 1.6668337530004464,
+     "ratio": 2.0978139050739792
+    },
+    "steady_ratio": 2.126549732667242,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 14544,
+     "consumer_calls": 14544,
+     "weight_issues": 144,
+     "activation_issues": 14544,
+     "calls": 14544,
+     "ir_proven": 32,
+     "kernel_delivered": 14544,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+     }
+    }
+   }
+  ],
+  "off_vs_structure": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "structure_timing": {
+   "round": 0,
+   "start_s": {
+    "off": [
+     11.12633753199998,
+     8.898051068999848
+    ],
+    "structure": 14.946151926999846
+   },
+   "warm_equals_cold": true,
+   "greedy_cold": {
+    "off": [
+     1.0174330089998875,
+     0.9378715719999491
+    ],
+    "structure": 2.1726244139999835,
+    "ratio": 2.222287448320733
+   },
+   "greedy_warm": {
+    "off": [
+     0.8666185889996996,
+     0.7949037759999555
+    ],
+    "structure": 1.8487678279998363,
+    "ratio": 2.2253902408352113
+   },
+   "seeded": {
+    "off": [
+     0.8378661440001451,
+     0.8237567240003045
+    ],
+    "structure": 1.7906358870000076,
+    "ratio": 2.1552855602605043
+   },
+   "unseeded": {
+    "off": [
+     0.7978247529999862,
+     0.7912902289999693
+    ],
+    "structure": 1.6668337530004464,
+    "ratio": 2.0978139050739792
+   },
+   "steady_ratio": 2.126549732667242
+  },
+  "structure_warm_equals_cold": true,
+  "structure_entail": {
+   "weight_issued": 144,
+   "activation_issued": 14544,
+   "consumer_calls": 14544,
+   "weight_issues": 144,
+   "activation_issues": 14544,
+   "calls": 14544,
+   "ir_proven": 32,
+   "kernel_delivered": 14544,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 14544
+   }
+  },
+  "structure_steady_ratio_rounds": [
+   2.126549732667242
+  ],
+  "structure_steady_ratio_median": 2.126549732667242,
+  "structure_outputs_equal_all_rounds": true
+ },
+ "graphs": {
+  "runs": [
+   "04_graphs_off",
+   "05_graphs_guarantee",
+   "06_graphs_structure",
+   "07_graphs_off",
+   "08_graphs_off",
+   "09_graphs_guarantee",
+   "10_graphs_structure",
+   "11_graphs_off",
+   "12_graphs_off",
+   "13_graphs_guarantee",
+   "14_graphs_structure",
+   "15_graphs_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_rounds": [
+   {
+    "round": 0,
+    "start_s": {
+     "off": [
+      12.336378835999767,
+      12.988355722000051
+     ],
+     "guarantee": 69.7111693779998
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      0.6835966620001273,
+      0.6633054740000262
+     ],
+     "guarantee": 8.260272795000219,
+     "ratio": 12.265587193336039
+    },
+    "greedy_warm": {
+     "off": [
+      0.4049431309999818,
+      0.41017718100010825
+     ],
+     "guarantee": 7.9744663989999935,
+     "ratio": 19.566354270899613
+    },
+    "seeded": {
+     "off": [
+      0.4223746239999855,
+      0.4203983069996866
+     ],
+     "guarantee": 7.991574564000075,
+     "ratio": 18.964953120933078
+    },
+    "unseeded": {
+     "off": [
+      0.40684076899970023,
+      0.41298730599964983
+     ],
+     "guarantee": 7.994446904000142,
+     "ratio": 19.502740020232853
+    },
+    "steady_ratio": 19.233846570582966,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 11952,
+     "consumer_calls": 11952,
+     "weight_issues": 144,
+     "activation_issues": 11952,
+     "calls": 11952,
+     "normal_delivered": 19872,
+     "captured_sites": 5328,
+     "replays": 92,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+     }
+    }
+   },
+   {
+    "round": 1,
+    "start_s": {
+     "off": [
+      13.111194318000344,
+      11.222372054000061
+     ],
+     "guarantee": 67.60748435699998
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      0.6968749200000275,
+      0.6117660280001473
+     ],
+     "guarantee": 8.56945753700029,
+     "ratio": 13.096728403762503
+    },
+    "greedy_warm": {
+     "off": [
+      0.40771398299966677,
+      0.3968524990000333
+     ],
+     "guarantee": 7.613676462000058,
+     "ratio": 18.92615870120947
+    },
+    "seeded": {
+     "off": [
+      0.4148798450000868,
+      0.410175328999685
+     ],
+     "guarantee": 7.980394836999949,
+     "ratio": 19.345117971473158
+    },
+    "unseeded": {
+     "off": [
+      0.4008687799996551,
+      0.39785882899968783
+     ],
+     "guarantee": 7.917133811999975,
+     "ratio": 19.824364959460134
+    },
+    "steady_ratio": 19.584741465466646,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 11952,
+     "consumer_calls": 11952,
+     "weight_issues": 144,
+     "activation_issues": 11952,
+     "calls": 11952,
+     "normal_delivered": 19872,
+     "captured_sites": 5328,
+     "replays": 92,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+     }
+    }
+   },
+   {
+    "round": 2,
+    "start_s": {
+     "off": [
+      11.495013204000315,
+      11.031808840999474
+     ],
+     "guarantee": 58.78067703099987
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      0.5960089340001105,
+      0.5777048849995481
+     ],
+     "guarantee": 8.520372255999973,
+     "ratio": 14.518653726445478
+    },
+    "greedy_warm": {
+     "off": [
+      0.4041958929997236,
+      0.39237397800025064
+     ],
+     "guarantee": 8.189794744999745,
+     "ratio": 20.562652551040333
+    },
+    "seeded": {
+     "off": [
+      0.4133705680001185,
+      0.39994804700017994
+     ],
+     "guarantee": 7.836371391999819,
+     "ratio": 19.27011443601827
+    },
+    "unseeded": {
+     "off": [
+      0.40004274099965187,
+      0.39119243800087133
+     ],
+     "guarantee": 7.864172200000212,
+     "ratio": 19.878216764664383
+    },
+    "steady_ratio": 19.574165600341328,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 11952,
+     "consumer_calls": 11952,
+     "weight_issues": 144,
+     "activation_issues": 11952,
+     "calls": 11952,
+     "normal_delivered": 19872,
+     "captured_sites": 5328,
+     "replays": 92,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+     }
+    }
+   }
+  ],
+  "off_vs_guarantee": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_timing": {
+   "round": 0,
+   "start_s": {
+    "off": [
+     12.336378835999767,
+     12.988355722000051
+    ],
+    "guarantee": 69.7111693779998
+   },
+   "warm_equals_cold": true,
+   "greedy_cold": {
+    "off": [
+     0.6835966620001273,
+     0.6633054740000262
+    ],
+    "guarantee": 8.260272795000219,
+    "ratio": 12.265587193336039
+   },
+   "greedy_warm": {
+    "off": [
+     0.4049431309999818,
+     0.41017718100010825
+    ],
+    "guarantee": 7.9744663989999935,
+    "ratio": 19.566354270899613
+   },
+   "seeded": {
+    "off": [
+     0.4223746239999855,
+     0.4203983069996866
+    ],
+    "guarantee": 7.991574564000075,
+    "ratio": 18.964953120933078
+   },
+   "unseeded": {
+    "off": [
+     0.40684076899970023,
+     0.41298730599964983
+    ],
+    "guarantee": 7.994446904000142,
+    "ratio": 19.502740020232853
+   },
+   "steady_ratio": 19.233846570582966
+  },
+  "guarantee_warm_equals_cold": true,
+  "guarantee_entail": {
+   "weight_issued": 144,
+   "activation_issued": 11952,
+   "consumer_calls": 11952,
+   "weight_issues": 144,
+   "activation_issues": 11952,
+   "calls": 11952,
+   "normal_delivered": 19872,
+   "captured_sites": 5328,
+   "replays": 92,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+   }
+  },
+  "guarantee_steady_ratio_rounds": [
+   19.233846570582966,
+   19.584741465466646,
+   19.574165600341328
+  ],
+  "guarantee_steady_ratio_median": 19.574165600341328,
+  "guarantee_outputs_equal_all_rounds": true,
+  "structure_rounds": [
+   {
+    "round": 0,
+    "start_s": {
+     "off": [
+      12.336378835999767,
+      12.988355722000051
+     ],
+     "structure": 27.073134587000368
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      0.6835966620001273,
+      0.6633054740000262
+     ],
+     "structure": 0.7966024790002848,
+     "ratio": 1.1828661603669683
+    },
+    "greedy_warm": {
+     "off": [
+      0.4049431309999818,
+      0.41017718100010825
+     ],
+     "structure": 0.5699035200000253,
+     "ratio": 1.398329821033738
+    },
+    "seeded": {
+     "off": [
+      0.4223746239999855,
+      0.4203983069996866
+     ],
+     "structure": 0.4831482899999173,
+     "ratio": 1.1465681258338976
+    },
+    "unseeded": {
+     "off": [
+      0.40684076899970023,
+      0.41298730599964983
+     ],
+     "structure": 0.4692758579999463,
+     "ratio": 1.1448152906944993
+    },
+    "steady_ratio": 1.1456917082641984,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 11952,
+     "consumer_calls": 11952,
+     "weight_issues": 144,
+     "activation_issues": 11952,
+     "calls": 11952,
+     "ir_proven": 156,
+     "kernel_delivered": 25200,
+     "replays": 92,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+     }
+    }
+   },
+   {
+    "round": 1,
+    "start_s": {
+     "off": [
+      13.111194318000344,
+      11.222372054000061
+     ],
+     "structure": 24.735431455999787
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      0.6968749200000275,
+      0.6117660280001473
+     ],
+     "structure": 0.8771319900001799,
+     "ratio": 1.3405235276193768
+    },
+    "greedy_warm": {
+     "off": [
+      0.40771398299966677,
+      0.3968524990000333
+     ],
+     "structure": 0.5403263339999285,
+     "ratio": 1.3431490028194586
+    },
+    "seeded": {
+     "off": [
+      0.4148798450000868,
+      0.410175328999685
+     ],
+     "structure": 0.4453316190001715,
+     "ratio": 1.0795196079827134
+    },
+    "unseeded": {
+     "off": [
+      0.4008687799996551,
+      0.39785882899968783
+     ],
+     "structure": 0.4387478660000852,
+     "ratio": 1.0986170029849216
+    },
+    "steady_ratio": 1.0890683054838175,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 11952,
+     "consumer_calls": 11952,
+     "weight_issues": 144,
+     "activation_issues": 11952,
+     "calls": 11952,
+     "ir_proven": 156,
+     "kernel_delivered": 25200,
+     "replays": 92,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+     }
+    }
+   },
+   {
+    "round": 2,
+    "start_s": {
+     "off": [
+      11.495013204000315,
+      11.031808840999474
+     ],
+     "structure": 24.08041595300074
+    },
+    "outputs": {
+     "greedy_cold": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     },
+     "greedy_warm": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "seeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       true,
+       true
+      ]
+     },
+     "unseeded": {
+      "same_ids": "6/6",
+      "max_logprob_diff": 0.0,
+      "rng_before_same": true,
+      "rng_after_same": true,
+      "rng_untouched_in_run": [
+       false,
+       false
+      ]
+     }
+    },
+    "warm_equals_cold": true,
+    "greedy_cold": {
+     "off": [
+      0.5960089340001105,
+      0.5777048849995481
+     ],
+     "structure": 0.7764542889999575,
+     "ratio": 1.3230725862318289
+    },
+    "greedy_warm": {
+     "off": [
+      0.4041958929997236,
+      0.39237397800025064
+     ],
+     "structure": 0.5298174229992583,
+     "ratio": 1.330247206900135
+    },
+    "seeded": {
+     "off": [
+      0.4133705680001185,
+      0.39994804700017994
+     ],
+     "structure": 0.44085612800063245,
+     "ratio": 1.0840920639704543
+    },
+    "unseeded": {
+     "off": [
+      0.40004274099965187,
+      0.39119243800087133
+     ],
+     "structure": 0.4377881600003093,
+     "ratio": 1.1065942759352965
+    },
+    "steady_ratio": 1.0953431699528755,
+    "entail": {
+     "weight_issued": 144,
+     "activation_issued": 11952,
+     "consumer_calls": 11952,
+     "weight_issues": 144,
+     "activation_issues": 11952,
+     "calls": 11952,
+     "ir_proven": 156,
+     "kernel_delivered": 25200,
+     "replays": 92,
+     "reached": {
+      "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+      "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+     }
+    }
+   }
+  ],
+  "off_vs_structure": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "structure_timing": {
+   "round": 0,
+   "start_s": {
+    "off": [
+     12.336378835999767,
+     12.988355722000051
+    ],
+    "structure": 27.073134587000368
+   },
+   "warm_equals_cold": true,
+   "greedy_cold": {
+    "off": [
+     0.6835966620001273,
+     0.6633054740000262
+    ],
+    "structure": 0.7966024790002848,
+    "ratio": 1.1828661603669683
+   },
+   "greedy_warm": {
+    "off": [
+     0.4049431309999818,
+     0.41017718100010825
+    ],
+    "structure": 0.5699035200000253,
+    "ratio": 1.398329821033738
+   },
+   "seeded": {
+    "off": [
+     0.4223746239999855,
+     0.4203983069996866
+    ],
+    "structure": 0.4831482899999173,
+    "ratio": 1.1465681258338976
+   },
+   "unseeded": {
+    "off": [
+     0.40684076899970023,
+     0.41298730599964983
+    ],
+    "structure": 0.4692758579999463,
+    "ratio": 1.1448152906944993
+   },
+   "steady_ratio": 1.1456917082641984
+  },
+  "structure_warm_equals_cold": true,
+  "structure_entail": {
+   "weight_issued": 144,
+   "activation_issued": 11952,
+   "consumer_calls": 11952,
+   "weight_issues": 144,
+   "activation_issues": 11952,
+   "calls": 11952,
+   "ir_proven": 156,
+   "kernel_delivered": 25200,
+   "replays": 92,
+   "reached": {
+    "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 144,
+    "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 11952
+   }
+  },
+  "structure_steady_ratio_rounds": [
+   1.1456917082641984,
+   1.0890683054838175,
+   1.0953431699528755
+  ],
+  "structure_steady_ratio_median": 1.0953431699528755,
+  "structure_outputs_equal_all_rounds": true
+ },
+ "default": {
+  "runs": [
+   "16_default_off",
+   "17_default_guarantee",
+   "18_default_structure",
+   "19_default_off"
+  ],
+  "offA_vs_offB": {
+   "greedy_cold": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   },
+   "greedy_warm": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "seeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     true,
+     true
+    ]
+   },
+   "unseeded": {
+    "same_ids": "6/6",
+    "max_logprob_diff": 0.0,
+    "rng_before_same": true,
+    "rng_after_same": true,
+    "rng_untouched_in_run": [
+     false,
+     false
+    ]
+   }
+  },
+  "guarantee_start_error": {
+   "type": "Refused",
+   "kind": "declaration",
+   "message": "[entail guarantee] refused (declaration): the activation operand ((8192, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)"
+  },
+  "structure_start_error": {
+   "type": "Refused",
+   "kind": "declaration",
+   "message": "[entail guarantee] refused (declaration): the activation operand ((8192, 2560), float8_e4m3fn) has no producer issue: it was not made by the hooked producer (a compiled path, another quantizer, a copy)"
+  }
+ }
+}

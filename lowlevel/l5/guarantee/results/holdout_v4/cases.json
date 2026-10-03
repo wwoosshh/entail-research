@@ -1,0 +1,1201 @@
+{
+ "split": "holdout",
+ "key": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "cases": [
+  {
+   "id": "N1-small-cold",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 4,
+     "seed": 1166026029,
+     "dist": "normal"
+    }
+   ],
+   "wseed": [
+    2045392664
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N2-large",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 512,
+     "seed": 1680499156,
+     "dist": "normal"
+    }
+   ],
+   "wseed": [
+    1164565718
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N3-distributions",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 1801380368,
+     "dist": "heavy"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 200,
+     "seed": 1919900518,
+     "dist": "small"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 200,
+     "seed": 697674306,
+     "dist": "normal"
+    }
+   ],
+   "wseed": [
+    1676615724
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N4-cold-warm",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 32,
+     "seed": 2042822563,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 32,
+     "seed": 2042822563,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 32,
+     "seed": 2042822563,
+     "dist": "normal"
+    }
+   ],
+   "wseed": [
+    1601555258
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N5-new-weights",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 1093503664,
+     "dist": "normal"
+    },
+    {
+     "op": "reload",
+     "layer": 0,
+     "seed": 803615224
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 902306173,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 96,
+     "seed": 1114782613,
+     "dist": "normal"
+    }
+   ],
+   "wseed": [
+    284518308,
+    1411335412
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N6-colmajor-scales",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "direct",
+     "layer": 0,
+     "M": 160,
+     "seed": 61962337,
+     "quant": "colmajor"
+    }
+   ],
+   "wseed": [
+    2049983634
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N7-repeated",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 759331252,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 17,
+     "seed": 1786792487,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 300,
+     "seed": 2023663532,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 65,
+     "seed": 1693098831,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 65,
+     "seed": 2019971371,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 3,
+     "seed": 1659282956,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 128,
+     "seed": 1347861668,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 1,
+     "seed": 914541265,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 3,
+     "seed": 805438903,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 1,
+     "seed": 984004607,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 65,
+     "seed": 917482265,
+     "dist": "normal"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 17,
+     "seed": 771142948,
+     "dist": "normal"
+    }
+   ],
+   "wseed": [
+    845206024,
+    915594787
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "N8-graph",
+   "group": "normal",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 1320532291
+    },
+    {
+     "op": "replay",
+     "seed": 1242862543,
+     "mut": 0
+    },
+    {
+     "op": "replay",
+     "seed": 835875604,
+     "mut": 0
+    },
+    {
+     "op": "replay",
+     "seed": 1117427272,
+     "mut": 0
+    }
+   ],
+   "wseed": [
+    1421172664
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-interval-T1",
+   "group": "defect",
+   "mutant": "interval",
+   "timing": "T1",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    45177084,
+    16038410
+   ],
+   "rows_from": 128,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 144,
+     "seed": 678095099,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "first call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 144,
+     "seed": 2006381385,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 144,
+     "seed": 147901067,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-interval-T2",
+   "group": "defect",
+   "mutant": "interval",
+   "timing": "T2",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1802501324,
+    1960125916
+   ],
+   "rows_from": 80,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 16,
+     "seed": 1104227488,
+     "dist": "normal",
+     "mut": 0,
+     "cache": 0,
+     "role": "normal first call (16 rows)"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 384,
+     "seed": 872239893,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "new batch and input"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 384,
+     "seed": 234815402,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 512,
+     "seed": 1697181131,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-interval-T3",
+   "group": "defect",
+   "mutant": "interval",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1030616952,
+    1261003225
+   ],
+   "rows_from": 200,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 256,
+     "seed": 1239001601,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 331339153,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2047776082,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 875854983,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1719077417,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-neighbor-T1",
+   "group": "defect",
+   "mutant": "neighbor",
+   "timing": "T1",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1852518862,
+    1630705109
+   ],
+   "rows_from": 200,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 216,
+     "seed": 1432171780,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "first call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 216,
+     "seed": 1765192159,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 300,
+     "seed": 548518224,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-neighbor-T2",
+   "group": "defect",
+   "mutant": "neighbor",
+   "timing": "T2",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    390268081,
+    1467849661
+   ],
+   "rows_from": 200,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 16,
+     "seed": 135657831,
+     "dist": "normal",
+     "mut": 0,
+     "cache": 0,
+     "role": "normal first call (16 rows)"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 256,
+     "seed": 810281888,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "new batch and input"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 256,
+     "seed": 264560360,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 512,
+     "seed": 1354782341,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-neighbor-T3",
+   "group": "defect",
+   "mutant": "neighbor",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1057872132,
+    1400667450
+   ],
+   "rows_from": 200,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 256,
+     "seed": 526521382,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 164445908,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1698241059,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2015993480,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2097546310,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-alt_weight-T1",
+   "group": "defect",
+   "mutant": "alt_weight",
+   "timing": "T1",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1112980680,
+    8354131
+   ],
+   "rows_from": 64,
+   "mechanism": "consumer-side scale cache at the call site (Python)",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 16,
+     "seed": 1054844529,
+     "dist": "normal",
+     "mut": 0,
+     "cache": 1,
+     "role": "fills the cache"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 96,
+     "seed": 1715442173,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "first call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 96,
+     "seed": 390344860,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 96,
+     "seed": 83271579,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-alt_weight-T2",
+   "group": "defect",
+   "mutant": "alt_weight",
+   "timing": "T2",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    2095951770,
+    2035272810
+   ],
+   "rows_from": 80,
+   "mechanism": "consumer-side scale cache at the call site (Python)",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 16,
+     "seed": 552356062,
+     "dist": "normal",
+     "mut": 0,
+     "cache": 0,
+     "role": "normal first call (16 rows)"
+    },
+    {
+     "op": "call",
+     "layer": 1,
+     "M": 16,
+     "seed": 265293353,
+     "dist": "normal",
+     "mut": 0,
+     "cache": 1,
+     "role": "another weight of the same shape fills the cache"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 300,
+     "seed": 634219285,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "new batch and input"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 300,
+     "seed": 524812724,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 300,
+     "seed": 1473037148,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-alt_weight-T3",
+   "group": "defect",
+   "mutant": "alt_weight",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1057845770,
+    299797121
+   ],
+   "rows_from": 64,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 869527762,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 782301201,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2113110664,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1795532440,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1553898866,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-rows-T1",
+   "group": "defect",
+   "mutant": "rows",
+   "timing": "T1",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    158554754,
+    446400603
+   ],
+   "rows_from": 80,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 256,
+     "seed": 1279533181,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "first call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 256,
+     "seed": 1129747042,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 256,
+     "seed": 161958212,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-rows-T2",
+   "group": "defect",
+   "mutant": "rows",
+   "timing": "T2",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    1623959818,
+    1965373280
+   ],
+   "rows_from": 64,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 16,
+     "seed": 714073528,
+     "dist": "normal",
+     "mut": 0,
+     "cache": 0,
+     "role": "normal first call (16 rows)"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 384,
+     "seed": 2019886596,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "new batch and input"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 384,
+     "seed": 829767181,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "second call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 384,
+     "seed": 1425983864,
+     "dist": "normal",
+     "mut": 1,
+     "cache": 1,
+     "role": "third call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "D-rows-T3",
+   "group": "defect",
+   "mutant": "rows",
+   "timing": "T3",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 2,
+   "wseed": [
+    602446365,
+    1798295211
+   ],
+   "rows_from": 80,
+   "mechanism": "the consumer kernel's own read, switched by a device flag",
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 128,
+     "seed": 878119924,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 281210593,
+     "mut": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 1165342308,
+     "mut": 1,
+     "role": "defect comes on at replay"
+    },
+    {
+     "op": "replay",
+     "seed": 66685899,
+     "mut": 1,
+     "role": "second defective replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2075575502,
+     "mut": 1,
+     "role": "third defective replay"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "group": "admission",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "wseed": [
+    2097544502
+   ],
+   "id": "A1-declaration-missing",
+   "expect": "declaration",
+   "steps": [
+    {
+     "op": "direct",
+     "layer": 0,
+     "M": 64,
+     "seed": 2097985379,
+     "quant": "native"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "group": "admission",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "wseed": [
+    2097544502
+   ],
+   "id": "A2-hook-missing",
+   "expect": "hook",
+   "skip_hook": "weights",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 2141241279,
+     "dist": "normal"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "group": "admission",
+   "N": 1536,
+   "K": 2560,
+   "out": "float32",
+   "layers": 1,
+   "wseed": [
+    2097544502
+   ],
+   "id": "A3-unsupported-output-dtype",
+   "expect": "unsupported",
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 2141241279,
+     "dist": "normal"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "group": "admission",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "wseed": [
+    2097544502
+   ],
+   "id": "A4-budget",
+   "expect": "budget",
+   "plan": {
+    "budget_bytes": 1048576
+   },
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 2141241279,
+     "dist": "normal"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "I1-integrity-eager",
+   "group": "integrity",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "wseed": [
+    82869855
+   ],
+   "expect": "integrity",
+   "corrupt_bytes": 16,
+   "steps": [
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 1296735178,
+     "dist": "normal",
+     "corrupt": 0,
+     "role": "normal call"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 1130033128,
+     "dist": "normal",
+     "corrupt": 1,
+     "role": "bytes changed after the issue"
+    },
+    {
+     "op": "call",
+     "layer": 0,
+     "M": 64,
+     "seed": 1870839719,
+     "dist": "normal",
+     "corrupt": 1,
+     "role": "second changed call"
+    }
+   ],
+   "split": "holdout"
+  },
+  {
+   "id": "I2-integrity-graph",
+   "group": "integrity",
+   "N": 1536,
+   "K": 2560,
+   "out": "bfloat16",
+   "layers": 1,
+   "wseed": [
+    1993254859
+   ],
+   "expect": "integrity",
+   "corrupt_bytes": 16,
+   "steps": [
+    {
+     "op": "capture",
+     "layer": 0,
+     "M": 64,
+     "seed": 40131269,
+     "role": "normal warm-up + capture"
+    },
+    {
+     "op": "replay",
+     "seed": 877535,
+     "corrupt": 0,
+     "role": "normal replay"
+    },
+    {
+     "op": "replay",
+     "seed": 2814829,
+     "corrupt": 1,
+     "role": "bytes changed at replay"
+    }
+   ],
+   "split": "holdout"
+  }
+ ],
+ "scheduled": [
+  "N1-small-cold",
+  "N2-large",
+  "N3-distributions",
+  "N4-cold-warm",
+  "N5-new-weights",
+  "N6-colmajor-scales",
+  "N7-repeated",
+  "N8-graph",
+  "D-interval-T1",
+  "D-interval-T2",
+  "D-interval-T3",
+  "D-neighbor-T1",
+  "D-neighbor-T2",
+  "D-neighbor-T3",
+  "D-alt_weight-T1",
+  "D-alt_weight-T2",
+  "D-alt_weight-T3",
+  "D-rows-T1",
+  "D-rows-T2",
+  "D-rows-T3",
+  "A1-declaration-missing",
+  "A2-hook-missing",
+  "A3-unsupported-output-dtype",
+  "A4-budget",
+  "I1-integrity-eager",
+  "I2-integrity-graph"
+ ],
+ "selected": [
+  "N1-small-cold",
+  "N2-large",
+  "N3-distributions",
+  "N4-cold-warm",
+  "N5-new-weights",
+  "N6-colmajor-scales",
+  "N7-repeated",
+  "N8-graph",
+  "D-interval-T1",
+  "D-interval-T2",
+  "D-interval-T3",
+  "D-neighbor-T1",
+  "D-neighbor-T2",
+  "D-neighbor-T3",
+  "D-alt_weight-T1",
+  "D-alt_weight-T2",
+  "D-alt_weight-T3",
+  "D-rows-T1",
+  "D-rows-T2",
+  "D-rows-T3",
+  "A1-declaration-missing",
+  "A2-hook-missing",
+  "A3-unsupported-output-dtype",
+  "A4-budget",
+  "I1-integrity-eager",
+  "I2-integrity-graph"
+ ],
+ "labels": [
+  "offA",
+  "offB",
+  "load",
+  "guarantee",
+  "structure"
+ ],
+ "partial": false
+}

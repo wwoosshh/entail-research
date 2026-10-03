@@ -1,0 +1,186 @@
+{
+ "case": {
+  "id": "D-rows-T3",
+  "group": "defect",
+  "mutant": "rows",
+  "timing": "T3",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   602446365,
+   1798295211
+  ],
+  "rows_from": 80,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 128,
+    "seed": 878119924,
+    "role": "normal warm-up + capture"
+   },
+   {
+    "op": "replay",
+    "seed": 281210593,
+    "mut": 0,
+    "role": "normal replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1165342308,
+    "mut": 1,
+    "role": "defect comes on at replay"
+   },
+   {
+    "op": "replay",
+    "seed": 66685899,
+    "mut": 1,
+    "role": "second defective replay"
+   },
+   {
+    "op": "replay",
+    "seed": 2075575502,
+    "mut": 1,
+    "role": "third defective replay"
+   }
+  ],
+  "split": "holdout"
+ },
+ "mode": "off",
+ "pid": 17217,
+ "env_ENTAIL": "off",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 128,
+   "seed": 878119924,
+   "role": "normal warm-up + capture",
+   "ms": 320.357,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {},
+   "delivered": false,
+   "exception": null
+  },
+  {
+   "op": "replay",
+   "seed": 281210593,
+   "mut": 0,
+   "role": "normal replay",
+   "ms": 10.956,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.2560693867392603,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 6.450132675239508e-05
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1165342308,
+   "mut": 1,
+   "role": "defect comes on at replay",
+   "ms": 15.243,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 56247,
+    "elements": 196608,
+    "worst_ratio": 37.09711592471823,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.11856432931600236
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 66685899,
+   "mut": 1,
+   "role": "second defective replay",
+   "ms": 21.828,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 56853,
+    "elements": 196608,
+    "worst_ratio": 38.84810017938129,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.11561900870109772
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 2075575502,
+   "mut": 1,
+   "role": "third defective replay",
+   "ms": 15.345,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {},
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": false,
+    "violations": 56911,
+    "elements": 196608,
+    "worst_ratio": 40.35236750016169,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 0.11925832898181543
+   }
+  }
+ ],
+ "freeze_sha256": "6d566c72e0008dfae06a2e8a53ce810530bda7a2e575f4d7ad1ae51aeb9022ba",
+ "mutant_source_sha256": "0efe13f4df7ebc32fa5f04f7f27424e20e7ca803ce2319bb523ecbbc137e80c0",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {},
+ "launcher_total": 3,
+ "seconds": 8.496,
+ "device_stopped": null,
+ "peak_mem": 28588032
+}

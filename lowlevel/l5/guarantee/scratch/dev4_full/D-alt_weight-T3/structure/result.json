@@ -1,0 +1,266 @@
+{
+ "case": {
+  "id": "D-alt_weight-T3",
+  "group": "defect",
+  "mutant": "alt_weight",
+  "timing": "T3",
+  "N": 1536,
+  "K": 2560,
+  "out": "bfloat16",
+  "layers": 2,
+  "wseed": [
+   1990228157,
+   1690574976
+  ],
+  "rows_from": 64,
+  "mechanism": "the consumer kernel's own read, switched by a device flag",
+  "steps": [
+   {
+    "op": "capture",
+    "layer": 0,
+    "M": 128,
+    "seed": 378457165,
+    "role": "normal warm-up + capture"
+   },
+   {
+    "op": "replay",
+    "seed": 620155778,
+    "mut": 0,
+    "role": "normal replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1592953911,
+    "mut": 1,
+    "role": "defect comes on at replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1293609414,
+    "mut": 1,
+    "role": "second defective replay"
+   },
+   {
+    "op": "replay",
+    "seed": 1732896926,
+    "mut": 1,
+    "role": "third defective replay"
+   }
+  ],
+  "split": "dev"
+ },
+ "mode": "structure",
+ "pid": 14416,
+ "env_ENTAIL": "structure",
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 128,
+   "seed": 378457165,
+   "role": "normal warm-up + capture",
+   "ms": 409.027,
+   "rng_same": true,
+   "kernel_launches": 3,
+   "cache_hits": 0,
+   "entail": {
+    "activation_issued": 3,
+    "consumer_calls": 3,
+    "launch_withheld": 3,
+    "activation_issues": 3,
+    "calls": 3,
+    "ir_possible": 1,
+    "reference_delivered": 3
+   },
+   "delivered": false,
+   "exception": null
+  },
+  {
+   "op": "replay",
+   "seed": 620155778,
+   "mut": 0,
+   "role": "normal replay",
+   "ms": 12.682,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "reference_delivered": 1,
+    "replays": 1
+   },
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s1",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.24898233384476418,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.6718761429706954e-08
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1592953911,
+   "mut": 1,
+   "role": "defect comes on at replay",
+   "ms": 3.661,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "reference_delivered": 1,
+    "replays": 1
+   },
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s2",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.21444394638840802,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 1.709386896996272e-08
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1293609414,
+   "mut": 1,
+   "role": "second defective replay",
+   "ms": 4.273,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "reference_delivered": 1,
+    "replays": 1
+   },
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s3",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.21143531710645921,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.220259654745478e-08
+   }
+  },
+  {
+   "op": "replay",
+   "seed": 1732896926,
+   "mut": 1,
+   "role": "third defective replay",
+   "ms": 14.522,
+   "rng_same": true,
+   "kernel_launches": 0,
+   "cache_hits": 0,
+   "entail": {
+    "reference_delivered": 1,
+    "replays": 1
+   },
+   "next_op_ran": true,
+   "device_stopped": false,
+   "delivered": true,
+   "exception": null,
+   "truth_key": "s4",
+   "poisoned": false,
+   "oracle": {
+    "ok": true,
+    "violations": 0,
+    "elements": 196608,
+    "worst_ratio": 0.2033490521137385,
+    "nonfinite": 0,
+    "c_used": 0.001953125,
+    "calibration_max": 3.240344730389101e-08
+   }
+  }
+ ],
+ "freeze_sha256": "a6bbdc86e7d3cff937ba8fa7563dda18b8b78e56d6ec02bac8ba3150885db5cf",
+ "plan": {
+  "name": "vllm-0.30-triton-dense-block-fp8-structure",
+  "scope": "the output of one call of vLLM 0.30's w8a8_triton_block_scaled_mm (dense, Triton), handed to the next operation",
+  "contract": "block_fp8_mm/1",
+  "blocks": [
+   [
+    128,
+    128
+   ]
+  ],
+  "value_dtypes": [
+   "float8_e4m3fn"
+  ],
+  "scale_dtypes": [
+   "float32"
+  ],
+  "out_dtypes": [
+   "bfloat16",
+   "float16"
+  ],
+  "ulps": 1.0,
+  "c_acc": 0.00048828125,
+  "budget_bytes": 2147483648,
+  "budget_ms": null,
+  "chunk_bytes": 67108864,
+  "graphs": true,
+  "check": "static",
+  "integrity": "epoch",
+  "records": "changes",
+  "trusted": [
+   "PyTorch eager operations on the device (float32 matmul with TF32 off, elementwise and reductions)",
+   "the CUDA runtime, driver and device memory",
+   "this checker's code",
+   "the producers hooked as REQUIRED_HOOKS name them"
+  ]
+ },
+ "plan_fp": "9019396b8aed60798e36c6cc9af76d38246caa14253d98bdacb8feea1fe4f6fe",
+ "profile": "block_fp8_structure",
+ "mutant_source_sha256": "29645115546352727acdf039d5281e7081580a07d95fbe60e4b49f28199da385",
+ "kernel": {
+  "used": "TritonFp8BlockScaledMMKernel",
+  "vllm_would_choose": "MarlinFP8ScaledMMLinearKernel"
+ },
+ "entail_final": {
+  "weight_issued": 2,
+  "activation_issued": 3,
+  "consumer_calls": 3,
+  "launch_withheld": 3,
+  "weight_issues": 2,
+  "activation_issues": 3,
+  "calls": 3,
+  "ir_possible": 1,
+  "reference_delivered": 7,
+  "replays": 4,
+  "installed": [
+   "torch.cuda.graphs:CUDAGraph.capture_begin/capture_end/replay",
+   "triton.runtime.jit:JITFunction.run",
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8",
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:w8a8_triton_block_scaled_mm"
+  ],
+  "reached": {
+   "vllm.model_executor.kernels.linear.scaled_mm.BlockScaledMMLinearKernel:Fp8BlockScaledMMLinearKernel.process_weights_after_loading": 2,
+   "vllm.model_executor.layers.quantization.utils.fp8_utils:per_token_group_quant_fp8": 3
+  }
+ },
+ "launcher_total": 3,
+ "seconds": 8.714,
+ "device_stopped": null,
+ "peak_mem": 54573568
+}

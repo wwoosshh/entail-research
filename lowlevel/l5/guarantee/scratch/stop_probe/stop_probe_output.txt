@@ -1,0 +1,32 @@
+/__w/pytorch/pytorch/aten/src/ATen/native/cuda/TensorCompare.cu:109: _assert_async_cuda_kernel: block: [0,0,0], thread: [0,0,0] Assertion `` failed.
+captured; nodes ok
+replay ok=1: status [1, 0] observer [-16.945, 35.536, -10.499, -130.566]
+stopped at synchronize: CUDA error: device-side assert triggered
+after the stop: status [0, 1] observer [-7.0, -7.0, -7.0, -7.0]
+observer untouched (next operation did not run): True
+context lost: AcceleratorError
+[W1003 02:49:55.697244183 CachingHostAllocator.cpp:26] Warning: Exception in pinned allocator free(), rethrowing (function free)
+terminate called after throwing an instance of 'c10::AcceleratorError'
+  what():  CUDA error: device-side assert triggered
+Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+
+Exception raised from createEvent at /__w/pytorch/pytorch/c10/cuda/CUDAEvent.h:262 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x7133e9b63bfd in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xc4e9 (0x7133e9f6a4e9 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libc10_cuda.so)
+frame #2: <unknown function> + 0xce9060 (0x713339ee9060 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: <unknown function> + 0xcebf1c (0x713339eebf1c in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0xce5971 (0x713339ee5971 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0x86ae4 (0x7133e9b40ae4 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #6: c10::TensorImpl::~TensorImpl() + 0x9 (0x7133e9b3b219 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #7: <unknown function> + 0x8752b5 (0x7133674752b5 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libtorch_python.so)
+frame #8: <unknown function> + 0x875341 (0x713367475341 in /home/<user>/venvs/vllm/lib/python3.12/site-packages/torch/lib/libtorch_python.so)
+frame #9: python() [0x59f273]
+frame #10: python() [0x573556]
+<omitting python frames>
+frame #12: python() [0x6b1d69]
+frame #16: <unknown function> + 0x2a1ca (0x7133ea82a1ca in /lib/x86_64-linux-gnu/libc.so.6)
+frame #17: __libc_start_main + 0x8b (0x7133ea82a28b in /lib/x86_64-linux-gnu/libc.so.6)
+
+exit 134

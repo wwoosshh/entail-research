@@ -1,0 +1,35 @@
+{
+ "id": "I2-integrity-graph",
+ "group": "integrity",
+ "N": 1536,
+ "K": 2560,
+ "out": "bfloat16",
+ "layers": 1,
+ "wseed": [
+  584506102
+ ],
+ "expect": "integrity",
+ "corrupt_bytes": 16,
+ "steps": [
+  {
+   "op": "capture",
+   "layer": 0,
+   "M": 256,
+   "seed": 2132527414,
+   "role": "normal warm-up + capture"
+  },
+  {
+   "op": "replay",
+   "seed": 655463048,
+   "corrupt": 0,
+   "role": "normal replay"
+  },
+  {
+   "op": "replay",
+   "seed": 502426249,
+   "corrupt": 1,
+   "role": "bytes changed at replay"
+  }
+ ],
+ "split": "dev"
+}
